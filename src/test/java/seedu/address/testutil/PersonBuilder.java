@@ -87,7 +87,7 @@ public class PersonBuilder {
     }
 
     public Task build() {
-        return new Task(name, phone, email, address, tags);
+        return new Task(name, phone, email, tags);
     }
 
 }
