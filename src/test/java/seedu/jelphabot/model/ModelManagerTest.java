@@ -2,7 +2,7 @@ package seedu.jelphabot.model;
 
 import org.junit.jupiter.api.Test;
 import seedu.jelphabot.commons.core.GuiSettings;
-import seedu.jelphabot.model.task.NameContainsKeywordsPredicate;
+import seedu.jelphabot.model.task.DescriptionContainsKeywordsPredicate;
 import seedu.jelphabot.testutil.JelphaBotBuilder;
 
 import java.nio.file.Path;
@@ -115,7 +115,7 @@ public class ModelManagerTest {
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getDescription().fullDescription.split("\\s+");
-        modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        modelManager.updateFilteredPersonList(new DescriptionContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests

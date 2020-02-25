@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import seedu.jelphabot.logic.commands.*;
 import seedu.jelphabot.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.jelphabot.logic.parser.exceptions.ParseException;
-import seedu.jelphabot.model.task.NameContainsKeywordsPredicate;
+import seedu.jelphabot.model.task.DescriptionContainsKeywordsPredicate;
 import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.testutil.EditPersonDescriptorBuilder;
 import seedu.jelphabot.testutil.PersonBuilder;
@@ -65,7 +65,7 @@ public class JelphaBotParserTest {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+        assertEquals(new FindCommand(new DescriptionContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test

@@ -2,7 +2,7 @@ package seedu.jelphabot.logic.commands;
 
 import seedu.jelphabot.commons.core.Messages;
 import seedu.jelphabot.model.Model;
-import seedu.jelphabot.model.task.NameContainsKeywordsPredicate;
+import seedu.jelphabot.model.task.DescriptionContainsKeywordsPredicate;
 
 import static java.util.Objects.requireNonNull;
 
@@ -19,9 +19,9 @@ public class FindCommand extends Command {
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " alice bob charlie";
 
-    private final NameContainsKeywordsPredicate predicate;
+    private final DescriptionContainsKeywordsPredicate predicate;
 
-    public FindCommand(NameContainsKeywordsPredicate predicate) {
+    public FindCommand(DescriptionContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 

@@ -2,7 +2,7 @@ package seedu.jelphabot.logic.parser;
 
 import org.junit.jupiter.api.Test;
 import seedu.jelphabot.logic.commands.FindCommand;
-import seedu.jelphabot.model.task.NameContainsKeywordsPredicate;
+import seedu.jelphabot.model.task.DescriptionContainsKeywordsPredicate;
 
 import java.util.Arrays;
 
@@ -23,7 +23,7 @@ public class FindCommandParserTest {
     public void parse_validArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
         FindCommand expectedFindCommand =
-                new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));
+                new FindCommand(new DescriptionContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));
         assertParseSuccess(parser, "Alice Bob", expectedFindCommand);
 
         // multiple whitespaces between keywords

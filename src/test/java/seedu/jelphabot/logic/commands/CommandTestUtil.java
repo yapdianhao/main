@@ -4,7 +4,7 @@ import seedu.jelphabot.commons.core.index.Index;
 import seedu.jelphabot.logic.commands.exceptions.CommandException;
 import seedu.jelphabot.model.JelphaBot;
 import seedu.jelphabot.model.Model;
-import seedu.jelphabot.model.task.NameContainsKeywordsPredicate;
+import seedu.jelphabot.model.task.DescriptionContainsKeywordsPredicate;
 import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.testutil.EditPersonDescriptorBuilder;
 
@@ -116,7 +116,7 @@ public class CommandTestUtil {
 
         Task task = model.getFilteredPersonList().get(targetIndex.getZeroBased());
         final String[] splitName = task.getDescription().fullDescription.split("\\s+");
-        model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredPersonList(new DescriptionContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredPersonList().size());
     }
