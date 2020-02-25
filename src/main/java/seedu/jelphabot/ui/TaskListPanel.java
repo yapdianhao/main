@@ -13,14 +13,14 @@ import java.util.logging.Logger;
 /**
  * Panel containing the list of persons.
  */
-public class PersonListPanel extends UiPart<Region> {
-    private static final String FXML = "PersonListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
+public class TaskListPanel extends UiPart<Region> {
+    private static final String FXML = "TaskListPanel.fxml";
+    private final Logger logger = LogsCenter.getLogger(TaskListPanel.class);
 
     @FXML
     private ListView<Task> personListView;
 
-    public PersonListPanel(ObservableList<Task> taskList) {
+    public TaskListPanel(ObservableList<Task> taskList) {
         super(FXML);
         personListView.setItems(taskList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
