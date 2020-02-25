@@ -19,34 +19,34 @@ public class TaskTest {
     }
 
     @Test
-    public void isSamePerson() {
+    public void isSameTask() {
         // same object -> returns true
-        assertTrue(ALICE.isSamePerson(ALICE));
+        assertTrue(ALICE.isSameTask(ALICE));
 
         // null -> returns false
-        assertFalse(ALICE.isSamePerson(null));
+        assertFalse(ALICE.isSameTask(null));
 
         // different phone and module code -> returns false
         Task editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_MODULE_CODE_BOB).build();
-        assertFalse(ALICE.isSamePerson(editedAlice));
+        assertFalse(ALICE.isSameTask(editedAlice));
 
         // different name -> returns false
         editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
-        assertFalse(ALICE.isSamePerson(editedAlice));
+        assertFalse(ALICE.isSameTask(editedAlice));
 
         // same name, same phone, different attributes -> returns true
         editedAlice = new PersonBuilder(ALICE).withEmail(VALID_MODULE_CODE_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
-        assertTrue(ALICE.isSamePerson(editedAlice));
+        assertTrue(ALICE.isSameTask(editedAlice));
 
         // same name, same module code, different attributes -> returns true
         editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
-        assertTrue(ALICE.isSamePerson(editedAlice));
+        assertTrue(ALICE.isSameTask(editedAlice));
 
         // same name, same phone, same module code, different attributes -> returns true
         editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
-        assertTrue(ALICE.isSamePerson(editedAlice));
+        assertTrue(ALICE.isSameTask(editedAlice));
     }
 
     @Test

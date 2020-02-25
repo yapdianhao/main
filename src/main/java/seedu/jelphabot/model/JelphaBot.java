@@ -10,7 +10,7 @@ import static java.util.Objects.requireNonNull;
 
 /**
  * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSamePerson comparison)
+ * Duplicates are not allowed (by .isSameTask comparison)
  */
 public class JelphaBot implements ReadOnlyJelphaBot {
 
