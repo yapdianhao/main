@@ -21,7 +21,6 @@ public class Task {
     private final Email email;
 
     // Data fields
-    //private final Address address;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
@@ -105,8 +104,6 @@ public class Task {
                 .append(getPhone())
                 .append(" Email: ")
                 .append(getEmail())
-                //.append(" Address: ")
-                //.append(getAddress())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();

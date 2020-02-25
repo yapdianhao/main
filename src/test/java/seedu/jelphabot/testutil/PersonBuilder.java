@@ -1,7 +1,10 @@
 package seedu.jelphabot.testutil;
 
 import seedu.jelphabot.model.tag.Tag;
-import seedu.jelphabot.model.task.*;
+import seedu.jelphabot.model.task.Description;
+import seedu.jelphabot.model.task.Email;
+import seedu.jelphabot.model.task.Phone;
+import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.model.util.SampleDataUtil;
 
 import java.util.HashSet;
@@ -20,14 +23,12 @@ public class PersonBuilder {
     private Description description;
     private Phone phone;
     private Email email;
-    private Address address;
     private Set<Tag> tags;
 
     public PersonBuilder() {
         description = new Description(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
-        address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
     }
 
@@ -38,7 +39,6 @@ public class PersonBuilder {
         description = taskToCopy.getDescription();
         phone = taskToCopy.getPhone();
         email = taskToCopy.getEmail();
-        address = taskToCopy.getAddress();
         tags = new HashSet<>(taskToCopy.getTags());
     }
 
@@ -55,14 +55,6 @@ public class PersonBuilder {
      */
     public PersonBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
-        return this;
-    }
-
-    /**
-     * Sets the {@code Address} of the {@code Person} that we are building.
-     */
-    public PersonBuilder withAddress(String address) {
-        this.address = new Address(address);
         return this;
     }
 

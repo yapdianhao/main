@@ -6,7 +6,10 @@ import seedu.jelphabot.commons.util.CollectionUtil;
 import seedu.jelphabot.logic.commands.exceptions.CommandException;
 import seedu.jelphabot.model.Model;
 import seedu.jelphabot.model.tag.Tag;
-import seedu.jelphabot.model.task.*;
+import seedu.jelphabot.model.task.Description;
+import seedu.jelphabot.model.task.Email;
+import seedu.jelphabot.model.task.Phone;
+import seedu.jelphabot.model.task.Task;
 
 import java.util.*;
 
@@ -115,7 +118,6 @@ public class EditCommand extends Command {
         private Description description;
         private Phone phone;
         private Email email;
-        private Address address;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -128,7 +130,6 @@ public class EditCommand extends Command {
             setDescription(toCopy.description);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
-            setAddress(toCopy.address);
             setTags(toCopy.tags);
         }
 
@@ -136,7 +137,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(description, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(description, phone, email, tags);
         }
 
         public Optional<Description> getDescription() {
@@ -161,14 +162,6 @@ public class EditCommand extends Command {
 
         public Optional<Email> getEmail() {
             return Optional.ofNullable(email);
-        }
-
-        public void setAddress(Address address) {
-            this.address = address;
-        }
-
-        public Optional<Address> getAddress() {
-            return Optional.ofNullable(address);
         }
 
         /**
@@ -206,7 +199,6 @@ public class EditCommand extends Command {
             return getDescription().equals(e.getDescription())
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
-                    && getAddress().equals(e.getAddress())
                     && getTags().equals(e.getTags());
         }
     }
