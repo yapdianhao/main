@@ -21,10 +21,10 @@ public class ModuleCodeTest {
 
     @Test
     public void isValidEmail() {
-        // null email
+        // null module code
         assertThrows(NullPointerException.class, () -> ModuleCode.isValidEmail(null));
 
-        // blank email
+        // blank module code
         assertFalse(ModuleCode.isValidEmail("")); // empty string
         assertFalse(ModuleCode.isValidEmail(" ")); // spaces only
 
@@ -48,7 +48,7 @@ public class ModuleCodeTest {
         assertFalse(ModuleCode.isValidEmail("peterjack@-example.com")); // domain name starts with a hyphen
         assertFalse(ModuleCode.isValidEmail("peterjack@example.com-")); // domain name ends with a hyphen
 
-        // valid email
+        // valid module code
         assertTrue(ModuleCode.isValidEmail("PeterJack_1190@example.com"));
         assertTrue(ModuleCode.isValidEmail("a@bc")); // minimal
         assertTrue(ModuleCode.isValidEmail("test@localhost")); // alphabets only

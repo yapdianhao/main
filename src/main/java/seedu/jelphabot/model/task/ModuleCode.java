@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.jelphabot.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Person's email in the address book.
+ * Represents a Person's module code in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidEmail(String)}
  */
 public class ModuleCode {
@@ -32,16 +32,16 @@ public class ModuleCode {
     /**
      * Constructs an {@code ModuleCode}.
      *
-     * @param email A valid email address.
+     * @param module code A valid module code address.
      */
-    public ModuleCode(String email) {
-        requireNonNull(email);
-        checkArgument(isValidEmail(email), MESSAGE_CONSTRAINTS);
-        value = email;
+    public ModuleCode(String moduleCode) {
+        requireNonNull(moduleCode);
+        checkArgument(isValidEmail(moduleCode), MESSAGE_CONSTRAINTS);
+        value = moduleCode;
     }
 
     /**
-     * Returns if a given string is a valid email.
+     * Returns if a given string is a valid module code.
      */
     public static boolean isValidEmail(String test) {
         return test.matches(VALIDATION_REGEX);

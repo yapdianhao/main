@@ -36,12 +36,8 @@ public class EditTaskDescriptorTest {
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withPhone(VALID_PHONE_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
-        // different email -> returns false
+        // different module code -> returns false
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withEmail(VALID_MODULE_CODE_BOB).build();
-        assertFalse(DESC_AMY.equals(editedAmy));
-
-        // different address -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withAddress(VALID_ADDRESS_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different tags -> returns false

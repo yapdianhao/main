@@ -24,7 +24,7 @@ class JsonAdaptedPerson {
 
     private final String name;
     private final String phone;
-    private final String email;
+    private final String moduleCode;
    // private final String address;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
@@ -33,11 +33,11 @@ class JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email,
+            @JsonProperty("email") String moduleCode,
             @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
-        this.email = email;
+        this.moduleCode = moduleCode;
         //this.address = address;
         if (tagged != null) {
             this.tagged.addAll(tagged);
@@ -50,7 +50,7 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(Task source) {
         name = source.getDescription().fullDescription;
         phone = source.getPhone().value;
-        email = source.getModuleCode().value;
+        moduleCode = source.getModuleCode().value;
         //address = source.getAddress().value;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
@@ -84,13 +84,13 @@ class JsonAdaptedPerson {
         }
         final Phone modelPhone = new Phone(phone);
 
-        if (email == null) {
+        if (moduleCode == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, ModuleCode.class.getSimpleName()));
         }
-        if (!ModuleCode.isValidEmail(email)) {
+        if (!ModuleCode.isValidEmail(moduleCode)) {
             throw new IllegalValueException(ModuleCode.MESSAGE_CONSTRAINTS);
         }
-        final ModuleCode modelModuleCode = new ModuleCode(email);
+        final ModuleCode modelModuleCode = new ModuleCode(moduleCode);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Task(modelDescription, modelPhone, modelModuleCode, modelTags);

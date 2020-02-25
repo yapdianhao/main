@@ -56,8 +56,8 @@ public class EditPersonDescriptorBuilder {
     /**
      * Sets the {@code ModuleCode} of the {@code EditPersonDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withEmail(String email) {
-        descriptor.setModuleCode(new ModuleCode(email));
+    public EditPersonDescriptorBuilder withEmail(String moduleCode) {
+        descriptor.setModuleCode(new ModuleCode(moduleCode));
         return this;
     }
 

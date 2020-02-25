@@ -66,14 +66,14 @@ public class ParserUtil {
 
 
     /**
-     * Parses a {@code String email} into an {@code ModuleCode}.
+     * Parses a {@code String module code} into an {@code ModuleCode}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code email} is invalid.
+     * @throws ParseException if the given {@code module code} is invalid.
      */
-    public static ModuleCode parseEmail(String email) throws ParseException {
-        requireNonNull(email);
-        String trimmedEmail = email.trim();
+    public static ModuleCode parseEmail(String moduleCode) throws ParseException {
+        requireNonNull(moduleCode);
+        String trimmedEmail = moduleCode.trim();
         if (!ModuleCode.isValidEmail(trimmedEmail)) {
             throw new ParseException(ModuleCode.MESSAGE_CONSTRAINTS);
         }

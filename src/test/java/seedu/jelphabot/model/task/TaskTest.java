@@ -26,7 +26,7 @@ public class TaskTest {
         // null -> returns false
         assertFalse(ALICE.isSamePerson(null));
 
-        // different phone and email -> returns false
+        // different phone and module code -> returns false
         Task editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_MODULE_CODE_BOB).build();
         assertFalse(ALICE.isSamePerson(editedAlice));
 
@@ -39,12 +39,12 @@ public class TaskTest {
                 .withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
-        // same name, same email, different attributes -> returns true
+        // same name, same module code, different attributes -> returns true
         editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
-        // same name, same phone, same email, different attributes -> returns true
+        // same name, same phone, same module code, different attributes -> returns true
         editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
     }
@@ -75,7 +75,7 @@ public class TaskTest {
         editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different email -> returns false
+        // different module code -> returns false
         editedAlice = new PersonBuilder(ALICE).withEmail(VALID_MODULE_CODE_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 

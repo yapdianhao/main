@@ -141,9 +141,9 @@ public class ParserUtilTest {
 
     @Test
     public void parseEmail_validValueWithWhitespace_returnsTrimmedEmail() throws Exception {
-        String emailWithWhitespace = WHITESPACE + VALID_MODULE_CODE + WHITESPACE;
+        String moduleCodeWithWhitespace = WHITESPACE + VALID_MODULE_CODE + WHITESPACE;
         ModuleCode expectedModuleCode = new ModuleCode(VALID_MODULE_CODE);
-        assertEquals(expectedModuleCode, ParserUtil.parseEmail(emailWithWhitespace));
+        assertEquals(expectedModuleCode, ParserUtil.parseEmail(moduleCodeWithWhitespace));
     }
 
     @Test

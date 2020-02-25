@@ -57,10 +57,10 @@ public class EditCommandParserTest {
     public void parse_invalidValue_failure() {
         assertParseFailure(parser, "1" + INVALID_NAME_DESC, Description.MESSAGE_CONSTRAINTS); // invalid name
         assertParseFailure(parser, "1" + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS); // invalid phone
-        assertParseFailure(parser, "1" + INVALID_MODULE_CODE_DESC, ModuleCode.MESSAGE_CONSTRAINTS); // invalid email
+        assertParseFailure(parser, "1" + INVALID_MODULE_CODE_DESC, ModuleCode.MESSAGE_CONSTRAINTS); // invalid module code
         assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
 
-        // invalid phone followed by valid email
+        // invalid phone followed by valid module code
         assertParseFailure(parser, "1" + INVALID_PHONE_DESC + MODULE_CODE_DESC_AMY, Phone.MESSAGE_CONSTRAINTS);
 
         // valid phone followed by invalid phone. The test case for invalid phone followed by valid phone
@@ -119,7 +119,7 @@ public class EditCommandParserTest {
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        // email
+        // module code
         userInput = targetIndex.getOneBased() + MODULE_CODE_DESC_AMY;
         descriptor = new EditPersonDescriptorBuilder().withEmail(VALID_MODULE_CODE_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);

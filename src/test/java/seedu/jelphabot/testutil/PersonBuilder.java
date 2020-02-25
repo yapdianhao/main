@@ -69,8 +69,8 @@ public class PersonBuilder {
     /**
      * Sets the {@code ModuleCode} of the {@code Person} that we are building.
      */
-    public PersonBuilder withEmail(String email) {
-        this.moduleCode = new ModuleCode(email);
+    public PersonBuilder withEmail(String moduleCode) {
+        this.moduleCode = new ModuleCode(moduleCode);
         return this;
     }
 
