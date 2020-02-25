@@ -2,7 +2,7 @@ package seedu.jelphabot.model;
 
 import javafx.collections.ObservableList;
 import seedu.jelphabot.model.task.Task;
-import seedu.jelphabot.model.task.UniquePersonList;
+import seedu.jelphabot.model.task.UniqueTaskList;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ import static java.util.Objects.requireNonNull;
  */
 public class JelphaBot implements ReadOnlyJelphaBot {
 
-    private final UniquePersonList persons;
+    private final UniqueTaskList persons;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -24,7 +24,7 @@ public class JelphaBot implements ReadOnlyJelphaBot {
      *   among constructors.
      */
     {
-        persons = new UniquePersonList();
+        persons = new UniqueTaskList();
     }
 
     public JelphaBot() {}
