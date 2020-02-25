@@ -18,7 +18,7 @@ public class Task {
     // Identity fields
     private final Description description;
     private final Phone phone;
-    private final Email email;
+    private final ModuleCode moduleCode;
 
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
@@ -26,11 +26,11 @@ public class Task {
     /**
      * Every field must be present and not null.
      */
-    public Task(Description description, Phone phone, Email email, Set<Tag> tags) {
-        requireAllNonNull(description, phone, email, tags);
+    public Task(Description description, Phone phone, ModuleCode moduleCode, Set<Tag> tags) {
+        requireAllNonNull(description, phone, moduleCode, tags);
         this.description = description;
         this.phone = phone;
-        this.email = email;
+        this.moduleCode = moduleCode;
         this.tags.addAll(tags);
     }
 
@@ -42,8 +42,8 @@ public class Task {
         return phone;
     }
 
-    public Email getEmail() {
-        return email;
+    public ModuleCode getModuleCode() {
+        return moduleCode;
     }
 
 
@@ -66,7 +66,7 @@ public class Task {
 
         return otherTask != null
                 && otherTask.getDescription().equals(getDescription())
-                && (otherTask.getPhone().equals(getPhone()) || otherTask.getEmail().equals(getEmail()));
+                && (otherTask.getPhone().equals(getPhone()) || otherTask.getModuleCode().equals(getModuleCode()));
     }
 
     /**
@@ -86,14 +86,14 @@ public class Task {
         Task otherTask = (Task) other;
         return otherTask.getDescription().equals(getDescription())
                 && otherTask.getPhone().equals(getPhone())
-                && otherTask.getEmail().equals(getEmail())
+                && otherTask.getModuleCode().equals(getModuleCode())
                 && otherTask.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(description, phone, email, tags);
+        return Objects.hash(description, phone, moduleCode, tags);
     }
 
     @Override
@@ -102,8 +102,8 @@ public class Task {
         builder.append(getDescription())
                 .append(" Phone: ")
                 .append(getPhone())
-                .append(" Email: ")
-                .append(getEmail())
+                .append(" ModuleCode: ")
+                .append(getModuleCode())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();

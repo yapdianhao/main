@@ -7,7 +7,7 @@ import seedu.jelphabot.logic.commands.exceptions.CommandException;
 import seedu.jelphabot.model.Model;
 import seedu.jelphabot.model.tag.Tag;
 import seedu.jelphabot.model.task.Description;
-import seedu.jelphabot.model.task.Email;
+import seedu.jelphabot.model.task.ModuleCode;
 import seedu.jelphabot.model.task.Phone;
 import seedu.jelphabot.model.task.Task;
 
@@ -30,12 +30,12 @@ public class EditCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_EMAIL + "EMAIL] "
+            + "[" + PREFIX_MODULE_CODE + "MODULE_CODE] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+            + PREFIX_MODULE_CODE + "johndoe@example.com";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -86,10 +86,10 @@ public class EditCommand extends Command {
 
         Description updatedDescription = editPersonDescriptor.getDescription().orElse(taskToEdit.getDescription());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(taskToEdit.getPhone());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(taskToEdit.getEmail());
+        ModuleCode updatedModuleCode = editPersonDescriptor.getModuleCode().orElse(taskToEdit.getModuleCode());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(taskToEdit.getTags());
 
-        return new Task(updatedDescription, updatedPhone, updatedEmail, updatedTags);
+        return new Task(updatedDescription, updatedPhone, updatedModuleCode, updatedTags);
     }
 
     @Override
@@ -117,7 +117,7 @@ public class EditCommand extends Command {
     public static class EditPersonDescriptor {
         private Description description;
         private Phone phone;
-        private Email email;
+        private ModuleCode moduleCode;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -129,7 +129,7 @@ public class EditCommand extends Command {
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setDescription(toCopy.description);
             setPhone(toCopy.phone);
-            setEmail(toCopy.email);
+            setModuleCode(toCopy.moduleCode);
             setTags(toCopy.tags);
         }
 
@@ -137,7 +137,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(description, phone, email, tags);
+            return CollectionUtil.isAnyNonNull(description, phone, moduleCode, tags);
         }
 
         public Optional<Description> getDescription() {
@@ -156,12 +156,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(phone);
         }
 
-        public void setEmail(Email email) {
-            this.email = email;
+        public Optional<ModuleCode> getModuleCode() {
+            return Optional.ofNullable(moduleCode);
         }
 
-        public Optional<Email> getEmail() {
-            return Optional.ofNullable(email);
+        public void setModuleCode(ModuleCode moduleCode) {
+            this.moduleCode = moduleCode;
         }
 
         /**
@@ -198,7 +198,7 @@ public class EditCommand extends Command {
 
             return getDescription().equals(e.getDescription())
                     && getPhone().equals(e.getPhone())
-                    && getEmail().equals(e.getEmail())
+                    && getModuleCode().equals(e.getModuleCode())
                     && getTags().equals(e.getTags());
         }
     }

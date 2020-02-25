@@ -2,7 +2,7 @@ package seedu.jelphabot.testutil;
 
 import seedu.jelphabot.model.tag.Tag;
 import seedu.jelphabot.model.task.Description;
-import seedu.jelphabot.model.task.Email;
+import seedu.jelphabot.model.task.ModuleCode;
 import seedu.jelphabot.model.task.Phone;
 import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.model.util.SampleDataUtil;
@@ -17,18 +17,18 @@ public class PersonBuilder {
 
     public static final String DEFAULT_NAME = "Alice Pauline";
     public static final String DEFAULT_PHONE = "85355255";
-    public static final String DEFAULT_EMAIL = "alice@gmail.com";
+    public static final String DEFAULT_MODULE_CODE = "alice@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
 
     private Description description;
     private Phone phone;
-    private Email email;
+    private ModuleCode moduleCode;
     private Set<Tag> tags;
 
     public PersonBuilder() {
         description = new Description(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
-        email = new Email(DEFAULT_EMAIL);
+        moduleCode = new ModuleCode(DEFAULT_MODULE_CODE);
         tags = new HashSet<>();
     }
 
@@ -38,7 +38,7 @@ public class PersonBuilder {
     public PersonBuilder(Task taskToCopy) {
         description = taskToCopy.getDescription();
         phone = taskToCopy.getPhone();
-        email = taskToCopy.getEmail();
+        moduleCode = taskToCopy.getModuleCode();
         tags = new HashSet<>(taskToCopy.getTags());
     }
 
@@ -67,15 +67,15 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Email} of the {@code Person} that we are building.
+     * Sets the {@code ModuleCode} of the {@code Person} that we are building.
      */
     public PersonBuilder withEmail(String email) {
-        this.email = new Email(email);
+        this.moduleCode = new ModuleCode(email);
         return this;
     }
 
     public Task build() {
-        return new Task(description, phone, email, tags);
+        return new Task(description, phone, moduleCode, tags);
     }
 
 }

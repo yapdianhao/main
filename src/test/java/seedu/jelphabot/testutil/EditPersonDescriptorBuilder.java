@@ -3,7 +3,7 @@ package seedu.jelphabot.testutil;
 import seedu.jelphabot.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.jelphabot.model.tag.Tag;
 import seedu.jelphabot.model.task.Description;
-import seedu.jelphabot.model.task.Email;
+import seedu.jelphabot.model.task.ModuleCode;
 import seedu.jelphabot.model.task.Phone;
 import seedu.jelphabot.model.task.Task;
 
@@ -33,7 +33,7 @@ public class EditPersonDescriptorBuilder {
         descriptor = new EditPersonDescriptor();
         descriptor.setDescription(task.getDescription());
         descriptor.setPhone(task.getPhone());
-        descriptor.setEmail(task.getEmail());
+        descriptor.setModuleCode(task.getModuleCode());
         descriptor.setTags(task.getTags());
     }
 
@@ -54,10 +54,10 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Email} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code ModuleCode} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withEmail(String email) {
-        descriptor.setEmail(new Email(email));
+        descriptor.setModuleCode(new ModuleCode(email));
         return this;
     }
 

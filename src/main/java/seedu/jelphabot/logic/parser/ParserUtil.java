@@ -5,7 +5,7 @@ import seedu.jelphabot.commons.util.StringUtil;
 import seedu.jelphabot.logic.parser.exceptions.ParseException;
 import seedu.jelphabot.model.tag.Tag;
 import seedu.jelphabot.model.task.Description;
-import seedu.jelphabot.model.task.Email;
+import seedu.jelphabot.model.task.ModuleCode;
 import seedu.jelphabot.model.task.Phone;
 
 import java.util.Collection;
@@ -66,18 +66,18 @@ public class ParserUtil {
 
 
     /**
-     * Parses a {@code String email} into an {@code Email}.
+     * Parses a {@code String email} into an {@code ModuleCode}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code email} is invalid.
      */
-    public static Email parseEmail(String email) throws ParseException {
+    public static ModuleCode parseEmail(String email) throws ParseException {
         requireNonNull(email);
         String trimmedEmail = email.trim();
-        if (!Email.isValidEmail(trimmedEmail)) {
-            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+        if (!ModuleCode.isValidEmail(trimmedEmail)) {
+            throw new ParseException(ModuleCode.MESSAGE_CONSTRAINTS);
         }
-        return new Email(trimmedEmail);
+        return new ModuleCode(trimmedEmail);
     }
 
     /**

@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.jelphabot.commons.exceptions.IllegalValueException;
 import seedu.jelphabot.model.tag.Tag;
 import seedu.jelphabot.model.task.Description;
-import seedu.jelphabot.model.task.Email;
+import seedu.jelphabot.model.task.ModuleCode;
 import seedu.jelphabot.model.task.Phone;
 import seedu.jelphabot.model.task.Task;
 
@@ -50,7 +50,7 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(Task source) {
         name = source.getDescription().fullDescription;
         phone = source.getPhone().value;
-        email = source.getEmail().value;
+        email = source.getModuleCode().value;
         //address = source.getAddress().value;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
@@ -85,15 +85,15 @@ class JsonAdaptedPerson {
         final Phone modelPhone = new Phone(phone);
 
         if (email == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, ModuleCode.class.getSimpleName()));
         }
-        if (!Email.isValidEmail(email)) {
-            throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
+        if (!ModuleCode.isValidEmail(email)) {
+            throw new IllegalValueException(ModuleCode.MESSAGE_CONSTRAINTS);
         }
-        final Email modelEmail = new Email(email);
+        final ModuleCode modelModuleCode = new ModuleCode(email);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Task(modelDescription, modelPhone, modelEmail, modelTags);
+        return new Task(modelDescription, modelPhone, modelModuleCode, modelTags);
     }
 
 }
