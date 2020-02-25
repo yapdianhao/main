@@ -1,6 +1,6 @@
 package seedu.jelphabot.testutil;
 
-import seedu.jelphabot.model.AddressBook;
+import seedu.jelphabot.model.JelphaBot;
 import seedu.jelphabot.model.task.Task;
 
 import java.util.ArrayList;
@@ -51,10 +51,10 @@ public class TypicalPersons {
     private TypicalPersons() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical persons.
+     * Returns an {@code JelphaBot} with all the typical persons.
      */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
+    public static JelphaBot getTypicalJelphaBot() {
+        JelphaBot ab = new JelphaBot();
         for (Task task : getTypicalPersons()) {
             ab.addPerson(task);
         }

@@ -4,9 +4,9 @@ import javafx.collections.ObservableList;
 import org.junit.jupiter.api.Test;
 import seedu.jelphabot.commons.core.GuiSettings;
 import seedu.jelphabot.logic.commands.exceptions.CommandException;
-import seedu.jelphabot.model.AddressBook;
+import seedu.jelphabot.model.JelphaBot;
 import seedu.jelphabot.model.Model;
-import seedu.jelphabot.model.ReadOnlyAddressBook;
+import seedu.jelphabot.model.ReadOnlyJelphaBot;
 import seedu.jelphabot.model.ReadOnlyUserPrefs;
 import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.testutil.PersonBuilder;
@@ -96,12 +96,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public Path getAddressBookFilePath() {
+        public Path getJelphaBotFilePath() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
+        public void setJelphaBotFilePath(Path addressBookFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -111,12 +111,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
+        public ReadOnlyJelphaBot getJelphaBot() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public void setJelphaBot(ReadOnlyJelphaBot newData) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -183,8 +183,8 @@ public class AddCommandTest {
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ReadOnlyJelphaBot getJelphaBot() {
+            return new JelphaBot();
         }
     }
 

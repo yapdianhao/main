@@ -6,7 +6,7 @@ import seedu.jelphabot.model.task.Task;
 /**
  * Unmodifiable view of an address book
  */
-public interface ReadOnlyAddressBook {
+public interface ReadOnlyJelphaBot {
 
     /**
      * Returns an unmodifiable view of the persons list.

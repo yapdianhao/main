@@ -10,7 +10,7 @@ import seedu.jelphabot.testutil.PersonBuilder;
 
 import static seedu.jelphabot.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.jelphabot.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.jelphabot.testutil.TypicalPersons.getTypicalJelphaBot;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code AddCommand}.
@@ -21,14 +21,14 @@ public class AddCommandIntegrationTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalJelphaBot(), new UserPrefs());
     }
 
     @Test
     public void execute_newPerson_success() {
         Task validTask = new PersonBuilder().build();
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getJelphaBot(), new UserPrefs());
         expectedModel.addPerson(validTask);
 
         assertCommandSuccess(new AddCommand(validTask), model,
@@ -37,7 +37,7 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
-        Task taskInList = model.getAddressBook().getPersonList().get(0);
+        Task taskInList = model.getJelphaBot().getPersonList().get(0);
         assertCommandFailure(new AddCommand(taskInList), model, AddCommand.MESSAGE_DUPLICATE_PERSON);
     }
 

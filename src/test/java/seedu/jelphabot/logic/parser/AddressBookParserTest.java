@@ -21,9 +21,9 @@ import static seedu.jelphabot.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.jelphabot.testutil.Assert.assertThrows;
 import static seedu.jelphabot.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
-public class AddressBookParserTest {
+public class JelphaBotParserTest {
 
-    private final AddressBookParser parser = new AddressBookParser();
+    private final JelphaBotParser parser = new JelphaBotParser();
 
     @Test
     public void parseCommand_add() throws Exception {

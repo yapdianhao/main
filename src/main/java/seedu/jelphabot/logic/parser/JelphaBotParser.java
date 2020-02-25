@@ -12,7 +12,7 @@ import static seedu.jelphabot.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 /**
  * Parses user input.
  */
-public class AddressBookParser {
+public class JelphaBotParser {
 
     /**
      * Used for initial separation of command word and args.

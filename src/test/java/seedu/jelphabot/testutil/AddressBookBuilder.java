@@ -1,34 +1,34 @@
 package seedu.jelphabot.testutil;
 
-import seedu.jelphabot.model.AddressBook;
+import seedu.jelphabot.model.JelphaBot;
 import seedu.jelphabot.model.task.Task;
 
 /**
  * A utility class to help with building Addressbook objects.
  * Example usage: <br>
- *     {@code AddressBook ab = new AddressBookBuilder().withPerson("John", "Doe").build();}
+ *     {@code JelphaBot ab = new JelphaBotBuilder().withPerson("John", "Doe").build();}
  */
-public class AddressBookBuilder {
+public class JelphaBotBuilder {
 
-    private AddressBook addressBook;
+    private JelphaBot addressBook;
 
-    public AddressBookBuilder() {
-        addressBook = new AddressBook();
+    public JelphaBotBuilder() {
+        addressBook = new JelphaBot();
     }
 
-    public AddressBookBuilder(AddressBook addressBook) {
+    public JelphaBotBuilder(JelphaBot addressBook) {
         this.addressBook = addressBook;
     }
 
     /**
-     * Adds a new {@code Person} to the {@code AddressBook} that we are building.
+     * Adds a new {@code Person} to the {@code JelphaBot} that we are building.
      */
-    public AddressBookBuilder withPerson(Task task) {
+    public JelphaBotBuilder withPerson(Task task) {
         addressBook.addPerson(task);
         return this;
     }
 
-    public AddressBook build() {
+    public JelphaBot build() {
         return addressBook;
     }
 }

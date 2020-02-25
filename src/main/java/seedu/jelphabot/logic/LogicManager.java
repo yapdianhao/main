@@ -6,10 +6,10 @@ import seedu.jelphabot.commons.core.LogsCenter;
 import seedu.jelphabot.logic.commands.Command;
 import seedu.jelphabot.logic.commands.CommandResult;
 import seedu.jelphabot.logic.commands.exceptions.CommandException;
-import seedu.jelphabot.logic.parser.AddressBookParser;
+import seedu.jelphabot.logic.parser.JelphaBotParser;
 import seedu.jelphabot.logic.parser.exceptions.ParseException;
 import seedu.jelphabot.model.Model;
-import seedu.jelphabot.model.ReadOnlyAddressBook;
+import seedu.jelphabot.model.ReadOnlyJelphaBot;
 import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.storage.Storage;
 
@@ -26,12 +26,12 @@ public class LogicManager implements Logic {
 
     private final Model model;
     private final Storage storage;
-    private final AddressBookParser addressBookParser;
+    private final JelphaBotParser addressBookParser;
 
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
-        addressBookParser = new AddressBookParser();
+        addressBookParser = new JelphaBotParser();
     }
 
     @Override
@@ -43,7 +43,7 @@ public class LogicManager implements Logic {
         commandResult = command.execute(model);
 
         try {
-            storage.saveAddressBook(model.getAddressBook());
+            storage.saveJelphaBot(model.getJelphaBot());
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
@@ -52,8 +52,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return model.getAddressBook();
+    public ReadOnlyJelphaBot getJelphaBot() {
+        return model.getJelphaBot();
     }
 
     @Override
@@ -62,8 +62,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return model.getAddressBookFilePath();
+    public Path getJelphaBotFilePath() {
+        return model.getJelphaBotFilePath();
     }
 
     @Override

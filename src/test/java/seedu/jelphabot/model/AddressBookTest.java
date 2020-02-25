@@ -17,11 +17,11 @@ import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.jelphabot.testutil.Assert.assertThrows;
 import static seedu.jelphabot.testutil.TypicalPersons.ALICE;
-import static seedu.jelphabot.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.jelphabot.testutil.TypicalPersons.getTypicalJelphaBot;
 
-public class AddressBookTest {
+public class JelphaBotTest {
 
-    private final AddressBook addressBook = new AddressBook();
+    private final JelphaBot addressBook = new JelphaBot();
 
     @Test
     public void constructor() {
@@ -34,8 +34,8 @@ public class AddressBookTest {
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        AddressBook newData = getTypicalAddressBook();
+    public void resetData_withValidReadOnlyJelphaBot_replacesData() {
+        JelphaBot newData = getTypicalJelphaBot();
         addressBook.resetData(newData);
         assertEquals(newData, addressBook);
     }
@@ -46,7 +46,7 @@ public class AddressBookTest {
         Task editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Task> newTasks = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newTasks);
+        JelphaBotStub newData = new JelphaBotStub(newTasks);
 
         assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
     }
@@ -57,18 +57,18 @@ public class AddressBookTest {
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
+    public void hasPerson_personNotInJelphaBot_returnsFalse() {
         assertFalse(addressBook.hasPerson(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
+    public void hasPerson_personInJelphaBot_returnsTrue() {
         addressBook.addPerson(ALICE);
         assertTrue(addressBook.hasPerson(ALICE));
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
+    public void hasPerson_personWithSameIdentityFieldsInJelphaBot_returnsTrue() {
         addressBook.addPerson(ALICE);
         Task editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
@@ -81,12 +81,12 @@ public class AddressBookTest {
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
+     * A stub ReadOnlyJelphaBot whose persons list can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyAddressBook {
+    private static class JelphaBotStub implements ReadOnlyJelphaBot {
         private final ObservableList<Task> tasks = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Task> tasks) {
+        JelphaBotStub(Collection<Task> tasks) {
             this.tasks.setAll(tasks);
         }
 

@@ -1,7 +1,7 @@
 package seedu.jelphabot.model.util;
 
-import seedu.jelphabot.model.AddressBook;
-import seedu.jelphabot.model.ReadOnlyAddressBook;
+import seedu.jelphabot.model.JelphaBot;
+import seedu.jelphabot.model.ReadOnlyJelphaBot;
 import seedu.jelphabot.model.tag.Tag;
 import seedu.jelphabot.model.task.Description;
 import seedu.jelphabot.model.task.ModuleCode;
@@ -13,7 +13,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * Contains utility methods for populating {@code AddressBook} with sample data.
+ * Contains utility methods for populating {@code JelphaBot} with sample data.
  */
 public class SampleDataUtil {
     public static Task[] getSamplePersons() {
@@ -33,8 +33,8 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
-        AddressBook sampleAb = new AddressBook();
+    public static ReadOnlyJelphaBot getSampleJelphaBot() {
+        JelphaBot sampleAb = new JelphaBot();
         for (Task sampleTask : getSamplePersons()) {
             sampleAb.addPerson(sampleTask);
         }

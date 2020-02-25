@@ -19,26 +19,26 @@ import static seedu.jelphabot.commons.util.CollectionUtil.requireAllNonNull;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final JelphaBot addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Task> filteredTasks;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyJelphaBot addressBook, ReadOnlyUserPrefs userPrefs) {
         super();
         requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.addressBook = new JelphaBot(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredTasks = new FilteredList<>(this.addressBook.getPersonList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new JelphaBot(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -66,26 +66,26 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public Path getJelphaBotFilePath() {
+        return userPrefs.getJelphaBotFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
+    public void setJelphaBotFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+        userPrefs.setJelphaBotFilePath(addressBookFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== JelphaBot ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
-    }
-
-    @Override
-    public ReadOnlyAddressBook getAddressBook() {
+    public ReadOnlyJelphaBot getJelphaBot() {
         return addressBook;
+    }
+
+    @Override
+    public void setJelphaBot(ReadOnlyJelphaBot addressBook) {
+        this.addressBook.resetData(addressBook);
     }
 
     @Override
@@ -116,7 +116,7 @@ public class ModelManager implements Model {
 
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedJelphaBot}
      */
     @Override
     public ObservableList<Task> getFilteredPersonList() {

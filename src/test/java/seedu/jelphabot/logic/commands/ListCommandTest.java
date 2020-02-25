@@ -9,7 +9,7 @@ import seedu.jelphabot.model.UserPrefs;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.jelphabot.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.jelphabot.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.jelphabot.testutil.TypicalPersons.getTypicalJelphaBot;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListCommand.
@@ -21,8 +21,8 @@ public class ListCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalJelphaBot(), new UserPrefs());
+        expectedModel = new ModelManager(model.getJelphaBot(), new UserPrefs());
     }
 
     @Test

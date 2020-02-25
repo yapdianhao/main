@@ -18,8 +18,8 @@ import static seedu.jelphabot.testutil.TypicalPersons.*;
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalJelphaBot(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalJelphaBot(), new UserPrefs());
 
     @Test
     public void equals() {

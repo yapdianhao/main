@@ -1,6 +1,6 @@
 package seedu.jelphabot.logic.commands;
 
-import seedu.jelphabot.model.AddressBook;
+import seedu.jelphabot.model.JelphaBot;
 import seedu.jelphabot.model.Model;
 
 import static java.util.Objects.requireNonNull;
@@ -17,7 +17,7 @@ public class ClearCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.setAddressBook(new AddressBook());
+        model.setJelphaBot(new JelphaBot());
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

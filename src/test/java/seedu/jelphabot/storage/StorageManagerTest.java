@@ -4,15 +4,15 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 import seedu.jelphabot.commons.core.GuiSettings;
-import seedu.jelphabot.model.AddressBook;
-import seedu.jelphabot.model.ReadOnlyAddressBook;
+import seedu.jelphabot.model.JelphaBot;
+import seedu.jelphabot.model.ReadOnlyJelphaBot;
 import seedu.jelphabot.model.UserPrefs;
 
 import java.nio.file.Path;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static seedu.jelphabot.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.jelphabot.testutil.TypicalPersons.getTypicalJelphaBot;
 
 public class StorageManagerTest {
 
@@ -23,7 +23,7 @@ public class StorageManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(getTempFilePath("ab"));
+        JsonJelphaBotStorage addressBookStorage = new JsonJelphaBotStorage(getTempFilePath("ab"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
         storageManager = new StorageManager(addressBookStorage, userPrefsStorage);
     }
@@ -50,18 +50,18 @@ public class StorageManagerTest {
     public void addressBookReadSave() throws Exception {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
-         * {@link JsonAddressBookStorage} class.
-         * More extensive testing of UserPref saving/reading is done in {@link JsonAddressBookStorageTest} class.
+         * {@link JsonJelphaBotStorage} class.
+         * More extensive testing of UserPref saving/reading is done in {@link JsonJelphaBotStorageTest} class.
          */
-        AddressBook original = getTypicalAddressBook();
-        storageManager.saveAddressBook(original);
-        ReadOnlyAddressBook retrieved = storageManager.readAddressBook().get();
-        assertEquals(original, new AddressBook(retrieved));
+        JelphaBot original = getTypicalJelphaBot();
+        storageManager.saveJelphaBot(original);
+        ReadOnlyJelphaBot retrieved = storageManager.readJelphaBot().get();
+        assertEquals(original, new JelphaBot(retrieved));
     }
 
     @Test
-    public void getAddressBookFilePath() {
-        assertNotNull(storageManager.getAddressBookFilePath());
+    public void getJelphaBotFilePath() {
+        assertNotNull(storageManager.getJelphaBotFilePath());
     }
 
 }

@@ -2,7 +2,7 @@ package seedu.jelphabot.logic.commands;
 
 import seedu.jelphabot.commons.core.index.Index;
 import seedu.jelphabot.logic.commands.exceptions.CommandException;
-import seedu.jelphabot.model.AddressBook;
+import seedu.jelphabot.model.JelphaBot;
 import seedu.jelphabot.model.Model;
 import seedu.jelphabot.model.task.NameContainsKeywordsPredicate;
 import seedu.jelphabot.model.task.Task;
@@ -100,11 +100,11 @@ public class CommandTestUtil {
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
-        AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
+        JelphaBot expectedJelphaBot = new JelphaBot(actualModel.getJelphaBot());
         List<Task> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
-        assertEquals(expectedAddressBook, actualModel.getAddressBook());
+        assertEquals(expectedJelphaBot, actualModel.getJelphaBot());
         assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
     }
     /**
