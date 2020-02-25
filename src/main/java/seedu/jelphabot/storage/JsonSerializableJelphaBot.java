@@ -20,14 +20,14 @@ class JsonSerializableJelphaBot {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
 
-    private final List<JsonAdaptedPerson> persons = new ArrayList<>();
+    private final List<JsonAdaptedTask> tasks = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableJelphaBot} with the given persons.
+     * Constructs a {@code JsonSerializableJelphaBot} with the given tasks.
      */
     @JsonCreator
-    public JsonSerializableJelphaBot(@JsonProperty("persons") List<JsonAdaptedPerson> persons) {
-        this.persons.addAll(persons);
+    public JsonSerializableJelphaBot(@JsonProperty("tasks") List<JsonAdaptedTask> tasks) {
+        this.tasks.addAll(tasks);
     }
 
     /**
@@ -36,7 +36,7 @@ class JsonSerializableJelphaBot {
      * @param source future changes to this will not affect the created {@code JsonSerializableJelphaBot}.
      */
     public JsonSerializableJelphaBot(ReadOnlyJelphaBot source) {
-        persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
+        tasks.addAll(source.getPersonList().stream().map(JsonAdaptedTask::new).collect(Collectors.toList()));
     }
 
     /**
@@ -45,15 +45,15 @@ class JsonSerializableJelphaBot {
      * @throws IllegalValueException if there were any data constraints violated.
      */
     public JelphaBot toModelType() throws IllegalValueException {
-        JelphaBot addressBook = new JelphaBot();
-        for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
+        JelphaBot jelphaBot = new JelphaBot();
+        for (JsonAdaptedTask jsonAdaptedPerson : tasks) {
             Task task = jsonAdaptedPerson.toModelType();
-            if (addressBook.hasPerson(task)) {
+            if (jelphaBot.hasPerson(task)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
-            addressBook.addPerson(task);
+            jelphaBot.addPerson(task);
         }
-        return addressBook;
+        return jelphaBot;
     }
 
 }

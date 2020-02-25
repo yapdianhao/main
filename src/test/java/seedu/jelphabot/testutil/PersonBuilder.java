@@ -1,10 +1,7 @@
 package seedu.jelphabot.testutil;
 
 import seedu.jelphabot.model.tag.Tag;
-import seedu.jelphabot.model.task.Description;
-import seedu.jelphabot.model.task.ModuleCode;
-import seedu.jelphabot.model.task.Phone;
-import seedu.jelphabot.model.task.Task;
+import seedu.jelphabot.model.task.*;
 import seedu.jelphabot.model.util.SampleDataUtil;
 
 import java.util.HashSet;
@@ -13,6 +10,7 @@ import java.util.Set;
 /**
  * A utility class to help with building Person objects.
  */
+// TODO rewrite class
 public class PersonBuilder {
 
     public static final String DEFAULT_NAME = "Alice Pauline";
@@ -21,13 +19,11 @@ public class PersonBuilder {
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
 
     private Description description;
-    private Phone phone;
     private ModuleCode moduleCode;
     private Set<Tag> tags;
 
     public PersonBuilder() {
         description = new Description(DEFAULT_NAME);
-        phone = new Phone(DEFAULT_PHONE);
         moduleCode = new ModuleCode(DEFAULT_MODULE_CODE);
         tags = new HashSet<>();
     }
@@ -37,7 +33,6 @@ public class PersonBuilder {
      */
     public PersonBuilder(Task taskToCopy) {
         description = taskToCopy.getDescription();
-        phone = taskToCopy.getPhone();
         moduleCode = taskToCopy.getModuleCode();
         tags = new HashSet<>(taskToCopy.getTags());
     }
@@ -58,13 +53,13 @@ public class PersonBuilder {
         return this;
     }
 
-    /**
-     * Sets the {@code Phone} of the {@code Person} that we are building.
-     */
-    public PersonBuilder withPhone(String phone) {
-        this.phone = new Phone(phone);
-        return this;
-    }
+//    /**
+//     * Sets the {@code Phone} of the {@code Person} that we are building.
+//     */
+//    public PersonBuilder withPhone(String phone) {
+//        this.phone = new Phone(phone);
+//        return this;
+//    }
 
     /**
      * Sets the {@code ModuleCode} of the {@code Person} that we are building.
@@ -75,7 +70,7 @@ public class PersonBuilder {
     }
 
     public Task build() {
-        return new Task(description, phone, moduleCode, tags);
+        return new Task(description, new Status(), new DateTime(), moduleCode, tags);
     }
 
 }

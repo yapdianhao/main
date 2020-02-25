@@ -17,8 +17,10 @@ public class Task {
 
     // Identity fields
     private final Description description;
-    private final Phone phone;
     private final ModuleCode moduleCode;
+    // TODO properly define status and dateTime
+    private final Status status;
+    private final DateTime dateTime;
 
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
@@ -26,20 +28,18 @@ public class Task {
     /**
      * Every field must be present and not null.
      */
-    public Task(Description description, Phone phone, ModuleCode moduleCode, Set<Tag> tags) {
-        requireAllNonNull(description, phone, moduleCode, tags);
+    public Task(Description description, Status status, DateTime dateTime, ModuleCode moduleCode, Set<Tag> tags) {
+        requireAllNonNull(description, status, dateTime, moduleCode, tags);
         this.description = description;
-        this.phone = phone;
+        this.status = status;
+        this.dateTime = dateTime;
         this.moduleCode = moduleCode;
         this.tags.addAll(tags);
     }
 
+
     public Description getDescription() {
         return description;
-    }
-
-    public Phone getPhone() {
-        return phone;
     }
 
     public ModuleCode getModuleCode() {
@@ -66,7 +66,7 @@ public class Task {
 
         return otherTask != null
                 && otherTask.getDescription().equals(getDescription())
-                && (otherTask.getPhone().equals(getPhone()) || otherTask.getModuleCode().equals(getModuleCode()));
+                && otherTask.getModuleCode().equals(getModuleCode());
     }
 
     /**
@@ -85,7 +85,6 @@ public class Task {
 
         Task otherTask = (Task) other;
         return otherTask.getDescription().equals(getDescription())
-                && otherTask.getPhone().equals(getPhone())
                 && otherTask.getModuleCode().equals(getModuleCode())
                 && otherTask.getTags().equals(getTags());
     }
@@ -93,15 +92,13 @@ public class Task {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(description, phone, moduleCode, tags);
+        return Objects.hash(description, moduleCode, tags);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getDescription())
-                .append(" Phone: ")
-                .append(getPhone())
                 .append(" ModuleCode: ")
                 .append(getModuleCode())
                 .append(" Tags: ");

@@ -6,10 +6,7 @@ import seedu.jelphabot.commons.util.CollectionUtil;
 import seedu.jelphabot.logic.commands.exceptions.CommandException;
 import seedu.jelphabot.model.Model;
 import seedu.jelphabot.model.tag.Tag;
-import seedu.jelphabot.model.task.Description;
-import seedu.jelphabot.model.task.ModuleCode;
-import seedu.jelphabot.model.task.Phone;
-import seedu.jelphabot.model.task.Task;
+import seedu.jelphabot.model.task.*;
 
 import java.util.*;
 
@@ -20,6 +17,7 @@ import static seedu.jelphabot.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 /**
  * Edits the details of an existing person in the address book.
  */
+// TODO replace command with updated fields.
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
@@ -85,11 +83,10 @@ public class EditCommand extends Command {
         assert taskToEdit != null;
 
         Description updatedDescription = editPersonDescriptor.getDescription().orElse(taskToEdit.getDescription());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(taskToEdit.getPhone());
         ModuleCode updatedModuleCode = editPersonDescriptor.getModuleCode().orElse(taskToEdit.getModuleCode());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(taskToEdit.getTags());
 
-        return new Task(updatedDescription, updatedPhone, updatedModuleCode, updatedTags);
+        return new Task(updatedDescription, new Status(), new DateTime(), updatedModuleCode, updatedTags);
     }
 
     @Override
@@ -116,7 +113,6 @@ public class EditCommand extends Command {
      */
     public static class EditPersonDescriptor {
         private Description description;
-        private Phone phone;
         private ModuleCode moduleCode;
         private Set<Tag> tags;
 
@@ -128,7 +124,6 @@ public class EditCommand extends Command {
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setDescription(toCopy.description);
-            setPhone(toCopy.phone);
             setModuleCode(toCopy.moduleCode);
             setTags(toCopy.tags);
         }
@@ -137,7 +132,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(description, phone, moduleCode, tags);
+            return CollectionUtil.isAnyNonNull(description, moduleCode, tags);
         }
 
         public Optional<Description> getDescription() {
@@ -146,14 +141,6 @@ public class EditCommand extends Command {
 
         public void setDescription(Description description) {
             this.description = description;
-        }
-
-        public void setPhone(Phone phone) {
-            this.phone = phone;
-        }
-
-        public Optional<Phone> getPhone() {
-            return Optional.ofNullable(phone);
         }
 
         public Optional<ModuleCode> getModuleCode() {
@@ -197,7 +184,6 @@ public class EditCommand extends Command {
             EditPersonDescriptor e = (EditPersonDescriptor) other;
 
             return getDescription().equals(e.getDescription())
-                    && getPhone().equals(e.getPhone())
                     && getModuleCode().equals(e.getModuleCode())
                     && getTags().equals(e.getTags());
         }

@@ -3,10 +3,7 @@ package seedu.jelphabot.logic.parser;
 import seedu.jelphabot.logic.commands.AddCommand;
 import seedu.jelphabot.logic.parser.exceptions.ParseException;
 import seedu.jelphabot.model.tag.Tag;
-import seedu.jelphabot.model.task.Description;
-import seedu.jelphabot.model.task.ModuleCode;
-import seedu.jelphabot.model.task.Phone;
-import seedu.jelphabot.model.task.Task;
+import seedu.jelphabot.model.task.*;
 
 import java.util.Set;
 import java.util.stream.Stream;
@@ -17,6 +14,7 @@ import static seedu.jelphabot.logic.parser.CliSyntax.*;
 /**
  * Parses input arguments and creates a new AddCommand object
  */
+// TODO rewrite command with new parameters
 public class AddCommandParser implements Parser<AddCommand> {
 
     /**
@@ -34,11 +32,10 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
 
         Description description = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         ModuleCode moduleCode = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_MODULE_CODE).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Task task = new Task(description, phone, moduleCode, tagList);
+        Task task = new Task(description, new Status(), new DateTime(), moduleCode, tagList);
 
         return new AddCommand(task);
     }

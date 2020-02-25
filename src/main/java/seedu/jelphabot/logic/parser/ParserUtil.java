@@ -6,7 +6,6 @@ import seedu.jelphabot.logic.parser.exceptions.ParseException;
 import seedu.jelphabot.model.tag.Tag;
 import seedu.jelphabot.model.task.Description;
 import seedu.jelphabot.model.task.ModuleCode;
-import seedu.jelphabot.model.task.Phone;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -50,22 +49,6 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String phone} into a {@code Phone}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code phone} is invalid.
-     */
-    public static Phone parsePhone(String phone) throws ParseException {
-        requireNonNull(phone);
-        String trimmedPhone = phone.trim();
-        if (!Phone.isValidPhone(trimmedPhone)) {
-            throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
-        }
-        return new Phone(trimmedPhone);
-    }
-
-
-    /**
      * Parses a {@code String module code} into an {@code ModuleCode}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -74,7 +57,7 @@ public class ParserUtil {
     public static ModuleCode parseEmail(String moduleCode) throws ParseException {
         requireNonNull(moduleCode);
         String trimmedEmail = moduleCode.trim();
-        if (!ModuleCode.isValidEmail(trimmedEmail)) {
+        if (!ModuleCode.isValidModuleCode(trimmedEmail)) {
             throw new ParseException(ModuleCode.MESSAGE_CONSTRAINTS);
         }
         return new ModuleCode(trimmedEmail);

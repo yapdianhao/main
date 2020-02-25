@@ -4,7 +4,6 @@ import seedu.jelphabot.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.jelphabot.model.tag.Tag;
 import seedu.jelphabot.model.task.Description;
 import seedu.jelphabot.model.task.ModuleCode;
-import seedu.jelphabot.model.task.Phone;
 import seedu.jelphabot.model.task.Task;
 
 import java.util.Set;
@@ -14,6 +13,7 @@ import java.util.stream.Stream;
 /**
  * A utility class to help with building EditPersonDescriptor objects.
  */
+// TODO rewrite required
 public class EditPersonDescriptorBuilder {
 
     private EditPersonDescriptor descriptor;
@@ -32,7 +32,6 @@ public class EditPersonDescriptorBuilder {
     public EditPersonDescriptorBuilder(Task task) {
         descriptor = new EditPersonDescriptor();
         descriptor.setDescription(task.getDescription());
-        descriptor.setPhone(task.getPhone());
         descriptor.setModuleCode(task.getModuleCode());
         descriptor.setTags(task.getTags());
     }
@@ -40,23 +39,23 @@ public class EditPersonDescriptorBuilder {
     /**
      * Sets the {@code Description} of the {@code EditPersonDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withName(String name) {
+    public EditPersonDescriptorBuilder withDescription(String name) {
         descriptor.setDescription(new Description(name));
         return this;
     }
 
-    /**
-     * Sets the {@code Phone} of the {@code EditPersonDescriptor} that we are building.
-     */
-    public EditPersonDescriptorBuilder withPhone(String phone) {
-        descriptor.setPhone(new Phone(phone));
-        return this;
-    }
+//    /**
+//     * Sets the {@code Phone} of the {@code EditPersonDescriptor} that we are building.
+//     */
+//    public EditPersonDescriptorBuilder withPhone(String phone) {
+//        descriptor.setPhone(new Phone(phone));
+//        return this;
+//    }
 
     /**
      * Sets the {@code ModuleCode} of the {@code EditPersonDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withEmail(String moduleCode) {
+    public EditPersonDescriptorBuilder withModuleCode(String moduleCode) {
         descriptor.setModuleCode(new ModuleCode(moduleCode));
         return this;
     }

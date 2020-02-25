@@ -5,7 +5,6 @@ import seedu.jelphabot.logic.commands.AddCommand;
 import seedu.jelphabot.model.tag.Tag;
 import seedu.jelphabot.model.task.Description;
 import seedu.jelphabot.model.task.ModuleCode;
-import seedu.jelphabot.model.task.Phone;
 import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.testutil.PersonBuilder;
 
@@ -16,6 +15,7 @@ import static seedu.jelphabot.logic.parser.CommandParserTestUtil.assertParseSucc
 import static seedu.jelphabot.testutil.TypicalPersons.AMY;
 import static seedu.jelphabot.testutil.TypicalPersons.BOB;
 
+// TODO rewrite required to replace missing fields
 public class AddCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();
 
@@ -83,15 +83,12 @@ public class AddCommandParserTest {
                 expectedMessage);
     }
 
+
     @Test
     public void parse_invalidValue_failure() {
         // invalid name
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + MODULE_CODE_DESC_BOB + ADDRESS_DESC_BOB
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Description.MESSAGE_CONSTRAINTS);
-
-        // invalid phone
-        assertParseFailure(parser, NAME_DESC_BOB + INVALID_PHONE_DESC + MODULE_CODE_DESC_BOB + ADDRESS_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Phone.MESSAGE_CONSTRAINTS);
 
         // invalid module code
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_MODULE_CODE_DESC + ADDRESS_DESC_BOB

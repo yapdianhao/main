@@ -12,6 +12,7 @@ import java.util.Comparator;
 /**
  * An UI component that displays information of a {@code Person}.
  */
+// TODO add back fields for new model elements
 public class TaskCard extends UiPart<Region> {
 
     private static final String FXML = "TaskListCard.fxml";
@@ -33,10 +34,6 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label phone;
-    @FXML
-    private Label address;
-    @FXML
     private Label moduleCode;
     @FXML
     private FlowPane tags;
@@ -46,7 +43,6 @@ public class TaskCard extends UiPart<Region> {
         this.task = task;
         id.setText(displayedIndex + ". ");
         description.setText(task.getDescription().fullDescription);
-        phone.setText(task.getPhone().value);
         moduleCode.setText(task.getModuleCode().value);
         task.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
