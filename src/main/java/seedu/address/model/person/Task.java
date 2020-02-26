@@ -10,7 +10,7 @@ import java.util.Set;
 import seedu.address.model.tag.Tag;
 
 /**
- * Represents a Person in the address book.
+ * Represents a Task in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Task {
@@ -19,6 +19,7 @@ public class Task {
     private final Name name;
     private final Phone phone;
     private final Email email;
+    private final DateTime dateTime;
 
     // Data fields
     //private final Address address;
@@ -27,12 +28,13 @@ public class Task {
     /**
      * Every field must be present and not null.
      */
-    public Task(Name name, Phone phone, Email email, Set<Tag> tags) {
+    public Task(Name name, Phone phone, Email email, Set<Tag> tags, DateTime dateTime) {
         requireAllNonNull(name, phone, email, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.tags.addAll(tags);
+        this.dateTime = dateTime;
     }
 
     public Name getName() {
@@ -47,7 +49,6 @@ public class Task {
         return email;
     }
 
-
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -56,18 +57,23 @@ public class Task {
         return Collections.unmodifiableSet(tags);
     }
 
+    public DateTime getDateTime() {
+        return dateTime;
+    }
+    
     /**
      * Returns true if both persons of the same name have at least one other identity field that is the same.
      * This defines a weaker notion of equality between two persons.
      */
-    public boolean isSamePerson(Task otherTask) {
+    public boolean isSameTask(Task otherTask) {
         if (otherTask == this) {
             return true;
         }
 
         return otherTask != null
                 && otherTask.getName().equals(getName())
-                && (otherTask.getPhone().equals(getPhone()) || otherTask.getEmail().equals(getEmail()));
+                && (otherTask.getPhone().equals(getPhone()) || otherTask.getEmail().equals(getEmail()))
+                && otherTask.getDateTime().equals(getDateTime());
     }
 
     /**
@@ -105,6 +111,8 @@ public class Task {
                 .append(getPhone())
                 .append(" Email: ")
                 .append(getEmail())
+                .append(" DateTime: ")
+                .append(getDateTime())
                 //.append(" Address: ")
                 //.append(getAddress())
                 .append(" Tags: ");

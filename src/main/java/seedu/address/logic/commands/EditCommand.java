@@ -20,6 +20,7 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.DateTime;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Task;
@@ -77,7 +78,7 @@ public class EditCommand extends Command {
         Task taskToEdit = lastShownList.get(index.getZeroBased());
         Task editedTask = createEditedPerson(taskToEdit, editPersonDescriptor);
 
-        if (!taskToEdit.isSamePerson(editedTask) && model.hasPerson(editedTask)) {
+        if (!taskToEdit.isSameTask(editedTask) && model.hasPerson(editedTask)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
@@ -97,8 +98,8 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(taskToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(taskToEdit.getEmail());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(taskToEdit.getTags());
-
-        return new Task(updatedName, updatedPhone, updatedEmail, updatedTags);
+        DateTime dateTime = editPersonDescriptor.getDateTime().orElse(taskToEdit.getDateTime());;
+        return new Task(updatedName, updatedPhone, updatedEmail, updatedTags, dateTime);
     }
 
     @Override
@@ -129,6 +130,7 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Set<Tag> tags;
+        private DateTime dateTime;
 
         public EditPersonDescriptor() {}
 
@@ -142,6 +144,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
+            setDateTime(toCopy.dateTime);
         }
 
         /**
@@ -200,6 +203,14 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
+        public void setDateTime(DateTime dateTime) {
+            this.dateTime = dateTime;
+        }
+
+        public Optional<DateTime> getDateTime() {
+            return Optional.ofNullable(dateTime);
+        }
+
         @Override
         public boolean equals(Object other) {
             // short circuit if same object
@@ -219,7 +230,8 @@ public class EditCommand extends Command {
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
-                    && getTags().equals(e.getTags());
+                    && getTags().equals(e.getTags())
+                    && getDateTime().equals(e.getDateTime());
         }
     }
 }

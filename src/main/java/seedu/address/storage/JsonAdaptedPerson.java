@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.person.DateTime;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Task;
@@ -28,17 +29,19 @@ class JsonAdaptedPerson {
     private final String email;
    // private final String address;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final String dateTime;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email,
-            @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+                             @JsonProperty("email") String email, @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
+                             @JsonProperty("datetime") String dateTime) {
         this.name = name;
         this.phone = phone;
         this.email = email;
+        this.dateTime = dateTime;
         //this.address = address;
         if (tagged != null) {
             this.tagged.addAll(tagged);
@@ -56,6 +59,7 @@ class JsonAdaptedPerson {
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        dateTime = source.getDateTime().value;
     }
 
     /**
@@ -94,7 +98,15 @@ class JsonAdaptedPerson {
         final Email modelEmail = new Email(email);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Task(modelName, modelPhone, modelEmail, modelTags);
+
+        if (dateTime == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, DateTime.class.getSimpleName()));
+        }
+        if (!DateTime.isValidDateTime(dateTime)) {
+            throw new IllegalValueException(DateTime.MESSAGE_CONSTRAINTS);
+        }
+        final DateTime modelDateTime = new DateTime(dateTime);
+        return new Task(modelName, modelPhone, modelEmail, modelTags, modelDateTime);
     }
 
 }
