@@ -70,7 +70,7 @@ public class PersonBuilder {
     }
 
     public Task build() {
-        return new Task(description, new Status(), new DateTime(), moduleCode, tags);
+        return new Task(description, Status.INCOMPLETE, new DateTime(""), moduleCode, tags);
     }
 
 }

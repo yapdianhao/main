@@ -21,7 +21,7 @@ class JsonAdaptedTask {
 
     private final String name;
     private final String moduleCode;
-    private final String status;
+    private final Status status;
     private final String dateTime;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
@@ -32,10 +32,11 @@ class JsonAdaptedTask {
     public JsonAdaptedTask(
             @JsonProperty("name") String name,
             @JsonProperty("email") String moduleCode,
-            @JsonProperty("tagged") List<JsonAdaptedTag> tagged
+            @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
+            @JsonProperty("status") Status status
     ) {
         this.name = name;
-        this.status = "";
+        this.status = status;
         this.dateTime = "";
         this.moduleCode = moduleCode;
         if (tagged != null) {
@@ -48,7 +49,7 @@ class JsonAdaptedTask {
      */
     public JsonAdaptedTask(Task source) {
         name = source.getDescription().fullDescription;
-        this.status = "";
+        this.status = source.getStatus();
         this.dateTime = "";
         moduleCode = source.getModuleCode().value;
         tagged.addAll(source.getTags().stream()
@@ -84,7 +85,7 @@ class JsonAdaptedTask {
         final ModuleCode modelModuleCode = new ModuleCode(moduleCode);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Task(modelDescription, new Status(), new DateTime("Jan 1 2020"), modelModuleCode, modelTags);
+        return new Task(modelDescription, Status.INCOMPLETE, new DateTime("Jan 1 2020"), modelModuleCode, modelTags);
     }
 
 }
