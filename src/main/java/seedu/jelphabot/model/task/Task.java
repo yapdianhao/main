@@ -60,6 +60,7 @@ public class Task {
     public Status getStatus() {
         return status;
     }
+
     /**
      * Returns true if both persons of the same description have at least one other identity field that is the same.
      * This defines a weaker notion of equality between two persons.
