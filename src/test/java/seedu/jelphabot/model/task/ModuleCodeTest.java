@@ -14,48 +14,26 @@ public class ModuleCodeTest {
     }
 
     @Test
-    public void constructor_invalidEmail_throwsIllegalArgumentException() {
-        String invalidEmail = "";
-        assertThrows(IllegalArgumentException.class, () -> new ModuleCode(invalidEmail));
+    public void constructor_invalidModuleCode_throwsIllegalArgumentException() {
+        String invalidModuleCode = "";
+        assertThrows(IllegalArgumentException.class, () -> new ModuleCode(invalidModuleCode));
     }
 
     @Test
-    public void isValidEmail() {
-        // null module code
-        assertThrows(NullPointerException.class, () -> ModuleCode.isValidEmail(null));
+    public void isValidModuleCode() {
+        // null address
+        assertThrows(NullPointerException.class, () -> ModuleCode.isValidModuleCode(null));
 
-        // blank module code
-        assertFalse(ModuleCode.isValidEmail("")); // empty string
-        assertFalse(ModuleCode.isValidEmail(" ")); // spaces only
+        // invalid addresses
+        assertFalse(ModuleCode.isValidModuleCode("")); // empty string
+        assertFalse(ModuleCode.isValidModuleCode(" ")); // spaces only
+        assertFalse(ModuleCode.isValidModuleCode("CS")); // No numbers only
+        assertFalse(ModuleCode.isValidModuleCode("2101S")); // No Faculty code
+        assertFalse(ModuleCode.isValidModuleCode("A2101")); // Invalid Faculty code
 
-        // missing parts
-        assertFalse(ModuleCode.isValidEmail("@example.com")); // missing local part
-        assertFalse(ModuleCode.isValidEmail("peterjackexample.com")); // missing '@' symbol
-        assertFalse(ModuleCode.isValidEmail("peterjack@")); // missing domain name
-
-        // invalid parts
-        assertFalse(ModuleCode.isValidEmail("peterjack@-")); // invalid domain name
-        assertFalse(ModuleCode.isValidEmail("peterjack@exam_ple.com")); // underscore in domain name
-        assertFalse(ModuleCode.isValidEmail("peter jack@example.com")); // spaces in local part
-        assertFalse(ModuleCode.isValidEmail("peterjack@exam ple.com")); // spaces in domain name
-        assertFalse(ModuleCode.isValidEmail(" peterjack@example.com")); // leading space
-        assertFalse(ModuleCode.isValidEmail("peterjack@example.com ")); // trailing space
-        assertFalse(ModuleCode.isValidEmail("peterjack@@example.com")); // double '@' symbol
-        assertFalse(ModuleCode.isValidEmail("peter@jack@example.com")); // '@' symbol in local part
-        assertFalse(ModuleCode.isValidEmail("peterjack@example@com")); // '@' symbol in domain name
-        assertFalse(ModuleCode.isValidEmail("peterjack@.example.com")); // domain name starts with a period
-        assertFalse(ModuleCode.isValidEmail("peterjack@example.com.")); // domain name ends with a period
-        assertFalse(ModuleCode.isValidEmail("peterjack@-example.com")); // domain name starts with a hyphen
-        assertFalse(ModuleCode.isValidEmail("peterjack@example.com-")); // domain name ends with a hyphen
-
-        // valid module code
-        assertTrue(ModuleCode.isValidEmail("PeterJack_1190@example.com"));
-        assertTrue(ModuleCode.isValidEmail("a@bc")); // minimal
-        assertTrue(ModuleCode.isValidEmail("test@localhost")); // alphabets only
-        assertTrue(ModuleCode.isValidEmail("!#$%&'*+/=?`{|}~^.-@example.org")); // special characters local part
-        assertTrue(ModuleCode.isValidEmail("123@145")); // numeric local part and domain name
-        assertTrue(ModuleCode.isValidEmail("a1+be!@example1.com")); // mixture of alphanumeric and special characters
-        assertTrue(ModuleCode.isValidEmail("peter_jack@very-very-very-long-example.com")); // long domain name
-        assertTrue(ModuleCode.isValidEmail("if.you.dream.it_you.can.do.it@example.com")); // long local part
+        // valid addresses
+        assertTrue(ModuleCode.isValidModuleCode("CS2101")); // No ending tag
+        assertTrue(ModuleCode.isValidModuleCode("CS2103T")); // yes module tag
+        assertTrue(ModuleCode.isValidModuleCode("ACC1301")); // module code has max 3 chars
     }
 }

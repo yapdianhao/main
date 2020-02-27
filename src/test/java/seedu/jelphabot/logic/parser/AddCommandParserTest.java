@@ -6,7 +6,7 @@ import seedu.jelphabot.model.tag.Tag;
 import seedu.jelphabot.model.task.Description;
 import seedu.jelphabot.model.task.ModuleCode;
 import seedu.jelphabot.model.task.Task;
-import seedu.jelphabot.testutil.PersonBuilder;
+import seedu.jelphabot.testutil.TaskBuilder;
 
 import static seedu.jelphabot.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.*;
@@ -21,7 +21,7 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Task expectedTask = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
+        Task expectedTask = new TaskBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + MODULE_CODE_DESC_BOB
@@ -44,7 +44,7 @@ public class AddCommandParserTest {
                 + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedTask));
 
         // multiple tags - all accepted
-        Task expectedTaskMultipleTags = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
+        Task expectedTaskMultipleTags = new TaskBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
                 .build();
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + MODULE_CODE_DESC_BOB + ADDRESS_DESC_BOB
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, new AddCommand(expectedTaskMultipleTags));
@@ -53,7 +53,7 @@ public class AddCommandParserTest {
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
-        Task expectedTask = new PersonBuilder(AMY).withTags().build();
+        Task expectedTask = new TaskBuilder(AMY).withTags().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + MODULE_CODE_DESC_AMY + ADDRESS_DESC_AMY,
                 new AddCommand(expectedTask));
     }

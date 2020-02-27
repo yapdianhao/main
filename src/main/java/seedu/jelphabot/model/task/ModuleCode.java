@@ -10,24 +10,16 @@ import static seedu.jelphabot.commons.util.AppUtil.checkArgument;
 public class ModuleCode {
 
     // TODO rewrite constraints for module code
-    public static final String MESSAGE_CONSTRAINTS = "Emails should be of the format [faculty][code][variant] "
+    public static final String MESSAGE_CONSTRAINTS = "Module Code should be of the format [faculty][code][variant] "
             + "and adhere to the following constraints:\n"
             + "1. The faculty should only contain alphabetical characters.\n"
             + "2. This is followed by a reference code, and optionally a variant tag.\n"
             + "    - The reference code must be 4 digits long.\n"
             + "    - The variant tag is an optional alphabetical character.\n";
-//    private static final String FACULTY_REGEX = "^[A-Za-z]+$";
-//    private static final String REFERENCE_CODE = "\\d{4,}";
-//    private static final String VARIANT_TAG = "^[A-Za-z]$";
-//    public static final String VALIDATION_REGEX = FACULTY_REGEX + REFERENCE_CODE + VARIANT_TAG;
-    // alphanumeric and special characters
-    private static final String SPECIAL_CHARACTERS = "!#$%&'*+/=?`{|}~^.-";
-    private static final String LOCAL_PART_REGEX = "^[\\w" + SPECIAL_CHARACTERS + "]+";
-    private static final String DOMAIN_FIRST_CHARACTER_REGEX = "[^\\W_]"; // alphanumeric characters except underscore
-    private static final String DOMAIN_MIDDLE_REGEX = "[a-zA-Z0-9.-]*"; // alphanumeric, period and hyphen
-    private static final String DOMAIN_LAST_CHARACTER_REGEX = "[^\\W_]$";
-    public static final String VALIDATION_REGEX = LOCAL_PART_REGEX + "@"
-            + DOMAIN_FIRST_CHARACTER_REGEX + DOMAIN_MIDDLE_REGEX + DOMAIN_LAST_CHARACTER_REGEX;
+    private static final String FACULTY_REGEX = "^[A-Za-z]{2,3}";
+    private static final String REFERENCE_CODE = "\\d{4}";
+    private static final String VARIANT_TAG = "[A-Za-z]?$";
+    public static final String VALIDATION_REGEX = FACULTY_REGEX + REFERENCE_CODE + VARIANT_TAG;
 
     public final String value;
 

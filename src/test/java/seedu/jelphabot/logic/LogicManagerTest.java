@@ -16,7 +16,7 @@ import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.storage.JsonJelphaBotStorage;
 import seedu.jelphabot.storage.JsonUserPrefsStorage;
 import seedu.jelphabot.storage.StorageManager;
-import seedu.jelphabot.testutil.PersonBuilder;
+import seedu.jelphabot.testutil.TaskBuilder;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -77,7 +77,7 @@ public class LogicManagerTest {
         // Execute add command
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + MODULE_CODE_DESC_AMY
                 + ADDRESS_DESC_AMY;
-        Task expectedTask = new PersonBuilder(AMY).withTags().build();
+        Task expectedTask = new TaskBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedTask);
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;

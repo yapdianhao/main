@@ -6,7 +6,7 @@ import seedu.jelphabot.model.Model;
 import seedu.jelphabot.model.ModelManager;
 import seedu.jelphabot.model.UserPrefs;
 import seedu.jelphabot.model.task.Task;
-import seedu.jelphabot.testutil.PersonBuilder;
+import seedu.jelphabot.testutil.TaskBuilder;
 
 import static seedu.jelphabot.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -26,7 +26,7 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_newPerson_success() {
-        Task validTask = new PersonBuilder().build();
+        Task validTask = new TaskBuilder().build();
 
         Model expectedModel = new ModelManager(model.getJelphaBot(), new UserPrefs());
         expectedModel.addPerson(validTask);

@@ -55,13 +55,13 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code module code} is invalid.
      */
-    public static ModuleCode parseEmail(String moduleCode) throws ParseException {
+    public static ModuleCode parseModuleCode(String moduleCode) throws ParseException {
         requireNonNull(moduleCode);
-        String trimmedEmail = moduleCode.trim();
-        if (!ModuleCode.isValidModuleCode(trimmedEmail)) {
+        String trimmedModuleCode = moduleCode.trim();
+        if (!ModuleCode.isValidModuleCode(trimmedModuleCode)) {
             throw new ParseException(ModuleCode.MESSAGE_CONSTRAINTS);
         }
-        return new ModuleCode(trimmedEmail);
+        return new ModuleCode(trimmedModuleCode);
     }
 
     /**
