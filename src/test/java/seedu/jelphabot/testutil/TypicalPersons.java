@@ -14,34 +14,34 @@ import static seedu.jelphabot.logic.commands.CommandTestUtil.*;
  */
 public class TypicalPersons {
 
-    public static final Task ALICE = new PersonBuilder().withName("Alice Pauline")
+    public static final Task ALICE = new TaskBuilder().withName("Alice Pauline")
             .withTags("friends").build();
-    public static final Task BENSON = new PersonBuilder().withName("Benson Meier")
+    public static final Task BENSON = new TaskBuilder().withName("Benson Meier")
             .withTags("owesMoney", "friends").build();
-    public static final Task CARL = new PersonBuilder().withName("Carl Kurz")
-            .withEmail("heinz@example.com").build();
-    public static final Task DANIEL = new PersonBuilder().withName("Daniel Meier")
-            .withEmail("cornelia@example.com").withTags("friends").build();
-    public static final Task ELLE = new PersonBuilder().withName("Elle Meyer")
-            .withEmail("werner@example.com").build();
-    public static final Task FIONA = new PersonBuilder().withName("Fiona Kunz")
-            .withEmail("lydia@example.com").build();
-    public static final Task GEORGE = new PersonBuilder().withName("George Best")
-            .withEmail("anna@example.com").build();
+    public static final Task CARL = new TaskBuilder().withName("Carl Kurz")
+            .withModuleCode("heinz@example.com").build();
+    public static final Task DANIEL = new TaskBuilder().withName("Daniel Meier")
+            .withModuleCode("cornelia@example.com").withTags("friends").build();
+    public static final Task ELLE = new TaskBuilder().withName("Elle Meyer")
+            .withModuleCode("werner@example.com").build();
+    public static final Task FIONA = new TaskBuilder().withName("Fiona Kunz")
+            .withModuleCode("lydia@example.com").build();
+    public static final Task GEORGE = new TaskBuilder().withName("George Best")
+            .withModuleCode("anna@example.com").build();
 
     // Manually added
-    public static final Task HOON = new PersonBuilder().withName("Hoon Meier")
-            .withEmail("stefan@example.com").build();
-    public static final Task IDA = new PersonBuilder().withName("Ida Mueller")
-            .withEmail("hans@example.com").build();
+    public static final Task HOON = new TaskBuilder().withName("Hoon Meier")
+            .withModuleCode("stefan@example.com").build();
+    public static final Task IDA = new TaskBuilder().withName("Ida Mueller")
+            .withModuleCode("hans@example.com").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
-    public static final Task AMY = new PersonBuilder()
+    public static final Task AMY = new TaskBuilder()
             .withName(VALID_NAME_AMY)
-            .withEmail(VALID_MODULE_CODE_AMY)
+            .withModuleCode(VALID_MODULE_CODE_AMY)
             .withTags(VALID_TAG_FRIEND).build();
-    public static final Task BOB = new PersonBuilder().withName(VALID_NAME_BOB)
-            .withEmail(VALID_MODULE_CODE_BOB)
+    public static final Task BOB = new TaskBuilder().withName(VALID_NAME_BOB)
+            .withModuleCode(VALID_MODULE_CODE_BOB)
             .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
             .build();
 
