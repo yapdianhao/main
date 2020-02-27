@@ -16,17 +16,17 @@ import java.util.stream.Collectors;
 public class SampleDataUtil {
     public static Task[] getSamplePersons() {
         return new Task[] {
-            new Task(new Description("Alex Yeoh"), new Status(), new DateTime(), new ModuleCode("CS2101"),
+            new Task(new Description("Alex Yeoh"), new Status(), new DateTime("Jan-20-2020 10 00"), new ModuleCode("CS2101"),
                 getTagSet("friends")),
-            new Task(new Description("Bernice Yu"), new Status(), new DateTime(), new ModuleCode("ACC1301"),
+            new Task(new Description("Bernice Yu"), new Status(), new DateTime("Jan-20-2020 10 00"), new ModuleCode("ACC1301"),
                 getTagSet("colleagues", "friends")),
-            new Task(new Description("Charlotte Oliveiro"), new Status(), new DateTime(), new ModuleCode("CS3240"),
+            new Task(new Description("Charlotte Oliveiro"), new Status(), new DateTime("Jan-20-2020 10 00"), new ModuleCode("CS3240"),
                 getTagSet("neighbours")),
-            new Task(new Description("David Li"), new Status(), new DateTime(), new ModuleCode("IS1103S"),
+            new Task(new Description("David Li"), new Status(), new DateTime("Jan-20-2020 10 00"), new ModuleCode("IS1103S"),
                 getTagSet("family")),
-            new Task(new Description("Irfan Ibrahim"), new Status(), new DateTime(), new ModuleCode("GEH1033"),
+            new Task(new Description("Irfan Ibrahim"), new Status(), new DateTime("Jan-20-2020 10 00"), new ModuleCode("GEH1033"),
                 getTagSet("classmates")),
-            new Task(new Description("Roy Balakrishnan"), new Status(), new DateTime(), new ModuleCode("CS4240"),
+            new Task(new Description("Roy Balakrishnan"), new Status(), new DateTime("Jan-20-2020 10 00"), new ModuleCode("CS4240"),
                 getTagSet("colleagues"))
         };
     }

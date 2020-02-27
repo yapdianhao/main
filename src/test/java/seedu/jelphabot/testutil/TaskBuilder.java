@@ -46,20 +46,21 @@ public class TaskBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the
+     * {@code Person} that we are building.
      */
-    public TaskBuilder withTags(String ... tags) {
+    public TaskBuilder withTags(String... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
 
-//    /**
-//     * Sets the {@code Phone} of the {@code Person} that we are building.
-//     */
-//    public PersonBuilder withPhone(String phone) {
-//        this.phone = new Phone(phone);
-//        return this;
-//    }
+    // /**
+    // * Sets the {@code Phone} of the {@code Person} that we are building.
+    // */
+    // public PersonBuilder withPhone(String phone) {
+    // this.phone = new Phone(phone);
+    // return this;
+    // }
 
     /**
      * Sets the {@code ModuleCode} of the {@code Person} that we are building.
@@ -70,7 +71,7 @@ public class TaskBuilder {
     }
 
     public Task build() {
-        return new Task(description, new Status(), new DateTime(), moduleCode, tags);
+        return new Task(description, new Status(), new DateTime("Jan-20-2020 01 20"), moduleCode, tags);
     }
 
 }
