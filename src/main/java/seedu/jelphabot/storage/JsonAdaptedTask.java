@@ -21,7 +21,7 @@ class JsonAdaptedTask {
 
     private final String name;
     private final String moduleCode;
-    private final String status;
+    private final Status status;
     private final String dateTime;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
@@ -30,13 +30,15 @@ class JsonAdaptedTask {
      */
     @JsonCreator
     public JsonAdaptedTask(
-            @JsonProperty("name") String name,
-            @JsonProperty("email") String moduleCode,
+            @JsonProperty("desc") String description,
+            @JsonProperty("status") Status status,
+            @JsonProperty("dateTime") String dateTime,
+            @JsonProperty("module") String moduleCode,
             @JsonProperty("tagged") List<JsonAdaptedTag> tagged
     ) {
-        this.name = name;
-        this.status = "";
-        this.dateTime = "";
+        this.name = description;
+        this.status = status;
+        this.dateTime = dateTime;
         this.moduleCode = moduleCode;
         if (tagged != null) {
             this.tagged.addAll(tagged);
@@ -48,18 +50,18 @@ class JsonAdaptedTask {
      */
     public JsonAdaptedTask(Task source) {
         name = source.getDescription().fullDescription;
-        this.status = "";
-        this.dateTime = "";
+        this.status = source.getStatus();
+        this.dateTime = ""; // TODO update this
         moduleCode = source.getModuleCode().value;
-        tagged.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
-                .collect(Collectors.toList()));
+        tagged.addAll(source.getTags().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()));
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code Task} object.
+     * Converts this Jackson-friendly adapted person object into the model's
+     * {@code Task} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person.
+     * @throws IllegalValueException if there were any data constraints violated in
+     *                               the adapted person.
      */
     public Task toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();
@@ -68,7 +70,8 @@ class JsonAdaptedTask {
         }
 
         if (name == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Description.class.getSimpleName()));
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, Description.class.getSimpleName()));
         }
         if (!Description.isValidName(name)) {
             throw new IllegalValueException(Description.MESSAGE_CONSTRAINTS);
@@ -76,7 +79,8 @@ class JsonAdaptedTask {
         final Description modelDescription = new Description(name);
 
         if (moduleCode == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, ModuleCode.class.getSimpleName()));
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, ModuleCode.class.getSimpleName()));
         }
         if (!ModuleCode.isValidModuleCode(moduleCode)) {
             throw new IllegalValueException(ModuleCode.MESSAGE_CONSTRAINTS);
@@ -84,7 +88,7 @@ class JsonAdaptedTask {
         final ModuleCode modelModuleCode = new ModuleCode(moduleCode);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Task(modelDescription, new Status(), new DateTime("Jan 1 2020"), modelModuleCode, modelTags);
+        return new Task(modelDescription, status, new DateTime("Jan-1-2020 10 00"), modelModuleCode, modelTags);
     }
 
 }

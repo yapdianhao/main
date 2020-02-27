@@ -20,10 +20,12 @@ public class JsonAdaptedTaskTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_MODULE_CODE = "example.com";
     private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_DATETIME = "Jan 2 2020 11 11";
 
     private static final String VALID_NAME = BENSON.getDescription().toString();
 //    private static final String VALID_PHONE = BENSON.getPhone().toString();
     private static final String VALID_MODULE_CODE = BENSON.getModuleCode().toString();
+    private static final String VALID_DATETIME = BENSON.getDateTime().toString();
 //    private static final String VALID_ADDRESS = BENSON.getAddress().toString();
     private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
             .map(JsonAdaptedTag::new)
@@ -68,14 +70,14 @@ public class JsonAdaptedTaskTest {
     @Test
     public void toModelType_invalidModuleCode_throwsIllegalValueException() {
         JsonAdaptedTask person =
-                new JsonAdaptedTask(VALID_NAME, INVALID_MODULE_CODE, VALID_TAGS);
+                new JsonAdaptedTask(VALID_NAME, INVALID_MODULE_CODE, VALID_TAGS, VALID_DATETIME);
         String expectedMessage = ModuleCode.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
     @Test
     public void toModelType_nullModuleCode_throwsIllegalValueException() {
-        JsonAdaptedTask person = new JsonAdaptedTask(VALID_NAME, null, VALID_TAGS);
+        JsonAdaptedTask person = new JsonAdaptedTask(VALID_NAME, null, VALID_TAGS, VALID_DATETIME);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, ModuleCode.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -100,7 +102,7 @@ public class JsonAdaptedTaskTest {
         List<JsonAdaptedTag> invalidTags = new ArrayList<>(VALID_TAGS);
         invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
         JsonAdaptedTask person =
-                new JsonAdaptedTask(VALID_NAME, VALID_MODULE_CODE, invalidTags);
+                new JsonAdaptedTask(VALID_NAME, VALID_MODULE_CODE, invalidTags, VALID_DATETIME);
         assertThrows(IllegalValueException.class, person::toModelType);
     }
 
