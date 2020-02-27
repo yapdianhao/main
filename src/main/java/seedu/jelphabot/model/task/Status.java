@@ -1,4 +1,6 @@
 package seedu.jelphabot.model.task;
 
-public class Status {
+public enum Status {
+    COMPLETE,
+    INCOMPLETE
 }

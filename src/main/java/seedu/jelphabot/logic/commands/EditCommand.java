@@ -86,8 +86,9 @@ public class EditCommand extends Command {
         ModuleCode updatedModuleCode = editPersonDescriptor.getModuleCode().orElse(taskToEdit.getModuleCode());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(taskToEdit.getTags());
         DateTime dateTime = editPersonDescriptor.getDateTime().orElse(taskToEdit.getDateTime());
+        Status updatedStatus = editPersonDescriptor.getStatus();
 
-        return new Task(updatedDescription, new Status(), dateTime, updatedModuleCode, updatedTags);
+        return new Task(updatedDescription, updatedStatus, dateTime, updatedModuleCode, updatedTags);
     }
 
     @Override
@@ -117,6 +118,7 @@ public class EditCommand extends Command {
         private ModuleCode moduleCode;
         private Set<Tag> tags;
         private DateTime dateTime;
+        private Status status;
 
         public EditPersonDescriptor() {}
 
@@ -129,6 +131,7 @@ public class EditCommand extends Command {
             setModuleCode(toCopy.moduleCode);
             setTags(toCopy.tags);
             setDateTime(toCopy.dateTime);
+            setStatus(toCopy.status);
         }
 
         /**
@@ -152,6 +155,13 @@ public class EditCommand extends Command {
 
         public void setModuleCode(ModuleCode moduleCode) {
             this.moduleCode = moduleCode;
+        }
+
+        public Status getStatus() {
+            return status;
+        }
+        public void setStatus(Status status) {
+            this.status = status;
         }
 
         /**

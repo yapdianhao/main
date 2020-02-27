@@ -36,7 +36,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         DateTime dateTime = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).get());
 
-        Task task = new Task(description, new Status(), dateTime, moduleCode, tagList);
+        Task task = new Task(description, Status.INCOMPLETE, dateTime, moduleCode, tagList);
 
         return new AddCommand(task);
     }
