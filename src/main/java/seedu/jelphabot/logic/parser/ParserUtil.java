@@ -4,6 +4,7 @@ import seedu.jelphabot.commons.core.index.Index;
 import seedu.jelphabot.commons.util.StringUtil;
 import seedu.jelphabot.logic.parser.exceptions.ParseException;
 import seedu.jelphabot.model.tag.Tag;
+import seedu.jelphabot.model.task.DateTime;
 import seedu.jelphabot.model.task.Description;
 import seedu.jelphabot.model.task.ModuleCode;
 
@@ -88,5 +89,20 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String dateTime} into an {@code dateTime}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code dateTime} is invalid.
+     */
+    public static DateTime parseDateTime(String dateTime) throws ParseException {
+        requireNonNull(dateTime);
+        String trimmedDatetime = dateTime.trim();
+        if (!DateTime.isValidDateTime(trimmedDatetime)) {
+            throw new ParseException(DateTime.MESSAGE_CONSTRAINTS);
+        }
+        return new DateTime(trimmedDatetime);
     }
 }

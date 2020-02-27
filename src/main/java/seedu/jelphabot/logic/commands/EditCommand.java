@@ -85,8 +85,9 @@ public class EditCommand extends Command {
         Description updatedDescription = editPersonDescriptor.getDescription().orElse(taskToEdit.getDescription());
         ModuleCode updatedModuleCode = editPersonDescriptor.getModuleCode().orElse(taskToEdit.getModuleCode());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(taskToEdit.getTags());
+        DateTime dateTime = editPersonDescriptor.getDateTime().orElse(taskToEdit.getDateTime());
 
-        return new Task(updatedDescription, new Status(), new DateTime(), updatedModuleCode, updatedTags);
+        return new Task(updatedDescription, new Status(), dateTime, updatedModuleCode, updatedTags);
     }
 
     @Override
@@ -115,6 +116,7 @@ public class EditCommand extends Command {
         private Description description;
         private ModuleCode moduleCode;
         private Set<Tag> tags;
+        private DateTime dateTime;
 
         public EditPersonDescriptor() {}
 
@@ -126,6 +128,7 @@ public class EditCommand extends Command {
             setDescription(toCopy.description);
             setModuleCode(toCopy.moduleCode);
             setTags(toCopy.tags);
+            setDateTime(toCopy.dateTime);
         }
 
         /**
@@ -168,6 +171,14 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
+        public void setDateTime(DateTime dateTime) {
+            this.dateTime = dateTime;
+        }
+
+        public Optional<DateTime> getDateTime() {
+            return Optional.ofNullable(dateTime);
+        }
+
         @Override
         public boolean equals(Object other) {
             // short circuit if same object
@@ -185,7 +196,8 @@ public class EditCommand extends Command {
 
             return getDescription().equals(e.getDescription())
                     && getModuleCode().equals(e.getModuleCode())
-                    && getTags().equals(e.getTags());
+                    && getTags().equals(e.getTags())
+                    && getDateTime().equals(e.getDateTime());
         }
     }
 }

@@ -10,7 +10,7 @@ import java.util.Set;
 import static seedu.jelphabot.commons.util.CollectionUtil.requireAllNonNull;
 
 /**
- * Represents a Person in the address book.
+ * Represents a Task in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Task {
@@ -34,7 +34,6 @@ public class Task {
         this.status = status;
         this.dateTime = dateTime;
         this.moduleCode = moduleCode;
-        this.tags.addAll(tags);
     }
 
 
@@ -46,13 +45,16 @@ public class Task {
         return moduleCode;
     }
 
-
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public DateTime getDateTime() {
+        return dateTime;
     }
 
     /**
@@ -66,7 +68,8 @@ public class Task {
 
         return otherTask != null
                 && otherTask.getDescription().equals(getDescription())
-                && otherTask.getModuleCode().equals(getModuleCode());
+                && otherTask.getModuleCode().equals(getModuleCode())
+                && otherTask.getDateTime().equals(getDateTime());
     }
 
     /**
@@ -101,6 +104,8 @@ public class Task {
         builder.append(getDescription())
                 .append(" ModuleCode: ")
                 .append(getModuleCode())
+                .append(" DateTime: ")
+                .append(getDateTime())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
