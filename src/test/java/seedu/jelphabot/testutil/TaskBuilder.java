@@ -15,8 +15,7 @@ public class TaskBuilder {
 
     public static final String DEFAULT_NAME = "Alice Pauline";
     public static final String DEFAULT_PHONE = "85355255";
-    public static final String DEFAULT_MODULE_CODE = "alice@gmail.com";
-    public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_MODULE_CODE = "CS2103";
 
     private Description description;
     private ModuleCode moduleCode;
@@ -71,7 +70,7 @@ public class TaskBuilder {
     }
 
     public Task build() {
-        return new Task(description, new Status(), new DateTime("Jan-20-2020 01 20"), moduleCode, tags);
+        return new Task(description,  Status.INCOMPLETE, new DateTime("Jan-20-2020 01 20"), moduleCode, tags);
     }
 
 }

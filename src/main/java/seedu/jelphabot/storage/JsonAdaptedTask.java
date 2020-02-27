@@ -21,7 +21,7 @@ class JsonAdaptedTask {
 
     private final String name;
     private final String moduleCode;
-    private final String status;
+    private final Status status;
     private final String dateTime;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
@@ -29,11 +29,15 @@ class JsonAdaptedTask {
      * Constructs a {@code JsonAdaptedTask} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedTask(@JsonProperty("name") String name, @JsonProperty("email") String moduleCode,
-                           @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
-                           @JsonProperty("dateTime") String dateTime) {
-        this.name = name;
-        this.status = "";
+    public JsonAdaptedTask(
+            @JsonProperty("desc") String description,
+            @JsonProperty("status") Status status,
+            @JsonProperty("dateTime") String dateTime,
+            @JsonProperty("module") String moduleCode,
+            @JsonProperty("tagged") List<JsonAdaptedTag> tagged
+    ) {
+        this.name = description;
+        this.status = status;
         this.dateTime = dateTime;
         this.moduleCode = moduleCode;
         if (tagged != null) {
@@ -46,8 +50,8 @@ class JsonAdaptedTask {
      */
     public JsonAdaptedTask(Task source) {
         name = source.getDescription().fullDescription;
-        this.status = "";
-        this.dateTime = "";
+        this.status = source.getStatus();
+        this.dateTime = ""; // TODO update this
         moduleCode = source.getModuleCode().value;
         tagged.addAll(source.getTags().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()));
     }
@@ -84,7 +88,7 @@ class JsonAdaptedTask {
         final ModuleCode modelModuleCode = new ModuleCode(moduleCode);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Task(modelDescription, new Status(), new DateTime("Jan-1-2020 10 00"), modelModuleCode, modelTags);
+        return new Task(modelDescription, status, new DateTime("Jan-1-2020 10 00"), modelModuleCode, modelTags);
     }
 
 }
