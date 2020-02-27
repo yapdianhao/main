@@ -33,7 +33,8 @@ public class EditTaskDescriptorTest {
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different phone -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withPhone(VALID_PHONE_BOB).build();
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY)
+                .build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different module code -> returns false
