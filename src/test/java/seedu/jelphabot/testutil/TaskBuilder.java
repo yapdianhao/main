@@ -11,7 +11,7 @@ import java.util.Set;
  * A utility class to help with building Person objects.
  */
 // TODO rewrite class
-public class PersonBuilder {
+public class TaskBuilder {
 
     public static final String DEFAULT_NAME = "Alice Pauline";
     public static final String DEFAULT_PHONE = "85355255";
@@ -22,7 +22,7 @@ public class PersonBuilder {
     private ModuleCode moduleCode;
     private Set<Tag> tags;
 
-    public PersonBuilder() {
+    public TaskBuilder() {
         description = new Description(DEFAULT_NAME);
         moduleCode = new ModuleCode(DEFAULT_MODULE_CODE);
         tags = new HashSet<>();
@@ -31,7 +31,7 @@ public class PersonBuilder {
     /**
      * Initializes the PersonBuilder with the data of {@code personToCopy}.
      */
-    public PersonBuilder(Task taskToCopy) {
+    public TaskBuilder(Task taskToCopy) {
         description = taskToCopy.getDescription();
         moduleCode = taskToCopy.getModuleCode();
         tags = new HashSet<>(taskToCopy.getTags());
@@ -40,7 +40,7 @@ public class PersonBuilder {
     /**
      * Sets the {@code Description} of the {@code Person} that we are building.
      */
-    public PersonBuilder withName(String name) {
+    public TaskBuilder withName(String name) {
         this.description = new Description(name);
         return this;
     }
@@ -48,7 +48,7 @@ public class PersonBuilder {
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withTags(String ... tags) {
+    public TaskBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
@@ -64,7 +64,7 @@ public class PersonBuilder {
     /**
      * Sets the {@code ModuleCode} of the {@code Person} that we are building.
      */
-    public PersonBuilder withEmail(String moduleCode) {
+    public TaskBuilder withModuleCode(String moduleCode) {
         this.moduleCode = new ModuleCode(moduleCode);
         return this;
     }
