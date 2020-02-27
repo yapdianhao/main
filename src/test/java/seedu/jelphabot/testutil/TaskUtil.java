@@ -12,7 +12,7 @@ import static seedu.jelphabot.logic.parser.CliSyntax.*;
 /**
  * A utility class for Person.
  */
-public class PersonUtil {
+public class TaskUtil {
 
     /**
      * Returns an add command string for adding the {@code person}.

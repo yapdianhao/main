@@ -3,8 +3,7 @@ package seedu.jelphabot.model.task;
 import org.junit.jupiter.api.Test;
 import seedu.jelphabot.testutil.PersonBuilder;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.*;
 import static seedu.jelphabot.testutil.Assert.assertThrows;
 import static seedu.jelphabot.testutil.TypicalPersons.ALICE;
@@ -52,34 +51,34 @@ public class TaskTest {
     public void equals() {
         // same values -> returns true
         Task aliceCopy = new PersonBuilder(ALICE).build();
-        assertTrue(ALICE.equals(aliceCopy));
+        assertEquals(ALICE, aliceCopy);
 
         // same object -> returns true
-        assertTrue(ALICE.equals(ALICE));
+        assertEquals(ALICE, ALICE);
 
         // null -> returns false
-        assertFalse(ALICE.equals(null));
+        assertNotEquals(null, ALICE);
 
         // different type -> returns false
-        assertFalse(ALICE.equals(5));
+        assertNotEquals(5, ALICE);
 
         // different person -> returns false
-        assertFalse(ALICE.equals(BOB));
+        assertNotEquals(ALICE, BOB);
 
         // different name -> returns false
         Task editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
+        assertNotEquals(ALICE, editedAlice);
 
         // different phone -> returns false
         editedAlice = new PersonBuilder(ALICE).build();
-        assertFalse(ALICE.equals(editedAlice));
+        assertNotEquals(ALICE, editedAlice);
 
         // different module code -> returns false
         editedAlice = new PersonBuilder(ALICE).withEmail(VALID_MODULE_CODE_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
+        assertNotEquals(ALICE, editedAlice);
 
         // different tags -> returns false
         editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
-        assertFalse(ALICE.equals(editedAlice));
+        assertNotEquals(ALICE, editedAlice);
     }
 }

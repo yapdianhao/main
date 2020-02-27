@@ -8,7 +8,7 @@ import seedu.jelphabot.model.task.DescriptionContainsKeywordsPredicate;
 import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.testutil.EditPersonDescriptorBuilder;
 import seedu.jelphabot.testutil.PersonBuilder;
-import seedu.jelphabot.testutil.PersonUtil;
+import seedu.jelphabot.testutil.TaskUtil;
 
 import java.util.Arrays;
 import java.util.List;
@@ -28,7 +28,7 @@ public class JelphaBotParserTest {
     @Test
     public void parseCommand_add() throws Exception {
         Task task = new PersonBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(task));
+        AddCommand command = (AddCommand) parser.parseCommand(TaskUtil.getAddCommand(task));
         assertEquals(new AddCommand(task), command);
     }
 
@@ -50,7 +50,7 @@ public class JelphaBotParserTest {
         Task task = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(task).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
+                + INDEX_FIRST_PERSON.getOneBased() + " " + TaskUtil.getEditPersonDescriptorDetails(descriptor));
         assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
 
