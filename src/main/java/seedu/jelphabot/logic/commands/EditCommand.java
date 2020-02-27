@@ -160,6 +160,11 @@ public class EditCommand extends Command {
         public Status getStatus() {
             return status;
         }
+
+        /**
+         * Sets {@code status} to this object's {@code status}.
+         * @param status sets the status to the specified status.
+         */
         public void setStatus(Status status) {
             this.status = status;
         }

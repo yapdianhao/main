@@ -85,7 +85,7 @@ class JsonAdaptedTask {
         final ModuleCode modelModuleCode = new ModuleCode(moduleCode);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Task(modelDescription, Status.INCOMPLETE, new DateTime("Jan 1 2020"), modelModuleCode, modelTags);
+        return new Task(modelDescription, status, new DateTime("Jan 1 2020"), modelModuleCode, modelTags);
     }
 
 }
