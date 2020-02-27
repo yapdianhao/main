@@ -1,7 +1,7 @@
 package seedu.jelphabot.model.task;
 
 import org.junit.jupiter.api.Test;
-import seedu.jelphabot.testutil.PersonBuilder;
+import seedu.jelphabot.testutil.TaskBuilder;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -40,34 +40,34 @@ public class DescriptionContainsKeywordsPredicateTest {
     public void test_nameContainsKeywords_returnsTrue() {
         // One keyword
         DescriptionContainsKeywordsPredicate predicate = new DescriptionContainsKeywordsPredicate(Collections.singletonList("Alice"));
-        assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
+        assertTrue(predicate.test(new TaskBuilder().withName("Alice Bob").build()));
 
         // Multiple keywords
         predicate = new DescriptionContainsKeywordsPredicate(Arrays.asList("Alice", "Bob"));
-        assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
+        assertTrue(predicate.test(new TaskBuilder().withName("Alice Bob").build()));
 
         // Only one matching keyword
         predicate = new DescriptionContainsKeywordsPredicate(Arrays.asList("Bob", "Carol"));
-        assertTrue(predicate.test(new PersonBuilder().withName("Alice Carol").build()));
+        assertTrue(predicate.test(new TaskBuilder().withName("Alice Carol").build()));
 
         // Mixed-case keywords
         predicate = new DescriptionContainsKeywordsPredicate(Arrays.asList("aLIce", "bOB"));
-        assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
+        assertTrue(predicate.test(new TaskBuilder().withName("Alice Bob").build()));
     }
 
     @Test
     public void test_nameDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
         DescriptionContainsKeywordsPredicate predicate = new DescriptionContainsKeywordsPredicate(Collections.emptyList());
-        assertFalse(predicate.test(new PersonBuilder().withName("Alice").build()));
+        assertFalse(predicate.test(new TaskBuilder().withName("Alice").build()));
 
         // Non-matching keyword
         predicate = new DescriptionContainsKeywordsPredicate(Arrays.asList("Carol"));
-        assertFalse(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
+        assertFalse(predicate.test(new TaskBuilder().withName("Alice Bob").build()));
 
         // Keywords match phone, module code and address, but does not match name
         predicate = new DescriptionContainsKeywordsPredicate(Arrays.asList("12345", "alice@email.com", "Main", "Street"));
-        assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("12345")
-                .withEmail("alice@email.com").build()));
+        assertFalse(predicate.test(new TaskBuilder().withName("Alice")
+                .withModuleCode("alice@email.com").build()));
     }
 }
