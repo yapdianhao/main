@@ -10,7 +10,7 @@ import seedu.jelphabot.model.task.Task;
 import java.util.Comparator;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * An UI component that displays information of a {@code Task}.
  */
 // TODO add back fields for new model elements
 public class TaskCard extends UiPart<Region> {
@@ -39,14 +39,17 @@ public class TaskCard extends UiPart<Region> {
     private Label status;
     @FXML
     private FlowPane tags;
+    @FXML
+    private Label dateTime;
 
     public TaskCard(Task task, int displayedIndex) {
         super(FXML);
         this.task = task;
-        id.setText(displayedIndex + ". ");
+//        id.setText(displayedIndex + ". ");
         description.setText(task.getDescription().fullDescription);
         moduleCode.setText(task.getModuleCode().value);
         status.setText(task.getStatus().name());
+        dateTime.setText(task.getDateTime().value);
         task.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
