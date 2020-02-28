@@ -66,11 +66,11 @@ public class EditCommand extends Command {
         Task taskToEdit = lastShownList.get(index.getZeroBased());
         Task editedTask = createEditedPerson(taskToEdit, editPersonDescriptor);
 
-        if (!taskToEdit.isSameTask(editedTask) && model.hasPerson(editedTask)) {
+        if (!taskToEdit.isSameTask(editedTask) && model.hasTask(editedTask)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        model.setPerson(taskToEdit, editedTask);
+        model.setTask(taskToEdit, editedTask);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedTask));
     }
@@ -211,9 +211,9 @@ public class EditCommand extends Command {
 
             return getDescription().equals(e.getDescription())
                     && getModuleCode().equals(e.getModuleCode())
-                    && getTags().equals(e.getTags())
                     && getStatus().equals(e.getStatus())
-                    && getDateTime().equals(e.getDateTime());
+                    && getDateTime().equals(e.getDateTime())
+                    && getTags().equals(e.getTags());
         }
     }
 }

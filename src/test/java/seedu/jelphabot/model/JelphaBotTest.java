@@ -24,7 +24,7 @@ public class JelphaBotTest {
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getPersonList());
+        assertEquals(Collections.emptyList(), addressBook.getTaskList());
     }
 
     @Test
@@ -76,7 +76,7 @@ public class JelphaBotTest {
 
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> addressBook.getTaskList().remove(0));
     }
 
     /**
@@ -90,7 +90,7 @@ public class JelphaBotTest {
         }
 
         @Override
-        public ObservableList<Task> getPersonList() {
+        public ObservableList<Task> getTaskList() {
             return tasks;
         }
     }

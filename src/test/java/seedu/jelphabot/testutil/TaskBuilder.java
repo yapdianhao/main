@@ -14,7 +14,6 @@ import java.util.Set;
 public class TaskBuilder {
 
     public static final String DEFAULT_NAME = "Alice Pauline";
-    public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_MODULE_CODE = "CS2103";
 
     private Description description;

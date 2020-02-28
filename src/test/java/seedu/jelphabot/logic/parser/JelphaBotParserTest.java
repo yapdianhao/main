@@ -50,7 +50,7 @@ public class JelphaBotParserTest {
         Task task = new TaskBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(task).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + TaskUtil.getEditPersonDescriptorDetails(descriptor));
+                + INDEX_FIRST_PERSON.getOneBased() + " " + TaskUtil.getEditTaskDescriptorDetails(descriptor));
         assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
 

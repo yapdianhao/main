@@ -10,25 +10,25 @@ import seedu.jelphabot.model.task.Task;
  */
 public class JelphaBotBuilder {
 
-    private JelphaBot addressBook;
+    private JelphaBot jelphaBot;
 
     public JelphaBotBuilder() {
-        addressBook = new JelphaBot();
+        jelphaBot = new JelphaBot();
     }
 
-    public JelphaBotBuilder(JelphaBot addressBook) {
-        this.addressBook = addressBook;
+    public JelphaBotBuilder(JelphaBot jelphaBot) {
+        this.jelphaBot = jelphaBot;
     }
 
     /**
      * Adds a new {@code Person} to the {@code JelphaBot} that we are building.
      */
     public JelphaBotBuilder withPerson(Task task) {
-        addressBook.addPerson(task);
+        jelphaBot.addPerson(task);
         return this;
     }
 
     public JelphaBot build() {
-        return addressBook;
+        return jelphaBot;
     }
 }

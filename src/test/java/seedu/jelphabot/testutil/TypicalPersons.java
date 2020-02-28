@@ -12,6 +12,7 @@ import static seedu.jelphabot.logic.commands.CommandTestUtil.*;
 /**
  * A utility class containing a list of {@code Person} objects to be used in tests.
  */
+// TODO rewrite needed
 public class TypicalPersons {
 
     public static final Task ALICE = new TaskBuilder().withName("Alice Pauline")

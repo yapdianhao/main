@@ -34,7 +34,7 @@ public class ModelManager implements Model {
 
         this.addressBook = new JelphaBot(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredTasks = new FilteredList<>(this.addressBook.getPersonList());
+        filteredTasks = new FilteredList<>(this.addressBook.getTaskList());
     }
 
     public ModelManager() {
@@ -89,24 +89,24 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasPerson(Task task) {
+    public boolean hasTask(Task task) {
         requireNonNull(task);
         return addressBook.hasPerson(task);
     }
 
     @Override
-    public void deletePerson(Task target) {
+    public void deleteTask(Task target) {
         addressBook.removePerson(target);
     }
 
     @Override
-    public void addPerson(Task task) {
+    public void addTask(Task task) {
         addressBook.addPerson(task);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
-    public void setPerson(Task target, Task editedTask) {
+    public void setTask(Task target, Task editedTask) {
         requireAllNonNull(target, editedTask);
 
         addressBook.setPerson(target, editedTask);

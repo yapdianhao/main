@@ -10,6 +10,7 @@ import java.util.function.Predicate;
 /**
  * The API of the Model component.
  */
+// TODO check the file paths here for saving as jelphabot.json
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Task> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
@@ -55,26 +56,26 @@ public interface Model {
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
-    boolean hasPerson(Task task);
+    boolean hasTask(Task task);
 
     /**
      * Deletes the given person.
      * The person must exist in the address book.
      */
-    void deletePerson(Task target);
+    void deleteTask(Task target);
 
     /**
      * Adds the given person.
      * {@code person} must not already exist in the address book.
      */
-    void addPerson(Task task);
+    void addTask(Task task);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
-    void setPerson(Task target, Task editedTask);
+    void setTask(Task target, Task editedTask);
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Task> getFilteredPersonList();
