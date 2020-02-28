@@ -49,7 +49,7 @@
           </padding>
         </StackPane>
 
-        <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="pane-with-border">
+        <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="stack-pane">
           <padding>
             <Insets top="5" right="10" bottom="5" left="10" />
           </padding>
