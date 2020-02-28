@@ -16,17 +16,17 @@ import java.util.stream.Collectors;
 public class SampleDataUtil {
     public static Task[] getSamplePersons() {
         return new Task[] {
-            new Task(new Description("Alex Yeoh"), Status.INCOMPLETE, new DateTime("Jan-1-2020 22 00"), new ModuleCode("CS3230"),
+            new Task(new Description("Individual Assignment 1"), Status.INCOMPLETE, new DateTime("Jan-1-2020 22 00"), new ModuleCode("CS3230"),
                 getTagSet("friends")),
-            new Task(new Description("Bernice Yu"), Status.INCOMPLETE, new DateTime("Jan-1-2020 22 00"), new ModuleCode("ACC1101"),
+            new Task(new Description("Tutorial 3"), Status.INCOMPLETE, new DateTime("Jan-1-2020 22 00"), new ModuleCode("ACC1101"),
                 getTagSet("colleagues", "friends")),
-            new Task(new Description("Charlotte Oliveiro"), Status.INCOMPLETE, new DateTime("Jan-1-2020 22 00"), new ModuleCode("ST2334"),
+            new Task(new Description("MidTerm Revision Papers"), Status.INCOMPLETE, new DateTime("Jan-1-2020 22 00"), new ModuleCode("ST2334"),
                 getTagSet("neighbours")),
             new Task(new Description("David Li"), Status.INCOMPLETE, new DateTime("Jan-1-2020 22 00"), new ModuleCode("PF1103"),
                 getTagSet("family")),
-            new Task(new Description("Irfan Ibrahim"), Status.INCOMPLETE, new DateTime("Jan-1-2020 22 00"), new ModuleCode("MA1521"),
+            new Task(new Description("Tutorial 4"), Status.INCOMPLETE, new DateTime("Jan-1-2020 22 00"), new ModuleCode("MA1521"),
                 getTagSet("classmates")),
-            new Task(new Description("Roy Balakrishnan"), Status.INCOMPLETE, new DateTime("Jan-1-2020 22 00"), new ModuleCode("MA1101R"),
+            new Task(new Description("Graded Homework 3"), Status.INCOMPLETE, new DateTime("Jan-1-2020 22 00"), new ModuleCode("MA1101R"),
                 getTagSet("colleagues"))
         };
     }
