@@ -17,6 +17,7 @@ import static seedu.jelphabot.model.Model.PREDICATE_SHOW_ALL_TASKS;
 /**
  * Edits the details of an existing person in the address book.
  */
+// TODO go through this manually
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
@@ -37,7 +38,7 @@ public class EditCommand extends Command {
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
-     * @param index                of the person in the filtered person list to edit
+     * @param index of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
     public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
