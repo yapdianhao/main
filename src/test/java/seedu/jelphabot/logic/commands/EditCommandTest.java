@@ -34,7 +34,7 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedTask);
 
         Model expectedModel = new ModelManager(new JelphaBot(model.getJelphaBot()), new UserPrefs());
-        expectedModel.setPerson(model.getFilteredPersonList().get(0), editedTask);
+        expectedModel.setTask(model.getFilteredPersonList().get(0), editedTask);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -55,7 +55,7 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedTask);
 
         Model expectedModel = new ModelManager(new JelphaBot(model.getJelphaBot()), new UserPrefs());
-        expectedModel.setPerson(lastTask, editedTask);
+        expectedModel.setTask(lastTask, editedTask);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -84,7 +84,7 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedTask);
 
         Model expectedModel = new ModelManager(new JelphaBot(model.getJelphaBot()), new UserPrefs());
-        expectedModel.setPerson(model.getFilteredPersonList().get(0), editedTask);
+        expectedModel.setTask(model.getFilteredPersonList().get(0), editedTask);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -103,7 +103,7 @@ public class EditCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         // edit person in filtered list into a duplicate in address book
-        Task taskInList = model.getJelphaBot().getPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        Task taskInList = model.getJelphaBot().getTaskList().get(INDEX_SECOND_PERSON.getZeroBased());
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
                 new EditPersonDescriptorBuilder(taskInList).build());
 
@@ -128,7 +128,7 @@ public class EditCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getJelphaBot().getPersonList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getJelphaBot().getTaskList().size());
 
         EditCommand editCommand = new EditCommand(outOfBoundIndex,
                 new EditPersonDescriptorBuilder().withDescription(VALID_NAME_BOB).build());

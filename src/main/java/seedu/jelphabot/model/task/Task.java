@@ -18,9 +18,9 @@ public class Task {
     // Identity fields
     private final Description description;
     private final ModuleCode moduleCode;
-    // TODO properly define status and dateTime
-    private final Status status;
     private final DateTime dateTime;
+    private final Status status;
+    // TODO implement priority
 
     // Data fields
     private final Set<Tag> tags = new HashSet<>();

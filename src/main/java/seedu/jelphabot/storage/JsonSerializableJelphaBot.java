@@ -36,7 +36,7 @@ class JsonSerializableJelphaBot {
      * @param source future changes to this will not affect the created {@code JsonSerializableJelphaBot}.
      */
     public JsonSerializableJelphaBot(ReadOnlyJelphaBot source) {
-        tasks.addAll(source.getPersonList().stream().map(JsonAdaptedTask::new).collect(Collectors.toList()));
+        tasks.addAll(source.getTaskList().stream().map(JsonAdaptedTask::new).collect(Collectors.toList()));
     }
 
     /**

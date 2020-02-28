@@ -4,8 +4,7 @@ import org.junit.jupiter.api.Test;
 import seedu.jelphabot.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.jelphabot.testutil.EditPersonDescriptorBuilder;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.*;
 
 public class EditTaskDescriptorTest {
@@ -14,35 +13,35 @@ public class EditTaskDescriptorTest {
     public void equals() {
         // same values -> returns true
         EditPersonDescriptor descriptorWithSameValues = new EditPersonDescriptor(DESC_AMY);
-        assertTrue(DESC_AMY.equals(descriptorWithSameValues));
+        assertEquals(DESC_AMY, descriptorWithSameValues);
 
         // same object -> returns true
-        assertTrue(DESC_AMY.equals(DESC_AMY));
+        assertEquals(DESC_AMY, DESC_AMY);
 
         // null -> returns false
-        assertFalse(DESC_AMY.equals(null));
+        assertNotEquals(null, DESC_AMY);
 
         // different types -> returns false
-        assertFalse(DESC_AMY.equals(5));
+        assertNotEquals(5, DESC_AMY);
 
         // different values -> returns false
-        assertFalse(DESC_AMY.equals(DESC_BOB));
+        assertNotEquals(DESC_AMY, DESC_BOB);
 
         // different name -> returns false
         EditPersonDescriptor editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withDescription(VALID_NAME_BOB).build();
-        assertFalse(DESC_AMY.equals(editedAmy));
+        assertNotEquals(DESC_AMY, editedAmy);
 
         // different phone -> returns false
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY)
                 .build();
-        assertFalse(DESC_AMY.equals(editedAmy));
+        assertNotEquals(DESC_AMY, editedAmy);
 
         // different module code -> returns false
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withModuleCode(VALID_MODULE_CODE_BOB).build();
-        assertFalse(DESC_AMY.equals(editedAmy));
+        assertNotEquals(DESC_AMY, editedAmy);
 
         // different tags -> returns false
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_HUSBAND).build();
-        assertFalse(DESC_AMY.equals(editedAmy));
+        assertNotEquals(DESC_AMY, editedAmy);
     }
 }

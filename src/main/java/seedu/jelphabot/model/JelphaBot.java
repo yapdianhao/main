@@ -53,7 +53,7 @@ public class JelphaBot implements ReadOnlyJelphaBot {
     public void resetData(ReadOnlyJelphaBot newData) {
         requireNonNull(newData);
 
-        setPersons(newData.getPersonList());
+        setPersons(newData.getTaskList());
     }
 
     //// person-level operations
@@ -102,7 +102,7 @@ public class JelphaBot implements ReadOnlyJelphaBot {
     }
 
     @Override
-    public ObservableList<Task> getPersonList() {
+    public ObservableList<Task> getTaskList() {
         return persons.asUnmodifiableObservableList();
     }
 
