@@ -16,10 +16,11 @@ import java.nio.file.Path;
 public interface Logic {
     /**
      * Executes the command and returns the result.
+     * 
      * @param commandText The command as entered by the user.
      * @return the result of the command execution.
      * @throws CommandException If an error occurs during command execution.
-     * @throws ParseException If an error occurs during parsing.
+     * @throws ParseException   If an error occurs during parsing.
      */
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
@@ -31,7 +32,7 @@ public interface Logic {
     ReadOnlyJelphaBot getJelphaBot();
 
     /** Returns an unmodifiable view of the filtered list of persons */
-    ObservableList<Task> getFilteredPersonList();
+    ObservableList<Task> getFilteredTaskList();
 
     /**
      * Returns the user prefs' address book file path.

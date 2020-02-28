@@ -51,7 +51,7 @@ class JsonAdaptedTask {
     public JsonAdaptedTask(Task source) {
         name = source.getDescription().fullDescription;
         this.status = source.getStatus();
-        this.dateTime = ""; // TODO update this
+        this.dateTime = source.getDateTime().toString();
         moduleCode = source.getModuleCode().value;
         tagged.addAll(source.getTags().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()));
     }

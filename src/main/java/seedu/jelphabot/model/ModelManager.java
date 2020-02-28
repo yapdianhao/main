@@ -41,7 +41,8 @@ public class ModelManager implements Model {
         this(new JelphaBot(), new UserPrefs());
     }
 
-    //=========== UserPrefs ==================================================================================
+    // =========== UserPrefs
+    // ==================================================================================
 
     @Override
     public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
@@ -76,7 +77,8 @@ public class ModelManager implements Model {
         userPrefs.setJelphaBotFilePath(addressBookFilePath);
     }
 
-    //=========== JelphaBot ================================================================================
+    // =========== JelphaBot
+    // ================================================================================
 
     @Override
     public ReadOnlyJelphaBot getJelphaBot() {
@@ -102,7 +104,7 @@ public class ModelManager implements Model {
     @Override
     public void addTask(Task task) {
         addressBook.addPerson(task);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
     }
 
     @Override
@@ -112,19 +114,20 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedTask);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    // =========== Filtered Person List Accessors
+    // =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedJelphaBot}
+     * Returns an unmodifiable view of the list of {@code Person} backed by the
+     * internal list of {@code versionedJelphaBot}
      */
     @Override
-    public ObservableList<Task> getFilteredPersonList() {
+    public ObservableList<Task> getFilteredTaskList() {
         return filteredTasks;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Task> predicate) {
+    public void updateFilteredTaskList(Predicate<Task> predicate) {
         requireNonNull(predicate);
         filteredTasks.setPredicate(predicate);
     }
@@ -143,8 +146,7 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return addressBook.equals(other.addressBook)
-                && userPrefs.equals(other.userPrefs)
+        return addressBook.equals(other.addressBook) && userPrefs.equals(other.userPrefs)
                 && filteredTasks.equals(other.filteredTasks);
     }
 
