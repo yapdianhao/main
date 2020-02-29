@@ -19,7 +19,8 @@ import static seedu.jelphabot.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.jelphabot.testutil.TypicalPersons.getTypicalJelphaBot;
 
 /**
- * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for EditCommand.
+ * Contains integration tests (interaction with the Model, UndoCommand and
+ * RedoCommand) and unit tests for EditCommand.
  */
 public class EditCommandTest {
 
@@ -31,28 +32,27 @@ public class EditCommandTest {
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedTask).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedTask);
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, editedTask);
 
         Model expectedModel = new ModelManager(new JelphaBot(model.getJelphaBot()), new UserPrefs());
-        expectedModel.setTask(model.getFilteredPersonList().get(0), editedTask);
+        expectedModel.setTask(model.getFilteredTaskList().get(0), editedTask);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
-        Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
-        Task lastTask = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
+        Index indexLastPerson = Index.fromOneBased(model.getFilteredTaskList().size());
+        Task lastTask = model.getFilteredTaskList().get(indexLastPerson.getZeroBased());
 
         TaskBuilder personInList = new TaskBuilder(lastTask);
-        Task editedTask = personInList.withName(VALID_NAME_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+        Task editedTask = personInList.withName(VALID_NAME_BOB).withTags(VALID_TAG_HUSBAND).build();
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withDescription(VALID_NAME_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
         EditCommand editCommand = new EditCommand(indexLastPerson, descriptor);
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedTask);
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, editedTask);
 
         Model expectedModel = new ModelManager(new JelphaBot(model.getJelphaBot()), new UserPrefs());
         expectedModel.setTask(lastTask, editedTask);
@@ -63,9 +63,9 @@ public class EditCommandTest {
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, new EditPersonDescriptor());
-        Task editedTask = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Task editedTask = model.getFilteredTaskList().get(INDEX_FIRST_PERSON.getZeroBased());
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedTask);
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, editedTask);
 
         Model expectedModel = new ModelManager(new JelphaBot(model.getJelphaBot()), new UserPrefs());
 
@@ -76,26 +76,26 @@ public class EditCommandTest {
     public void execute_filteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
-        Task taskInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Task taskInFilteredList = model.getFilteredTaskList().get(INDEX_FIRST_PERSON.getZeroBased());
         Task editedTask = new TaskBuilder(taskInFilteredList).withName(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
                 new EditPersonDescriptorBuilder().withDescription(VALID_NAME_BOB).build());
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedTask);
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, editedTask);
 
         Model expectedModel = new ModelManager(new JelphaBot(model.getJelphaBot()), new UserPrefs());
-        expectedModel.setTask(model.getFilteredPersonList().get(0), editedTask);
+        expectedModel.setTask(model.getFilteredTaskList().get(0), editedTask);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_duplicatePersonUnfilteredList_failure() {
-        Task firstTask = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Task firstTask = model.getFilteredTaskList().get(INDEX_FIRST_PERSON.getZeroBased());
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(firstTask).build();
         EditCommand editCommand = new EditCommand(INDEX_SECOND_PERSON, descriptor);
 
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_TASK);
     }
 
     @Test
@@ -107,12 +107,12 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
                 new EditPersonDescriptorBuilder(taskInList).build());
 
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_TASK);
     }
 
     @Test
     public void execute_invalidPersonIndexUnfilteredList_failure() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredTaskList().size() + 1);
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withDescription(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
 
@@ -120,8 +120,8 @@ public class EditCommandTest {
     }
 
     /**
-     * Edit filtered list where index is larger than size of filtered list,
-     * but smaller than size of address book
+     * Edit filtered list where index is larger than size of filtered list, but
+     * smaller than size of address book
      */
     @Test
     public void execute_invalidPersonIndexFilteredList_failure() {

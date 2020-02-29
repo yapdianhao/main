@@ -1,13 +1,13 @@
 package seedu.jelphabot.logic.parser;
 
+import static seedu.jelphabot.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.jelphabot.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+
 import seedu.jelphabot.logic.commands.*;
 import seedu.jelphabot.logic.parser.exceptions.ParseException;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import static seedu.jelphabot.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.jelphabot.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 /**
  * Parses user input.

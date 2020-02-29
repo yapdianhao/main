@@ -15,7 +15,8 @@ import static seedu.jelphabot.logic.commands.CommandTestUtil.assertCommandSucces
 import static seedu.jelphabot.testutil.TypicalPersons.*;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code FindCommand}.
+ * Contains integration tests (interaction with the Model) for
+ * {@code FindCommand}.
  */
 public class FindCommandTest {
     private Model model = new ModelManager(getTypicalJelphaBot(), new UserPrefs());
@@ -23,10 +24,10 @@ public class FindCommandTest {
 
     @Test
     public void equals() {
-        DescriptionContainsKeywordsPredicate firstPredicate =
-                new DescriptionContainsKeywordsPredicate(Collections.singletonList("first"));
-        DescriptionContainsKeywordsPredicate secondPredicate =
-                new DescriptionContainsKeywordsPredicate(Collections.singletonList("second"));
+        DescriptionContainsKeywordsPredicate firstPredicate = new DescriptionContainsKeywordsPredicate(
+                Collections.singletonList("first"));
+        DescriptionContainsKeywordsPredicate secondPredicate = new DescriptionContainsKeywordsPredicate(
+                Collections.singletonList("second"));
 
         FindCommand findFirstCommand = new FindCommand(firstPredicate);
         FindCommand findSecondCommand = new FindCommand(secondPredicate);
@@ -53,9 +54,9 @@ public class FindCommandTest {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
         DescriptionContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
+        expectedModel.updateFilteredTaskList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+        assertEquals(Collections.emptyList(), model.getFilteredTaskList());
     }
 
     @Test
@@ -63,9 +64,9 @@ public class FindCommandTest {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
         DescriptionContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
         FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
+        expectedModel.updateFilteredTaskList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredTaskList());
     }
 
     /**
