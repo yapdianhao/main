@@ -14,22 +14,24 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task list. "
             + "Parameters: "
-            + PREFIX_NAME + "NAME "
-            + PREFIX_PHONE + "PHONE "
+            + PREFIX_DESCRIPTION + "DESCRIPTION "
+//            + PREFIX_PHONE + "PHONE "
             + PREFIX_MODULE_CODE + "MODULE_CODE "
-            + PREFIX_ADDRESS + "ADDRESS "
+//            + PREFIX_ADDRESS + "ADDRESS "
+            + PREFIX_DATETIME + "DATETIME "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "John Doe "
-            + PREFIX_PHONE + "98765432 "
-            + PREFIX_MODULE_CODE + "johnd@example.com "
-            + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
+            + PREFIX_DESCRIPTION + "Assignment 1 "
+//            + PREFIX_PHONE + "98765432 "
+            + PREFIX_MODULE_CODE + "CS3230 "
+            + PREFIX_DATETIME + "Oct-1-2020 23 59 "
+//            + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
+    public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
 
     private final Task toAdd;
