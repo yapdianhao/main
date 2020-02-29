@@ -10,7 +10,7 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static seedu.jelphabot.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.jelphabot.model.Model.PREDICATE_SHOW_ALL_TASKS;
 import static seedu.jelphabot.testutil.Assert.assertThrows;
 import static seedu.jelphabot.testutil.TypicalPersons.ALICE;
 import static seedu.jelphabot.testutil.TypicalPersons.BENSON;
@@ -86,8 +86,8 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
+    public void getFilteredTaskList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredTaskList().remove(0));
     }
 
     @Test
@@ -115,11 +115,11 @@ public class ModelManagerTest {
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getDescription().fullDescription.split("\\s+");
-        modelManager.updateFilteredPersonList(new DescriptionContainsKeywordsPredicate(Arrays.asList(keywords)));
+        modelManager.updateFilteredTaskList(new DescriptionContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
-        modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        modelManager.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();

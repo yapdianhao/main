@@ -6,10 +6,10 @@ import seedu.jelphabot.commons.exceptions.IllegalValueException;
 import seedu.jelphabot.model.tag.Tag;
 import seedu.jelphabot.model.task.*;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Set;
+import java.util.HashSet;
 import java.util.stream.Collectors;
 
 /**
@@ -51,7 +51,7 @@ class JsonAdaptedTask {
     public JsonAdaptedTask(Task source) {
         name = source.getDescription().fullDescription;
         this.status = source.getStatus();
-        this.dateTime = ""; // TODO update this
+        this.dateTime = source.getDateTime().toString();
         moduleCode = source.getModuleCode().value;
         tagged.addAll(source.getTags().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()));
     }

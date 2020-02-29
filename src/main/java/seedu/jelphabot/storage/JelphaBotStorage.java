@@ -3,9 +3,9 @@ package seedu.jelphabot.storage;
 import seedu.jelphabot.commons.exceptions.DataConversionException;
 import seedu.jelphabot.model.ReadOnlyJelphaBot;
 
-import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
+import java.io.IOException;
 
 /**
  * Represents a storage for {@link seedu.jelphabot.model.JelphaBot}.
