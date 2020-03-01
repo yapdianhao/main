@@ -11,7 +11,7 @@ import java.text.SimpleDateFormat;
  */
 public class DateTime {
 
-    public static final String MESSAGE_CONSTRAINTS = "DateTime should be of the format MMM-d-yyy HH mm. Time should "
+    public static final String MESSAGE_CONSTRAINTS = "DateTime should be of the format YYYY-MM-DD HH:MM. Time should "
             + "be in the 24 hour format.";
     public final String value;
 
@@ -33,11 +33,12 @@ public class DateTime {
      */
     // TODO: change storage format to work properly
     public static boolean isValidDateTime(String test) {
-        SimpleDateFormat sdf = new SimpleDateFormat("MMM-d-yyyy HH mm");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         sdf.setLenient(false);
         try {
             sdf.parse(test);
         } catch (ParseException e) {
+            System.out.println(true);
             return false;
         }
         return true;
