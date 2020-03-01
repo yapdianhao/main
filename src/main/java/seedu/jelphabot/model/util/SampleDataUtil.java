@@ -7,7 +7,11 @@ import java.util.stream.Collectors;
 import seedu.jelphabot.model.JelphaBot;
 import seedu.jelphabot.model.ReadOnlyJelphaBot;
 import seedu.jelphabot.model.tag.Tag;
-import seedu.jelphabot.model.task.*;
+import seedu.jelphabot.model.task.DateTime;
+import seedu.jelphabot.model.task.Description;
+import seedu.jelphabot.model.task.ModuleCode;
+import seedu.jelphabot.model.task.Status;
+import seedu.jelphabot.model.task.Task;
 
 /**
  * Contains utility methods for populating {@code JelphaBot} with sample data.

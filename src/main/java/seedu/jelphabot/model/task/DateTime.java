@@ -6,10 +6,13 @@ import static seedu.jelphabot.commons.util.AppUtil.checkArgument;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+/**
+ * Class representing the Date and Time of the modelled task.
+ */
 public class DateTime {
 
-    public static final String MESSAGE_CONSTRAINTS = "DateTime should be of the format MMM-d-yyy HH mm. Time should " +
-            "be in the 24 hour format.";
+    public static final String MESSAGE_CONSTRAINTS = "DateTime should be of the format MMM-d-yyy HH mm. Time should "
+            + "be in the 24 hour format.";
     public final String value;
 
     /**

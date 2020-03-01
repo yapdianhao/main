@@ -11,7 +11,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.jelphabot.commons.exceptions.IllegalValueException;
 import seedu.jelphabot.model.tag.Tag;
-import seedu.jelphabot.model.task.*;
+import seedu.jelphabot.model.task.DateTime;
+import seedu.jelphabot.model.task.Description;
+import seedu.jelphabot.model.task.ModuleCode;
+import seedu.jelphabot.model.task.Status;
+import seedu.jelphabot.model.task.Task;
 
 /**
  * Jackson-friendly version of {@link Task}.
