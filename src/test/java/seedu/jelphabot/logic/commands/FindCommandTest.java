@@ -1,18 +1,19 @@
 package seedu.jelphabot.logic.commands;
 
-import org.junit.jupiter.api.Test;
-import seedu.jelphabot.model.Model;
-import seedu.jelphabot.model.ModelManager;
-import seedu.jelphabot.model.UserPrefs;
-import seedu.jelphabot.model.task.DescriptionContainsKeywordsPredicate;
-
-import java.util.Arrays;
-import java.util.Collections;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static seedu.jelphabot.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.jelphabot.testutil.TypicalPersons.*;
+
+import java.util.Arrays;
+import java.util.Collections;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.jelphabot.model.Model;
+import seedu.jelphabot.model.ModelManager;
+import seedu.jelphabot.model.UserPrefs;
+import seedu.jelphabot.model.task.DescriptionContainsKeywordsPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for

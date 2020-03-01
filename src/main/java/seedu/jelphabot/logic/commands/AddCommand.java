@@ -1,11 +1,11 @@
 package seedu.jelphabot.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.jelphabot.logic.parser.CliSyntax.*;
+
 import seedu.jelphabot.logic.commands.exceptions.CommandException;
 import seedu.jelphabot.model.Model;
 import seedu.jelphabot.model.task.Task;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.jelphabot.logic.parser.CliSyntax.*;
 
 /**
  * Adds a Task to the task list.

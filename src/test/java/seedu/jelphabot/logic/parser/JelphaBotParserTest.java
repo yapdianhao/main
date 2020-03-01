@@ -1,6 +1,18 @@
 package seedu.jelphabot.logic.parser;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.jelphabot.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.jelphabot.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.jelphabot.testutil.Assert.assertThrows;
+import static seedu.jelphabot.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.jelphabot.logic.commands.*;
 import seedu.jelphabot.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.jelphabot.logic.parser.exceptions.ParseException;
@@ -9,17 +21,6 @@ import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.testutil.EditPersonDescriptorBuilder;
 import seedu.jelphabot.testutil.TaskBuilder;
 import seedu.jelphabot.testutil.TaskUtil;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.jelphabot.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.jelphabot.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.jelphabot.testutil.Assert.assertThrows;
-import static seedu.jelphabot.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 public class JelphaBotParserTest {
 

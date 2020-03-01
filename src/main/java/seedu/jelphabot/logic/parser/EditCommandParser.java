@@ -1,19 +1,19 @@
 package seedu.jelphabot.logic.parser;
 
-import seedu.jelphabot.commons.core.index.Index;
-import seedu.jelphabot.logic.commands.EditCommand;
-import seedu.jelphabot.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.jelphabot.logic.parser.exceptions.ParseException;
-import seedu.jelphabot.model.tag.Tag;
+import static java.util.Objects.requireNonNull;
+import static seedu.jelphabot.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.jelphabot.logic.parser.CliSyntax.*;
 
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.jelphabot.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.jelphabot.logic.parser.CliSyntax.*;
+import seedu.jelphabot.commons.core.index.Index;
+import seedu.jelphabot.logic.commands.EditCommand;
+import seedu.jelphabot.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.jelphabot.logic.parser.exceptions.ParseException;
+import seedu.jelphabot.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new EditCommand object

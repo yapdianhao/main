@@ -1,13 +1,13 @@
 package seedu.jelphabot.testutil;
 
-import seedu.jelphabot.commons.core.index.Index;
-import seedu.jelphabot.model.Model;
-import seedu.jelphabot.model.task.Task;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
+import seedu.jelphabot.commons.core.index.Index;
+import seedu.jelphabot.model.Model;
+import seedu.jelphabot.model.task.Task;
 
 /**
  * A utility class for test cases.

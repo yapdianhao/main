@@ -1,13 +1,13 @@
 package seedu.jelphabot.testutil;
 
-import seedu.jelphabot.model.JelphaBot;
-import seedu.jelphabot.model.task.Task;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static seedu.jelphabot.logic.commands.CommandTestUtil.*;
+import seedu.jelphabot.model.JelphaBot;
+import seedu.jelphabot.model.task.Task;
 
 /**
  * A utility class containing a list of {@code Person} objects to be used in tests.

@@ -1,13 +1,13 @@
 package seedu.jelphabot.storage;
 
+import java.io.IOException;
+import java.nio.file.Path;
+import java.util.Optional;
+
 import seedu.jelphabot.commons.exceptions.DataConversionException;
 import seedu.jelphabot.model.ReadOnlyJelphaBot;
 import seedu.jelphabot.model.ReadOnlyUserPrefs;
 import seedu.jelphabot.model.UserPrefs;
-
-import java.io.IOException;
-import java.nio.file.Path;
-import java.util.Optional;
 
 /**
  * API of the Storage component

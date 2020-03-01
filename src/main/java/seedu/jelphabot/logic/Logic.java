@@ -1,5 +1,7 @@
 package seedu.jelphabot.logic;
 
+import java.nio.file.Path;
+
 import javafx.collections.ObservableList;
 import seedu.jelphabot.commons.core.GuiSettings;
 import seedu.jelphabot.logic.commands.CommandResult;
@@ -7,8 +9,6 @@ import seedu.jelphabot.logic.commands.exceptions.CommandException;
 import seedu.jelphabot.logic.parser.exceptions.ParseException;
 import seedu.jelphabot.model.ReadOnlyJelphaBot;
 import seedu.jelphabot.model.task.Task;
-
-import java.nio.file.Path;
 
 /**
  * API of the Logic component

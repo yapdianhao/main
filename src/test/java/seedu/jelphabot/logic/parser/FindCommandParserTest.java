@@ -1,14 +1,15 @@
 package seedu.jelphabot.logic.parser;
 
-import org.junit.jupiter.api.Test;
-import seedu.jelphabot.logic.commands.FindCommand;
-import seedu.jelphabot.model.task.DescriptionContainsKeywordsPredicate;
-
-import java.util.Arrays;
-
 import static seedu.jelphabot.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.jelphabot.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.jelphabot.logic.parser.CommandParserTestUtil.assertParseSuccess;
+
+import java.util.Arrays;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.jelphabot.logic.commands.FindCommand;
+import seedu.jelphabot.model.task.DescriptionContainsKeywordsPredicate;
 
 public class FindCommandParserTest {
 

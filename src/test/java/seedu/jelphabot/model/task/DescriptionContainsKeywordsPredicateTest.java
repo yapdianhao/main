@@ -1,13 +1,14 @@
 package seedu.jelphabot.model.task;
 
-import org.junit.jupiter.api.Test;
-import seedu.jelphabot.testutil.TaskBuilder;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+import seedu.jelphabot.testutil.TaskBuilder;
 
 public class DescriptionContainsKeywordsPredicateTest {
 

@@ -1,12 +1,12 @@
 package seedu.jelphabot.storage;
 
-import seedu.jelphabot.commons.exceptions.DataConversionException;
-import seedu.jelphabot.model.ReadOnlyUserPrefs;
-import seedu.jelphabot.model.UserPrefs;
-
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
+
+import seedu.jelphabot.commons.exceptions.DataConversionException;
+import seedu.jelphabot.model.ReadOnlyUserPrefs;
+import seedu.jelphabot.model.UserPrefs;
 
 /**
  * Represents a storage for {@link seedu.jelphabot.model.UserPrefs}.

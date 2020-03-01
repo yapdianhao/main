@@ -1,5 +1,9 @@
 package seedu.jelphabot.logic;
 
+import java.io.IOException;
+import java.nio.file.Path;
+import java.util.logging.Logger;
+
 import javafx.collections.ObservableList;
 import seedu.jelphabot.commons.core.GuiSettings;
 import seedu.jelphabot.commons.core.LogsCenter;
@@ -12,10 +16,6 @@ import seedu.jelphabot.model.Model;
 import seedu.jelphabot.model.ReadOnlyJelphaBot;
 import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.storage.Storage;
-
-import java.io.IOException;
-import java.nio.file.Path;
-import java.util.logging.Logger;
 
 /**
  * The main LogicManager of the app.

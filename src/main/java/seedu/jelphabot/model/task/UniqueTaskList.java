@@ -1,15 +1,15 @@
 package seedu.jelphabot.model.task;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import seedu.jelphabot.model.task.exceptions.DuplicatePersonException;
-import seedu.jelphabot.model.task.exceptions.PersonNotFoundException;
+import static java.util.Objects.requireNonNull;
+import static seedu.jelphabot.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.jelphabot.commons.util.CollectionUtil.requireAllNonNull;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import seedu.jelphabot.model.task.exceptions.DuplicatePersonException;
+import seedu.jelphabot.model.task.exceptions.PersonNotFoundException;
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.

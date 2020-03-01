@@ -1,11 +1,13 @@
 package seedu.jelphabot.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.*;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.jelphabot.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.jelphabot.testutil.EditPersonDescriptorBuilder;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.*;
 
 public class EditTaskDescriptorTest {
 

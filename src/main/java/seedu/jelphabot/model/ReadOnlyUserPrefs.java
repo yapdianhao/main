@@ -1,8 +1,8 @@
 package seedu.jelphabot.model;
 
-import seedu.jelphabot.commons.core.GuiSettings;
-
 import java.nio.file.Path;
+
+import seedu.jelphabot.commons.core.GuiSettings;
 
 /**
  * Unmodifiable view of user prefs.

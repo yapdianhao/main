@@ -1,11 +1,11 @@
 package seedu.jelphabot.testutil;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import seedu.jelphabot.model.tag.Tag;
 import seedu.jelphabot.model.task.*;
 import seedu.jelphabot.model.util.SampleDataUtil;
-
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * A utility class to help with building Person objects.

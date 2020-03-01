@@ -1,5 +1,11 @@
 package seedu.jelphabot.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.jelphabot.logic.parser.CliSyntax.*;
+import static seedu.jelphabot.model.Model.PREDICATE_SHOW_ALL_TASKS;
+
+import java.util.*;
+
 import seedu.jelphabot.commons.core.Messages;
 import seedu.jelphabot.commons.core.index.Index;
 import seedu.jelphabot.commons.util.CollectionUtil;
@@ -7,12 +13,6 @@ import seedu.jelphabot.logic.commands.exceptions.CommandException;
 import seedu.jelphabot.model.Model;
 import seedu.jelphabot.model.tag.Tag;
 import seedu.jelphabot.model.task.*;
-
-import java.util.*;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.jelphabot.logic.parser.CliSyntax.*;
-import static seedu.jelphabot.model.Model.PREDICATE_SHOW_ALL_TASKS;
 
 /**
  * Edits the details of an existing person in the address book.

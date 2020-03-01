@@ -1,5 +1,10 @@
 package seedu.jelphabot;
 
+import java.io.IOException;
+import java.nio.file.Path;
+import java.util.Optional;
+import java.util.logging.Logger;
+
 import javafx.application.Application;
 import javafx.stage.Stage;
 import seedu.jelphabot.commons.core.Config;
@@ -15,11 +20,6 @@ import seedu.jelphabot.model.util.SampleDataUtil;
 import seedu.jelphabot.storage.*;
 import seedu.jelphabot.ui.Ui;
 import seedu.jelphabot.ui.UiManager;
-
-import java.io.IOException;
-import java.nio.file.Path;
-import java.util.Optional;
-import java.util.logging.Logger;
 
 /**
  * Runs the application.

@@ -1,15 +1,15 @@
 package seedu.jelphabot.logic.parser;
 
-import seedu.jelphabot.logic.commands.AddCommand;
-import seedu.jelphabot.logic.parser.exceptions.ParseException;
-import seedu.jelphabot.model.tag.Tag;
-import seedu.jelphabot.model.task.*;
+import static seedu.jelphabot.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.jelphabot.logic.parser.CliSyntax.*;
 
 import java.util.Set;
 import java.util.stream.Stream;
 
-import static seedu.jelphabot.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.jelphabot.logic.parser.CliSyntax.*;
+import seedu.jelphabot.logic.commands.AddCommand;
+import seedu.jelphabot.logic.parser.exceptions.ParseException;
+import seedu.jelphabot.model.tag.Tag;
+import seedu.jelphabot.model.task.*;
 
 /**
  * Parses input arguments and creates a new AddCommand object

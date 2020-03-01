@@ -1,9 +1,9 @@
 package seedu.jelphabot.commons.core.index;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static seedu.jelphabot.testutil.Assert.assertThrows;
+
+import org.junit.jupiter.api.Test;
 
 public class IndexTest {
 

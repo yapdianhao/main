@@ -1,10 +1,10 @@
 package seedu.jelphabot.model.task;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.jelphabot.commons.util.AppUtil.checkArgument;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 public class DateTime {
 

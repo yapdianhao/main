@@ -1,16 +1,17 @@
 package seedu.jelphabot.ui;
 
-import javafx.fxml.FXML;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
-import seedu.jelphabot.MainApp;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static seedu.jelphabot.testutil.Assert.assertThrows;
 
 import java.net.URL;
 import java.nio.file.Path;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static seedu.jelphabot.testutil.Assert.assertThrows;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+
+import javafx.fxml.FXML;
+import seedu.jelphabot.MainApp;
 
 public class UiPartTest {
 

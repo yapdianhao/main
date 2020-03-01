@@ -1,6 +1,13 @@
 package seedu.jelphabot.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.*;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.*;
+import static seedu.jelphabot.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.jelphabot.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.jelphabot.testutil.TypicalPersons.getTypicalJelphaBot;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.jelphabot.commons.core.Messages;
 import seedu.jelphabot.commons.core.index.Index;
 import seedu.jelphabot.logic.commands.EditCommand.EditPersonDescriptor;
@@ -11,12 +18,6 @@ import seedu.jelphabot.model.UserPrefs;
 import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.testutil.EditPersonDescriptorBuilder;
 import seedu.jelphabot.testutil.TaskBuilder;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.*;
-import static seedu.jelphabot.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.jelphabot.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.jelphabot.testutil.TypicalPersons.getTypicalJelphaBot;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and

@@ -1,19 +1,20 @@
 package seedu.jelphabot.logic.parser;
 
-import org.junit.jupiter.api.Test;
-import seedu.jelphabot.logic.commands.AddCommand;
-import seedu.jelphabot.model.tag.Tag;
-import seedu.jelphabot.model.task.Description;
-import seedu.jelphabot.model.task.ModuleCode;
-import seedu.jelphabot.model.task.Task;
-import seedu.jelphabot.testutil.TaskBuilder;
-
 import static seedu.jelphabot.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.*;
 import static seedu.jelphabot.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.jelphabot.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.jelphabot.testutil.TypicalPersons.AMY;
 import static seedu.jelphabot.testutil.TypicalPersons.BOB;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.jelphabot.logic.commands.AddCommand;
+import seedu.jelphabot.model.tag.Tag;
+import seedu.jelphabot.model.task.Description;
+import seedu.jelphabot.model.task.ModuleCode;
+import seedu.jelphabot.model.task.Task;
+import seedu.jelphabot.testutil.TaskBuilder;
 
 // TODO rewrite required to replace missing fields
 public class AddCommandParserTest {

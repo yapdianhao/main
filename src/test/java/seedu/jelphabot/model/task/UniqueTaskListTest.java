@@ -1,19 +1,20 @@
 package seedu.jelphabot.model.task;
 
-import org.junit.jupiter.api.Test;
-import seedu.jelphabot.model.task.exceptions.DuplicatePersonException;
-import seedu.jelphabot.model.task.exceptions.PersonNotFoundException;
-import seedu.jelphabot.testutil.TaskBuilder;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.jelphabot.testutil.Assert.assertThrows;
 import static seedu.jelphabot.testutil.TypicalPersons.ALICE;
 import static seedu.jelphabot.testutil.TypicalPersons.BOB;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.jelphabot.model.task.exceptions.DuplicatePersonException;
+import seedu.jelphabot.model.task.exceptions.PersonNotFoundException;
+import seedu.jelphabot.testutil.TaskBuilder;
 
 public class UniqueTaskListTest {
 

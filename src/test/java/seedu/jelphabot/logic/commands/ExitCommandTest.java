@@ -1,11 +1,12 @@
 package seedu.jelphabot.logic.commands;
 
-import org.junit.jupiter.api.Test;
-import seedu.jelphabot.model.Model;
-import seedu.jelphabot.model.ModelManager;
-
 import static seedu.jelphabot.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.jelphabot.logic.commands.ExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.jelphabot.model.Model;
+import seedu.jelphabot.model.ModelManager;
 
 public class ExitCommandTest {
     private Model model = new ModelManager();

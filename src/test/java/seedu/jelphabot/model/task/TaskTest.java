@@ -1,13 +1,14 @@
 package seedu.jelphabot.model.task;
 
-import org.junit.jupiter.api.Test;
-import seedu.jelphabot.testutil.TaskBuilder;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.*;
 import static seedu.jelphabot.testutil.Assert.assertThrows;
 import static seedu.jelphabot.testutil.TypicalPersons.ALICE;
 import static seedu.jelphabot.testutil.TypicalPersons.BOB;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.jelphabot.testutil.TaskBuilder;
 
 public class TaskTest {
 

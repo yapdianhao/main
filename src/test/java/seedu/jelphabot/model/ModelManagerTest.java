@@ -1,19 +1,20 @@
 package seedu.jelphabot.model;
 
-import org.junit.jupiter.api.Test;
-import seedu.jelphabot.commons.core.GuiSettings;
-import seedu.jelphabot.model.task.DescriptionContainsKeywordsPredicate;
-import seedu.jelphabot.testutil.JelphaBotBuilder;
-
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Arrays;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static seedu.jelphabot.model.Model.PREDICATE_SHOW_ALL_TASKS;
 import static seedu.jelphabot.testutil.Assert.assertThrows;
 import static seedu.jelphabot.testutil.TypicalPersons.ALICE;
 import static seedu.jelphabot.testutil.TypicalPersons.BENSON;
+
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Arrays;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.jelphabot.commons.core.GuiSettings;
+import seedu.jelphabot.model.task.DescriptionContainsKeywordsPredicate;
+import seedu.jelphabot.testutil.JelphaBotBuilder;
 
 public class ModelManagerTest {
 

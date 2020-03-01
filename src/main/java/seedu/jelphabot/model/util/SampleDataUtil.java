@@ -1,13 +1,13 @@
 package seedu.jelphabot.model.util;
 
+import java.util.Arrays;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import seedu.jelphabot.model.JelphaBot;
 import seedu.jelphabot.model.ReadOnlyJelphaBot;
 import seedu.jelphabot.model.tag.Tag;
 import seedu.jelphabot.model.task.*;
-
-import java.util.Arrays;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * Contains utility methods for populating {@code JelphaBot} with sample data.

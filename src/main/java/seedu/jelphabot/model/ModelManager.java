@@ -1,17 +1,17 @@
 package seedu.jelphabot.model;
 
-import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
-import seedu.jelphabot.commons.core.GuiSettings;
-import seedu.jelphabot.commons.core.LogsCenter;
-import seedu.jelphabot.model.task.Task;
+import static java.util.Objects.requireNonNull;
+import static seedu.jelphabot.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.jelphabot.commons.util.CollectionUtil.requireAllNonNull;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import seedu.jelphabot.commons.core.GuiSettings;
+import seedu.jelphabot.commons.core.LogsCenter;
+import seedu.jelphabot.model.task.Task;
 
 /**
  * Represents the in-memory model of the address book data.

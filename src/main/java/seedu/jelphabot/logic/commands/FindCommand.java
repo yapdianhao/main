@@ -1,10 +1,10 @@
 package seedu.jelphabot.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
 import seedu.jelphabot.commons.core.Messages;
 import seedu.jelphabot.model.Model;
 import seedu.jelphabot.model.task.DescriptionContainsKeywordsPredicate;
-
-import static java.util.Objects.requireNonNull;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the

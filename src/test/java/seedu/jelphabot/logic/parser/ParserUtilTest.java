@@ -1,20 +1,21 @@
 package seedu.jelphabot.logic.parser;
 
-import org.junit.jupiter.api.Test;
-import seedu.jelphabot.logic.parser.exceptions.ParseException;
-import seedu.jelphabot.model.tag.Tag;
-import seedu.jelphabot.model.task.Description;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.jelphabot.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
+import static seedu.jelphabot.testutil.Assert.assertThrows;
+import static seedu.jelphabot.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.jelphabot.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
-import static seedu.jelphabot.testutil.Assert.assertThrows;
-import static seedu.jelphabot.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import org.junit.jupiter.api.Test;
+
+import seedu.jelphabot.logic.parser.exceptions.ParseException;
+import seedu.jelphabot.model.tag.Tag;
+import seedu.jelphabot.model.task.Description;
 
 // TODO REWRITE CLASS
 public class ParserUtilTest {
