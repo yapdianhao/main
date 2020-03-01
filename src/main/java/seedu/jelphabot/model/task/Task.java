@@ -20,7 +20,7 @@ public class Task {
     private final ModuleCode moduleCode;
     private final DateTime dateTime;
     private final Status status;
-    // TODO implement priority
+    private final Priority priority;
 
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
@@ -28,12 +28,13 @@ public class Task {
     /**
      * Every field must be present and not null.
      */
-    public Task(Description description, Status status, DateTime dateTime, ModuleCode moduleCode, Set<Tag> tags) {
+    public Task(Description description, Status status, DateTime dateTime, ModuleCode moduleCode, Priority priority, Set<Tag> tags) {
         requireAllNonNull(description, status, dateTime, moduleCode, tags);
         this.description = description;
         this.status = status;
         this.dateTime = dateTime;
         this.moduleCode = moduleCode;
+        this.priority = priority;
     }
 
 
@@ -59,6 +60,10 @@ public class Task {
 
     public Status getStatus() {
         return status;
+    }
+
+    public Priority getPriority() {
+        return priority;
     }
 
     /**
