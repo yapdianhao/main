@@ -73,74 +73,74 @@ public class ParserUtilTest {
         assertEquals(expectedDescription, ParserUtil.parseDescription(nameWithWhitespace));
     }
 
-//    @Test
-//    public void parsePhone_null_throwsNullPointerException() {
-//        assertThrows(NullPointerException.class, () -> ParserUtil.parsePhone((String) null));
-//    }
-//
-//    @Test
-//    public void parsePhone_invalidValue_throwsParseException() {
-//        assertThrows(ParseException.class, () -> ParserUtil.parsePhone(INVALID_PHONE));
-//    }
-//
-//    @Test
-//    public void parsePhone_validValueWithoutWhitespace_returnsPhone() throws Exception {
-//        Phone expectedPhone = new Phone(VALID_PHONE);
-//        assertEquals(expectedPhone, ParserUtil.parsePhone(VALID_PHONE));
-//    }
-//
-//    @Test
-//    public void parsePhone_validValueWithWhitespace_returnsTrimmedPhone() throws Exception {
-//        String phoneWithWhitespace = WHITESPACE + VALID_PHONE + WHITESPACE;
-//        Phone expectedPhone = new Phone(VALID_PHONE);
-//        assertEquals(expectedPhone, ParserUtil.parsePhone(phoneWithWhitespace));
-//    }
-//
-//    @Test
-//    public void parseAddress_null_throwsNullPointerException() {
-//        assertThrows(NullPointerException.class, () -> ParserUtil.parseAddress((String) null));
-//    }
-//
-//    @Test
-//    public void parseAddress_invalidValue_throwsParseException() {
-//        assertThrows(ParseException.class, () -> ParserUtil.parseAddress(INVALID_ADDRESS));
-//    }
-//
-//    @Test
-//    public void parseAddress_validValueWithoutWhitespace_returnsAddress() throws Exception {
-//        Address expectedAddress = new Address(VALID_ADDRESS);
-//        assertEquals(expectedAddress, ParserUtil.parseAddress(VALID_ADDRESS));
-//    }
-//
-//    @Test
-//    public void parseAddress_validValueWithWhitespace_returnsTrimmedAddress() throws Exception {
-//        String addressWithWhitespace = WHITESPACE + VALID_ADDRESS + WHITESPACE;
-//        Address expectedAddress = new Address(VALID_ADDRESS);
-//        assertEquals(expectedAddress, ParserUtil.parseAddress(addressWithWhitespace));
-//    }
-//
-//    @Test
-//    public void parseEmail_null_throwsNullPointerException() {
-//        assertThrows(NullPointerException.class, () -> ParserUtil.parseModuleCode((String) null));
-//    }
-//
-//    @Test
-//    public void parseEmail_invalidValue_throwsParseException() {
-//        assertThrows(ParseException.class, () -> ParserUtil.parseModuleCode(INVALID_MODULE_CODE));
-//    }
-//
-//    @Test
-//    public void parseEmail_validValueWithoutWhitespace_returnsEmail() throws Exception {
-//        ModuleCode expectedModuleCode = new ModuleCode(VALID_MODULE_CODE);
-//        assertEquals(expectedModuleCode, ParserUtil.parseModuleCode(VALID_MODULE_CODE));
-//    }
-//
-//    @Test
-//    public void parseEmail_validValueWithWhitespace_returnsTrimmedEmail() throws Exception {
-//        String moduleCodeWithWhitespace = WHITESPACE + VALID_MODULE_CODE + WHITESPACE;
-//        ModuleCode expectedModuleCode = new ModuleCode(VALID_MODULE_CODE);
-//        assertEquals(expectedModuleCode, ParserUtil.parseModuleCode(moduleCodeWithWhitespace));
-//    }
+    //    @Test
+    //    public void parsePhone_null_throwsNullPointerException() {
+    //        assertThrows(NullPointerException.class, () -> ParserUtil.parsePhone((String) null));
+    //    }
+    //
+    //    @Test
+    //    public void parsePhone_invalidValue_throwsParseException() {
+    //        assertThrows(ParseException.class, () -> ParserUtil.parsePhone(INVALID_PHONE));
+    //    }
+    //
+    //    @Test
+    //    public void parsePhone_validValueWithoutWhitespace_returnsPhone() throws Exception {
+    //        Phone expectedPhone = new Phone(VALID_PHONE);
+    //        assertEquals(expectedPhone, ParserUtil.parsePhone(VALID_PHONE));
+    //    }
+    //
+    //    @Test
+    //    public void parsePhone_validValueWithWhitespace_returnsTrimmedPhone() throws Exception {
+    //        String phoneWithWhitespace = WHITESPACE + VALID_PHONE + WHITESPACE;
+    //        Phone expectedPhone = new Phone(VALID_PHONE);
+    //        assertEquals(expectedPhone, ParserUtil.parsePhone(phoneWithWhitespace));
+    //    }
+    //
+    //    @Test
+    //    public void parseAddress_null_throwsNullPointerException() {
+    //        assertThrows(NullPointerException.class, () -> ParserUtil.parseAddress((String) null));
+    //    }
+    //
+    //    @Test
+    //    public void parseAddress_invalidValue_throwsParseException() {
+    //        assertThrows(ParseException.class, () -> ParserUtil.parseAddress(INVALID_ADDRESS));
+    //    }
+    //
+    //    @Test
+    //    public void parseAddress_validValueWithoutWhitespace_returnsAddress() throws Exception {
+    //        Address expectedAddress = new Address(VALID_ADDRESS);
+    //        assertEquals(expectedAddress, ParserUtil.parseAddress(VALID_ADDRESS));
+    //    }
+    //
+    //    @Test
+    //    public void parseAddress_validValueWithWhitespace_returnsTrimmedAddress() throws Exception {
+    //        String addressWithWhitespace = WHITESPACE + VALID_ADDRESS + WHITESPACE;
+    //        Address expectedAddress = new Address(VALID_ADDRESS);
+    //        assertEquals(expectedAddress, ParserUtil.parseAddress(addressWithWhitespace));
+    //    }
+    //
+    //    @Test
+    //    public void parseEmail_null_throwsNullPointerException() {
+    //        assertThrows(NullPointerException.class, () -> ParserUtil.parseModuleCode((String) null));
+    //    }
+    //
+    //    @Test
+    //    public void parseEmail_invalidValue_throwsParseException() {
+    //        assertThrows(ParseException.class, () -> ParserUtil.parseModuleCode(INVALID_MODULE_CODE));
+    //    }
+    //
+    //    @Test
+    //    public void parseEmail_validValueWithoutWhitespace_returnsEmail() throws Exception {
+    //        ModuleCode expectedModuleCode = new ModuleCode(VALID_MODULE_CODE);
+    //        assertEquals(expectedModuleCode, ParserUtil.parseModuleCode(VALID_MODULE_CODE));
+    //    }
+    //
+    //    @Test
+    //    public void parseEmail_validValueWithWhitespace_returnsTrimmedEmail() throws Exception {
+    //        String moduleCodeWithWhitespace = WHITESPACE + VALID_MODULE_CODE + WHITESPACE;
+    //        ModuleCode expectedModuleCode = new ModuleCode(VALID_MODULE_CODE);
+    //        assertEquals(expectedModuleCode, ParserUtil.parseModuleCode(moduleCodeWithWhitespace));
+    //    }
 
     @Test
     public void parseTag_null_throwsNullPointerException() {

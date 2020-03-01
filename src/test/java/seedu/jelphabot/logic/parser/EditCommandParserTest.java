@@ -97,9 +97,7 @@ public class EditCommandParserTest {
         Index targetIndex = INDEX_SECOND_PERSON;
         String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + TAG_DESC_HUSBAND + MODULE_CODE_DESC_AMY + NAME_DESC_AMY + TAG_DESC_FRIEND;
 
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withDescription(VALID_NAME_AMY)
-                .withModuleCode(VALID_MODULE_CODE_AMY)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withDescription(VALID_NAME_AMY).withModuleCode(VALID_MODULE_CODE_AMY).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
