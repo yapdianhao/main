@@ -74,14 +74,14 @@ public class MainApp extends Application {
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        Optional<ReadOnlyJelphaBot> addressBookOptional;
+        Optional<ReadOnlyJelphaBot> jelphaBotOptional;
         ReadOnlyJelphaBot initialData;
         try {
-            addressBookOptional = storage.readJelphaBot();
-            if (!addressBookOptional.isPresent()) {
+            jelphaBotOptional = storage.readJelphaBot();
+            if (!jelphaBotOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample JelphaBot");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleJelphaBot);
+            initialData = jelphaBotOptional.orElseGet(SampleDataUtil::getSampleJelphaBot);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty JelphaBot");
             initialData = new JelphaBot();

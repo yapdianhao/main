@@ -160,7 +160,7 @@ public class LogicManagerTest {
         }
 
         @Override
-        public void saveJelphaBot(ReadOnlyJelphaBot addressBook, Path filePath) throws IOException {
+        public void saveJelphaBot(ReadOnlyJelphaBot jelphaBot, Path filePath) throws IOException {
             throw DUMMY_IO_EXCEPTION;
         }
     }
