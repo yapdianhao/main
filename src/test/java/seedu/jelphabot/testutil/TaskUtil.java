@@ -31,9 +31,7 @@ public class TaskUtil {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_DESCRIPTION + task.getDescription().fullDescription + " ");
         sb.append(PREFIX_MODULE_CODE + task.getModuleCode().value + " ");
-        task.getTags().stream().forEach(
-            s -> sb.append(PREFIX_TAG + s.tagName + " ")
-        );
+        task.getTags().stream().forEach(s -> sb.append(PREFIX_TAG + s.tagName + " "));
         return sb.toString();
     }
 
@@ -42,8 +40,10 @@ public class TaskUtil {
      */
     public static String getEditTaskDescriptorDetails(EditPersonDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
-        descriptor.getDescription().ifPresent(name -> sb.append(PREFIX_DESCRIPTION).append(name.fullDescription).append(" "));
-        descriptor.getModuleCode().ifPresent(moduleCode -> sb.append(PREFIX_MODULE_CODE).append(moduleCode.value).append(" "));
+        descriptor.getDescription()
+                .ifPresent(name -> sb.append(PREFIX_DESCRIPTION).append(name.fullDescription).append(" "));
+        descriptor.getModuleCode()
+                .ifPresent(moduleCode -> sb.append(PREFIX_MODULE_CODE).append(moduleCode.value).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {

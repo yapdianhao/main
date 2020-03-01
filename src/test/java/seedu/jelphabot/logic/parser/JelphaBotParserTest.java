@@ -70,7 +70,8 @@ public class JelphaBotParserTest {
     @Test
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindCommand command = (FindCommand) parser.parseCommand(FindCommand.COMMAND_WORD + " " + String.join(" ", keywords));
+        FindCommand command =
+                (FindCommand) parser.parseCommand(FindCommand.COMMAND_WORD + " " + String.join(" ", keywords));
         assertEquals(new FindCommand(new DescriptionContainsKeywordsPredicate(keywords)), command);
     }
 
@@ -88,8 +89,8 @@ public class JelphaBotParserTest {
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
-        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
-            -> parser.parseCommand(""));
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE),
+                () -> parser.parseCommand(""));
     }
 
     @Test
