@@ -51,8 +51,8 @@ public class AddCommandTest {
 
     @Test
     public void equals() {
-        Task alice = new TaskBuilder().withName("Alice").build();
-        Task bob = new TaskBuilder().withName("Bob").build();
+        Task alice = new TaskBuilder().withDescription("Alice").build();
+        Task bob = new TaskBuilder().withDescription("Bob").build();
         AddCommand addAliceCommand = new AddCommand(alice);
         AddCommand addBobCommand = new AddCommand(bob);
 

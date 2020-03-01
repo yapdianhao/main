@@ -36,7 +36,7 @@ public class TaskTest {
         assertFalse(ALICE.isSameTask(editedAlice));
 
         // different name -> returns false
-        editedAlice = new TaskBuilder(ALICE).withName(VALID_NAME_BOB).build();
+        editedAlice = new TaskBuilder(ALICE).withDescription(VALID_NAME_BOB).build();
         assertFalse(ALICE.isSameTask(editedAlice));
 
         // same name, same phone, different attributes -> returns true
@@ -72,7 +72,7 @@ public class TaskTest {
         assertNotEquals(ALICE, BOB);
 
         // different name -> returns false
-        Task editedAlice = new TaskBuilder(ALICE).withName(VALID_NAME_BOB).build();
+        Task editedAlice = new TaskBuilder(ALICE).withDescription(VALID_NAME_BOB).build();
         assertNotEquals(ALICE, editedAlice);
 
         // different phone -> returns false
