@@ -13,6 +13,7 @@ import seedu.jelphabot.model.tag.Tag;
 import seedu.jelphabot.model.task.DateTime;
 import seedu.jelphabot.model.task.Description;
 import seedu.jelphabot.model.task.ModuleCode;
+import seedu.jelphabot.model.task.Priority;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -50,6 +51,21 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String dateTime} into an {@code dateTime}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code dateTime} is invalid.
+     */
+    public static DateTime parseDateTime(String dateTime) throws ParseException {
+        requireNonNull(dateTime);
+        String trimmedDatetime = dateTime.trim();
+        if (!DateTime.isValidDateTime(trimmedDatetime)) {
+            throw new ParseException(DateTime.MESSAGE_CONSTRAINTS);
+        }
+        return new DateTime(trimmedDatetime);
+    }
+
+    /**
      * Parses a {@code String module code} into an {@code ModuleCode}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -62,6 +78,21 @@ public class ParserUtil {
             throw new ParseException(ModuleCode.MESSAGE_CONSTRAINTS);
         }
         return new ModuleCode(trimmedModuleCode);
+    }
+
+/**
+     * Parses a {@code String priority} into an {@code Priority}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code priority} is invalid.
+     */
+    public static Priority parsePriority(String priority) throws ParseException {
+        requireNonNull(priority);
+        String trimmedPriority = priority.trim();
+        if (!Priority.isValidPriority(trimmedPriority)) {
+            throw new ParseException(Priority.MESSAGE_CONSTRAINTS);
+        }
+        return Priority.toPriority(trimmedPriority);
     }
 
     /**
@@ -89,20 +120,5 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
-    }
-
-    /**
-     * Parses a {@code String dateTime} into an {@code dateTime}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code dateTime} is invalid.
-     */
-    public static DateTime parseDateTime(String dateTime) throws ParseException {
-        requireNonNull(dateTime);
-        String trimmedDatetime = dateTime.trim();
-        if (!DateTime.isValidDateTime(trimmedDatetime)) {
-            throw new ParseException(DateTime.MESSAGE_CONSTRAINTS);
-        }
-        return new DateTime(trimmedDatetime);
     }
 }

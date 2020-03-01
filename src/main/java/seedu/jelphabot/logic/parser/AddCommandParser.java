@@ -4,6 +4,7 @@ import static seedu.jelphabot.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORM
 import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
+import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
@@ -15,6 +16,7 @@ import seedu.jelphabot.model.tag.Tag;
 import seedu.jelphabot.model.task.DateTime;
 import seedu.jelphabot.model.task.Description;
 import seedu.jelphabot.model.task.ModuleCode;
+import seedu.jelphabot.model.task.Priority;
 import seedu.jelphabot.model.task.Status;
 import seedu.jelphabot.model.task.Task;
 
@@ -30,7 +32,14 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_DESCRIPTION, PREFIX_MODULE_CODE, PREFIX_DATETIME, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(
+                        args,
+                        PREFIX_DESCRIPTION,
+                        PREFIX_DATETIME,
+                        PREFIX_MODULE_CODE,
+                        PREFIX_PRIORITY,
+                        PREFIX_TAG
+                );
 
         if (!arePrefixesPresent(argMultimap, PREFIX_DESCRIPTION, PREFIX_MODULE_CODE, PREFIX_DATETIME)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -38,11 +47,12 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
 
         Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
-        ModuleCode moduleCode = ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_MODULE_CODE).get());
         DateTime dateTime = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).get());
+        ModuleCode moduleCode = ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_MODULE_CODE).get());
+        Priority priority = ParserUtil.parsePriority(argMultimap.getValue(PREFIX_PRIORITY).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Task task = new Task(description, Status.INCOMPLETE, dateTime, moduleCode, tagList);
+        Task task = new Task(description, Status.INCOMPLETE, dateTime, moduleCode, priority, tagList);
 
         return new AddCommand(task);
     }

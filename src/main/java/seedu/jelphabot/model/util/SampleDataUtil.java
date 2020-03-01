@@ -10,6 +10,7 @@ import seedu.jelphabot.model.tag.Tag;
 import seedu.jelphabot.model.task.DateTime;
 import seedu.jelphabot.model.task.Description;
 import seedu.jelphabot.model.task.ModuleCode;
+import seedu.jelphabot.model.task.Priority;
 import seedu.jelphabot.model.task.Status;
 import seedu.jelphabot.model.task.Task;
 
@@ -27,11 +28,11 @@ public class SampleDataUtil {
             new Task(new Description("MidTerm Revision Papers"), Status.INCOMPLETE, new DateTime("Jan-1-2020 22 00"),
                     new ModuleCode("ST2334"), Priority.MEDIUM, getTagSet("neighbours")),
             new Task(new Description("Consultation with David Li"), Status.INCOMPLETE, new DateTime("Jan-1-2020 22 00"),
-                    new ModuleCode("PF1103"), Priority.LOW getTagSet("family")),
+                     new ModuleCode("PF1103"), Priority.LOW, getTagSet("family")),
             new Task(new Description("Tutorial 4"), Status.INCOMPLETE, new DateTime("Jan-1-2020 22 00"),
                     new ModuleCode("MA1521"), Priority.LOW, getTagSet("classmates")),
             new Task(new Description("Graded Homework 3"), Status.INCOMPLETE, new DateTime("Jan-1-2020 22 00"),
-                    new ModuleCode("MA1101R"), Priority.HIGH getTagSet("colleagues"))
+                    new ModuleCode("MA1101R"), Priority.HIGH, getTagSet("colleagues"))
         };
     }
 

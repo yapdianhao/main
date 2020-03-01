@@ -20,33 +20,33 @@ import seedu.jelphabot.model.task.Task;
 // TODO rewrite needed
 public class TypicalPersons {
 
-    public static final Task ALICE = new TaskBuilder().withName("Alice Pauline")
+    public static final Task ALICE = new TaskBuilder().withDescription("Alice Pauline")
             .withTags("friends").build();
-    public static final Task BENSON = new TaskBuilder().withName("Benson Meier")
+    public static final Task BENSON = new TaskBuilder().withDescription("Benson Meier")
             .withTags("owesMoney", "friends").build();
-    public static final Task CARL = new TaskBuilder().withName("Carl Kurz")
+    public static final Task CARL = new TaskBuilder().withDescription("Carl Kurz")
             .withModuleCode("heinz@example.com").build();
-    public static final Task DANIEL = new TaskBuilder().withName("Daniel Meier")
+    public static final Task DANIEL = new TaskBuilder().withDescription("Daniel Meier")
             .withModuleCode("cornelia@example.com").withTags("friends").build();
-    public static final Task ELLE = new TaskBuilder().withName("Elle Meyer")
+    public static final Task ELLE = new TaskBuilder().withDescription("Elle Meyer")
             .withModuleCode("werner@example.com").build();
-    public static final Task FIONA = new TaskBuilder().withName("Fiona Kunz")
+    public static final Task FIONA = new TaskBuilder().withDescription("Fiona Kunz")
             .withModuleCode("lydia@example.com").build();
-    public static final Task GEORGE = new TaskBuilder().withName("George Best")
+    public static final Task GEORGE = new TaskBuilder().withDescription("George Best")
             .withModuleCode("anna@example.com").build();
 
     // Manually added
-    public static final Task HOON = new TaskBuilder().withName("Hoon Meier")
+    public static final Task HOON = new TaskBuilder().withDescription("Hoon Meier")
             .withModuleCode("stefan@example.com").build();
-    public static final Task IDA = new TaskBuilder().withName("Ida Mueller")
+    public static final Task IDA = new TaskBuilder().withDescription("Ida Mueller")
             .withModuleCode("hans@example.com").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Task AMY = new TaskBuilder()
-            .withName(VALID_NAME_AMY)
+            .withDescription(VALID_NAME_AMY)
             .withModuleCode(VALID_MODULE_CODE_AMY)
             .withTags(VALID_TAG_FRIEND).build();
-    public static final Task BOB = new TaskBuilder().withName(VALID_NAME_BOB)
+    public static final Task BOB = new TaskBuilder().withDescription(VALID_NAME_BOB)
             .withModuleCode(VALID_MODULE_CODE_BOB)
             .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
             .build();

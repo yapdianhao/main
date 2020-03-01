@@ -7,7 +7,7 @@ import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.Set;
 
 import seedu.jelphabot.logic.commands.AddCommand;
-import seedu.jelphabot.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.jelphabot.logic.commands.EditCommand.EditTaskDescriptor;
 import seedu.jelphabot.model.tag.Tag;
 import seedu.jelphabot.model.task.Task;
 
@@ -36,9 +36,9 @@ public class TaskUtil {
     }
 
     /**
-     * Returns the part of command string for the given {@code EditPersonDescriptor}'s details.
+     * Returns the part of command string for the given {@code EditTaskDescriptor}'s details.
      */
-    public static String getEditTaskDescriptorDetails(EditPersonDescriptor descriptor) {
+    public static String getEditTaskDescriptorDetails(EditTaskDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getDescription()
                 .ifPresent(name -> sb.append(PREFIX_DESCRIPTION).append(name.fullDescription).append(" "));

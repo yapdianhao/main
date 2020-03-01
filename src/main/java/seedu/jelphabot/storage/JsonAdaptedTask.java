@@ -14,6 +14,7 @@ import seedu.jelphabot.model.tag.Tag;
 import seedu.jelphabot.model.task.DateTime;
 import seedu.jelphabot.model.task.Description;
 import seedu.jelphabot.model.task.ModuleCode;
+import seedu.jelphabot.model.task.Priority;
 import seedu.jelphabot.model.task.Status;
 import seedu.jelphabot.model.task.Task;
 
@@ -24,7 +25,7 @@ class JsonAdaptedTask {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Task's %s field is missing!";
 
-    private final String name;
+    private final String description;
     private final String moduleCode;
     private final Status status;
     private final String dateTime;
@@ -40,10 +41,10 @@ class JsonAdaptedTask {
             @JsonProperty("status") Status status,
             @JsonProperty("dateTime") String dateTime,
             @JsonProperty("module") String moduleCode,
-            @JsonProperty("priority") String priority,
+            @JsonProperty("priority") Priority priority,
             @JsonProperty("tagged") List<JsonAdaptedTag> tagged
     ) {
-        this.name = description;
+        this.description = description;
         this.status = status;
         this.dateTime = dateTime;
         this.moduleCode = moduleCode;
@@ -57,11 +58,11 @@ class JsonAdaptedTask {
      * Converts a given {@code Task} into this class for Jackson use.
      */
     public JsonAdaptedTask(Task source) {
-        name = source.getDescription().fullDescription;
+        this.description = source.getDescription().fullDescription;
         this.status = source.getStatus();
         this.dateTime = source.getDateTime().toString();
-        moduleCode = source.getModuleCode().value;
-        this.priority = source.getPriority().toString();
+        this.moduleCode = source.getModuleCode().value;
+        this.priority = source.getPriority();
         tagged.addAll(source.getTags().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()));
     }
 
@@ -78,14 +79,14 @@ class JsonAdaptedTask {
             personTags.add(tag.toModelType());
         }
 
-        if (name == null) {
+        if (description == null) {
             throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, Description.class.getSimpleName()));
         }
-        if (!Description.isValidName(name)) {
+        if (!Description.isValidName(description)) {
             throw new IllegalValueException(Description.MESSAGE_CONSTRAINTS);
         }
-        final Description modelDescription = new Description(name);
+        final Description modelDescription = new Description(description);
 
         if (moduleCode == null) {
             throw new IllegalValueException(
@@ -96,8 +97,25 @@ class JsonAdaptedTask {
         }
         final ModuleCode modelModuleCode = new ModuleCode(moduleCode);
 
+        if (dateTime == null) {
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, DateTime.class.getSimpleName()));
+        }
+        if (!DateTime.isValidDateTime(dateTime)) {
+            throw new IllegalValueException(DateTime.MESSAGE_CONSTRAINTS);
+        }
+        final DateTime modelDateTime = new DateTime(dateTime);
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Task(modelDescription, status, new DateTime("Jan-1-2020 10 00"), modelModuleCode, priority, modelTags);
+
+        return new Task(
+                modelDescription,
+                status,
+                modelDateTime,
+                modelModuleCode,
+                priority,
+                modelTags
+        );
     }
 
 }
