@@ -2,7 +2,11 @@ package seedu.jelphabot.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.jelphabot.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.jelphabot.logic.parser.CliSyntax.*;
+import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
+import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -17,6 +21,7 @@ import seedu.jelphabot.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new EditCommand object
+ * TODO rewrite due
  */
 public class EditCommandParser implements Parser<EditCommand> {
 
@@ -28,7 +33,8 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_DESCRIPTION, PREFIX_PHONE, PREFIX_MODULE_CODE, PREFIX_ADDRESS, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(
+                        args, PREFIX_DESCRIPTION, PREFIX_PHONE, PREFIX_MODULE_CODE, PREFIX_ADDRESS, PREFIX_TAG);
 
         Index index;
 
@@ -40,7 +46,8 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
         if (argMultimap.getValue(PREFIX_DESCRIPTION).isPresent()) {
-            editPersonDescriptor.setDescription(ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get()));
+            editPersonDescriptor.setDescription(
+                    ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get()));
         }
         if (argMultimap.getValue(PREFIX_MODULE_CODE).isPresent()) {
             editPersonDescriptor.setModuleCode(ParserUtil

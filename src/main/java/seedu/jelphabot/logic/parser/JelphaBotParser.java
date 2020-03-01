@@ -6,7 +6,15 @@ import static seedu.jelphabot.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.jelphabot.logic.commands.*;
+import seedu.jelphabot.logic.commands.AddCommand;
+import seedu.jelphabot.logic.commands.ClearCommand;
+import seedu.jelphabot.logic.commands.Command;
+import seedu.jelphabot.logic.commands.DeleteCommand;
+import seedu.jelphabot.logic.commands.EditCommand;
+import seedu.jelphabot.logic.commands.ExitCommand;
+import seedu.jelphabot.logic.commands.FindCommand;
+import seedu.jelphabot.logic.commands.HelpCommand;
+import seedu.jelphabot.logic.commands.ListCommand;
 import seedu.jelphabot.logic.parser.exceptions.ParseException;
 
 /**
