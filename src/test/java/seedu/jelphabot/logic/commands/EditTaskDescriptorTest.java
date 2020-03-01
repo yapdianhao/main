@@ -10,7 +10,7 @@ import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.jelphabot.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.jelphabot.logic.commands.EditCommand.EditTaskDescriptor;
 import seedu.jelphabot.testutil.EditPersonDescriptorBuilder;
 
 public class EditTaskDescriptorTest {
@@ -18,7 +18,7 @@ public class EditTaskDescriptorTest {
     @Test
     public void equals() {
         // same values -> returns true
-        EditPersonDescriptor descriptorWithSameValues = new EditPersonDescriptor(DESC_AMY);
+        EditCommand.EditTaskDescriptor descriptorWithSameValues = new EditCommand.EditTaskDescriptor(DESC_AMY);
         assertEquals(DESC_AMY, descriptorWithSameValues);
 
         // same object -> returns true
@@ -34,7 +34,7 @@ public class EditTaskDescriptorTest {
         assertNotEquals(DESC_AMY, DESC_BOB);
 
         // different name -> returns false
-        EditPersonDescriptor editedAmy =
+        EditTaskDescriptor editedAmy =
                 new EditPersonDescriptorBuilder(DESC_AMY).withDescription(VALID_NAME_BOB).build();
         assertNotEquals(DESC_AMY, editedAmy);
 

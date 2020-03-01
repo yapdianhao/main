@@ -4,40 +4,41 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import seedu.jelphabot.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.jelphabot.logic.commands.EditCommand;
+import seedu.jelphabot.logic.commands.EditCommand.EditTaskDescriptor;
 import seedu.jelphabot.model.tag.Tag;
 import seedu.jelphabot.model.task.Description;
 import seedu.jelphabot.model.task.ModuleCode;
 import seedu.jelphabot.model.task.Task;
 
 /**
- * A utility class to help with building EditPersonDescriptor objects.
+ * A utility class to help with building EditTaskDescriptor objects.
  */
 // TODO rewrite required
 public class EditPersonDescriptorBuilder {
 
-    private EditPersonDescriptor descriptor;
+    private EditCommand.EditTaskDescriptor descriptor;
 
     public EditPersonDescriptorBuilder() {
-        descriptor = new EditPersonDescriptor();
+        descriptor = new EditCommand.EditTaskDescriptor();
     }
 
-    public EditPersonDescriptorBuilder(EditPersonDescriptor descriptor) {
-        this.descriptor = new EditPersonDescriptor(descriptor);
+    public EditPersonDescriptorBuilder(EditTaskDescriptor descriptor) {
+        this.descriptor = new EditCommand.EditTaskDescriptor(descriptor);
     }
 
     /**
-     * Returns an {@code EditPersonDescriptor} with fields containing {@code person}'s details
+     * Returns an {@code EditTaskDescriptor} with fields containing {@code person}'s details
      */
     public EditPersonDescriptorBuilder(Task task) {
-        descriptor = new EditPersonDescriptor();
+        descriptor = new EditTaskDescriptor();
         descriptor.setDescription(task.getDescription());
         descriptor.setModuleCode(task.getModuleCode());
         descriptor.setTags(task.getTags());
     }
 
     /**
-     * Sets the {@code Description} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Description} of the {@code EditTaskDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withDescription(String name) {
         descriptor.setDescription(new Description(name));
@@ -45,7 +46,7 @@ public class EditPersonDescriptorBuilder {
     }
 
     //   /**
-    //     * Sets the {@code Phone} of the {@code EditPersonDescriptor} that we are building.
+    //     * Sets the {@code Phone} of the {@code EditTaskDescriptor} that we are building.
     //     */
     //    public EditPersonDescriptorBuilder withPhone(String phone) {
     //        descriptor.setPhone(new Phone(phone));
@@ -53,7 +54,7 @@ public class EditPersonDescriptorBuilder {
     //    }
 
     /**
-     * Sets the {@code ModuleCode} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code ModuleCode} of the {@code EditTaskDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withModuleCode(String moduleCode) {
         descriptor.setModuleCode(new ModuleCode(moduleCode));
@@ -61,7 +62,7 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditTaskDescriptor}
      * that we are building.
      */
     public EditPersonDescriptorBuilder withTags(String... tags) {
@@ -70,7 +71,7 @@ public class EditPersonDescriptorBuilder {
         return this;
     }
 
-    public EditPersonDescriptor build() {
+    public EditTaskDescriptor build() {
         return descriptor;
     }
 }

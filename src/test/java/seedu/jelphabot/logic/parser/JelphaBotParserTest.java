@@ -16,7 +16,7 @@ import seedu.jelphabot.logic.commands.AddCommand;
 import seedu.jelphabot.logic.commands.ClearCommand;
 import seedu.jelphabot.logic.commands.DeleteCommand;
 import seedu.jelphabot.logic.commands.EditCommand;
-import seedu.jelphabot.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.jelphabot.logic.commands.EditCommand.EditTaskDescriptor;
 import seedu.jelphabot.logic.commands.ExitCommand;
 import seedu.jelphabot.logic.commands.FindCommand;
 import seedu.jelphabot.logic.commands.HelpCommand;
@@ -55,7 +55,7 @@ public class JelphaBotParserTest {
     @Test
     public void parseCommand_edit() throws Exception {
         Task task = new TaskBuilder().build();
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(task).build();
+        EditTaskDescriptor descriptor = new EditPersonDescriptorBuilder(task).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
                                                                 + INDEX_FIRST_PERSON.getOneBased() + " " + TaskUtil
                                                                         .getEditTaskDescriptorDetails(descriptor));

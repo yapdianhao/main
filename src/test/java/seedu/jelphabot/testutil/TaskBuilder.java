@@ -7,12 +7,13 @@ import seedu.jelphabot.model.tag.Tag;
 import seedu.jelphabot.model.task.DateTime;
 import seedu.jelphabot.model.task.Description;
 import seedu.jelphabot.model.task.ModuleCode;
+import seedu.jelphabot.model.task.Priority;
 import seedu.jelphabot.model.task.Status;
 import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.model.util.SampleDataUtil;
 
 /**
- * A utility class to help with building Person objects.
+ * A utility class to help with building Task objects.
  */
 // TODO rewrite class
 public class TaskBuilder {
@@ -31,7 +32,7 @@ public class TaskBuilder {
     }
 
     /**
-     * Initializes the PersonBuilder with the data of {@code personToCopy}.
+     * Initializes the TaskBuilder with the data of {@code taskToCopy}.
      */
     public TaskBuilder(Task taskToCopy) {
         description = taskToCopy.getDescription();
@@ -40,7 +41,7 @@ public class TaskBuilder {
     }
 
     /**
-     * Sets the {@code Description} of the {@code Person} that we are building.
+     * Sets the {@code Description} of the {@code Task} that we are building.
      */
     public TaskBuilder withName(String name) {
         this.description = new Description(name);
@@ -49,23 +50,15 @@ public class TaskBuilder {
 
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the
-     * {@code Person} that we are building.
+     * {@code Task} that we are building.
      */
     public TaskBuilder withTags(String... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
 
-    // /**
-    // * Sets the {@code Phone} of the {@code Person} that we are building.
-    // */
-    // public PersonBuilder withPhone(String phone) {
-    // this.phone = new Phone(phone);
-    // return this;
-    // }
-
     /**
-     * Sets the {@code ModuleCode} of the {@code Person} that we are building.
+     * Sets the {@code ModuleCode} of the {@code Task} that we are building.
      */
     public TaskBuilder withModuleCode(String moduleCode) {
         this.moduleCode = new ModuleCode(moduleCode);
@@ -73,7 +66,7 @@ public class TaskBuilder {
     }
 
     public Task build() {
-        return new Task(description, Status.INCOMPLETE, new DateTime("Jan-20-2020 01 20"), moduleCode, tags);
+        return new Task(description, Status.INCOMPLETE, new DateTime("Jan-20-2020 01 20"), moduleCode, Priority.HIGH, tags);
     }
 
 }
