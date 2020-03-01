@@ -26,7 +26,7 @@ public class AddCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_DESCRIPTION + "Assignment 1 "
             + PREFIX_MODULE_CODE + "CS3230 "
-            + PREFIX_DATETIME + "23 01 2020 23 59 ";
+            + PREFIX_DATETIME + "Jan-01-2020 23 59 ";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task list";

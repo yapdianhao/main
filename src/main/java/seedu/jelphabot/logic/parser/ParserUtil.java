@@ -44,7 +44,7 @@ public class ParserUtil {
     public static Description parseDescription(String description) throws ParseException {
         requireNonNull(description);
         String trimmedDescription = description.trim();
-        if (!Description.isValidName(trimmedDescription)) {
+        if (!Description.isValidDescription(trimmedDescription)) {
             throw new ParseException(Description.MESSAGE_CONSTRAINTS);
         }
         return new Description(trimmedDescription);
@@ -80,7 +80,7 @@ public class ParserUtil {
         return new ModuleCode(trimmedModuleCode);
     }
 
-/**
+    /**
      * Parses a {@code String priority} into an {@code Priority}.
      * Leading and trailing whitespaces will be trimmed.
      *

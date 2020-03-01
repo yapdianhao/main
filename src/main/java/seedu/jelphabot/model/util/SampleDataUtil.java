@@ -39,7 +39,7 @@ public class SampleDataUtil {
     public static ReadOnlyJelphaBot getSampleJelphaBot() {
         JelphaBot sampleAb = new JelphaBot();
         for (Task sampleTask : getSamplePersons()) {
-            sampleAb.addPerson(sampleTask);
+            sampleAb.addTask(sampleTask);
         }
         return sampleAb;
     }
