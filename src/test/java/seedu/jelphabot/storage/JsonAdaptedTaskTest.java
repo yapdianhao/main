@@ -1,6 +1,6 @@
 package seedu.jelphabot.storage;
 
-import static seedu.jelphabot.testutil.TypicalPersons.BENSON;
+import static seedu.jelphabot.testutil.TypicalTasks.BENSON;
 
 import java.util.List;
 import java.util.stream.Collectors;

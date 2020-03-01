@@ -3,10 +3,10 @@ package seedu.jelphabot.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.jelphabot.testutil.Assert.assertThrows;
-import static seedu.jelphabot.testutil.TypicalPersons.ALICE;
-import static seedu.jelphabot.testutil.TypicalPersons.HOON;
-import static seedu.jelphabot.testutil.TypicalPersons.IDA;
-import static seedu.jelphabot.testutil.TypicalPersons.getTypicalJelphaBot;
+import static seedu.jelphabot.testutil.TypicalTasks.ALICE;
+import static seedu.jelphabot.testutil.TypicalTasks.HOON;
+import static seedu.jelphabot.testutil.TypicalTasks.IDA;
+import static seedu.jelphabot.testutil.TypicalTasks.getTypicalJelphaBot;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -72,14 +72,14 @@ public class JsonJelphaBotStorageTest {
         assertEquals(original, new JelphaBot(readBack));
 
         // Modify data, overwrite exiting file, and read back
-        original.addPerson(HOON);
-        original.removePerson(ALICE);
+        original.addTask(HOON);
+        original.removeTask(ALICE);
         jsonJelphaBotStorage.saveJelphaBot(original, filePath);
         readBack = jsonJelphaBotStorage.readJelphaBot(filePath).get();
         assertEquals(original, new JelphaBot(readBack));
 
         // Save and read without specifying file path
-        original.addPerson(IDA);
+        original.addTask(IDA);
         jsonJelphaBotStorage.saveJelphaBot(original); // file path not specified
         readBack = jsonJelphaBotStorage.readJelphaBot().get(); // file path not specified
         assertEquals(original, new JelphaBot(readBack));

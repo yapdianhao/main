@@ -40,7 +40,8 @@ public class EditCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_DESCRIPTION + "DESCRIPTION] " + "[" + PREFIX_MODULE_CODE + "MODULE_CODE] "
             + "[" + PREFIX_DATETIME + "DATETIME]" + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_MODULE_CODE + "CS2105" + PREFIX_DATETIME + "23 01 2020 20 20";
+            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_MODULE_CODE + "CS2105" + PREFIX_DATETIME + "Jan-1-2020 20 20"
+            + PREFIX_TAG + "yo";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -62,18 +63,18 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code taskToEdit}
+     * Creates and returns a {@code Task} with the details of {@code taskToEdit}
      * edited with {@code editTaskDescriptor}.
      */
-    private static Task createEditedPerson(Task taskToEdit, EditTaskDescriptor editTaskDescriptor) {
+    private static Task createEditedTask(Task taskToEdit, EditTaskDescriptor editTaskDescriptor) {
         assert taskToEdit != null;
 
         Description updatedDescription = editTaskDescriptor.getDescription().orElse(taskToEdit.getDescription());
         ModuleCode updatedModuleCode = editTaskDescriptor.getModuleCode().orElse(taskToEdit.getModuleCode());
         Set<Tag> updatedTags = editTaskDescriptor.getTags().orElse(taskToEdit.getTags());
         DateTime dateTime = editTaskDescriptor.getDateTime().orElse(taskToEdit.getDateTime());
-        Status updatedStatus = editTaskDescriptor.getStatus();
-        Priority updatedPriority = editTaskDescriptor.getPriority();
+        Status updatedStatus = editTaskDescriptor.getStatus().orElse(taskToEdit.getStatus());
+        Priority updatedPriority = editTaskDescriptor.getPriority().orElse(taskToEdit.getPriority());
 
         return new Task(updatedDescription, updatedStatus, dateTime, updatedModuleCode, updatedPriority, updatedTags);
     }
@@ -84,11 +85,11 @@ public class EditCommand extends Command {
         List<Task> lastShownList = model.getFilteredTaskList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
         Task taskToEdit = lastShownList.get(index.getZeroBased());
-        Task editedTask = createEditedPerson(taskToEdit, editTaskDescriptor);
+        Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
 
         if (!taskToEdit.isSameTask(editedTask) && model.hasTask(editedTask)) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
@@ -166,8 +167,8 @@ public class EditCommand extends Command {
             this.moduleCode = moduleCode;
         }
 
-        public Status getStatus() {
-            return status;
+        public Optional<Status> getStatus() {
+            return Optional.ofNullable(status);
         }
 
         /**
@@ -179,8 +180,8 @@ public class EditCommand extends Command {
             this.status = status;
         }
 
-        public Priority getPriority() {
-            return priority;
+        public Optional<Priority> getPriority() {
+            return Optional.ofNullable(priority);
         }
 
         public void setPriority(Priority priority) {

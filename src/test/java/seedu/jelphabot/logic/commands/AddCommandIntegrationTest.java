@@ -2,7 +2,7 @@ package seedu.jelphabot.logic.commands;
 
 import static seedu.jelphabot.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.jelphabot.testutil.TypicalPersons.getTypicalJelphaBot;
+import static seedu.jelphabot.testutil.TypicalTasks.getTypicalJelphaBot;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

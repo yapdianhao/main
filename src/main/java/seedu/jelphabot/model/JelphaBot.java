@@ -14,7 +14,7 @@ import seedu.jelphabot.model.task.UniqueTaskList;
  */
 public class JelphaBot implements ReadOnlyJelphaBot {
 
-    private final UniqueTaskList persons;
+    private final UniqueTaskList tasks;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -24,7 +24,7 @@ public class JelphaBot implements ReadOnlyJelphaBot {
      *   among constructors.
      */
     {
-        persons = new UniqueTaskList();
+        tasks = new UniqueTaskList();
     }
 
     public JelphaBot() {}
@@ -40,11 +40,11 @@ public class JelphaBot implements ReadOnlyJelphaBot {
     //// list overwrite operations
 
     /**
-     * Replaces the contents of the person list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of the task list with {@code tasks}.
+     * {@code tasks} must not contain duplicate tasks.
      */
-    public void setPersons(List<Task> tasks) {
-        this.persons.setPersons(tasks);
+    public void setTasks(List<Task> tasks) {
+        this.tasks.setTasks(tasks);
     }
 
     /**
@@ -53,68 +53,68 @@ public class JelphaBot implements ReadOnlyJelphaBot {
     public void resetData(ReadOnlyJelphaBot newData) {
         requireNonNull(newData);
 
-        setPersons(newData.getTaskList());
+        setTasks(newData.getTaskList());
     }
 
-    //// person-level operations
+    //// task-level operations
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a task with the same identity as {@code task} exists in the address book.
      */
-    public boolean hasPerson(Task task) {
+    public boolean hasTask(Task task) {
         requireNonNull(task);
-        return persons.contains(task);
+        return tasks.contains(task);
     }
 
     /**
-     * Adds a person to the address book.
-     * The person must not already exist in the address book.
+     * Adds a task to the address book.
+     * The task must not already exist in the address book.
      */
-    public void addPerson(Task p) {
-        persons.add(p);
+    public void addTask(Task p) {
+        tasks.add(p);
     }
 
     /**
-     * Replaces the given person {@code target} in the list with {@code editedPerson}.
+     * Replaces the given task {@code target} in the list with {@code editedPerson}.
      * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * The task identity of {@code editedPerson} must not be the same as another existing task in the address book.
      */
-    public void setPerson(Task target, Task editedTask) {
+    public void setTask(Task target, Task editedTask) {
         requireNonNull(editedTask);
 
-        persons.setPerson(target, editedTask);
+        tasks.setTask(target, editedTask);
     }
 
     /**
      * Removes {@code key} from this {@code JelphaBot}.
      * {@code key} must exist in the address book.
      */
-    public void removePerson(Task key) {
-        persons.remove(key);
+    public void removeTask(Task key) {
+        tasks.remove(key);
     }
 
     //// util methods
 
     @Override
     public String toString() {
-        return persons.asUnmodifiableObservableList().size() + " persons";
+        return tasks.asUnmodifiableObservableList().size() + " tasks";
         // TODO: refine later
     }
 
     @Override
     public ObservableList<Task> getTaskList() {
-        return persons.asUnmodifiableObservableList();
+        return tasks.asUnmodifiableObservableList();
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof JelphaBot // instanceof handles nulls
-                && persons.equals(((JelphaBot) other).persons));
+                && tasks.equals(((JelphaBot) other).tasks));
     }
 
     @Override
     public int hashCode() {
-        return persons.hashCode();
+        return tasks.hashCode();
     }
 }

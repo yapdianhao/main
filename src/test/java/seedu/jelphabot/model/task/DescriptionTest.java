@@ -20,21 +20,21 @@ public class DescriptionTest {
     }
 
     @Test
-    public void isValidName() {
-        // null name
-        assertThrows(NullPointerException.class, () -> Description.isValidName(null));
+    public void isValidDescription() {
+        // null description
+        assertThrows(NullPointerException.class, () -> Description.isValidDescription(null));
 
-        // invalid name
-        assertFalse(Description.isValidName("")); // empty string
-        assertFalse(Description.isValidName(" ")); // spaces only
-        assertFalse(Description.isValidName("^")); // only non-alphanumeric characters
-        assertFalse(Description.isValidName("peter*")); // contains non-alphanumeric characters
+        // invalid description
+        assertFalse(Description.isValidDescription("")); // empty string
+        assertFalse(Description.isValidDescription(" ")); // spaces only
+        assertFalse(Description.isValidDescription("^")); // only non-alphanumeric characters
+        assertFalse(Description.isValidDescription("peter*")); // contains non-alphanumeric characters
 
-        // valid name
-        assertTrue(Description.isValidName("peter jack")); // alphabets only
-        assertTrue(Description.isValidName("12345")); // numbers only
-        assertTrue(Description.isValidName("peter the 2nd")); // alphanumeric characters
-        assertTrue(Description.isValidName("Capital Tan")); // with capital letters
-        assertTrue(Description.isValidName("David Roger Jackson Ray Jr 2nd")); // long names
+        // valid description
+        assertTrue(Description.isValidDescription("peter jack")); // alphabets only
+        assertTrue(Description.isValidDescription("12345")); // numbers only
+        assertTrue(Description.isValidDescription("peter the 2nd")); // alphanumeric characters
+        assertTrue(Description.isValidDescription("Capital Tan")); // with capital letters
+        assertTrue(Description.isValidDescription("David Roger Jackson Ray Jr 2nd")); // long descriptions
     }
 }

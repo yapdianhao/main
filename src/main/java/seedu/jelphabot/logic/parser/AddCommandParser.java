@@ -35,9 +35,9 @@ public class AddCommandParser implements Parser<AddCommand> {
                 ArgumentTokenizer.tokenize(
                         args,
                         PREFIX_DESCRIPTION,
-                        PREFIX_DATETIME,
                         PREFIX_MODULE_CODE,
                         PREFIX_PRIORITY,
+                        PREFIX_DATETIME,
                         PREFIX_TAG
                 );
 
