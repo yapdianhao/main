@@ -15,10 +15,8 @@ public class JsonAdaptedTaskTest {
     private static final String INVALID_DATETIME = "Jan 2 2020 11 11";
 
     private static final String VALID_NAME = BENSON.getDescription().toString();
-//    private static final String VALID_PHONE = BENSON.getPhone().toString();
     private static final String VALID_MODULE_CODE = BENSON.getModuleCode().toString();
     private static final String VALID_DATETIME = BENSON.getDateTime().toString();
-//    private static final String VALID_ADDRESS = BENSON.getAddress().toString();
     private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());

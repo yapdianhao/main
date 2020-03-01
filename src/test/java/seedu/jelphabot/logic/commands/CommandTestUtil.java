@@ -2,7 +2,11 @@ package seedu.jelphabot.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.jelphabot.logic.parser.CliSyntax.*;
+import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
+import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.jelphabot.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;

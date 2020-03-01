@@ -2,7 +2,11 @@ package seedu.jelphabot.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.*;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.DESC_AMY;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.DESC_BOB;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_MODULE_CODE_BOB;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
 import org.junit.jupiter.api.Test;
 
@@ -34,8 +38,7 @@ public class EditTaskDescriptorTest {
         assertNotEquals(DESC_AMY, editedAmy);
 
         // different phone -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY)
-                .build();
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).build();
         assertNotEquals(DESC_AMY, editedAmy);
 
         // different module code -> returns false

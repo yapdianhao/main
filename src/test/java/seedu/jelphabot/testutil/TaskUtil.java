@@ -1,6 +1,8 @@
 package seedu.jelphabot.testutil;
 
-import static seedu.jelphabot.logic.parser.CliSyntax.*;
+import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
+import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
 

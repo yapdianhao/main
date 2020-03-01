@@ -9,12 +9,18 @@ import static seedu.jelphabot.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.jelphabot.logic.commands.*;
+import seedu.jelphabot.logic.commands.AddCommand;
+import seedu.jelphabot.logic.commands.ClearCommand;
+import seedu.jelphabot.logic.commands.DeleteCommand;
+import seedu.jelphabot.logic.commands.EditCommand;
 import seedu.jelphabot.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.jelphabot.logic.commands.ExitCommand;
+import seedu.jelphabot.logic.commands.FindCommand;
+import seedu.jelphabot.logic.commands.HelpCommand;
+import seedu.jelphabot.logic.commands.ListCommand;
 import seedu.jelphabot.logic.parser.exceptions.ParseException;
 import seedu.jelphabot.model.task.DescriptionContainsKeywordsPredicate;
 import seedu.jelphabot.model.task.Task;
@@ -64,8 +70,7 @@ public class JelphaBotParserTest {
     @Test
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+        FindCommand command = (FindCommand) parser.parseCommand(FindCommand.COMMAND_WORD + " " + String.join(" ", keywords));
         assertEquals(new FindCommand(new DescriptionContainsKeywordsPredicate(keywords)), command);
     }
 

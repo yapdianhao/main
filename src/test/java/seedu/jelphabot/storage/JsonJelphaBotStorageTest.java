@@ -3,7 +3,10 @@ package seedu.jelphabot.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.jelphabot.testutil.Assert.assertThrows;
-import static seedu.jelphabot.testutil.TypicalPersons.*;
+import static seedu.jelphabot.testutil.TypicalPersons.ALICE;
+import static seedu.jelphabot.testutil.TypicalPersons.HOON;
+import static seedu.jelphabot.testutil.TypicalPersons.IDA;
+import static seedu.jelphabot.testutil.TypicalPersons.getTypicalJelphaBot;
 
 import java.io.IOException;
 import java.nio.file.Path;

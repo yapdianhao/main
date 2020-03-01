@@ -20,14 +20,10 @@ import seedu.jelphabot.model.task.Description;
 // TODO REWRITE CLASS
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
-    private static final String INVALID_PHONE = "+651234";
-    private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_MODULE_CODE = "example.com";
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = "Rachel Walker";
-    private static final String VALID_PHONE = "123456";
-    private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_MODULE_CODE = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
@@ -99,7 +95,7 @@ public class ParserUtilTest {
 //        Phone expectedPhone = new Phone(VALID_PHONE);
 //        assertEquals(expectedPhone, ParserUtil.parsePhone(phoneWithWhitespace));
 //    }
-
+//
 //    @Test
 //    public void parseAddress_null_throwsNullPointerException() {
 //        assertThrows(NullPointerException.class, () -> ParserUtil.parseAddress((String) null));
@@ -122,7 +118,7 @@ public class ParserUtilTest {
 //        Address expectedAddress = new Address(VALID_ADDRESS);
 //        assertEquals(expectedAddress, ParserUtil.parseAddress(addressWithWhitespace));
 //    }
-
+//
 //    @Test
 //    public void parseEmail_null_throwsNullPointerException() {
 //        assertThrows(NullPointerException.class, () -> ParserUtil.parseModuleCode((String) null));

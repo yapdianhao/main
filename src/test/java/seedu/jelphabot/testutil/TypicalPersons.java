@@ -1,6 +1,11 @@
 package seedu.jelphabot.testutil;
 
-import static seedu.jelphabot.logic.commands.CommandTestUtil.*;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_MODULE_CODE_AMY;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_MODULE_CODE_BOB;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_NAME_AMY;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
 import java.util.ArrayList;
 import java.util.Arrays;

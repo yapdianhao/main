@@ -1,11 +1,31 @@
 package seedu.jelphabot.logic.parser;
 
 import static seedu.jelphabot.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.*;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.INVALID_MODULE_CODE_DESC;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.MODULE_CODE_DESC_AMY;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.MODULE_CODE_DESC_BOB;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.NAME_DESC_AMY;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_MODULE_CODE_AMY;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_MODULE_CODE_BOB;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_NAME_AMY;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.jelphabot.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.jelphabot.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.jelphabot.testutil.TypicalIndexes.*;
+import static seedu.jelphabot.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.jelphabot.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.jelphabot.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 
 import org.junit.jupiter.api.Test;
 
@@ -69,15 +89,13 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + TAG_EMPTY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND, Tag.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
-        assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_MODULE_CODE_DESC /* VALID_ADDRESS_AMY*/ + VALID_PHONE_AMY,
-                Description.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_MODULE_CODE_DESC + VALID_PHONE_AMY, Description.MESSAGE_CONSTRAINTS);
     }
 
     @Test
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_PERSON;
-        String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + TAG_DESC_HUSBAND
-                + MODULE_CODE_DESC_AMY + /*ADDRESS_DESC_AMY + */NAME_DESC_AMY + TAG_DESC_FRIEND;
+        String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + TAG_DESC_HUSBAND + MODULE_CODE_DESC_AMY + NAME_DESC_AMY + TAG_DESC_FRIEND;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withDescription(VALID_NAME_AMY)
                 .withModuleCode(VALID_MODULE_CODE_AMY)

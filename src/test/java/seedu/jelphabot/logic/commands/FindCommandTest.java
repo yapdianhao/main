@@ -1,9 +1,14 @@
 package seedu.jelphabot.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.jelphabot.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.jelphabot.testutil.TypicalPersons.*;
+import static seedu.jelphabot.testutil.TypicalPersons.CARL;
+import static seedu.jelphabot.testutil.TypicalPersons.ELLE;
+import static seedu.jelphabot.testutil.TypicalPersons.FIONA;
+import static seedu.jelphabot.testutil.TypicalPersons.getTypicalJelphaBot;
 
 import java.util.Arrays;
 import java.util.Collections;

@@ -1,6 +1,10 @@
 package seedu.jelphabot.model.task;
 
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -68,7 +72,6 @@ public class DescriptionContainsKeywordsPredicateTest {
 
         // Keywords match phone, module code and address, but does not match name
         predicate = new DescriptionContainsKeywordsPredicate(Arrays.asList("12345", "alice@email.com", "Main", "Street"));
-        assertFalse(predicate.test(new TaskBuilder().withName("Alice")
-                .withModuleCode("alice@email.com").build()));
+        assertFalse(predicate.test(new TaskBuilder().withName("Alice").withModuleCode("alice@email.com").build()));
     }
 }
