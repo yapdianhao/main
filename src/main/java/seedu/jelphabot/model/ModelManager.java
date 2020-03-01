@@ -93,17 +93,17 @@ public class ModelManager implements Model {
     @Override
     public boolean hasTask(Task task) {
         requireNonNull(task);
-        return addressBook.hasPerson(task);
+        return addressBook.hasTask(task);
     }
 
     @Override
     public void deleteTask(Task target) {
-        addressBook.removePerson(target);
+        addressBook.removeTask(target);
     }
 
     @Override
     public void addTask(Task task) {
-        addressBook.addPerson(task);
+        addressBook.addTask(task);
         updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
     }
 
@@ -111,7 +111,7 @@ public class ModelManager implements Model {
     public void setTask(Task target, Task editedTask) {
         requireAllNonNull(target, editedTask);
 
-        addressBook.setPerson(target, editedTask);
+        addressBook.setTask(target, editedTask);
     }
 
     // =========== Filtered Person List Accessors

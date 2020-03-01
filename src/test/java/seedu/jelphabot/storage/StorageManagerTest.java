@@ -2,7 +2,7 @@ package seedu.jelphabot.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static seedu.jelphabot.testutil.TypicalPersons.getTypicalJelphaBot;
+import static seedu.jelphabot.testutil.TypicalTasks.getTypicalJelphaBot;
 
 import java.nio.file.Path;
 

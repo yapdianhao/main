@@ -49,10 +49,10 @@ class JsonSerializableJelphaBot {
         JelphaBot jelphaBot = new JelphaBot();
         for (JsonAdaptedTask jsonAdaptedPerson : tasks) {
             Task task = jsonAdaptedPerson.toModelType();
-            if (jelphaBot.hasPerson(task)) {
+            if (jelphaBot.hasTask(task)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
-            jelphaBot.addPerson(task);
+            jelphaBot.addTask(task);
         }
         return jelphaBot;
     }

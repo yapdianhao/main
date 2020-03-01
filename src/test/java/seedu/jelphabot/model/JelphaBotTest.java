@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.jelphabot.testutil.Assert.assertThrows;
-import static seedu.jelphabot.testutil.TypicalPersons.ALICE;
-import static seedu.jelphabot.testutil.TypicalPersons.getTypicalJelphaBot;
+import static seedu.jelphabot.testutil.TypicalTasks.ALICE;
+import static seedu.jelphabot.testutil.TypicalTasks.getTypicalJelphaBot;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -55,26 +55,26 @@ public class JelphaBotTest {
 
     @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasPerson(null));
+        assertThrows(NullPointerException.class, () -> addressBook.hasTask(null));
     }
 
     @Test
     public void hasPerson_personNotInJelphaBot_returnsFalse() {
-        assertFalse(addressBook.hasPerson(ALICE));
+        assertFalse(addressBook.hasTask(ALICE));
     }
 
     @Test
     public void hasPerson_personInJelphaBot_returnsTrue() {
-        addressBook.addPerson(ALICE);
-        assertTrue(addressBook.hasPerson(ALICE));
+        addressBook.addTask(ALICE);
+        assertTrue(addressBook.hasTask(ALICE));
     }
 
     @Test
     public void hasPerson_personWithSameIdentityFieldsInJelphaBot_returnsTrue() {
-        addressBook.addPerson(ALICE);
+        addressBook.addTask(ALICE);
         Task editedAlice = new TaskBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(addressBook.hasPerson(editedAlice));
+        assertTrue(addressBook.hasTask(editedAlice));
     }
 
     @Test
