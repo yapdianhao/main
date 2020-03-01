@@ -20,8 +20,8 @@ import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.jelphabot.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.jelphabot.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.jelphabot.testutil.TypicalPersons.AMY;
-import static seedu.jelphabot.testutil.TypicalPersons.BOB;
+import static seedu.jelphabot.testutil.TypicalTasks.AMY;
+import static seedu.jelphabot.testutil.TypicalTasks.BOB;
 
 import org.junit.jupiter.api.Test;
 

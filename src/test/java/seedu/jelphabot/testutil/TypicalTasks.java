@@ -15,10 +15,10 @@ import seedu.jelphabot.model.JelphaBot;
 import seedu.jelphabot.model.task.Task;
 
 /**
- * A utility class containing a list of {@code Person} objects to be used in tests.
+ * A utility class containing a list of {@code Task} objects to be used in tests.
  */
 // TODO rewrite needed
-public class TypicalPersons {
+public class TypicalTasks {
 
     public static final Task ALICE = new TaskBuilder().withDescription("Alice Pauline")
             .withTags("friends").build();
@@ -41,7 +41,7 @@ public class TypicalPersons {
     public static final Task IDA = new TaskBuilder().withDescription("Ida Mueller")
             .withModuleCode("hans@example.com").build();
 
-    // Manually added - Person's details found in {@code CommandTestUtil}
+    // Manually added - Task's details found in {@code CommandTestUtil}
     public static final Task AMY = new TaskBuilder()
             .withDescription(VALID_NAME_AMY)
             .withModuleCode(VALID_MODULE_CODE_AMY)
@@ -53,20 +53,20 @@ public class TypicalPersons {
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
-    private TypicalPersons() {} // prevents instantiation
+    private TypicalTasks() {} // prevents instantiation
 
     /**
      * Returns an {@code JelphaBot} with all the typical persons.
      */
     public static JelphaBot getTypicalJelphaBot() {
         JelphaBot ab = new JelphaBot();
-        for (Task task : getTypicalPersons()) {
-            ab.addPerson(task);
+        for (Task task : getTypicalTasks()) {
+            ab.addTask(task);
         }
         return ab;
     }
 
-    public static List<Task> getTypicalPersons() {
+    public static List<Task> getTypicalTasks() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
 }

@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import seedu.jelphabot.commons.exceptions.IllegalValueException;
 import seedu.jelphabot.commons.util.JsonUtil;
 import seedu.jelphabot.model.JelphaBot;
-import seedu.jelphabot.testutil.TypicalPersons;
+import seedu.jelphabot.testutil.TypicalTasks;
 
 public class JsonSerializableJelphaBotTest {
 
@@ -25,7 +25,7 @@ public class JsonSerializableJelphaBotTest {
         JsonSerializableJelphaBot dataFromFile = JsonUtil.readJsonFile(TYPICAL_PERSONS_FILE,
                 JsonSerializableJelphaBot.class).get();
         JelphaBot addressBookFromFile = dataFromFile.toModelType();
-        JelphaBot typicalPersonsJelphaBot = TypicalPersons.getTypicalJelphaBot();
+        JelphaBot typicalPersonsJelphaBot = TypicalTasks.getTypicalJelphaBot();
         assertEquals(addressBookFromFile, typicalPersonsJelphaBot);
     }
 

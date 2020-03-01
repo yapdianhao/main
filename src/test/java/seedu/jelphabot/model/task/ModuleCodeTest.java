@@ -21,17 +21,17 @@ public class ModuleCodeTest {
 
     @Test
     public void isValidModuleCode() {
-        // null address
+        // null module code
         assertThrows(NullPointerException.class, () -> ModuleCode.isValidModuleCode(null));
 
-        // invalid addresses
+        // invalid module codes
         assertFalse(ModuleCode.isValidModuleCode("")); // empty string
         assertFalse(ModuleCode.isValidModuleCode(" ")); // spaces only
         assertFalse(ModuleCode.isValidModuleCode("CS")); // No numbers only
         assertFalse(ModuleCode.isValidModuleCode("2101S")); // No Faculty code
         assertFalse(ModuleCode.isValidModuleCode("A2101")); // Invalid Faculty code
 
-        // valid addresses
+        // valid module codes
         assertTrue(ModuleCode.isValidModuleCode("CS2101")); // No ending tag
         assertTrue(ModuleCode.isValidModuleCode("CS2103T")); // yes module tag
         assertTrue(ModuleCode.isValidModuleCode("ACC1301")); // module code has max 3 chars

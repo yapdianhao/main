@@ -12,7 +12,7 @@ import static seedu.jelphabot.logic.commands.CommandTestUtil.assertCommandSucces
 import static seedu.jelphabot.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.jelphabot.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.jelphabot.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.jelphabot.testutil.TypicalPersons.getTypicalJelphaBot;
+import static seedu.jelphabot.testutil.TypicalTasks.getTypicalJelphaBot;
 
 import org.junit.jupiter.api.Test;
 
@@ -125,7 +125,7 @@ public class EditCommandTest {
         EditTaskDescriptor descriptor = new EditPersonDescriptorBuilder().withDescription(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
 
-        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
 
     /**
@@ -142,7 +142,7 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(outOfBoundIndex,
                 new EditPersonDescriptorBuilder().withDescription(VALID_NAME_BOB).build());
 
-        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
 
     @Test
