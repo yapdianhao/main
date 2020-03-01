@@ -1,18 +1,18 @@
 package seedu.jelphabot.storage;
 
-import seedu.jelphabot.commons.core.LogsCenter;
-import seedu.jelphabot.commons.exceptions.DataConversionException;
-import seedu.jelphabot.commons.exceptions.IllegalValueException;
-import seedu.jelphabot.commons.util.FileUtil;
-import seedu.jelphabot.commons.util.JsonUtil;
-import seedu.jelphabot.model.ReadOnlyJelphaBot;
+import static java.util.Objects.requireNonNull;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
 import java.util.logging.Logger;
 
-import static java.util.Objects.requireNonNull;
+import seedu.jelphabot.commons.core.LogsCenter;
+import seedu.jelphabot.commons.exceptions.DataConversionException;
+import seedu.jelphabot.commons.exceptions.IllegalValueException;
+import seedu.jelphabot.commons.util.FileUtil;
+import seedu.jelphabot.commons.util.JsonUtil;
+import seedu.jelphabot.model.ReadOnlyJelphaBot;
 
 /**
  * A class to access JelphaBot data stored as a json file on the hard disk.

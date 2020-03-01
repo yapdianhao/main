@@ -1,9 +1,9 @@
 package seedu.jelphabot.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
 import seedu.jelphabot.model.JelphaBot;
 import seedu.jelphabot.model.Model;
-
-import static java.util.Objects.requireNonNull;
 
 /**
  * Clears the address book.

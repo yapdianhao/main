@@ -1,11 +1,11 @@
 package seedu.jelphabot.model;
 
+import java.nio.file.Path;
+import java.util.function.Predicate;
+
 import javafx.collections.ObservableList;
 import seedu.jelphabot.commons.core.GuiSettings;
 import seedu.jelphabot.model.task.Task;
-
-import java.nio.file.Path;
-import java.util.function.Predicate;
 
 /**
  * The API of the Model component.

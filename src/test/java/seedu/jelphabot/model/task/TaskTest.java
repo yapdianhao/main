@@ -1,13 +1,19 @@
 package seedu.jelphabot.model.task;
 
-import org.junit.jupiter.api.Test;
-import seedu.jelphabot.testutil.TaskBuilder;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_MODULE_CODE_BOB;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.jelphabot.testutil.Assert.assertThrows;
 import static seedu.jelphabot.testutil.TypicalPersons.ALICE;
 import static seedu.jelphabot.testutil.TypicalPersons.BOB;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.jelphabot.testutil.TaskBuilder;
 
 public class TaskTest {
 

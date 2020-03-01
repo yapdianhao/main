@@ -1,15 +1,15 @@
 package seedu.jelphabot.storage;
 
+import java.io.IOException;
+import java.nio.file.Path;
+import java.util.Optional;
+import java.util.logging.Logger;
+
 import seedu.jelphabot.commons.core.LogsCenter;
 import seedu.jelphabot.commons.exceptions.DataConversionException;
 import seedu.jelphabot.model.ReadOnlyJelphaBot;
 import seedu.jelphabot.model.ReadOnlyUserPrefs;
 import seedu.jelphabot.model.UserPrefs;
-
-import java.io.IOException;
-import java.nio.file.Path;
-import java.util.Optional;
-import java.util.logging.Logger;
 
 /**
  * Manages storage of JelphaBot data in local storage.

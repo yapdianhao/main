@@ -1,9 +1,9 @@
 package seedu.jelphabot.logic.commands;
 
-import seedu.jelphabot.model.Model;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.jelphabot.model.Model.PREDICATE_SHOW_ALL_TASKS;
+
+import seedu.jelphabot.model.Model;
 
 /**
  * Lists all persons in the address book to the user.

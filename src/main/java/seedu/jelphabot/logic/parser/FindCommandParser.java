@@ -1,12 +1,12 @@
 package seedu.jelphabot.logic.parser;
 
-import seedu.jelphabot.logic.commands.FindCommand;
-import seedu.jelphabot.logic.parser.exceptions.ParseException;
-import seedu.jelphabot.model.task.DescriptionContainsKeywordsPredicate;
+import static seedu.jelphabot.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.Arrays;
 
-import static seedu.jelphabot.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import seedu.jelphabot.logic.commands.FindCommand;
+import seedu.jelphabot.logic.parser.exceptions.ParseException;
+import seedu.jelphabot.model.task.DescriptionContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object

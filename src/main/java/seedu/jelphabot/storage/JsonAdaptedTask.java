@@ -1,16 +1,21 @@
 package seedu.jelphabot.storage;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import seedu.jelphabot.commons.exceptions.IllegalValueException;
 import seedu.jelphabot.model.tag.Tag;
-import seedu.jelphabot.model.task.*;
-
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Set;
-import java.util.HashSet;
-import java.util.stream.Collectors;
+import seedu.jelphabot.model.task.DateTime;
+import seedu.jelphabot.model.task.Description;
+import seedu.jelphabot.model.task.ModuleCode;
+import seedu.jelphabot.model.task.Status;
+import seedu.jelphabot.model.task.Task;
 
 /**
  * Jackson-friendly version of {@link Task}.
@@ -23,6 +28,7 @@ class JsonAdaptedTask {
     private final String moduleCode;
     private final Status status;
     private final String dateTime;
+    private final Priority priority;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
@@ -34,12 +40,14 @@ class JsonAdaptedTask {
             @JsonProperty("status") Status status,
             @JsonProperty("dateTime") String dateTime,
             @JsonProperty("module") String moduleCode,
+            @JsonProperty("priority") String priority,
             @JsonProperty("tagged") List<JsonAdaptedTag> tagged
     ) {
         this.name = description;
         this.status = status;
         this.dateTime = dateTime;
         this.moduleCode = moduleCode;
+        this.priority = priority;
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
@@ -53,6 +61,7 @@ class JsonAdaptedTask {
         this.status = source.getStatus();
         this.dateTime = source.getDateTime().toString();
         moduleCode = source.getModuleCode().value;
+        this.priority = source.getPriority().toString();
         tagged.addAll(source.getTags().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()));
     }
 
@@ -88,7 +97,7 @@ class JsonAdaptedTask {
         final ModuleCode modelModuleCode = new ModuleCode(moduleCode);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Task(modelDescription, status, new DateTime("Jan-1-2020 10 00"), modelModuleCode, modelTags);
+        return new Task(modelDescription, status, new DateTime("Jan-1-2020 10 00"), modelModuleCode, priority, modelTags);
     }
 
 }

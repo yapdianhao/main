@@ -1,13 +1,14 @@
 package seedu.jelphabot.commons.util;
 
-import org.junit.jupiter.api.Test;
-import seedu.jelphabot.testutil.SerializableTestClass;
-import seedu.jelphabot.testutil.TestUtil;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.IOException;
 import java.nio.file.Path;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+import seedu.jelphabot.testutil.SerializableTestClass;
+import seedu.jelphabot.testutil.TestUtil;
 
 /**
  * Tests JSON Read and Write

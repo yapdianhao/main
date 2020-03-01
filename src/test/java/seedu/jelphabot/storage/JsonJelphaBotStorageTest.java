@@ -1,19 +1,23 @@
 package seedu.jelphabot.storage;
 
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
-import seedu.jelphabot.commons.exceptions.DataConversionException;
-import seedu.jelphabot.model.JelphaBot;
-import seedu.jelphabot.model.ReadOnlyJelphaBot;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static seedu.jelphabot.testutil.Assert.assertThrows;
+import static seedu.jelphabot.testutil.TypicalPersons.ALICE;
+import static seedu.jelphabot.testutil.TypicalPersons.HOON;
+import static seedu.jelphabot.testutil.TypicalPersons.IDA;
+import static seedu.jelphabot.testutil.TypicalPersons.getTypicalJelphaBot;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static seedu.jelphabot.testutil.Assert.assertThrows;
-import static seedu.jelphabot.testutil.TypicalPersons.*;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+
+import seedu.jelphabot.commons.exceptions.DataConversionException;
+import seedu.jelphabot.model.JelphaBot;
+import seedu.jelphabot.model.ReadOnlyJelphaBot;
 
 public class JsonJelphaBotStorageTest {
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonJelphaBotStorageTest");
