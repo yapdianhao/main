@@ -90,15 +90,16 @@ public class EditCommandParserTest {
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_MODULE_CODE_DESC + VALID_PHONE_AMY,
-                Description.MESSAGE_CONSTRAINTS);
+                           Description.MESSAGE_CONSTRAINTS
+        );
     }
 
     @Test
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_PERSON;
         String userInput =
-                targetIndex.getOneBased() + PHONE_DESC_BOB + TAG_DESC_HUSBAND + MODULE_CODE_DESC_AMY + NAME_DESC_AMY +
-                        TAG_DESC_FRIEND;
+                targetIndex.getOneBased() + PHONE_DESC_BOB + TAG_DESC_HUSBAND + MODULE_CODE_DESC_AMY + NAME_DESC_AMY
+                + TAG_DESC_FRIEND;
 
         EditPersonDescriptor descriptor =
                 new EditPersonDescriptorBuilder().withDescription(VALID_NAME_AMY).withModuleCode(VALID_MODULE_CODE_AMY)
@@ -152,9 +153,9 @@ public class EditCommandParserTest {
     public void parse_multipleRepeatedFields_acceptsLast() {
         Index targetIndex = INDEX_FIRST_PERSON;
         String userInput =
-                targetIndex.getOneBased() + PHONE_DESC_AMY + ADDRESS_DESC_AMY + MODULE_CODE_DESC_AMY + TAG_DESC_FRIEND +
-                        PHONE_DESC_AMY + ADDRESS_DESC_AMY + MODULE_CODE_DESC_AMY + TAG_DESC_FRIEND + PHONE_DESC_BOB +
-                        ADDRESS_DESC_BOB + MODULE_CODE_DESC_BOB + TAG_DESC_HUSBAND;
+                targetIndex.getOneBased() + PHONE_DESC_AMY + ADDRESS_DESC_AMY + MODULE_CODE_DESC_AMY + TAG_DESC_FRIEND
+                + PHONE_DESC_AMY + ADDRESS_DESC_AMY + MODULE_CODE_DESC_AMY + TAG_DESC_FRIEND + PHONE_DESC_BOB
+                + ADDRESS_DESC_BOB + MODULE_CODE_DESC_BOB + TAG_DESC_HUSBAND;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withModuleCode(VALID_MODULE_CODE_BOB)
                 .withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND).build();
@@ -173,8 +174,8 @@ public class EditCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // other valid values specified
-        userInput = targetIndex.getOneBased() + MODULE_CODE_DESC_BOB + INVALID_PHONE_DESC + ADDRESS_DESC_BOB +
-                PHONE_DESC_BOB;
+        userInput = targetIndex.getOneBased() + MODULE_CODE_DESC_BOB + INVALID_PHONE_DESC + ADDRESS_DESC_BOB
+                    + PHONE_DESC_BOB;
         descriptor = new EditPersonDescriptorBuilder().withModuleCode(VALID_MODULE_CODE_BOB).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
