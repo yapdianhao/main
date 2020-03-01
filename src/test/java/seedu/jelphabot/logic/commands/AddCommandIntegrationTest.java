@@ -1,16 +1,17 @@
 package seedu.jelphabot.logic.commands;
 
+import static seedu.jelphabot.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.jelphabot.testutil.TypicalPersons.getTypicalJelphaBot;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import seedu.jelphabot.model.Model;
 import seedu.jelphabot.model.ModelManager;
 import seedu.jelphabot.model.UserPrefs;
 import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.testutil.TaskBuilder;
-
-import static seedu.jelphabot.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.jelphabot.testutil.TypicalPersons.getTypicalJelphaBot;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code AddCommand}.
@@ -38,7 +39,7 @@ public class AddCommandIntegrationTest {
     @Test
     public void execute_duplicateTask_throwsCommandException() {
         Task taskInList = model.getJelphaBot().getTaskList().get(0);
-        assertCommandFailure(new AddCommand(taskInList), model, AddCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(new AddCommand(taskInList), model, AddCommand.MESSAGE_DUPLICATE_TASK);
     }
 
 }

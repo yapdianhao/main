@@ -1,13 +1,13 @@
 package seedu.jelphabot.model.task;
 
-import seedu.jelphabot.model.tag.Tag;
+import static seedu.jelphabot.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import static seedu.jelphabot.commons.util.CollectionUtil.requireAllNonNull;
+import seedu.jelphabot.model.tag.Tag;
 
 /**
  * Represents a Task in the address book.

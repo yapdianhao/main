@@ -1,13 +1,15 @@
 package seedu.jelphabot.testutil;
 
+import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
+import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_TAG;
+
+import java.util.Set;
+
 import seedu.jelphabot.logic.commands.AddCommand;
 import seedu.jelphabot.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.jelphabot.model.tag.Tag;
 import seedu.jelphabot.model.task.Task;
-
-import java.util.Set;
-
-import static seedu.jelphabot.logic.parser.CliSyntax.*;
 
 /**
  * A utility class for Person.
@@ -27,11 +29,9 @@ public class TaskUtil {
      */
     public static String getTaskDetails(Task task) {
         StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_NAME + task.getDescription().fullDescription + " ");
+        sb.append(PREFIX_DESCRIPTION + task.getDescription().fullDescription + " ");
         sb.append(PREFIX_MODULE_CODE + task.getModuleCode().value + " ");
-        task.getTags().stream().forEach(
-            s -> sb.append(PREFIX_TAG + s.tagName + " ")
-        );
+        task.getTags().stream().forEach(s -> sb.append(PREFIX_TAG + s.tagName + " "));
         return sb.toString();
     }
 
@@ -40,8 +40,10 @@ public class TaskUtil {
      */
     public static String getEditTaskDescriptorDetails(EditPersonDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
-        descriptor.getDescription().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullDescription).append(" "));
-        descriptor.getModuleCode().ifPresent(moduleCode -> sb.append(PREFIX_MODULE_CODE).append(moduleCode.value).append(" "));
+        descriptor.getDescription()
+                .ifPresent(name -> sb.append(PREFIX_DESCRIPTION).append(name.fullDescription).append(" "));
+        descriptor.getModuleCode()
+                .ifPresent(moduleCode -> sb.append(PREFIX_MODULE_CODE).append(moduleCode.value).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {

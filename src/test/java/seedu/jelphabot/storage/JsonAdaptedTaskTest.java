@@ -1,17 +1,9 @@
 package seedu.jelphabot.storage;
 
-import org.junit.jupiter.api.Test;
-import seedu.jelphabot.commons.exceptions.IllegalValueException;
-import seedu.jelphabot.model.task.ModuleCode;
+import static seedu.jelphabot.testutil.TypicalPersons.BENSON;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.jelphabot.storage.JsonAdaptedTask.MISSING_FIELD_MESSAGE_FORMAT;
-import static seedu.jelphabot.testutil.Assert.assertThrows;
-import static seedu.jelphabot.testutil.TypicalPersons.BENSON;
 
 // TODO rewrite entire test class to replace missing fields
 public class JsonAdaptedTaskTest {
@@ -23,10 +15,8 @@ public class JsonAdaptedTaskTest {
     private static final String INVALID_DATETIME = "Jan 2 2020 11 11";
 
     private static final String VALID_NAME = BENSON.getDescription().toString();
-//    private static final String VALID_PHONE = BENSON.getPhone().toString();
     private static final String VALID_MODULE_CODE = BENSON.getModuleCode().toString();
     private static final String VALID_DATETIME = BENSON.getDateTime().toString();
-//    private static final String VALID_ADDRESS = BENSON.getAddress().toString();
     private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
