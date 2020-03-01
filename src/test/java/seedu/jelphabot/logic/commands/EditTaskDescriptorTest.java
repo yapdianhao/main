@@ -34,7 +34,8 @@ public class EditTaskDescriptorTest {
         assertNotEquals(DESC_AMY, DESC_BOB);
 
         // different name -> returns false
-        EditPersonDescriptor editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withDescription(VALID_NAME_BOB).build();
+        EditPersonDescriptor editedAmy =
+                new EditPersonDescriptorBuilder(DESC_AMY).withDescription(VALID_NAME_BOB).build();
         assertNotEquals(DESC_AMY, editedAmy);
 
         // different phone -> returns false
