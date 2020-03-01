@@ -35,9 +35,9 @@ public class AddCommandParser implements Parser<AddCommand> {
                 ArgumentTokenizer.tokenize(
                         args,
                         PREFIX_DESCRIPTION,
-                        PREFIX_DATETIME,
                         PREFIX_MODULE_CODE,
                         PREFIX_PRIORITY,
+                        PREFIX_DATETIME,
                         PREFIX_TAG
                 );
 
@@ -53,6 +53,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Task task = new Task(description, Status.INCOMPLETE, dateTime, moduleCode, priority, tagList);
+
         return new AddCommand(task);
     }
 

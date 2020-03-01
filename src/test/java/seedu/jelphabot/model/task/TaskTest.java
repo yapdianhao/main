@@ -8,8 +8,8 @@ import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_MODULE_CODE_B
 import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.jelphabot.testutil.Assert.assertThrows;
-import static seedu.jelphabot.testutil.TypicalPersons.ALICE;
-import static seedu.jelphabot.testutil.TypicalPersons.BOB;
+import static seedu.jelphabot.testutil.TypicalTasks.ALICE;
+import static seedu.jelphabot.testutil.TypicalTasks.BOB;
 
 import org.junit.jupiter.api.Test;
 
@@ -35,7 +35,7 @@ public class TaskTest {
         Task editedAlice = new TaskBuilder(ALICE).build();
         assertFalse(ALICE.isSameTask(editedAlice));
 
-        // different name -> returns false
+        // different description -> returns false
         editedAlice = new TaskBuilder(ALICE).withDescription(VALID_NAME_BOB).build();
         assertFalse(ALICE.isSameTask(editedAlice));
 
@@ -68,16 +68,16 @@ public class TaskTest {
         // different type -> returns false
         assertNotEquals(5, ALICE);
 
-        // different person -> returns false
+        // different task -> returns false
         assertNotEquals(ALICE, BOB);
 
-        // different name -> returns false
+        // different description -> returns false
         Task editedAlice = new TaskBuilder(ALICE).withDescription(VALID_NAME_BOB).build();
         assertNotEquals(ALICE, editedAlice);
 
         // different phone -> returns false
-        editedAlice = new TaskBuilder(ALICE).build();
-        assertNotEquals(ALICE, editedAlice);
+        // editedAlice = new TaskBuilder(ALICE).build();
+        // assertNotEquals(ALICE, editedAlice);
 
         // different module code -> returns false
         editedAlice = new TaskBuilder(ALICE).withModuleCode(VALID_MODULE_CODE_BOB).build();

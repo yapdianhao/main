@@ -60,8 +60,8 @@ public class JsonJelphaBotStorage implements JelphaBotStorage {
     }
 
     @Override
-    public void saveJelphaBot(ReadOnlyJelphaBot addressBook) throws IOException {
-        saveJelphaBot(addressBook, filePath);
+    public void saveJelphaBot(ReadOnlyJelphaBot jelphaBot) throws IOException {
+        saveJelphaBot(jelphaBot, filePath);
     }
 
     /**
@@ -69,12 +69,12 @@ public class JsonJelphaBotStorage implements JelphaBotStorage {
      *
      * @param filePath location of the data. Cannot be null.
      */
-    public void saveJelphaBot(ReadOnlyJelphaBot addressBook, Path filePath) throws IOException {
-        requireNonNull(addressBook);
+    public void saveJelphaBot(ReadOnlyJelphaBot jelphaBot, Path filePath) throws IOException {
+        requireNonNull(jelphaBot);
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        JsonUtil.saveJsonFile(new JsonSerializableJelphaBot(addressBook), filePath);
+        JsonUtil.saveJsonFile(new JsonSerializableJelphaBot(jelphaBot), filePath);
     }
 
 }

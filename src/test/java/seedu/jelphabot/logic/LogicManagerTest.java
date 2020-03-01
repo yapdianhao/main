@@ -1,12 +1,12 @@
 package seedu.jelphabot.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.jelphabot.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static seedu.jelphabot.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
 import static seedu.jelphabot.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.MODULE_CODE_DESC_AMY;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.jelphabot.testutil.Assert.assertThrows;
-import static seedu.jelphabot.testutil.TypicalPersons.AMY;
+import static seedu.jelphabot.testutil.TypicalTasks.AMY;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -56,7 +56,7 @@ public class LogicManagerTest {
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
         String deleteCommand = "delete 9";
-        assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandException(deleteCommand, MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
 
     @Test
@@ -160,7 +160,7 @@ public class LogicManagerTest {
         }
 
         @Override
-        public void saveJelphaBot(ReadOnlyJelphaBot addressBook, Path filePath) throws IOException {
+        public void saveJelphaBot(ReadOnlyJelphaBot jelphaBot, Path filePath) throws IOException {
             throw DUMMY_IO_EXCEPTION;
         }
     }
