@@ -6,10 +6,10 @@ import seedu.jelphabot.commons.exceptions.IllegalValueException;
 import seedu.jelphabot.model.tag.Tag;
 import seedu.jelphabot.model.task.*;
 
-import java.util.List;
 import java.util.ArrayList;
-import java.util.Set;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**

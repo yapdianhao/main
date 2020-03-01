@@ -38,7 +38,7 @@ public class AddCommandIntegrationTest {
     @Test
     public void execute_duplicateTask_throwsCommandException() {
         Task taskInList = model.getJelphaBot().getTaskList().get(0);
-        assertCommandFailure(new AddCommand(taskInList), model, AddCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(new AddCommand(taskInList), model, AddCommand.MESSAGE_DUPLICATE_TASK);
     }
 
 }

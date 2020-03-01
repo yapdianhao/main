@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 import seedu.jelphabot.logic.parser.exceptions.ParseException;
 import seedu.jelphabot.model.tag.Tag;
 import seedu.jelphabot.model.task.Description;
-import seedu.jelphabot.model.task.ModuleCode;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -55,26 +54,26 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseName_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseName((String) null));
+    public void parseDescription_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseDescription(null));
     }
 
     @Test
-    public void parseName_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseName(INVALID_NAME));
+    public void parseDescription_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDescription(INVALID_NAME));
     }
 
     @Test
-    public void parseName_validValueWithoutWhitespace_returnsName() throws Exception {
+    public void parseDescription_validValueWithoutWhitespace_returnsName() throws Exception {
         Description expectedDescription = new Description(VALID_NAME);
-        assertEquals(expectedDescription, ParserUtil.parseName(VALID_NAME));
+        assertEquals(expectedDescription, ParserUtil.parseDescription(VALID_NAME));
     }
 
     @Test
-    public void parseName_validValueWithWhitespace_returnsTrimmedName() throws Exception {
+    public void parseDescription_validValueWithWhitespace_returnsTrimmedName() throws Exception {
         String nameWithWhitespace = WHITESPACE + VALID_NAME + WHITESPACE;
         Description expectedDescription = new Description(VALID_NAME);
-        assertEquals(expectedDescription, ParserUtil.parseName(nameWithWhitespace));
+        assertEquals(expectedDescription, ParserUtil.parseDescription(nameWithWhitespace));
     }
 
 //    @Test
