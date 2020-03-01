@@ -44,6 +44,8 @@ indent_size = 2
 ij_haml_keep_indents_on_empty_lines = false
 
 [*.java]
+ij_visual_guides = 110, 120
+ij_wrap_on_typing = true
 ij_java_align_consecutive_assignments = false
 ij_java_align_consecutive_variable_declarations = false
 ij_java_align_group_field_declarations = false
@@ -151,7 +153,7 @@ ij_java_keep_blank_lines_in_declarations = 2
 ij_java_keep_control_statement_in_one_line = true
 ij_java_keep_first_column_comment = true
 ij_java_keep_indents_on_empty_lines = false
-ij_java_keep_line_breaks = true
+ij_java_keep_line_breaks = false
 ij_java_keep_multiple_expressions_in_one_line = false
 ij_java_keep_simple_blocks_in_one_line = false
 ij_java_keep_simple_classes_in_one_line = false
@@ -173,7 +175,6 @@ ij_java_method_parameters_right_paren_on_new_line = false
 ij_java_method_parameters_wrap = off
 ij_java_modifier_list_wrap = false
 ij_java_names_count_to_use_import_on_demand = 999
-ij_java_packages_to_use_import_on_demand = java.awt.*, javax.swing.*
 ij_java_parameter_annotation_wrap = off
 ij_java_parentheses_expression_new_line_after_left_paren = false
 ij_java_parentheses_expression_right_paren_on_new_line = false
