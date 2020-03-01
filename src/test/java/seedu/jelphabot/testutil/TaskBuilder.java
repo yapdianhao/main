@@ -1,11 +1,15 @@
 package seedu.jelphabot.testutil;
 
-import seedu.jelphabot.model.tag.Tag;
-import seedu.jelphabot.model.task.*;
-import seedu.jelphabot.model.util.SampleDataUtil;
-
 import java.util.HashSet;
 import java.util.Set;
+
+import seedu.jelphabot.model.tag.Tag;
+import seedu.jelphabot.model.task.DateTime;
+import seedu.jelphabot.model.task.Description;
+import seedu.jelphabot.model.task.ModuleCode;
+import seedu.jelphabot.model.task.Status;
+import seedu.jelphabot.model.task.Task;
+import seedu.jelphabot.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building Person objects.
@@ -69,7 +73,7 @@ public class TaskBuilder {
     }
 
     public Task build() {
-        return new Task(description,  Status.INCOMPLETE, new DateTime("Jan-20-2020 01 20"), moduleCode, tags);
+        return new Task(description, Status.INCOMPLETE, new DateTime("Jan-20-2020 01 20"), moduleCode, tags);
     }
 
 }

@@ -1,20 +1,26 @@
 package seedu.jelphabot.logic.parser;
 
-import seedu.jelphabot.logic.commands.AddCommand;
-import seedu.jelphabot.logic.parser.exceptions.ParseException;
-import seedu.jelphabot.model.tag.Tag;
-import seedu.jelphabot.model.task.*;
+import static seedu.jelphabot.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_DATETIME;
+import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
+import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
 import java.util.stream.Stream;
 
-import static seedu.jelphabot.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.jelphabot.logic.parser.CliSyntax.*;
+import seedu.jelphabot.logic.commands.AddCommand;
+import seedu.jelphabot.logic.parser.exceptions.ParseException;
+import seedu.jelphabot.model.tag.Tag;
+import seedu.jelphabot.model.task.DateTime;
+import seedu.jelphabot.model.task.Description;
+import seedu.jelphabot.model.task.ModuleCode;
+import seedu.jelphabot.model.task.Status;
+import seedu.jelphabot.model.task.Task;
 
 /**
  * Parses input arguments and creates a new AddCommand object
  */
-// TODO rewrite command with new parameters
 public class AddCommandParser implements Parser<AddCommand> {
 
     /**
@@ -24,17 +30,17 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_MODULE_CODE, PREFIX_ADDRESS, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_DESCRIPTION, PREFIX_MODULE_CODE, PREFIX_DATETIME, PREFIX_TAG);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_MODULE_CODE)
+        if (!arePrefixesPresent(argMultimap, PREFIX_DESCRIPTION, PREFIX_MODULE_CODE, PREFIX_DATETIME)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
-        Description description = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+        Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
         ModuleCode moduleCode = ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_MODULE_CODE).get());
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         DateTime dateTime = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).get());
+        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Task task = new Task(description, Status.INCOMPLETE, dateTime, moduleCode, tagList);
 

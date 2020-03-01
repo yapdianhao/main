@@ -1,19 +1,41 @@
 package seedu.jelphabot.logic.parser;
 
+import static seedu.jelphabot.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.INVALID_MODULE_CODE_DESC;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.MODULE_CODE_DESC_AMY;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.MODULE_CODE_DESC_BOB;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.NAME_DESC_AMY;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.NAME_DESC_BOB;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_MODULE_CODE_BOB;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.jelphabot.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.jelphabot.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.jelphabot.testutil.TypicalPersons.AMY;
+import static seedu.jelphabot.testutil.TypicalPersons.BOB;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.jelphabot.logic.commands.AddCommand;
 import seedu.jelphabot.model.tag.Tag;
 import seedu.jelphabot.model.task.Description;
 import seedu.jelphabot.model.task.ModuleCode;
 import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.testutil.TaskBuilder;
-
-import static seedu.jelphabot.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.*;
-import static seedu.jelphabot.logic.parser.CommandParserTestUtil.assertParseFailure;
-import static seedu.jelphabot.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.jelphabot.testutil.TypicalPersons.AMY;
-import static seedu.jelphabot.testutil.TypicalPersons.BOB;
 
 // TODO rewrite required to replace missing fields
 public class AddCommandParserTest {

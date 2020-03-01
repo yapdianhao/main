@@ -1,25 +1,32 @@
 package seedu.jelphabot.logic.parser;
 
-import org.junit.jupiter.api.Test;
-import seedu.jelphabot.logic.commands.*;
-import seedu.jelphabot.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.jelphabot.logic.parser.exceptions.ParseException;
-import seedu.jelphabot.model.task.DescriptionContainsKeywordsPredicate;
-import seedu.jelphabot.model.task.Task;
-import seedu.jelphabot.testutil.EditPersonDescriptorBuilder;
-import seedu.jelphabot.testutil.TaskBuilder;
-import seedu.jelphabot.testutil.TaskUtil;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.jelphabot.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.jelphabot.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.jelphabot.testutil.Assert.assertThrows;
 import static seedu.jelphabot.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+
+import java.util.Arrays;
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.jelphabot.logic.commands.AddCommand;
+import seedu.jelphabot.logic.commands.ClearCommand;
+import seedu.jelphabot.logic.commands.DeleteCommand;
+import seedu.jelphabot.logic.commands.EditCommand;
+import seedu.jelphabot.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.jelphabot.logic.commands.ExitCommand;
+import seedu.jelphabot.logic.commands.FindCommand;
+import seedu.jelphabot.logic.commands.HelpCommand;
+import seedu.jelphabot.logic.commands.ListCommand;
+import seedu.jelphabot.logic.parser.exceptions.ParseException;
+import seedu.jelphabot.model.task.DescriptionContainsKeywordsPredicate;
+import seedu.jelphabot.model.task.Task;
+import seedu.jelphabot.testutil.EditPersonDescriptorBuilder;
+import seedu.jelphabot.testutil.TaskBuilder;
+import seedu.jelphabot.testutil.TaskUtil;
 
 public class JelphaBotParserTest {
 
@@ -50,7 +57,8 @@ public class JelphaBotParserTest {
         Task task = new TaskBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(task).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + TaskUtil.getEditTaskDescriptorDetails(descriptor));
+                                                                + INDEX_FIRST_PERSON.getOneBased() + " " + TaskUtil
+                                                                        .getEditTaskDescriptorDetails(descriptor));
         assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
 
@@ -63,8 +71,9 @@ public class JelphaBotParserTest {
     @Test
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+        FindCommand command =
+                (FindCommand) parser.parseCommand(
+                        FindCommand.COMMAND_WORD + " " + String.join(" ", keywords));
         assertEquals(new FindCommand(new DescriptionContainsKeywordsPredicate(keywords)), command);
     }
 
@@ -83,11 +92,14 @@ public class JelphaBotParserTest {
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
-            -> parser.parseCommand(""));
+            -> parser.parseCommand("")
+        );
     }
 
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
+        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, ()
+            -> parser.parseCommand("unknownCommand")
+        );
     }
 }

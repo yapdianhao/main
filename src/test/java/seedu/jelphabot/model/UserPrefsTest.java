@@ -1,8 +1,8 @@
 package seedu.jelphabot.model;
 
-import org.junit.jupiter.api.Test;
-
 import static seedu.jelphabot.testutil.Assert.assertThrows;
+
+import org.junit.jupiter.api.Test;
 
 public class UserPrefsTest {
 

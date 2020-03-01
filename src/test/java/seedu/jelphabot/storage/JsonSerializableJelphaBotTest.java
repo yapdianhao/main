@@ -1,16 +1,17 @@
 package seedu.jelphabot.storage;
 
-import org.junit.jupiter.api.Test;
-import seedu.jelphabot.commons.exceptions.IllegalValueException;
-import seedu.jelphabot.commons.util.JsonUtil;
-import seedu.jelphabot.model.JelphaBot;
-import seedu.jelphabot.testutil.TypicalPersons;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.jelphabot.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.jelphabot.testutil.Assert.assertThrows;
+import org.junit.jupiter.api.Test;
+
+import seedu.jelphabot.commons.exceptions.IllegalValueException;
+import seedu.jelphabot.commons.util.JsonUtil;
+import seedu.jelphabot.model.JelphaBot;
+import seedu.jelphabot.testutil.TypicalPersons;
 
 public class JsonSerializableJelphaBotTest {
 

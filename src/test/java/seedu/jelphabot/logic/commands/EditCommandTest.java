@@ -1,6 +1,21 @@
 package seedu.jelphabot.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.DESC_AMY;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.DESC_BOB;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.jelphabot.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.jelphabot.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.jelphabot.testutil.TypicalPersons.getTypicalJelphaBot;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.jelphabot.commons.core.Messages;
 import seedu.jelphabot.commons.core.index.Index;
 import seedu.jelphabot.logic.commands.EditCommand.EditPersonDescriptor;
@@ -11,12 +26,6 @@ import seedu.jelphabot.model.UserPrefs;
 import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.testutil.EditPersonDescriptorBuilder;
 import seedu.jelphabot.testutil.TaskBuilder;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.*;
-import static seedu.jelphabot.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.jelphabot.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.jelphabot.testutil.TypicalPersons.getTypicalJelphaBot;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and

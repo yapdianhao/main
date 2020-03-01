@@ -1,18 +1,29 @@
 package seedu.jelphabot.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_DATETIME;
+import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
+import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.jelphabot.model.Model.PREDICATE_SHOW_ALL_TASKS;
+
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+
 import seedu.jelphabot.commons.core.Messages;
 import seedu.jelphabot.commons.core.index.Index;
 import seedu.jelphabot.commons.util.CollectionUtil;
 import seedu.jelphabot.logic.commands.exceptions.CommandException;
 import seedu.jelphabot.model.Model;
 import seedu.jelphabot.model.tag.Tag;
-import seedu.jelphabot.model.task.*;
-
-import java.util.*;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.jelphabot.logic.parser.CliSyntax.*;
-import static seedu.jelphabot.model.Model.PREDICATE_SHOW_ALL_TASKS;
+import seedu.jelphabot.model.task.DateTime;
+import seedu.jelphabot.model.task.Description;
+import seedu.jelphabot.model.task.ModuleCode;
+import seedu.jelphabot.model.task.Status;
+import seedu.jelphabot.model.task.Task;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -25,14 +36,14 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
             + "by the index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) " 
-            + "[" + PREFIX_NAME + "DESCRIPTION] " + "[" + PREFIX_MODULE_CODE + "MODULE_CODE] " 
-            + "[" + PREFIX_DATETIME + "DATETIME]" + "[" + PREFIX_TAG + "TAG]...\n"  
+            + "Parameters: INDEX (must be a positive integer) "
+            + "[" + PREFIX_DESCRIPTION + "DESCRIPTION] " + "[" + PREFIX_MODULE_CODE + "MODULE_CODE] "
+            + "[" + PREFIX_DATETIME + "DATETIME]" + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 " + PREFIX_MODULE_CODE + "CS2105" + PREFIX_DATETIME + "23 01 2020 20 20";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task list.";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -157,7 +168,7 @@ public class EditCommand extends Command {
 
         /**
          * Sets {@code status} to this object's {@code status}.
-         * 
+         *
          * @param status sets the status to the specified status.
          */
         public void setStatus(Status status) {

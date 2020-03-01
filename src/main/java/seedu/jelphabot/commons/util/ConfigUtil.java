@@ -1,11 +1,11 @@
 package seedu.jelphabot.commons.util;
 
-import seedu.jelphabot.commons.core.Config;
-import seedu.jelphabot.commons.exceptions.DataConversionException;
-
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
+
+import seedu.jelphabot.commons.core.Config;
+import seedu.jelphabot.commons.exceptions.DataConversionException;
 
 /**
  * A class for accessing the Config File.

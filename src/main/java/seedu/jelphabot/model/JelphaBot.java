@@ -1,12 +1,12 @@
 package seedu.jelphabot.model;
 
-import javafx.collections.ObservableList;
-import seedu.jelphabot.model.task.Task;
-import seedu.jelphabot.model.task.UniqueTaskList;
+import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
-import static java.util.Objects.requireNonNull;
+import javafx.collections.ObservableList;
+import seedu.jelphabot.model.task.Task;
+import seedu.jelphabot.model.task.UniqueTaskList;
 
 /**
  * Wraps all data at the address-book level
