@@ -36,6 +36,7 @@ class DateTimeTest {
         // valid addresses
         assertTrue(DateTime.isValidDateTime("May-1-2020 11 11")); // Date and time with hyphen
         // valid addresses for developers for ease of testing, to be deleted in the final product
+        assertTrue(DateTime.isValidDateTime("1-May-2020 11 11")); //Day and month reversed
         assertTrue(DateTime.isValidDateTime("May/1/2020 22 00"));
         assertTrue(DateTime.isValidDateTime("1/1/2020 12 00"));
         assertTrue(DateTime.isValidDateTime("2 May 2020 20 20")); // Date and time with no hyphen

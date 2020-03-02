@@ -23,7 +23,7 @@ public class DateTime {
     private final String value;
     private final DateFormat format;
 
-    private static final List<String> dateFormatStrings = Arrays.asList("MMM-d-yyyy HH mm", "MMM/d/yyyy HH mm", "d/M/y HH mm", "dd MM yyyy HH mm");
+    private static final List<String> dateFormatStrings = Arrays.asList("MMM-d-yyyy HH mm", "MMM/d/yyyy HH mm", "d/M/y HH mm", "d-MMM-yyyy HH mm", "d MMM yyyy HH mmm");
 
     /**
      * Constructs an {@code DateTime}.
