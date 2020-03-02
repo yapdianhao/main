@@ -46,8 +46,11 @@ public class AddCommandParser implements Parser<AddCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
+        //noinspection OptionalGetWithoutIsPresent guaranteed present return from ParserUtil
         Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
+        //noinspection OptionalGetWithoutIsPresent guaranteed present return from ParserUtil
         DateTime dateTime = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).get());
+        //noinspection OptionalGetWithoutIsPresent guaranteed present return from ParserUtil
         ModuleCode moduleCode = ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_MODULE_CODE).get());
         Priority priority = Priority.MEDIUM;
         if (argMultimap.getValue(PREFIX_PRIORITY).isPresent()) {
