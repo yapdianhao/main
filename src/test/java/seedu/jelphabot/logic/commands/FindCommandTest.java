@@ -5,9 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.jelphabot.commons.core.Messages.MESSAGE_TASKS_LISTED_OVERVIEW;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.jelphabot.testutil.TypicalTasks.CARL;
-import static seedu.jelphabot.testutil.TypicalTasks.ELLE;
-import static seedu.jelphabot.testutil.TypicalTasks.FIONA;
+import static seedu.jelphabot.testutil.TypicalTasks.CLASS;
+import static seedu.jelphabot.testutil.TypicalTasks.ERRAND;
+import static seedu.jelphabot.testutil.TypicalTasks.FINALS;
 import static seedu.jelphabot.testutil.TypicalTasks.getTypicalJelphaBot;
 
 import java.util.Arrays;
@@ -72,7 +72,7 @@ public class FindCommandTest {
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredTaskList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredTaskList());
+        assertEquals(Arrays.asList(CLASS, ERRAND, FINALS), model.getFilteredTaskList());
     }
 
     /**

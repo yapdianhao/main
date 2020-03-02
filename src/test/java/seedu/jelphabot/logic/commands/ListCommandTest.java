@@ -1,8 +1,8 @@
 package seedu.jelphabot.logic.commands;
 
 import static seedu.jelphabot.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.jelphabot.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.showTaskAtIndex;
+import static seedu.jelphabot.testutil.TypicalIndexes.INDEX_FIRST_TASK;
 import static seedu.jelphabot.testutil.TypicalTasks.getTypicalJelphaBot;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -33,7 +33,7 @@ public class ListCommandTest {
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showTaskAtIndex(model, INDEX_FIRST_TASK);
         assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
     }
 }

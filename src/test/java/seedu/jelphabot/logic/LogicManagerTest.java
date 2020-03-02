@@ -3,10 +3,10 @@ package seedu.jelphabot.logic;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.jelphabot.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
 import static seedu.jelphabot.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.MODULE_CODE_DESC_AMY;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.NAME_DESC_AMY;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.MODULE_CODE_DESC_LAB;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.NAME_DESC_LAB;
 import static seedu.jelphabot.testutil.Assert.assertThrows;
-import static seedu.jelphabot.testutil.TypicalTasks.AMY;
+import static seedu.jelphabot.testutil.TypicalTasks.LAB;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -76,8 +76,8 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Execute add command
-        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + MODULE_CODE_DESC_AMY;
-        Task expectedTask = new TaskBuilder(AMY).withTags().build();
+        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_LAB + MODULE_CODE_DESC_LAB;
+        Task expectedTask = new TaskBuilder(LAB).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addTask(expectedTask);
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;

@@ -1,6 +1,6 @@
 package seedu.jelphabot.storage;
 
-import static seedu.jelphabot.testutil.TypicalTasks.BENSON;
+import static seedu.jelphabot.testutil.TypicalTasks.BOOK_REPORT;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,10 +14,10 @@ public class JsonAdaptedTaskTest {
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_DATETIME = "Jan 2 2020 11 11";
 
-    private static final String VALID_NAME = BENSON.getDescription().toString();
-    private static final String VALID_MODULE_CODE = BENSON.getModuleCode().toString();
-    private static final String VALID_DATETIME = BENSON.getDateTime().toString();
-    private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
+    private static final String VALID_NAME = BOOK_REPORT.getDescription().toString();
+    private static final String VALID_MODULE_CODE = BOOK_REPORT.getModuleCode().toString();
+    private static final String VALID_DATETIME = BOOK_REPORT.getDateTime().toString();
+    private static final List<JsonAdaptedTag> VALID_TAGS = BOOK_REPORT.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
 
