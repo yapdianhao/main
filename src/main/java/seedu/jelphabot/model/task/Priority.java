@@ -1,4 +1,5 @@
 package seedu.jelphabot.model.task;
+import static seedu.jelphabot.commons.util.AppUtil.checkArgument;
 
 /**
  * Enum class representative of the different possible priorities that a task can have.
@@ -7,8 +8,7 @@ package seedu.jelphabot.model.task;
 public enum Priority {
     HIGH,
     MEDIUM,
-    LOW,
-    INVALID;
+    LOW;
 
     public static final String MESSAGE_CONSTRAINTS =
             "Priority should be either -1, 0, or 1, or the string representation HIGH, MEDIUM or LOW";
@@ -49,7 +49,8 @@ public enum Priority {
         case "-1":
             return Priority.LOW;
         default:
-            return Priority.INVALID;
+            checkArgument(isValidPriority(test), MESSAGE_CONSTRAINTS);
+            return null;
         }
     }
 }
