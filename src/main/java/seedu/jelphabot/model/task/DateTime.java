@@ -25,14 +25,14 @@ public class DateTime {
 
     /**
      * Constructs an {@code DateTime}.
-     *
      * @param dateTime A valid email address.
      */
     public DateTime(String dateTime) {
         requireNonNull(dateTime);
         checkArgument(isValidDateTime(dateTime), MESSAGE_CONSTRAINTS);
-        value = dateTime;
         format = getDateFormat(dateTime);
+        value = convertDateToStandardFormat(dateTime);
+
     }
 
     /**
@@ -72,6 +72,17 @@ public class DateTime {
             }
         }
         return currDateFormat;
+    }
+
+    private String convertDateToStandardFormat(String currDate) {
+        String retString = "";
+        try {
+            Date date = format.parse(currDate);
+            retString = new SimpleDateFormat("MMM-d-yyyy HH mm").format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return retString;
     }
 
     public DateFormat getFormat() {
