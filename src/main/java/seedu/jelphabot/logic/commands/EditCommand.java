@@ -1,10 +1,7 @@
 package seedu.jelphabot.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_DATETIME;
-import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
-import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.jelphabot.logic.parser.CliSyntax.*;
 import static seedu.jelphabot.model.Model.PREDICATE_SHOW_ALL_TASKS;
 
 import java.util.Collections;
@@ -37,9 +34,12 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
             + "by the index number used in the displayed task list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_DESCRIPTION + "DESCRIPTION] " + "[" + PREFIX_MODULE_CODE + "MODULE_CODE] "
-            + "[" + PREFIX_DATETIME + "DATETIME]" + "[" + PREFIX_TAG + "TAG]...\n"
+            + "Parameters:\n" + "INDEX (must be a positive integer) "
+            + "    " + "[" + PREFIX_DESCRIPTION + "DESCRIPTION] "
+            + "    " + "[" + PREFIX_DATETIME + "DATETIME]"
+            + "    " + "[" + PREFIX_MODULE_CODE + "MODULE_CODE] "
+            + "    " + "[" + PREFIX_PRIORITY + "PRIORITY (-1, 0, or 1)] "
+            + "    " + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 " + PREFIX_MODULE_CODE + "CS2105" + PREFIX_DATETIME + "Jan-1-2020 20 20"
             + PREFIX_TAG + "yo";
 
