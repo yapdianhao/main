@@ -9,7 +9,6 @@ import static seedu.jelphabot.commons.util.AppUtil.checkArgument;
  */
 public class ModuleCode {
 
-    // TODO rewrite constraints for module code
     public static final String MESSAGE_CONSTRAINTS = "Module Code should be of the format [faculty][code][variant] "
             + "and adhere to the following constraints:\n"
             + "1. The faculty should only contain alphabetical characters.\n"

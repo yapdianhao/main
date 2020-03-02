@@ -3,8 +3,8 @@ package seedu.jelphabot.logic;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.jelphabot.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
 import static seedu.jelphabot.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.MODULE_CODE_DESC_AMY;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.NAME_DESC_AMY;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.MODULE_CODE_DESC_ASSIGNMENT;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.DESCRIPTION_DESC_ASSIGNMENT;
 import static seedu.jelphabot.testutil.Assert.assertThrows;
 import static seedu.jelphabot.testutil.TypicalTasks.AMY;
 
@@ -76,7 +76,7 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Execute add command
-        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + MODULE_CODE_DESC_AMY;
+        String addCommand = AddCommand.COMMAND_WORD + DESCRIPTION_DESC_ASSIGNMENT + MODULE_CODE_DESC_ASSIGNMENT;
         Task expectedTask = new TaskBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addTask(expectedTask);

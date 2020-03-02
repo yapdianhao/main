@@ -3,7 +3,7 @@ package seedu.jelphabot.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_GRADED;
 import static seedu.jelphabot.testutil.Assert.assertThrows;
 import static seedu.jelphabot.testutil.TypicalTasks.ALICE;
 import static seedu.jelphabot.testutil.TypicalTasks.getTypicalJelphaBot;
@@ -45,7 +45,7 @@ public class JelphaBotTest {
     @Test
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
         // Two persons with the same identity fields
-        Task editedAlice = new TaskBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
+        Task editedAlice = new TaskBuilder(ALICE).withTags(VALID_TAG_GRADED)
                 .build();
         List<Task> newTasks = Arrays.asList(ALICE, editedAlice);
         JelphaBotStub newData = new JelphaBotStub(newTasks);
@@ -72,7 +72,7 @@ public class JelphaBotTest {
     @Test
     public void hasPerson_personWithSameIdentityFieldsInJelphaBot_returnsTrue() {
         addressBook.addTask(ALICE);
-        Task editedAlice = new TaskBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
+        Task editedAlice = new TaskBuilder(ALICE).withTags(VALID_TAG_GRADED)
                 .build();
         assertTrue(addressBook.hasTask(editedAlice));
     }

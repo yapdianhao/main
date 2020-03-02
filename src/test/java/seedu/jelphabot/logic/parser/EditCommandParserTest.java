@@ -4,17 +4,17 @@ import static seedu.jelphabot.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORM
 import static seedu.jelphabot.logic.commands.CommandTestUtil.INVALID_MODULE_CODE_DESC;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.MODULE_CODE_DESC_AMY;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.MODULE_CODE_DESC_BOB;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_MODULE_CODE_AMY;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_MODULE_CODE_BOB;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_NAME_AMY;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.MODULE_CODE_DESC_ASSIGNMENT;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.MODULE_CODE_DESC_TUTORIAL;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.DESCRIPTION_DESC_ASSIGNMENT;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.TAG_DESC_UNGRADED;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.TAG_DESC_GRADED;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_MODULE_CODE_ASSIGNMENT;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_MODULE_CODE_TUTORIAL;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_DESCRIPTION_ASSIGNMENT;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_UNGRADED;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_GRADED;
 import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.jelphabot.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.jelphabot.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -44,7 +44,7 @@ public class EditCommandParserTest {
     @Test
     public void parse_missingParts_failure() {
         // no index specified
-        assertParseFailure(parser, VALID_NAME_AMY, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, VALID_DESCRIPTION_ASSIGNMENT, MESSAGE_INVALID_FORMAT);
 
         // no field specified
         assertParseFailure(parser, "1", EditCommand.MESSAGE_NOT_EDITED);
@@ -56,10 +56,10 @@ public class EditCommandParserTest {
     @Test
     public void parse_invalidPreamble_failure() {
         // negative index
-        assertParseFailure(parser, "-5" + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "-5" + DESCRIPTION_DESC_ASSIGNMENT, MESSAGE_INVALID_FORMAT);
 
         // zero index
-        assertParseFailure(parser, "0" + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "0" + DESCRIPTION_DESC_ASSIGNMENT, MESSAGE_INVALID_FORMAT);
 
         // invalid arguments being parsed as preamble
         assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);
@@ -80,9 +80,9 @@ public class EditCommandParserTest {
 
         // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Person} being edited,
         // parsing it together with a valid tag results in error
-        assertParseFailure(parser, "1" + TAG_DESC_FRIEND + TAG_DESC_HUSBAND + TAG_EMPTY, Tag.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + TAG_DESC_FRIEND + TAG_EMPTY + TAG_DESC_HUSBAND, Tag.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + TAG_EMPTY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND, Tag.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + TAG_DESC_UNGRADED + TAG_DESC_GRADED + TAG_EMPTY, Tag.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + TAG_DESC_UNGRADED + TAG_EMPTY + TAG_DESC_GRADED, Tag.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + TAG_EMPTY + TAG_DESC_UNGRADED + TAG_DESC_GRADED, Tag.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_MODULE_CODE_DESC + VALID_PHONE_AMY,
@@ -94,12 +94,13 @@ public class EditCommandParserTest {
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_PERSON;
         String userInput =
-            targetIndex.getOneBased() + TAG_DESC_HUSBAND + MODULE_CODE_DESC_AMY + NAME_DESC_AMY
-                + TAG_DESC_FRIEND;
+            targetIndex.getOneBased() + TAG_DESC_GRADED + MODULE_CODE_DESC_ASSIGNMENT + DESCRIPTION_DESC_ASSIGNMENT
+                + TAG_DESC_UNGRADED;
 
         EditCommand.EditTaskDescriptor descriptor =
-            new EditPersonDescriptorBuilder().withDescription(VALID_NAME_AMY).withModuleCode(VALID_MODULE_CODE_AMY)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+            new EditPersonDescriptorBuilder().withDescription(VALID_DESCRIPTION_ASSIGNMENT).withModuleCode(
+                VALID_MODULE_CODE_ASSIGNMENT)
+                .withTags(VALID_TAG_GRADED, VALID_TAG_UNGRADED).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -108,10 +109,10 @@ public class EditCommandParserTest {
     @Test
     public void parse_someFieldsSpecified_success() {
         Index targetIndex = INDEX_FIRST_PERSON;
-        String userInput = targetIndex.getOneBased() + MODULE_CODE_DESC_AMY;
+        String userInput = targetIndex.getOneBased() + MODULE_CODE_DESC_ASSIGNMENT;
 
         EditTaskDescriptor descriptor =
-            new EditPersonDescriptorBuilder().withModuleCode(VALID_MODULE_CODE_AMY).build();
+            new EditPersonDescriptorBuilder().withModuleCode(VALID_MODULE_CODE_ASSIGNMENT).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -121,8 +122,9 @@ public class EditCommandParserTest {
     public void parse_oneFieldSpecified_success() {
         // name
         Index targetIndex = INDEX_THIRD_PERSON;
-        String userInput = targetIndex.getOneBased() + NAME_DESC_AMY;
-        EditCommand.EditTaskDescriptor descriptor = new EditPersonDescriptorBuilder().withDescription(VALID_NAME_AMY)
+        String userInput = targetIndex.getOneBased() + DESCRIPTION_DESC_ASSIGNMENT;
+        EditCommand.EditTaskDescriptor descriptor = new EditPersonDescriptorBuilder().withDescription(
+            VALID_DESCRIPTION_ASSIGNMENT)
                                                         .build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -134,14 +136,14 @@ public class EditCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // module code
-        userInput = targetIndex.getOneBased() + MODULE_CODE_DESC_AMY;
-        descriptor = new EditPersonDescriptorBuilder().withModuleCode(VALID_MODULE_CODE_AMY).build();
+        userInput = targetIndex.getOneBased() + MODULE_CODE_DESC_ASSIGNMENT;
+        descriptor = new EditPersonDescriptorBuilder().withModuleCode(VALID_MODULE_CODE_ASSIGNMENT).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // tags
-        userInput = targetIndex.getOneBased() + TAG_DESC_FRIEND;
-        descriptor = new EditPersonDescriptorBuilder().withTags(VALID_TAG_FRIEND).build();
+        userInput = targetIndex.getOneBased() + TAG_DESC_UNGRADED;
+        descriptor = new EditPersonDescriptorBuilder().withTags(VALID_TAG_UNGRADED).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -150,12 +152,12 @@ public class EditCommandParserTest {
     public void parse_multipleRepeatedFields_acceptsLast() {
         Index targetIndex = INDEX_FIRST_PERSON;
         String userInput =
-            targetIndex.getOneBased() + MODULE_CODE_DESC_AMY + TAG_DESC_FRIEND
-                + MODULE_CODE_DESC_AMY + TAG_DESC_FRIEND
-                + MODULE_CODE_DESC_BOB + TAG_DESC_HUSBAND;
+            targetIndex.getOneBased() + MODULE_CODE_DESC_ASSIGNMENT + TAG_DESC_UNGRADED
+                + MODULE_CODE_DESC_ASSIGNMENT + TAG_DESC_UNGRADED
+                + MODULE_CODE_DESC_TUTORIAL + TAG_DESC_GRADED;
 
-        EditTaskDescriptor descriptor = new EditPersonDescriptorBuilder().withModuleCode(VALID_MODULE_CODE_BOB)
-                                            .withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND).build();
+        EditTaskDescriptor descriptor = new EditPersonDescriptorBuilder().withModuleCode(VALID_MODULE_CODE_TUTORIAL)
+                                            .withTags(VALID_TAG_UNGRADED, VALID_TAG_GRADED).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -171,8 +173,8 @@ public class EditCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // other valid values specified
-        userInput = targetIndex.getOneBased() + MODULE_CODE_DESC_BOB;
-        descriptor = new EditPersonDescriptorBuilder().withModuleCode(VALID_MODULE_CODE_BOB).build();
+        userInput = targetIndex.getOneBased() + MODULE_CODE_DESC_TUTORIAL;
+        descriptor = new EditPersonDescriptorBuilder().withModuleCode(VALID_MODULE_CODE_TUTORIAL).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }

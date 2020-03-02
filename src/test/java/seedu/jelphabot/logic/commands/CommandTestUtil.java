@@ -24,38 +24,59 @@ import seedu.jelphabot.testutil.EditPersonDescriptorBuilder;
  */
 public class CommandTestUtil {
 
-    public static final String VALID_NAME_AMY = "Amy Bee";
-    public static final String VALID_NAME_BOB = "Bob Choo";
+    public static final String VALID_DESCRIPTION_ASSIGNMENT = "Individual Assignment 1";
+    public static final String VALID_DESCRIPTION_TUTORIAL = "Tutorial 3";
+    public static final String VALID_STATUS_ASSIGNMENT = "INCOMPLETE";
+    public static final String VALID_STATUS_TUTORIAL = "COMPLETE";
+    public static final String VALID_DATETIME_ASSIGNMENT = "Jan-12-2020 22 00";
+    public static final String VALID_DATETIME_TUTORIAL = "Mar-2-2019 23 59";
+    public static final String VALID_MODULE_CODE_ASSIGNMENT = "CS2103T";
+    public static final String VALID_MODULE_CODE_TUTORIAL = "CS2101";
+    public static final String VALID_PRIORITY_ASSIGNMENT = "HIGH";
+    public static final String VALID_PRIORITY_TUTORIAL = "LOW";
+    public static final String VALID_TAG_GRADED = "graded";
+    public static final String VALID_TAG_UNGRADED = "ungraded";
+
+    // TODO Remove all usages of these fields
+    public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_PHONE_AMY = "11111111";
     public static final String VALID_PHONE_BOB = "22222222";
-    public static final String VALID_MODULE_CODE_AMY = "amy@example.com";
-    public static final String VALID_MODULE_CODE_BOB = "bob@example.com";
-    public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
-    public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
-    public static final String VALID_TAG_HUSBAND = "husband";
-    public static final String VALID_TAG_FRIEND = "friend";
 
-    public static final String NAME_DESC_AMY = " " + PREFIX_DESCRIPTION + VALID_NAME_AMY;
-    public static final String NAME_DESC_BOB = " " + PREFIX_DESCRIPTION + VALID_NAME_BOB;
-    public static final String MODULE_CODE_DESC_AMY = " " + PREFIX_MODULE_CODE + VALID_MODULE_CODE_AMY;
-    public static final String MODULE_CODE_DESC_BOB = " " + PREFIX_MODULE_CODE + VALID_MODULE_CODE_BOB;
-    public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
-    public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String DESCRIPTION_DESC_ASSIGNMENT = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_ASSIGNMENT;
+    public static final String DESCRIPTION_DESC_TUTORIAL = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_TUTORIAL;
+    public static final String MODULE_CODE_DESC_ASSIGNMENT = " " + PREFIX_MODULE_CODE + VALID_MODULE_CODE_ASSIGNMENT;
+    public static final String MODULE_CODE_DESC_TUTORIAL = " " + PREFIX_MODULE_CODE + VALID_MODULE_CODE_TUTORIAL;
+    public static final String TAG_DESC_UNGRADED = " " + PREFIX_TAG + VALID_TAG_UNGRADED;
+    public static final String TAG_DESC_GRADED = " " + PREFIX_TAG + VALID_TAG_GRADED;
 
-    public static final String INVALID_NAME_DESC = " " + PREFIX_DESCRIPTION + "James&"; // '&' not allowed in names
-    public static final String INVALID_MODULE_CODE_DESC = " " + PREFIX_MODULE_CODE + "bob!yahoo"; // missing '@' symbol
+    // TODO remove this wrong invalid_desc and add new invalid desc
+    public static final String INVALID_NAME_DESC = " " + PREFIX_DESCRIPTION
+                                                       + "!Indivual &ssignment 1"; // '!&' not allowed in names
+
+    public static final String INVALID_MODULE_CODE_DESC = " " + PREFIX_MODULE_CODE + "3230"; // missing module code
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditCommand.EditTaskDescriptor DESC_AMY;
-    public static final EditCommand.EditTaskDescriptor DESC_BOB;
+    public static final EditCommand.EditTaskDescriptor DESC_ASSIGNMENT;
+    public static final EditCommand.EditTaskDescriptor DESC_TUTORIAL;
 
     static {
-        DESC_AMY = new EditPersonDescriptorBuilder().withDescription(VALID_NAME_AMY).withTags(VALID_TAG_FRIEND).build();
-        DESC_BOB = new EditPersonDescriptorBuilder().withDescription(VALID_NAME_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+        DESC_ASSIGNMENT = new EditPersonDescriptorBuilder()
+                .withDescription(VALID_DESCRIPTION_ASSIGNMENT)
+                // .withStatus(VALID_STATUS_ASSIGNMENT)
+                // .withDateTime(VALID_DATETIME_ASSIGNMENT)
+                // .withModuleCode(VALID_MODULE_CODE_ASSIGNMENT)
+                // .withPriority(VALID_PRIORITY_ASSIGNMENT)
+                .withTags(VALID_TAG_UNGRADED).build();
+        DESC_TUTORIAL = new EditPersonDescriptorBuilder()
+                .withDescription(VALID_DESCRIPTION_TUTORIAL)
+                // .withStatus(VALID_STATUS_TUTORIAL)
+                // .withDateTime(VALID_DATETIME_TUTORIAL)
+                // .withModuleCode(VALID_MODULE_CODE_TUTORIAL)
+                // .withPriority(VALID_PRIORITY_TUTORIAL)
+                .withTags(VALID_TAG_GRADED, VALID_TAG_UNGRADED).build();
     }
 
     /**

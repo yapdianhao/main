@@ -96,7 +96,7 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        JelphaBot addressBook = new JelphaBotBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        JelphaBot addressBook = new JelphaBotBuilder().withTask(ALICE).withTask(BENSON).build();
         JelphaBot differentJelphaBot = new JelphaBot();
         UserPrefs userPrefs = new UserPrefs();
 

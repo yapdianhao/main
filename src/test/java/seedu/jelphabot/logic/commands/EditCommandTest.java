@@ -3,10 +3,10 @@ package seedu.jelphabot.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.DESC_AMY;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.DESC_BOB;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.DESC_ASSIGNMENT;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.DESC_TUTORIAL;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_DESCRIPTION_TUTORIAL;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_GRADED;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.showPersonAtIndex;
@@ -55,10 +55,10 @@ public class EditCommandTest {
         Task lastTask = model.getFilteredTaskList().get(indexLastPerson.getZeroBased());
 
         TaskBuilder personInList = new TaskBuilder(lastTask);
-        Task editedTask = personInList.withDescription(VALID_NAME_BOB).withTags(VALID_TAG_HUSBAND).build();
+        Task editedTask = personInList.withDescription(VALID_DESCRIPTION_TUTORIAL).withTags(VALID_TAG_GRADED).build();
 
-        EditCommand.EditTaskDescriptor descriptor = new EditPersonDescriptorBuilder().withDescription(VALID_NAME_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+        EditCommand.EditTaskDescriptor descriptor = new EditPersonDescriptorBuilder().withDescription(VALID_DESCRIPTION_TUTORIAL)
+                .withTags(VALID_TAG_GRADED).build();
         EditCommand editCommand = new EditCommand(indexLastPerson, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, editedTask);
@@ -86,9 +86,9 @@ public class EditCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         Task taskInFilteredList = model.getFilteredTaskList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Task editedTask = new TaskBuilder(taskInFilteredList).withDescription(VALID_NAME_BOB).build();
+        Task editedTask = new TaskBuilder(taskInFilteredList).withDescription(VALID_DESCRIPTION_TUTORIAL).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
-                new EditPersonDescriptorBuilder().withDescription(VALID_NAME_BOB).build());
+                new EditPersonDescriptorBuilder().withDescription(VALID_DESCRIPTION_TUTORIAL).build());
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, editedTask);
 
@@ -122,7 +122,7 @@ public class EditCommandTest {
     @Test
     public void execute_invalidPersonIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredTaskList().size() + 1);
-        EditTaskDescriptor descriptor = new EditPersonDescriptorBuilder().withDescription(VALID_NAME_BOB).build();
+        EditTaskDescriptor descriptor = new EditPersonDescriptorBuilder().withDescription(VALID_DESCRIPTION_TUTORIAL).build();
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
@@ -140,17 +140,17 @@ public class EditCommandTest {
         assertTrue(outOfBoundIndex.getZeroBased() < model.getJelphaBot().getTaskList().size());
 
         EditCommand editCommand = new EditCommand(outOfBoundIndex,
-                new EditPersonDescriptorBuilder().withDescription(VALID_NAME_BOB).build());
+                new EditPersonDescriptorBuilder().withDescription(VALID_DESCRIPTION_TUTORIAL).build());
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        final EditCommand standardCommand = new EditCommand(INDEX_FIRST_PERSON, DESC_AMY);
+        final EditCommand standardCommand = new EditCommand(INDEX_FIRST_PERSON, DESC_ASSIGNMENT);
 
         // same values -> returns true
-        EditCommand.EditTaskDescriptor copyDescriptor = new EditTaskDescriptor(DESC_AMY);
+        EditCommand.EditTaskDescriptor copyDescriptor = new EditTaskDescriptor(DESC_ASSIGNMENT);
         EditCommand commandWithSameValues = new EditCommand(INDEX_FIRST_PERSON, copyDescriptor);
         assertEquals(standardCommand, commandWithSameValues);
 
@@ -164,10 +164,10 @@ public class EditCommandTest {
         assertNotEquals(standardCommand, new ClearCommand());
 
         /* different index -> returns false */
-        assertNotEquals(standardCommand, new EditCommand(INDEX_SECOND_PERSON, DESC_AMY));
+        assertNotEquals(standardCommand, new EditCommand(INDEX_SECOND_PERSON, DESC_ASSIGNMENT));
 
         // different descriptor -> returns false
-        assertNotEquals(standardCommand, new EditCommand(INDEX_FIRST_PERSON, DESC_BOB));
+        assertNotEquals(standardCommand, new EditCommand(INDEX_FIRST_PERSON, DESC_TUTORIAL));
     }
 
 }

@@ -6,7 +6,7 @@ import seedu.jelphabot.model.task.Task;
 /**
  * A utility class to help with building Addressbook objects.
  * Example usage: <br>
- *     {@code JelphaBot ab = new JelphaBotBuilder().withPerson("John", "Doe").build();}
+ *     {@code JelphaBot ab = new JelphaBotBuilder().withTask("John", "Doe").build();}
  */
 public class JelphaBotBuilder {
 
@@ -21,9 +21,9 @@ public class JelphaBotBuilder {
     }
 
     /**
-     * Adds a new {@code Person} to the {@code JelphaBot} that we are building.
+     * Adds a new {@code Task} to the {@code JelphaBot} that we are building.
      */
-    public JelphaBotBuilder withPerson(Task task) {
+    public JelphaBotBuilder withTask(Task task) {
         jelphaBot.addTask(task);
         return this;
     }

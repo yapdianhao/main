@@ -4,9 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_MODULE_CODE_BOB;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_MODULE_CODE_TUTORIAL;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_DESCRIPTION_TUTORIAL;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_GRADED;
 import static seedu.jelphabot.testutil.Assert.assertThrows;
 import static seedu.jelphabot.testutil.TypicalTasks.ALICE;
 import static seedu.jelphabot.testutil.TypicalTasks.BOB;
@@ -36,12 +36,12 @@ public class TaskTest {
         assertFalse(ALICE.isSameTask(editedAlice));
 
         // different description -> returns false
-        editedAlice = new TaskBuilder(ALICE).withDescription(VALID_NAME_BOB).build();
+        editedAlice = new TaskBuilder(ALICE).withDescription(VALID_DESCRIPTION_TUTORIAL).build();
         assertFalse(ALICE.isSameTask(editedAlice));
 
         // same name, same phone, different attributes -> returns true
-        editedAlice = new TaskBuilder(ALICE).withModuleCode(VALID_MODULE_CODE_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+        editedAlice = new TaskBuilder(ALICE).withModuleCode(VALID_MODULE_CODE_TUTORIAL)
+                .withTags(VALID_TAG_GRADED).build();
         assertTrue(ALICE.isSameTask(editedAlice));
 
         // same name, same module code, different attributes -> returns true
@@ -49,7 +49,7 @@ public class TaskTest {
         assertTrue(ALICE.isSameTask(editedAlice));
 
         // same name, same phone, same module code, different attributes -> returns true
-        editedAlice = new TaskBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
+        editedAlice = new TaskBuilder(ALICE).withTags(VALID_TAG_GRADED).build();
         assertTrue(ALICE.isSameTask(editedAlice));
     }
 
@@ -72,7 +72,7 @@ public class TaskTest {
         assertNotEquals(ALICE, BOB);
 
         // different description -> returns false
-        Task editedAlice = new TaskBuilder(ALICE).withDescription(VALID_NAME_BOB).build();
+        Task editedAlice = new TaskBuilder(ALICE).withDescription(VALID_DESCRIPTION_TUTORIAL).build();
         assertNotEquals(ALICE, editedAlice);
 
         // different phone -> returns false
@@ -80,11 +80,11 @@ public class TaskTest {
         // assertNotEquals(ALICE, editedAlice);
 
         // different module code -> returns false
-        editedAlice = new TaskBuilder(ALICE).withModuleCode(VALID_MODULE_CODE_BOB).build();
+        editedAlice = new TaskBuilder(ALICE).withModuleCode(VALID_MODULE_CODE_TUTORIAL).build();
         assertNotEquals(ALICE, editedAlice);
 
         // different tags -> returns false
-        editedAlice = new TaskBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
+        editedAlice = new TaskBuilder(ALICE).withTags(VALID_TAG_GRADED).build();
         assertNotEquals(ALICE, editedAlice);
     }
 }

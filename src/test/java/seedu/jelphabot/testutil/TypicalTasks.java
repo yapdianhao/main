@@ -1,11 +1,11 @@
 package seedu.jelphabot.testutil;
 
-import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_MODULE_CODE_AMY;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_MODULE_CODE_BOB;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_MODULE_CODE_ASSIGNMENT;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_MODULE_CODE_TUTORIAL;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_DESCRIPTION_ASSIGNMENT;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_DESCRIPTION_TUTORIAL;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_UNGRADED;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_GRADED;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -43,12 +43,12 @@ public class TypicalTasks {
 
     // Manually added - Task's details found in {@code CommandTestUtil}
     public static final Task AMY = new TaskBuilder()
-            .withDescription(VALID_NAME_AMY)
-            .withModuleCode(VALID_MODULE_CODE_AMY)
-            .withTags(VALID_TAG_FRIEND).build();
-    public static final Task BOB = new TaskBuilder().withDescription(VALID_NAME_BOB)
-            .withModuleCode(VALID_MODULE_CODE_BOB)
-            .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
+            .withDescription(VALID_DESCRIPTION_ASSIGNMENT)
+            .withModuleCode(VALID_MODULE_CODE_ASSIGNMENT)
+            .withTags(VALID_TAG_UNGRADED).build();
+    public static final Task BOB = new TaskBuilder().withDescription(VALID_DESCRIPTION_TUTORIAL)
+            .withModuleCode(VALID_MODULE_CODE_TUTORIAL)
+            .withTags(VALID_TAG_GRADED, VALID_TAG_UNGRADED)
             .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER

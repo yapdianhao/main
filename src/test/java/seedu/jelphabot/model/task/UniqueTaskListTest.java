@@ -3,7 +3,7 @@ package seedu.jelphabot.model.task;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_GRADED;
 import static seedu.jelphabot.testutil.Assert.assertThrows;
 import static seedu.jelphabot.testutil.TypicalTasks.ALICE;
 import static seedu.jelphabot.testutil.TypicalTasks.BOB;
@@ -41,7 +41,7 @@ public class UniqueTaskListTest {
     @Test
     public void contains_personWithSameIdentityFieldsInList_returnsTrue() {
         uniqueTaskList.add(ALICE);
-        Task editedAlice = new TaskBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
+        Task editedAlice = new TaskBuilder(ALICE).withTags(VALID_TAG_GRADED)
                 .build();
         assertTrue(uniqueTaskList.contains(editedAlice));
     }
@@ -84,7 +84,7 @@ public class UniqueTaskListTest {
     @Test
     public void setPerson_editedPersonHasSameIdentity_success() {
         uniqueTaskList.add(ALICE);
-        Task editedAlice = new TaskBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
+        Task editedAlice = new TaskBuilder(ALICE).withTags(VALID_TAG_GRADED)
                 .build();
         uniqueTaskList.setTask(ALICE, editedAlice);
         UniqueTaskList expectedUniqueTaskList = new UniqueTaskList();

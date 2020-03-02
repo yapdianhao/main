@@ -17,7 +17,6 @@ import seedu.jelphabot.model.task.Task;
 /**
  * Contains utility methods for populating {@code JelphaBot} with sample data.
  */
-// TODO update with new sample data
 public class SampleDataUtil {
     public static Task[] getSamplePersons() {
         return new Task[] {
