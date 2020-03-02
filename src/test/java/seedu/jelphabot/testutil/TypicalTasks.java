@@ -17,13 +17,13 @@ import seedu.jelphabot.model.task.Task;
 /**
  * A utility class containing a list of {@code Task} objects to be used in tests.
  */
-// TODO rewrite needed
+// TODO rewrite needed, except for MA1101R
 public class TypicalTasks {
 
     public static final Task ALICE = new TaskBuilder().withDescription("Alice Pauline")
             .withTags("friends").build();
-    public static final Task BENSON = new TaskBuilder().withDescription("Benson Meier")
-            .withTags("owesMoney", "friends").build();
+    public static final Task MA1101R = new TaskBuilder().withDescription("assignment")
+            .withTags("maths", "friends").build();
     public static final Task CARL = new TaskBuilder().withDescription("Carl Kurz")
             .withModuleCode("heinz@example.com").build();
     public static final Task DANIEL = new TaskBuilder().withDescription("Daniel Meier")
