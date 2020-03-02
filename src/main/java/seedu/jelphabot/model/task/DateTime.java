@@ -13,11 +13,11 @@ import java.util.List;
  */
 public class DateTime {
 
-    public static final String MESSAGE_CONSTRAINTS = "DateTime should be of the format MMM-d-yyyy."
-            +  "Time should be in the 24 hour format HH mm.";
+    public static final String MESSAGE_CONSTRAINTS = "DateTime should be one of the formats:\n "
+                                                + "MMM-d-yyyy, MMM/d/yyyy HH mm, d/M/y HH mm, dd MM yyyy HH mm"
+                                                + "Time should be in the 24 hour format HH mm.";
     public final String value;
 
-    // TODO: Make UI display uniform date formatting, even with multiple date formats
     private static final List<String> dateFormatStrings = Arrays.asList("MMM-d-yyyy HH mm", "MMM/d/yyyy HH mm", "d/M/y HH mm", "dd MM yyyy HH mm");
 
     /**
@@ -49,13 +49,6 @@ public class DateTime {
                 continue;
             }
         }
-//        sdf.setLenient(false);
-//        try {
-//            sdf.parse(test);
-//        } catch (ParseException e) {
-//            return false;
-//        }
-        //return true;
         return correctFormat;
     }
 
