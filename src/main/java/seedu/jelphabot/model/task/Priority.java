@@ -32,10 +32,9 @@ public enum Priority {
         }
     }
 
-    // TODO: check if javadoc is correct
-    /** Converts input stream to Priority object.
-     *
-     * @param test string to convert.
+    /**
+     * Converts input String to Priority object.
+     * @param test String to convert.
      * @return Priority of the input string.
      */
     public static Priority toPriority(String test) {
