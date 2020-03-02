@@ -18,10 +18,10 @@ import seedu.jelphabot.model.util.SampleDataUtil;
 // TODO rewrite classes referencing TaskBuilder
 public class TaskBuilder {
 
-    public static final String DEFAULT_DESCRIPTION = "Individual Assignment 1";
+    public static final String DEFAULT_DESCRIPTION = "Default Task 1";
     public static final Status DEFAULT_STATUS = Status.INCOMPLETE;
-    public static final String DEFAULT_DATETIME = "Jan-1-2020 22 00";
-    public static final String DEFAULT_MODULE_CODE = "CS2103";
+    public static final String DEFAULT_DATETIME = "Jan-1-2000 00 00";
+    public static final String DEFAULT_MODULE_CODE = "TES1000";
     public static final Priority DEFAULT_PRIORITY = Priority.MEDIUM;
 
     private Description description;
@@ -63,8 +63,8 @@ public class TaskBuilder {
     /**
      * Sets the {@code Status} of the {@code Task} that we are building.
      */
-    public TaskBuilder withStatus(Status status) {
-        this.status = status;
+    public TaskBuilder withStatus(String status) {
+        this.status = Status.toStatus(status);
         return this;
     }
 
@@ -87,8 +87,8 @@ public class TaskBuilder {
     /**
      * Sets the {@code Priority} of the {@code Task} that we are building.
      */
-    public TaskBuilder withPriority(Priority priority) {
-        this.priority = priority;
+    public TaskBuilder withPriority(String priority) {
+        this.priority = Priority.toPriority(priority);
         return this;
     }
 
