@@ -11,7 +11,7 @@ import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_GRADED;
 import org.junit.jupiter.api.Test;
 
 import seedu.jelphabot.logic.commands.EditCommand.EditTaskDescriptor;
-import seedu.jelphabot.testutil.EditPersonDescriptorBuilder;
+import seedu.jelphabot.testutil.EditTaskDescriptorBuilder;
 
 public class EditTaskDescriptorTest {
 
@@ -35,19 +35,19 @@ public class EditTaskDescriptorTest {
 
         // different name -> returns false
         EditTaskDescriptor editedAmy =
-                new EditPersonDescriptorBuilder(DESC_ASSIGNMENT).withDescription(VALID_DESCRIPTION_TUTORIAL).build();
+                new EditTaskDescriptorBuilder(DESC_ASSIGNMENT).withDescription(VALID_DESCRIPTION_TUTORIAL).build();
         assertNotEquals(DESC_ASSIGNMENT, editedAmy);
 
         // different phone -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_ASSIGNMENT).build();
+        editedAmy = new EditTaskDescriptorBuilder(DESC_ASSIGNMENT).build();
         assertNotEquals(DESC_ASSIGNMENT, editedAmy);
 
         // different module code -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_ASSIGNMENT).withModuleCode(VALID_MODULE_CODE_TUTORIAL).build();
+        editedAmy = new EditTaskDescriptorBuilder(DESC_ASSIGNMENT).withModuleCode(VALID_MODULE_CODE_TUTORIAL).build();
         assertNotEquals(DESC_ASSIGNMENT, editedAmy);
 
         // different tags -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_ASSIGNMENT).withTags(VALID_TAG_GRADED).build();
+        editedAmy = new EditTaskDescriptorBuilder(DESC_ASSIGNMENT).withTags(VALID_TAG_GRADED).build();
         assertNotEquals(DESC_ASSIGNMENT, editedAmy);
     }
 }

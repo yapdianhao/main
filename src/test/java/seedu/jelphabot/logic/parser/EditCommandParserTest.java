@@ -29,7 +29,7 @@ import seedu.jelphabot.logic.commands.EditCommand;
 import seedu.jelphabot.logic.commands.EditCommand.EditTaskDescriptor;
 import seedu.jelphabot.model.tag.Tag;
 import seedu.jelphabot.model.task.Description;
-import seedu.jelphabot.testutil.EditPersonDescriptorBuilder;
+import seedu.jelphabot.testutil.EditTaskDescriptorBuilder;
 
 // TODO rewrite in order: Description, Status, DateTime, ModuleCode, Priority, Set<Tag> tags
 public class EditCommandParserTest {
@@ -98,7 +98,7 @@ public class EditCommandParserTest {
                 + TAG_DESC_UNGRADED;
 
         EditCommand.EditTaskDescriptor descriptor =
-            new EditPersonDescriptorBuilder().withDescription(VALID_DESCRIPTION_ASSIGNMENT).withModuleCode(
+            new EditTaskDescriptorBuilder().withDescription(VALID_DESCRIPTION_ASSIGNMENT).withModuleCode(
                 VALID_MODULE_CODE_ASSIGNMENT)
                 .withTags(VALID_TAG_GRADED, VALID_TAG_UNGRADED).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
@@ -112,7 +112,7 @@ public class EditCommandParserTest {
         String userInput = targetIndex.getOneBased() + MODULE_CODE_DESC_ASSIGNMENT;
 
         EditTaskDescriptor descriptor =
-            new EditPersonDescriptorBuilder().withModuleCode(VALID_MODULE_CODE_ASSIGNMENT).build();
+            new EditTaskDescriptorBuilder().withModuleCode(VALID_MODULE_CODE_ASSIGNMENT).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -123,7 +123,7 @@ public class EditCommandParserTest {
         // name
         Index targetIndex = INDEX_THIRD_PERSON;
         String userInput = targetIndex.getOneBased() + DESCRIPTION_DESC_ASSIGNMENT;
-        EditCommand.EditTaskDescriptor descriptor = new EditPersonDescriptorBuilder().withDescription(
+        EditCommand.EditTaskDescriptor descriptor = new EditTaskDescriptorBuilder().withDescription(
             VALID_DESCRIPTION_ASSIGNMENT)
                                                         .build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
@@ -131,19 +131,19 @@ public class EditCommandParserTest {
 
         // phone
         userInput = targetIndex.getOneBased() + "";
-        descriptor = new EditPersonDescriptorBuilder().build();
+        descriptor = new EditTaskDescriptorBuilder().build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // module code
         userInput = targetIndex.getOneBased() + MODULE_CODE_DESC_ASSIGNMENT;
-        descriptor = new EditPersonDescriptorBuilder().withModuleCode(VALID_MODULE_CODE_ASSIGNMENT).build();
+        descriptor = new EditTaskDescriptorBuilder().withModuleCode(VALID_MODULE_CODE_ASSIGNMENT).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // tags
         userInput = targetIndex.getOneBased() + TAG_DESC_UNGRADED;
-        descriptor = new EditPersonDescriptorBuilder().withTags(VALID_TAG_UNGRADED).build();
+        descriptor = new EditTaskDescriptorBuilder().withTags(VALID_TAG_UNGRADED).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -156,7 +156,7 @@ public class EditCommandParserTest {
                 + MODULE_CODE_DESC_ASSIGNMENT + TAG_DESC_UNGRADED
                 + MODULE_CODE_DESC_TUTORIAL + TAG_DESC_GRADED;
 
-        EditTaskDescriptor descriptor = new EditPersonDescriptorBuilder().withModuleCode(VALID_MODULE_CODE_TUTORIAL)
+        EditTaskDescriptor descriptor = new EditTaskDescriptorBuilder().withModuleCode(VALID_MODULE_CODE_TUTORIAL)
                                             .withTags(VALID_TAG_UNGRADED, VALID_TAG_GRADED).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
@@ -168,13 +168,13 @@ public class EditCommandParserTest {
         // no other valid values specified
         Index targetIndex = INDEX_FIRST_PERSON;
         String userInput = targetIndex.getOneBased() + "";
-        EditCommand.EditTaskDescriptor descriptor = new EditPersonDescriptorBuilder().build();
+        EditCommand.EditTaskDescriptor descriptor = new EditTaskDescriptorBuilder().build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // other valid values specified
         userInput = targetIndex.getOneBased() + MODULE_CODE_DESC_TUTORIAL;
-        descriptor = new EditPersonDescriptorBuilder().withModuleCode(VALID_MODULE_CODE_TUTORIAL).build();
+        descriptor = new EditTaskDescriptorBuilder().withModuleCode(VALID_MODULE_CODE_TUTORIAL).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -184,7 +184,7 @@ public class EditCommandParserTest {
         Index targetIndex = INDEX_THIRD_PERSON;
         String userInput = targetIndex.getOneBased() + TAG_EMPTY;
 
-        EditCommand.EditTaskDescriptor descriptor = new EditPersonDescriptorBuilder().withTags().build();
+        EditCommand.EditTaskDescriptor descriptor = new EditTaskDescriptorBuilder().withTags().build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);

@@ -17,7 +17,7 @@ import seedu.jelphabot.model.JelphaBot;
 import seedu.jelphabot.model.Model;
 import seedu.jelphabot.model.task.DescriptionContainsKeywordsPredicate;
 import seedu.jelphabot.model.task.Task;
-import seedu.jelphabot.testutil.EditPersonDescriptorBuilder;
+import seedu.jelphabot.testutil.EditTaskDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -63,19 +63,19 @@ public class CommandTestUtil {
     public static final EditCommand.EditTaskDescriptor DESC_TUTORIAL;
 
     static {
-        DESC_ASSIGNMENT = new EditPersonDescriptorBuilder()
+        DESC_ASSIGNMENT = new EditTaskDescriptorBuilder()
                 .withDescription(VALID_DESCRIPTION_ASSIGNMENT)
-                // .withStatus(VALID_STATUS_ASSIGNMENT)
-                // .withDateTime(VALID_DATETIME_ASSIGNMENT)
-                // .withModuleCode(VALID_MODULE_CODE_ASSIGNMENT)
-                // .withPriority(VALID_PRIORITY_ASSIGNMENT)
+                .withStatus(VALID_STATUS_ASSIGNMENT)
+                .withDateTime(VALID_DATETIME_ASSIGNMENT)
+                .withModuleCode(VALID_MODULE_CODE_ASSIGNMENT)
+                .withPriority(VALID_PRIORITY_ASSIGNMENT)
                 .withTags(VALID_TAG_UNGRADED).build();
-        DESC_TUTORIAL = new EditPersonDescriptorBuilder()
+        DESC_TUTORIAL = new EditTaskDescriptorBuilder()
                 .withDescription(VALID_DESCRIPTION_TUTORIAL)
-                // .withStatus(VALID_STATUS_TUTORIAL)
-                // .withDateTime(VALID_DATETIME_TUTORIAL)
-                // .withModuleCode(VALID_MODULE_CODE_TUTORIAL)
-                // .withPriority(VALID_PRIORITY_TUTORIAL)
+                .withStatus(VALID_STATUS_TUTORIAL)
+                .withDateTime(VALID_DATETIME_TUTORIAL)
+                .withModuleCode(VALID_MODULE_CODE_TUTORIAL)
+                .withPriority(VALID_PRIORITY_TUTORIAL)
                 .withTags(VALID_TAG_GRADED, VALID_TAG_UNGRADED).build();
     }
 
