@@ -3,9 +3,12 @@ package seedu.jelphabot.model.task;
 import static java.util.Objects.requireNonNull;
 import static seedu.jelphabot.commons.util.AppUtil.checkArgument;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -17,6 +20,7 @@ public class DateTime {
                                                 + "MMM-d-yyyy, MMM/d/yyyy HH mm, d/M/y HH mm, dd MM yyyy HH mm"
                                                 + "Time should be in the 24 hour format HH mm.";
     public final String value;
+    private final DateFormat format;
 
     private static final List<String> dateFormatStrings = Arrays.asList("MMM-d-yyyy HH mm", "MMM/d/yyyy HH mm", "d/M/y HH mm", "dd MM yyyy HH mm");
 
@@ -29,6 +33,7 @@ public class DateTime {
         requireNonNull(dateTime);
         checkArgument(isValidDateTime(dateTime), MESSAGE_CONSTRAINTS);
         value = dateTime;
+        format = getDateFormat(dateTime);
     }
 
     /**
@@ -42,6 +47,9 @@ public class DateTime {
         // SimpleDateFormat sdf2 = new SimpleDateFormat("dd MM yyyy HH mm");
         boolean correctFormat = false;
         for (String formatString : dateFormatStrings) {
+            if (correctFormat) {
+                break;
+            }
             try {
                 new SimpleDateFormat(formatString).parse(test);
                 correctFormat = true;
@@ -50,6 +58,28 @@ public class DateTime {
             }
         }
         return correctFormat;
+    }
+
+    private DateFormat getDateFormat(String dateTimeString) {
+        DateFormat currDateFormat = null;
+        ArrayList<DateFormat> dfList = new ArrayList<>();
+        for (String dfString : dateFormatStrings) {
+            dfList.add(new SimpleDateFormat(dfString));
+        }
+
+        for (DateFormat df : dfList) {
+            try {
+                Date date = df.parse(dateTimeString);
+                currDateFormat = df;
+            } catch (ParseException e) {
+                continue;
+            }
+        }
+        return currDateFormat;
+    }
+
+    public DateFormat getFormat() {
+        return format;
     }
 
     @Override
