@@ -17,10 +17,10 @@ import java.util.List;
 public class DateTime {
 
     private static final String STANDARD_FORMAT = "MMM-d-yyyy HH mm";
-    private static final String DISPLAY_FORMAT = "MMM-d-yyyy HH mm";
-    public static final String MESSAGE_CONSTRAINTS = "Date should be of the format MMM-d-yyyy. "
-                                                         + "Time should be in the 24 hour format HH mm.";
-    public final String value;
+    private static final String DISPLAY_FORMAT = "d-MMM-yyyy HH:mm";
+    public static final String MESSAGE_CONSTRAINTS = "Date should be of the format " + STANDARD_FORMAT
+                                                         + ". Time should be in the 24 hour format HH mm.";
+    private final String value;
     private final DateFormat format;
 
     private static final List<String> dateFormatStrings = Arrays.asList("MMM-d-yyyy HH mm", "MMM/d/yyyy HH mm", "d/M/y HH mm", "dd MM yyyy HH mm");
@@ -33,7 +33,8 @@ public class DateTime {
         requireNonNull(dateTime);
         checkArgument(isValidDateTime(dateTime), MESSAGE_CONSTRAINTS);
         format = getDateFormat(dateTime);
-        value = convertDateToStandardFormat(dateTime);
+        //value = convertDateToStandardFormat(dateTime);
+        value = dateTime;
 
     }
 
@@ -58,6 +59,12 @@ public class DateTime {
         return correctFormat;
     }
 
+
+
+    public DateFormat getFormat() {
+        return format;
+    }
+
     private DateFormat getDateFormat(String dateTimeString) {
         DateFormat currDateFormat = null;
         ArrayList<DateFormat> dfList = new ArrayList<>();
@@ -76,19 +83,30 @@ public class DateTime {
         return currDateFormat;
     }
 
-    private String convertDateToStandardFormat(String currDate) {
-        String retString = "";
+    private String convertDateToStandardFormat(String dateString) {
+        String standardDateString = "";
         try {
-            Date date = format.parse(currDate);
-            retString = new SimpleDateFormat(STANDARD_FORMAT).format(date);
+            Date date = format.parse(dateString);
+            standardDateString = new SimpleDateFormat(STANDARD_FORMAT).format(date);
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        return retString;
+        return standardDateString;
     }
 
-    public DateFormat getFormat() {
-        return format;
+    private String convertDateToDisplayFormat(String dateString) {
+        String displayString = "";
+        try {
+            Date date = format.parse(dateString);
+            displayString = new SimpleDateFormat(DISPLAY_FORMAT).format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return displayString;
+    }
+
+    public String getValue() {
+        return convertDateToDisplayFormat(value);
     }
 
     @Override
