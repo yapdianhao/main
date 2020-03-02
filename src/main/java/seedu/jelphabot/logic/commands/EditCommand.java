@@ -26,7 +26,6 @@ import seedu.jelphabot.model.task.Task;
 /**
  * Edits the details of an existing task in the address book.
  */
-// TODO go through this manually
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
@@ -35,13 +34,13 @@ public class EditCommand extends Command {
             + "by the index number used in the displayed task list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters:\n" + "INDEX (must be a positive integer) "
-            + "    " + "[" + PREFIX_DESCRIPTION + "DESCRIPTION] "
-            + "    " + "[" + PREFIX_DATETIME + "DATETIME]"
-            + "    " + "[" + PREFIX_MODULE_CODE + "MODULE_CODE] "
-            + "    " + "[" + PREFIX_PRIORITY + "PRIORITY (-1, 0, or 1)] "
+            + "    " + "[" + PREFIX_DESCRIPTION + "DESCRIPTION]\n"
+            + "    " + "[" + PREFIX_DATETIME + "DATETIME]\n"
+            + "    " + "[" + PREFIX_MODULE_CODE + "MODULE_CODE]\n"
+            + "    " + "[" + PREFIX_PRIORITY + "PRIORITY (-1, 0, or 1)]\n"
             + "    " + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 " + PREFIX_MODULE_CODE + "CS2105" + PREFIX_DATETIME + "Jan-1-2020 20 20"
-            + PREFIX_TAG + "yo";
+            + PREFIX_TAG + "Ungraded";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
