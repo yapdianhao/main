@@ -16,6 +16,8 @@ import java.util.List;
  */
 public class DateTime {
 
+    private static final String STANDARD_FORMAT = "MMM-d-yyyy HH mm";
+    private static final String DISPLAY_FORMAT = "MMM-d-yyyy HH mm";
     public static final String MESSAGE_CONSTRAINTS = "Date should be of the format MMM-d-yyyy. "
                                                          + "Time should be in the 24 hour format HH mm.";
     public final String value;
@@ -78,7 +80,7 @@ public class DateTime {
         String retString = "";
         try {
             Date date = format.parse(currDate);
-            retString = new SimpleDateFormat("MMM-d-yyyy HH mm").format(date);
+            retString = new SimpleDateFormat(STANDARD_FORMAT).format(date);
         } catch (ParseException e) {
             e.printStackTrace();
         }
