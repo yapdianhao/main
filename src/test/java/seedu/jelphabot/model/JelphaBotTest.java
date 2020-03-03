@@ -18,7 +18,7 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.jelphabot.model.task.Task;
-import seedu.jelphabot.model.task.exceptions.DuplicatePersonException;
+import seedu.jelphabot.model.task.exceptions.DuplicateTaskException;
 import seedu.jelphabot.testutil.TaskBuilder;
 
 public class JelphaBotTest {
@@ -43,34 +43,34 @@ public class JelphaBotTest {
     }
 
     @Test
-    public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
+    public void resetData_withDuplicateTasks_throwsDuplicateTaskException() {
         // Two persons with the same identity fields
         Task editedAlice = new TaskBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Task> newTasks = Arrays.asList(ALICE, editedAlice);
         JelphaBotStub newData = new JelphaBotStub(newTasks);
 
-        assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
+        assertThrows(DuplicateTaskException.class, () -> addressBook.resetData(newData));
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
+    public void hasTask_nullTask_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> addressBook.hasTask(null));
     }
 
     @Test
-    public void hasPerson_personNotInJelphaBot_returnsFalse() {
+    public void hasTask_personNotInJelphaBot_returnsFalse() {
         assertFalse(addressBook.hasTask(ALICE));
     }
 
     @Test
-    public void hasPerson_personInJelphaBot_returnsTrue() {
+    public void hasTask_personInJelphaBot_returnsTrue() {
         addressBook.addTask(ALICE);
         assertTrue(addressBook.hasTask(ALICE));
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInJelphaBot_returnsTrue() {
+    public void hasTask_personWithSameIdentityFieldsInJelphaBot_returnsTrue() {
         addressBook.addTask(ALICE);
         Task editedAlice = new TaskBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
                 .build();
@@ -78,7 +78,7 @@ public class JelphaBotTest {
     }
 
     @Test
-    public void getPersonList_modifyList_throwsUnsupportedOperationException() {
+    public void getTaskList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> addressBook.getTaskList().remove(0));
     }
 
