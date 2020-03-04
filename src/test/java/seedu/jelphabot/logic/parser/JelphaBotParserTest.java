@@ -1,24 +1,32 @@
 package seedu.jelphabot.logic.parser;
 
-import org.junit.jupiter.api.Test;
-import seedu.jelphabot.logic.commands.*;
-import seedu.jelphabot.logic.commands.EditCommand.EditTaskDescriptor;
-import seedu.jelphabot.logic.parser.exceptions.ParseException;
-import seedu.jelphabot.model.task.DescriptionContainsKeywordsPredicate;
-import seedu.jelphabot.model.task.Task;
-import seedu.jelphabot.testutil.EditTaskDescriptorBuilder;
-import seedu.jelphabot.testutil.TaskBuilder;
-import seedu.jelphabot.testutil.TaskUtil;
-
-import java.util.Arrays;
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.jelphabot.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.jelphabot.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.jelphabot.testutil.Assert.assertThrows;
 import static seedu.jelphabot.testutil.TypicalIndexes.INDEX_FIRST_TASK;
+
+import java.util.Arrays;
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.jelphabot.logic.commands.AddCommand;
+import seedu.jelphabot.logic.commands.ClearCommand;
+import seedu.jelphabot.logic.commands.DeleteCommand;
+import seedu.jelphabot.logic.commands.EditCommand;
+import seedu.jelphabot.logic.commands.EditCommand.EditTaskDescriptor;
+import seedu.jelphabot.logic.commands.ExitCommand;
+import seedu.jelphabot.logic.commands.FindCommand;
+import seedu.jelphabot.logic.commands.HelpCommand;
+import seedu.jelphabot.logic.commands.ListCommand;
+import seedu.jelphabot.logic.parser.exceptions.ParseException;
+import seedu.jelphabot.model.task.DescriptionContainsKeywordsPredicate;
+import seedu.jelphabot.model.task.Task;
+import seedu.jelphabot.testutil.EditTaskDescriptorBuilder;
+import seedu.jelphabot.testutil.TaskBuilder;
+import seedu.jelphabot.testutil.TaskUtil;
 
 public class JelphaBotParserTest {
 

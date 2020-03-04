@@ -1,7 +1,11 @@
 package seedu.jelphabot.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.jelphabot.logic.parser.CliSyntax.*;
+import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_DATETIME;
+import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
+import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_PRIORITY;
+import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.jelphabot.model.Model.PREDICATE_SHOW_ALL_TASKS;
 
 import java.util.Collections;

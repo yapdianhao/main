@@ -7,7 +7,12 @@ import java.util.stream.Stream;
 import seedu.jelphabot.logic.commands.EditCommand;
 import seedu.jelphabot.logic.commands.EditCommand.EditTaskDescriptor;
 import seedu.jelphabot.model.tag.Tag;
-import seedu.jelphabot.model.task.*;
+import seedu.jelphabot.model.task.DateTime;
+import seedu.jelphabot.model.task.Description;
+import seedu.jelphabot.model.task.ModuleCode;
+import seedu.jelphabot.model.task.Priority;
+import seedu.jelphabot.model.task.Status;
+import seedu.jelphabot.model.task.Task;
 
 /**
  * A utility class to help with building EditTaskDescriptor objects.
@@ -43,19 +48,19 @@ public class EditTaskDescriptorBuilder {
     }
 
     /**
-    * Sets the {@code Status} of the {@code EditTaskDescriptor} that we are building.
-    */
+     * Sets the {@code Status} of the {@code EditTaskDescriptor} that we are building.
+     */
     public EditTaskDescriptorBuilder withStatus(String status) {
-       descriptor.setStatus(Status.toStatus(status));
-       return this;
+        descriptor.setStatus(Status.toStatus(status));
+        return this;
     }
 
     /**
-    * Sets the {@code DateTime} of the {@code EditTaskDescriptor} that we are building.
-    */
+     * Sets the {@code DateTime} of the {@code EditTaskDescriptor} that we are building.
+     */
     public EditTaskDescriptorBuilder withDateTime(String dateTime) {
-       descriptor.setDateTime(new DateTime(dateTime));
-       return this;
+        descriptor.setDateTime(new DateTime(dateTime));
+        return this;
     }
 
     /**

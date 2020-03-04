@@ -1,19 +1,23 @@
 package seedu.jelphabot.model;
 
-import org.junit.jupiter.api.Test;
-import seedu.jelphabot.commons.core.GuiSettings;
-import seedu.jelphabot.model.task.DescriptionContainsKeywordsPredicate;
-import seedu.jelphabot.testutil.JelphaBotBuilder;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.jelphabot.model.Model.PREDICATE_SHOW_ALL_TASKS;
+import static seedu.jelphabot.testutil.Assert.assertThrows;
+import static seedu.jelphabot.testutil.TypicalTasks.ASSIGNMENT;
+import static seedu.jelphabot.testutil.TypicalTasks.BOOK_REPORT;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.jelphabot.model.Model.PREDICATE_SHOW_ALL_TASKS;
-import static seedu.jelphabot.testutil.Assert.assertThrows;
-import static seedu.jelphabot.testutil.TypicalTasks.ASSIGNMENT;
-import static seedu.jelphabot.testutil.TypicalTasks.BOOK_REPORT;
+import org.junit.jupiter.api.Test;
+
+import seedu.jelphabot.commons.core.GuiSettings;
+import seedu.jelphabot.model.task.DescriptionContainsKeywordsPredicate;
+import seedu.jelphabot.testutil.JelphaBotBuilder;
 
 public class ModelManagerTest {
 

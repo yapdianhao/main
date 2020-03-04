@@ -1,18 +1,24 @@
 package seedu.jelphabot.logic.commands;
 
-import org.junit.jupiter.api.Test;
-import seedu.jelphabot.model.Model;
-import seedu.jelphabot.model.ModelManager;
-import seedu.jelphabot.model.UserPrefs;
-import seedu.jelphabot.model.task.DescriptionContainsKeywordsPredicate;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.jelphabot.commons.core.Messages.MESSAGE_TASKS_LISTED_OVERVIEW;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.jelphabot.testutil.TypicalTasks.CLASS;
+import static seedu.jelphabot.testutil.TypicalTasks.ERRAND;
+import static seedu.jelphabot.testutil.TypicalTasks.FINALS;
+import static seedu.jelphabot.testutil.TypicalTasks.getTypicalJelphaBot;
 
 import java.util.Arrays;
 import java.util.Collections;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.jelphabot.commons.core.Messages.MESSAGE_TASKS_LISTED_OVERVIEW;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.jelphabot.testutil.TypicalTasks.*;
+import org.junit.jupiter.api.Test;
+
+import seedu.jelphabot.model.Model;
+import seedu.jelphabot.model.ModelManager;
+import seedu.jelphabot.model.UserPrefs;
+import seedu.jelphabot.model.task.DescriptionContainsKeywordsPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for

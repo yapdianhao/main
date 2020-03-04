@@ -1,19 +1,22 @@
 package seedu.jelphabot.model.task;
 
-import org.junit.jupiter.api.Test;
-import seedu.jelphabot.model.task.exceptions.DuplicateTaskException;
-import seedu.jelphabot.model.task.exceptions.TaskNotFoundException;
-import seedu.jelphabot.testutil.TaskBuilder;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_GRADED;
+import static seedu.jelphabot.testutil.Assert.assertThrows;
+import static seedu.jelphabot.testutil.TypicalTasks.ASSIGNMENT;
+import static seedu.jelphabot.testutil.TypicalTasks.JOB;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_GRADED;
-import static seedu.jelphabot.testutil.Assert.assertThrows;
-import static seedu.jelphabot.testutil.TypicalTasks.ASSIGNMENT;
-import static seedu.jelphabot.testutil.TypicalTasks.JOB;
+import org.junit.jupiter.api.Test;
+
+import seedu.jelphabot.model.task.exceptions.DuplicateTaskException;
+import seedu.jelphabot.model.task.exceptions.TaskNotFoundException;
+import seedu.jelphabot.testutil.TaskBuilder;
 
 public class UniqueTaskListTest {
 

@@ -1,15 +1,15 @@
 package seedu.jelphabot.model.task;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import seedu.jelphabot.model.task.exceptions.DuplicateTaskException;
-import seedu.jelphabot.model.task.exceptions.TaskNotFoundException;
+import static java.util.Objects.requireNonNull;
+import static seedu.jelphabot.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.jelphabot.commons.util.CollectionUtil.requireAllNonNull;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import seedu.jelphabot.model.task.exceptions.DuplicateTaskException;
+import seedu.jelphabot.model.task.exceptions.TaskNotFoundException;
 
 /**
  * A list of tasks that enforces uniqueness between its elements and does not allow nulls.
@@ -17,7 +17,7 @@ import static seedu.jelphabot.commons.util.CollectionUtil.requireAllNonNull;
  * tasks uses Task#isSameTask(Task) for equality so as to ensure that the task being added or updated is
  * unique in terms of identity in the UniqueTaskList. However, the removal of a task uses Task#equals(Object) so
  * as to ensure that the task with exactly the same fields will be removed.
- *
+ * <p>
  * Supports a minimal set of list operations.
  *
  * @see Task#isSameTask(Task)
@@ -26,7 +26,7 @@ public class UniqueTaskList implements Iterable<Task> {
 
     private final ObservableList<Task> internalList = FXCollections.observableArrayList();
     private final ObservableList<Task> internalUnmodifiableList =
-            FXCollections.unmodifiableObservableList(internalList);
+        FXCollections.unmodifiableObservableList(internalList);
 
     /**
      * Returns true if the list contains an equivalent task as the given argument.
@@ -112,8 +112,8 @@ public class UniqueTaskList implements Iterable<Task> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof UniqueTaskList // instanceof handles nulls
-                        && internalList.equals(((UniqueTaskList) other).internalList));
+                   || (other instanceof UniqueTaskList // instanceof handles nulls
+                           && internalList.equals(((UniqueTaskList) other).internalList));
     }
 
     @Override

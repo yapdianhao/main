@@ -1,19 +1,34 @@
 package seedu.jelphabot.logic.parser;
 
+import static seedu.jelphabot.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.DESCRIPTION_DESC_ASSIGNMENT;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.DESCRIPTION_DESC_TUTORIAL;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.INVALID_MODULE_CODE_DESC;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.MODULE_CODE_DESC_ASSIGNMENT;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.MODULE_CODE_DESC_TUTORIAL;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.TAG_DESC_GRADED;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.TAG_DESC_PROJECT;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_DESCRIPTION_ASSIGNMENT;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_MODULE_CODE_ASSIGNMENT;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_GRADED;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_PROJECT;
+import static seedu.jelphabot.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.jelphabot.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.jelphabot.testutil.TypicalTasks.JOB;
+import static seedu.jelphabot.testutil.TypicalTasks.LAB;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.jelphabot.logic.commands.AddCommand;
 import seedu.jelphabot.model.tag.Tag;
 import seedu.jelphabot.model.task.Description;
 import seedu.jelphabot.model.task.ModuleCode;
 import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.testutil.TaskBuilder;
-
-import static seedu.jelphabot.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.*;
-import static seedu.jelphabot.logic.parser.CommandParserTestUtil.assertParseFailure;
-import static seedu.jelphabot.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.jelphabot.testutil.TypicalTasks.JOB;
-import static seedu.jelphabot.testutil.TypicalTasks.LAB;
 
 // TODO rewrite required to replace missing fields
 public class AddCommandParserTest {

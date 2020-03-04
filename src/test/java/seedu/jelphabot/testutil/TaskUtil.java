@@ -1,13 +1,15 @@
 package seedu.jelphabot.testutil;
 
+import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
+import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_TAG;
+
+import java.util.Set;
+
 import seedu.jelphabot.logic.commands.AddCommand;
 import seedu.jelphabot.logic.commands.EditCommand.EditTaskDescriptor;
 import seedu.jelphabot.model.tag.Tag;
 import seedu.jelphabot.model.task.Task;
-
-import java.util.Set;
-
-import static seedu.jelphabot.logic.parser.CliSyntax.*;
 
 /**
  * A utility class for Person.

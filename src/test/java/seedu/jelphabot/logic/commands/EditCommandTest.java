@@ -1,6 +1,21 @@
 package seedu.jelphabot.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.DESC_ASSIGNMENT;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.DESC_TUTORIAL;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_DESCRIPTION_TUTORIAL;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_GRADED;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.showTaskAtIndex;
+import static seedu.jelphabot.testutil.TypicalIndexes.INDEX_FIRST_TASK;
+import static seedu.jelphabot.testutil.TypicalIndexes.INDEX_SECOND_TASK;
+import static seedu.jelphabot.testutil.TypicalTasks.getTypicalJelphaBot;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.jelphabot.commons.core.Messages;
 import seedu.jelphabot.commons.core.index.Index;
 import seedu.jelphabot.logic.commands.EditCommand.EditTaskDescriptor;
@@ -11,12 +26,6 @@ import seedu.jelphabot.model.UserPrefs;
 import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.testutil.EditTaskDescriptorBuilder;
 import seedu.jelphabot.testutil.TaskBuilder;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.*;
-import static seedu.jelphabot.testutil.TypicalIndexes.INDEX_FIRST_TASK;
-import static seedu.jelphabot.testutil.TypicalIndexes.INDEX_SECOND_TASK;
-import static seedu.jelphabot.testutil.TypicalTasks.getTypicalJelphaBot;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and
@@ -48,7 +57,8 @@ public class EditCommandTest {
         TaskBuilder personInList = new TaskBuilder(lastTask);
         Task editedTask = personInList.withDescription(VALID_DESCRIPTION_TUTORIAL).withTags(VALID_TAG_GRADED).build();
 
-        EditCommand.EditTaskDescriptor descriptor = new EditTaskDescriptorBuilder().withDescription(VALID_DESCRIPTION_TUTORIAL)
+        EditCommand.EditTaskDescriptor descriptor =
+            new EditTaskDescriptorBuilder().withDescription(VALID_DESCRIPTION_TUTORIAL)
                 .withTags(VALID_TAG_GRADED).build();
         EditCommand editCommand = new EditCommand(indexLastPerson, descriptor);
 
@@ -79,7 +89,8 @@ public class EditCommandTest {
         Task taskInFilteredList = model.getFilteredTaskList().get(INDEX_FIRST_TASK.getZeroBased());
         Task editedTask = new TaskBuilder(taskInFilteredList).withDescription(VALID_DESCRIPTION_TUTORIAL).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_TASK,
-                new EditTaskDescriptorBuilder().withDescription(VALID_DESCRIPTION_TUTORIAL).build());
+            new EditTaskDescriptorBuilder().withDescription(VALID_DESCRIPTION_TUTORIAL).build()
+        );
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, editedTask);
 
@@ -105,7 +116,8 @@ public class EditCommandTest {
         // edit person in filtered list into a duplicate in address book
         Task taskInList = model.getJelphaBot().getTaskList().get(INDEX_SECOND_TASK.getZeroBased());
         EditCommand editCommand = new EditCommand(INDEX_FIRST_TASK,
-                new EditTaskDescriptorBuilder(taskInList).build());
+            new EditTaskDescriptorBuilder(taskInList).build()
+        );
 
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_TASK);
     }
@@ -113,7 +125,8 @@ public class EditCommandTest {
     @Test
     public void execute_invalidPersonIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredTaskList().size() + 1);
-        EditTaskDescriptor descriptor = new EditTaskDescriptorBuilder().withDescription(VALID_DESCRIPTION_TUTORIAL).build();
+        EditTaskDescriptor descriptor =
+            new EditTaskDescriptorBuilder().withDescription(VALID_DESCRIPTION_TUTORIAL).build();
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
@@ -131,7 +144,8 @@ public class EditCommandTest {
         assertTrue(outOfBoundIndex.getZeroBased() < model.getJelphaBot().getTaskList().size());
 
         EditCommand editCommand = new EditCommand(outOfBoundIndex,
-                new EditTaskDescriptorBuilder().withDescription(VALID_DESCRIPTION_TUTORIAL).build());
+            new EditTaskDescriptorBuilder().withDescription(VALID_DESCRIPTION_TUTORIAL).build()
+        );
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }

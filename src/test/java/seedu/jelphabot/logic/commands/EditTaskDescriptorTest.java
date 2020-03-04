@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.DESC_ASSIGNMENT;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.DESC_TUTORIAL;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_MODULE_CODE_TUTORIAL;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_DESCRIPTION_TUTORIAL;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_MODULE_CODE_TUTORIAL;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_GRADED;
 
 import org.junit.jupiter.api.Test;

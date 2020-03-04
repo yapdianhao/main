@@ -1,13 +1,18 @@
 package seedu.jelphabot.testutil;
 
-import seedu.jelphabot.model.JelphaBot;
-import seedu.jelphabot.model.task.Task;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_DESCRIPTION_ASSIGNMENT;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_DESCRIPTION_TUTORIAL;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_MODULE_CODE_ASSIGNMENT;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_MODULE_CODE_TUTORIAL;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_GRADED;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_PROJECT;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static seedu.jelphabot.logic.commands.CommandTestUtil.*;
+import seedu.jelphabot.model.JelphaBot;
+import seedu.jelphabot.model.task.Task;
 
 /**
  * A utility class containing a list of {@code Task} objects to be used in tests.

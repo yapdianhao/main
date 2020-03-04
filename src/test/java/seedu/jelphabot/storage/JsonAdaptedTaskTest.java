@@ -1,18 +1,23 @@
 package seedu.jelphabot.storage;
 
-import org.junit.jupiter.api.Tags;
-import org.junit.jupiter.api.Test;
-import seedu.jelphabot.commons.exceptions.IllegalValueException;
-import seedu.jelphabot.model.task.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.jelphabot.storage.JsonAdaptedTask.MISSING_FIELD_MESSAGE_FORMAT;
+import static seedu.jelphabot.testutil.Assert.assertThrows;
+import static seedu.jelphabot.testutil.TypicalTasks.BOOK_REPORT;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.jelphabot.storage.JsonAdaptedTask.MISSING_FIELD_MESSAGE_FORMAT;
-import static seedu.jelphabot.testutil.Assert.assertThrows;
-import static seedu.jelphabot.testutil.TypicalTasks.BOOK_REPORT;
+import org.junit.jupiter.api.Tags;
+import org.junit.jupiter.api.Test;
+
+import seedu.jelphabot.commons.exceptions.IllegalValueException;
+import seedu.jelphabot.model.task.DateTime;
+import seedu.jelphabot.model.task.Description;
+import seedu.jelphabot.model.task.ModuleCode;
+import seedu.jelphabot.model.task.Priority;
+import seedu.jelphabot.model.task.Status;
 
 // TODO add tests for priority fields
 public class JsonAdaptedTaskTest {

@@ -1,22 +1,25 @@
 package seedu.jelphabot.model;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import org.junit.jupiter.api.Test;
-import seedu.jelphabot.model.task.Task;
-import seedu.jelphabot.model.task.exceptions.DuplicateTaskException;
-import seedu.jelphabot.testutil.TaskBuilder;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_GRADED;
+import static seedu.jelphabot.testutil.Assert.assertThrows;
+import static seedu.jelphabot.testutil.TypicalTasks.ASSIGNMENT;
+import static seedu.jelphabot.testutil.TypicalTasks.getTypicalJelphaBot;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_GRADED;
-import static seedu.jelphabot.testutil.Assert.assertThrows;
-import static seedu.jelphabot.testutil.TypicalTasks.ASSIGNMENT;
-import static seedu.jelphabot.testutil.TypicalTasks.getTypicalJelphaBot;
+import org.junit.jupiter.api.Test;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import seedu.jelphabot.model.task.Task;
+import seedu.jelphabot.model.task.exceptions.DuplicateTaskException;
+import seedu.jelphabot.testutil.TaskBuilder;
 
 public class JelphaBotTest {
 
