@@ -1,11 +1,11 @@
 package seedu.jelphabot.testutil;
 
-import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_MODULE_CODE_AMY;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_MODULE_CODE_BOB;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_MODULE_CODE_LAB;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_MODULE_CODE_JOB;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_DESC_LAB;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_DESC_JOB;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_PROJECT;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_SCHOOL;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,41 +17,38 @@ import seedu.jelphabot.model.task.Task;
 /**
  * A utility class containing a list of {@code Task} objects to be used in tests.
  */
-// TODO rewrite needed, except for MA1101R
 public class TypicalTasks {
 
-    public static final Task ALICE = new TaskBuilder().withDescription("Alice Pauline")
-            .withTags("friends").build();
-    public static final Task MA1101R = new TaskBuilder().withDescription("assignment")
-            .withTags("maths", "friends").build();
-    public static final Task CARL = new TaskBuilder().withDescription("Carl Kurz")
-            .withModuleCode("heinz@example.com").build();
-    public static final Task DANIEL = new TaskBuilder().withDescription("Daniel Meier")
-            .withModuleCode("cornelia@example.com").withTags("friends").build();
-    public static final Task ELLE = new TaskBuilder().withDescription("Elle Meyer")
-            .withModuleCode("werner@example.com").build();
-    public static final Task FIONA = new TaskBuilder().withDescription("Fiona Kunz")
-            .withModuleCode("lydia@example.com").build();
-    public static final Task GEORGE = new TaskBuilder().withDescription("George Best")
-            .withModuleCode("anna@example.com").build();
+    public static final Task ASSIGNMENT = new TaskBuilder().withDescription("Assignment 1").withModuleCode("MA1101R")
+                                              .withDateTime("Feb-1-2020 11 00").withTags("school").build();
+    public static final Task BOOK_REPORT = new TaskBuilder().withDescription("Book Report 1").withModuleCode("GES1028")
+                                               .withDateTime("Feb-1-2020 11 00").withTags("project", "school").build();
+    public static final Task CLASS = new TaskBuilder().withDescription("Yoga class")
+                                         .withDateTime("Feb-1-2020 11 00").withModuleCode("YG1011").build();
+    public static final Task DATE = new TaskBuilder().withDescription("Daniel Meier").withDateTime("Feb-1-2020 11 00")
+                                        .withModuleCode("DT1101").build();
+    public static final Task ERRAND = new TaskBuilder().withDescription("Milk errand").withModuleCode("MYB1101")
+                                          .withDateTime("Feb-1-2020 11 00").build();
+    public static final Task FINALS = new TaskBuilder().withDescription("Open book finals").withModuleCode("CS3230")
+                                          .withTags("school").withDateTime("Feb-1-2020 11 00").build();
+    public static final Task GROUP_WORK = new TaskBuilder().withDescription("Group project").withModuleCode("CS2103T")
+                                              .withDateTime("Feb-1-2020 11 00").withTags("project", "school").build();
 
     // Manually added
-    public static final Task HOON = new TaskBuilder().withDescription("Hoon Meier")
-            .withModuleCode("stefan@example.com").build();
-    public static final Task IDA = new TaskBuilder().withDescription("Ida Mueller")
-            .withModuleCode("hans@example.com").build();
+    public static final Task HOMEWORK = new TaskBuilder().withDescription("Homework 1")
+            .withModuleCode("CS3230").build();
+    public static final Task INTERNSHIP = new TaskBuilder().withDescription("Internship at Google")
+            .withModuleCode("CP3202").build();
 
     // Manually added - Task's details found in {@code CommandTestUtil}
-    public static final Task AMY = new TaskBuilder()
-            .withDescription(VALID_NAME_AMY)
-            .withModuleCode(VALID_MODULE_CODE_AMY)
-            .withTags(VALID_TAG_FRIEND).build();
-    public static final Task BOB = new TaskBuilder().withDescription(VALID_NAME_BOB)
-            .withModuleCode(VALID_MODULE_CODE_BOB)
-            .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
-            .build();
+    public static final Task JOB = new TaskBuilder().withDescription(VALID_DESC_JOB)
+                                       .withModuleCode(VALID_MODULE_CODE_JOB)
+                                       .withTags(VALID_TAG_SCHOOL, VALID_TAG_PROJECT).build();
+    public static final Task LAB = new TaskBuilder().withDescription(VALID_DESC_LAB)
+                                       .withModuleCode(VALID_MODULE_CODE_LAB)
+                                       .withTags(VALID_TAG_PROJECT).build();
 
-    public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
+    public static final String KEYWORD_MATCHING_TUTORIAL = "Tutorial"; // A keyword that matches TUTORIAL
 
     private TypicalTasks() {} // prevents instantiation
 
@@ -67,6 +64,6 @@ public class TypicalTasks {
     }
 
     public static List<Task> getTypicalTasks() {
-        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+        return new ArrayList<>(Arrays.asList(ASSIGNMENT, BOOK_REPORT, CLASS, DATE, ERRAND, FINALS, GROUP_WORK));
     }
 }
