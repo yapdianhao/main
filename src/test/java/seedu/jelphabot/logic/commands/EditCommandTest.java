@@ -3,15 +3,15 @@ package seedu.jelphabot.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.DESC_AMY;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.DESC_BOB;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.DESC_LAB;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.DESC_JOB;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_DESC_JOB;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_SCHOOL;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.jelphabot.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.jelphabot.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.showTaskAtIndex;
+import static seedu.jelphabot.testutil.TypicalIndexes.INDEX_FIRST_TASK;
+import static seedu.jelphabot.testutil.TypicalIndexes.INDEX_SECOND_TASK;
 import static seedu.jelphabot.testutil.TypicalTasks.getTypicalJelphaBot;
 
 import org.junit.jupiter.api.Test;
@@ -39,7 +39,7 @@ public class EditCommandTest {
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Task editedTask = new TaskBuilder().build();
         EditCommand.EditTaskDescriptor descriptor = new EditPersonDescriptorBuilder(editedTask).build();
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_TASK, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, editedTask);
 
@@ -55,10 +55,10 @@ public class EditCommandTest {
         Task lastTask = model.getFilteredTaskList().get(indexLastPerson.getZeroBased());
 
         TaskBuilder personInList = new TaskBuilder(lastTask);
-        Task editedTask = personInList.withDescription(VALID_NAME_BOB).withTags(VALID_TAG_HUSBAND).build();
+        Task editedTask = personInList.withDescription(VALID_DESC_JOB).withTags(VALID_TAG_SCHOOL).build();
 
-        EditCommand.EditTaskDescriptor descriptor = new EditPersonDescriptorBuilder().withDescription(VALID_NAME_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+        EditCommand.EditTaskDescriptor descriptor = new EditPersonDescriptorBuilder().withDescription(VALID_DESC_JOB)
+                .withTags(VALID_TAG_SCHOOL).build();
         EditCommand editCommand = new EditCommand(indexLastPerson, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, editedTask);
@@ -71,8 +71,8 @@ public class EditCommandTest {
 
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, new EditTaskDescriptor());
-        Task editedTask = model.getFilteredTaskList().get(INDEX_FIRST_PERSON.getZeroBased());
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_TASK, new EditTaskDescriptor());
+        Task editedTask = model.getFilteredTaskList().get(INDEX_FIRST_TASK.getZeroBased());
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, editedTask);
 
@@ -83,12 +83,12 @@ public class EditCommandTest {
 
     @Test
     public void execute_filteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showTaskAtIndex(model, INDEX_FIRST_TASK);
 
-        Task taskInFilteredList = model.getFilteredTaskList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Task editedTask = new TaskBuilder(taskInFilteredList).withDescription(VALID_NAME_BOB).build();
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
-                new EditPersonDescriptorBuilder().withDescription(VALID_NAME_BOB).build());
+        Task taskInFilteredList = model.getFilteredTaskList().get(INDEX_FIRST_TASK.getZeroBased());
+        Task editedTask = new TaskBuilder(taskInFilteredList).withDescription(VALID_DESC_JOB).build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_TASK,
+                new EditPersonDescriptorBuilder().withDescription(VALID_DESC_JOB).build());
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, editedTask);
 
@@ -100,20 +100,20 @@ public class EditCommandTest {
 
     @Test
     public void execute_duplicatePersonUnfilteredList_failure() {
-        Task firstTask = model.getFilteredTaskList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Task firstTask = model.getFilteredTaskList().get(INDEX_FIRST_TASK.getZeroBased());
         EditTaskDescriptor descriptor = new EditPersonDescriptorBuilder(firstTask).build();
-        EditCommand editCommand = new EditCommand(INDEX_SECOND_PERSON, descriptor);
+        EditCommand editCommand = new EditCommand(INDEX_SECOND_TASK, descriptor);
 
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_TASK);
     }
 
     @Test
     public void execute_duplicatePersonFilteredList_failure() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showTaskAtIndex(model, INDEX_FIRST_TASK);
 
         // edit person in filtered list into a duplicate in address book
-        Task taskInList = model.getJelphaBot().getTaskList().get(INDEX_SECOND_PERSON.getZeroBased());
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
+        Task taskInList = model.getJelphaBot().getTaskList().get(INDEX_SECOND_TASK.getZeroBased());
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_TASK,
                 new EditPersonDescriptorBuilder(taskInList).build());
 
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_TASK);
@@ -122,7 +122,7 @@ public class EditCommandTest {
     @Test
     public void execute_invalidPersonIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredTaskList().size() + 1);
-        EditTaskDescriptor descriptor = new EditPersonDescriptorBuilder().withDescription(VALID_NAME_BOB).build();
+        EditTaskDescriptor descriptor = new EditPersonDescriptorBuilder().withDescription(VALID_DESC_JOB).build();
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
@@ -134,24 +134,24 @@ public class EditCommandTest {
      */
     @Test
     public void execute_invalidPersonIndexFilteredList_failure() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-        Index outOfBoundIndex = INDEX_SECOND_PERSON;
+        showTaskAtIndex(model, INDEX_FIRST_TASK);
+        Index outOfBoundIndex = INDEX_SECOND_TASK;
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getJelphaBot().getTaskList().size());
 
         EditCommand editCommand = new EditCommand(outOfBoundIndex,
-                new EditPersonDescriptorBuilder().withDescription(VALID_NAME_BOB).build());
+                new EditPersonDescriptorBuilder().withDescription(VALID_DESC_JOB).build());
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        final EditCommand standardCommand = new EditCommand(INDEX_FIRST_PERSON, DESC_AMY);
+        final EditCommand standardCommand = new EditCommand(INDEX_FIRST_TASK, DESC_LAB);
 
         // same values -> returns true
-        EditCommand.EditTaskDescriptor copyDescriptor = new EditTaskDescriptor(DESC_AMY);
-        EditCommand commandWithSameValues = new EditCommand(INDEX_FIRST_PERSON, copyDescriptor);
+        EditCommand.EditTaskDescriptor copyDescriptor = new EditTaskDescriptor(DESC_LAB);
+        EditCommand commandWithSameValues = new EditCommand(INDEX_FIRST_TASK, copyDescriptor);
         assertEquals(standardCommand, commandWithSameValues);
 
         // same object -> returns true
@@ -164,10 +164,10 @@ public class EditCommandTest {
         assertNotEquals(standardCommand, new ClearCommand());
 
         /* different index -> returns false */
-        assertNotEquals(standardCommand, new EditCommand(INDEX_SECOND_PERSON, DESC_AMY));
+        assertNotEquals(standardCommand, new EditCommand(INDEX_SECOND_TASK, DESC_LAB));
 
         // different descriptor -> returns false
-        assertNotEquals(standardCommand, new EditCommand(INDEX_FIRST_PERSON, DESC_BOB));
+        assertNotEquals(standardCommand, new EditCommand(INDEX_FIRST_TASK, DESC_JOB));
     }
 
 }

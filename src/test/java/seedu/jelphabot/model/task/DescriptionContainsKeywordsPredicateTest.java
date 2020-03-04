@@ -44,7 +44,7 @@ public class DescriptionContainsKeywordsPredicateTest {
     }
 
     @Test
-    public void test_nameContainsKeywords_returnsTrue() {
+    public void test_descriptionContainsKeywords_returnsTrue() {
         // One keyword
         DescriptionContainsKeywordsPredicate predicate =
                 new DescriptionContainsKeywordsPredicate(Collections.singletonList("Alice"));
@@ -64,7 +64,7 @@ public class DescriptionContainsKeywordsPredicateTest {
     }
 
     @Test
-    public void test_nameDoesNotContainKeywords_returnsFalse() {
+    public void test_descriptionDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
         DescriptionContainsKeywordsPredicate predicate =
                 new DescriptionContainsKeywordsPredicate(Collections.emptyList());

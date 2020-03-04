@@ -23,7 +23,7 @@ public class JelphaBotBuilder {
     /**
      * Adds a new {@code Person} to the {@code JelphaBot} that we are building.
      */
-    public JelphaBotBuilder withPerson(Task task) {
+    public JelphaBotBuilder withTask(Task task) {
         jelphaBot.addTask(task);
         return this;
     }
