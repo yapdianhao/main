@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.jelphabot.model.Model.PREDICATE_SHOW_ALL_TASKS;
 import static seedu.jelphabot.testutil.Assert.assertThrows;
-import static seedu.jelphabot.testutil.TypicalTasks.ASSIGNMENT;
+import static seedu.jelphabot.testutil.TypicalTasks.ASSESSMENT;
 import static seedu.jelphabot.testutil.TypicalTasks.BOOK_REPORT;
 
 import java.nio.file.Path;
@@ -80,13 +80,13 @@ public class ModelManagerTest {
 
     @Test
     public void hasPerson_personNotInJelphaBot_returnsFalse() {
-        assertFalse(modelManager.hasTask(ASSIGNMENT));
+        assertFalse(modelManager.hasTask(ASSESSMENT));
     }
 
     @Test
     public void hasPerson_personInJelphaBot_returnsTrue() {
-        modelManager.addTask(ASSIGNMENT);
-        assertTrue(modelManager.hasTask(ASSIGNMENT));
+        modelManager.addTask(ASSESSMENT);
+        assertTrue(modelManager.hasTask(ASSESSMENT));
     }
 
     @Test
@@ -96,7 +96,7 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        JelphaBot addressBook = new JelphaBotBuilder().withTask(ASSIGNMENT).withTask(BOOK_REPORT).build();
+        JelphaBot addressBook = new JelphaBotBuilder().withTask(ASSESSMENT).withTask(BOOK_REPORT).build();
         JelphaBot differentJelphaBot = new JelphaBot();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -118,7 +118,7 @@ public class ModelManagerTest {
         assertNotEquals(modelManager, new ModelManager(differentJelphaBot, userPrefs));
 
         // different filteredList -> returns false
-        String[] keywords = ASSIGNMENT.getDescription().fullDescription.split("\\s+");
+        String[] keywords = ASSESSMENT.getDescription().fullDescription.split("\\s+");
         modelManager.updateFilteredTaskList(new DescriptionContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertNotEquals(modelManager, new ModelManager(addressBook, userPrefs));
 

@@ -18,8 +18,8 @@ import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_GRADED;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_PROJECT;
 import static seedu.jelphabot.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.jelphabot.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.jelphabot.testutil.TypicalTasks.JOB;
-import static seedu.jelphabot.testutil.TypicalTasks.LAB;
+import static seedu.jelphabot.testutil.TypicalTasks.ASSIGNMENT;
+import static seedu.jelphabot.testutil.TypicalTasks.TUTORIAL;
 
 import org.junit.jupiter.api.Test;
 
@@ -36,15 +36,20 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Task expectedTask = new TaskBuilder(JOB).withTags(VALID_TAG_PROJECT).build();
+        Task expectedTask = new TaskBuilder(ASSIGNMENT).withTags(VALID_TAG_PROJECT).build();
 
         // whitespace only preamble
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + DESCRIPTION_DESC_ASSIGNMENT + MODULE_CODE_DESC_ASSIGNMENT
-                                       + TAG_DESC_GRADED, new AddCommand(expectedTask));
+        assertParseSuccess(parser,
+            PREAMBLE_WHITESPACE + DESCRIPTION_DESC_ASSIGNMENT + MODULE_CODE_DESC_ASSIGNMENT + TAG_DESC_GRADED,
+            new AddCommand(expectedTask)
+        );
 
         // multiple names - last name accepted
-        assertParseSuccess(parser, DESCRIPTION_DESC_TUTORIAL + DESCRIPTION_DESC_ASSIGNMENT + MODULE_CODE_DESC_ASSIGNMENT
-                                       + TAG_DESC_GRADED, new AddCommand(expectedTask));
+        assertParseSuccess(
+            parser,
+            DESCRIPTION_DESC_TUTORIAL + DESCRIPTION_DESC_ASSIGNMENT + MODULE_CODE_DESC_ASSIGNMENT + TAG_DESC_GRADED,
+            new AddCommand(expectedTask)
+        );
 
         // multiple phones - last phone accepted
         assertParseSuccess(parser, DESCRIPTION_DESC_ASSIGNMENT + MODULE_CODE_DESC_ASSIGNMENT
@@ -59,7 +64,7 @@ public class AddCommandParserTest {
                                        + TAG_DESC_GRADED, new AddCommand(expectedTask));
 
         // multiple tags - all accepted
-        Task expectedTaskMultipleTags = new TaskBuilder(JOB).withTags(VALID_TAG_PROJECT, VALID_TAG_GRADED)
+        Task expectedTaskMultipleTags = new TaskBuilder(ASSIGNMENT).withTags(VALID_TAG_PROJECT, VALID_TAG_GRADED)
                                             .build();
         assertParseSuccess(parser, DESCRIPTION_DESC_ASSIGNMENT + MODULE_CODE_DESC_ASSIGNMENT
                                        + TAG_DESC_PROJECT + TAG_DESC_GRADED, new AddCommand(expectedTaskMultipleTags));
@@ -68,7 +73,7 @@ public class AddCommandParserTest {
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
-        Task expectedTask = new TaskBuilder(LAB).withTags().build();
+        Task expectedTask = new TaskBuilder(TUTORIAL).withTags().build();
         assertParseSuccess(parser, DESCRIPTION_DESC_TUTORIAL + MODULE_CODE_DESC_TUTORIAL,
             new AddCommand(expectedTask)
         );

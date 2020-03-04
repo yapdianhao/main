@@ -35,7 +35,7 @@ public class CommandTestUtil {
     public static final String VALID_PRIORITY_ASSIGNMENT = "HIGH";
     public static final String VALID_PRIORITY_TUTORIAL = "LOW";
     public static final String VALID_TAG_GRADED = "graded";
-    public static final String VALID_TAG_PROJECT = "ungraded";
+    public static final String VALID_TAG_PROJECT = "project";
 
     public static final String DESCRIPTION_DESC_ASSIGNMENT = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_ASSIGNMENT;
     public static final String DESCRIPTION_DESC_TUTORIAL = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_TUTORIAL;
@@ -64,14 +64,14 @@ public class CommandTestUtil {
                 .withDateTime(VALID_DATETIME_ASSIGNMENT)
                 .withModuleCode(VALID_MODULE_CODE_ASSIGNMENT)
                 .withPriority(VALID_PRIORITY_ASSIGNMENT)
-                .withTags(VALID_TAG_PROJECT).build();
+                .withTags(VALID_TAG_GRADED).build();
         DESC_TUTORIAL = new EditTaskDescriptorBuilder()
                 .withDescription(VALID_DESCRIPTION_TUTORIAL)
                 .withStatus(VALID_STATUS_TUTORIAL)
                 .withDateTime(VALID_DATETIME_TUTORIAL)
                 .withModuleCode(VALID_MODULE_CODE_TUTORIAL)
                 .withPriority(VALID_PRIORITY_TUTORIAL)
-                .withTags(VALID_TAG_GRADED, VALID_TAG_PROJECT).build();
+                .withTags(VALID_TAG_PROJECT).build();
     }
 
     /**
