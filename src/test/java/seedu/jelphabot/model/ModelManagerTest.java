@@ -1,23 +1,19 @@
 package seedu.jelphabot.model;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.jelphabot.model.Model.PREDICATE_SHOW_ALL_TASKS;
-import static seedu.jelphabot.testutil.Assert.assertThrows;
-import static seedu.jelphabot.testutil.TypicalTasks.ALICE;
-import static seedu.jelphabot.testutil.TypicalTasks.BENSON;
+import org.junit.jupiter.api.Test;
+import seedu.jelphabot.commons.core.GuiSettings;
+import seedu.jelphabot.model.task.DescriptionContainsKeywordsPredicate;
+import seedu.jelphabot.testutil.JelphaBotBuilder;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 
-import org.junit.jupiter.api.Test;
-
-import seedu.jelphabot.commons.core.GuiSettings;
-import seedu.jelphabot.model.task.DescriptionContainsKeywordsPredicate;
-import seedu.jelphabot.testutil.JelphaBotBuilder;
+import static org.junit.jupiter.api.Assertions.*;
+import static seedu.jelphabot.model.Model.PREDICATE_SHOW_ALL_TASKS;
+import static seedu.jelphabot.testutil.Assert.assertThrows;
+import static seedu.jelphabot.testutil.TypicalTasks.ASSIGNMENT;
+import static seedu.jelphabot.testutil.TypicalTasks.BOOK_REPORT;
 
 public class ModelManagerTest {
 
@@ -80,13 +76,13 @@ public class ModelManagerTest {
 
     @Test
     public void hasPerson_personNotInJelphaBot_returnsFalse() {
-        assertFalse(modelManager.hasTask(ALICE));
+        assertFalse(modelManager.hasTask(ASSIGNMENT));
     }
 
     @Test
     public void hasPerson_personInJelphaBot_returnsTrue() {
-        modelManager.addTask(ALICE);
-        assertTrue(modelManager.hasTask(ALICE));
+        modelManager.addTask(ASSIGNMENT);
+        assertTrue(modelManager.hasTask(ASSIGNMENT));
     }
 
     @Test
@@ -96,7 +92,7 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        JelphaBot addressBook = new JelphaBotBuilder().withTask(ALICE).withTask(BENSON).build();
+        JelphaBot addressBook = new JelphaBotBuilder().withTask(ASSIGNMENT).withTask(BOOK_REPORT).build();
         JelphaBot differentJelphaBot = new JelphaBot();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -118,7 +114,7 @@ public class ModelManagerTest {
         assertNotEquals(modelManager, new ModelManager(differentJelphaBot, userPrefs));
 
         // different filteredList -> returns false
-        String[] keywords = ALICE.getDescription().fullDescription.split("\\s+");
+        String[] keywords = ASSIGNMENT.getDescription().fullDescription.split("\\s+");
         modelManager.updateFilteredTaskList(new DescriptionContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertNotEquals(modelManager, new ModelManager(addressBook, userPrefs));
 

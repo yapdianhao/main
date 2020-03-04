@@ -1,35 +1,20 @@
 package seedu.jelphabot.logic.parser;
 
-import static seedu.jelphabot.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.INVALID_MODULE_CODE_DESC;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.MODULE_CODE_DESC_ASSIGNMENT;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.MODULE_CODE_DESC_TUTORIAL;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.DESCRIPTION_DESC_ASSIGNMENT;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.TAG_DESC_UNGRADED;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.TAG_DESC_GRADED;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_MODULE_CODE_ASSIGNMENT;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_MODULE_CODE_TUTORIAL;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_DESCRIPTION_ASSIGNMENT;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_UNGRADED;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_GRADED;
-import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.jelphabot.logic.parser.CommandParserTestUtil.assertParseFailure;
-import static seedu.jelphabot.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.jelphabot.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.jelphabot.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.jelphabot.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
-
 import org.junit.jupiter.api.Test;
-
 import seedu.jelphabot.commons.core.index.Index;
 import seedu.jelphabot.logic.commands.EditCommand;
 import seedu.jelphabot.logic.commands.EditCommand.EditTaskDescriptor;
 import seedu.jelphabot.model.tag.Tag;
 import seedu.jelphabot.model.task.Description;
+import seedu.jelphabot.model.task.ModuleCode;
 import seedu.jelphabot.testutil.EditTaskDescriptorBuilder;
+
+import static seedu.jelphabot.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.*;
+import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.jelphabot.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.jelphabot.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.jelphabot.testutil.TypicalIndexes.*;
 
 // TODO rewrite in order: Description, Status, DateTime, ModuleCode, Priority, Set<Tag> tags
 public class EditCommandParserTest {
@@ -44,7 +29,7 @@ public class EditCommandParserTest {
     @Test
     public void parse_missingParts_failure() {
         // no index specified
-        assertParseFailure(parser, VALID_DESCRIPTION_ASSIGNMENT, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, VALID_DESCRIPTION_TUTORIAL, MESSAGE_INVALID_FORMAT);
 
         // no field specified
         assertParseFailure(parser, "1", EditCommand.MESSAGE_NOT_EDITED);
@@ -56,10 +41,10 @@ public class EditCommandParserTest {
     @Test
     public void parse_invalidPreamble_failure() {
         // negative index
-        assertParseFailure(parser, "-5" + DESCRIPTION_DESC_ASSIGNMENT, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "-5" + DESCRIPTION_DESC_TUTORIAL, MESSAGE_INVALID_FORMAT);
 
         // zero index
-        assertParseFailure(parser, "0" + DESCRIPTION_DESC_ASSIGNMENT, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "0" + DESCRIPTION_DESC_TUTORIAL, MESSAGE_INVALID_FORMAT);
 
         // invalid arguments being parsed as preamble
         assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);
@@ -72,35 +57,34 @@ public class EditCommandParserTest {
     public void parse_invalidValue_failure() {
         assertParseFailure(parser, "1" + INVALID_NAME_DESC, Description.MESSAGE_CONSTRAINTS); // invalid name
         assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
-
-        // invalid phone followed by valid module code
+        assertParseFailure(parser, "1" + INVALID_MODULE_CODE_DESC,
+            ModuleCode.MESSAGE_CONSTRAINTS); // invalid module code
 
         // valid phone followed by invalid phone. The test case for invalid phone followed by valid phone
         // is tested at {@code parse_invalidValueFollowedByValidValue_success()}
 
         // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Person} being edited,
         // parsing it together with a valid tag results in error
-        assertParseFailure(parser, "1" + TAG_DESC_UNGRADED + TAG_DESC_GRADED + TAG_EMPTY, Tag.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + TAG_DESC_UNGRADED + TAG_EMPTY + TAG_DESC_GRADED, Tag.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + TAG_EMPTY + TAG_DESC_UNGRADED + TAG_DESC_GRADED, Tag.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + TAG_DESC_GRADED + TAG_DESC_PROJECT + TAG_EMPTY, Tag.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + TAG_DESC_GRADED + TAG_EMPTY + TAG_DESC_PROJECT, Tag.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + TAG_EMPTY + TAG_DESC_GRADED + TAG_DESC_PROJECT, Tag.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
-        assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_MODULE_CODE_DESC + VALID_PHONE_AMY,
+        assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_MODULE_CODE_DESC + INVALID_TAG_DESC,
             Description.MESSAGE_CONSTRAINTS
         );
     }
 
     @Test
     public void parse_allFieldsSpecified_success() {
-        Index targetIndex = INDEX_SECOND_PERSON;
+        Index targetIndex = INDEX_SECOND_TASK;
         String userInput =
-            targetIndex.getOneBased() + TAG_DESC_GRADED + MODULE_CODE_DESC_ASSIGNMENT + DESCRIPTION_DESC_ASSIGNMENT
-                + TAG_DESC_UNGRADED;
+            targetIndex.getOneBased() + TAG_DESC_PROJECT + MODULE_CODE_DESC_TUTORIAL + DESCRIPTION_DESC_TUTORIAL
+                + TAG_DESC_GRADED;
 
         EditCommand.EditTaskDescriptor descriptor =
-            new EditTaskDescriptorBuilder().withDescription(VALID_DESCRIPTION_ASSIGNMENT).withModuleCode(
-                VALID_MODULE_CODE_ASSIGNMENT)
-                .withTags(VALID_TAG_GRADED, VALID_TAG_UNGRADED).build();
+            new EditTaskDescriptorBuilder().withDescription(VALID_DESCRIPTION_TUTORIAL).withModuleCode(VALID_MODULE_CODE_TUTORIAL)
+                .withTags(VALID_TAG_GRADED, VALID_TAG_PROJECT).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -108,11 +92,11 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_someFieldsSpecified_success() {
-        Index targetIndex = INDEX_FIRST_PERSON;
-        String userInput = targetIndex.getOneBased() + MODULE_CODE_DESC_ASSIGNMENT;
+        Index targetIndex = INDEX_FIRST_TASK;
+        String userInput = targetIndex.getOneBased() + MODULE_CODE_DESC_TUTORIAL;
 
         EditTaskDescriptor descriptor =
-            new EditTaskDescriptorBuilder().withModuleCode(VALID_MODULE_CODE_ASSIGNMENT).build();
+            new EditTaskDescriptorBuilder().withModuleCode(VALID_MODULE_CODE_TUTORIAL).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -121,43 +105,36 @@ public class EditCommandParserTest {
     @Test
     public void parse_oneFieldSpecified_success() {
         // name
-        Index targetIndex = INDEX_THIRD_PERSON;
-        String userInput = targetIndex.getOneBased() + DESCRIPTION_DESC_ASSIGNMENT;
-        EditCommand.EditTaskDescriptor descriptor = new EditTaskDescriptorBuilder().withDescription(
-            VALID_DESCRIPTION_ASSIGNMENT)
+        Index targetIndex = INDEX_THIRD_TASK;
+        String userInput = targetIndex.getOneBased() + DESCRIPTION_DESC_TUTORIAL;
+        EditCommand.EditTaskDescriptor descriptor = new EditTaskDescriptorBuilder().withDescription(VALID_DESCRIPTION_TUTORIAL)
                                                         .build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        // phone
-        userInput = targetIndex.getOneBased() + "";
-        descriptor = new EditTaskDescriptorBuilder().build();
-        expectedCommand = new EditCommand(targetIndex, descriptor);
-        assertParseSuccess(parser, userInput, expectedCommand);
-
         // module code
-        userInput = targetIndex.getOneBased() + MODULE_CODE_DESC_ASSIGNMENT;
-        descriptor = new EditTaskDescriptorBuilder().withModuleCode(VALID_MODULE_CODE_ASSIGNMENT).build();
+        userInput = targetIndex.getOneBased() + MODULE_CODE_DESC_TUTORIAL;
+        descriptor = new EditTaskDescriptorBuilder().withModuleCode(VALID_MODULE_CODE_TUTORIAL).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // tags
-        userInput = targetIndex.getOneBased() + TAG_DESC_UNGRADED;
-        descriptor = new EditTaskDescriptorBuilder().withTags(VALID_TAG_UNGRADED).build();
+        userInput = targetIndex.getOneBased() + TAG_DESC_GRADED;
+        descriptor = new EditTaskDescriptorBuilder().withTags(VALID_TAG_PROJECT).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
     @Test
     public void parse_multipleRepeatedFields_acceptsLast() {
-        Index targetIndex = INDEX_FIRST_PERSON;
+        Index targetIndex = INDEX_FIRST_TASK;
         String userInput =
-            targetIndex.getOneBased() + MODULE_CODE_DESC_ASSIGNMENT + TAG_DESC_UNGRADED
-                + MODULE_CODE_DESC_ASSIGNMENT + TAG_DESC_UNGRADED
-                + MODULE_CODE_DESC_TUTORIAL + TAG_DESC_GRADED;
+            targetIndex.getOneBased() + MODULE_CODE_DESC_TUTORIAL + TAG_DESC_GRADED
+                + MODULE_CODE_DESC_TUTORIAL + TAG_DESC_GRADED
+                + MODULE_CODE_DESC_ASSIGNMENT + TAG_DESC_PROJECT;
 
-        EditTaskDescriptor descriptor = new EditTaskDescriptorBuilder().withModuleCode(VALID_MODULE_CODE_TUTORIAL)
-                                            .withTags(VALID_TAG_UNGRADED, VALID_TAG_GRADED).build();
+        EditTaskDescriptor descriptor = new EditTaskDescriptorBuilder().withModuleCode(VALID_MODULE_CODE_ASSIGNMENT)
+                                            .withTags(VALID_TAG_PROJECT, VALID_TAG_GRADED).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -166,22 +143,22 @@ public class EditCommandParserTest {
     @Test
     public void parse_invalidValueFollowedByValidValue_success() {
         // no other valid values specified
-        Index targetIndex = INDEX_FIRST_PERSON;
+        Index targetIndex = INDEX_FIRST_TASK;
         String userInput = targetIndex.getOneBased() + "";
         EditCommand.EditTaskDescriptor descriptor = new EditTaskDescriptorBuilder().build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // other valid values specified
-        userInput = targetIndex.getOneBased() + MODULE_CODE_DESC_TUTORIAL;
-        descriptor = new EditTaskDescriptorBuilder().withModuleCode(VALID_MODULE_CODE_TUTORIAL).build();
+        userInput = targetIndex.getOneBased() + MODULE_CODE_DESC_ASSIGNMENT;
+        descriptor = new EditTaskDescriptorBuilder().withModuleCode(VALID_MODULE_CODE_ASSIGNMENT).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
     @Test
     public void parse_resetTags_success() {
-        Index targetIndex = INDEX_THIRD_PERSON;
+        Index targetIndex = INDEX_THIRD_TASK;
         String userInput = targetIndex.getOneBased() + TAG_EMPTY;
 
         EditCommand.EditTaskDescriptor descriptor = new EditTaskDescriptorBuilder().withTags().build();

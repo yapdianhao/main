@@ -1,47 +1,111 @@
 package seedu.jelphabot.model.task;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.jelphabot.commons.util.AppUtil.checkArgument;
-
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
+
+import static java.util.Objects.requireNonNull;
+import static seedu.jelphabot.commons.util.AppUtil.checkArgument;
 
 /**
  * Class representing the Date and Time of the modelled task.
  */
 public class DateTime {
 
-    public static final String MESSAGE_CONSTRAINTS = "DateTime should be of the format MMM-d-yyyy."
-            +  "Time should be in the 24 hour format HH mm.";
-    public final String value;
+    private static final String STANDARD_FORMAT = "MMM-d-yyyy HH mm";
+    public static final String MESSAGE_CONSTRAINTS = "Date should be of the format " + STANDARD_FORMAT
+                                                         + ". Time should be in the 24 hour format HH mm.";
+    private static final String DISPLAY_FORMAT = "d-MMM-yyyy HH:mm";
+    private static final List<String> dateFormatStrings = Arrays.asList("MMM-d-yyyy HH mm", "MMM/d/yyyy HH mm", "d/M/y HH mm", "d-MMM-yyyy HH mm", "d MMM yyyy HH mmm");
+    private final String value;
+    private final DateFormat format;
 
     /**
      * Constructs an {@code DateTime}.
-     *
      * @param dateTime A valid email address.
      */
     public DateTime(String dateTime) {
         requireNonNull(dateTime);
         checkArgument(isValidDateTime(dateTime), MESSAGE_CONSTRAINTS);
+        format = getDateFormat(dateTime);
+        //value = convertDateToStandardFormat(dateTime);
         value = dateTime;
+
     }
 
     /**
-     * Returns if the given string is a valid datetime.
+     * Returns if the given string is a valid datetime format, specified in the List dateFormatStrings.
      * @param test The date to be checked.
      * @return The boolean representing whether the date provided is valid.
      */
-    // TODO: check multiple date formats
     public static boolean isValidDateTime(String test) {
-        SimpleDateFormat sdf = new SimpleDateFormat("MMM-d-yyyy HH mm");
-        // SimpleDateFormat sdf2 = new SimpleDateFormat("dd MM yyyy HH mm");
-        sdf.setLenient(false);
-        try {
-            sdf.parse(test);
-        } catch (ParseException e) {
-            return false;
+        boolean correctFormat = false;
+        for (String formatString : dateFormatStrings) {
+            if (correctFormat) {
+                break;
+            }
+            try {
+                new SimpleDateFormat(formatString).parse(test);
+                correctFormat = true;
+            } catch (ParseException e) {
+                continue;
+            }
         }
-        return true;
+        return correctFormat;
+    }
+
+
+
+    public DateFormat getFormat() {
+        return format;
+    }
+
+    private DateFormat getDateFormat(String dateTimeString) {
+        DateFormat currDateFormat = null;
+        ArrayList<DateFormat> dfList = new ArrayList<>();
+        for (String dfString : dateFormatStrings) {
+            dfList.add(new SimpleDateFormat(dfString));
+        }
+
+        for (DateFormat df : dfList) {
+            try {
+                Date date = df.parse(dateTimeString);
+                currDateFormat = df;
+            } catch (ParseException e) {
+                continue;
+            }
+        }
+        return currDateFormat;
+    }
+
+    private String convertDateToStandardFormat(String dateString) {
+        String standardDateString = "";
+        try {
+            Date date = format.parse(dateString);
+            standardDateString = new SimpleDateFormat(STANDARD_FORMAT).format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return standardDateString;
+    }
+
+    private String convertDateToDisplayFormat(String dateString) {
+        String displayString = "";
+        try {
+            Date date = format.parse(dateString);
+            displayString = new SimpleDateFormat(DISPLAY_FORMAT).format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return displayString;
+    }
+
+    public String getValue() {
+        return convertDateToDisplayFormat(value);
     }
 
     @Override

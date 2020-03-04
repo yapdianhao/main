@@ -1,18 +1,13 @@
 package seedu.jelphabot.model.util;
 
-import java.util.Arrays;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 import seedu.jelphabot.model.JelphaBot;
 import seedu.jelphabot.model.ReadOnlyJelphaBot;
 import seedu.jelphabot.model.tag.Tag;
-import seedu.jelphabot.model.task.DateTime;
-import seedu.jelphabot.model.task.Description;
-import seedu.jelphabot.model.task.ModuleCode;
-import seedu.jelphabot.model.task.Priority;
-import seedu.jelphabot.model.task.Status;
-import seedu.jelphabot.model.task.Task;
+import seedu.jelphabot.model.task.*;
+
+import java.util.Arrays;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Contains utility methods for populating {@code JelphaBot} with sample data.
@@ -31,7 +26,13 @@ public class SampleDataUtil {
             new Task(new Description("Tutorial 4"), Status.INCOMPLETE, new DateTime("Jan-1-2020 22 00"),
                     new ModuleCode("MA1521"), Priority.LOW, getTagSet("classmates")),
             new Task(new Description("Graded Homework 3"), Status.INCOMPLETE, new DateTime("Jan-1-2020 22 00"),
-                    new ModuleCode("MA1101R"), Priority.HIGH, getTagSet("colleagues"))
+                    new ModuleCode("MA1101R"), Priority.HIGH, getTagSet("colleagues")),
+            new Task(new Description("Lab 1"), Status.INCOMPLETE, new DateTime("Jan/1/2020 22 00"),
+                    new ModuleCode("CN1103"), Priority.HIGH, getTagSet("schoolwork")),
+            new Task(new Description("Assignment 3"), Status.INCOMPLETE, new DateTime("1/1/2020 22 00"),
+                    new ModuleCode("PC1232"), Priority.MEDIUM, getTagSet("schoolwork")),
+            new Task(new Description("Readings"), Status.INCOMPLETE, new DateTime("01 01 2020 22 00"),
+                    new ModuleCode("EC1103"), Priority.MEDIUM, getTagSet("readings"))
         };
     }
 

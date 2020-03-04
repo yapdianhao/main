@@ -1,24 +1,18 @@
 package seedu.jelphabot.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.jelphabot.commons.core.Messages.MESSAGE_TASKS_LISTED_OVERVIEW;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.jelphabot.testutil.TypicalTasks.CARL;
-import static seedu.jelphabot.testutil.TypicalTasks.ELLE;
-import static seedu.jelphabot.testutil.TypicalTasks.FIONA;
-import static seedu.jelphabot.testutil.TypicalTasks.getTypicalJelphaBot;
-
-import java.util.Arrays;
-import java.util.Collections;
-
 import org.junit.jupiter.api.Test;
-
 import seedu.jelphabot.model.Model;
 import seedu.jelphabot.model.ModelManager;
 import seedu.jelphabot.model.UserPrefs;
 import seedu.jelphabot.model.task.DescriptionContainsKeywordsPredicate;
+
+import java.util.Arrays;
+import java.util.Collections;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static seedu.jelphabot.commons.core.Messages.MESSAGE_TASKS_LISTED_OVERVIEW;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.jelphabot.testutil.TypicalTasks.*;
 
 /**
  * Contains integration tests (interaction with the Model) for
@@ -72,7 +66,7 @@ public class FindCommandTest {
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredTaskList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredTaskList());
+        assertEquals(Arrays.asList(CLASS, ERRAND, FINALS), model.getFilteredTaskList());
     }
 
     /**

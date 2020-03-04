@@ -1,17 +1,13 @@
 package seedu.jelphabot.model.task;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Test;
+import seedu.jelphabot.testutil.TaskBuilder;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import org.junit.jupiter.api.Test;
-
-import seedu.jelphabot.testutil.TaskBuilder;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class DescriptionContainsKeywordsPredicateTest {
 
@@ -44,7 +40,7 @@ public class DescriptionContainsKeywordsPredicateTest {
     }
 
     @Test
-    public void test_nameContainsKeywords_returnsTrue() {
+    public void test_descriptionContainsKeywords_returnsTrue() {
         // One keyword
         DescriptionContainsKeywordsPredicate predicate =
                 new DescriptionContainsKeywordsPredicate(Collections.singletonList("Alice"));
@@ -64,7 +60,7 @@ public class DescriptionContainsKeywordsPredicateTest {
     }
 
     @Test
-    public void test_nameDoesNotContainKeywords_returnsFalse() {
+    public void test_descriptionDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
         DescriptionContainsKeywordsPredicate predicate =
                 new DescriptionContainsKeywordsPredicate(Collections.emptyList());

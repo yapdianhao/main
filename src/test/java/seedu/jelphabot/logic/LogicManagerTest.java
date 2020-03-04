@@ -1,20 +1,8 @@
 package seedu.jelphabot.logic;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.jelphabot.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
-import static seedu.jelphabot.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.MODULE_CODE_DESC_ASSIGNMENT;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.DESCRIPTION_DESC_ASSIGNMENT;
-import static seedu.jelphabot.testutil.Assert.assertThrows;
-import static seedu.jelphabot.testutil.TypicalTasks.AMY;
-
-import java.io.IOException;
-import java.nio.file.Path;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
-
 import seedu.jelphabot.logic.commands.AddCommand;
 import seedu.jelphabot.logic.commands.CommandResult;
 import seedu.jelphabot.logic.commands.ListCommand;
@@ -29,6 +17,17 @@ import seedu.jelphabot.storage.JsonJelphaBotStorage;
 import seedu.jelphabot.storage.JsonUserPrefsStorage;
 import seedu.jelphabot.storage.StorageManager;
 import seedu.jelphabot.testutil.TaskBuilder;
+
+import java.io.IOException;
+import java.nio.file.Path;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.jelphabot.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
+import static seedu.jelphabot.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.DESCRIPTION_DESC_TUTORIAL;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.MODULE_CODE_DESC_TUTORIAL;
+import static seedu.jelphabot.testutil.Assert.assertThrows;
+import static seedu.jelphabot.testutil.TypicalTasks.LAB;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy exception");
@@ -76,8 +75,8 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Execute add command
-        String addCommand = AddCommand.COMMAND_WORD + DESCRIPTION_DESC_ASSIGNMENT + MODULE_CODE_DESC_ASSIGNMENT;
-        Task expectedTask = new TaskBuilder(AMY).withTags().build();
+        String addCommand = AddCommand.COMMAND_WORD + DESCRIPTION_DESC_TUTORIAL + MODULE_CODE_DESC_TUTORIAL;
+        Task expectedTask = new TaskBuilder(LAB).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addTask(expectedTask);
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;

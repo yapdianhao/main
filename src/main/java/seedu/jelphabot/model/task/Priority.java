@@ -1,14 +1,14 @@
 package seedu.jelphabot.model.task;
+import static seedu.jelphabot.commons.util.AppUtil.checkArgument;
 
 /**
  * Enum class representative of the different possible priorities that a task can have.
- * By default, the priority of a task is set to LOW.
+ * By default, the priority of a task is set to MEDIUM.
  */
 public enum Priority {
     HIGH,
     MEDIUM,
-    LOW,
-    INVALID;
+    LOW;
 
     public static final String MESSAGE_CONSTRAINTS =
             "Priority should be either -1, 0, or 1, or the string representation HIGH, MEDIUM or LOW";
@@ -32,10 +32,9 @@ public enum Priority {
         }
     }
 
-    // TODO: check if javadoc is correct
-    /** Converts input stream to Priority object.
-     *
-     * @param test string to convert.
+    /**
+     * Converts input String to Priority object.
+     * @param test String to convert.
      * @return Priority of the input string.
      */
     public static Priority toPriority(String test) {
@@ -50,7 +49,8 @@ public enum Priority {
         case "-1":
             return Priority.LOW;
         default:
-            return Priority.INVALID;
+            checkArgument(isValidPriority(test), MESSAGE_CONSTRAINTS);
+            return null;
         }
     }
 }

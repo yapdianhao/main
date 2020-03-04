@@ -1,16 +1,5 @@
 package seedu.jelphabot.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
-import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.jelphabot.testutil.Assert.assertThrows;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import seedu.jelphabot.commons.core.index.Index;
 import seedu.jelphabot.logic.commands.exceptions.CommandException;
 import seedu.jelphabot.model.JelphaBot;
@@ -18,6 +7,15 @@ import seedu.jelphabot.model.Model;
 import seedu.jelphabot.model.task.DescriptionContainsKeywordsPredicate;
 import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.testutil.EditTaskDescriptorBuilder;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.jelphabot.logic.parser.CliSyntax.*;
+import static seedu.jelphabot.testutil.Assert.assertThrows;
 
 /**
  * Contains helper methods for testing commands.
@@ -35,26 +33,21 @@ public class CommandTestUtil {
     public static final String VALID_PRIORITY_ASSIGNMENT = "HIGH";
     public static final String VALID_PRIORITY_TUTORIAL = "LOW";
     public static final String VALID_TAG_GRADED = "graded";
-    public static final String VALID_TAG_UNGRADED = "ungraded";
-
-    // TODO Remove all usages of these fields
-    public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
-    public static final String VALID_PHONE_AMY = "11111111";
-    public static final String VALID_PHONE_BOB = "22222222";
+    public static final String VALID_TAG_PROJECT = "ungraded";
 
     public static final String DESCRIPTION_DESC_ASSIGNMENT = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_ASSIGNMENT;
     public static final String DESCRIPTION_DESC_TUTORIAL = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_TUTORIAL;
     public static final String MODULE_CODE_DESC_ASSIGNMENT = " " + PREFIX_MODULE_CODE + VALID_MODULE_CODE_ASSIGNMENT;
     public static final String MODULE_CODE_DESC_TUTORIAL = " " + PREFIX_MODULE_CODE + VALID_MODULE_CODE_TUTORIAL;
-    public static final String TAG_DESC_UNGRADED = " " + PREFIX_TAG + VALID_TAG_UNGRADED;
     public static final String TAG_DESC_GRADED = " " + PREFIX_TAG + VALID_TAG_GRADED;
+    public static final String TAG_DESC_PROJECT = " " + PREFIX_TAG + VALID_TAG_PROJECT;
 
-    // TODO remove this wrong invalid_desc and add new invalid desc
-    public static final String INVALID_NAME_DESC = " " + PREFIX_DESCRIPTION
-                                                       + "!Indivual &ssignment 1"; // '!&' not allowed in names
-
-    public static final String INVALID_MODULE_CODE_DESC = " " + PREFIX_MODULE_CODE + "3230"; // missing module code
-    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    // '!&' not allowed in description
+    public static final String INVALID_NAME_DESC = " " + PREFIX_DESCRIPTION + "!Indivual &ssignment 1";
+    // prefix requires at least 2 characters
+    public static final String INVALID_MODULE_CODE_DESC = " " + PREFIX_MODULE_CODE + "C2103T";
+    // empty tag not allowed
+    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -69,14 +62,14 @@ public class CommandTestUtil {
                 .withDateTime(VALID_DATETIME_ASSIGNMENT)
                 .withModuleCode(VALID_MODULE_CODE_ASSIGNMENT)
                 .withPriority(VALID_PRIORITY_ASSIGNMENT)
-                .withTags(VALID_TAG_UNGRADED).build();
+                .withTags(VALID_TAG_PROJECT).build();
         DESC_TUTORIAL = new EditTaskDescriptorBuilder()
                 .withDescription(VALID_DESCRIPTION_TUTORIAL)
                 .withStatus(VALID_STATUS_TUTORIAL)
                 .withDateTime(VALID_DATETIME_TUTORIAL)
                 .withModuleCode(VALID_MODULE_CODE_TUTORIAL)
                 .withPriority(VALID_PRIORITY_TUTORIAL)
-                .withTags(VALID_TAG_GRADED, VALID_TAG_UNGRADED).build();
+                .withTags(VALID_TAG_GRADED, VALID_TAG_PROJECT).build();
     }
 
     /**
@@ -111,7 +104,7 @@ public class CommandTestUtil {
      * Executes the given {@code command}, confirms that <br>
      * - a {@code CommandException} is thrown <br>
      * - the CommandException message matches {@code expectedMessage} <br>
-     * - the address book, filtered person list and selected person in
+     * - the address book, filtered task list and selected task in
      * {@code actualModel} remain unchanged
      */
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
@@ -126,10 +119,10 @@ public class CommandTestUtil {
     }
 
     /**
-     * Updates {@code model}'s filtered list to show only the person at the given
+     * Updates {@code model}'s filtered list to show only the task at the given
      * {@code targetIndex} in the {@code model}'s address book.
      */
-    public static void showPersonAtIndex(Model model, Index targetIndex) {
+    public static void showTaskAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredTaskList().size());
 
         Task task = model.getFilteredTaskList().get(targetIndex.getZeroBased());

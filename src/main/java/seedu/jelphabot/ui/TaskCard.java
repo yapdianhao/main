@@ -1,13 +1,13 @@
 package seedu.jelphabot.ui;
 
-import java.util.Comparator;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.jelphabot.model.task.Task;
+
+import java.util.Comparator;
 
 /**
  * An UI component that displays information of a {@code Task}.
@@ -49,7 +49,7 @@ public class TaskCard extends UiPart<Region> {
         description.setText(task.getDescription().fullDescription);
         moduleCode.setText(task.getModuleCode().value);
         status.setText(task.getStatus().name());
-        dateTime.setText(task.getDateTime().value);
+        dateTime.setText(task.getDateTime().getValue());
         task.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
