@@ -1,11 +1,11 @@
 package seedu.jelphabot.testutil;
 
-import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_MODULE_CODE_LAB;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_MODULE_CODE_JOB;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_DESC_LAB;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_DESC_JOB;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_DESCRIPTION_ASSIGNMENT;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_DESCRIPTION_TUTORIAL;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_MODULE_CODE_ASSIGNMENT;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_MODULE_CODE_TUTORIAL;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_GRADED;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_PROJECT;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_SCHOOL;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -41,11 +41,11 @@ public class TypicalTasks {
             .withModuleCode("CP3202").build();
 
     // Manually added - Task's details found in {@code CommandTestUtil}
-    public static final Task JOB = new TaskBuilder().withDescription(VALID_DESC_JOB)
-                                       .withModuleCode(VALID_MODULE_CODE_JOB)
-                                       .withTags(VALID_TAG_SCHOOL, VALID_TAG_PROJECT).build();
-    public static final Task LAB = new TaskBuilder().withDescription(VALID_DESC_LAB)
-                                       .withModuleCode(VALID_MODULE_CODE_LAB)
+    public static final Task JOB = new TaskBuilder().withDescription(VALID_DESCRIPTION_ASSIGNMENT)
+                                       .withModuleCode(VALID_MODULE_CODE_ASSIGNMENT)
+                                       .withTags(VALID_TAG_GRADED, VALID_TAG_PROJECT).build();
+    public static final Task LAB = new TaskBuilder().withDescription(VALID_DESCRIPTION_TUTORIAL)
+                                       .withModuleCode(VALID_MODULE_CODE_TUTORIAL)
                                        .withTags(VALID_TAG_PROJECT).build();
 
     public static final String KEYWORD_MATCHING_TUTORIAL = "Tutorial"; // A keyword that matches TUTORIAL

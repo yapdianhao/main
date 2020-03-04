@@ -51,8 +51,8 @@ public class TaskCard extends UiPart<Region> {
         status.setText(task.getStatus().name());
         dateTime.setText(task.getDateTime().getValue());
         task.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+            .sorted(Comparator.comparing(tag -> tag.tagName))
+            .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
     @Override
@@ -70,6 +70,6 @@ public class TaskCard extends UiPart<Region> {
         // state check
         TaskCard card = (TaskCard) other;
         return id.getText().equals(card.id.getText())
-                && task.equals(card.task);
+                   && task.equals(card.task);
     }
 }
