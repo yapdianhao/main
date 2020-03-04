@@ -27,7 +27,6 @@ public class DateTime {
 
     /**
      * Constructs an {@code DateTime}.
-     *
      * @param dateTime A valid email address.
      */
     public DateTime(String dateTime) {
@@ -36,12 +35,10 @@ public class DateTime {
         format = getDateFormat(dateTime);
         //value = convertDateToStandardFormat(dateTime);
         value = dateTime;
-
     }
 
     /**
      * Returns if the given string is a valid datetime format, specified in the List dateFormatStrings.
-     *
      * @param test The date to be checked.
      * @return The boolean representing whether the date provided is valid.
      */

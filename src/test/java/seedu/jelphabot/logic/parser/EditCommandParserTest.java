@@ -111,8 +111,7 @@ public class EditCommandParserTest {
                 + TAG_DESC_GRADED;
 
         EditCommand.EditTaskDescriptor descriptor =
-            new EditTaskDescriptorBuilder().withDescription(VALID_DESCRIPTION_TUTORIAL)
-                .withModuleCode(VALID_MODULE_CODE_TUTORIAL)
+            new EditTaskDescriptorBuilder().withDescription(VALID_DESCRIPTION_TUTORIAL).withModuleCode(VALID_MODULE_CODE_TUTORIAL)
                 .withTags(VALID_TAG_GRADED, VALID_TAG_PROJECT).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 

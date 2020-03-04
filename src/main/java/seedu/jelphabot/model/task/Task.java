@@ -38,7 +38,6 @@ public class Task {
         this.priority = priority;
     }
 
-
     public Description getDescription() {
         return description;
     }
@@ -68,8 +67,9 @@ public class Task {
     }
 
     /**
-     * Returns true if both persons of the same description have at least one other identity field that is the same.
-     * This defines a weaker notion of equality between two persons.
+     * Returns true if both tasks of the same description also occur at the same dateTime and have the same ModuleCode.
+     * This defines a weaker notion of equality between two tasks.
+     * Mainly used to check for duplicate tasks.
      */
     public boolean isSameTask(Task otherTask) {
         if (otherTask == this) {
@@ -77,14 +77,15 @@ public class Task {
         }
 
         return otherTask != null
-                && otherTask.getDescription().equals(getDescription())
-                && otherTask.getModuleCode().equals(getModuleCode())
-                && otherTask.getDateTime().equals(getDateTime());
+                   && otherTask.getDescription().equals(getDescription())
+                   && otherTask.getDateTime().equals(getDateTime())
+                   && otherTask.getModuleCode().equals(getModuleCode());
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * Returns true if both tasks have the same identity and data fields.
+     * This defines a stronger notion of equality between two tasks.
+     * Used to check for two instances of the same model entity.
      */
     @Override
     public boolean equals(Object other) {
@@ -98,25 +99,32 @@ public class Task {
 
         Task otherTask = (Task) other;
         return otherTask.getDescription().equals(getDescription())
-                && otherTask.getModuleCode().equals(getModuleCode())
-                && otherTask.getTags().equals(getTags());
+                   && otherTask.getStatus().equals(getStatus())
+                   && otherTask.getDateTime().equals(getDateTime())
+                   && otherTask.getModuleCode().equals(getModuleCode())
+                   && otherTask.getPriority().equals(getPriority())
+                   && otherTask.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(description, moduleCode, tags);
+        return Objects.hash(description, dateTime, moduleCode, tags);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getDescription())
-                .append(" ModuleCode: ")
-                .append(getModuleCode())
-                .append(" DateTime: ")
-                .append(getDateTime())
-                .append(" Tags: ");
+            .append(" Status: ")
+            .append(getStatus())
+            .append(" DateTime: ")
+            .append(getDateTime())
+            .append(" ModuleCode: ")
+            .append(getModuleCode())
+            .append(" Priority: ")
+            .append(getPriority())
+            .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
     }
