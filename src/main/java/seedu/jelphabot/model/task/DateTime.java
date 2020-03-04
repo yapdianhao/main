@@ -21,11 +21,11 @@ public class DateTime {
     public static final String MESSAGE_CONSTRAINTS = "Date should be of the format " + STANDARD_FORMAT
                                                          + ". Time should be in the 24 hour format HH mm.";
     private static final List<String> dateFormatStrings = Arrays.asList("MMM-d-yyyy HH mm", "MMM/d/yyyy HH mm",
-        "d/M/y HH mm", "d-MMM-yyyy HH mm", "d MMM yyyy HH mmm");
+        "d/M/y HH mm", "d-MMM-yyyy HH mm", "d MMM yyyy HH mmm"
+    );
 
     private final String value;
     private final DateFormat format;
-
 
     /**
      * Constructs an {@code DateTime}.
@@ -42,6 +42,7 @@ public class DateTime {
 
     /**
      * Returns if the given string is a valid datetime format, specified in the List dateFormatStrings.
+     *
      * @param test The date to be checked.
      * @return The boolean representing whether the date provided is valid.
      */
@@ -117,8 +118,8 @@ public class DateTime {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof DateTime // instanceof handles nulls
-                && value.equals(((DateTime) other).value)); // state check
+                   || (other instanceof DateTime // instanceof handles nulls
+                           && value.equals(((DateTime) other).value)); // state check
     }
 
     @Override
