@@ -3,7 +3,7 @@ package seedu.jelphabot.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.jelphabot.testutil.Assert.assertThrows;
-import static seedu.jelphabot.testutil.TypicalTasks.ASSIGNMENT;
+import static seedu.jelphabot.testutil.TypicalTasks.ASSESSMENT;
 import static seedu.jelphabot.testutil.TypicalTasks.HOMEWORK;
 import static seedu.jelphabot.testutil.TypicalTasks.INTERNSHIP;
 import static seedu.jelphabot.testutil.TypicalTasks.getTypicalJelphaBot;
@@ -73,7 +73,7 @@ public class JsonJelphaBotStorageTest {
 
         // Modify data, overwrite exiting file, and read back
         original.addTask(HOMEWORK);
-        original.removeTask(ASSIGNMENT);
+        original.removeTask(ASSESSMENT);
         jsonJelphaBotStorage.saveJelphaBot(original, filePath);
         readBack = jsonJelphaBotStorage.readJelphaBot(filePath).get();
         assertEquals(original, new JelphaBot(readBack));

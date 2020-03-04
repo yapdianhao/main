@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_GRADED;
 import static seedu.jelphabot.testutil.Assert.assertThrows;
-import static seedu.jelphabot.testutil.TypicalTasks.ASSIGNMENT;
+import static seedu.jelphabot.testutil.TypicalTasks.ASSESSMENT;
 import static seedu.jelphabot.testutil.TypicalTasks.getTypicalJelphaBot;
 
 import java.util.Arrays;
@@ -45,9 +45,9 @@ public class JelphaBotTest {
     @Test
     public void resetData_withDuplicateTasks_throwsDuplicateTaskException() {
         // Two persons with the same identity fields
-        Task editedAlice = new TaskBuilder(ASSIGNMENT).withTags(VALID_TAG_GRADED)
+        Task editedAlice = new TaskBuilder(ASSESSMENT).withTags(VALID_TAG_GRADED)
                 .build();
-        List<Task> newTasks = Arrays.asList(ASSIGNMENT, editedAlice);
+        List<Task> newTasks = Arrays.asList(ASSESSMENT, editedAlice);
         JelphaBotStub newData = new JelphaBotStub(newTasks);
 
         assertThrows(DuplicateTaskException.class, () -> addressBook.resetData(newData));
@@ -60,19 +60,19 @@ public class JelphaBotTest {
 
     @Test
     public void hasTask_taskNotInJelphaBot_returnsFalse() {
-        assertFalse(addressBook.hasTask(ASSIGNMENT));
+        assertFalse(addressBook.hasTask(ASSESSMENT));
     }
 
     @Test
     public void hasTask_tasknJelphaBot_returnsTrue() {
-        addressBook.addTask(ASSIGNMENT);
-        assertTrue(addressBook.hasTask(ASSIGNMENT));
+        addressBook.addTask(ASSESSMENT);
+        assertTrue(addressBook.hasTask(ASSESSMENT));
     }
 
     @Test
     public void hasTask_taskWithSameIdentityFieldsInJelphaBot_returnsTrue() {
-        addressBook.addTask(ASSIGNMENT);
-        Task editedAlice = new TaskBuilder(ASSIGNMENT).withTags(VALID_TAG_GRADED)
+        addressBook.addTask(ASSESSMENT);
+        Task editedAlice = new TaskBuilder(ASSESSMENT).withTags(VALID_TAG_GRADED)
                 .build();
         assertTrue(addressBook.hasTask(editedAlice));
     }
