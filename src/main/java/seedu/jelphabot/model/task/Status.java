@@ -5,5 +5,9 @@ package seedu.jelphabot.model.task;
  */
 public enum Status {
     COMPLETE,
-    INCOMPLETE
+    INCOMPLETE;
+
+    public static Status toStatus(String test) {
+        return Status.valueOf(test.strip().toUpperCase());
+    }
 }

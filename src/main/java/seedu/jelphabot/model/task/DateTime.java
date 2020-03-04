@@ -17,13 +17,13 @@ import java.util.List;
 public class DateTime {
 
     private static final String STANDARD_FORMAT = "MMM-d-yyyy HH mm";
-    private static final String DISPLAY_FORMAT = "d-MMM-yyyy HH:mm";
     public static final String MESSAGE_CONSTRAINTS = "Date should be of the format " + STANDARD_FORMAT
                                                          + ". Time should be in the 24 hour format HH mm.";
+    private static final String DISPLAY_FORMAT = "d-MMM-yyyy HH:mm";
+    private static final List<String> dateFormatStrings =
+        Arrays.asList("MMM-d-yyyy HH mm", "MMM/d/yyyy HH mm", "d/M/y HH mm", "d-MMM-yyyy HH mm", "d MMM yyyy HH mmm");
     private final String value;
     private final DateFormat format;
-
-    private static final List<String> dateFormatStrings = Arrays.asList("MMM-d-yyyy HH mm", "MMM/d/yyyy HH mm", "d/M/y HH mm", "d-MMM-yyyy HH mm", "d MMM yyyy HH mmm");
 
     /**
      * Constructs an {@code DateTime}.
@@ -35,7 +35,6 @@ public class DateTime {
         format = getDateFormat(dateTime);
         //value = convertDateToStandardFormat(dateTime);
         value = dateTime;
-
     }
 
     /**
@@ -52,14 +51,10 @@ public class DateTime {
             try {
                 new SimpleDateFormat(formatString).parse(test);
                 correctFormat = true;
-            } catch (ParseException e) {
-                continue;
-            }
+            } catch (ParseException e) { }
         }
         return correctFormat;
     }
-
-
 
     public DateFormat getFormat() {
         return format;
@@ -71,18 +66,21 @@ public class DateTime {
         for (String dfString : dateFormatStrings) {
             dfList.add(new SimpleDateFormat(dfString));
         }
-
         for (DateFormat df : dfList) {
             try {
                 Date date = df.parse(dateTimeString);
                 currDateFormat = df;
-            } catch (ParseException e) {
-                continue;
-            }
+            } catch (ParseException e) { }
         }
         return currDateFormat;
     }
 
+    /**
+     * Converts dateTime to the standard format (Standard format is the format the string is stored, defined in
+     * #DateTime.STANDARD_FORMAT).
+     * @param dateString the string to be converted.
+     * @return dateString converted to standard format.
+     */
     private String convertDateToStandardFormat(String dateString) {
         String standardDateString = "";
         try {
@@ -94,6 +92,12 @@ public class DateTime {
         return standardDateString;
     }
 
+    /**
+     * Converts stored dateTime value to the display format (Display format is the format the datetime is shown in
+     * the view, defined in #DateTime.DISPLAY_FORMAT).
+     * @param dateString the string to be converted.
+     * @return dateString converted to display format.
+     */
     private String convertDateToDisplayFormat(String dateString) {
         String displayString = "";
         try {
@@ -117,8 +121,8 @@ public class DateTime {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof DateTime // instanceof handles nulls
-                && value.equals(((DateTime) other).value)); // state check
+                   || (other instanceof DateTime // instanceof handles nulls
+                           && value.equals(((DateTime) other).value)); // state check
     }
 
     @Override

@@ -17,44 +17,61 @@ import seedu.jelphabot.model.JelphaBot;
 import seedu.jelphabot.model.Model;
 import seedu.jelphabot.model.task.DescriptionContainsKeywordsPredicate;
 import seedu.jelphabot.model.task.Task;
-import seedu.jelphabot.testutil.EditPersonDescriptorBuilder;
+import seedu.jelphabot.testutil.EditTaskDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
  */
 public class CommandTestUtil {
 
-    public static final String VALID_DESC_JOB = "Work";
-    public static final String VALID_DESC_LAB = "Laboratory";
-    public static final String VALID_MODULE_CODE_JOB = "CP3200";
-    public static final String VALID_MODULE_CODE_LAB = "CS2100";
-    public static final String VALID_TAG_SCHOOL = "school";
-    public static final String VALID_TAG_PROJECT = "project";
+    public static final String VALID_DESCRIPTION_ASSIGNMENT = "Individual Assignment 1";
+    public static final String VALID_DESCRIPTION_TUTORIAL = "Tutorial 3";
+    public static final String VALID_STATUS_ASSIGNMENT = "INCOMPLETE";
+    public static final String VALID_STATUS_TUTORIAL = "COMPLETE";
+    public static final String VALID_DATETIME_ASSIGNMENT = "Jan-12-2020 22 00";
+    public static final String VALID_DATETIME_TUTORIAL = "Mar-2-2019 23 59";
+    public static final String VALID_MODULE_CODE_ASSIGNMENT = "CS2103T";
+    public static final String VALID_MODULE_CODE_TUTORIAL = "CS2101";
+    public static final String VALID_PRIORITY_ASSIGNMENT = "HIGH";
+    public static final String VALID_PRIORITY_TUTORIAL = "LOW";
+    public static final String VALID_TAG_GRADED = "graded";
+    public static final String VALID_TAG_PROJECT = "ungraded";
 
-    public static final String NAME_DESC_JOB = " " + PREFIX_DESCRIPTION + VALID_DESC_JOB;
-    public static final String NAME_DESC_LAB = " " + PREFIX_DESCRIPTION + VALID_DESC_LAB;
-    public static final String MODULE_CODE_DESC_JOB = " " + PREFIX_MODULE_CODE + VALID_MODULE_CODE_JOB;
-    public static final String MODULE_CODE_DESC_LAB = " " + PREFIX_MODULE_CODE + VALID_MODULE_CODE_LAB;
-    public static final String TAG_DESC_SCHOOL = " " + PREFIX_TAG + VALID_TAG_SCHOOL;
+    public static final String DESCRIPTION_DESC_ASSIGNMENT = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_ASSIGNMENT;
+    public static final String DESCRIPTION_DESC_TUTORIAL = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_TUTORIAL;
+    public static final String MODULE_CODE_DESC_ASSIGNMENT = " " + PREFIX_MODULE_CODE + VALID_MODULE_CODE_ASSIGNMENT;
+    public static final String MODULE_CODE_DESC_TUTORIAL = " " + PREFIX_MODULE_CODE + VALID_MODULE_CODE_TUTORIAL;
+    public static final String TAG_DESC_GRADED = " " + PREFIX_TAG + VALID_TAG_GRADED;
     public static final String TAG_DESC_PROJECT = " " + PREFIX_TAG + VALID_TAG_PROJECT;
 
-    // '&' not allowed in description
-    public static final String INVALID_NAME_DESC = " " + PREFIX_DESCRIPTION + "James&";
+    // '!&' not allowed in description
+    public static final String INVALID_NAME_DESC = " " + PREFIX_DESCRIPTION + "!Indivual &ssignment 1";
     // prefix requires at least 2 characters
     public static final String INVALID_MODULE_CODE_DESC = " " + PREFIX_MODULE_CODE + "C2103T";
     // empty tag not allowed
-    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + ""; 
+    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditCommand.EditTaskDescriptor DESC_LAB;
-    public static final EditCommand.EditTaskDescriptor DESC_JOB;
+    public static final EditCommand.EditTaskDescriptor DESC_ASSIGNMENT;
+    public static final EditCommand.EditTaskDescriptor DESC_TUTORIAL;
 
     static {
-        DESC_LAB = new EditPersonDescriptorBuilder().withDescription(VALID_DESC_LAB).withTags(VALID_TAG_PROJECT).build();
-        DESC_JOB = new EditPersonDescriptorBuilder().withDescription(VALID_DESC_JOB)
-                .withTags(VALID_TAG_SCHOOL, VALID_TAG_PROJECT).build();
+        DESC_ASSIGNMENT = new EditTaskDescriptorBuilder()
+                .withDescription(VALID_DESCRIPTION_ASSIGNMENT)
+                .withStatus(VALID_STATUS_ASSIGNMENT)
+                .withDateTime(VALID_DATETIME_ASSIGNMENT)
+                .withModuleCode(VALID_MODULE_CODE_ASSIGNMENT)
+                .withPriority(VALID_PRIORITY_ASSIGNMENT)
+                .withTags(VALID_TAG_PROJECT).build();
+        DESC_TUTORIAL = new EditTaskDescriptorBuilder()
+                .withDescription(VALID_DESCRIPTION_TUTORIAL)
+                .withStatus(VALID_STATUS_TUTORIAL)
+                .withDateTime(VALID_DATETIME_TUTORIAL)
+                .withModuleCode(VALID_MODULE_CODE_TUTORIAL)
+                .withPriority(VALID_PRIORITY_TUTORIAL)
+                .withTags(VALID_TAG_GRADED, VALID_TAG_PROJECT).build();
     }
 
     /**

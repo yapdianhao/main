@@ -3,7 +3,7 @@ package seedu.jelphabot.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_SCHOOL;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_GRADED;
 import static seedu.jelphabot.testutil.Assert.assertThrows;
 import static seedu.jelphabot.testutil.TypicalTasks.ASSIGNMENT;
 import static seedu.jelphabot.testutil.TypicalTasks.getTypicalJelphaBot;
@@ -45,7 +45,7 @@ public class JelphaBotTest {
     @Test
     public void resetData_withDuplicateTasks_throwsDuplicateTaskException() {
         // Two persons with the same identity fields
-        Task editedAlice = new TaskBuilder(ASSIGNMENT).withTags(VALID_TAG_SCHOOL)
+        Task editedAlice = new TaskBuilder(ASSIGNMENT).withTags(VALID_TAG_GRADED)
                 .build();
         List<Task> newTasks = Arrays.asList(ASSIGNMENT, editedAlice);
         JelphaBotStub newData = new JelphaBotStub(newTasks);
@@ -70,9 +70,9 @@ public class JelphaBotTest {
     }
 
     @Test
-    public void hasTask_tasknWithSameIdentityFieldsInJelphaBot_returnsTrue() {
+    public void hasTask_taskWithSameIdentityFieldsInJelphaBot_returnsTrue() {
         addressBook.addTask(ASSIGNMENT);
-        Task editedAlice = new TaskBuilder(ASSIGNMENT).withTags(VALID_TAG_SCHOOL)
+        Task editedAlice = new TaskBuilder(ASSIGNMENT).withTags(VALID_TAG_GRADED)
                 .build();
         assertTrue(addressBook.hasTask(editedAlice));
     }

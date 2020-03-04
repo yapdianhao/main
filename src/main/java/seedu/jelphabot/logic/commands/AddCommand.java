@@ -23,7 +23,7 @@ public class AddCommand extends Command {
             + "    " + PREFIX_DESCRIPTION + "DESCRIPTION\n"
             + "    " + PREFIX_DATETIME + "DATETIME in format MMM-dd-YYYY HH mm\n"
             + "    " + PREFIX_MODULE_CODE + "MODULE_CODE\n"
-            + "    " + PREFIX_PRIORITY + "PRIORITY [-1, 0 or 1]\n"
+            + "    " + "[" + PREFIX_PRIORITY + "PRIORITY (-1, 0 or 1), DEFAULTS TO 1]\n"
             + "    " + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_DESCRIPTION + "Assignment 1 " + PREFIX_DATETIME + "Jan-01-2020 23 59 "
