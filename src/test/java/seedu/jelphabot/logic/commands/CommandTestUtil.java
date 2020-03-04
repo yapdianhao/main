@@ -43,7 +43,7 @@ public class CommandTestUtil {
     // prefix requires at least 2 characters
     public static final String INVALID_MODULE_CODE_DESC = " " + PREFIX_MODULE_CODE + "C2103T";
     // empty tag not allowed
-    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + ""; 
+    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -52,7 +52,8 @@ public class CommandTestUtil {
     public static final EditCommand.EditTaskDescriptor DESC_JOB;
 
     static {
-        DESC_LAB = new EditPersonDescriptorBuilder().withDescription(VALID_DESC_LAB).withTags(VALID_TAG_PROJECT).build();
+        DESC_LAB = new EditPersonDescriptorBuilder().withDescription(VALID_DESC_LAB).withTags(VALID_TAG_PROJECT)
+                       .build();
         DESC_JOB = new EditPersonDescriptorBuilder().withDescription(VALID_DESC_JOB)
                 .withTags(VALID_TAG_SCHOOL, VALID_TAG_PROJECT).build();
     }

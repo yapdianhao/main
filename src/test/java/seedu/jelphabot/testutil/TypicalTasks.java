@@ -1,9 +1,9 @@
 package seedu.jelphabot.testutil;
 
-import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_MODULE_CODE_LAB;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_MODULE_CODE_JOB;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_DESC_LAB;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_DESC_JOB;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_DESC_LAB;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_MODULE_CODE_JOB;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_MODULE_CODE_LAB;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_PROJECT;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_SCHOOL;
 

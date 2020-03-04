@@ -4,22 +4,22 @@ import static seedu.jelphabot.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORM
 import static seedu.jelphabot.logic.commands.CommandTestUtil.INVALID_MODULE_CODE_DESC;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.MODULE_CODE_DESC_LAB;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.MODULE_CODE_DESC_JOB;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.NAME_DESC_LAB;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.MODULE_CODE_DESC_LAB;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.NAME_DESC_JOB;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.NAME_DESC_LAB;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.TAG_DESC_SCHOOL;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.TAG_DESC_PROJECT;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_MODULE_CODE_JOB;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.TAG_DESC_SCHOOL;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_DESC_JOB;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_MODULE_CODE_JOB;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_PROJECT;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_SCHOOL;
 import static seedu.jelphabot.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.jelphabot.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.jelphabot.testutil.TypicalTasks.LAB;
 import static seedu.jelphabot.testutil.TypicalTasks.JOB;
+import static seedu.jelphabot.testutil.TypicalTasks.LAB;
 
 import org.junit.jupiter.api.Test;
 

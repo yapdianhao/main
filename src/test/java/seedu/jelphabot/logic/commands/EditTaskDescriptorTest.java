@@ -2,10 +2,10 @@ package seedu.jelphabot.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.DESC_LAB;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.DESC_JOB;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_MODULE_CODE_JOB;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.DESC_LAB;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_DESC_JOB;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_MODULE_CODE_JOB;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_SCHOOL;
 
 import org.junit.jupiter.api.Test;
