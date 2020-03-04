@@ -51,7 +51,9 @@ public class DateTime {
             try {
                 new SimpleDateFormat(formatString).parse(test);
                 correctFormat = true;
-            } catch (ParseException e) { }
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         }
         return correctFormat;
     }
@@ -70,7 +72,9 @@ public class DateTime {
             try {
                 Date date = df.parse(dateTimeString);
                 currDateFormat = df;
-            } catch (ParseException e) { }
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         }
         return currDateFormat;
     }
