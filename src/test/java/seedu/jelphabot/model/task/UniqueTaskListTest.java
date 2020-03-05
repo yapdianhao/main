@@ -5,8 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_GRADED;
 import static seedu.jelphabot.testutil.Assert.assertThrows;
-import static seedu.jelphabot.testutil.TypicalTasks.ASSESSMENT;
-import static seedu.jelphabot.testutil.TypicalTasks.JOB;
+import static seedu.jelphabot.testutil.TypicalTasks.*;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -95,17 +94,17 @@ public class UniqueTaskListTest {
     @Test
     public void setTask_editedTaskHasDifferentIdentity_success() {
         uniqueTaskList.add(ASSESSMENT);
-        uniqueTaskList.setTask(ASSESSMENT, JOB);
+        uniqueTaskList.setTask(ASSESSMENT, TUTORIAL);
         UniqueTaskList expectedUniqueTaskList = new UniqueTaskList();
-        expectedUniqueTaskList.add(ASSIGNMENT);
+        expectedUniqueTaskList.add(TUTORIAL);
         assertEquals(expectedUniqueTaskList, uniqueTaskList);
     }
 
     @Test
     public void setTask_editedTaskHasNonUniqueIdentity_throwsDuplicateTaskException() {
         uniqueTaskList.add(ASSESSMENT);
-        uniqueTaskList.add(JOB);
-        assertThrows(DuplicateTaskException.class, () -> uniqueTaskList.setTask(ASSESSMENT, JOB));
+        uniqueTaskList.add(TUTORIAL);
+        assertThrows(DuplicateTaskException.class, () -> uniqueTaskList.setTask(ASSESSMENT, TUTORIAL));
     }
 
     @Test
@@ -148,10 +147,10 @@ public class UniqueTaskListTest {
     @Test
     public void setTasks_list_replacesOwnListWithProvidedList() {
         uniqueTaskList.add(ASSESSMENT);
-        List<Task> taskList = Collections.singletonList(JOB);
+        List<Task> taskList = Arrays.asList(TUTORIAL);
         uniqueTaskList.setTasks(taskList);
         UniqueTaskList expectedUniqueTaskList = new UniqueTaskList();
-        expectedUniqueTaskList.add(ASSIGNMENT);
+        expectedUniqueTaskList.add(TUTORIAL);
         assertEquals(expectedUniqueTaskList, uniqueTaskList);
     }
 
