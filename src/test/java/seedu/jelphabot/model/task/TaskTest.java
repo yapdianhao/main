@@ -12,7 +12,7 @@ import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_STATUS_TUTORI
 import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_PROJECT;
 import static seedu.jelphabot.testutil.Assert.assertThrows;
 import static seedu.jelphabot.testutil.TypicalTasks.ASSESSMENT;
-import static seedu.jelphabot.testutil.TypicalTasks.JOB;
+import static seedu.jelphabot.testutil.TypicalTasks.TUTORIAL;
 
 import org.junit.jupiter.api.Test;
 
@@ -71,14 +71,26 @@ public class TaskTest {
         assertNotEquals(5, ASSESSMENT);
 
         // different task -> returns false
-        assertNotEquals(ASSESSMENT, JOB);
+        assertNotEquals(ASSESSMENT, TUTORIAL);
 
         // different description -> returns false
         Task editedAssignment = new TaskBuilder(ASSESSMENT).withDescription(VALID_DESCRIPTION_TUTORIAL).build();
         assertNotEquals(ASSESSMENT, editedAssignment);
 
+        // different dateTime  -> returns false
+        editedAssignment = new TaskBuilder(ASSESSMENT).withDateTime(VALID_DATETIME_TUTORIAL).build();
+        assertNotEquals(ASSESSMENT, editedAssignment);
+
         // different module code -> returns false
         editedAssignment = new TaskBuilder(ASSESSMENT).withModuleCode(VALID_MODULE_CODE_TUTORIAL).build();
+        assertNotEquals(ASSESSMENT, editedAssignment);
+
+        // different priority -> returns false
+        editedAssignment = new TaskBuilder(ASSESSMENT).withPriority(VALID_PRIORITY_TUTORIAL).build();
+        assertNotEquals(ASSESSMENT, editedAssignment);
+
+        // different status -> returns false
+        editedAssignment = new TaskBuilder(ASSESSMENT).withStatus(VALID_STATUS_TUTORIAL).build();
         assertNotEquals(ASSESSMENT, editedAssignment);
 
         // different tags -> returns false
