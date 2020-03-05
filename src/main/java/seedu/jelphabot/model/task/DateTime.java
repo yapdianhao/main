@@ -21,7 +21,7 @@ public class DateTime {
                                                          + ". Time should be in the 24 hour format HH mm.";
     private static final String DISPLAY_FORMAT = "d-MMM-yyyy HH:mm";
     private static final List<String> dateFormatStrings =
-        Arrays.asList("MMM-d-yyyy HH mm", "MMM/d/yyyy HH mm", "d/M/y HH mm", "d-MMM-yyyy HH mm", "d MMM yyyy HH mmm");
+        Arrays.asList("MMM-d-yyyy HH mm", "MMM/d/yyyy HH mm", "d/M/y HH mm", "d-MMM-yyyy HH mm", "d MMM yyyy HH mm");
     private final String value;
     private final DateFormat format;
 
@@ -51,7 +51,9 @@ public class DateTime {
             try {
                 new SimpleDateFormat(formatString).parse(test);
                 correctFormat = true;
-            } catch (ParseException e) { }
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         }
         return correctFormat;
     }
@@ -70,7 +72,9 @@ public class DateTime {
             try {
                 Date date = df.parse(dateTimeString);
                 currDateFormat = df;
-            } catch (ParseException e) { }
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         }
         return currDateFormat;
     }
