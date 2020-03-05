@@ -2,8 +2,10 @@ package seedu.jelphabot.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
+import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.jelphabot.testutil.Assert.assertThrows;
 
@@ -32,22 +34,30 @@ public class CommandTestUtil {
     public static final String VALID_DATETIME_TUTORIAL = "Mar-2-2019 23 59";
     public static final String VALID_MODULE_CODE_ASSIGNMENT = "CS2103T";
     public static final String VALID_MODULE_CODE_TUTORIAL = "CS2101";
-    public static final String VALID_PRIORITY_ASSIGNMENT = "HIGH";
-    public static final String VALID_PRIORITY_TUTORIAL = "LOW";
+    public static final String VALID_PRIORITY_ASSIGNMENT = "1";
+    public static final String VALID_PRIORITY_TUTORIAL = "0";
     public static final String VALID_TAG_GRADED = "graded";
     public static final String VALID_TAG_PROJECT = "project";
 
     public static final String DESCRIPTION_DESC_ASSIGNMENT = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_ASSIGNMENT;
     public static final String DESCRIPTION_DESC_TUTORIAL = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_TUTORIAL;
+    public static final String DATETIME_DESC_ASSIGNMENT = " " + PREFIX_DATETIME + VALID_DATETIME_ASSIGNMENT;
+    public static final String DATETIME_DESC_TUTORIAL = " " + PREFIX_DATETIME + VALID_DATETIME_TUTORIAL;
     public static final String MODULE_CODE_DESC_ASSIGNMENT = " " + PREFIX_MODULE_CODE + VALID_MODULE_CODE_ASSIGNMENT;
     public static final String MODULE_CODE_DESC_TUTORIAL = " " + PREFIX_MODULE_CODE + VALID_MODULE_CODE_TUTORIAL;
+    public static final String PRIORITY_DESC_ASSIGNMENT = " " + PREFIX_PRIORITY + VALID_PRIORITY_ASSIGNMENT;
+    public static final String PRIORITY_DESC_TUTORIAL = " " + PREFIX_PRIORITY + VALID_PRIORITY_TUTORIAL;
     public static final String TAG_DESC_GRADED = " " + PREFIX_TAG + VALID_TAG_GRADED;
     public static final String TAG_DESC_PROJECT = " " + PREFIX_TAG + VALID_TAG_PROJECT;
 
     // '!&' not allowed in description
-    public static final String INVALID_NAME_DESC = " " + PREFIX_DESCRIPTION + "!Indivual &ssignment 1";
+    public static final String INVALID_DESCRIPTION_DESC = " " + PREFIX_DESCRIPTION + "!Indivual &ssignment 1";
+    // Inconsistent format + out of range
+    public static final String INVALID_DATETIME_DESC = " " + PREFIX_DATETIME + "22-10/2020 33 59";
     // prefix requires at least 2 characters
     public static final String INVALID_MODULE_CODE_DESC = " " + PREFIX_MODULE_CODE + "C2103T";
+    // priority only allows 1, 0, -1
+    public static final String INVALID_PRIORITY_DESC = " " + PREFIX_PRIORITY + "-2";
     // empty tag not allowed
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "";
 

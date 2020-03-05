@@ -15,13 +15,13 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 image::yaojiethng.jpg[width="150", align="left"]
 {empty}[http://github.com/yaojiethng[github]] [https://github.com/damithc[github]] [<<johndoe#, portfolio>>]
 
-Role: Cant remove the /r/n how ah
+Role: Project Advisor
 
 '''
 
 === Jel Lim
 image::lejolly.jpg[width="150", align="left"]
-{empty}[http://github.com/lejolly[github]] [<<johndoe#, portfolio>>]
+{empty}[https://github.com/Clouddoggo[github]] [<<johndoe#, portfolio>>]
 
 Role: Team Lead +
 Responsibilities: UI
@@ -47,8 +47,8 @@ Responsibilities: Dev Ops + Threading
 '''
 
 === Yap Dian Hao
-image::yl_coder.jpg[width="150", align="left"]
-{empty}[http://github.com/yl-coder[github]] [<<johndoe#, portfolio>>]
+image::dianhao.png[width="150", align="left"]
+{empty}[http://github.com/yapdianhao[github]] [<<johndoe#, portfolio>>]
 
 Role: Developer +
 Responsibilities: UI

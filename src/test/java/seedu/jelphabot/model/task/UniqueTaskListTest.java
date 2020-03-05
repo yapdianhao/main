@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_GRADED;
 import static seedu.jelphabot.testutil.Assert.assertThrows;
 import static seedu.jelphabot.testutil.TypicalTasks.ASSESSMENT;
-import static seedu.jelphabot.testutil.TypicalTasks.ASSIGNMENT;
+import static seedu.jelphabot.testutil.TypicalTasks.JOB;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -95,7 +95,7 @@ public class UniqueTaskListTest {
     @Test
     public void setTask_editedTaskHasDifferentIdentity_success() {
         uniqueTaskList.add(ASSESSMENT);
-        uniqueTaskList.setTask(ASSESSMENT, ASSIGNMENT);
+        uniqueTaskList.setTask(ASSESSMENT, JOB);
         UniqueTaskList expectedUniqueTaskList = new UniqueTaskList();
         expectedUniqueTaskList.add(ASSIGNMENT);
         assertEquals(expectedUniqueTaskList, uniqueTaskList);
@@ -104,8 +104,8 @@ public class UniqueTaskListTest {
     @Test
     public void setTask_editedTaskHasNonUniqueIdentity_throwsDuplicateTaskException() {
         uniqueTaskList.add(ASSESSMENT);
-        uniqueTaskList.add(ASSIGNMENT);
-        assertThrows(DuplicateTaskException.class, () -> uniqueTaskList.setTask(ASSESSMENT, ASSIGNMENT));
+        uniqueTaskList.add(JOB);
+        assertThrows(DuplicateTaskException.class, () -> uniqueTaskList.setTask(ASSESSMENT, JOB));
     }
 
     @Test
@@ -148,7 +148,7 @@ public class UniqueTaskListTest {
     @Test
     public void setTasks_list_replacesOwnListWithProvidedList() {
         uniqueTaskList.add(ASSESSMENT);
-        List<Task> taskList = Collections.singletonList(ASSIGNMENT);
+        List<Task> taskList = Collections.singletonList(JOB);
         uniqueTaskList.setTasks(taskList);
         UniqueTaskList expectedUniqueTaskList = new UniqueTaskList();
         expectedUniqueTaskList.add(ASSIGNMENT);

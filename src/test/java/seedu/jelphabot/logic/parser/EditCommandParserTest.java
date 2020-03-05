@@ -2,8 +2,8 @@ package seedu.jelphabot.logic.parser;
 
 import static seedu.jelphabot.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.DESCRIPTION_DESC_TUTORIAL;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.INVALID_DESCRIPTION_DESC;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.INVALID_MODULE_CODE_DESC;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.MODULE_CODE_DESC_ASSIGNMENT;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.MODULE_CODE_DESC_TUTORIAL;
@@ -70,7 +70,7 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
-        assertParseFailure(parser, "1" + INVALID_NAME_DESC, Description.MESSAGE_CONSTRAINTS); // invalid name
+        assertParseFailure(parser, "1" + INVALID_DESCRIPTION_DESC, Description.MESSAGE_CONSTRAINTS); // invalid name
         assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
         assertParseFailure(parser, "1" + INVALID_MODULE_CODE_DESC,
             ModuleCode.MESSAGE_CONSTRAINTS
@@ -98,7 +98,7 @@ public class EditCommandParserTest {
         );
 
         // multiple invalid values, but only the first invalid value is captured
-        assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_MODULE_CODE_DESC + INVALID_TAG_DESC,
+        assertParseFailure(parser, "1" + INVALID_DESCRIPTION_DESC + INVALID_MODULE_CODE_DESC + INVALID_TAG_DESC,
             Description.MESSAGE_CONSTRAINTS
         );
     }
@@ -111,8 +111,7 @@ public class EditCommandParserTest {
                 + TAG_DESC_GRADED;
 
         EditCommand.EditTaskDescriptor descriptor =
-            new EditTaskDescriptorBuilder().withDescription(VALID_DESCRIPTION_TUTORIAL)
-                .withModuleCode(VALID_MODULE_CODE_TUTORIAL)
+            new EditTaskDescriptorBuilder().withDescription(VALID_DESCRIPTION_TUTORIAL).withModuleCode(VALID_MODULE_CODE_TUTORIAL)
                 .withTags(VALID_TAG_GRADED, VALID_TAG_PROJECT).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 

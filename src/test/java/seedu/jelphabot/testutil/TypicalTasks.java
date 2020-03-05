@@ -1,5 +1,16 @@
 package seedu.jelphabot.testutil;
 
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_DATETIME_ASSIGNMENT;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_DATETIME_TUTORIAL;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_DESCRIPTION_ASSIGNMENT;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_DESCRIPTION_TUTORIAL;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_MODULE_CODE_ASSIGNMENT;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_MODULE_CODE_TUTORIAL;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_PRIORITY_ASSIGNMENT;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_STATUS_ASSIGNMENT;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_GRADED;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_PROJECT;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -14,8 +25,9 @@ import static seedu.jelphabot.logic.commands.CommandTestUtil.*;
  */
 public class TypicalTasks {
 
-    public static final Task ASSESSMENT = new TaskBuilder().withDescription("Midterms").withModuleCode("MA1101R")
-                                              .withDateTime("Feb-1-2020 11 00").withTags("school").build();
+    public static final Task ASSESSMENT =
+        new TaskBuilder().withDescription("Online Midterm Assessment").withModuleCode("MA1101R")
+            .withDateTime("Feb-1-2020 11 00").withTags("school").build();
     public static final Task BOOK_REPORT = new TaskBuilder().withDescription("Book Report 1").withModuleCode("GES1028")
                                                .withDateTime("Feb-1-2020 11 00").withTags("project", "school").build();
     public static final Task CLASS = new TaskBuilder().withDescription("Yoga class")
@@ -29,12 +41,6 @@ public class TypicalTasks {
     public static final Task GROUP_WORK = new TaskBuilder().withDescription("Group project").withModuleCode("CS2103T")
                                               .withDateTime("Feb-1-2020 11 00").withTags("project", "school").build();
 
-    // Manually added
-    public static final Task HOMEWORK = new TaskBuilder().withDescription("Homework 1")
-                                            .withModuleCode("CS3230").build();
-    public static final Task INTERNSHIP = new TaskBuilder().withDescription("Internship at Google")
-                                              .withModuleCode("CP3202").build();
-
     // Manually added - Task's details found in {@code CommandTestUtil}
     public static final Task ASSIGNMENT = new TaskBuilder()
                                               .withDescription(VALID_DESCRIPTION_ASSIGNMENT)
@@ -42,18 +48,27 @@ public class TypicalTasks {
                                               .withDateTime(VALID_DATETIME_ASSIGNMENT)
                                               .withModuleCode(VALID_MODULE_CODE_ASSIGNMENT)
                                               .withPriority(VALID_PRIORITY_ASSIGNMENT)
-                                              .build();
+                                              .withTags(VALID_TAG_GRADED).build();
+
+
     public static final Task TUTORIAL = new TaskBuilder()
                                             .withDescription(VALID_DESCRIPTION_TUTORIAL)
-                                            .withStatus(VALID_STATUS_TUTORIAL)
+                                            .withStatus(VALID_DESCRIPTION_TUTORIAL)
                                             .withDateTime(VALID_DATETIME_TUTORIAL)
                                             .withModuleCode(VALID_MODULE_CODE_TUTORIAL)
-                                            .withPriority(VALID_PRIORITY_TUTORIAL)
                                             .build();
+
+    public static final Task INTERNSHIP = new TaskBuilder().withDescription("Internship at Google")
+                                              .withModuleCode("CP3202").build();
+
+    public static final Task LAB = new TaskBuilder().withDescription(VALID_DESCRIPTION_TUTORIAL)
+                                       .withModuleCode(VALID_MODULE_CODE_TUTORIAL)
+                                       .withTags(VALID_TAG_PROJECT).build();
 
     public static final String KEYWORD_MATCHING_TUTORIAL = "Tutorial"; // A keyword that matches TUTORIAL
 
-    private TypicalTasks() { } // prevents instantiation
+    private TypicalTasks() {
+    } // prevents instantiation
 
     /**
      * Returns an {@code JelphaBot} with all the typical persons.
