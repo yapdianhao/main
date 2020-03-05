@@ -33,21 +33,17 @@ public class EditTaskDescriptorTest {
         // different values -> returns false
         assertNotEquals(DESC_LAB, DESC_JOB);
 
-        // different name -> returns false
-        EditTaskDescriptor editedAmy =
+        // different description -> returns false
+        EditTaskDescriptor editedAssignment =
                 new EditPersonDescriptorBuilder(DESC_LAB).withDescription(VALID_DESC_JOB).build();
-        assertNotEquals(DESC_LAB, editedAmy);
-
-        // different phone -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_LAB).build();
-        assertNotEquals(DESC_LAB, editedAmy);
+        assertNotEquals(DESC_LAB, editedAssignment);
 
         // different module code -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_LAB).withModuleCode(VALID_MODULE_CODE_JOB).build();
-        assertNotEquals(DESC_LAB, editedAmy);
+        editedAssignment = new EditPersonDescriptorBuilder(DESC_LAB).withModuleCode(VALID_MODULE_CODE_JOB).build();
+        assertNotEquals(DESC_LAB, editedAssignment);
 
         // different tags -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_LAB).withTags(VALID_TAG_SCHOOL).build();
-        assertNotEquals(DESC_LAB, editedAmy);
+        editedAssignment = new EditPersonDescriptorBuilder(DESC_LAB).withTags(VALID_TAG_SCHOOL).build();
+        assertNotEquals(DESC_LAB, editedAssignment);
     }
 }

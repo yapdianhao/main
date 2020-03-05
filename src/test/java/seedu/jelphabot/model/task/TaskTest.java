@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_DESC_JOB;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_MODULE_CODE_JOB;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_SCHOOL;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_PROJECT;
 import static seedu.jelphabot.testutil.Assert.assertThrows;
 import static seedu.jelphabot.testutil.TypicalTasks.ASSIGNMENT;
 import static seedu.jelphabot.testutil.TypicalTasks.JOB;
@@ -75,7 +75,7 @@ public class TaskTest {
         assertNotEquals(ASSIGNMENT, editedAssignment);
 
         // different tags -> returns false
-        editedAssignment = new TaskBuilder(ASSIGNMENT).withTags(VALID_TAG_SCHOOL).build();
+        editedAssignment = new TaskBuilder(ASSIGNMENT).withTags(VALID_TAG_PROJECT).build();
         assertNotEquals(ASSIGNMENT, editedAssignment);
     }
 }
