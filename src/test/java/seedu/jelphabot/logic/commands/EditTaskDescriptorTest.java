@@ -20,8 +20,6 @@ import static seedu.jelphabot.logic.commands.CommandTestUtil.DATETIME_DESC_ASSIG
 import static seedu.jelphabot.logic.commands.CommandTestUtil.DATETIME_DESC_TUTORIAL;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.MODULE_CODE_DESC_ASSIGNMENT;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.MODULE_CODE_DESC_TUTORIAL;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.DATE_TIME_ASSIGNMENT;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.DATE_TIME_TUTORIAL;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.TAG_DESC_GRADED;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.TAG_DESC_PROJECT;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.INVALID_DESCRIPTION_DESC;
