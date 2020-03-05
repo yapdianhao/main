@@ -4,8 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_DESC_JOB;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_MODULE_CODE_JOB;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_DATETIME_TUTORIAL;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_DESCRIPTION_TUTORIAL;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_MODULE_CODE_TUTORIAL;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_PRIORITY_TUTORIAL;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_STATUS_TUTORIAL;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_PROJECT;
 import static seedu.jelphabot.testutil.Assert.assertThrows;
 import static seedu.jelphabot.testutil.TypicalTasks.ASSIGNMENT;
@@ -31,20 +34,24 @@ public class TaskTest {
         // null -> returns false
         assertFalse(ASSIGNMENT.isSameTask(null));
 
-        // different module code -> returns false
-        Task editedAssignment = new TaskBuilder().withModuleCode(VALID_MODULE_CODE_JOB).build();
-        assertFalse(ASSIGNMENT.isSameTask(editedAssignment));
-
         // different description -> returns false
-        editedAssignment = new TaskBuilder(ASSIGNMENT).withDescription(VALID_DESC_JOB).build();
+        Task editedAssignment = new TaskBuilder(ASSIGNMENT).withDescription(VALID_DESCRIPTION_TUTORIAL).build();
         assertFalse(ASSIGNMENT.isSameTask(editedAssignment));
 
-        // same description, different status -> returns true
-        editedAssignment = new TaskBuilder(ASSIGNMENT).withStatus(Status.COMPLETE).build();
+        // different dateTime  -> returns false
+        editedAssignment = new TaskBuilder(ASSIGNMENT).withDateTime(VALID_DATETIME_TUTORIAL).build();
+        assertFalse(ASSIGNMENT.isSameTask(editedAssignment));
+
+        // different module code -> returns false
+        editedAssignment = new TaskBuilder().withModuleCode(VALID_MODULE_CODE_TUTORIAL).build();
+        assertFalse(ASSIGNMENT.isSameTask(editedAssignment));
+
+        // same description, same datetime, same module code, different attributes -> returns true
+        editedAssignment = new TaskBuilder(ASSIGNMENT).withPriority(VALID_PRIORITY_TUTORIAL).build();
         assertTrue(ASSIGNMENT.isSameTask(editedAssignment));
 
         // same description, same datetime, same module code, different attributes -> returns true
-        editedAssignment = new TaskBuilder(ASSIGNMENT).withPriority(Priority.HIGH).build();
+        editedAssignment = new TaskBuilder(ASSIGNMENT).withStatus(VALID_STATUS_TUTORIAL).build();
         assertTrue(ASSIGNMENT.isSameTask(editedAssignment));
     }
 
@@ -67,11 +74,11 @@ public class TaskTest {
         assertNotEquals(ASSIGNMENT, JOB);
 
         // different description -> returns false
-        Task editedAssignment = new TaskBuilder(ASSIGNMENT).withDescription(VALID_DESC_JOB).build();
+        Task editedAssignment = new TaskBuilder(ASSIGNMENT).withDescription(VALID_DESCRIPTION_TUTORIAL).build();
         assertNotEquals(ASSIGNMENT, editedAssignment);
 
         // different module code -> returns false
-        editedAssignment = new TaskBuilder(ASSIGNMENT).withModuleCode(VALID_MODULE_CODE_JOB).build();
+        editedAssignment = new TaskBuilder(ASSIGNMENT).withModuleCode(VALID_MODULE_CODE_TUTORIAL).build();
         assertNotEquals(ASSIGNMENT, editedAssignment);
 
         // different tags -> returns false
