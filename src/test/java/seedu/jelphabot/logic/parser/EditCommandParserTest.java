@@ -1,6 +1,7 @@
 package seedu.jelphabot.logic.parser;
 
 import static seedu.jelphabot.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.DATE_TIME_TUTORIAL;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.DESCRIPTION_DESC_TUTORIAL;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.INVALID_DESCRIPTION_DESC;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.INVALID_MODULE_CODE_DESC;
@@ -9,6 +10,7 @@ import static seedu.jelphabot.logic.commands.CommandTestUtil.MODULE_CODE_DESC_AS
 import static seedu.jelphabot.logic.commands.CommandTestUtil.MODULE_CODE_DESC_TUTORIAL;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.TAG_DESC_GRADED;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.TAG_DESC_PROJECT;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_DATETIME_TUTORIAL;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_DESCRIPTION_TUTORIAL;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_MODULE_CODE_ASSIGNMENT;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_MODULE_CODE_TUTORIAL;
@@ -147,9 +149,9 @@ public class EditCommandParserTest {
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        // tags
-        userInput = targetIndex.getOneBased() + TAG_DESC_GRADED;
-        descriptor = new EditTaskDescriptorBuilder().withTags(VALID_TAG_PROJECT).build();
+        // datetime
+        userInput = targetIndex.getOneBased() + DATE_TIME_TUTORIAL;
+        descriptor = new EditTaskDescriptorBuilder().withDateTime(VALID_DATETIME_TUTORIAL).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }

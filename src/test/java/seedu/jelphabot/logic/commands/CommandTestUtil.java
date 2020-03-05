@@ -45,8 +45,8 @@ public class CommandTestUtil {
     public static final String DATETIME_DESC_TUTORIAL = " " + PREFIX_DATETIME + VALID_DATETIME_TUTORIAL;
     public static final String MODULE_CODE_DESC_ASSIGNMENT = " " + PREFIX_MODULE_CODE + VALID_MODULE_CODE_ASSIGNMENT;
     public static final String MODULE_CODE_DESC_TUTORIAL = " " + PREFIX_MODULE_CODE + VALID_MODULE_CODE_TUTORIAL;
-    public static final String PRIORITY_DESC_ASSIGNMENT = " " + PREFIX_PRIORITY + VALID_PRIORITY_ASSIGNMENT;
-    public static final String PRIORITY_DESC_TUTORIAL = " " + PREFIX_PRIORITY + VALID_PRIORITY_TUTORIAL;
+    public static final String DATE_TIME_ASSIGNMENT = " " + PREFIX_DATETIME + VALID_DATETIME_ASSIGNMENT;
+    public static final String DATE_TIME_TUTORIAL = " " + PREFIX_DATETIME + VALID_DATETIME_TUTORIAL;
     public static final String TAG_DESC_GRADED = " " + PREFIX_TAG + VALID_TAG_GRADED;
     public static final String TAG_DESC_PROJECT = " " + PREFIX_TAG + VALID_TAG_PROJECT;
 
@@ -59,7 +59,7 @@ public class CommandTestUtil {
     // priority only allows 1, 0, -1
     public static final String INVALID_PRIORITY_DESC = " " + PREFIX_PRIORITY + "-2";
     // empty tag not allowed
-    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "";
+    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "*";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
