@@ -6,7 +6,7 @@ import static seedu.jelphabot.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.DESCRIPTION_DESC_TUTORIAL;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.MODULE_CODE_DESC_TUTORIAL;
 import static seedu.jelphabot.testutil.Assert.assertThrows;
-import static seedu.jelphabot.testutil.TypicalTasks.LAB;
+import static seedu.jelphabot.testutil.TypicalTasks.TUTORIAL;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -77,7 +77,7 @@ public class LogicManagerTest {
 
         // Execute add command
         String addCommand = AddCommand.COMMAND_WORD + DESCRIPTION_DESC_TUTORIAL + MODULE_CODE_DESC_TUTORIAL;
-        Task expectedTask = new TaskBuilder(LAB).withTags().build();
+        Task expectedTask = new TaskBuilder(TUTORIAL).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addTask(expectedTask);
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;

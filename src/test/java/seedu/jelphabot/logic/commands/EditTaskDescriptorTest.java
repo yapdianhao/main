@@ -2,11 +2,7 @@ package seedu.jelphabot.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.DESC_ASSIGNMENT;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.DESC_TUTORIAL;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_DESCRIPTION_TUTORIAL;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_MODULE_CODE_TUTORIAL;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_GRADED;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.*;
 
 import org.junit.jupiter.api.Test;
 
@@ -34,20 +30,30 @@ public class EditTaskDescriptorTest {
         assertNotEquals(DESC_ASSIGNMENT, DESC_TUTORIAL);
 
         // different name -> returns false
-        EditTaskDescriptor editedAmy =
-                new EditTaskDescriptorBuilder(DESC_ASSIGNMENT).withDescription(VALID_DESCRIPTION_TUTORIAL).build();
-        assertNotEquals(DESC_ASSIGNMENT, editedAmy);
+        EditTaskDescriptor editedAssignment =
+            new EditTaskDescriptorBuilder(DESC_ASSIGNMENT).withDescription(VALID_DESCRIPTION_TUTORIAL).build();
+        assertNotEquals(DESC_ASSIGNMENT, editedAssignment);
 
-        // different phone -> returns false
-        editedAmy = new EditTaskDescriptorBuilder(DESC_ASSIGNMENT).build();
-        assertNotEquals(DESC_ASSIGNMENT, editedAmy);
+        // different status -> returns false
+        editedAssignment = new EditTaskDescriptorBuilder(DESC_ASSIGNMENT).withStatus(VALID_STATUS_TUTORIAL).build();
+        assertNotEquals(DESC_ASSIGNMENT, editedAssignment);
+
+        // different dateTime -> returns false
+        editedAssignment = new EditTaskDescriptorBuilder(DESC_ASSIGNMENT).withDateTime(VALID_DATETIME_TUTORIAL).build();
+        assertNotEquals(DESC_ASSIGNMENT, editedAssignment);
 
         // different module code -> returns false
-        editedAmy = new EditTaskDescriptorBuilder(DESC_ASSIGNMENT).withModuleCode(VALID_MODULE_CODE_TUTORIAL).build();
-        assertNotEquals(DESC_ASSIGNMENT, editedAmy);
+        editedAssignment =
+            new EditTaskDescriptorBuilder(DESC_ASSIGNMENT).withModuleCode(VALID_MODULE_CODE_TUTORIAL).build();
+        assertNotEquals(DESC_ASSIGNMENT, editedAssignment);
+
+        // different module code -> returns false
+        editedAssignment =
+            new EditTaskDescriptorBuilder(DESC_ASSIGNMENT).withPriority(VALID_PRIORITY_TUTORIAL).build();
+        assertNotEquals(DESC_ASSIGNMENT, editedAssignment);
 
         // different tags -> returns false
-        editedAmy = new EditTaskDescriptorBuilder(DESC_ASSIGNMENT).withTags(VALID_TAG_GRADED).build();
-        assertNotEquals(DESC_ASSIGNMENT, editedAmy);
+        editedAssignment = new EditTaskDescriptorBuilder(DESC_ASSIGNMENT).withTags(VALID_TAG_PROJECT).build();
+        assertNotEquals(DESC_ASSIGNMENT, editedAssignment);
     }
 }
