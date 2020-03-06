@@ -53,7 +53,6 @@ public class TypicalTasks {
 
     public static final Task TUTORIAL = new TaskBuilder()
                                             .withDescription(VALID_DESCRIPTION_TUTORIAL)
-                                            .withStatus(VALID_DESCRIPTION_TUTORIAL)
                                             .withDateTime(VALID_DATETIME_TUTORIAL)
                                             .withModuleCode(VALID_MODULE_CODE_TUTORIAL)
                                             .build();

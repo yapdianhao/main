@@ -45,14 +45,11 @@ public class DateTime {
     public static boolean isValidDateTime(String test) {
         boolean correctFormat = false;
         for (String formatString : dateFormatStrings) {
-            if (correctFormat) {
-                break;
-            }
             try {
                 new SimpleDateFormat(formatString).parse(test);
-                correctFormat = true;
+                return true;
             } catch (ParseException e) {
-                e.printStackTrace();
+                continue;
             }
         }
         return correctFormat;
@@ -70,13 +67,14 @@ public class DateTime {
         }
         for (DateFormat df : dfList) {
             try {
-                Date date = df.parse(dateTimeString);
+                df.parse(dateTimeString);
                 currDateFormat = df;
+                return currDateFormat;
             } catch (ParseException e) {
-                e.printStackTrace();
+                continue;
             }
         }
-        return currDateFormat;
+        return null;
     }
 
     /**
