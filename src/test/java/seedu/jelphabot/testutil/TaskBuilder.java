@@ -20,7 +20,7 @@ public class TaskBuilder {
 
     public static final String DEFAULT_DESCRIPTION = "Default Task 1";
     public static final Status DEFAULT_STATUS = Status.INCOMPLETE;
-    public static final String DEFAULT_DATETIME = "Jan-1-2000 00 00";
+    public static final String DEFAULT_DATETIME = "May-1-2020 00 01";
     public static final String DEFAULT_MODULE_CODE = "TES1000";
     public static final Priority DEFAULT_PRIORITY = Priority.MEDIUM;
 
