@@ -18,8 +18,6 @@ import java.util.List;
 import seedu.jelphabot.model.JelphaBot;
 import seedu.jelphabot.model.task.Task;
 
-import static seedu.jelphabot.logic.commands.CommandTestUtil.*;
-
 /**
  * A utility class containing a list of {@code Task} objects to be used in tests.
  */
