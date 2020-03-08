@@ -21,7 +21,6 @@ import static seedu.jelphabot.logic.commands.CommandTestUtil.TAG_DESC_PROJECT;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_DATETIME_ASSIGNMENT;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_DESCRIPTION_ASSIGNMENT;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_MODULE_CODE_ASSIGNMENT;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_PRIORITY_ASSIGNMENT;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_GRADED;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_PROJECT;
 import static seedu.jelphabot.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -131,21 +130,9 @@ public class AddCommandParserTest {
             expectedMessage
         );
 
-        // missing priority prefix
-        assertParseFailure(parser, DESCRIPTION_DESC_ASSIGNMENT + DATETIME_DESC_ASSIGNMENT
-                                       + MODULE_CODE_DESC_ASSIGNMENT + VALID_PRIORITY_ASSIGNMENT + VALID_TAG_GRADED,
-            expectedMessage
-        );
-
-        // missing tag prefix
-        assertParseFailure(parser, DESCRIPTION_DESC_ASSIGNMENT + DATETIME_DESC_ASSIGNMENT
-                                       + MODULE_CODE_DESC_ASSIGNMENT + PRIORITY_DESC_ASSIGNMENT + VALID_TAG_GRADED,
-            expectedMessage
-        );
-
         // all prefixes missing
         assertParseFailure(parser, VALID_DESCRIPTION_ASSIGNMENT + VALID_DATETIME_ASSIGNMENT
-                                       + VALID_MODULE_CODE_ASSIGNMENT + VALID_TAG_PROJECT,
+                                       + VALID_MODULE_CODE_ASSIGNMENT,
             expectedMessage
         );
     }

@@ -6,7 +6,6 @@ import static seedu.jelphabot.commons.util.AppUtil.checkArgument;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -19,59 +18,60 @@ public class DateTime {
     private static final String STANDARD_FORMAT = "MMM-d-yyyy HH mm";
     public static final String MESSAGE_CONSTRAINTS = "Date should be of the format " + STANDARD_FORMAT
                                                          + ". Time should be in the 24 hour format HH mm.";
-    private static final String DISPLAY_FORMAT = "d-MMM-yyyy HH:mm";
-    private static final List<String> dateFormatStrings =
-        Arrays.asList("MMM-d-yyyy HH mm", "MMM/d/yyyy HH mm", "d/M/y HH mm", "d-MMM-yyyy HH mm", "d MMM yyyy HH mm");
+    private static final String DISPLAY_FORMAT = "d-MMM-yyyy HH mm";
+    private static final List<DateFormat> dateFormats =
+        Arrays.asList(
+            new SimpleDateFormat("MMM-d-yyyy HH mm"),
+            new SimpleDateFormat("MMM/d/yyyy HH mm"),
+            new SimpleDateFormat("d/M/y HH mm"),
+            new SimpleDateFormat("d-MMM-yyyy HH mm"),
+            new SimpleDateFormat("d MMM yyyy HH mm")
+        );
+    private static final DateFormat standardFormatter = new SimpleDateFormat(STANDARD_FORMAT);
+    private static final DateFormat displayFormatter = new SimpleDateFormat(DISPLAY_FORMAT);
     private final String value;
-    private final DateFormat format;
 
     /**
      * Constructs an {@code DateTime}.
+     *
      * @param dateTime A valid email address.
      */
     public DateTime(String dateTime) {
         requireNonNull(dateTime);
         checkArgument(isValidDateTime(dateTime), MESSAGE_CONSTRAINTS);
-        format = getDateFormat(dateTime);
-        //value = convertDateToStandardFormat(dateTime);
-        value = dateTime;
+        DateFormat currentFormat = getDateFormatOfString(dateTime);
+        value = convertDateToStandardFormat(currentFormat, dateTime);
     }
 
     /**
      * Returns if the given string is a valid datetime format, specified in the List dateFormatStrings.
+     *
      * @param test The date to be checked.
      * @return The boolean representing whether the date provided is valid.
      */
     public static boolean isValidDateTime(String test) {
-        boolean correctFormat = false;
-        for (String formatString : dateFormatStrings) {
+        for (DateFormat df : dateFormats) {
             try {
-                new SimpleDateFormat(formatString).parse(test);
+                df.parse(test);
                 return true;
             } catch (ParseException e) {
-                continue;
+                // do nothing, try next
             }
         }
-        return correctFormat;
+        return false;
     }
 
-    public DateFormat getFormat() {
-        return format;
+    public static DateFormat getFormat() {
+        return standardFormatter;
     }
 
-    private DateFormat getDateFormat(String dateTimeString) {
-        DateFormat currDateFormat = null;
-        ArrayList<DateFormat> dfList = new ArrayList<>();
-        for (String dfString : dateFormatStrings) {
-            dfList.add(new SimpleDateFormat(dfString));
-        }
-        for (DateFormat df : dfList) {
+    private static DateFormat getDateFormatOfString(String dateTimeString) {
+        for (DateFormat df : dateFormats) {
             try {
                 df.parse(dateTimeString);
-                currDateFormat = df;
-                return currDateFormat;
+                return df;
             } catch (ParseException e) {
-                continue;
+                // do nothing, try next
             }
         }
         return null;
@@ -80,13 +80,15 @@ public class DateTime {
     /**
      * Converts dateTime to the standard format (Standard format is the format the string is stored, defined in
      * #DateTime.STANDARD_FORMAT).
+     *
+     * @param currentDateFormat the current format of the DateTime string.
      * @param dateString the string to be converted.
      * @return dateString converted to standard format.
      */
-    private String convertDateToStandardFormat(String dateString) {
+    private String convertDateToStandardFormat(DateFormat currentDateFormat, String dateString) {
         String standardDateString = "";
         try {
-            Date date = format.parse(dateString);
+            Date date = currentDateFormat.parse(dateString);
             standardDateString = new SimpleDateFormat(STANDARD_FORMAT).format(date);
         } catch (ParseException e) {
             e.printStackTrace();
@@ -97,14 +99,15 @@ public class DateTime {
     /**
      * Converts stored dateTime value to the display format (Display format is the format the datetime is shown in
      * the view, defined in #DateTime.DISPLAY_FORMAT).
+     *
      * @param dateString the string to be converted.
      * @return dateString converted to display format.
      */
     private String convertDateToDisplayFormat(String dateString) {
         String displayString = "";
         try {
-            Date date = format.parse(dateString);
-            displayString = new SimpleDateFormat(DISPLAY_FORMAT).format(date);
+            Date date = standardFormatter.parse(dateString);
+            displayString = displayFormatter.format(date);
         } catch (ParseException e) {
             e.printStackTrace();
         }
