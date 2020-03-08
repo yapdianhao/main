@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 
 import seedu.jelphabot.commons.exceptions.IllegalValueException;
@@ -106,7 +105,7 @@ public class JsonAdaptedTaskTest {
             VALID_DESCRIPTION,
             VALID_STATUS,
             null,
-            INVALID_MODULE_CODE,
+            VALID_MODULE_CODE,
             VALID_PRIORITY,
             VALID_TAGS
         );
@@ -124,16 +123,4 @@ public class JsonAdaptedTaskTest {
             );
         assertThrows(IllegalValueException.class, person::toModelType);
     }
-
-    @Test
-    public void toModelType_nullTags_throwsIllegalValueException() {
-        JsonAdaptedTask person =
-            new JsonAdaptedTask(VALID_DESCRIPTION, VALID_STATUS, VALID_DATETIME, INVALID_MODULE_CODE, VALID_PRIORITY,
-                null
-            );
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Tags.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
-    }
-
-
 }

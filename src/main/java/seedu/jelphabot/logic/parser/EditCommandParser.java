@@ -55,8 +55,8 @@ public class EditCommandParser implements Parser<EditCommand> {
                 ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get()));
         }
         if (argMultimap.getValue(PREFIX_DATETIME).isPresent()) {
-            editTaskDescriptor.setDescription(
-                ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DATETIME).get()));
+            editTaskDescriptor.setDateTime(
+                ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).get()));
         }
         if (argMultimap.getValue(PREFIX_MODULE_CODE).isPresent()) {
             editTaskDescriptor.setModuleCode(ParserUtil

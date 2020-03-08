@@ -35,7 +35,10 @@ public class EditTaskDescriptorBuilder {
     public EditTaskDescriptorBuilder(Task task) {
         descriptor = new EditTaskDescriptor();
         descriptor.setDescription(task.getDescription());
+        descriptor.setStatus(task.getStatus());
+        descriptor.setDateTime(task.getDateTime());
         descriptor.setModuleCode(task.getModuleCode());
+        descriptor.setPriority(task.getPriority());
         descriptor.setTags(task.getTags());
     }
 

@@ -21,6 +21,7 @@ import static seedu.jelphabot.logic.commands.CommandTestUtil.TAG_DESC_PROJECT;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_DATETIME_ASSIGNMENT;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_DESCRIPTION_ASSIGNMENT;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_MODULE_CODE_ASSIGNMENT;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_PRIORITY_TUTORIAL;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_GRADED;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_PROJECT;
 import static seedu.jelphabot.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -44,7 +45,7 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Task expectedTask = new TaskBuilder(ASSIGNMENT).withTags(VALID_TAG_PROJECT).build();
+        Task expectedTask = new TaskBuilder(ASSIGNMENT).withTags(VALID_TAG_GRADED).build();
 
         // whitespace only preamble
         assertParseSuccess(parser,
@@ -101,7 +102,9 @@ public class AddCommandParserTest {
         );
 
         // zero tags
-        expectedTask = new TaskBuilder(TUTORIAL).withTags().build();
+        expectedTask = new TaskBuilder(TUTORIAL)
+                           .withPriority(VALID_PRIORITY_TUTORIAL)
+                           .withTags().build();
         assertParseSuccess(parser, DESCRIPTION_DESC_TUTORIAL + DATETIME_DESC_TUTORIAL
                                        + MODULE_CODE_DESC_TUTORIAL + PRIORITY_DESC_TUTORIAL,
             new AddCommand(expectedTask)
