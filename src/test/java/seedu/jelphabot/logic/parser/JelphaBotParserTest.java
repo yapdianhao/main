@@ -32,7 +32,7 @@ public class JelphaBotParserTest {
 
     private final JelphaBotParser parser = new JelphaBotParser();
 
-    @Test
+    @Test // test against a task with Status = INCOMPLETE as that is the default value upon task creation.
     public void parseCommand_add() throws Exception {
         Task task = new TaskBuilder().build();
         AddCommand command = (AddCommand) parser.parseCommand(TaskUtil.getAddCommand(task));

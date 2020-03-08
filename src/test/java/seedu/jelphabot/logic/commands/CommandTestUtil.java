@@ -35,7 +35,7 @@ public class CommandTestUtil {
     public static final String VALID_MODULE_CODE_ASSIGNMENT = "CS2103T";
     public static final String VALID_MODULE_CODE_TUTORIAL = "CS2101";
     public static final String VALID_PRIORITY_ASSIGNMENT = "1";
-    public static final String VALID_PRIORITY_TUTORIAL = "0";
+    public static final String VALID_PRIORITY_TUTORIAL = "-1";
     public static final String VALID_TAG_GRADED = "graded";
     public static final String VALID_TAG_PROJECT = "project";
 

@@ -29,7 +29,7 @@ public class DateTime {
         );
     private static final DateFormat standardFormatter = new SimpleDateFormat(STANDARD_FORMAT);
     private static final DateFormat displayFormatter = new SimpleDateFormat(DISPLAY_FORMAT);
-    private final String value;
+    public final String value;
 
     /**
      * Constructs an {@code DateTime}.
@@ -114,7 +114,7 @@ public class DateTime {
         return displayString;
     }
 
-    public String getValue() {
+    public String getDisplayValue() {
         return convertDateToDisplayFormat(value);
     }
 

@@ -19,10 +19,10 @@ import seedu.jelphabot.model.util.SampleDataUtil;
 public class TaskBuilder {
 
     public static final String DEFAULT_DESCRIPTION = "Default Task 1";
-    public static final Status DEFAULT_STATUS = Status.INCOMPLETE;
+    public static final String DEFAULT_STATUS = "INCOMPLETE";
     public static final String DEFAULT_DATETIME = "May-1-2020 00 01";
     public static final String DEFAULT_MODULE_CODE = "TES1000";
-    public static final Priority DEFAULT_PRIORITY = Priority.MEDIUM;
+    public static final String DEFAULT_PRIORITY = "0";
 
     private Description description;
     private Status status;
@@ -33,10 +33,10 @@ public class TaskBuilder {
 
     public TaskBuilder() {
         description = new Description(DEFAULT_DESCRIPTION);
-        status = DEFAULT_STATUS;
+        status = Status.toStatus(DEFAULT_STATUS);
         dateTime = new DateTime(DEFAULT_DATETIME);
         moduleCode = new ModuleCode(DEFAULT_MODULE_CODE);
-        priority = DEFAULT_PRIORITY;
+        priority = Priority.toPriority(DEFAULT_PRIORITY);
         tags = new HashSet<>();
     }
 

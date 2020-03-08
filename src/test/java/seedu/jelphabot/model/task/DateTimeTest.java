@@ -72,10 +72,10 @@ class DateTimeTest {
 
     @Test
     public void getValue_returnsCorrectDisplayString() {
-        assertEquals(new DateTime("May-1-2020 11 11").getValue(), "1-May-2020 11 11");
-        assertEquals(new DateTime("1-May-2020 00 00").getValue(), "1-May-2020 00 00");
-        assertEquals(new DateTime("May/1/2020 22 00").getValue(), "1-May-2020 22 00");
-        assertEquals(new DateTime("1/5/2020 12 00").getValue(), "1-May-2020 12 00");
-        assertEquals(new DateTime("1 May 2020 23 59").getValue(), "1-May-2020 23 59");
+        assertEquals(new DateTime("May-1-2020 11 11").getDisplayValue(), "1-May-2020 11 11");
+        assertEquals(new DateTime("1-May-2020 00 00").getDisplayValue(), "1-May-2020 00 00");
+        assertEquals(new DateTime("May/1/2020 22 00").getDisplayValue(), "1-May-2020 22 00");
+        assertEquals(new DateTime("1/5/2020 12 00").getDisplayValue(), "1-May-2020 12 00");
+        assertEquals(new DateTime("1 May 2020 23 59").getDisplayValue(), "1-May-2020 23 59");
     }
 }
