@@ -3,6 +3,7 @@ package seedu.jelphabot.logic;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.jelphabot.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
 import static seedu.jelphabot.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.DATETIME_DESC_TUTORIAL;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.DESCRIPTION_DESC_TUTORIAL;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.MODULE_CODE_DESC_TUTORIAL;
 import static seedu.jelphabot.testutil.Assert.assertThrows;
@@ -69,14 +70,15 @@ public class LogicManagerTest {
     public void execute_storageThrowsIoException_throwsCommandException() {
         // Setup LogicManager with JsonJelphaBotIoExceptionThrowingStub
         JsonJelphaBotStorage addressBookStorage = new JsonJelphaBotIoExceptionThrowingStub(
-                temporaryFolder.resolve("ioExceptionJelphaBot.json"));
+            temporaryFolder.resolve("ioExceptionJelphaBot.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(
-                temporaryFolder.resolve("ioExceptionUserPrefs.json"));
+            temporaryFolder.resolve("ioExceptionUserPrefs.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
 
         // Execute add command
-        String addCommand = AddCommand.COMMAND_WORD + DESCRIPTION_DESC_TUTORIAL + MODULE_CODE_DESC_TUTORIAL;
+        String addCommand =
+            AddCommand.COMMAND_WORD + DESCRIPTION_DESC_TUTORIAL + DATETIME_DESC_TUTORIAL + MODULE_CODE_DESC_TUTORIAL;
         Task expectedTask = new TaskBuilder(TUTORIAL).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addTask(expectedTask);
@@ -98,7 +100,7 @@ public class LogicManagerTest {
      * @see #assertCommandFailure(String, Class, String, Model)
      */
     private void assertCommandSuccess(String inputCommand, String expectedMessage, Model expectedModel)
-            throws CommandException, ParseException {
+        throws CommandException, ParseException {
         CommandResult result = logic.execute(inputCommand);
         assertEquals(expectedMessage, result.getFeedbackToUser());
         assertEquals(expectedModel, model);
@@ -131,7 +133,7 @@ public class LogicManagerTest {
      * @see #assertCommandFailure(String, Class, String, Model)
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
-            String expectedMessage) {
+        String expectedMessage) {
         Model expectedModel = new ModelManager(model.getJelphaBot(), new UserPrefs());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
@@ -146,7 +148,7 @@ public class LogicManagerTest {
      * @see #assertCommandSuccess(String, String, Model)
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
-            String expectedMessage, Model expectedModel) {
+        String expectedMessage, Model expectedModel) {
         assertThrows(expectedException, expectedMessage, () -> logic.execute(inputCommand));
         assertEquals(expectedModel, model);
     }

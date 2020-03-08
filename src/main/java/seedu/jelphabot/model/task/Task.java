@@ -36,6 +36,7 @@ public class Task {
         this.dateTime = dateTime;
         this.moduleCode = moduleCode;
         this.priority = priority;
+        this.tags.addAll(tags);
     }
 
     public Description getDescription() {

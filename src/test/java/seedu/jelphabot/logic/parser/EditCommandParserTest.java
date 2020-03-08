@@ -1,7 +1,22 @@
 package seedu.jelphabot.logic.parser;
 
 import static seedu.jelphabot.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.*;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.DATETIME_DESC_TUTORIAL;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.DESCRIPTION_DESC_TUTORIAL;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.INVALID_DESCRIPTION_DESC;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.INVALID_MODULE_CODE_DESC;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.MODULE_CODE_DESC_ASSIGNMENT;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.MODULE_CODE_DESC_TUTORIAL;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.TAG_DESC_GRADED;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.TAG_DESC_PROJECT;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_DATETIME_TUTORIAL;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_DESCRIPTION_TUTORIAL;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_MODULE_CODE_ASSIGNMENT;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_MODULE_CODE_TUTORIAL;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_GRADED;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_PROJECT;
+import static seedu.jelphabot.logic.commands.EditCommand.MESSAGE_NOT_EDITED;
 import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.jelphabot.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.jelphabot.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -35,7 +50,7 @@ public class EditCommandParserTest {
         assertParseFailure(parser, VALID_DESCRIPTION_TUTORIAL, MESSAGE_INVALID_FORMAT);
 
         // no field specified
-        assertParseFailure(parser, "1", EditCommand.MESSAGE_NOT_EDITED);
+        assertParseFailure(parser, "1", MESSAGE_NOT_EDITED);
 
         // no index and no field specified
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
@@ -58,11 +73,13 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
-        assertParseFailure(parser, "1" + INVALID_DESCRIPTION_DESC, Description.MESSAGE_CONSTRAINTS); // invalid name
-        assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
-        assertParseFailure(parser, "1" + INVALID_MODULE_CODE_DESC,
-            ModuleCode.MESSAGE_CONSTRAINTS
-        ); // invalid module code
+        // invalid desc
+        assertParseFailure(parser, "1" + INVALID_DESCRIPTION_DESC, Description.MESSAGE_CONSTRAINTS);
+        // invalid module code
+        assertParseFailure(parser, "1" + INVALID_MODULE_CODE_DESC, ModuleCode.MESSAGE_CONSTRAINTS);
+        // TODO invalid datetime
+        // invalid tag
+        assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS);
 
         // valid phone followed by invalid phone. The test case for invalid phone followed by valid phone
         // is tested at {@code parse_invalidValueFollowedByValidValue_success()}
@@ -86,7 +103,9 @@ public class EditCommandParserTest {
         );
 
         // multiple invalid values, but only the first invalid value is captured
-        assertParseFailure(parser, "1" + INVALID_DESCRIPTION_DESC + INVALID_MODULE_CODE_DESC + INVALID_TAG_DESC,
+        assertParseFailure(
+            parser,
+            "1" + INVALID_DESCRIPTION_DESC + INVALID_MODULE_CODE_DESC + INVALID_TAG_DESC,
             Description.MESSAGE_CONSTRAINTS
         );
     }
@@ -99,7 +118,8 @@ public class EditCommandParserTest {
                 + TAG_DESC_GRADED;
 
         EditCommand.EditTaskDescriptor descriptor =
-            new EditTaskDescriptorBuilder().withDescription(VALID_DESCRIPTION_TUTORIAL).withModuleCode(VALID_MODULE_CODE_TUTORIAL)
+            new EditTaskDescriptorBuilder().withDescription(VALID_DESCRIPTION_TUTORIAL)
+                .withModuleCode(VALID_MODULE_CODE_TUTORIAL)
                 .withTags(VALID_TAG_GRADED, VALID_TAG_PROJECT).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
@@ -165,13 +185,12 @@ public class EditCommandParserTest {
         Index targetIndex = INDEX_FIRST_TASK;
         String userInput = targetIndex.getOneBased() + "";
         EditCommand.EditTaskDescriptor descriptor = new EditTaskDescriptorBuilder().build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
-        assertParseSuccess(parser, userInput, expectedCommand);
+        assertParseFailure(parser, userInput, MESSAGE_NOT_EDITED);
 
         // other valid values specified
         userInput = targetIndex.getOneBased() + MODULE_CODE_DESC_ASSIGNMENT;
         descriptor = new EditTaskDescriptorBuilder().withModuleCode(VALID_MODULE_CODE_ASSIGNMENT).build();
-        expectedCommand = new EditCommand(targetIndex, descriptor);
+        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 

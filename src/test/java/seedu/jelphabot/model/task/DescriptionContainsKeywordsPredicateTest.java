@@ -74,10 +74,10 @@ public class DescriptionContainsKeywordsPredicateTest {
         predicate = new DescriptionContainsKeywordsPredicate(Arrays.asList("Carol"));
         assertFalse(predicate.test(new TaskBuilder().withDescription("Alice Bob").build()));
 
-        // Keywords match phone, module code and address, but does not match name
+        // Keywords match datetime and module code, but does not match description
         predicate =
-                new DescriptionContainsKeywordsPredicate(Arrays.asList("12345", "alice@email.com", "Main", "Street"));
-        assertFalse(predicate.test(new TaskBuilder().withDescription("Alice").withModuleCode("alice@email.com")
+                new DescriptionContainsKeywordsPredicate(Arrays.asList("12345", "ALI1234", "1-May-2020"));
+        assertFalse(predicate.test(new TaskBuilder().withDescription("Alice").withModuleCode("ALI1234")
                                        .build()));
     }
 }

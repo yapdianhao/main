@@ -1,5 +1,6 @@
 package seedu.jelphabot.model.task;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.jelphabot.testutil.Assert.assertThrows;
@@ -20,7 +21,7 @@ class DateTimeTest {
     }
 
     @Test
-    void isValidDateTime() {
+    public void isValidDateTime_invalidDateTime_returnsFalse() {
         // null datetime
         assertThrows(NullPointerException.class, () -> DateTime.isValidDateTime(null));
 
@@ -48,12 +49,33 @@ class DateTimeTest {
         assertFalse(DateTime.isValidDateTime("May 2 2020 22 00")); // wrong format: MMM d yyyy HH mm
         assertFalse(DateTime.isValidDateTime("2020 2 May 22 00")); // wrong format: yyy d MMM
         assertFalse(DateTime.isValidDateTime("2 05 2020 22 00")); // wrong format: d MM yyyy
+    }
 
+    @Test
+    public void isValidDateTime_validDateTime_returnsTrue() {
         // valid DateTime formats
         assertTrue(DateTime.isValidDateTime("May-1-2020 11 11")); // MMM-d-yyyy HH mm
         assertTrue(DateTime.isValidDateTime("1-May-2020 11 11")); // d-MMM-yyyy HH mm
         assertTrue(DateTime.isValidDateTime("May/1/2020 22 00")); // MMM/d/yyyy HH mm
         assertTrue(DateTime.isValidDateTime("1/1/2020 12 00")); // d/M/y HH mm
         assertTrue(DateTime.isValidDateTime("2 May 2020 20 20")); // d MMM yyyy HH mm
+    }
+
+    @Test
+    public void constructor_validDateTime_success() {
+        assertEquals(new DateTime("May-1-2020 11 11"), new DateTime("May-1-2020 11 11"));
+        assertEquals(new DateTime("1-May-2020 00 00"), new DateTime("May-1-2020 00 00"));
+        assertEquals(new DateTime("May/1/2020 22 00"), new DateTime("May-1-2020 22 00"));
+        assertEquals(new DateTime("1/5/2020 12 00"), new DateTime("May-1-2020 12 00"));
+        assertEquals(new DateTime("1 May 2020 23 59"), new DateTime("May-1-2020 23 59"));
+    }
+
+    @Test
+    public void getValue_returnsCorrectDisplayString() {
+        assertEquals(new DateTime("May-1-2020 11 11").getDisplayValue(), "1-May-2020 11 11");
+        assertEquals(new DateTime("1-May-2020 00 00").getDisplayValue(), "1-May-2020 00 00");
+        assertEquals(new DateTime("May/1/2020 22 00").getDisplayValue(), "1-May-2020 22 00");
+        assertEquals(new DateTime("1/5/2020 12 00").getDisplayValue(), "1-May-2020 12 00");
+        assertEquals(new DateTime("1 May 2020 23 59").getDisplayValue(), "1-May-2020 23 59");
     }
 }

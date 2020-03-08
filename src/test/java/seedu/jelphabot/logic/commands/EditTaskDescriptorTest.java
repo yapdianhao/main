@@ -4,11 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.DESC_ASSIGNMENT;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.DESC_TUTORIAL;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_STATUS_TUTORIAL;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_DATETIME_TUTORIAL;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_DESCRIPTION_TUTORIAL;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_MODULE_CODE_TUTORIAL;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_PRIORITY_TUTORIAL;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_STATUS_TUTORIAL;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_PROJECT;
 
 import org.junit.jupiter.api.Test;
@@ -54,7 +54,7 @@ public class EditTaskDescriptorTest {
             new EditTaskDescriptorBuilder(DESC_ASSIGNMENT).withModuleCode(VALID_MODULE_CODE_TUTORIAL).build();
         assertNotEquals(DESC_ASSIGNMENT, editedAssignment);
 
-        // different module code -> returns false
+        // different priority -> returns false
         editedAssignment =
             new EditTaskDescriptorBuilder(DESC_ASSIGNMENT).withPriority(VALID_PRIORITY_TUTORIAL).build();
         assertNotEquals(DESC_ASSIGNMENT, editedAssignment);

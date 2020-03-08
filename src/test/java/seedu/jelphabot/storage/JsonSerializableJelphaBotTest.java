@@ -16,9 +16,9 @@ import seedu.jelphabot.testutil.TypicalTasks;
 public class JsonSerializableJelphaBotTest {
 
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonSerializableJelphaBotTest");
-    private static final Path TYPICAL_TASKS_FILE = TEST_DATA_FOLDER.resolve("typicalPersonsJelphaBot.json");
-    private static final Path INVALID_TASK_FILE = TEST_DATA_FOLDER.resolve("invalidPersonJelphaBot.json");
-    private static final Path DUPLICATE_TASK_FILE = TEST_DATA_FOLDER.resolve("duplicatePersonJelphaBot.json");
+    private static final Path TYPICAL_TASKS_FILE = TEST_DATA_FOLDER.resolve("typicalTasksJelphaBot.json");
+    private static final Path INVALID_TASK_FILE = TEST_DATA_FOLDER.resolve("invalidTaskJelphaBot.json");
+    private static final Path DUPLICATE_TASK_FILE = TEST_DATA_FOLDER.resolve("duplicateTaskJelphaBot.json");
 
     @Test
     public void toModelType_typicalTasksFile_success() throws Exception {

@@ -38,13 +38,13 @@ public class SampleDataUtil {
             new Task(new Description("Graded Homework 3"), Status.INCOMPLETE, new DateTime("Jan-1-2020 22 00"),
                 new ModuleCode("MA1101R"), Priority.HIGH, getTagSet("colleagues")
             ),
-            new Task(new Description("Lab 1"), Status.INCOMPLETE, new DateTime("Jan/1/2020 22 00"),
+            new Task(new Description("Lab 1"), Status.INCOMPLETE, new DateTime("1/1/2020 12 00"),
                 new ModuleCode("CN1103"), Priority.HIGH, getTagSet("schoolwork")
             ),
-            new Task(new Description("Assignment 3"), Status.INCOMPLETE, new DateTime("1/1/2020 22 00"),
+            new Task(new Description("Assignment 3"), Status.INCOMPLETE, new DateTime("1-May-2020 11 11"),
                 new ModuleCode("PC1232"), Priority.MEDIUM, getTagSet("schoolwork")
             ),
-            new Task(new Description("Readings"), Status.INCOMPLETE, new DateTime("01 01 2020 22 00"),
+            new Task(new Description("Readings"), Status.INCOMPLETE, new DateTime("May/1/2020 22 00"),
                 new ModuleCode("EC1103"), Priority.MEDIUM, getTagSet("readings")
             )
         };
