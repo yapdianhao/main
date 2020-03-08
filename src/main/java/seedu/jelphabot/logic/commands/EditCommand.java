@@ -43,7 +43,7 @@ public class EditCommand extends Command {
             + "    " + "[" + PREFIX_MODULE_CODE + "MODULE_CODE]\n"
             + "    " + "[" + PREFIX_PRIORITY + "PRIORITY (-1, 0, or 1)]\n"
             + "    " + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_MODULE_CODE + "CS2105" + PREFIX_DATETIME + "Jan-1-2020 20 20"
+            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_MODULE_CODE + "CS2105 " + PREFIX_DATETIME + "Jan-1-2020 20 20 "
             + PREFIX_TAG + "Ungraded";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
@@ -151,7 +151,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(description, moduleCode, tags);
+            return CollectionUtil.isAnyNonNull(description, dateTime, moduleCode, tags, priority, status);
         }
 
         public Optional<Description> getDescription() {

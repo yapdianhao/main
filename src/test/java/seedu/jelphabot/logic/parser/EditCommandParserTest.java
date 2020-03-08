@@ -3,6 +3,7 @@ package seedu.jelphabot.logic.parser;
 import static seedu.jelphabot.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.DATETIME_DESC_TUTORIAL;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.DESCRIPTION_DESC_TUTORIAL;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.INVALID_DATETIME_DESC;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.INVALID_DESCRIPTION_DESC;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.INVALID_MODULE_CODE_DESC;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
@@ -30,6 +31,7 @@ import seedu.jelphabot.commons.core.index.Index;
 import seedu.jelphabot.logic.commands.EditCommand;
 import seedu.jelphabot.logic.commands.EditCommand.EditTaskDescriptor;
 import seedu.jelphabot.model.tag.Tag;
+import seedu.jelphabot.model.task.DateTime;
 import seedu.jelphabot.model.task.Description;
 import seedu.jelphabot.model.task.ModuleCode;
 import seedu.jelphabot.testutil.EditTaskDescriptorBuilder;
@@ -75,9 +77,10 @@ public class EditCommandParserTest {
     public void parse_invalidValue_failure() {
         // invalid desc
         assertParseFailure(parser, "1" + INVALID_DESCRIPTION_DESC, Description.MESSAGE_CONSTRAINTS);
+        // invalid datetime
+        assertParseFailure(parser, 1 + INVALID_DATETIME_DESC, DateTime.MESSAGE_CONSTRAINTS);
         // invalid module code
         assertParseFailure(parser, "1" + INVALID_MODULE_CODE_DESC, ModuleCode.MESSAGE_CONSTRAINTS);
-        // TODO invalid datetime
         // invalid tag
         assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS);
 
@@ -140,7 +143,7 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_oneFieldSpecified_success() {
-        // name
+        // description
         Index targetIndex = INDEX_THIRD_TASK;
         String userInput = targetIndex.getOneBased() + DESCRIPTION_DESC_TUTORIAL;
         EditCommand.EditTaskDescriptor descriptor =

@@ -78,7 +78,7 @@ public class JsonJelphaBotStorageTest {
         assertEquals(original, new JelphaBot(readBack));
 
         // Save and read without specifying file path
-        original.addTask(TUTORIAL);
+        original.addTask(ASSESSMENT);
         jsonJelphaBotStorage.saveJelphaBot(original); // file path not specified
         readBack = jsonJelphaBotStorage.readJelphaBot().get(); // file path not specified
         assertEquals(original, new JelphaBot(readBack));
