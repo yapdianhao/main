@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class DateTime {
 
-    private static final String STANDARD_FORMAT = "MMM-d-yyyy HH mm";
+    private static final String STANDARD_FORMAT = "MMM d yyyy HH mm";
     public static final String MESSAGE_CONSTRAINTS = "Date should be of the format " + STANDARD_FORMAT
                                                          + ". Time should be in the 24 hour format HH mm.";
     private static final String DISPLAY_FORMAT = "d-MMM-yyyy HH mm";
@@ -25,7 +25,7 @@ public class DateTime {
             new SimpleDateFormat("MMM/d/yyyy HH mm"),
             new SimpleDateFormat("d/M/y HH mm"),
             new SimpleDateFormat("d-MMM-yyyy HH mm"),
-            new SimpleDateFormat("d MMM yyyy HH mm")
+            new SimpleDateFormat("d/MMM/yyyy HH mm")
         );
     private static final DateFormat standardFormatter = new SimpleDateFormat(STANDARD_FORMAT);
     private static final DateFormat displayFormatter = new SimpleDateFormat(DISPLAY_FORMAT);
