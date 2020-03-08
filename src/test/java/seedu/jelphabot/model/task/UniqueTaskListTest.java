@@ -5,10 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_GRADED;
 import static seedu.jelphabot.testutil.Assert.assertThrows;
-import static seedu.jelphabot.testutil.TypicalTasks.*;
+import static seedu.jelphabot.testutil.TypicalTasks.ASSESSMENT;
+import static seedu.jelphabot.testutil.TypicalTasks.ASSIGNMENT;
+import static seedu.jelphabot.testutil.TypicalTasks.TUTORIAL;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -41,7 +42,7 @@ public class UniqueTaskListTest {
     public void contains_taskWithSameIdentityFieldsInList_returnsTrue() {
         uniqueTaskList.add(ASSESSMENT);
         Task editedAlice = new TaskBuilder(ASSESSMENT).withTags(VALID_TAG_GRADED)
-                .build();
+                               .build();
         assertTrue(uniqueTaskList.contains(editedAlice));
     }
 
@@ -84,7 +85,7 @@ public class UniqueTaskListTest {
     public void setTask_editedTaskHasSameIdentity_success() {
         uniqueTaskList.add(ASSESSMENT);
         Task editedAlice = new TaskBuilder(ASSESSMENT).withTags(VALID_TAG_GRADED)
-                .build();
+                               .build();
         uniqueTaskList.setTask(ASSESSMENT, editedAlice);
         UniqueTaskList expectedUniqueTaskList = new UniqueTaskList();
         expectedUniqueTaskList.add(editedAlice);
@@ -163,6 +164,7 @@ public class UniqueTaskListTest {
     @Test
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
-            -> uniqueTaskList.asUnmodifiableObservableList().remove(0));
+                                                              -> uniqueTaskList.asUnmodifiableObservableList()
+                                                                     .remove(0));
     }
 }

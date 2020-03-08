@@ -73,11 +73,13 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
-        assertParseFailure(parser, "1" + INVALID_DESCRIPTION_DESC, Description.MESSAGE_CONSTRAINTS); // invalid name
-        assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
-        assertParseFailure(parser, "1" + INVALID_MODULE_CODE_DESC,
-            ModuleCode.MESSAGE_CONSTRAINTS
-        ); // invalid module code
+        // invalid desc
+        assertParseFailure(parser, "1" + INVALID_DESCRIPTION_DESC, Description.MESSAGE_CONSTRAINTS);
+        // invalid module code
+        assertParseFailure(parser, "1" + INVALID_MODULE_CODE_DESC, ModuleCode.MESSAGE_CONSTRAINTS);
+        // TODO invalid datetime
+        // invalid tag
+        assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS);
 
         // valid phone followed by invalid phone. The test case for invalid phone followed by valid phone
         // is tested at {@code parse_invalidValueFollowedByValidValue_success()}
@@ -101,7 +103,9 @@ public class EditCommandParserTest {
         );
 
         // multiple invalid values, but only the first invalid value is captured
-        assertParseFailure(parser, "1" + INVALID_DESCRIPTION_DESC + INVALID_MODULE_CODE_DESC + INVALID_TAG_DESC,
+        assertParseFailure(
+            parser,
+            "1" + INVALID_DESCRIPTION_DESC + INVALID_MODULE_CODE_DESC + INVALID_TAG_DESC,
             Description.MESSAGE_CONSTRAINTS
         );
     }
@@ -114,7 +118,8 @@ public class EditCommandParserTest {
                 + TAG_DESC_GRADED;
 
         EditCommand.EditTaskDescriptor descriptor =
-            new EditTaskDescriptorBuilder().withDescription(VALID_DESCRIPTION_TUTORIAL).withModuleCode(VALID_MODULE_CODE_TUTORIAL)
+            new EditTaskDescriptorBuilder().withDescription(VALID_DESCRIPTION_TUTORIAL)
+                .withModuleCode(VALID_MODULE_CODE_TUTORIAL)
                 .withTags(VALID_TAG_GRADED, VALID_TAG_PROJECT).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
