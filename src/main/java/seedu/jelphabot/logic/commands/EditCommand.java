@@ -35,16 +35,17 @@ public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
-            + "by the index number used in the displayed task list. "
-            + "Existing values will be overwritten by the input values.\n"
-            + "Parameters:\n" + "INDEX (must be a positive integer) "
-            + "    " + "[" + PREFIX_DESCRIPTION + "DESCRIPTION]\n"
-            + "    " + "[" + PREFIX_DATETIME + "DATETIME]\n"
-            + "    " + "[" + PREFIX_MODULE_CODE + "MODULE_CODE]\n"
-            + "    " + "[" + PREFIX_PRIORITY + "PRIORITY (-1, 0, or 1)]\n"
-            + "    " + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_MODULE_CODE + "CS2105 " + PREFIX_DATETIME + "Jan-1-2020 20 20 "
-            + PREFIX_TAG + "Ungraded";
+                                                   + "by the index number used in the displayed task list. "
+                                                   + "Existing values will be overwritten by the input values.\n"
+                                                   + "Parameters:\n" + "INDEX (must be a positive integer) "
+                                                   + "    " + "[" + PREFIX_DESCRIPTION + "DESCRIPTION]\n"
+                                                   + "    " + "[" + PREFIX_DATETIME + "DATETIME]\n"
+                                                   + "    " + "[" + PREFIX_MODULE_CODE + "MODULE_CODE]\n"
+                                                   + "    " + "[" + PREFIX_PRIORITY + "PRIORITY (-1, 0, or 1)]\n"
+                                                   + "    " + "[" + PREFIX_TAG + "TAG]...\n"
+                                                   + "Example: " + COMMAND_WORD + " 1 " + PREFIX_MODULE_CODE + "CS2105 "
+                                                   + PREFIX_DATETIME + "Jan-1-2020 20 20 "
+                                                   + PREFIX_TAG + "Ungraded";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -54,7 +55,7 @@ public class EditCommand extends Command {
     private final EditTaskDescriptor editTaskDescriptor;
 
     /**
-     * @param index of the task in the filtered task list to edit
+     * @param index              of the task in the filtered task list to edit
      * @param editTaskDescriptor details to edit the task with
      */
     public EditCommand(Index index, EditTaskDescriptor editTaskDescriptor) {
@@ -228,8 +229,9 @@ public class EditCommand extends Command {
             // state check
             EditTaskDescriptor e = (EditTaskDescriptor) other;
 
-            return getDescription().equals(e.getDescription()) && getDateTime().equals(e.getDateTime()) && getModuleCode().equals(e.getModuleCode())
-                   && getPriority().equals(e.getPriority()) && getTags().equals(e.getTags());
+            return getDescription().equals(e.getDescription()) && getDateTime().equals(e.getDateTime())
+                       && getModuleCode().equals(e.getModuleCode())
+                       && getPriority().equals(e.getPriority()) && getTags().equals(e.getTags());
         }
     }
 }
