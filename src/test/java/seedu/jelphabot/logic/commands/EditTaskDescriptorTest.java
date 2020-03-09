@@ -8,7 +8,6 @@ import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_DATETIME_TUTO
 import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_DESCRIPTION_TUTORIAL;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_MODULE_CODE_TUTORIAL;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_PRIORITY_TUTORIAL;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_STATUS_TUTORIAL;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_PROJECT;
 
 import org.junit.jupiter.api.Test;
@@ -41,9 +40,9 @@ public class EditTaskDescriptorTest {
             new EditTaskDescriptorBuilder(DESC_ASSIGNMENT).withDescription(VALID_DESCRIPTION_TUTORIAL).build();
         assertNotEquals(DESC_ASSIGNMENT, editedAssignment);
 
-        // different status -> returns false
-        editedAssignment = new EditTaskDescriptorBuilder(DESC_ASSIGNMENT).withStatus(VALID_STATUS_TUTORIAL).build();
-        assertNotEquals(DESC_ASSIGNMENT, editedAssignment);
+        // // different status -> returns false
+        // editedAssignment = new EditTaskDescriptorBuilder(DESC_ASSIGNMENT).withStatus(VALID_STATUS_TUTORIAL).build();
+        // assertNotEquals(DESC_ASSIGNMENT, editedAssignment);
 
         // different dateTime -> returns false
         editedAssignment = new EditTaskDescriptorBuilder(DESC_ASSIGNMENT).withDateTime(VALID_DATETIME_TUTORIAL).build();
