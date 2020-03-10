@@ -1,4 +1,4 @@
-= AddressBook Level 3 - User Guide
+= JelphaBot - User Guide
 :site-section: UserGuide
 :toc:
 :toc-title:
@@ -14,89 +14,113 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/se-edu/addressbook-level3
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `Team 2103T-F09-02`      Since: `Jan 2022`      Licence: `MIT`
 
 == Introduction
 
-AddressBook Level 3 (AB3) is for those who *prefer to use a desktop app for managing contacts*. More importantly, AB3 is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+JelphaBot is designed for users who *prefer to use a desktop app for managing tasks*.
+If you *prefer to work with a Command Line Interface* (CLI), JelphaBot allows you to work fast while still retaining the benefits of a Graphical User Interface (GUI).
+If you can type fast, JelphaBot can get your contact management tasks done faster than traditional GUI apps.
+
+The JelphaBot GUI is designed to allow you to *recognise important tasks at first glance* so that you can prioritise commitments and manage your time.
+
+Interested? Jump to the <<Quick Start>> to get started.
+Enjoy!
 
 == Quick Start
 
-.  Ensure you have Java `11` or above installed in your Computer.
-.  Download the latest `addressbook.jar` link:{repoURL}/releases[here].
-.  Copy the file to the folder you want to use as the home folder for your Address Book.
-.  Double-click the file to start the app. The GUI should appear in a few seconds.
+. Ensure you have Java `11` or above installed in your Computer.
+. Download the latest `jelphabot.jar` link:{repoURL}/releases[here].
+. Copy the file to the folder you want to use as the home folder for your JelphaBot.
+. Double-click the file to start the app.
+The GUI should appear in a few seconds.
 +
 image::Ui.png[width="790"]
 +
-.  Type the command in the command box and press kbd:[Enter] to execute it. +
+. Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
-.  Some example commands you can try:
+. Some example commands you can try:
 
-* *`list`* : lists all contacts
-* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to the Address Book.
-* **`delete`**`3` : deletes the 3rd contact shown in the current list
+* *`list`* : lists all tasks
+* **`add`**`d/Assignment 1 dt/10-Mar-2020 23 59 m/CS2103T` : adds a task named `Assignment 1` to the task list.
+* **`delete`**`3` : deletes the 3rd task shown in the current list
 * *`exit`* : exits the app
 
-.  Refer to <<Features>> for details of each command.
+. Refer to <<Features>> for details of each command.
 
 [[Features]]
-== Features
 
+== Features
 ====
 *Command Format*
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
-* Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-* Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-* Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add d/DESCRIPTION`, `DESCRIPTION` is a parameter which can be used as `add d/Assignment 1`.
+* Items in square brackets are optional e.g `d/DESCRIPTION [p/PRIORITY]` can be used as `d/Assignment 1 p/0` or as `d/Assignment 1`.
+* Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/project`, `t/project t/graded` etc.
+* Parameters can be in any order e.g. if the command specifies `d/DESCRIPTION p/PRIORITY`, `p/PRIORITY d/DESCRIPTION` is also acceptable.
 ====
 
 === Viewing help : `help`
 
 Format: `help`
 
-=== Adding a person: `add`
+Opens a help popup which provides a link to this user guide.
 
-Adds a person to the address book +
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
+=== Adding a task: `add`
+
+Adds a task to the task list +
+Format: `d/DESCRIPTION dt/DATETIME m/MODULE_CODE [p/PRIORITY] [t/TAG]...`
+
+****
+* For dt/DATETIME inputs, we recommend the format MMM-dd-YYYY HH mm, but it also allows some other formats.
+// TODO list datetime accepted formats here
+* Values that p/PRIORITY can take are -1, 0 or 1. If not specified, DEFAULTS TO 1.
+****
 
 [TIP]
-A person can have any number of tags (including 0)
+A task can have any number of tags (including 0)
 
 Examples:
 
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add add d/Assignment 1 dt/Jan-01-2020 23 59 m/CS3230 p/1`
+* `add add d/Project TP dt/Jan-01-2020 23 59 m/CS2103T p/1 t/pair work`
 
-=== Listing all persons : `list`
+=== Listing all tasks : `list`
 
-Shows a list of all persons in the address book. +
+Shows a list of all tasks in the task list. +
 Format: `list`
 
-=== Editing a person : `edit`
+image::ug_figures/list.png[width="600"]
+_Figure: Example of an expected result after running `list`_
 
-Edits an existing person in the address book. +
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+The task list is formatted so that you can distinguish urgent tasks at first glance. Tasks are tagged according to their importance:
 
-****
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index *must be a positive integer* 1, 2, 3, ...
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person's tags by typing `t/` without specifying any tags after it.
-****
+* Default
+* *Important*
+* _Optional_
 
-Examples:
+Deadlines that are marked as low priority (`p/-1`) will be _italicized_ to denote that there is no penalty for not meeting the deadline. (or that it denotes an approximate deadline )
 
-* `edit 1 p/91234567 e/johndoe@example.com` +
-Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-* `edit 2 n/Betsy Crower t/` +
-Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+Deadlines that are marked as high priority (`p/1`) will be *bolded* to denote that they are more urgent.
 
-=== Locating persons by name: `find`
+Tasks will be organized into drop down menus based on the following Categories:
 
-Finds persons whose names contain any of the given keywords. +
+* Now  +
+(Showing tasks due within the next 4 hours)
+* Today +
+(Showing tasks due by the end of the day)
+* This week +
+(Showing tasks due by the end of the week, defined as before the next upcoming Monday)
+* This month +
+(Showing tasks due by the end of the month, defined as all tasks within the same Month and Year as the current date)
+
+The start of every task will be labelled with a visual tag so that you can visually categorize them.
+
+To read more about tags, go <<#Tags, here>>
+
+=== Locating tasks by name: `find`
+
+Finds tasks whose description contain any of the given keywords. +
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 ****
@@ -104,25 +128,48 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* tasks matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 ****
 
 Examples:
 
-* `find John` +
-Returns `john` and `John Doe`
-* `find Betsy Tim John` +
-Returns any person having names `Betsy`, `Tim`, or `John`
+* `find assignment` +
+Returns `Assignment 1` and `assignment task`
+* `find Tutorial Project MidTerm` +
+Returns any task having descriptions of `Tutorial`, `Project`, or `MidTerm`
+
+=== Editing a task : `edit`
+
+Edits an existing task in the address book. +
+Format: `edit INDEX [d/DESCRIPTION] [dt/DATETIME] [m/MODULE_CODE] [p/PRIORITY (-1, 0, or 1)] [t/TAG]...`
+
+****
+* Edits the task at the specified `INDEX`.
+The index refers to the index number shown in the displayed task list.
+The index *must be a positive integer* 1, 2, 3, ...
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the task will be removed i.e adding of tags is not cumulative.
+* You can remove all the task's tags by typing `t/` without specifying any tags after it.
+****
+
+Examples:
+
+* `edit 1 m/CS2105 d/Tutorial 2` +
+Edits the moduleCode of the 1st task to be `cs2105` and description to `Tutorial 2` respectively.
+* `edit 2 dt/Jan-2-2020 23 59 t/` +
+Edits the date and time of the 2nd task to be `Jan-2-2020 23 59` and clears all existing tags.
+
 
 // tag::delete[]
-=== Deleting a person : `delete`
+=== Deleting a task : `delete`
 
-Deletes the specified person from the address book. +
+Deletes the specified task from the task list. +
 Format: `delete INDEX`
 
 ****
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* Deletes the task at the specified `INDEX`.
+* The index refers to the index number shown in the displayed task list.
 * The index *must be a positive integer* 1, 2, 3, ...
 ****
 
@@ -130,16 +177,19 @@ Examples:
 
 * `list` +
 `delete 2` +
-Deletes the 2nd person in the address book.
+Deletes the 2nd task in the task list.
 * `find Betsy` +
 `delete 1` +
-Deletes the 1st person in the results of the `find` command.
+Deletes the 1st task in the results of the `find` command.
 
 // end::delete[]
 === Clearing all entries : `clear`
 
 Clears all entries from the address book. +
 Format: `clear`
+
+// tag::log[]
+=== Viewing the task log : `log`
 
 === Exiting the program : `exit`
 
@@ -151,11 +201,63 @@ Format: `exit`
 Address book data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
-// tag::dataencryption[]
-=== Encrypting data files `[coming in v2.0]`
+=== Set Reminders and Notifications  `[coming in v2.0]`
 
-_{explain how the user can enable/disable data encryption}_
-// end::dataencryption[]
+=== Pin Important tasks  `[coming in v2.0]`
+
+== Interface Navigation
+
+=== Colours for prioritising modules  `[coming in v2.0]`
+
+=== Integrate Calender on Interface  `[coming in v2.0]`
+
+=== Morning call/Night debrief  `[coming in v2.0]`
+
+JelphaBot is a digital assistant aimed at providing summaries and timely reminders.
+With Morning Call and Nightly Debrief, JelphaBot can provide daily summaries for you to start and end the day well.
+
+==== Morning Call
+You can configure the time of the morning call.
+Format: `morning_call -t <time>`
+
+-----
+Good morning!
+Your first task starts at 8AM today.
+Here are the tasks you have for the day:
+[ ] Go to School
+[ ] Eat Breakfast
+[ ] Pass CS3230
+[ ] Hit the woah
+-----
+_Example Morning call_
+
+==== Nightly Debrief
+You can configure the time of the morning call.
+Format: `morning_call \t [TIME]`
+
+-----
+Good evening sexy!
+Here are the tasks you have completed today:
+[x] Go to School
+[x] Eat breakfast
+[x] Hit the woah
+
+The following tasks were deferred:
+|--> Pass CS3230 (To Tomorrow)
+
+The following tasks are incomplete. Would you like to reschedule them?
+[ ] Survive CS2103T
+
+You start tomorrow at 9am. Goodnight bb xoxo uwu <3
+
+-----
+_Example Night Debrief_
+
+=== Sticky notes  `[coming in v2.0]`
+
+=== Productivity tracker  `[coming in v2.0]`
+
+=== Sort tasks (by today, week, month)  `[coming in v2.0]`
 
 == FAQ
 
@@ -164,14 +266,19 @@ _{explain how the user can enable/disable data encryption}_
 
 == Command Summary
 
-* *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
-e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+* *Add* `[d/DESCRIPTION] [dt/DATETIME] [m/MODULE_CODE] [p/PRIORITY] [t/TAG]…` +
+e.g. `add add d/Project TP dt/Jan-01-2020 23 59 m/CS2103T p/1 t/pair work`
 * *Clear* : `clear`
 * *Delete* : `delete INDEX` +
 e.g. `delete 3`
-* *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
-e.g. `edit 2 n/James Lee e/jameslee@example.com`
+* *Edit* : `edit INDEX
+[d/DESCRIPTION]
+[dt/DATETIME]
+[m/MODULE_CODE]
+[p/PRIORITY]
+[t/TAG]...` +
+e.g. `edit 1 m/CS2105 d/Tutorial 2`
 * *Find* : `find KEYWORD [MORE_KEYWORDS]` +
-e.g. `find James Jake`
+e.g. `find Tutorial Assignment`
 * *List* : `list`
 * *Help* : `help`
