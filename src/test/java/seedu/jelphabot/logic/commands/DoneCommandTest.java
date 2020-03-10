@@ -1,15 +1,16 @@
-package seedu.jelphabot.logic;
+package seedu.jelphabot.logic.commands;
 
-import static seedu.jelphabot.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.*;
 import static seedu.jelphabot.testutil.TypicalIndexes.INDEX_FIRST_TASK;
+import static seedu.jelphabot.testutil.TypicalIndexes.INDEX_SECOND_TASK;
 import static seedu.jelphabot.testutil.TypicalTasks.getTypicalJelphaBot;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.jelphabot.commons.core.Messages;
 import seedu.jelphabot.commons.core.index.Index;
-import seedu.jelphabot.logic.commands.DoneCommand;
 import seedu.jelphabot.model.Model;
 import seedu.jelphabot.model.ModelManager;
 import seedu.jelphabot.model.UserPrefs;
@@ -38,5 +39,64 @@ public class DoneCommandTest {
         DoneCommand doneCommand = new DoneCommand(outOfBoundIndex);
 
         assertCommandFailure(doneCommand, model, Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_validIndexFilteredList_success() {
+        showTaskAtIndex(model, INDEX_FIRST_TASK);
+
+        Task tasktoMarkDone = model.getFilteredTaskList().get(INDEX_FIRST_TASK.getZeroBased());
+        DoneCommand doneCommand = new DoneCommand(INDEX_FIRST_TASK);
+        Task doneTask = doneCommand.createDoneTask(tasktoMarkDone);
+
+        String expectedMessage = String.format(DoneCommand.MESSAGE_MARK_TASK_COMPLETE_SUCCESS, tasktoMarkDone);
+
+        Model expectedModel = new ModelManager(model.getJelphaBot(), new UserPrefs());
+        expectedModel.setTask(tasktoMarkDone, doneTask);
+        showNoPerson(expectedModel);
+    }
+
+    @Test
+    public void execute_InvalidIndexFilteredList_throwsCommandException() {
+        showTaskAtIndex(model, INDEX_FIRST_TASK);
+
+        Index outOfBoundIndex = INDEX_SECOND_TASK;
+        // ensures that outOfBoundIndex is still in bounds of the task list
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getJelphaBot().getTaskList().size());
+
+        DoneCommand doneCommand = new DoneCommand(outOfBoundIndex);
+
+        assertCommandFailure(doneCommand, model, Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void equals() {
+        DoneCommand firstDoneCommand = new DoneCommand(INDEX_FIRST_TASK);
+        DoneCommand secondDoneCommand = new DoneCommand(INDEX_SECOND_TASK);
+
+        // same object returns true
+        assertTrue(firstDoneCommand.equals(firstDoneCommand));
+
+        // same values returns true
+        DoneCommand firstDoneCommandCopy = new DoneCommand(INDEX_FIRST_TASK);
+        assertTrue(firstDoneCommand.equals(firstDoneCommandCopy));
+
+        // different types returns false
+        assertFalse(firstDoneCommand.equals(1));
+
+        // null returns false
+        assertFalse(firstDoneCommand.equals(null));
+
+        // different task returns false
+        assertFalse(firstDoneCommand.equals(secondDoneCommand));
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show no one.
+     */
+    private void showNoPerson(Model model) {
+        model.updateFilteredTaskList(p -> false);
+
+        assertTrue(model.getFilteredTaskList().isEmpty());
     }
 }
