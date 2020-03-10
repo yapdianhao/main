@@ -98,7 +98,7 @@ image::LogicClassDiagram.png[]
 *API* :
 link:{repoURL}/src/main/java/seedu/address/logic/Logic.java[`Logic.java`]
 
-.  `Logic` uses the `AddressBookParser` class to parse the user command.
+.  `Logic` uses the `JelphaBotParser` class to parse the user command.
 .  This results in a `Command` object which is executed by the `LogicManager`.
 .  The command execution can affect the `Model` (e.g. adding a person).
 .  The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
@@ -147,7 +147,7 @@ The `Storage` component,
 [[Design-Commons]]
 === Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.jelphabot.commons` package.
 
 == Implementation
 
@@ -319,13 +319,72 @@ _{More to be added}_
 
 //[discrete]
 === Use case: UC1 - Add Task
+*MSS*
 
+1.  User keys in command to add task.
+2.  JelphaBot adds the task and displays the added task to the user.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. JelphaBot detects an error in the entered command.
++
+[none]
+** 1a1. JelphaBot detects error and displays the correct input format to be expected.
+** 1a2. User enters new command.
+** Steps 1a1-1a2 are repeated until the command entered is correct.
++
+Use case resumes from step 2.
 
 === Use case: UC2 - List Tasks
+*MSS*
 
+1.  User keys in command to list tasks.
+2.  JelphaBot displays the list of all the tasks.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. JelphaBot detects an error in the entered command.
++
+[none]
+** 1a1. JelphaBot detects error and displays the correct input format to be expected.
+** 1a2. User enters new command.
+** Steps 1a1-1a2 are repeated until the command entered is correct.
++
+Use case resumes from step 2.
 
 === Use case: UC3 - Mark Task as Done
+*MSS*
 
+1.  User specifies to mark a task as done by specifying the task index.
+2.  JelphaBot updates the task status and displays the updated task to the user.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. JelphaBot detects an error in the entered command.
++
+[none]
+** 1a1. JelphaBot detects error and displays the correct input format to be expected.
+** 1a2. User enters new command.
+** Steps 1a1-1a2 are repeated until the command entered is correct.
++
+Use case resumes from step 2.
+* 1b. JelphaBot detects that the specified task does not exist.
++
+[none]
+** 1b1. JelphaBot detects error and displays the correct input format to be expected.
+** 1b2. User enters new task index to be marked as done.
+** Steps 1b1-1b2 are repeated until the command entered is correct.
++
+Use case resumes from step 2.
 
 === Use case: UC4 - Edit Task Details
 
@@ -334,28 +393,7 @@ _{More to be added}_
 
 
 === Use case: UC6 - Delete Task
-*MSS*
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
-+
-Use case ends.
-
-*Extensions*
-
-[none]
-* 2a. The list is empty.
-+
-Use case ends.
-
-* 3a. The given index is invalid.
-+
-[none]
-** 3a1. AddressBook shows an error message.
-+
-Use case resumes at step 2.
 
 [appendix]
 == Non Functional Requirements
@@ -372,8 +410,6 @@ _{More to be added}_
 [[mainstream-os]] Mainstream OS::
 Windows, Linux, Unix, OS-X
 
-[[private-contact-detail]] Private contact detail::
-A contact detail that is not meant to be shared with others
 
 [appendix]
 == Product Survey
