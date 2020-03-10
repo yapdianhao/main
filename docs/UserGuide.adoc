@@ -50,9 +50,6 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 [[Features]]
 == Features
-
-=== Command-Line Interface
-
 ====
 *Command Format*
 
@@ -62,13 +59,13 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * Parameters can be in any order e.g. if the command specifies `d/DESCRIPTION p/PRIORITY`, `p/PRIORITY d/DESCRIPTION` is also acceptable.
 ====
 
-==== Viewing help : `help`
+=== Viewing help : `help`
 
 Format: `help`
 
 Opens a help popup which provides a link to this user guide.
 
-==== Adding a task: `add`
+=== Adding a task: `add`
 
 Adds a task to the task list +
 Format: `d/DESCRIPTION dt/DATETIME m/MODULE_CODE [p/PRIORITY] [t/TAG]...`
