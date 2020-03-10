@@ -18,11 +18,13 @@ By: `Team 2103T-F09-02`      Since: `Jan 2022`      Licence: `MIT`
 
 == Introduction
 
-JelphaBot is for those who *prefer to use a desktop app for managing tasks*.
-More importantly, JelphaBot is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI).
+JelphaBot is designed for users who *prefer to use a desktop app for managing tasks*.
+If you *prefer to work with a Command Line Interface* (CLI), JelphaBot allows you to work fast while still retaining the benefits of a Graphical User Interface (GUI).
 If you can type fast, JelphaBot can get your contact management tasks done faster than traditional GUI apps.
-Interested?
-Jump to the <<Quick Start>> to get started.
+
+The JelphaBot GUI is designed to allow you to *recognise important tasks at first glance* so that you can prioritise commitments and manage your time.
+
+Interested? Jump to the <<Quick Start>> to get started.
 Enjoy!
 
 == Quick Start
@@ -40,7 +42,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 . Some example commands you can try:
 
 * *`list`* : lists all tasks
-* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a task named `John Doe` to the Address Book.
+* **`add`**`d/Assignment 1 dt/10-Mar-2020 23 59 m/CS2103T` : adds a task named `Assignment 1` to the task list.
 * **`delete`**`3` : deletes the 3rd task shown in the current list
 * *`exit`* : exits the app
 
@@ -54,27 +56,26 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 ====
 *Command Format*
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
-* Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-* Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-* Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add d/DESCRIPTION`, `DESCRIPTION` is a parameter which can be used as `add d/Assignment 1`.
+* Items in square brackets are optional e.g `d/DESCRIPTION [p/PRIORITY]` can be used as `d/Assignment 1 p/0` or as `d/Assignment 1`.
+* Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/project`, `t/project t/graded` etc.
+* Parameters can be in any order e.g. if the command specifies `d/DESCRIPTION p/PRIORITY`, `p/PRIORITY d/DESCRIPTION` is also acceptable.
 ====
 
 ==== Viewing help : `help`
 
 Format: `help`
 
+Opens a help popup which provides a link to this user guide.
+
 ==== Adding a task: `add`
 
 Adds a task to the task list +
-Format: `d/DESCRIPTION
-dt/DATETIME
-m/MODULE_CODE
-[p/PRIORITY]
-[t/TAG]...`
+Format: `d/DESCRIPTION dt/DATETIME m/MODULE_CODE [p/PRIORITY] [t/TAG]...`
 
 ****
-* For dt/DATETIME inputs, it has to be in format MMM-dd-YYYY HH mm.
+* For dt/DATETIME inputs, we recommend the format MMM-dd-YYYY HH mm, but it also allows some other formats.
+// TODO list datetime accepted formats here
 * Values that p/PRIORITY can take are -1, 0 or 1. If not specified, DEFAULTS TO 1.
 ****
 
@@ -91,32 +92,33 @@ Examples:
 Shows a list of all tasks in the task list. +
 Format: `list`
 
-==== Editing a task : `edit`
+image::docs/images/ug_figures/list.png[width="600"]
+_Figure: Example of an expected result after running `list`_
 
-Edits an existing task in the address book. +
-Format: `edit INDEX
-[d/DESCRIPTION]
-[dt/DATETIME]
-[m/MODULE_CODE]
-[p/PRIORITY (-1, 0, or 1)]
-[t/TAG]...`
+The task list is formatted so that you can distinguish urgent tasks at first glance. Tasks are tagged according to their importance:
 
-****
-* Edits the task at the specified `INDEX`.
-The index refers to the index number shown in the displayed task list.
-The index *must be a positive integer* 1, 2, 3, ...
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the task will be removed i.e adding of tags is not cumulative.
-* You can remove all the task's tags by typing `t/` without specifying any tags after it.
-****
+* Default
+* *Important*
+* _Optional_
 
-Examples:
+Deadlines that are marked as low priority (`p/-1`) will be _italicized_ to denote that there is no penalty for not meeting the deadline. (or that it denotes an approximate deadline )
 
-* `edit 1 m/CS2105 d/Tutorial 2` +
-Edits the moduleCode of the 1st task to be `cs2105` and description to `Tutorial 2` respectively.
-* `edit 2 dt/Jan-2-2020 23 59 t/` +
-Edits the date and time of the 2nd task to be `Jan-2-2020 23 59` and clears all existing tags.
+Deadlines that are marked as high priority (`p/1`) will be *bolded* to denote that they are more urgent.
+
+Tasks will be organized into drop down menus based on the following Categories:
+
+* Now  +
+(Showing tasks due within the next 4 hours)
+* Today +
+(Showing tasks due by the end of the day)
+* This week +
+(Showing tasks due by the end of the week, defined as before the next upcoming Monday)
+* This month +
+(Showing tasks due by the end of the month, defined as all tasks within the same Month and Year as the current date)
+
+The start of every task will be labelled with a visual tag so that you can visually categorize them.
+
+To read more about tags, go <<#Tags, here>>
 
 ==== Locating tasks by name: `find`
 
@@ -137,6 +139,30 @@ Examples:
 Returns `Assignment 1` and `assignment task`
 * `find Tutorial Project MidTerm` +
 Returns any task having descriptions of `Tutorial`, `Project`, or `MidTerm`
+
+==== Editing a task : `edit`
+
+Edits an existing task in the address book. +
+Format: `edit INDEX [d/DESCRIPTION] [dt/DATETIME] [m/MODULE_CODE] [p/PRIORITY (-1, 0, or 1)]
+[t/TAG]...`
+
+****
+* Edits the task at the specified `INDEX`.
+The index refers to the index number shown in the displayed task list.
+The index *must be a positive integer* 1, 2, 3, ...
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the task will be removed i.e adding of tags is not cumulative.
+* You can remove all the task's tags by typing `t/` without specifying any tags after it.
+****
+
+Examples:
+
+* `edit 1 m/CS2105 d/Tutorial 2` +
+Edits the moduleCode of the 1st task to be `cs2105` and description to `Tutorial 2` respectively.
+* `edit 2 dt/Jan-2-2020 23 59 t/` +
+Edits the date and time of the 2nd task to be `Jan-2-2020 23 59` and clears all existing tags.
+
 
 // tag::delete[]
 ==== Deleting a task : `delete`
