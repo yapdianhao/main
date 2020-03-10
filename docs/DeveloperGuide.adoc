@@ -317,10 +317,44 @@ _{More to be added}_
 
 //[discrete]
 === Use case: UC1 - Add Task
+*MSS*
 
+1.  User keys in command to add task.
+2.  JelphaBot adds the task and displays the added task to the user.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. JelphaBot detects an error in the entered command.
++
+[none]
+** 1a1. JelphaBot detects error and displays the correct input format to be expected.
+** 1a2. User enters new command.
+** Steps 1a1-1a2 are repeated until the command entered is correct.
++
+Use case resumes from step 2.
 
 === Use case: UC2 - List Tasks
+*MSS*
 
+1.  User keys in command to list tasks.
+2.  JelphaBot displays the list of all the tasks.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. JelphaBot detects an error in the entered command.
++
+[none]
+** 1a1. JelphaBot detects error and displays the correct input format to be expected.
+** 1a2. User enters new command.
+** Steps 1a1-1a2 are repeated until the command entered is correct.
++
+Use case resumes from step 2.
 
 === Use case: UC3 - Mark Task as Done
 
