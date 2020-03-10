@@ -279,13 +279,15 @@ Refer to the guide <<DevOps#, here>>.
 
 *Target user profile*:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing over mouse input
+* NUS students who need to manage a large number of tasks
+* prefer using a desktop app over other types
+* wants to distinguish at first glance important and unimportant tasks
+* can type fast; prefers typing over mouse input
 * is reasonably comfortable using CLI apps
 
-*Value proposition*: manage contacts faster than a typical mouse/GUI driven app
+*Value proposition*: The user will be able to manage tasks faster than a typical mouse/GUI driven app, and the visual
+representation of tasks in the UI will allow the user to look through entire lists of tasks more quickly than in
+the terminal.
 
 [appendix]
 == User Stories
