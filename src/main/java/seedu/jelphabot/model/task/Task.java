@@ -80,6 +80,7 @@ public class Task {
         return otherTask != null
                    && otherTask.getDescription().equals(getDescription())
                    && otherTask.getDateTime().equals(getDateTime())
+                   && otherTask.getStatus().equals(getStatus())
                    && otherTask.getModuleCode().equals(getModuleCode());
     }
 

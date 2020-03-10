@@ -30,6 +30,7 @@ public class DoneCommand extends Command {
         + "Parameters: INDEX (must be a positive integer)\n";
 
     public static final String MESSAGE_MARK_TASK_COMPLETE_SUCCESS = "Marked task as completed: %1$s";
+    public static final String MESSAGE_TASK_ALREADY_MARKED_COMPLETE = "The specified task has already been marked as complete!";
 
     private final Index index;
 
@@ -53,6 +54,10 @@ public class DoneCommand extends Command {
         Task taskToMarkDone = lastShownList.get(index.getZeroBased());
         Task doneTask = createDoneTask(taskToMarkDone);
 
+        if (taskToMarkDone.isSameTask(doneTask)) {
+            throw new CommandException(MESSAGE_TASK_ALREADY_MARKED_COMPLETE);
+        }
+
         model.setTask(taskToMarkDone, doneTask);
         model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
         return new CommandResult(String.format(MESSAGE_MARK_TASK_COMPLETE_SUCCESS, doneTask));
@@ -65,7 +70,7 @@ public class DoneCommand extends Command {
      * @param task Task object to get the relevant details from.
      * @return Task object with it's status set as COMPLETE.
      */
-    public Task createDoneTask(Task task) {
+    public static Task createDoneTask(Task task) {
         Description description = task.getDescription();
         ModuleCode moduleCode = task.getModuleCode();
         Set<Tag> tags = task.getTags();
