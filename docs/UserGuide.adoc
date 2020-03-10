@@ -71,7 +71,8 @@ Opens a help popup which provides a link to this user guide.
 
 Adds a task to the task list +
 Format: `d/DESCRIPTION dt/DATETIME m/MODULE_CODE [p/PRIORITY] [t/TAG]...`
-image::ug_figures/add.png[width="600"]
+
+image::add.png[width="600"]
 _Figure 2: Example of an expected result after running `add`_
 
 ****
@@ -126,7 +127,8 @@ To read more about tags, go <<#Tags, here>>
 Finds tasks whose description contain any of the given keywords. +
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-image::ug_figures/find.png[width="600"]
+image::find.png[width="600"]
+
 _Figure 4: Example of an expected result after running `find`_
 
 ****
@@ -150,7 +152,8 @@ Edit existing tasks by calling `edit` directly from a task page, or `edit <task_
 . +
 Format: `edit INDEX [d/DESCRIPTION] [dt/DATETIME] [m/MODULE_CODE] [p/PRIORITY (-1, 0, or 1)]
 [t/TAG]...`
-image::ug_figures/edit.png[width="600"]
+
+image::edit.png[width="600"]
 _Figure 5: Example of an expected result after running `edit`_
 
 ****
@@ -176,7 +179,8 @@ Edits the date and time of the 2nd task to be `Jan-2-2020 23 59` and clears all 
 
 Deletes tasks by calling `delete` directly from a task page or `delete <task_name>` from the landing page. +
 Format: `delete INDEX`
-image::ug_figures/delete.png[width="600"]
+
+image::delete.png[width="600"]
 _Figure 6: Example of an expected result after running `delete`_
 
 ****
