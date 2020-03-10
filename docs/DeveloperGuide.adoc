@@ -297,17 +297,59 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 [width="59%",cols="22%,<23%,<25%,<30%",options="header",]
 |=======================================================================
 |Priority |As a ... |I want to ... |So that I can...
-|`* * *` |new user |see usage instructions |refer to instructions when I forget how to use the App
+|`* * *` |student with good work-life balance |view tasks with different labels (e.g. health, work) under different tabs |
 
-|`* * *` |user |add a new person |
+|`* * *` |student with many group projects |be able to import and export shared text files |
 
-|`* * *` |user |delete a person |remove entries that I no longer need
+|`* * *` |goal-oriented student |set goals for the next day |
 
-|`* * *` |user |find a person by name |locate details of persons without having to go through the entire list
+|`* * *` |student |track tasks I've completed in a log | better understand myself and time management.
 
-|`* *` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
+|`* * *` |student who has a flexible schedule |reorder my tasks easily |
 
-|`*` |user with many persons in the address book |sort persons by name |locate a person easily
+|`* * *` |student taking multiple modules |*_tag my tasks_* |manage the time spent on each module.
+
+|`* * *` |student who has a flexible schedule |*_remove tasks_* when they are no longer relevant |
+
+|`* * *` |student who gets tasks done frequently |marks my tasks as completed |focus on the unfinished ones.
+
+|`* * *` |lazy student |which of my classes have graded attendance |have more time to laze.
+
+|`* * *` |busy student |what tasks are important at first glance |manage my time well.
+
+|`* * *` |student who loves to procrastinate | get reminders of tasks I have delayed | don't forget them
+
+|`* * *` |hall resident |keep track of my events and commitments | plan my time properly
+
+|`* *` |student |track my habits| know if I have strayed from my goal
+
+|`* *` |student |keep track of number of tasks completed and the number of tasks I have to complete by a certain date time |
+
+|`* *` |student who actively keeps track of upcoming tasks |view tasks specifically for a range of date/time |
+
+|`* *` |visual student |customize my tags |
+
+|`* *` |forgetful student |reminders for exam dates | plan my revision efficiently
+
+|`* *` |unmotivated student |bot that does a morning call for me | wake up and start my day on time
+
+|`* *` |free-spirited student |set deadlines for doing tutorials and watching webcasts | do things at my own pace while not lagging behind in class
+
+|`*` |who needs validation and reminders |debriefed on my achievements (task completed, migrated, scheduled) for that day and what is in store for me the next day |
+
+|`*` |irresponsible student |“motivated” to complete my tasks | actually complete my tasks in time
+
+|`*` |student that is driven by motivation |receive timely compliments | stay motivated to complete my tasks on time
+
+|`*` |someone who doesnt always open the computer to run a jar file in the morning |have a convenient way to enter and receive notifications |
+
+|`*` |loner |have a bot to talk to me | will not be so lonely anymore
+
+|`*` |lives alone and cook myself |know that what stuffs I have to buy at fairprice |cook my meals
+
+|`*` |irresponsible student |scolded |learn from my mistakes and be more responsible in the future
+
+|`*` |talented student |know which hackathons I already participated in | polish my portfolio
 |=======================================================================
 
 _{More to be added}_
