@@ -71,7 +71,7 @@ Opens a help popup which provides a link to this user guide.
 
 Adds a task to the task list +
 Format: `d/DESCRIPTION dt/DATETIME m/MODULE_CODE [p/PRIORITY] [t/TAG]...`
-image::docs/images/ug_figures/add.png[width="600"]
+image::ug_figures/add.png[width="600"]
 _Figure 2: Example of an expected result after running `add`_
 
 ****
@@ -93,7 +93,7 @@ Examples:
 Shows a list of all tasks in the task list. +
 Format: `list`
 
-image::docs/images/ug_figures/list.png[width="600"]
+image::ug_figures/list.png[width="600"]
 _Figure 3: Example of an expected result after running `list`_
 
 The task list is formatted so that you can distinguish urgent tasks at first glance. Tasks are tagged according to their importance:
@@ -126,7 +126,7 @@ To read more about tags, go <<#Tags, here>>
 Finds tasks whose description contain any of the given keywords. +
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-image::docs/images/ug_figures/find.png[width="600"]
+image::ug_figures/find.png[width="600"]
 _Figure 4: Example of an expected result after running `find`_
 
 ****
@@ -150,7 +150,7 @@ Edit existing tasks by calling `edit` directly from a task page, or `edit <task_
 . +
 Format: `edit INDEX [d/DESCRIPTION] [dt/DATETIME] [m/MODULE_CODE] [p/PRIORITY (-1, 0, or 1)]
 [t/TAG]...`
-image::docs/images/ug_figures/edit.png[width="600"]
+image::ug_figures/edit.png[width="600"]
 _Figure 5: Example of an expected result after running `edit`_
 
 ****
@@ -176,7 +176,7 @@ Edits the date and time of the 2nd task to be `Jan-2-2020 23 59` and clears all 
 
 Deletes tasks by calling `delete` directly from a task page or `delete <task_name>` from the landing page. +
 Format: `delete INDEX`
-image::docs/images/ug_figures/delete.png[width="600"]
+image::ug_figures/delete.png[width="600"]
 _Figure 6: Example of an expected result after running `delete`_
 
 ****
@@ -199,7 +199,7 @@ Deletes the 1st task in the results of the `find` command.
 
 Clears all entries from the task list by calling `clear` directly from a task page or from the landing page. +
 Format: `clear`
-image::docs/images/ug_figures/clear.png[width="600"]
+image::ug_figures/clear.png[width="600"]
 _Figure 7: Example of an expected result after running `clear`_
 
 ==== Exiting the program : `exit`
