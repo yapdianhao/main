@@ -10,10 +10,6 @@ ifdef::env-github[]
 image::docs/images/Ui.png[width="600"]
 endif::[]
 
-ifndef::env-github[]
-image::images/Ui.png[width="600"]
-endif::[]
-
 * This is a desktop Task Manager application. It has a GUI but most of the user interactions happen using a CLI (Command Line Interface).
 * JelphaBot is your very own personal Task Manager mainly marketed towards University Students to keep track of their modules and varying tasks and activities.
 //* It is a Java sample application intended for students learning Software Engineering while using Java as the main programming language.
