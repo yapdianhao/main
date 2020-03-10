@@ -13,7 +13,7 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 
 === Yao Jie Thng
 image::yaojiethng.png[width="150", align="left"]
-{empty}[http://github.com/yaojiethng[github]] [https://github.com/damithc[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/yaojiethng[github]] [<<johndoe#, portfolio>>]
 
 Role: Project Advisor
 
