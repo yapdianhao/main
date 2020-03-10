@@ -89,7 +89,7 @@ Examples:
 Shows a list of all tasks in the task list. +
 Format: `list`
 
-image::docs/images/ug_figures/list.png[width="600"]
+image::ug_figures/list.png[width="600"]
 _Figure: Example of an expected result after running `list`_
 
 The task list is formatted so that you can distinguish urgent tasks at first glance. Tasks are tagged according to their importance:
@@ -140,8 +140,7 @@ Returns any task having descriptions of `Tutorial`, `Project`, or `MidTerm`
 ==== Editing a task : `edit`
 
 Edits an existing task in the address book. +
-Format: `edit INDEX [d/DESCRIPTION] [dt/DATETIME] [m/MODULE_CODE] [p/PRIORITY (-1, 0, or 1)]
-[t/TAG]...`
+Format: `edit INDEX [d/DESCRIPTION] [dt/DATETIME] [m/MODULE_CODE] [p/PRIORITY (-1, 0, or 1)] [t/TAG]...`
 
 ****
 * Edits the task at the specified `INDEX`.
@@ -187,6 +186,9 @@ Deletes the 1st task in the results of the `find` command.
 
 Clears all entries from the address book. +
 Format: `clear`
+
+// tag::log[]
+==== Viewing the task log : `log`
 
 ==== Exiting the program : `exit`
 
