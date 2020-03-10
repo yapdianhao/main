@@ -18,6 +18,9 @@ import seedu.jelphabot.model.task.Priority;
 import seedu.jelphabot.model.task.Status;
 import seedu.jelphabot.model.task.Task;
 
+/**
+ * Marks the specified as done by updating it's status to COMPLETE.
+ */
 public class DoneCommand extends Command {
 
     public static final String COMMAND_WORD = "done";
@@ -30,6 +33,9 @@ public class DoneCommand extends Command {
 
     private final Index index;
 
+    /**
+     * @param index of the task in the filtered task list to mark done
+     */
     public DoneCommand(Index index) {
         requireNonNull(index);
         this.index = index;
@@ -52,6 +58,13 @@ public class DoneCommand extends Command {
         return new CommandResult(String.format(MESSAGE_MARK_TASK_COMPLETE_SUCCESS, doneTask));
     }
 
+    /**
+     * Creates and returns a {@code Task} with the updated COMPLETE status,
+     * by copying all the details of the given {@code task} and creating a new
+     * {@code Task} object.
+     * @param task Task object to get the relevant details from.
+     * @return Task object with it's status set as COMPLETE.
+     */
     private Task createDoneTask(Task task) {
         Description description = task.getDescription();
         ModuleCode moduleCode = task.getModuleCode();
