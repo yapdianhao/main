@@ -504,6 +504,14 @@ Use case ends.
 +
 Use case resumes from step 2
 
+=== Use case: UC7 - Clear all Tasks
+*MSS*
+
+1.  User enters command to clear all tasks.
+2.  JelphaBot removes all listed tasks and returns an empty list.
++
+Use case ends.
+
 [appendix]
 == Non Functional Requirements
 
