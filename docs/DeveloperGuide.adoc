@@ -12,7 +12,7 @@ ifdef::env-github[]
 :note-caption: :information_source:
 :warning-caption: :warning:
 endif::[]
-:repoURL: https://github.com/se-edu/addressbook-level3/tree/master
+:repoURL: https://github.com/AY1920S2-CS2103T-F09-2/main.git
 
 By: `Team 2103T-F09-02`      Since: `Jan 2020`      Licence: `MIT`
 
@@ -315,11 +315,25 @@ _{More to be added}_
 [appendix]
 == Use Cases
 
-(For all use cases below, the *System* is the `AddressBook` and the *Actor* is the `user`, unless specified otherwise)
+(For all use cases below, the *System* is the `JelphaBot` and the *Actor* is the `user`, unless specified otherwise)
 
-[discrete]
-=== Use case: Delete person
+//[discrete]
+=== Use case: UC1 - Add Task
 
+
+=== Use case: UC2 - List Tasks
+
+
+=== Use case: UC3 - Mark Task as Done
+
+
+=== Use case: UC4 - Edit Task Details
+
+
+=== Use case: UC5 - Find Task(s) by Keyword(s)
+
+
+=== Use case: UC6 - Delete Task
 *MSS*
 
 1.  User requests to list persons
@@ -342,8 +356,6 @@ Use case ends.
 ** 3a1. AddressBook shows an error message.
 +
 Use case resumes at step 2.
-
-_{More to be added}_
 
 [appendix]
 == Non Functional Requirements
