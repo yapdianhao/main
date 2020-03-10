@@ -218,13 +218,10 @@ Address book data are saved in the hard disk automatically after any command tha
 There is no need to save manually.
 
 // tag::dataencryption[]
-=== Set Reminders and Notifications  `[coming in v2.0]`
-
 _{explain how the user can enable/disable data encryption}_
-
-=== Pin Important tasks  `[coming in v2.0]`
-
 // end::dataencryption[]
+
+=== Set Reminders and Notifications  `[coming in v2.0]`
 
 == Interface Navigation
 
@@ -238,7 +235,10 @@ _{explain how the user can enable/disable data encryption}_
 
 === Productivity tracker  `[coming in v2.0]`
 
-=== Sort tasks (by today, week, month)  `[coming in v2.0]`
+=== Reorganizing tasks
+
+==== Pin Important tasks  `[coming in v2.0]`
+==== Sort tasks (by today, week, month)  `[coming in v2.0]`
 
 == FAQ
 
