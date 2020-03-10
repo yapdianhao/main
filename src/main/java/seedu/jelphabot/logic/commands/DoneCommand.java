@@ -65,7 +65,7 @@ public class DoneCommand extends Command {
      * @param task Task object to get the relevant details from.
      * @return Task object with it's status set as COMPLETE.
      */
-    private Task createDoneTask(Task task) {
+    public Task createDoneTask(Task task) {
         Description description = task.getDescription();
         ModuleCode moduleCode = task.getModuleCode();
         Set<Tag> tags = task.getTags();
