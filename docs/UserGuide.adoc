@@ -14,34 +14,39 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/se-edu/addressbook-level3
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `Team 2103T-F09-02`      Since: `Jan 2022`      Licence: `MIT`
 
 == Introduction
 
-JelphaBot is for those who *prefer to use a desktop app for managing tasks*. More importantly, JelphaBot is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, JelphaBot can get your contact management tasks done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+JelphaBot is for those who *prefer to use a desktop app for managing tasks*.
+More importantly, JelphaBot is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI).
+If you can type fast, JelphaBot can get your contact management tasks done faster than traditional GUI apps.
+Interested?
+Jump to the <<Quick Start>> to get started.
+Enjoy!
 
 == Quick Start
 
-.  Ensure you have Java `11` or above installed in your Computer.
-.  Download the latest `jelphabot.jar` link:{repoURL}/releases[here].
-.  Copy the file to the folder you want to use as the home folder for your JelphaBot.
-.  Double-click the file to start the app. The GUI should appear in a few seconds.
+. Ensure you have Java `11` or above installed in your Computer.
+. Download the latest `jelphabot.jar` link:{repoURL}/releases[here].
+. Copy the file to the folder you want to use as the home folder for your JelphaBot.
+. Double-click the file to start the app.
+The GUI should appear in a few seconds.
 +
 image::Ui.png[width="790"]
 +
-.  Type the command in the command box and press kbd:[Enter] to execute it. +
+. Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
-.  Some example commands you can try:
+. Some example commands you can try:
 
 * *`list`* : lists all tasks
 * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a task named `John Doe` to the Address Book.
 * **`delete`**`3` : deletes the 3rd task shown in the current list
 * *`exit`* : exits the app
 
-.  Refer to <<Features>> for details of each command.
+. Refer to <<Features>> for details of each command.
 
 [[Features]]
-
 == Features
 
 === Command-Line Interface
@@ -63,10 +68,10 @@ Format: `help`
 
 Adds a task to the task list +
 Format: `d/DESCRIPTION
-    dt/DATETIME
-    m/MODULE_CODE
-    [p/PRIORITY]
-    [t/TAG]...`
+dt/DATETIME
+m/MODULE_CODE
+[p/PRIORITY]
+[t/TAG]...`
 
 ****
 * For dt/DATETIME inputs, it has to be in format MMM-dd-YYYY HH mm.
@@ -90,14 +95,16 @@ Format: `list`
 
 Edits an existing task in the address book. +
 Format: `edit INDEX
-    [d/DESCRIPTION]
-    [dt/DATETIME]
-    [m/MODULE_CODE]
-    [p/PRIORITY (-1, 0, or 1)]
-    [t/TAG]...`
+[d/DESCRIPTION]
+[dt/DATETIME]
+[m/MODULE_CODE]
+[p/PRIORITY (-1, 0, or 1)]
+[t/TAG]...`
 
 ****
-* Edits the task at the specified `INDEX`. The index refers to the index number shown in the displayed task list. The index *must be a positive integer* 1, 2, 3, ...
+* Edits the task at the specified `INDEX`.
+The index refers to the index number shown in the displayed task list.
+The index *must be a positive integer* 1, 2, 3, ...
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the task will be removed i.e adding of tags is not cumulative.
@@ -180,10 +187,15 @@ _{explain how the user can enable/disable data encryption}_
 == Interface Navigation
 
 ==== Colours for prioritising modules  `[coming in v2.0]`
+
 ==== Integrate Calender on Interface  `[coming in v2.0]`
+
 ==== Morning call/Night debrief  `[coming in v2.0]`
+
 ==== Sticky notes  `[coming in v2.0]`
+
 ==== Productivity tracker  `[coming in v2.0]`
+
 ==== Sort tasks (by today, week, month)  `[coming in v2.0]`
 
 == FAQ
@@ -199,11 +211,11 @@ e.g. `add add d/Project TP dt/Jan-01-2020 23 59 m/CS2103T p/1 t/pair work`
 * *Delete* : `delete INDEX` +
 e.g. `delete 3`
 * *Edit* : `edit INDEX
-    [d/DESCRIPTION]
-    [dt/DATETIME]
-    [m/MODULE_CODE]
-    [p/PRIORITY]
-    [t/TAG]...` +
+[d/DESCRIPTION]
+[dt/DATETIME]
+[m/MODULE_CODE]
+[p/PRIORITY]
+[t/TAG]...` +
 e.g. `edit 1 m/CS2105 d/Tutorial 2`
 * *Find* : `find KEYWORD [MORE_KEYWORDS]` +
 e.g. `find Tutorial Assignment`
