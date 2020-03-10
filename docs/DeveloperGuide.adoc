@@ -387,12 +387,80 @@ Use case resumes from step 2.
 Use case resumes from step 2.
 
 === Use case: UC4 - Edit Task Details
+*MSS*
 
+1.  User requests to edit a task by specifying the task index and the field(s) they want to edit
+
+2.  JelphaBot edits the specified task in the task list with the specified details
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. JelphaBot detects that the specified task does not exist.
++
+[none]
+** 1a1. JelphaBot detects error and displays the correct input format to be expected.
+** 1a2. User enters new task index to be marked as done.
+** Steps 1b1-1b2 are repeated until the command entered is correct.
++
+Use case resumes from step 2
+
+[none]
+* 1b. JelphaBot detects an error in the entered command.
++
+[none]
+** 1b1. JelphaBot detects error and displays the correct input format to be expected.
++
+1b2. User enters new command.
+[none]
+** Steps 1b1-1b2 are repeated until the command entered is correct.
++
+Use case resumes from step 2.
 
 === Use case: UC5 - Find Task(s) by Keyword(s)
+*MSS*
 
+1. User requests to find task(s) by entering specified keyword(s)
+2. JelphaBot shows a list of task(s) that contain the specified keyword(s)
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a1. None of the tasks in the task list contain the specified keywords.
+[none]
++
+** Use case ends.
 
 === Use case: UC6 - Delete Task
+*MSS*
+
+1.  User requests to delete a specific task in the list by specified index
+2.  JelphaBot deletes the task
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. The list is empty.
+[none]
++
+** 1a1. JelphaBot displays to user that the task list is empty.
++
+Use case ends.
+
+* 1b. JelphaBot detects that the specified task does not exist.
++
+[none]
+** 1b1. JelphaBot detects error and displays the correct input format to be expected.
+** 1b2. User enters new task index to be marked as done.
+** Steps 1b1-1b2 are repeated until the command entered is correct.
++
+Use case resumes from step 2
 
 
 [appendix]
