@@ -394,7 +394,6 @@ Use case resumes from step 2.
 
 === Use case: UC6 - Delete Task
 
-
 [appendix]
 == Non Functional Requirements
 
