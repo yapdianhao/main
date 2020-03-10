@@ -89,7 +89,7 @@ Examples:
 * `add add d/Assignment 1 dt/Jan-01-2020 23 59 m/CS3230 p/1`
 * `add add d/Project TP dt/Jan-01-2020 23 59 m/CS2103T p/1 t/pair work`
 
-=== Listing all tasks : `list`
+==== Listing all tasks : `list`
 
 Shows a list of all tasks in the task list. +
 Format: `list`
@@ -122,7 +122,7 @@ The start of every task will be labelled with a visual tag so that you can visua
 
 To read more about tags, go <<#Tags, here>>
 
-=== Locating tasks by name: `find`
+==== Locating tasks by name: `find`
 
 Finds tasks whose description contain any of the given keywords. +
 Format: `find KEYWORD [MORE_KEYWORDS]`
@@ -175,7 +175,7 @@ Edits the date and time of the 2nd task to be `Jan-2-2020 23 59` and clears all 
 
 
 // tag::delete[]
-=== Deleting a task : `delete`
+==== Deleting a task : `delete`
 
 Deletes tasks by calling `delete` directly from a task page or `delete <task_name>` from the landing page. +
 Format: `delete INDEX`
@@ -199,11 +199,12 @@ Deletes the 2nd task in the task list.
 Deletes the 1st task in the results of the `find` command.
 
 // end::delete[]
-=== Clearing all entries : `clear`
+==== Clearing all entries : `clear`
 
 Clears all entries from the task list by calling `clear` directly from a task page or from the landing page. +
 Format: `clear`
-image::ug_figures/clear.png[width="600"]
+
+image::clear.png[width="600"]
 _Figure 7: Example of an expected result after running `clear`_
 
 === Exiting the program : `exit`
@@ -212,7 +213,7 @@ Exits the program by calling `exit` directly from a task page or from the landin
 Format: `exit`
 // no image needed
 
-=== Saving the data
+==== Saving the data
 
 Address book data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
@@ -228,17 +229,17 @@ _{explain how the user can enable/disable data encryption}_
 
 == Interface Navigation
 
-=== Colours for prioritising modules  `[coming in v2.0]`
+==== Colours for prioritising modules  `[coming in v2.0]`
 
-=== Integrate Calender on Interface  `[coming in v2.0]`
+==== Integrate Calender on Interface  `[coming in v2.0]`
 
-=== Morning call/Night debrief  `[coming in v2.0]`
+==== Morning call/Night debrief  `[coming in v2.0]`
 
-=== Sticky notes  `[coming in v2.0]`
+==== Sticky notes  `[coming in v2.0]`
 
-=== Productivity tracker  `[coming in v2.0]`
+==== Productivity tracker  `[coming in v2.0]`
 
-=== Sort tasks (by today, week, month)  `[coming in v2.0]`
+==== Sort tasks (by today, week, month)  `[coming in v2.0]`
 
 == FAQ
 
