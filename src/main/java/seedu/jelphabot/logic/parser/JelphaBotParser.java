@@ -10,6 +10,7 @@ import seedu.jelphabot.logic.commands.AddCommand;
 import seedu.jelphabot.logic.commands.ClearCommand;
 import seedu.jelphabot.logic.commands.Command;
 import seedu.jelphabot.logic.commands.DeleteCommand;
+import seedu.jelphabot.logic.commands.DoneCommand;
 import seedu.jelphabot.logic.commands.EditCommand;
 import seedu.jelphabot.logic.commands.ExitCommand;
 import seedu.jelphabot.logic.commands.FindCommand;
@@ -67,6 +68,8 @@ public class JelphaBotParser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
+        case DoneCommand.COMMAND_WORD:
+            return new DoneCommandParser().parse(arguments);
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
