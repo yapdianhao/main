@@ -89,7 +89,7 @@ public class DoneCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EditCommand)) {
+        if (!(other instanceof DoneCommand)) {
             return false;
         }
 

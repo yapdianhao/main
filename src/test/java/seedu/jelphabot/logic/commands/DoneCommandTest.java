@@ -96,7 +96,6 @@ public class DoneCommandTest {
 
         assertCommandFailure(doneCommand, newModel, DoneCommand.MESSAGE_TASK_ALREADY_MARKED_COMPLETE);
     }
-
     @Test
     public void equals() {
         DoneCommand firstDoneCommand = new DoneCommand(INDEX_FIRST_TASK);
