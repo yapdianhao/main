@@ -30,7 +30,8 @@ public class DoneCommand extends Command {
         + "Parameters: INDEX (must be a positive integer)\n";
 
     public static final String MESSAGE_MARK_TASK_COMPLETE_SUCCESS = "Marked task as completed: %1$s";
-    public static final String MESSAGE_TASK_ALREADY_MARKED_COMPLETE = "The specified task has already been marked as complete!";
+    public static final String MESSAGE_TASK_ALREADY_MARKED_COMPLETE = "The specified task has already "
+                                                                          + "been marked as complete!";
 
     private final Index index;
 
