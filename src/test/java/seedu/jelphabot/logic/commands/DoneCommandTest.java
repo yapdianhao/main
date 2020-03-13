@@ -26,7 +26,7 @@ public class DoneCommandTest {
         DoneCommand doneCommand = new DoneCommand(INDEX_FIRST_TASK);
         Task doneTask = createDoneTask(taskToMarkDone);
 
-        String expectedMessage = String.format(DoneCommand.MESSAGE_MARK_TASK_COMPLETE_SUCCESS, taskToMarkDone);
+        String expectedMessage = String.format(DoneCommand.MESSAGE_MARK_TASK_COMPLETE_SUCCESS, doneTask);
 
         ModelManager expectedModel = new ModelManager(model.getJelphaBot(), new UserPrefs());
         expectedModel.setTask(taskToMarkDone, doneTask);
