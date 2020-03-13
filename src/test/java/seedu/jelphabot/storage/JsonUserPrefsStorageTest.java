@@ -1,19 +1,20 @@
 package seedu.jelphabot.storage;
 
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
-import seedu.jelphabot.commons.core.GuiSettings;
-import seedu.jelphabot.commons.exceptions.DataConversionException;
-import seedu.jelphabot.model.UserPrefs;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static seedu.jelphabot.testutil.Assert.assertThrows;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static seedu.jelphabot.testutil.Assert.assertThrows;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+
+import seedu.jelphabot.commons.core.GuiSettings;
+import seedu.jelphabot.commons.exceptions.DataConversionException;
+import seedu.jelphabot.model.UserPrefs;
 
 public class JsonUserPrefsStorageTest {
 

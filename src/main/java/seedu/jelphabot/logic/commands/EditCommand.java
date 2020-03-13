@@ -1,93 +1,107 @@
 package seedu.jelphabot.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_DATETIME;
+import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
+import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_PRIORITY;
+import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.jelphabot.model.Model.PREDICATE_SHOW_ALL_TASKS;
+
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+
 import seedu.jelphabot.commons.core.Messages;
 import seedu.jelphabot.commons.core.index.Index;
 import seedu.jelphabot.commons.util.CollectionUtil;
 import seedu.jelphabot.logic.commands.exceptions.CommandException;
 import seedu.jelphabot.model.Model;
 import seedu.jelphabot.model.tag.Tag;
-import seedu.jelphabot.model.task.*;
-
-import java.util.*;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.jelphabot.logic.parser.CliSyntax.*;
-import static seedu.jelphabot.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import seedu.jelphabot.model.task.DateTime;
+import seedu.jelphabot.model.task.Description;
+import seedu.jelphabot.model.task.ModuleCode;
+import seedu.jelphabot.model.task.Priority;
+import seedu.jelphabot.model.task.Status;
+import seedu.jelphabot.model.task.Task;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing task in the address book.
  */
-// TODO replace command with updated fields.
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the displayed person list. "
-            + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_MODULE_CODE + "MODULE_CODE] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_PHONE + "91234567 "
-            + PREFIX_MODULE_CODE + "johndoe@example.com";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
+                                                   + "by the index number used in the displayed task list. "
+                                                   + "Existing values will be overwritten by the input values.\n"
+                                                   + "Parameters:\n" + "INDEX (must be a positive integer) "
+                                                   + "    " + "[" + PREFIX_DESCRIPTION + "DESCRIPTION]\n"
+                                                   + "    " + "[" + PREFIX_DATETIME + "DATETIME]\n"
+                                                   + "    " + "[" + PREFIX_MODULE_CODE + "MODULE_CODE]\n"
+                                                   + "    " + "[" + PREFIX_PRIORITY + "PRIORITY (-1, 0, or 1)]\n"
+                                                   + "    " + "[" + PREFIX_TAG + "TAG]...\n"
+                                                   + "Example: " + COMMAND_WORD + " 1 " + PREFIX_MODULE_CODE + "CS2105 "
+                                                   + PREFIX_DATETIME + "Jan-1-2020 20 20 "
+                                                   + PREFIX_TAG + "Ungraded";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task list.";
 
     private final Index index;
-    private final EditPersonDescriptor editPersonDescriptor;
+    private final EditTaskDescriptor editTaskDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
-     * @param editPersonDescriptor details to edit the person with
+     * @param index              of the task in the filtered task list to edit
+     * @param editTaskDescriptor details to edit the task with
      */
-    public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
+    public EditCommand(Index index, EditTaskDescriptor editTaskDescriptor) {
         requireNonNull(index);
-        requireNonNull(editPersonDescriptor);
+        requireNonNull(editTaskDescriptor);
 
         this.index = index;
-        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+        this.editTaskDescriptor = new EditTaskDescriptor(editTaskDescriptor);
+    }
+
+    /**
+     * Creates and returns a {@code Task} with the details of {@code taskToEdit}
+     * edited with {@code editTaskDescriptor}.
+     */
+    private static Task createEditedTask(Task taskToEdit, EditTaskDescriptor editTaskDescriptor) {
+        assert taskToEdit != null;
+
+        Description updatedDescription = editTaskDescriptor.getDescription().orElse(taskToEdit.getDescription());
+        ModuleCode updatedModuleCode = editTaskDescriptor.getModuleCode().orElse(taskToEdit.getModuleCode());
+        Set<Tag> updatedTags = editTaskDescriptor.getTags().orElse(taskToEdit.getTags());
+        DateTime dateTime = editTaskDescriptor.getDateTime().orElse(taskToEdit.getDateTime());
+        Status updatedStatus = taskToEdit.getStatus();
+        Priority updatedPriority = editTaskDescriptor.getPriority().orElse(taskToEdit.getPriority());
+
+        return new Task(updatedDescription, updatedStatus, dateTime, updatedModuleCode, updatedPriority, updatedTags);
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Task> lastShownList = model.getFilteredPersonList();
+        List<Task> lastShownList = model.getFilteredTaskList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
         Task taskToEdit = lastShownList.get(index.getZeroBased());
-        Task editedTask = createEditedPerson(taskToEdit, editPersonDescriptor);
+        Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
 
-        if (!taskToEdit.isSameTask(editedTask) && model.hasPerson(editedTask)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        if (!taskToEdit.isSameTask(editedTask) && model.hasTask(editedTask)) {
+            throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
 
-        model.setPerson(taskToEdit, editedTask);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedTask));
-    }
-
-    /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
-     */
-    private static Task createEditedPerson(Task taskToEdit, EditPersonDescriptor editPersonDescriptor) {
-        assert taskToEdit != null;
-
-        Description updatedDescription = editPersonDescriptor.getDescription().orElse(taskToEdit.getDescription());
-        ModuleCode updatedModuleCode = editPersonDescriptor.getModuleCode().orElse(taskToEdit.getModuleCode());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(taskToEdit.getTags());
-        DateTime dateTime = editPersonDescriptor.getDateTime().orElse(taskToEdit.getDateTime());
-
-        return new Task(updatedDescription, new Status(), dateTime, updatedModuleCode, updatedTags);
+        model.setTask(taskToEdit, editedTask);
+        model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+        return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, editedTask));
     }
 
     @Override
@@ -104,38 +118,41 @@ public class EditCommand extends Command {
 
         // state check
         EditCommand e = (EditCommand) other;
-        return index.equals(e.index)
-                && editPersonDescriptor.equals(e.editPersonDescriptor);
+        return index.equals(e.index) && editTaskDescriptor.equals(e.editTaskDescriptor);
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to edit the task with. Each non-empty field value will
+     * replace the corresponding field value of the task.
      */
-    public static class EditPersonDescriptor {
+    public static class EditTaskDescriptor {
         private Description description;
         private ModuleCode moduleCode;
         private Set<Tag> tags;
         private DateTime dateTime;
+        //private Status status;
+        private Priority priority;
 
-        public EditPersonDescriptor() {}
+        public EditTaskDescriptor() {
+        }
 
         /**
-         * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
+         * Copy constructor. A defensive copy of {@code tags} is used internally.
          */
-        public EditPersonDescriptor(EditPersonDescriptor toCopy) {
+        public EditTaskDescriptor(EditTaskDescriptor toCopy) {
             setDescription(toCopy.description);
             setModuleCode(toCopy.moduleCode);
             setTags(toCopy.tags);
             setDateTime(toCopy.dateTime);
+            //setStatus(toCopy.status);
+            setPriority(toCopy.priority);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(description, moduleCode, tags);
+            return CollectionUtil.isAnyNonNull(description, dateTime, moduleCode, tags, priority);
         }
 
         public Optional<Description> getDescription() {
@@ -154,18 +171,36 @@ public class EditCommand extends Command {
             this.moduleCode = moduleCode;
         }
 
+        /*
+        public Optional<Status> getStatus() {
+            return Optional.ofNullable(status);
+        }
+
+        public void setStatus(Status status) {
+            this.status = status;
+        }
+        */
+
+        public Optional<Priority> getPriority() {
+            return Optional.ofNullable(priority);
+        }
+
+        public void setPriority(Priority priority) {
+            this.priority = priority;
+        }
+
         /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
+         * Sets {@code tags} to this object's {@code tags}. A defensive copy of
+         * {@code tags} is used internally.
          */
         public void setTags(Set<Tag> tags) {
             this.tags = (tags != null) ? new HashSet<>(tags) : null;
         }
 
         /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
-         * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
+         * Returns an unmodifiable tag set, which throws
+         * {@code UnsupportedOperationException} if modification is attempted. Returns
+         * {@code Optional#empty()} if {@code tags} is null.
          */
         public Optional<Set<Tag>> getTags() {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
@@ -187,17 +222,16 @@ public class EditCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditPersonDescriptor)) {
+            if (!(other instanceof EditTaskDescriptor)) {
                 return false;
             }
 
             // state check
-            EditPersonDescriptor e = (EditPersonDescriptor) other;
+            EditTaskDescriptor e = (EditTaskDescriptor) other;
 
-            return getDescription().equals(e.getDescription())
-                    && getModuleCode().equals(e.getModuleCode())
-                    && getTags().equals(e.getTags())
-                    && getDateTime().equals(e.getDateTime());
+            return getDescription().equals(e.getDescription()) && getDateTime().equals(e.getDateTime())
+                       && getModuleCode().equals(e.getModuleCode())
+                       && getPriority().equals(e.getPriority()) && getTags().equals(e.getTags());
         }
     }
 }

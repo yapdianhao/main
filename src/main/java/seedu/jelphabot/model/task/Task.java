@@ -1,13 +1,13 @@
 package seedu.jelphabot.model.task;
 
-import seedu.jelphabot.model.tag.Tag;
+import static seedu.jelphabot.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import static seedu.jelphabot.commons.util.CollectionUtil.requireAllNonNull;
+import seedu.jelphabot.model.tag.Tag;
 
 /**
  * Represents a Task in the address book.
@@ -18,9 +18,9 @@ public class Task {
     // Identity fields
     private final Description description;
     private final ModuleCode moduleCode;
-    // TODO properly define status and dateTime
-    private final Status status;
     private final DateTime dateTime;
+    private final Status status;
+    private final Priority priority;
 
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
@@ -28,14 +28,16 @@ public class Task {
     /**
      * Every field must be present and not null.
      */
-    public Task(Description description, Status status, DateTime dateTime, ModuleCode moduleCode, Set<Tag> tags) {
+    public Task(Description description, Status status, DateTime dateTime, ModuleCode moduleCode,
+        Priority priority, Set<Tag> tags) {
         requireAllNonNull(description, status, dateTime, moduleCode, tags);
         this.description = description;
         this.status = status;
         this.dateTime = dateTime;
         this.moduleCode = moduleCode;
+        this.priority = priority;
+        this.tags.addAll(tags);
     }
-
 
     public Description getDescription() {
         return description;
@@ -57,9 +59,18 @@ public class Task {
         return dateTime;
     }
 
+    public Status getStatus() {
+        return status;
+    }
+
+    public Priority getPriority() {
+        return priority;
+    }
+
     /**
-     * Returns true if both persons of the same description have at least one other identity field that is the same.
-     * This defines a weaker notion of equality between two persons.
+     * Returns true if both tasks of the same description also occur at the same dateTime and have the same ModuleCode.
+     * This defines a weaker notion of equality between two tasks.
+     * Mainly used to check for duplicate tasks.
      */
     public boolean isSameTask(Task otherTask) {
         if (otherTask == this) {
@@ -67,14 +78,15 @@ public class Task {
         }
 
         return otherTask != null
-                && otherTask.getDescription().equals(getDescription())
-                && otherTask.getModuleCode().equals(getModuleCode())
-                && otherTask.getDateTime().equals(getDateTime());
+                   && otherTask.getDescription().equals(getDescription())
+                   && otherTask.getDateTime().equals(getDateTime())
+                   && otherTask.getModuleCode().equals(getModuleCode());
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * Returns true if both tasks have the same identity and data fields.
+     * This defines a stronger notion of equality between two tasks.
+     * Used to check for two instances of the same model entity.
      */
     @Override
     public boolean equals(Object other) {
@@ -88,25 +100,32 @@ public class Task {
 
         Task otherTask = (Task) other;
         return otherTask.getDescription().equals(getDescription())
-                && otherTask.getModuleCode().equals(getModuleCode())
-                && otherTask.getTags().equals(getTags());
+                   && otherTask.getStatus().equals(getStatus())
+                   && otherTask.getDateTime().equals(getDateTime())
+                   && otherTask.getModuleCode().equals(getModuleCode())
+                   && otherTask.getPriority().equals(getPriority())
+                   && otherTask.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(description, moduleCode, tags);
+        return Objects.hash(description, dateTime, moduleCode, tags);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getDescription())
-                .append(" ModuleCode: ")
-                .append(getModuleCode())
-                .append(" DateTime: ")
-                .append(getDateTime())
-                .append(" Tags: ");
+            .append(" Status: ")
+            .append(getStatus())
+            .append(" DateTime: ")
+            .append(getDateTime())
+            .append(" ModuleCode: ")
+            .append(getModuleCode())
+            .append(" Priority: ")
+            .append(getPriority())
+            .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
     }

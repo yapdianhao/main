@@ -1,9 +1,9 @@
 package seedu.jelphabot.logic.parser;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import seedu.jelphabot.logic.commands.Command;
 import seedu.jelphabot.logic.parser.exceptions.ParseException;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Contains helper methods for testing command parsers.

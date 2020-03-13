@@ -1,8 +1,8 @@
 package seedu.jelphabot.model.tag;
 
-import org.junit.jupiter.api.Test;
-
 import static seedu.jelphabot.testutil.Assert.assertThrows;
+
+import org.junit.jupiter.api.Test;
 
 public class TagTest {
 
@@ -22,5 +22,4 @@ public class TagTest {
         // null tag name
         assertThrows(NullPointerException.class, () -> Tag.isValidTagName(null));
     }
-
 }

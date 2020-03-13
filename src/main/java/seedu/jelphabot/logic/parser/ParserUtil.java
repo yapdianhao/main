@@ -1,5 +1,11 @@
 package seedu.jelphabot.logic.parser;
 
+import static java.util.Objects.requireNonNull;
+
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
+
 import seedu.jelphabot.commons.core.index.Index;
 import seedu.jelphabot.commons.util.StringUtil;
 import seedu.jelphabot.logic.parser.exceptions.ParseException;
@@ -7,12 +13,7 @@ import seedu.jelphabot.model.tag.Tag;
 import seedu.jelphabot.model.task.DateTime;
 import seedu.jelphabot.model.task.Description;
 import seedu.jelphabot.model.task.ModuleCode;
-
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
-
-import static java.util.Objects.requireNonNull;
+import seedu.jelphabot.model.task.Priority;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -40,13 +41,28 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code name} is invalid.
      */
-    public static Description parseName(String name) throws ParseException {
-        requireNonNull(name);
-        String trimmedName = name.trim();
-        if (!Description.isValidName(trimmedName)) {
+    public static Description parseDescription(String description) throws ParseException {
+        requireNonNull(description);
+        String trimmedDescription = description.trim();
+        if (!Description.isValidDescription(trimmedDescription)) {
             throw new ParseException(Description.MESSAGE_CONSTRAINTS);
         }
-        return new Description(trimmedName);
+        return new Description(trimmedDescription);
+    }
+
+    /**
+     * Parses a {@code String dateTime} into an {@code dateTime}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code dateTime} is invalid.
+     */
+    public static DateTime parseDateTime(String dateTime) throws ParseException {
+        requireNonNull(dateTime);
+        String trimmedDatetime = dateTime.trim();
+        if (!DateTime.isValidDateTime(trimmedDatetime)) {
+            throw new ParseException(DateTime.MESSAGE_CONSTRAINTS);
+        }
+        return new DateTime(trimmedDatetime);
     }
 
     /**
@@ -55,13 +71,28 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code module code} is invalid.
      */
-    public static ModuleCode parseEmail(String moduleCode) throws ParseException {
+    public static ModuleCode parseModuleCode(String moduleCode) throws ParseException {
         requireNonNull(moduleCode);
-        String trimmedEmail = moduleCode.trim();
-        if (!ModuleCode.isValidModuleCode(trimmedEmail)) {
+        String trimmedModuleCode = moduleCode.trim();
+        if (!ModuleCode.isValidModuleCode(trimmedModuleCode)) {
             throw new ParseException(ModuleCode.MESSAGE_CONSTRAINTS);
         }
-        return new ModuleCode(trimmedEmail);
+        return new ModuleCode(trimmedModuleCode);
+    }
+
+    /**
+     * Parses a {@code String priority} into an {@code Priority}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code priority} is invalid.
+     */
+    public static Priority parsePriority(String priority) throws ParseException {
+        requireNonNull(priority);
+        String trimmedPriority = priority.trim();
+        if (!Priority.isValidPriority(trimmedPriority)) {
+            throw new ParseException(Priority.MESSAGE_CONSTRAINTS);
+        }
+        return Priority.toPriority(trimmedPriority);
     }
 
     /**
@@ -89,20 +120,5 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
-    }
-
-    /**
-     * Parses a {@code String dateTime} into an {@code dateTime}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code dateTime} is invalid.
-     */
-    public static DateTime parseDateTime(String dateTime) throws ParseException {
-        requireNonNull(dateTime);
-        String trimmedDatetime = dateTime.trim();
-        if (!DateTime.isValidDateTime(trimmedDatetime)) {
-            throw new ParseException(DateTime.MESSAGE_CONSTRAINTS);
-        }
-        return new DateTime(trimmedDatetime);
     }
 }

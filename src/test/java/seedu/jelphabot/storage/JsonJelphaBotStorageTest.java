@@ -1,19 +1,22 @@
 package seedu.jelphabot.storage;
 
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
-import seedu.jelphabot.commons.exceptions.DataConversionException;
-import seedu.jelphabot.model.JelphaBot;
-import seedu.jelphabot.model.ReadOnlyJelphaBot;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static seedu.jelphabot.testutil.Assert.assertThrows;
+import static seedu.jelphabot.testutil.TypicalTasks.ASSESSMENT;
+import static seedu.jelphabot.testutil.TypicalTasks.TUTORIAL;
+import static seedu.jelphabot.testutil.TypicalTasks.getTypicalJelphaBot;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static seedu.jelphabot.testutil.Assert.assertThrows;
-import static seedu.jelphabot.testutil.TypicalPersons.*;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+
+import seedu.jelphabot.commons.exceptions.DataConversionException;
+import seedu.jelphabot.model.JelphaBot;
+import seedu.jelphabot.model.ReadOnlyJelphaBot;
 
 public class JsonJelphaBotStorageTest {
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonJelphaBotStorageTest");
@@ -48,12 +51,12 @@ public class JsonJelphaBotStorageTest {
 
     @Test
     public void readJelphaBot_invalidPersonJelphaBot_throwDataConversionException() {
-        assertThrows(DataConversionException.class, () -> readJelphaBot("invalidPersonJelphaBot.json"));
+        assertThrows(DataConversionException.class, () -> readJelphaBot("invalidTaskJelphaBot.json"));
     }
 
     @Test
     public void readJelphaBot_invalidAndValidPersonJelphaBot_throwDataConversionException() {
-        assertThrows(DataConversionException.class, () -> readJelphaBot("invalidAndValidPersonJelphaBot.json"));
+        assertThrows(DataConversionException.class, () -> readJelphaBot("invalidAndValidTaskJelphaBot.json"));
     }
 
     @Test
@@ -68,14 +71,14 @@ public class JsonJelphaBotStorageTest {
         assertEquals(original, new JelphaBot(readBack));
 
         // Modify data, overwrite exiting file, and read back
-        original.addPerson(HOON);
-        original.removePerson(ALICE);
+        original.addTask(TUTORIAL);
+        original.removeTask(ASSESSMENT);
         jsonJelphaBotStorage.saveJelphaBot(original, filePath);
         readBack = jsonJelphaBotStorage.readJelphaBot(filePath).get();
         assertEquals(original, new JelphaBot(readBack));
 
         // Save and read without specifying file path
-        original.addPerson(IDA);
+        original.addTask(ASSESSMENT);
         jsonJelphaBotStorage.saveJelphaBot(original); // file path not specified
         readBack = jsonJelphaBotStorage.readJelphaBot().get(); // file path not specified
         assertEquals(original, new JelphaBot(readBack));

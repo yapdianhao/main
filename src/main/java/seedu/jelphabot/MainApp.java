@@ -1,5 +1,10 @@
 package seedu.jelphabot;
 
+import java.io.IOException;
+import java.nio.file.Path;
+import java.util.Optional;
+import java.util.logging.Logger;
+
 import javafx.application.Application;
 import javafx.stage.Stage;
 import seedu.jelphabot.commons.core.Config;
@@ -10,16 +15,21 @@ import seedu.jelphabot.commons.util.ConfigUtil;
 import seedu.jelphabot.commons.util.StringUtil;
 import seedu.jelphabot.logic.Logic;
 import seedu.jelphabot.logic.LogicManager;
-import seedu.jelphabot.model.*;
+import seedu.jelphabot.model.JelphaBot;
+import seedu.jelphabot.model.Model;
+import seedu.jelphabot.model.ModelManager;
+import seedu.jelphabot.model.ReadOnlyJelphaBot;
+import seedu.jelphabot.model.ReadOnlyUserPrefs;
+import seedu.jelphabot.model.UserPrefs;
 import seedu.jelphabot.model.util.SampleDataUtil;
-import seedu.jelphabot.storage.*;
+import seedu.jelphabot.storage.JelphaBotStorage;
+import seedu.jelphabot.storage.JsonJelphaBotStorage;
+import seedu.jelphabot.storage.JsonUserPrefsStorage;
+import seedu.jelphabot.storage.Storage;
+import seedu.jelphabot.storage.StorageManager;
+import seedu.jelphabot.storage.UserPrefsStorage;
 import seedu.jelphabot.ui.Ui;
 import seedu.jelphabot.ui.UiManager;
-
-import java.io.IOException;
-import java.nio.file.Path;
-import java.util.Optional;
-import java.util.logging.Logger;
 
 /**
  * Runs the application.
@@ -64,14 +74,14 @@ public class MainApp extends Application {
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        Optional<ReadOnlyJelphaBot> addressBookOptional;
+        Optional<ReadOnlyJelphaBot> jelphaBotOptional;
         ReadOnlyJelphaBot initialData;
         try {
-            addressBookOptional = storage.readJelphaBot();
-            if (!addressBookOptional.isPresent()) {
+            jelphaBotOptional = storage.readJelphaBot();
+            if (!jelphaBotOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample JelphaBot");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleJelphaBot);
+            initialData = jelphaBotOptional.orElseGet(SampleDataUtil::getSampleJelphaBot);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty JelphaBot");
             initialData = new JelphaBot();

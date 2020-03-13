@@ -1,19 +1,23 @@
 package seedu.jelphabot.model;
 
-import org.junit.jupiter.api.Test;
-import seedu.jelphabot.commons.core.GuiSettings;
-import seedu.jelphabot.model.task.DescriptionContainsKeywordsPredicate;
-import seedu.jelphabot.testutil.JelphaBotBuilder;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.jelphabot.model.Model.PREDICATE_SHOW_ALL_TASKS;
+import static seedu.jelphabot.testutil.Assert.assertThrows;
+import static seedu.jelphabot.testutil.TypicalTasks.ASSESSMENT;
+import static seedu.jelphabot.testutil.TypicalTasks.BOOK_REPORT;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.jelphabot.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-import static seedu.jelphabot.testutil.Assert.assertThrows;
-import static seedu.jelphabot.testutil.TypicalPersons.ALICE;
-import static seedu.jelphabot.testutil.TypicalPersons.BENSON;
+import org.junit.jupiter.api.Test;
+
+import seedu.jelphabot.commons.core.GuiSettings;
+import seedu.jelphabot.model.task.DescriptionContainsKeywordsPredicate;
+import seedu.jelphabot.testutil.JelphaBotBuilder;
 
 public class ModelManagerTest {
 
@@ -71,59 +75,59 @@ public class ModelManagerTest {
 
     @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.hasPerson(null));
+        assertThrows(NullPointerException.class, () -> modelManager.hasTask(null));
     }
 
     @Test
     public void hasPerson_personNotInJelphaBot_returnsFalse() {
-        assertFalse(modelManager.hasPerson(ALICE));
+        assertFalse(modelManager.hasTask(ASSESSMENT));
     }
 
     @Test
     public void hasPerson_personInJelphaBot_returnsTrue() {
-        modelManager.addPerson(ALICE);
-        assertTrue(modelManager.hasPerson(ALICE));
+        modelManager.addTask(ASSESSMENT);
+        assertTrue(modelManager.hasTask(ASSESSMENT));
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
+    public void getFilteredTaskList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredTaskList().remove(0));
     }
 
     @Test
     public void equals() {
-        JelphaBot addressBook = new JelphaBotBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        JelphaBot addressBook = new JelphaBotBuilder().withTask(ASSESSMENT).withTask(BOOK_REPORT).build();
         JelphaBot differentJelphaBot = new JelphaBot();
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
         modelManager = new ModelManager(addressBook, userPrefs);
         ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs);
-        assertTrue(modelManager.equals(modelManagerCopy));
+        assertEquals(modelManager, modelManagerCopy);
 
         // same object -> returns true
-        assertTrue(modelManager.equals(modelManager));
+        assertEquals(modelManager, modelManager);
 
         // null -> returns false
-        assertFalse(modelManager.equals(null));
+        assertNotEquals(null, modelManager);
 
         // different types -> returns false
-        assertFalse(modelManager.equals(5));
+        assertNotEquals(5, modelManager);
 
         // different addressBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentJelphaBot, userPrefs)));
+        assertNotEquals(modelManager, new ModelManager(differentJelphaBot, userPrefs));
 
         // different filteredList -> returns false
-        String[] keywords = ALICE.getDescription().fullDescription.split("\\s+");
-        modelManager.updateFilteredPersonList(new DescriptionContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+        String[] keywords = ASSESSMENT.getDescription().fullDescription.split("\\s+");
+        modelManager.updateFilteredTaskList(new DescriptionContainsKeywordsPredicate(Arrays.asList(keywords)));
+        assertNotEquals(modelManager, new ModelManager(addressBook, userPrefs));
 
         // resets modelManager to initial state for upcoming tests
-        modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        modelManager.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setJelphaBotFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
+        assertNotEquals(modelManager, new ModelManager(addressBook, differentUserPrefs));
     }
 }

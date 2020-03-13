@@ -1,47 +1,65 @@
 package seedu.jelphabot.logic.commands;
 
-import org.junit.jupiter.api.Test;
-import seedu.jelphabot.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.jelphabot.testutil.EditPersonDescriptorBuilder;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.DESC_ASSIGNMENT;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.DESC_TUTORIAL;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_DATETIME_TUTORIAL;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_DESCRIPTION_TUTORIAL;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_MODULE_CODE_TUTORIAL;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_PRIORITY_TUTORIAL;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_PROJECT;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.*;
+import org.junit.jupiter.api.Test;
+
+import seedu.jelphabot.logic.commands.EditCommand.EditTaskDescriptor;
+import seedu.jelphabot.testutil.EditTaskDescriptorBuilder;
 
 public class EditTaskDescriptorTest {
 
     @Test
     public void equals() {
         // same values -> returns true
-        EditPersonDescriptor descriptorWithSameValues = new EditPersonDescriptor(DESC_AMY);
-        assertTrue(DESC_AMY.equals(descriptorWithSameValues));
+        EditCommand.EditTaskDescriptor descriptorWithSameValues = new EditCommand.EditTaskDescriptor(DESC_ASSIGNMENT);
+        assertEquals(DESC_ASSIGNMENT, descriptorWithSameValues);
 
         // same object -> returns true
-        assertTrue(DESC_AMY.equals(DESC_AMY));
+        assertEquals(DESC_ASSIGNMENT, DESC_ASSIGNMENT);
 
         // null -> returns false
-        assertFalse(DESC_AMY.equals(null));
+        assertNotEquals(null, DESC_ASSIGNMENT);
 
         // different types -> returns false
-        assertFalse(DESC_AMY.equals(5));
+        assertNotEquals(5, DESC_ASSIGNMENT);
 
         // different values -> returns false
-        assertFalse(DESC_AMY.equals(DESC_BOB));
+        assertNotEquals(DESC_ASSIGNMENT, DESC_TUTORIAL);
 
         // different name -> returns false
-        EditPersonDescriptor editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withDescription(VALID_NAME_BOB).build();
-        assertFalse(DESC_AMY.equals(editedAmy));
+        EditTaskDescriptor editedAssignment =
+            new EditTaskDescriptorBuilder(DESC_ASSIGNMENT).withDescription(VALID_DESCRIPTION_TUTORIAL).build();
+        assertNotEquals(DESC_ASSIGNMENT, editedAssignment);
 
-        // different phone -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withPhone(VALID_PHONE_BOB).build();
-        assertFalse(DESC_AMY.equals(editedAmy));
+        // // different status -> returns false
+        // editedAssignment = new EditTaskDescriptorBuilder(DESC_ASSIGNMENT).withStatus(VALID_STATUS_TUTORIAL).build();
+        // assertNotEquals(DESC_ASSIGNMENT, editedAssignment);
+
+        // different dateTime -> returns false
+        editedAssignment = new EditTaskDescriptorBuilder(DESC_ASSIGNMENT).withDateTime(VALID_DATETIME_TUTORIAL).build();
+        assertNotEquals(DESC_ASSIGNMENT, editedAssignment);
 
         // different module code -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withModuleCode(VALID_MODULE_CODE_BOB).build();
-        assertFalse(DESC_AMY.equals(editedAmy));
+        editedAssignment =
+            new EditTaskDescriptorBuilder(DESC_ASSIGNMENT).withModuleCode(VALID_MODULE_CODE_TUTORIAL).build();
+        assertNotEquals(DESC_ASSIGNMENT, editedAssignment);
+
+        // different priority -> returns false
+        editedAssignment =
+            new EditTaskDescriptorBuilder(DESC_ASSIGNMENT).withPriority(VALID_PRIORITY_TUTORIAL).build();
+        assertNotEquals(DESC_ASSIGNMENT, editedAssignment);
 
         // different tags -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_HUSBAND).build();
-        assertFalse(DESC_AMY.equals(editedAmy));
+        editedAssignment = new EditTaskDescriptorBuilder(DESC_ASSIGNMENT).withTags(VALID_TAG_PROJECT).build();
+        assertNotEquals(DESC_ASSIGNMENT, editedAssignment);
     }
 }

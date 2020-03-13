@@ -1,5 +1,9 @@
 package seedu.jelphabot.logic;
 
+import java.io.IOException;
+import java.nio.file.Path;
+import java.util.logging.Logger;
+
 import javafx.collections.ObservableList;
 import seedu.jelphabot.commons.core.GuiSettings;
 import seedu.jelphabot.commons.core.LogsCenter;
@@ -13,10 +17,6 @@ import seedu.jelphabot.model.ReadOnlyJelphaBot;
 import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.storage.Storage;
 
-import java.io.IOException;
-import java.nio.file.Path;
-import java.util.logging.Logger;
-
 /**
  * The main LogicManager of the app.
  */
@@ -26,12 +26,12 @@ public class LogicManager implements Logic {
 
     private final Model model;
     private final Storage storage;
-    private final JelphaBotParser addressBookParser;
+    private final JelphaBotParser jelphaBotParser;
 
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
-        addressBookParser = new JelphaBotParser();
+        jelphaBotParser = new JelphaBotParser();
     }
 
     @Override
@@ -39,7 +39,7 @@ public class LogicManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
-        Command command = addressBookParser.parseCommand(commandText);
+        Command command = jelphaBotParser.parseCommand(commandText);
         commandResult = command.execute(model);
 
         try {
@@ -57,8 +57,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ObservableList<Task> getFilteredPersonList() {
-        return model.getFilteredPersonList();
+    public ObservableList<Task> getFilteredTaskList() {
+        return model.getFilteredTaskList();
     }
 
     @Override

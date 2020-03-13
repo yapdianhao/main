@@ -5,17 +5,12 @@ import static seedu.jelphabot.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Person's description in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidDescription(String)}
  */
 public class Description {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should only contain alphanumeric characters and spaces, and it should not be blank";
-
-    /*
-     * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
+            "Descriptions should only contain alphanumeric characters and spaces, and it should not be blank";
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
     public final String fullDescription;
@@ -27,14 +22,14 @@ public class Description {
      */
     public Description(String description) {
         requireNonNull(description);
-        checkArgument(isValidName(description), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidDescription(description), MESSAGE_CONSTRAINTS);
         fullDescription = description;
     }
 
     /**
      * Returns true if a given string is a valid description.
      */
-    public static boolean isValidName(String test) {
+    public static boolean isValidDescription(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 

@@ -1,23 +1,22 @@
 package seedu.jelphabot.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
 import seedu.jelphabot.commons.core.Messages;
 import seedu.jelphabot.model.Model;
 import seedu.jelphabot.model.task.DescriptionContainsKeywordsPredicate;
 
-import static java.util.Objects.requireNonNull;
-
 /**
- * Finds and lists all persons in address book whose name contains any of the argument keywords.
- * Keyword matching is case insensitive.
+ * Finds and lists all tasks in address book whose name contains any of the
+ * argument keywords. Keyword matching is case insensitive.
  */
 public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all tasks whose names contain any of "
+            + "the specified keywords (case-insensitive) and displays them as a list.\n"
+            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n" + "Example: " + COMMAND_WORD + " assignment";
 
     private final DescriptionContainsKeywordsPredicate predicate;
 
@@ -28,15 +27,15 @@ public class FindCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPersonList(predicate);
+        model.updateFilteredTaskList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+                String.format(Messages.MESSAGE_TASKS_LISTED_OVERVIEW, model.getFilteredTaskList().size()));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof FindCommand // instanceof handles nulls
-                && predicate.equals(((FindCommand) other).predicate)); // state check
+                        && predicate.equals(((FindCommand) other).predicate)); // state check
     }
 }

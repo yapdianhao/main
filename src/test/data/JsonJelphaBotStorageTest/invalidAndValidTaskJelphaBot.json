@@ -1,0 +1,17 @@
+{
+  "tasks": [ {
+    "status" : "INCOMPLETE",
+    "dateTime" : "Jan-1-2020 22 00",
+    "priority" : "LOW",
+    "tagged" : [ "friends" ],
+    "description" : "Valid Task",
+    "moduleCode" : "CS3230"
+  }, {
+    "status" : "INCOMPLETE",
+    "dateTime" : "Jan-1-2020 22 00",
+    "priority" : "LOW",
+    "tagged" : [ "friends" ],
+    "description" : "Task with Invalid Module Code",
+    "moduleCode" : "3230T"
+  } ]
+}

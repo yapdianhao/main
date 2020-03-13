@@ -1,16 +1,17 @@
 package seedu.jelphabot.logic.commands;
 
+import static seedu.jelphabot.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.jelphabot.testutil.TypicalTasks.getTypicalJelphaBot;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import seedu.jelphabot.model.Model;
 import seedu.jelphabot.model.ModelManager;
 import seedu.jelphabot.model.UserPrefs;
 import seedu.jelphabot.model.task.Task;
-import seedu.jelphabot.testutil.PersonBuilder;
-
-import static seedu.jelphabot.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.jelphabot.testutil.TypicalPersons.getTypicalJelphaBot;
+import seedu.jelphabot.testutil.TaskBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code AddCommand}.
@@ -25,20 +26,20 @@ public class AddCommandIntegrationTest {
     }
 
     @Test
-    public void execute_newPerson_success() {
-        Task validTask = new PersonBuilder().build();
+    public void execute_newTask_success() {
+        Task validTask = new TaskBuilder().build();
 
         Model expectedModel = new ModelManager(model.getJelphaBot(), new UserPrefs());
-        expectedModel.addPerson(validTask);
+        expectedModel.addTask(validTask);
 
         assertCommandSuccess(new AddCommand(validTask), model,
                 String.format(AddCommand.MESSAGE_SUCCESS, validTask), expectedModel);
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
-        Task taskInList = model.getJelphaBot().getPersonList().get(0);
-        assertCommandFailure(new AddCommand(taskInList), model, AddCommand.MESSAGE_DUPLICATE_PERSON);
+    public void execute_duplicateTask_throwsCommandException() {
+        Task taskInList = model.getJelphaBot().getTaskList().get(0);
+        assertCommandFailure(new AddCommand(taskInList), model, AddCommand.MESSAGE_DUPLICATE_TASK);
     }
 
 }

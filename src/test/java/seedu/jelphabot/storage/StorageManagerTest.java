@@ -1,18 +1,19 @@
 package seedu.jelphabot.storage;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static seedu.jelphabot.testutil.TypicalTasks.getTypicalJelphaBot;
+
+import java.nio.file.Path;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
+
 import seedu.jelphabot.commons.core.GuiSettings;
 import seedu.jelphabot.model.JelphaBot;
 import seedu.jelphabot.model.ReadOnlyJelphaBot;
 import seedu.jelphabot.model.UserPrefs;
-
-import java.nio.file.Path;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static seedu.jelphabot.testutil.TypicalPersons.getTypicalJelphaBot;
 
 public class StorageManagerTest {
 

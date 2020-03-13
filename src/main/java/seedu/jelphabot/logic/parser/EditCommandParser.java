@@ -1,19 +1,22 @@
 package seedu.jelphabot.logic.parser;
 
-import seedu.jelphabot.commons.core.index.Index;
-import seedu.jelphabot.logic.commands.EditCommand;
-import seedu.jelphabot.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.jelphabot.logic.parser.exceptions.ParseException;
-import seedu.jelphabot.model.tag.Tag;
+import static java.util.Objects.requireNonNull;
+import static seedu.jelphabot.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_DATETIME;
+import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
+import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_PRIORITY;
+import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.jelphabot.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.jelphabot.logic.parser.CliSyntax.*;
+import seedu.jelphabot.commons.core.index.Index;
+import seedu.jelphabot.logic.commands.EditCommand;
+import seedu.jelphabot.logic.parser.exceptions.ParseException;
+import seedu.jelphabot.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -23,12 +26,20 @@ public class EditCommandParser implements Parser<EditCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
      * and returns an EditCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_MODULE_CODE, PREFIX_ADDRESS, PREFIX_TAG);
+            ArgumentTokenizer.tokenize(
+                args,
+                PREFIX_DESCRIPTION,
+                PREFIX_DATETIME,
+                PREFIX_MODULE_CODE,
+                PREFIX_PRIORITY,
+                PREFIX_TAG
+            );
 
         Index index;
 
@@ -38,20 +49,29 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
         }
 
-        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
-        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            editPersonDescriptor.setDescription(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
+        EditCommand.EditTaskDescriptor editTaskDescriptor = new EditCommand.EditTaskDescriptor();
+        if (argMultimap.getValue(PREFIX_DESCRIPTION).isPresent()) {
+            editTaskDescriptor.setDescription(
+                ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get()));
+        }
+        if (argMultimap.getValue(PREFIX_DATETIME).isPresent()) {
+            editTaskDescriptor.setDateTime(
+                ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).get()));
         }
         if (argMultimap.getValue(PREFIX_MODULE_CODE).isPresent()) {
-            editPersonDescriptor.setModuleCode(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_MODULE_CODE).get()));
+            editTaskDescriptor.setModuleCode(ParserUtil
+                .parseModuleCode(argMultimap.getValue(PREFIX_MODULE_CODE).get()));
         }
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
+        if (argMultimap.getValue(PREFIX_PRIORITY).isPresent()) {
+            editTaskDescriptor.setPriority(ParserUtil
+                 .parsePriority(argMultimap.getValue(PREFIX_PRIORITY).get()));
+        }
+        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editTaskDescriptor::setTags);
 
-        if (!editPersonDescriptor.isAnyFieldEdited()) {
+        if (!editTaskDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
-
-        return new EditCommand(index, editPersonDescriptor);
+        return new EditCommand(index, editTaskDescriptor);
     }
 
     /**

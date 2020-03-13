@@ -1,86 +1,100 @@
 package seedu.jelphabot.model.task;
 
-import org.junit.jupiter.api.Test;
-import seedu.jelphabot.testutil.PersonBuilder;
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.*;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_DATETIME_TUTORIAL;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_DESCRIPTION_TUTORIAL;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_MODULE_CODE_TUTORIAL;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_PRIORITY_TUTORIAL;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_STATUS_TUTORIAL;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_PROJECT;
 import static seedu.jelphabot.testutil.Assert.assertThrows;
-import static seedu.jelphabot.testutil.TypicalPersons.ALICE;
-import static seedu.jelphabot.testutil.TypicalPersons.BOB;
+import static seedu.jelphabot.testutil.TypicalTasks.ASSIGNMENT;
+import static seedu.jelphabot.testutil.TypicalTasks.TUTORIAL;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.jelphabot.testutil.TaskBuilder;
 
 public class TaskTest {
 
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
-        Task task = new PersonBuilder().build();
+        Task task = new TaskBuilder().build();
         assertThrows(UnsupportedOperationException.class, () -> task.getTags().remove(0));
     }
 
     @Test
     public void isSameTask() {
         // same object -> returns true
-        assertTrue(ALICE.isSameTask(ALICE));
+        assertTrue(ASSIGNMENT.isSameTask(ASSIGNMENT));
 
         // null -> returns false
-        assertFalse(ALICE.isSameTask(null));
+        assertFalse(ASSIGNMENT.isSameTask(null));
 
-        // different phone and module code -> returns false
-        Task editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_MODULE_CODE_BOB).build();
-        assertFalse(ALICE.isSameTask(editedAlice));
+        // different description -> returns false
+        Task editedAssignment = new TaskBuilder(ASSIGNMENT).withDescription(VALID_DESCRIPTION_TUTORIAL).build();
+        assertFalse(ASSIGNMENT.isSameTask(editedAssignment));
 
-        // different name -> returns false
-        editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
-        assertFalse(ALICE.isSameTask(editedAlice));
+        // different dateTime  -> returns false
+        editedAssignment = new TaskBuilder(ASSIGNMENT).withDateTime(VALID_DATETIME_TUTORIAL).build();
+        assertFalse(ASSIGNMENT.isSameTask(editedAssignment));
 
-        // same name, same phone, different attributes -> returns true
-        editedAlice = new PersonBuilder(ALICE).withEmail(VALID_MODULE_CODE_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
-        assertTrue(ALICE.isSameTask(editedAlice));
+        // different module code -> returns false
+        editedAssignment = new TaskBuilder().withModuleCode(VALID_MODULE_CODE_TUTORIAL).build();
+        assertFalse(ASSIGNMENT.isSameTask(editedAssignment));
 
-        // same name, same module code, different attributes -> returns true
-        editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
-        assertTrue(ALICE.isSameTask(editedAlice));
+        // same description, same datetime, same module code, different attributes -> returns true
+        editedAssignment = new TaskBuilder(ASSIGNMENT).withPriority(VALID_PRIORITY_TUTORIAL).build();
+        assertTrue(ASSIGNMENT.isSameTask(editedAssignment));
 
-        // same name, same phone, same module code, different attributes -> returns true
-        editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
-        assertTrue(ALICE.isSameTask(editedAlice));
+        // same description, same datetime, same module code, different attributes -> returns true
+        editedAssignment = new TaskBuilder(ASSIGNMENT).withStatus(VALID_STATUS_TUTORIAL).build();
+        assertTrue(ASSIGNMENT.isSameTask(editedAssignment));
     }
 
     @Test
     public void equals() {
         // same values -> returns true
-        Task aliceCopy = new PersonBuilder(ALICE).build();
-        assertTrue(ALICE.equals(aliceCopy));
+        Task assignmentCopy = new TaskBuilder(ASSIGNMENT).build();
+        assertEquals(ASSIGNMENT, assignmentCopy);
 
         // same object -> returns true
-        assertTrue(ALICE.equals(ALICE));
+        assertEquals(ASSIGNMENT, ASSIGNMENT);
 
         // null -> returns false
-        assertFalse(ALICE.equals(null));
+        assertNotEquals(null, ASSIGNMENT);
 
         // different type -> returns false
-        assertFalse(ALICE.equals(5));
+        assertNotEquals(5, ASSIGNMENT);
 
-        // different person -> returns false
-        assertFalse(ALICE.equals(BOB));
+        // different task -> returns false
+        assertNotEquals(ASSIGNMENT, TUTORIAL);
 
-        // different name -> returns false
-        Task editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
+        // different description -> returns false
+        Task editedAssignment = new TaskBuilder(ASSIGNMENT).withDescription(VALID_DESCRIPTION_TUTORIAL).build();
+        assertNotEquals(ASSIGNMENT, editedAssignment);
 
-        // different phone -> returns false
-        editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
+        // different dateTime  -> returns false
+        editedAssignment = new TaskBuilder(ASSIGNMENT).withDateTime(VALID_DATETIME_TUTORIAL).build();
+        assertNotEquals(ASSIGNMENT, editedAssignment);
 
         // different module code -> returns false
-        editedAlice = new PersonBuilder(ALICE).withEmail(VALID_MODULE_CODE_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
+        editedAssignment = new TaskBuilder(ASSIGNMENT).withModuleCode(VALID_MODULE_CODE_TUTORIAL).build();
+        assertNotEquals(ASSIGNMENT, editedAssignment);
+
+        // different priority -> returns false
+        editedAssignment = new TaskBuilder(ASSIGNMENT).withPriority(VALID_PRIORITY_TUTORIAL).build();
+        assertNotEquals(ASSIGNMENT, editedAssignment);
+
+        // different status -> returns false
+        editedAssignment = new TaskBuilder(ASSIGNMENT).withStatus(VALID_STATUS_TUTORIAL).build();
+        assertNotEquals(ASSIGNMENT, editedAssignment);
 
         // different tags -> returns false
-        editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
-        assertFalse(ALICE.equals(editedAlice));
+        editedAssignment = new TaskBuilder(ASSIGNMENT).withTags(VALID_TAG_PROJECT).build();
+        assertNotEquals(ASSIGNMENT, editedAssignment);
     }
 }

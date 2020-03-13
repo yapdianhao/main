@@ -1,13 +1,14 @@
 package seedu.jelphabot.logic.commands;
 
+import static seedu.jelphabot.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.jelphabot.testutil.TypicalTasks.getTypicalJelphaBot;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.jelphabot.model.JelphaBot;
 import seedu.jelphabot.model.Model;
 import seedu.jelphabot.model.ModelManager;
 import seedu.jelphabot.model.UserPrefs;
-
-import static seedu.jelphabot.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.jelphabot.testutil.TypicalPersons.getTypicalJelphaBot;
 
 public class ClearCommandTest {
 

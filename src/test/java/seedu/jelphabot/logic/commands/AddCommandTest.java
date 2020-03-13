@@ -1,7 +1,18 @@
 package seedu.jelphabot.logic.commands;
 
-import javafx.collections.ObservableList;
+import static java.util.Objects.requireNonNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static seedu.jelphabot.testutil.Assert.assertThrows;
+
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.function.Predicate;
+
 import org.junit.jupiter.api.Test;
+
+import javafx.collections.ObservableList;
 import seedu.jelphabot.commons.core.GuiSettings;
 import seedu.jelphabot.logic.commands.exceptions.CommandException;
 import seedu.jelphabot.model.JelphaBot;
@@ -9,16 +20,7 @@ import seedu.jelphabot.model.Model;
 import seedu.jelphabot.model.ReadOnlyJelphaBot;
 import seedu.jelphabot.model.ReadOnlyUserPrefs;
 import seedu.jelphabot.model.task.Task;
-import seedu.jelphabot.testutil.PersonBuilder;
-
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.function.Predicate;
-
-import static java.util.Objects.requireNonNull;
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.jelphabot.testutil.Assert.assertThrows;
+import seedu.jelphabot.testutil.TaskBuilder;
 
 public class AddCommandTest {
 
@@ -30,7 +32,7 @@ public class AddCommandTest {
     @Test
     public void execute_personAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Task validTask = new PersonBuilder().build();
+        Task validTask = new TaskBuilder().build();
 
         CommandResult commandResult = new AddCommand(validTask).execute(modelStub);
 
@@ -40,35 +42,35 @@ public class AddCommandTest {
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
-        Task validTask = new PersonBuilder().build();
+        Task validTask = new TaskBuilder().build();
         AddCommand addCommand = new AddCommand(validTask);
         ModelStub modelStub = new ModelStubWithPerson(validTask);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_TASK, () -> addCommand.execute(modelStub));
     }
 
     @Test
     public void equals() {
-        Task alice = new PersonBuilder().withName("Alice").build();
-        Task bob = new PersonBuilder().withName("Bob").build();
+        Task alice = new TaskBuilder().withDescription("Alice").build();
+        Task bob = new TaskBuilder().withDescription("Bob").build();
         AddCommand addAliceCommand = new AddCommand(alice);
         AddCommand addBobCommand = new AddCommand(bob);
 
         // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
+        assertEquals(addAliceCommand, addAliceCommand);
 
         // same values -> returns true
         AddCommand addAliceCommandCopy = new AddCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
+        assertEquals(addAliceCommand, addAliceCommandCopy);
 
         // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
+        assertNotEquals(1, addAliceCommand);
 
         // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
+        assertNotEquals(null, addAliceCommand);
 
         // different person -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
+        assertNotEquals(addAliceCommand, addBobCommand);
     }
 
     /**
@@ -106,7 +108,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void addPerson(Task task) {
+        public void addTask(Task task) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -121,27 +123,27 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasPerson(Task task) {
+        public boolean hasTask(Task task) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void deletePerson(Task target) {
+        public void deleteTask(Task target) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setPerson(Task target, Task editedTask) {
+        public void setTask(Task target, Task editedTask) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ObservableList<Task> getFilteredPersonList() {
+        public ObservableList<Task> getFilteredTaskList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updateFilteredPersonList(Predicate<Task> predicate) {
+        public void updateFilteredTaskList(Predicate<Task> predicate) {
             throw new AssertionError("This method should not be called.");
         }
     }
@@ -158,7 +160,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasPerson(Task task) {
+        public boolean hasTask(Task task) {
             requireNonNull(task);
             return this.task.isSameTask(task);
         }
@@ -171,13 +173,13 @@ public class AddCommandTest {
         final ArrayList<Task> personsAdded = new ArrayList<>();
 
         @Override
-        public boolean hasPerson(Task task) {
+        public boolean hasTask(Task task) {
             requireNonNull(task);
             return personsAdded.stream().anyMatch(task::isSameTask);
         }
 
         @Override
-        public void addPerson(Task task) {
+        public void addTask(Task task) {
             requireNonNull(task);
             personsAdded.add(task);
         }

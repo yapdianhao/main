@@ -1,5 +1,7 @@
 package seedu.jelphabot.ui;
 
+import java.util.Comparator;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -7,10 +9,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.jelphabot.model.task.Task;
 
-import java.util.Comparator;
-
 /**
- * An UI component that displays information of a {@code Person}.
+ * An UI component that displays information of a {@code Task}.
  */
 // TODO add back fields for new model elements
 public class TaskCard extends UiPart<Region> {
@@ -36,17 +36,23 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label moduleCode;
     @FXML
+    private Label status;
+    @FXML
     private FlowPane tags;
+    @FXML
+    private Label dateTime;
 
     public TaskCard(Task task, int displayedIndex) {
         super(FXML);
         this.task = task;
-        id.setText(displayedIndex + ". ");
+        // id.setText(displayedIndex + ". ");
         description.setText(task.getDescription().fullDescription);
         moduleCode.setText(task.getModuleCode().value);
+        status.setText(task.getStatus().name());
+        dateTime.setText(task.getDateTime().getDisplayValue());
         task.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+            .sorted(Comparator.comparing(tag -> tag.tagName))
+            .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
     @Override
@@ -64,6 +70,6 @@ public class TaskCard extends UiPart<Region> {
         // state check
         TaskCard card = (TaskCard) other;
         return id.getText().equals(card.id.getText())
-                && task.equals(card.task);
+                   && task.equals(card.task);
     }
 }
