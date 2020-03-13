@@ -30,7 +30,7 @@ public class JelphaBot implements ReadOnlyJelphaBot {
     public JelphaBot() {}
 
     /**
-     * Creates an JelphaBot using the Persons in the {@code toBeCopied}
+     * Creates an JelphaBot using the Tasks in the {@code toBeCopied}
      */
     public JelphaBot(ReadOnlyJelphaBot toBeCopied) {
         this();
@@ -75,9 +75,9 @@ public class JelphaBot implements ReadOnlyJelphaBot {
     }
 
     /**
-     * Replaces the given task {@code target} in the list with {@code editedPerson}.
+     * Replaces the given task {@code target} in the list with {@code editedTask}.
      * {@code target} must exist in the address book.
-     * The task identity of {@code editedPerson} must not be the same as another existing task in the address book.
+     * The task identity of {@code editedTask} must not be the same as another existing task in the address book.
      */
     public void setTask(Task target, Task editedTask) {
         requireNonNull(editedTask);

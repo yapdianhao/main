@@ -54,7 +54,7 @@ public class DoneCommandTest {
 
         Model expectedModel = new ModelManager(model.getJelphaBot(), new UserPrefs());
         expectedModel.setTask(tasktoMarkDone, doneTask);
-        showNoPerson(expectedModel);
+        showNoTask(expectedModel);
 
         assertCommandSuccess(doneCommand, model, expectedMessage, expectedModel);
     }
@@ -114,14 +114,14 @@ public class DoneCommandTest {
         // null returns false
         assertFalse(firstDoneCommand.equals(null));
 
-        // different task returns false
+        // different commands returns false
         assertFalse(firstDoneCommand.equals(secondDoneCommand));
     }
 
     /**
      * Updates {@code model}'s filtered list to show no one.
      */
-    private void showNoPerson(Model model) {
+    private void showNoTask(Model model) {
         model.updateFilteredTaskList(p -> false);
 
         assertTrue(model.getFilteredTaskList().isEmpty());

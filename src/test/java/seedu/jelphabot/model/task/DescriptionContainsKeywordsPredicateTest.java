@@ -39,7 +39,7 @@ public class DescriptionContainsKeywordsPredicateTest {
         // null -> returns false
         assertNotEquals(null, firstPredicate);
 
-        // different person -> returns false
+        // different task -> returns false
         assertNotEquals(firstPredicate, secondPredicate);
     }
 
