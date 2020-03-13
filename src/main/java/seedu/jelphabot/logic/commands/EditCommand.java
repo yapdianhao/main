@@ -77,7 +77,7 @@ public class EditCommand extends Command {
         ModuleCode updatedModuleCode = editTaskDescriptor.getModuleCode().orElse(taskToEdit.getModuleCode());
         Set<Tag> updatedTags = editTaskDescriptor.getTags().orElse(taskToEdit.getTags());
         DateTime dateTime = editTaskDescriptor.getDateTime().orElse(taskToEdit.getDateTime());
-        Status updatedStatus = taskToEdit.getStatus();
+        Status updatedStatus = editTaskDescriptor.getStatus().orElse(taskToEdit.getStatus());
         Priority updatedPriority = editTaskDescriptor.getPriority().orElse(taskToEdit.getPriority());
 
         return new Task(updatedDescription, updatedStatus, dateTime, updatedModuleCode, updatedPriority, updatedTags);
