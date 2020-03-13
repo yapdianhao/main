@@ -10,6 +10,7 @@ import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_MODULE_CODE_T
 import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_PRIORITY_TUTORIAL;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_STATUS_ASSIGNMENT;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_STATUS_TUTORIAL;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_GRADED;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_PROJECT;
 import static seedu.jelphabot.testutil.Assert.assertThrows;
 import static seedu.jelphabot.testutil.TypicalTasks.ASSIGNMENT;
@@ -47,12 +48,14 @@ public class TaskTest {
         editedAssignment = new TaskBuilder().withModuleCode(VALID_MODULE_CODE_TUTORIAL).build();
         assertFalse(ASSIGNMENT.isSameTask(editedAssignment));
 
-        // same description, same datetime, same module code, different attributes -> returns true
-        editedAssignment = new TaskBuilder(ASSIGNMENT).withPriority(VALID_PRIORITY_TUTORIAL).build();
+        // same description, same datetime, same module code, different tag -> returns true
+        editedAssignment = new TaskBuilder(ASSIGNMENT).withPriority(VALID_PRIORITY_TUTORIAL)
+                               .withTags(VALID_TAG_PROJECT).build();
         assertTrue(ASSIGNMENT.isSameTask(editedAssignment));
 
-        // same description, same datetime, same module code, different attributes -> returns true
-        editedAssignment = new TaskBuilder(ASSIGNMENT).withStatus(VALID_STATUS_ASSIGNMENT).build();
+        // same description, same datetime, same module code, different tag -> returns true
+        editedAssignment = new TaskBuilder(ASSIGNMENT).withStatus(VALID_STATUS_ASSIGNMENT)
+                               .withTags(VALID_TAG_PROJECT).build();
         assertTrue(ASSIGNMENT.isSameTask(editedAssignment));
     }
 
