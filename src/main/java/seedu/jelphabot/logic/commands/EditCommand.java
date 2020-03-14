@@ -229,7 +229,7 @@ public class EditCommand extends Command {
             EditTaskDescriptor e = (EditTaskDescriptor) other;
 
             return getDescription().equals(e.getDescription()) && getDateTime().equals(e.getDateTime())
-                       && getModuleCode().equals(e.getModuleCode())
+                       && getModuleCode().equals(e.getModuleCode()) && getStatus().equals(e.getStatus())
                        && getPriority().equals(e.getPriority()) && getTags().equals(e.getTags());
         }
     }
