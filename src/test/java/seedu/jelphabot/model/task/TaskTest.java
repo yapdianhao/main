@@ -10,7 +10,6 @@ import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_MODULE_CODE_T
 import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_PRIORITY_TUTORIAL;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_STATUS_ASSIGNMENT;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_STATUS_TUTORIAL;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_GRADED;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_PROJECT;
 import static seedu.jelphabot.testutil.Assert.assertThrows;
 import static seedu.jelphabot.testutil.TypicalTasks.ASSIGNMENT;
