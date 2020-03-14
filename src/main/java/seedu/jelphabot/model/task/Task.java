@@ -69,6 +69,7 @@ public class Task {
 
     /**
      * Returns true if both tasks of the same description also occur at the same dateTime and have the same ModuleCode.
+     * Those fields that are chosen are a combination which is meant to be unique.
      * This defines a weaker notion of equality between two tasks.
      * Mainly used to check for duplicate tasks.
      */
@@ -80,7 +81,6 @@ public class Task {
         return otherTask != null
                    && otherTask.getDescription().equals(getDescription())
                    && otherTask.getDateTime().equals(getDateTime())
-                   && otherTask.getStatus().equals(getStatus())
                    && otherTask.getModuleCode().equals(getModuleCode());
     }
 

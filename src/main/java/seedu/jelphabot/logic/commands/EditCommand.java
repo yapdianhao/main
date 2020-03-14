@@ -77,7 +77,7 @@ public class EditCommand extends Command {
         ModuleCode updatedModuleCode = editTaskDescriptor.getModuleCode().orElse(taskToEdit.getModuleCode());
         Set<Tag> updatedTags = editTaskDescriptor.getTags().orElse(taskToEdit.getTags());
         DateTime dateTime = editTaskDescriptor.getDateTime().orElse(taskToEdit.getDateTime());
-        Status updatedStatus = editTaskDescriptor.getStatus().orElse(taskToEdit.getStatus());
+        Status updatedStatus = taskToEdit.getStatus();
         Priority updatedPriority = editTaskDescriptor.getPriority().orElse(taskToEdit.getPriority());
 
         return new Task(updatedDescription, updatedStatus, dateTime, updatedModuleCode, updatedPriority, updatedTags);
@@ -130,7 +130,6 @@ public class EditCommand extends Command {
         private ModuleCode moduleCode;
         private Set<Tag> tags;
         private DateTime dateTime;
-        private Status status;
         private Priority priority;
 
         public EditTaskDescriptor() {
@@ -144,7 +143,6 @@ public class EditCommand extends Command {
             setModuleCode(toCopy.moduleCode);
             setTags(toCopy.tags);
             setDateTime(toCopy.dateTime);
-            setStatus(toCopy.status);
             setPriority(toCopy.priority);
         }
 
@@ -169,15 +167,6 @@ public class EditCommand extends Command {
 
         public void setModuleCode(ModuleCode moduleCode) {
             this.moduleCode = moduleCode;
-        }
-
-
-        public Optional<Status> getStatus() {
-            return Optional.ofNullable(status);
-        }
-
-        public void setStatus(Status status) {
-            this.status = status;
         }
 
         public Optional<Priority> getPriority() {
@@ -229,7 +218,7 @@ public class EditCommand extends Command {
             EditTaskDescriptor e = (EditTaskDescriptor) other;
 
             return getDescription().equals(e.getDescription()) && getDateTime().equals(e.getDateTime())
-                       && getModuleCode().equals(e.getModuleCode()) && getStatus().equals(e.getStatus())
+                       && getModuleCode().equals(e.getModuleCode())
                        && getPriority().equals(e.getPriority()) && getTags().equals(e.getTags());
         }
     }
