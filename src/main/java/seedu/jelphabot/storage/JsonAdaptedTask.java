@@ -33,7 +33,7 @@ class JsonAdaptedTask {
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonAdaptedTask} with the given person details.
+     * Constructs a {@code JsonAdaptedTask} with the given task details.
      */
     @JsonCreator
     public JsonAdaptedTask(
@@ -67,16 +67,16 @@ class JsonAdaptedTask {
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's
+     * Converts this Jackson-friendly adapted task object into the model's
      * {@code Task} object.
      *
      * @throws IllegalValueException if there were any data constraints violated in
-     *                               the adapted person.
+     *                               the adapted task.
      */
     public Task toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
+        final List<Tag> taskTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tagged) {
-            personTags.add(tag.toModelType());
+            taskTags.add(tag.toModelType());
         }
 
         if (description == null) {
@@ -106,7 +106,7 @@ class JsonAdaptedTask {
         }
         final DateTime modelDateTime = new DateTime(dateTime);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
+        final Set<Tag> modelTags = new HashSet<>(taskTags);
 
         return new Task(
                 modelDescription,

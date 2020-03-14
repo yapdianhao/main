@@ -114,11 +114,11 @@ public class ModelManager implements Model {
         addressBook.setTask(target, editedTask);
     }
 
-    // =========== Filtered Person List Accessors
+    // =========== Filtered Task List Accessors
     // =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the
+     * Returns an unmodifiable view of the list of {@code Task} backed by the
      * internal list of {@code versionedJelphaBot}
      */
     @Override

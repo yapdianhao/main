@@ -2,7 +2,9 @@ package seedu.jelphabot.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.*;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.showTaskAtIndex;
 import static seedu.jelphabot.logic.commands.DoneCommand.createDoneTask;
 import static seedu.jelphabot.testutil.TypicalIndexes.INDEX_FIRST_TASK;
 import static seedu.jelphabot.testutil.TypicalIndexes.INDEX_SECOND_TASK;
@@ -46,9 +48,9 @@ public class DoneCommandTest {
     public void execute_validIndexFilteredList_success() {
         showTaskAtIndex(model, INDEX_FIRST_TASK);
 
-        Task tasktoMarkDone = model.getFilteredTaskList().get(INDEX_FIRST_TASK.getZeroBased());
+        Task taskToMarkDone = model.getFilteredTaskList().get(INDEX_FIRST_TASK.getZeroBased());
         DoneCommand doneCommand = new DoneCommand(INDEX_FIRST_TASK);
-        Task doneTask = createDoneTask(tasktoMarkDone);
+        Task doneTask = createDoneTask(taskToMarkDone);
 
         String expectedMessage = String.format(DoneCommand.MESSAGE_MARK_TASK_COMPLETE_SUCCESS, doneTask);
 
@@ -113,14 +115,14 @@ public class DoneCommandTest {
         // null returns false
         assertFalse(firstDoneCommand.equals(null));
 
-        // different task returns false
+        // different commands returns false
         assertFalse(firstDoneCommand.equals(secondDoneCommand));
     }
 
     /**
      * Updates {@code model}'s filtered list to show no one.
      */
-    private void showNoPerson(Model model) {
+    private void showNoTask(Model model) {
         model.updateFilteredTaskList(p -> false);
 
         assertTrue(model.getFilteredTaskList().isEmpty());

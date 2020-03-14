@@ -50,12 +50,12 @@ public class JsonJelphaBotStorageTest {
     }
 
     @Test
-    public void readJelphaBot_invalidPersonJelphaBot_throwDataConversionException() {
+    public void readJelphaBot_invalidTaskJelphaBot_throwDataConversionException() {
         assertThrows(DataConversionException.class, () -> readJelphaBot("invalidTaskJelphaBot.json"));
     }
 
     @Test
-    public void readJelphaBot_invalidAndValidPersonJelphaBot_throwDataConversionException() {
+    public void readJelphaBot_invalidAndValidTaskJelphaBot_throwDataConversionException() {
         assertThrows(DataConversionException.class, () -> readJelphaBot("invalidAndValidTaskJelphaBot.json"));
     }
 

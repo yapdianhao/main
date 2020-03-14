@@ -77,7 +77,7 @@ public class EditCommand extends Command {
         ModuleCode updatedModuleCode = editTaskDescriptor.getModuleCode().orElse(taskToEdit.getModuleCode());
         Set<Tag> updatedTags = editTaskDescriptor.getTags().orElse(taskToEdit.getTags());
         DateTime dateTime = editTaskDescriptor.getDateTime().orElse(taskToEdit.getDateTime());
-        Status updatedStatus = taskToEdit.getStatus();
+        Status updatedStatus = editTaskDescriptor.getStatus().orElse(taskToEdit.getStatus());
         Priority updatedPriority = editTaskDescriptor.getPriority().orElse(taskToEdit.getPriority());
 
         return new Task(updatedDescription, updatedStatus, dateTime, updatedModuleCode, updatedPriority, updatedTags);
@@ -130,7 +130,7 @@ public class EditCommand extends Command {
         private ModuleCode moduleCode;
         private Set<Tag> tags;
         private DateTime dateTime;
-        //private Status status;
+        private Status status;
         private Priority priority;
 
         public EditTaskDescriptor() {
@@ -144,7 +144,7 @@ public class EditCommand extends Command {
             setModuleCode(toCopy.moduleCode);
             setTags(toCopy.tags);
             setDateTime(toCopy.dateTime);
-            //setStatus(toCopy.status);
+            setStatus(toCopy.status);
             setPriority(toCopy.priority);
         }
 
@@ -171,7 +171,7 @@ public class EditCommand extends Command {
             this.moduleCode = moduleCode;
         }
 
-        /*
+
         public Optional<Status> getStatus() {
             return Optional.ofNullable(status);
         }
@@ -179,7 +179,6 @@ public class EditCommand extends Command {
         public void setStatus(Status status) {
             this.status = status;
         }
-        */
 
         public Optional<Priority> getPriority() {
             return Optional.ofNullable(priority);

@@ -18,7 +18,7 @@ import seedu.jelphabot.model.task.Task;
  * Contains utility methods for populating {@code JelphaBot} with sample data.
  */
 public class SampleDataUtil {
-    public static Task[] getSamplePersons() {
+    public static Task[] getSampleTasks() {
         return new Task[]{
             new Task(new Description("Individual Assignment 1"), Status.INCOMPLETE, new DateTime("Jan-1-2020 22 00"),
                 new ModuleCode("CS3230"), Priority.LOW, getTagSet("friends")
@@ -52,7 +52,7 @@ public class SampleDataUtil {
 
     public static ReadOnlyJelphaBot getSampleJelphaBot() {
         JelphaBot sampleAb = new JelphaBot();
-        for (Task sampleTask : getSamplePersons()) {
+        for (Task sampleTask : getSampleTasks()) {
             sampleAb.addTask(sampleTask);
         }
         return sampleAb;
