@@ -11,7 +11,6 @@ import seedu.jelphabot.model.task.DateTime;
 import seedu.jelphabot.model.task.Description;
 import seedu.jelphabot.model.task.ModuleCode;
 import seedu.jelphabot.model.task.Priority;
-import seedu.jelphabot.model.task.Status;
 import seedu.jelphabot.model.task.Task;
 
 /**
