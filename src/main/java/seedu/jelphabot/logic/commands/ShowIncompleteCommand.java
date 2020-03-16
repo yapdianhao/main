@@ -19,12 +19,12 @@ public class ShowIncompleteCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Displaying all incomplete tasks";
 
-    public static final Predicate<Task> incompletePredicate = new TaskIncompletePredicate();
+    public static final Predicate<Task> INCOMPLETE_PREDICATE = new TaskIncompletePredicate();
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredTaskList(incompletePredicate);
+        model.updateFilteredTaskList(INCOMPLETE_PREDICATE);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

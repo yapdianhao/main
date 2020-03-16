@@ -18,12 +18,12 @@ public class ShowCompletedCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Displaying all completed tasks";
 
-    public static final Predicate<Task> completedPredicate = new TaskCompletedPredicate();
+    public static final Predicate<Task> COMPLETED_PREDICATE = new TaskCompletedPredicate();
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredTaskList(completedPredicate);
+        model.updateFilteredTaskList(COMPLETED_PREDICATE);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

@@ -1,6 +1,7 @@
 package seedu.jelphabot.logic.commands;
 
-import static seedu.jelphabot.logic.commands.CommandTestUtil.*;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.showTasksWithSpecifiedStatus;
 import static seedu.jelphabot.testutil.TypicalTasks.getTypicalJelphaBot;
 
 import org.junit.jupiter.api.BeforeEach;
