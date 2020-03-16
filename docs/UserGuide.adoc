@@ -14,7 +14,7 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/se-edu/addressbook-level3
 
-By: `Team 2103T-F09-02`      Since: `Jan 2022`      Licence: `MIT`
+By: `Team 2103T-F09-02`      Since: `Jan 2020`      Licence: `MIT`
 
 == Introduction
 
@@ -36,6 +36,7 @@ Enjoy!
 The GUI should appear in a few seconds.
 +
 image::Ui.png[width="790"]
+_Figure 1: Expected result after running `Jelphabot`_
 +
 . Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
@@ -60,7 +61,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * Parameters can be in any order e.g. if the command specifies `d/DESCRIPTION p/PRIORITY`, `p/PRIORITY d/DESCRIPTION` is also acceptable.
 ====
 
-=== Viewing help : `help`
+==== Viewing help : `help`
 
 Format: `help`
 
@@ -70,6 +71,9 @@ Opens a help popup which provides a link to this user guide.
 
 Adds a task to the task list +
 Format: `d/DESCRIPTION dt/DATETIME m/MODULE_CODE [p/PRIORITY] [t/TAG]...`
+
+image::add.png[width="600"]
+_Figure 2: Example of an expected result after running `add`_
 
 ****
 * For dt/DATETIME inputs, we recommend the format MMM-dd-YYYY HH mm, but it also allows some other formats.
@@ -91,7 +95,7 @@ Shows a list of all tasks in the task list. +
 Format: `list`
 
 image::ug_figures/list.png[width="600"]
-_Figure: Example of an expected result after running `list`_
+_Figure 3: Example of an expected result after running `list`_
 
 The task list is formatted so that you can distinguish urgent tasks at first glance. Tasks are tagged according to their importance:
 
@@ -123,6 +127,9 @@ To read more about tags, go <<#Tags, here>>
 Finds tasks whose description contain any of the given keywords. +
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
+image::find.png[width="600"]
+_Figure 4: Example of an expected result after running `find`_
+
 ****
 * The search is case insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -138,10 +145,15 @@ Returns `Assignment 1` and `assignment task`
 * `find Tutorial Project MidTerm` +
 Returns any task having descriptions of `Tutorial`, `Project`, or `MidTerm`
 
-=== Editing a task : `edit`
+==== Editing a task : `edit`
 
-Edits an existing task in the address book. +
-Format: `edit INDEX [d/DESCRIPTION] [dt/DATETIME] [m/MODULE_CODE] [p/PRIORITY (-1, 0, or 1)] [t/TAG]...`
+Edit existing tasks by calling `edit` directly from a task page, or `edit <task_name>` from the landing page.
+. +
+Format: `edit INDEX [d/DESCRIPTION] [dt/DATETIME] [m/MODULE_CODE] [p/PRIORITY (-1, 0, or 1)]
+[t/TAG]...`
+
+image::edit.png[width="600"]
+_Figure 5: Example of an expected result after running `edit`_
 
 ****
 * Edits the task at the specified `INDEX`.
@@ -164,8 +176,11 @@ Edits the date and time of the 2nd task to be `Jan-2-2020 23 59` and clears all 
 // tag::delete[]
 === Deleting a task : `delete`
 
-Deletes the specified task from the task list. +
+Deletes tasks by calling `delete` directly from a task page or `delete <task_name>` from the landing page. +
 Format: `delete INDEX`
+
+image::delete.png[width="600"]
+_Figure 6: Example of an expected result after running `delete`_
 
 ****
 * Deletes the task at the specified `INDEX`.
@@ -185,25 +200,28 @@ Deletes the 1st task in the results of the `find` command.
 // end::delete[]
 === Clearing all entries : `clear`
 
-Clears all entries from the address book. +
+Clears all entries from the task list by calling `clear` directly from a task page or from the landing page. +
 Format: `clear`
 
-// tag::log[]
-=== Viewing the task log : `log`
+image::clear.png[width="600"]
+_Figure 7: Example of an expected result after running `clear`_
 
 === Exiting the program : `exit`
 
-Exits the program. +
+Exits the program by calling `exit` directly from a task page or from the landing page. +
 Format: `exit`
+// no image needed
 
 === Saving the data
 
 Address book data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
-=== Set Reminders and Notifications  `[coming in v2.0]`
+// tag::dataencryption[]
+_{explain how the user can enable/disable data encryption}_
+// end::dataencryption[]
 
-=== Pin Important tasks  `[coming in v2.0]`
+=== Set Reminders and Notifications  `[coming in v2.0]`
 
 == Interface Navigation
 
@@ -213,51 +231,14 @@ There is no need to save manually.
 
 === Morning call/Night debrief  `[coming in v2.0]`
 
-JelphaBot is a digital assistant aimed at providing summaries and timely reminders.
-With Morning Call and Nightly Debrief, JelphaBot can provide daily summaries for you to start and end the day well.
-
-==== Morning Call
-You can configure the time of the morning call.
-Format: `morning_call -t <time>`
-
------
-Good morning!
-Your first task starts at 8AM today.
-Here are the tasks you have for the day:
-[ ] Go to School
-[ ] Eat Breakfast
-[ ] Pass CS3230
-[ ] Hit the woah
------
-_Example Morning call_
-
-==== Nightly Debrief
-You can configure the time of the morning call.
-Format: `morning_call \t [TIME]`
-
------
-Good evening sexy!
-Here are the tasks you have completed today:
-[x] Go to School
-[x] Eat breakfast
-[x] Hit the woah
-
-The following tasks were deferred:
-|--> Pass CS3230 (To Tomorrow)
-
-The following tasks are incomplete. Would you like to reschedule them?
-[ ] Survive CS2103T
-
-You start tomorrow at 9am. Goodnight bb xoxo uwu <3
-
------
-_Example Night Debrief_
-
 === Sticky notes  `[coming in v2.0]`
 
 === Productivity tracker  `[coming in v2.0]`
 
-=== Sort tasks (by today, week, month)  `[coming in v2.0]`
+=== Reorganizing tasks
+
+==== Pin Important tasks  `[coming in v2.0]`
+==== Sort tasks (by today, week, month)  `[coming in v2.0]`
 
 == FAQ
 
@@ -282,3 +263,4 @@ e.g. `edit 1 m/CS2105 d/Tutorial 2`
 e.g. `find Tutorial Assignment`
 * *List* : `list`
 * *Help* : `help`
+* *Exit* : `exit`
