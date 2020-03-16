@@ -14,20 +14,20 @@ import seedu.jelphabot.model.tag.Tag;
 import seedu.jelphabot.model.task.Task;
 
 /**
- * A utility class for Person.
+ * A utility class for Task.
  */
 // TODO: rewrite this class to add in new model class details
 public class TaskUtil {
 
     /**
-     * Returns an add command string for adding the {@code person}.
+     * Returns an add command string for adding the {@code task}.
      */
     public static String getAddCommand(Task task) {
         return AddCommand.COMMAND_WORD + " " + getTaskDetails(task);
     }
 
     /**
-     * Returns the part of command string for the given {@code person}'s details.
+     * Returns the part of command string for the given {@code task}'s details.
      */
     public static String getTaskDetails(Task task) {
         StringBuilder sb = new StringBuilder();

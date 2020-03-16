@@ -35,7 +35,7 @@ public class AddCommand extends Command {
     private final Task toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddCommand to add the specified {@code Task}
      */
     public AddCommand(Task task) {
         requireNonNull(task);

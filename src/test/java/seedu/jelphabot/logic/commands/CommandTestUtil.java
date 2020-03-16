@@ -70,14 +70,12 @@ public class CommandTestUtil {
     static {
         DESC_ASSIGNMENT = new EditTaskDescriptorBuilder()
                 .withDescription(VALID_DESCRIPTION_ASSIGNMENT)
-                //.withStatus(VALID_STATUS_ASSIGNMENT)
                 .withDateTime(VALID_DATETIME_ASSIGNMENT)
                 .withModuleCode(VALID_MODULE_CODE_ASSIGNMENT)
                 .withPriority(VALID_PRIORITY_ASSIGNMENT)
                 .withTags(VALID_TAG_GRADED).build();
         DESC_TUTORIAL = new EditTaskDescriptorBuilder()
                 .withDescription(VALID_DESCRIPTION_TUTORIAL)
-                //.withStatus(VALID_STATUS_TUTORIAL)
                 .withDateTime(VALID_DATETIME_TUTORIAL)
                 .withModuleCode(VALID_MODULE_CODE_TUTORIAL)
                 .withPriority(VALID_PRIORITY_TUTORIAL)

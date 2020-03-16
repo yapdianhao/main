@@ -72,7 +72,7 @@ public class TypicalTasks {
     } // prevents instantiation
 
     /**
-     * Returns an {@code JelphaBot} with all the typical persons.
+     * Returns an {@code JelphaBot} with all the typical tasks.
      */
     public static JelphaBot getTypicalJelphaBot() {
         JelphaBot ab = new JelphaBot();

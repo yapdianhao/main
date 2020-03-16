@@ -34,7 +34,6 @@ public class EditTaskDescriptorBuilder {
     public EditTaskDescriptorBuilder(Task task) {
         descriptor = new EditTaskDescriptor();
         descriptor.setDescription(task.getDescription());
-        //descriptor.setStatus(task.getStatus());
         descriptor.setDateTime(task.getDateTime());
         descriptor.setModuleCode(task.getModuleCode());
         descriptor.setPriority(task.getPriority());
@@ -48,14 +47,6 @@ public class EditTaskDescriptorBuilder {
         descriptor.setDescription(new Description(name));
         return this;
     }
-
-    // /**
-    //  * Sets the {@code Status} of the {@code EditTaskDescriptor} that we are building.
-    //  */
-    // public EditTaskDescriptorBuilder withStatus(String status) {
-    //     descriptor.setStatus(Status.toStatus(status));
-    //     return this;
-    // }
 
     /**
      * Sets the {@code DateTime} of the {@code EditTaskDescriptor} that we are building.

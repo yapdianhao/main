@@ -31,7 +31,7 @@ public interface Logic {
      */
     ReadOnlyJelphaBot getJelphaBot();
 
-    /** Returns an unmodifiable view of the filtered list of persons */
+    /** Returns an unmodifiable view of the filtered list of tasks */
     ObservableList<Task> getFilteredTaskList();
 
     /**

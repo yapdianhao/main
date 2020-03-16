@@ -84,10 +84,7 @@ public class EditCommandParserTest {
         // invalid tag
         assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS);
 
-        // valid phone followed by invalid phone. The test case for invalid phone followed by valid phone
-        // is tested at {@code parse_invalidValueFollowedByValidValue_success()}
-
-        // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Person} being edited,
+        // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Task} being edited,
         // parsing it together with a valid tag results in error
         assertParseFailure(
             parser,
