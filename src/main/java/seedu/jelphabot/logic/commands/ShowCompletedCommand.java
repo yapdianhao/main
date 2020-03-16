@@ -8,8 +8,11 @@ import seedu.jelphabot.model.Model;
 import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.model.task.TaskCompletedPredicate;
 
+/**
+ * Displays to the user a list of tasks that are currently of the COMPLETE status.
+ */
 public class ShowCompletedCommand extends Command {
-    public static final String COMMAND_WORD = "completed-tasks";
+    public static final String COMMAND_WORD = "show-completed";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows all completed tasks in the task list";
 

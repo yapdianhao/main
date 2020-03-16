@@ -2,10 +2,13 @@ package seedu.jelphabot.model.task;
 
 import java.util.function.Predicate;
 
+/**
+ * Tests that a {@code Task}'s {@code Status} is INCOMPLETE.
+ */
 public class TaskIncompletePredicate implements Predicate<Task> {
     @Override
     public boolean test(Task task) {
-        return task.getStatus() == Status.COMPLETE;
+        return task.getStatus() == Status.INCOMPLETE;
     }
 
     @Override

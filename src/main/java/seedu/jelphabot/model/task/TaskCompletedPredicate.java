@@ -2,6 +2,9 @@ package seedu.jelphabot.model.task;
 
 import java.util.function.Predicate;
 
+/**
+ * Tests that a {@code Task}'s {@code Status} is COMPLETE.
+ */
 public class TaskCompletedPredicate implements Predicate<Task> {
 
     @Override
