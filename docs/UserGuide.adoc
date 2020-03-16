@@ -198,7 +198,7 @@ Deletes the 2nd task in the task list.
 Deletes the 1st task in the results of the `find` command.
 
 // end::delete[]
-=== Clearing all entries : `clear`
+==== Clearing all entries : `clear`
 
 Clears all entries from the task list by calling `clear` directly from a task page or from the landing page. +
 Format: `clear`
@@ -212,13 +212,16 @@ Exits the program by calling `exit` directly from a task page or from the landin
 Format: `exit`
 // no image needed
 
-=== Saving the data
+==== Saving the data
 
 Address book data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
 // tag::dataencryption[]
 _{explain how the user can enable/disable data encryption}_
+
+==== Pin Important tasks  `[coming in v2.0]`
+
 // end::dataencryption[]
 
 === Set Reminders and Notifications  `[coming in v2.0]`
