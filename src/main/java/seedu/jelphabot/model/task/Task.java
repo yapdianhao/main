@@ -23,12 +23,13 @@ public class Task {
     private final DateTime dateTime;
     private final Status status;
     private final Priority priority;
-    LocalDateTime startTime;
-    LocalDateTime endTime;
-    Duration duration;
 
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
+
+    private LocalDateTime startTime;
+    private LocalDateTime endTime;
+    private Duration duration;
 
     /**
      * Every field must be present and not null.
@@ -76,6 +77,9 @@ public class Task {
         this.startTime = LocalDateTime.now();
     }
 
+    /**
+     * Stops the timer for the task specified
+     */
     public void stopTimer() {
         this.endTime = LocalDateTime.now();
         this.setDuration();

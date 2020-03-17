@@ -1,5 +1,7 @@
 package seedu.jelphabot.ui;
 
+import java.util.logging.Logger;
+
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -7,13 +9,15 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
 import seedu.jelphabot.commons.core.GuiSettings;
 import seedu.jelphabot.commons.core.LogsCenter;
 import seedu.jelphabot.logic.Logic;
 import seedu.jelphabot.model.task.Task;
 
-import java.util.logging.Logger;
-
+/**
+ * The Productivity Panel. Provides the basic application layout of productivity of tasks.
+ */
 public class ProductivityPanel extends UiPart<Stage> {
 
     private static final String FXML = "ProductivityPanel.fxml";
@@ -67,8 +71,8 @@ public class ProductivityPanel extends UiPart<Stage> {
         PieChart pieChart = new PieChart();
 
         PieChart.Data slice1 = new PieChart.Data("Desktop", 213);
-        PieChart.Data slice2 = new PieChart.Data("Phone"  , 67);
-        PieChart.Data slice3 = new PieChart.Data("Tablet" , 36);
+        PieChart.Data slice2 = new PieChart.Data("Phone", 67);
+        PieChart.Data slice3 = new PieChart.Data("Tablet", 36);
 
         pieChart.getData().add(slice1);
         pieChart.getData().add(slice2);

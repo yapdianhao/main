@@ -1,7 +1,7 @@
 package seedu.jelphabot.logic.parser;
 
-import static seedu.jelphabot.commons.core.Messages.MESSAGE_CANNOT_START_MORE_TIMERS;
 import static seedu.jelphabot.commons.core.Messages.MESSAGE_CANNOT_ADD_OR_DELETE;
+import static seedu.jelphabot.commons.core.Messages.MESSAGE_CANNOT_START_MORE_TIMERS;
 import static seedu.jelphabot.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.jelphabot.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
