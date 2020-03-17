@@ -2,12 +2,14 @@ package seedu.jelphabot.ui;
 
 import java.util.logging.Logger;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.jelphabot.commons.core.GuiSettings;
 import seedu.jelphabot.commons.core.LogsCenter;
 import seedu.jelphabot.logic.Logic;
+import seedu.jelphabot.model.task.Task;
 
 public class MorningCallWindow extends UiPart<Stage> {
     private static final String FXML = "MorningCallWindow.fxml";
@@ -38,6 +40,13 @@ public class MorningCallWindow extends UiPart<Stage> {
 
         //setAcclerators();
 
+    }
+
+    void fillWindow() {
+        // get the list of Incomplete tasks
+        ObservableList<Task> taskList = logic.getFilteredByIncompleteTaskList();
+        taskListPanel = new TaskListPanel(taskList);
+        taskListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
     }
 
     public TaskListPanel getTaskListPanel() {

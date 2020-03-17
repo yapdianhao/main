@@ -49,6 +49,7 @@ public class UiManager implements Ui {
             // show morningCallWindow
             morningCallWindow = new MorningCallWindow(morningCallStage, logic);
             morningCallWindow.show();
+            morningCallWindow.fillWindow();
 
         } catch (Throwable e) {
             logger.severe(StringUtil.getDetails(e));
