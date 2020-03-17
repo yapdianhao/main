@@ -85,7 +85,7 @@ public class DateTime {
      * @param dateString the string to be converted.
      * @return dateString converted to standard format.
      */
-    private static  String convertDateToStandardFormat(DateFormat currentDateFormat, String dateString) {
+    private static String convertDateToStandardFormat(DateFormat currentDateFormat, String dateString) {
         String standardDateString = "";
         try {
             Date date = currentDateFormat.parse(dateString);
