@@ -95,6 +95,15 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void getFilteredByCompleteTaskList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredByCompleteTaskList().remove(0));
+    }
+
+    @Test
+    public void getFilteredByIncompleteTaskList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredByIncompleteTaskList().remove(0));
+    }
+    @Test
     public void equals() {
         JelphaBot addressBook = new JelphaBotBuilder().withTask(ASSESSMENT).withTask(BOOK_REPORT).build();
         JelphaBot differentJelphaBot = new JelphaBot();
