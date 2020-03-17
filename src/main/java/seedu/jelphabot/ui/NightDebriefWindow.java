@@ -12,24 +12,25 @@ import seedu.jelphabot.logic.Logic;
 import seedu.jelphabot.model.task.Task;
 
 /**
- * The MorningCall Window that is shown upon the app startup. Follows the
- * styling specified in MainWindow.
+ * The NightDebrief Window that is shown upon the app exiting.
+ * Follows the styling specified in MainWindow.
  */
-public class MorningCallWindow extends UiPart<Stage> {
+public class NightDebriefWindow extends UiPart<Stage> {
+    private static final String FXML = "NightDebriefWindow.fxml";
 
-    private static final String FXML = "MorningCallWindow.fxml";
-
-    private static final String MORNING_CALL_STRING = "Hello! Here are your incomplete tasks so far!";
+    private static final String NIGHT_DEBRIEF_STRING = "Goodbye! Before you go, \n"
+                                                           + "here are the tasks that you have completed!";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
-    private Stage morningCallStage;
+    private Stage nightDebriefStage;
     private Logic logic;
 
     // Ui parts that are required to be in this Ui container
     private TaskListPanel taskListPanel;
+
     // resultDisplay box from MainWindow will be used to
-    // display the message of the "morning call" to user
+    // display the message of the "night debrief" to the user
     // TODO: customise this box to be something other than resultDisplay
     private ResultDisplay resultDisplay;
 
@@ -39,34 +40,33 @@ public class MorningCallWindow extends UiPart<Stage> {
     @FXML
     private StackPane resultDisplayPlaceholder;
 
-    public MorningCallWindow(Stage morningCallStage, Logic logic) {
+    public NightDebriefWindow(Stage nightDebriefStage, Logic logic) {
+        super(FXML, nightDebriefStage);
 
-        super(FXML, morningCallStage);
+        logger.info("Initialising NightDebriefWindow");
 
-        logger.info("Initialising morningCallWindow");
-        // set dependencies
-        this.morningCallStage = morningCallStage;
+        //set dependencies
+        this.nightDebriefStage = nightDebriefStage;
         this.logic = logic;
-        // configure the UI to custom dimensions
+
+        //configure the UI to custom dimensions
         setWindowDefaultSize(logic.getPopUpWindowGuiSettings());
-
-        //setAcclerators();
-
     }
 
     /**
      * Fills the placeholders of this window
      */
     void fillWindow() {
-        // get the list of Incomplete tasks
-        ObservableList<Task> taskList = logic.getFilteredByIncompleteTaskList();
+        // get the list of completed tasks
+        ObservableList<Task> taskList = logic.getFilteredByCompleteTaskList();
         taskListPanel = new TaskListPanel(taskList);
         taskListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
 
-        // initialise resultDisplay
+        //initialise resultDisplay
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
-        resultDisplay.setFeedbackToUser(MORNING_CALL_STRING);
+        resultDisplay.setFeedbackToUser(NIGHT_DEBRIEF_STRING);
+
     }
 
     public TaskListPanel getTaskListPanel() {
@@ -74,26 +74,25 @@ public class MorningCallWindow extends UiPart<Stage> {
     }
 
     void show() {
-        logger.info("Showing morningCallStage");
-        morningCallStage.show();
+        logger.info("Showing nightDebriefStage");
+        nightDebriefStage.show();
     }
 
     /**
      * Sets the default size based on {@code guiSettings}.
      */
     private void setWindowDefaultSize(GuiSettings guiSettings) {
-        morningCallStage.setHeight(guiSettings.getWindowHeight());
-        morningCallStage.setWidth(guiSettings.getWindowWidth());
+        nightDebriefStage.setHeight(guiSettings.getWindowHeight());
+        nightDebriefStage.setWidth(guiSettings.getWindowWidth());
         if (guiSettings.getWindowCoordinates() != null) {
-            morningCallStage.setX(guiSettings.getWindowCoordinates().getX());
-            morningCallStage.setY(guiSettings.getWindowCoordinates().getY());
+            nightDebriefStage.setX(guiSettings.getWindowCoordinates().getX());
+            nightDebriefStage.setY(guiSettings.getWindowCoordinates().getY());
         }
     }
 
     @FXML
     private void closeButtonAction() {
-        logger.info("Close Button pressed. Closing morningCallWindow");
-        morningCallStage.close();
+        logger.info("Close Button pressed. Closing nightDebriefStage.");
+        nightDebriefStage.close();
     }
-
 }
