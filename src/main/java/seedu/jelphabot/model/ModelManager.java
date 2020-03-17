@@ -63,6 +63,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public GuiSettings getPopUpWindowGuiSettings() {
+        return userPrefs.getPopUpWindowGuiSettings();
+    }
+
+    @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         requireNonNull(guiSettings);
         userPrefs.setGuiSettings(guiSettings);

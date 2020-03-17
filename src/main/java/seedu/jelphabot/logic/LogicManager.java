@@ -82,6 +82,11 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public GuiSettings getPopUpWindowGuiSettings() {
+        return model.getPopUpWindowGuiSettings();
+    }
+
+    @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
     }

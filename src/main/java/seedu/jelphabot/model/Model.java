@@ -31,6 +31,11 @@ public interface Model {
     GuiSettings getGuiSettings();
 
     /**
+     * Returns the GUI settings for a popup window
+     */
+    GuiSettings getPopUpWindowGuiSettings();
+
+    /**
      * Sets the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);

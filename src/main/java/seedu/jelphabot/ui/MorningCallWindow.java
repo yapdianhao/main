@@ -36,7 +36,7 @@ public class MorningCallWindow extends UiPart<Stage> {
         // configure the UI
         // for now, set the size to be the same as MainWindow
         // TODO: configure settings to customize the size of the window, not follow MainWindow dims
-        setWindowDefaultSize(logic.getGuiSettings());
+        setWindowDefaultSize(logic.getPopUpWindowGuiSettings());
 
         //setAcclerators();
 

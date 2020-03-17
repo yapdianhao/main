@@ -42,6 +42,11 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         return guiSettings;
     }
 
+    public GuiSettings getPopUpWindowGuiSettings() {
+        // create a new GuiSettings object with smaller dimensions than the default
+        return new GuiSettings(540.0, 400.0);
+    }
+
     public void setGuiSettings(GuiSettings guiSettings) {
         requireNonNull(guiSettings);
         this.guiSettings = guiSettings;

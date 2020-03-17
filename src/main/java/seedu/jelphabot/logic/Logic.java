@@ -51,6 +51,11 @@ public interface Logic {
     GuiSettings getGuiSettings();
 
     /**
+     * Returns the GUI settings for a popup window
+     */
+    GuiSettings getPopUpWindowGuiSettings();
+
+    /**
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);

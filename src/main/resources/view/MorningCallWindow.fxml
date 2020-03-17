@@ -8,7 +8,8 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.stage.*?>
 
-<fx:root minHeight="600" minWidth="450" title="JelphaBot" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root minHeight="540" minWidth="400" title="JelphaBot" type="javafx.stage.Stage"
+         xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
     <icons>
         <Image url="@/images/address_book_32.png" />
     </icons>
@@ -19,16 +20,17 @@
                 <URL value="@Extensions.css" />
             </stylesheets>
             <VBox>
-                <AnchorPane prefHeight="560.0" prefWidth="600.0">
+                <AnchorPane prefHeight="500.0" prefWidth="400.0">
                     <children>
-                        <VBox fx:id="taskList" minWidth="340" prefWidth="340.0" styleClass="pane-with-border" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <VBox fx:id="taskList" minWidth="140" prefWidth="140.0" styleClass="pane-with-border"
+                              AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <padding>
-                                <Insets bottom="10" left="10" right="10" top="10" />
+                                <Insets left="10" right="10" top="10" />
                             </padding>
                             <StackPane fx:id="taskListPanelPlaceholder" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS" />
                      <ButtonBar maxHeight="40.0" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="80.0">
                        <buttons>
-                         <Button fx:id="closeButton" alignment="CENTER" contentDisplay="CENTER" layoutX="-10.0" layoutY="-10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="0.0" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="31.0" text="OK" textAlignment="CENTER" />
+                         <Button fx:id="closeButton" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="0.0" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="31.0" text="OK" textAlignment="CENTER" />
                        </buttons>
                      </ButtonBar>
                         </VBox>
