@@ -2,6 +2,8 @@ package seedu.jelphabot.model.task;
 
 import static seedu.jelphabot.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -21,6 +23,9 @@ public class Task {
     private final DateTime dateTime;
     private final Status status;
     private final Priority priority;
+    LocalDateTime startTime;
+    LocalDateTime endTime;
+    Duration duration;
 
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
@@ -65,6 +70,23 @@ public class Task {
 
     public Priority getPriority() {
         return priority;
+    }
+
+    public void startTimer() {
+        this.startTime = LocalDateTime.now();
+    }
+
+    public void stopTimer() {
+        this.endTime = LocalDateTime.now();
+        this.setDuration();
+    }
+
+    private void setDuration() {
+        this.duration = Duration.between(this.startTime, this.endTime);
+    }
+
+    public LocalDateTime getStartTime() {
+        return this.startTime;
     }
 
     /**

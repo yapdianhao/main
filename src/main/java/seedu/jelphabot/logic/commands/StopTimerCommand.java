@@ -1,17 +1,18 @@
 package seedu.jelphabot.logic.commands;
 
-import seedu.jelphabot.commons.core.Messages;
-import seedu.jelphabot.commons.core.index.Index;
-import seedu.jelphabot.logic.commands.exceptions.CommandException;
-import seedu.jelphabot.model.Model;
-import seedu.jelphabot.model.task.Status;
-import seedu.jelphabot.model.task.Task;
+import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-import static java.util.Objects.requireNonNull;
-
+import seedu.jelphabot.commons.core.Messages;
+import seedu.jelphabot.commons.core.index.Index;
+import seedu.jelphabot.logic.commands.exceptions.CommandException;
+import seedu.jelphabot.model.Model;
+import seedu.jelphabot.model.task.Task;
+/**
+ * Starts a timer for a task.
+ */
 public class StopTimerCommand extends Command {
     public static final String COMMAND_WORD = "stop";
     public static final String MESSAGE_USAGE = COMMAND_WORD
@@ -21,14 +22,13 @@ public class StopTimerCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Stopped timer for %1$s";
     public static final String MESSAGE_NO_TIMER_TO_STOP = "No timers were started.";
 
-    private LocalDateTime end;
     private Index targetIndex;
+    private LocalDateTime end;
 
     public StopTimerCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
-    // TODO: Add timer started status to task
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -39,11 +39,12 @@ public class StopTimerCommand extends Command {
         }
 
         Task taskToStop = lastShownList.get(targetIndex.getZeroBased());
-        this.end = LocalDateTime.now();
 
-        // if (!this.started) {
-        //     throw new CommandException(MESSAGE_NO_TIMER_TO_STOP);
-        // }
+        if (taskToStop.getStartTime() == null) {
+            throw new CommandException(MESSAGE_NO_TIMER_TO_STOP);
+        }
+
+        taskToStop.stopTimer();
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, taskToStop));
     }

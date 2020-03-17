@@ -1,5 +1,10 @@
 package seedu.jelphabot.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
 import seedu.jelphabot.commons.core.Messages;
 import seedu.jelphabot.commons.core.index.Index;
 import seedu.jelphabot.logic.commands.exceptions.CommandException;
@@ -7,11 +12,9 @@ import seedu.jelphabot.model.Model;
 import seedu.jelphabot.model.task.Status;
 import seedu.jelphabot.model.task.Task;
 
-import java.time.LocalDateTime;
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
-
+/**
+ * Starts a timer for a task.
+ */
 public class StartTimerCommand extends Command {
     public static final String COMMAND_WORD = "start";
     public static final String MESSAGE_USAGE = COMMAND_WORD
@@ -21,8 +24,8 @@ public class StartTimerCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Started timer for %1$s";
     public static final String MESSAGE_TASK_ALREADY_TIMED = "Task has already been marked as done and cannot be timed.";
 
+    private Index targetIndex;
     private LocalDateTime start;
-    public Index targetIndex;
 
     public StartTimerCommand(Index targetIndex) {
         requireNonNull(targetIndex);
@@ -44,6 +47,8 @@ public class StartTimerCommand extends Command {
         if (taskToTime.getStatus() == Status.COMPLETE) {
             throw new CommandException(MESSAGE_TASK_ALREADY_TIMED);
         }
+
+        taskToTime.startTimer();
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, taskToTime));
     }

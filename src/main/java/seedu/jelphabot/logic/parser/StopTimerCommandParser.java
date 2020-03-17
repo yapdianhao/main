@@ -1,11 +1,14 @@
 package seedu.jelphabot.logic.parser;
 
+import static seedu.jelphabot.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 import seedu.jelphabot.commons.core.index.Index;
 import seedu.jelphabot.logic.commands.StopTimerCommand;
 import seedu.jelphabot.logic.parser.exceptions.ParseException;
 
-import static seedu.jelphabot.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
+/**
+ * Parses input arguments and creates a new StopTimerCommand object
+ */
 public class StopTimerCommandParser implements Parser<StopTimerCommand> {
 
     /**

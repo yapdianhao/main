@@ -1,8 +1,8 @@
 package seedu.jelphabot.logic.parser;
 
 import static seedu.jelphabot.commons.core.Messages.MESSAGE_CANNOT_START_MORE_TIMERS;
-import static seedu.jelphabot.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.jelphabot.commons.core.Messages.MESSAGE_CANNOT_ADD_OR_DELETE;
+import static seedu.jelphabot.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.jelphabot.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import java.util.regex.Matcher;
@@ -24,18 +24,23 @@ import seedu.jelphabot.logic.commands.StartTimerCommand;
 import seedu.jelphabot.logic.commands.StopTimerCommand;
 import seedu.jelphabot.logic.parser.exceptions.ParseException;
 
+/* TODO: lock add and delete commands when timer is running for a task OR allow timer for > 1 task but identify tasks by
+ * object rather than index. BUT also means that user has to have a way to end timer appropriately
+ * */
 /**
  * Parses user input.
  */
-/* TODO: lock add and delete commands when timer is running for a task OR allow timer for > 1 task but identify tasks by
-* object rather than index. BUT also means that user has to have a way to end timer appropriately
-* */
 public class JelphaBotParser {
 
     /**
      * Used for initial separation of command word and args.
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
+
+    /**
+     * Field to indicate whether a timer was started.
+     */
+    private static boolean timerStarted = false;
 
     /**
      * Parses user input into command for execution.
@@ -54,15 +59,24 @@ public class JelphaBotParser {
         switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:
+            if (timerStarted) {
+                throw new ParseException(MESSAGE_CANNOT_ADD_OR_DELETE);
+            }
             return new AddCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
         case DeleteCommand.COMMAND_WORD:
+            if (timerStarted) {
+                throw new ParseException(MESSAGE_CANNOT_ADD_OR_DELETE);
+            }
             return new DeleteCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
+            if (timerStarted) {
+                throw new ParseException(MESSAGE_CANNOT_ADD_OR_DELETE);
+            }
             return new ClearCommand();
 
         case FindCommand.COMMAND_WORD:
@@ -87,9 +101,14 @@ public class JelphaBotParser {
             return new DoneCommandParser().parse(arguments);
 
         case StartTimerCommand.COMMAND_WORD:
+            if (timerStarted) {
+                throw new ParseException(MESSAGE_CANNOT_START_MORE_TIMERS);
+            }
+            timerStarted = true;
             return new StartTimerCommandParser().parse(arguments);
 
         case StopTimerCommand.COMMAND_WORD:
+            timerStarted = false;
             return new StopTimerCommandParser().parse(arguments);
 
         default:
