@@ -28,8 +28,8 @@
                                 <Insets left="10" right="10" top="10" />
                             </padding>
                             <StackPane fx:id="taskListPanelPlaceholder" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS" />
-                            <StackPane fx:id="resultDisplayPlaceholder" maxHeight="50" minHeight="50"
-                                       prefHeight="50" styleClass="pane-with-border" VBox.vgrow="NEVER">
+                            <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100" minHeight="100"
+                                       prefHeight="100" styleClass="pane-with-border" VBox.vgrow="NEVER">
                                 <padding>
                                     <Insets bottom="5" left="10" right="10" top="5" />
                                 </padding>

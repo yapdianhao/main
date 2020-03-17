@@ -11,10 +11,14 @@ import seedu.jelphabot.commons.core.LogsCenter;
 import seedu.jelphabot.logic.Logic;
 import seedu.jelphabot.model.task.Task;
 
+/**
+ * The NightDebrief Window that is shown upon the app exiting.
+ * Follows the styling specified in MainWindow.
+ */
 public class NightDebriefWindow extends UiPart<Stage> {
     private static final String FXML = "NightDebriefWindow.fxml";
 
-    private static final String NIGHT_DEBRIEF_STRING = "Goodbye! Before you go, "
+    private static final String NIGHT_DEBRIEF_STRING = "Goodbye! Before you go, \n"
                                                            + "here are the tasks that you have completed!";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
@@ -49,6 +53,9 @@ public class NightDebriefWindow extends UiPart<Stage> {
         setWindowDefaultSize(logic.getPopUpWindowGuiSettings());
     }
 
+    /**
+     * Fills the placeholders of this window
+     */
     void fillWindow() {
         // get the list of completed tasks
         ObservableList<Task> taskList = logic.getFilteredByCompleteTaskList();
@@ -81,5 +88,11 @@ public class NightDebriefWindow extends UiPart<Stage> {
             nightDebriefStage.setX(guiSettings.getWindowCoordinates().getX());
             nightDebriefStage.setY(guiSettings.getWindowCoordinates().getY());
         }
+    }
+
+    @FXML
+    private void closeButtonAction() {
+        logger.info("Close Button pressed. Closing nightDebriefStage.");
+        nightDebriefStage.close();
     }
 }
