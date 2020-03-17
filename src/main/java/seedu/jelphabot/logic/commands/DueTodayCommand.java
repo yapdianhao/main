@@ -5,10 +5,13 @@ import static java.util.Objects.requireNonNull;
 import seedu.jelphabot.model.Model;
 import seedu.jelphabot.model.task.predicates.TaskDueWithinDayPredicate;
 
+/**
+ * Displays to the user a list of tasks that are due the same day as the current day.
+ */
 public class DueTodayCommand extends Command {
     public static final String COMMAND_WORD = "due-today";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows all today-tasks in the task list" ;
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows all today-tasks in the task list";
 
     public static final String MESSAGE_SUCCESS = "Displaying all today-tasks";
 

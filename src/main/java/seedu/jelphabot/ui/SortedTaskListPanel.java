@@ -1,5 +1,9 @@
 package seedu.jelphabot.ui;
 
+import java.util.Date;
+import java.util.function.Predicate;
+import java.util.logging.Logger;
+
 import javafx.collections.ObservableList;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -8,10 +12,10 @@ import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.model.task.predicates.TaskDueWithinDayPredicate;
 import seedu.jelphabot.model.task.predicates.TaskDueWithinWeekPredicate;
 
-import java.util.Date;
-import java.util.function.Predicate;
-import java.util.logging.Logger;
-
+/**
+ * Panel containing the list of tasks.
+ * Tasks are further sorted into pinned, dueToday, dueThisWeek, dueSomeday
+ */
 public class SortedTaskListPanel extends TaskListPanel {
     private static final String FXML = "SortedTaskListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(TaskListPanel.class);
@@ -32,7 +36,7 @@ public class SortedTaskListPanel extends TaskListPanel {
 
         Predicate<Task> isDueToday = new TaskDueWithinDayPredicate(new Date());
         Predicate<Task> isDueThisWeek = new TaskDueWithinWeekPredicate(new Date());
-        // TODO feed in a few tasklists instead of doing it here
+        // TODO feed in a few tasklists instead of doing it here, split in ModelManager and feed in through MainWindow
         dueTodayTaskListView.setItems(taskList.filtered(isDueToday));
         dueTodayTaskListView.setCellFactory(listView -> new SortedTaskListPanel.SortedTaskListViewCell());
 

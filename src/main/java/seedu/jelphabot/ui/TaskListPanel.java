@@ -27,8 +27,8 @@ public class TaskListPanel extends UiPart<Region> {
     }
 
     // TODO ratchet placeholder constructor
-    public TaskListPanel(String FXML) {
-        super(FXML);
+    public TaskListPanel(String file) {
+        super(file);
     }
 
     /**
