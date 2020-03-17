@@ -54,6 +54,9 @@ public class MorningCallWindow extends UiPart<Stage> {
 
     }
 
+    /**
+     * Fills the placeholders of this window
+     */
     void fillWindow() {
         // get the list of Incomplete tasks
         ObservableList<Task> taskList = logic.getFilteredByIncompleteTaskList();
