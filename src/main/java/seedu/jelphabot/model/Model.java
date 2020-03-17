@@ -31,6 +31,11 @@ public interface Model {
     GuiSettings getGuiSettings();
 
     /**
+     * Returns the GUI settings for a popup window
+     */
+    GuiSettings getPopUpWindowGuiSettings();
+
+    /**
      * Sets the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
@@ -79,6 +84,12 @@ public interface Model {
 
     /** Returns an unmodifiable view of the filtered task list */
     ObservableList<Task> getFilteredTaskList();
+
+    /** Returns an unmodifiable view of the completed tasks in the task list */
+    ObservableList<Task> getFilteredByCompleteTaskList();
+
+    /** Returns an unmodifiable view of the incomplete tasks in the task list */
+    ObservableList<Task> getFilteredByIncompleteTaskList();
 
     /**
      * Updates the filter of the filtered task list to filter by the given {@code predicate}.

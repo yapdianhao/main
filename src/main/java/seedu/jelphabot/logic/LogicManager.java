@@ -62,6 +62,16 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public ObservableList<Task> getFilteredByCompleteTaskList() {
+        return model.getFilteredByCompleteTaskList();
+    }
+
+    @Override
+    public ObservableList<Task> getFilteredByIncompleteTaskList() {
+        return model.getFilteredByIncompleteTaskList();
+    }
+
+    @Override
     public Path getJelphaBotFilePath() {
         return model.getJelphaBotFilePath();
     }
@@ -69,6 +79,11 @@ public class LogicManager implements Logic {
     @Override
     public GuiSettings getGuiSettings() {
         return model.getGuiSettings();
+    }
+
+    @Override
+    public GuiSettings getPopUpWindowGuiSettings() {
+        return model.getPopUpWindowGuiSettings();
     }
 
     @Override
