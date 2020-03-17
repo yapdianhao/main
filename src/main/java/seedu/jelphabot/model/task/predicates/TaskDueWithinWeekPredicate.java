@@ -25,7 +25,7 @@ public class TaskDueWithinWeekPredicate implements Predicate<Task> {
     }
 
     private boolean isWithinWeek(Date date) {
-        return date.before(calendar.getTime());
+        return date.before(calendar.getTime()) && date.after(new Date());
     }
 
     @Override
