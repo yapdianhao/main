@@ -6,13 +6,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.jelphabot.model.task.predicates.TaskIsIncompletePredicate;
 import seedu.jelphabot.testutil.TaskBuilder;
 
-public class TaskIncompletePredicateTest {
+public class TaskIsIncompletePredicateTest {
 
     @Test
     public void equals() {
-        TaskIncompletePredicate predicate = new TaskIncompletePredicate();
+        TaskIsIncompletePredicate predicate = new TaskIsIncompletePredicate();
 
         // same object returns true
         assertEquals(predicate, predicate);
@@ -27,7 +28,7 @@ public class TaskIncompletePredicateTest {
     @Test
     public void test_taskStatusEqual_returnsTrue() {
         // true if the status of the Task is set to INCOMPLETE
-        TaskIncompletePredicate predicate = new TaskIncompletePredicate();
+        TaskIsIncompletePredicate predicate = new TaskIsIncompletePredicate();
         Task incompleteTask = new TaskBuilder().withStatus("INCOMPLETE").build();
         assertTrue(predicate.test(incompleteTask));
     }

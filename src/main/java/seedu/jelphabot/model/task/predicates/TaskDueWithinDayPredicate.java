@@ -1,19 +1,18 @@
-package seedu.jelphabot.model.task.exceptions;
+package seedu.jelphabot.model.task.predicates;
 
 import java.util.Date;
 import java.util.function.Predicate;
 
 import seedu.jelphabot.model.task.Task;
-import seedu.jelphabot.model.task.TaskIncompletePredicate;
 
 /**
  * Tests that a {@code Task}'s {@code DateTime} falls within the given Date.
  */
-public class TaskWithinDayPredicate implements Predicate<Task> {
+public class TaskDueWithinDayPredicate implements Predicate<Task> {
     // private final Calendar calendar;
     private final Date date;
 
-    public TaskWithinDayPredicate(Date date) {
+    public TaskDueWithinDayPredicate(Date date) {
         // this.calendar = new Calendar.Builder().setInstant(date).build();
         this.date = date;
     }
@@ -33,6 +32,6 @@ public class TaskWithinDayPredicate implements Predicate<Task> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                   || (other instanceof TaskIncompletePredicate); // instanceof handles null
+                   || (other instanceof TaskIsIncompletePredicate); // instanceof handles null
     }
 }

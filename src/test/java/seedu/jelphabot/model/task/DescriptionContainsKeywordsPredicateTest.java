@@ -11,6 +11,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.jelphabot.model.task.predicates.DescriptionContainsKeywordsPredicate;
 import seedu.jelphabot.testutil.TaskBuilder;
 
 public class DescriptionContainsKeywordsPredicateTest {

@@ -12,8 +12,8 @@ import javafx.collections.transformation.FilteredList;
 import seedu.jelphabot.commons.core.GuiSettings;
 import seedu.jelphabot.commons.core.LogsCenter;
 import seedu.jelphabot.model.task.Task;
-import seedu.jelphabot.model.task.TaskCompletedPredicate;
-import seedu.jelphabot.model.task.TaskIncompletePredicate;
+import seedu.jelphabot.model.task.predicates.TaskIsCompletedPredicate;
+import seedu.jelphabot.model.task.predicates.TaskIsIncompletePredicate;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -134,12 +134,12 @@ public class ModelManager implements Model {
     }
 
     public ObservableList<Task> getFilteredByIncompleteTaskList() {
-        TaskIncompletePredicate predicate = new TaskIncompletePredicate();
+        TaskIsIncompletePredicate predicate = new TaskIsIncompletePredicate();
         return new FilteredList<>(filteredTasks, predicate);
     }
 
     public ObservableList<Task> getFilteredByCompleteTaskList() {
-        TaskCompletedPredicate predicate = new TaskCompletedPredicate();
+        TaskIsCompletedPredicate predicate = new TaskIsCompletedPredicate();
         return new FilteredList<>(filteredTasks, predicate);
     }
 
