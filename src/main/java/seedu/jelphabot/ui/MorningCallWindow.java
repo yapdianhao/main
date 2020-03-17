@@ -26,7 +26,7 @@ public class MorningCallWindow extends UiPart<Stage> {
     private Stage morningCallStage;
     private Logic logic;
 
-    // Ui parts that are required to be in this Ui contioner
+    // Ui parts that are required to be in this Ui container
     private TaskListPanel taskListPanel;
     // resultDisplay box from MainWindow will be used to
     // display the message of the "morning call" to user

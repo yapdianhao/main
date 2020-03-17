@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.stage.*?>
 
-<fx:root minHeight="540" minWidth="400" title="Morning Call" type="javafx.stage.Stage"
+<fx:root minHeight="540" minWidth="400" title="Night Debrief" type="javafx.stage.Stage"
          xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
     <icons>
         <Image url="@/images/address_book_32.png" />
@@ -35,9 +35,9 @@
                                 </padding>
                             </StackPane>
                             <ButtonBar maxHeight="40.0" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="80.0">
-                               <buttons>
-                                 <Button fx:id="closeButton" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="0.0" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="31.0" text="OK" textAlignment="CENTER" />
-                               </buttons>
+                                <buttons>
+                                    <Button fx:id="closeButton" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="0.0" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="31.0" text="OK" textAlignment="CENTER" />
+                                </buttons>
                             </ButtonBar>
                         </VBox>
                     </children>
