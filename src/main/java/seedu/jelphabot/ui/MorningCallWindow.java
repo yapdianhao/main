@@ -11,8 +11,15 @@ import seedu.jelphabot.commons.core.LogsCenter;
 import seedu.jelphabot.logic.Logic;
 import seedu.jelphabot.model.task.Task;
 
+/**
+ * The MorningCall Window that is shown upon the app startup. Follows the
+ * styling specified in MainWindow.
+ */
 public class MorningCallWindow extends UiPart<Stage> {
+
     private static final String FXML = "MorningCallWindow.fxml";
+
+    private static final String MORNING_CALL_STRING = "Hello! Here are your incomplete tasks so far!";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -21,9 +28,16 @@ public class MorningCallWindow extends UiPart<Stage> {
 
     // Ui parts that are required to be in this Ui contioner
     private TaskListPanel taskListPanel;
+    // resultDisplay box from MainWindow will be used to
+    // display the message of the "morning call" to user
+    // TODO: customise this box to be something other than resultDisplay
+    private ResultDisplay resultDisplay;
 
     @FXML
     private StackPane taskListPanelPlaceholder;
+
+    @FXML
+    private StackPane resultDisplayPlaceholder;
 
     public MorningCallWindow(Stage morningCallStage, Logic logic) {
 
@@ -33,9 +47,7 @@ public class MorningCallWindow extends UiPart<Stage> {
         // set dependencies
         this.morningCallStage = morningCallStage;
         this.logic = logic;
-        // configure the UI
-        // for now, set the size to be the same as MainWindow
-        // TODO: configure settings to customize the size of the window, not follow MainWindow dims
+        // configure the UI to custom dimensions
         setWindowDefaultSize(logic.getPopUpWindowGuiSettings());
 
         //setAcclerators();
@@ -47,6 +59,11 @@ public class MorningCallWindow extends UiPart<Stage> {
         ObservableList<Task> taskList = logic.getFilteredByIncompleteTaskList();
         taskListPanel = new TaskListPanel(taskList);
         taskListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
+
+        // initialise resultDisplay
+        resultDisplay = new ResultDisplay();
+        resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+        resultDisplay.setFeedbackToUser(MORNING_CALL_STRING);
     }
 
     public TaskListPanel getTaskListPanel() {
