@@ -85,11 +85,11 @@ public class DateTime {
      * @param dateString the string to be converted.
      * @return dateString converted to standard format.
      */
-    private String convertDateToStandardFormat(DateFormat currentDateFormat, String dateString) {
+    private static  String convertDateToStandardFormat(DateFormat currentDateFormat, String dateString) {
         String standardDateString = "";
         try {
             Date date = currentDateFormat.parse(dateString);
-            standardDateString = new SimpleDateFormat(STANDARD_FORMAT).format(date);
+            standardDateString = standardFormatter.format(date);
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -133,5 +133,14 @@ public class DateTime {
     @Override
     public int hashCode() {
         return value.hashCode();
+    }
+
+    public Date getDate() {
+        try {
+            return standardFormatter.parse(value);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
