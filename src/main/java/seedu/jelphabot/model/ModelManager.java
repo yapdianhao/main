@@ -12,6 +12,8 @@ import javafx.collections.transformation.FilteredList;
 import seedu.jelphabot.commons.core.GuiSettings;
 import seedu.jelphabot.commons.core.LogsCenter;
 import seedu.jelphabot.model.task.Task;
+import seedu.jelphabot.model.task.TaskCompletedPredicate;
+import seedu.jelphabot.model.task.TaskIncompletePredicate;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -58,6 +60,11 @@ public class ModelManager implements Model {
     @Override
     public GuiSettings getGuiSettings() {
         return userPrefs.getGuiSettings();
+    }
+
+    @Override
+    public GuiSettings getPopUpWindowGuiSettings() {
+        return userPrefs.getPopUpWindowGuiSettings();
     }
 
     @Override
@@ -124,6 +131,16 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Task> getFilteredTaskList() {
         return filteredTasks;
+    }
+
+    public ObservableList<Task> getFilteredByIncompleteTaskList() {
+        TaskIncompletePredicate predicate = new TaskIncompletePredicate();
+        return new FilteredList<>(filteredTasks, predicate);
+    }
+
+    public ObservableList<Task> getFilteredByCompleteTaskList() {
+        TaskCompletedPredicate predicate = new TaskCompletedPredicate();
+        return new FilteredList<>(filteredTasks, predicate);
     }
 
     @Override

@@ -18,6 +18,8 @@ import seedu.jelphabot.logic.commands.ExitCommand;
 import seedu.jelphabot.logic.commands.FindCommand;
 import seedu.jelphabot.logic.commands.HelpCommand;
 import seedu.jelphabot.logic.commands.ListCommand;
+import seedu.jelphabot.logic.commands.ShowCompletedCommand;
+import seedu.jelphabot.logic.commands.ShowIncompleteCommand;
 import seedu.jelphabot.logic.commands.StartTimerCommand;
 import seedu.jelphabot.logic.commands.StopTimerCommand;
 import seedu.jelphabot.logic.parser.exceptions.ParseException;
@@ -74,6 +76,12 @@ public class JelphaBotParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case ShowCompletedCommand.COMMAND_WORD:
+            return new ShowCompletedCommand();
+
+        case ShowIncompleteCommand.COMMAND_WORD:
+            return new ShowIncompleteCommand();
 
         case DoneCommand.COMMAND_WORD:
             return new DoneCommandParser().parse(arguments);
