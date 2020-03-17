@@ -15,8 +15,10 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.ObservableList;
 import seedu.jelphabot.commons.core.GuiSettings;
 import seedu.jelphabot.model.task.DescriptionContainsKeywordsPredicate;
+import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.testutil.JelphaBotBuilder;
 
 public class ModelManagerTest {
@@ -101,7 +103,8 @@ public class ModelManagerTest {
 
     @Test
     public void getFilteredByIncompleteTaskList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredByIncompleteTaskList().remove(0));
+        ObservableList<Task> filteredByIncompleteTaskList = modelManager.getFilteredByIncompleteTaskList();
+        assertThrows(UnsupportedOperationException.class, () -> filteredByIncompleteTaskList.remove(0));
     }
     @Test
     public void equals() {
