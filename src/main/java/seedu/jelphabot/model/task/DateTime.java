@@ -82,7 +82,7 @@ public class DateTime {
      * #DateTime.STANDARD_FORMAT).
      *
      * @param currentDateFormat the current format of the DateTime string.
-     * @param dateString the string to be converted.
+     * @param dateString        the string to be converted.
      * @return dateString converted to standard format.
      */
     private static String convertDateToStandardFormat(DateFormat currentDateFormat, String dateString) {
