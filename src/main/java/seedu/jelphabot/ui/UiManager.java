@@ -24,6 +24,7 @@ public class UiManager implements Ui {
 
     private Logic logic;
     private MainWindow mainWindow;
+    private MorningCallWindow morningCallWindow;
 
     public UiManager(Logic logic) {
         super();
@@ -37,10 +38,18 @@ public class UiManager implements Ui {
         //Set the application icon.
         primaryStage.getIcons().add(getImage(ICON_APPLICATION));
 
+        // create second stage for MorningCallWindow
+        Stage morningCallStage = new Stage();
+
         try {
             mainWindow = new MainWindow(primaryStage, logic);
             mainWindow.show(); //This should be called before creating other UI parts
             mainWindow.fillInnerParts();
+
+            // show morningCallWindow
+            morningCallWindow = new MorningCallWindow(morningCallStage, logic);
+            morningCallWindow.show();
+            morningCallWindow.fillWindow();
 
         } catch (Throwable e) {
             logger.severe(StringUtil.getDetails(e));
