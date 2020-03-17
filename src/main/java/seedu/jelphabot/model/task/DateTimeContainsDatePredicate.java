@@ -1,10 +1,6 @@
 package seedu.jelphabot.model.task;
 
-import seedu.jelphabot.commons.util.StringUtil;
-
-import java.util.List;
 import java.util.function.Predicate;
-
 
 /**
  * Tests that a {@code Task}'s {@code DateTime} matches the date given.

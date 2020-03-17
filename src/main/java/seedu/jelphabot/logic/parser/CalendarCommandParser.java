@@ -26,7 +26,12 @@ public class CalendarCommandParser implements Parser<CalendarCommand> {
             new SimpleDateFormat("d-MMM-yyyy"),
             new SimpleDateFormat("d MMM yyyy")
         );
-    
+
+    /**
+     * Parses the given {@code String} of argument in the context of the CalendarCommand
+     * and returns a CalendarCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */
     public CalendarCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {

@@ -6,6 +6,10 @@ import seedu.jelphabot.model.task.DateTimeContainsDatePredicate;
 
 import static java.util.Objects.requireNonNull;
 
+/**
+ * Lists all tasks in task list whose date corresponds with the specified date.
+ * Shows the tasks that are due on the specified date.
+ */
 public class CalendarCommand extends Command {
 
     public static final String COMMAND_WORD = "cal";
