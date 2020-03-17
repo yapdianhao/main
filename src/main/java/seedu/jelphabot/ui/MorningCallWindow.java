@@ -23,23 +23,30 @@ public class MorningCallWindow extends UiPart<Stage> {
     @FXML
     private StackPane taskListPanelPlaceholder;
 
-    public MorningCallWindow(Stage morningCallStage) {
+    public MorningCallWindow(Stage morningCallStage, Logic logic) {
+
         super(FXML, morningCallStage);
 
+        logger.info("Initialising morningCallWindow");
         // set dependencies
         this.morningCallStage = morningCallStage;
-
+        this.logic = logic;
         // configure the UI
         // for now, set the size to be the same as MainWindow
-        // TODO: configure settings to customize the size of the window
+        // TODO: configure settings to customize the size of the window, not follow MainWindow dims
         setWindowDefaultSize(logic.getGuiSettings());
 
-        setAcclerators();
+        //setAcclerators();
 
     }
 
     public TaskListPanel getTaskListPanel() {
         return taskListPanel;
+    }
+
+    void show() {
+        logger.info("Showing morningCallStage");
+        morningCallStage.show();
     }
 
     /**
@@ -52,6 +59,12 @@ public class MorningCallWindow extends UiPart<Stage> {
             morningCallStage.setX(guiSettings.getWindowCoordinates().getX());
             morningCallStage.setY(guiSettings.getWindowCoordinates().getY());
         }
+    }
+
+    @FXML
+    private void closeButtonAction() {
+        logger.info("Close Button pressed. Closing morningCallWindow");
+        morningCallStage.close();
     }
 
 }
