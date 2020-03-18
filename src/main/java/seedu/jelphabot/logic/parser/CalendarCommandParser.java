@@ -1,9 +1,6 @@
 package seedu.jelphabot.logic.parser;
 
-import seedu.jelphabot.commons.core.Messages;
-import seedu.jelphabot.logic.commands.CalendarCommand;
-import seedu.jelphabot.logic.parser.exceptions.ParseException;
-import seedu.jelphabot.model.task.DateTimeContainsDatePredicate;
+import static seedu.jelphabot.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -11,7 +8,10 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import static seedu.jelphabot.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import seedu.jelphabot.commons.core.Messages;
+import seedu.jelphabot.logic.commands.CalendarCommand;
+import seedu.jelphabot.logic.parser.exceptions.ParseException;
+import seedu.jelphabot.model.task.DateTimeContainsDatePredicate;
 
 /**
  * Parses input argument and creates a new CalendarCommand object

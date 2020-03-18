@@ -1,10 +1,10 @@
 package seedu.jelphabot.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
 import seedu.jelphabot.commons.core.Messages;
 import seedu.jelphabot.model.Model;
 import seedu.jelphabot.model.task.DateTimeContainsDatePredicate;
-
-import static java.util.Objects.requireNonNull;
 
 /**
  * Lists all tasks in task list whose date corresponds with the specified date.
