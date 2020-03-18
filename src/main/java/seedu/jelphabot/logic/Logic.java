@@ -40,6 +40,11 @@ public interface Logic {
     /** Returns an unmodifiable view of the incomplete tasks in the task list */
     ObservableList<Task> getFilteredByIncompleteTaskList();
 
+    /** Returns an unmodifiable view of the incomplete tasks that are due today in
+     * the task list
+     */
+    ObservableList<Task> getFilteredByIncompleteDueTodayTaskList();
+
     /**
      * Returns the user prefs' address book file path.
      */

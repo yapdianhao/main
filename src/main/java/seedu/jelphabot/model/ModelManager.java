@@ -14,6 +14,8 @@ import seedu.jelphabot.commons.core.LogsCenter;
 import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.model.task.TaskCompletedPredicate;
 import seedu.jelphabot.model.task.TaskIncompletePredicate;
+import seedu.jelphabot.model.task.TaskWithinDayPredicate;
+import seedu.jelphabot.model.task.UniqueTaskList;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -134,13 +136,29 @@ public class ModelManager implements Model {
     }
 
     public ObservableList<Task> getFilteredByIncompleteTaskList() {
-        TaskIncompletePredicate predicate = new TaskIncompletePredicate();
-        return new FilteredList<>(filteredTasks, predicate);
+        TaskIncompletePredicate taskIncompletePredicate = new TaskIncompletePredicate();
+        UniqueTaskList uniqueTaskList = new UniqueTaskList();
+        FilteredList<Task> filteredIncompleteList = new FilteredList<>(filteredTasks, taskIncompletePredicate);
+        uniqueTaskList.setTasks(filteredIncompleteList);
+        return uniqueTaskList.asUnmodifiableObservableList();
+    }
+
+    public ObservableList<Task> getFilteredByIncompleteDueTodayTaskList() {
+        TaskIncompletePredicate taskIncompletePredicate = new TaskIncompletePredicate();
+        TaskWithinDayPredicate taskWithinDayPredicate = new TaskWithinDayPredicate();
+        UniqueTaskList uniqueTaskList = new UniqueTaskList();
+        FilteredList<Task> filteredIncompleteList = new FilteredList<>(filteredTasks, taskIncompletePredicate);
+        FilteredList<Task> filteredIncompleteDueTodayList = new FilteredList<>(filteredIncompleteList,taskWithinDayPredicate);
+        uniqueTaskList.setTasks(filteredIncompleteDueTodayList);
+        return uniqueTaskList.asUnmodifiableObservableList();
     }
 
     public ObservableList<Task> getFilteredByCompleteTaskList() {
         TaskCompletedPredicate predicate = new TaskCompletedPredicate();
-        return new FilteredList<>(filteredTasks, predicate);
+        UniqueTaskList uniqueTaskList = new UniqueTaskList();
+        FilteredList<Task> filteredList = new FilteredList<>(filteredTasks, predicate);
+        uniqueTaskList.setTasks(filteredList);
+        return uniqueTaskList.asUnmodifiableObservableList();
     }
 
     @Override

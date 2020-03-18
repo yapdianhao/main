@@ -59,7 +59,7 @@ public class MorningCallWindow extends UiPart<Stage> {
      */
     void fillWindow() {
         // get the list of Incomplete tasks
-        ObservableList<Task> taskList = logic.getFilteredByIncompleteTaskList();
+        ObservableList<Task> taskList = logic.getFilteredByIncompleteDueTodayTaskList();
         taskListPanel = new TaskListPanel(taskList);
         taskListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
 
