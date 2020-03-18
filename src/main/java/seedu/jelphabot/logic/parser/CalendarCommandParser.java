@@ -38,7 +38,6 @@ public class CalendarCommandParser implements Parser<CalendarCommand> {
             throw new ParseException(
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, CalendarCommand.MESSAGE_USAGE));
         }
-        
         String standardDateString = "";
         try {
             if (!isValidDate(trimmedArgs)) {
@@ -50,7 +49,6 @@ public class CalendarCommandParser implements Parser<CalendarCommand> {
         } catch (java.text.ParseException e) {
             e.printStackTrace();
         }
-        
         return new CalendarCommand(new DateTimeContainsDatePredicate(standardDateString));
     }
 
