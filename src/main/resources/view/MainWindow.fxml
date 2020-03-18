@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.stage.Stage?>
 
-<fx:root minHeight="600" minWidth="450" onCloseRequest="#handleExit" title="JelphaBot" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root minHeight="600" minWidth="450" onCloseRequest="#handleExit" title="JelphaBot" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
     <icons>
         <Image url="@/images/address_book_32.png" />
     </icons>
@@ -80,7 +80,17 @@
                         </Tab>
                         <Tab text="Productivity">
                             <content>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                    <children>
+                                        <VBox fx:id="productivityList" minWidth="340" prefWidth="340.0"
+                                              styleClass="pane-with-border" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                            <padding>
+                                                <Insets bottom="10" left="10" right="10" top="10" />
+                                            </padding>
+                                            <StackPane fx:id="productivityListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+                                        </VBox>
+                                    </children>
+                                </AnchorPane>
                             </content>
                         </Tab>
                   <Tab text="Notes">

@@ -34,6 +34,17 @@ public interface Logic {
     /** Returns an unmodifiable view of the filtered list of tasks */
     ObservableList<Task> getFilteredTaskList();
 
+    /** Returns an unmodifiable view of the completed tasks in the task list */
+    ObservableList<Task> getFilteredByCompleteTaskList();
+
+    /** Returns an unmodifiable view of the incomplete tasks in the task list */
+    ObservableList<Task> getFilteredByIncompleteTaskList();
+
+    /** Returns an unmodifiable view of the incomplete tasks that are due today in
+     * the task list
+     */
+    ObservableList<Task> getFilteredByIncompleteDueTodayTaskList();
+
     /**
      * Returns the user prefs' address book file path.
      */
@@ -43,6 +54,11 @@ public interface Logic {
      * Returns the user prefs' GUI settings.
      */
     GuiSettings getGuiSettings();
+
+    /**
+     * Returns the GUI settings for a popup window
+     */
+    GuiSettings getPopUpWindowGuiSettings();
 
     /**
      * Set the user prefs' GUI settings.

@@ -1,21 +1,19 @@
 package seedu.jelphabot.ui;
 
-import java.util.Comparator;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.jelphabot.model.task.Task;
+import seedu.jelphabot.model.productivity.Productivity;
 
 /**
- * An UI component that displays information of a {@code Task}.
+ * An UI component that displays information of {@code Productivity}.
  */
-// TODO add back fields for neaw model elements
-public class TaskCard extends UiPart<Region> {
+// TODO use piechart for visualisation (or progress bar)
+public class ProductivityCard extends UiPart<Region> {
 
-    private static final String FXML = "TaskListCard.fxml";
+    private static final String FXML = "ProductivityListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -25,7 +23,7 @@ public class TaskCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on JelphaBot level 4</a>
      */
 
-    public final Task task;
+    public final Productivity productivity;
 
     @FXML
     private HBox cardPane;
@@ -42,17 +40,17 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label dateTime;
 
-    public TaskCard(Task task, int displayedIndex) {
+    public ProductivityCard(Productivity productivity, int displayedIndex) {
         super(FXML);
-        this.task = task;
+        this.productivity = productivity;
         id.setText(displayedIndex + ". ");
-        description.setText(task.getDescription().fullDescription);
-        moduleCode.setText(task.getModuleCode().value);
-        status.setText(task.getStatus().name());
-        dateTime.setText(task.getDateTime().getDisplayValue());
-        task.getTags().stream()
-            .sorted(Comparator.comparing(tag -> tag.tagName))
-            .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        // description.setText(productivity.getDescription().fullDescription);
+        // moduleCode.setText(productivity.getModuleCode().value);
+        // status.setText(productivity.getStatus().name());
+        // dateTime.setText(productivity.getDateTime().getDisplayValue());
+        // productivity.getTags().stream()
+        //     .sorted(Comparator.comparing(tag -> tag.tagName))
+        //     .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
     @Override
@@ -63,13 +61,13 @@ public class TaskCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof TaskCard)) {
+        if (!(other instanceof ProductivityCard)) {
             return false;
         }
 
         // state check
-        TaskCard card = (TaskCard) other;
+        ProductivityCard card = (ProductivityCard) other;
         return id.getText().equals(card.id.getText())
-                   && task.equals(card.task);
+                   && productivity.equals(card.productivity);
     }
 }

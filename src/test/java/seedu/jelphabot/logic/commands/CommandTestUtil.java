@@ -1,5 +1,6 @@
 package seedu.jelphabot.logic.commands;
 
+import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_DATETIME;
@@ -12,13 +13,17 @@ import static seedu.jelphabot.testutil.Assert.assertThrows;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Predicate;
 
 import seedu.jelphabot.commons.core.index.Index;
 import seedu.jelphabot.logic.commands.exceptions.CommandException;
 import seedu.jelphabot.model.JelphaBot;
 import seedu.jelphabot.model.Model;
 import seedu.jelphabot.model.task.DescriptionContainsKeywordsPredicate;
+import seedu.jelphabot.model.task.Status;
 import seedu.jelphabot.model.task.Task;
+import seedu.jelphabot.model.task.TaskCompletedPredicate;
+import seedu.jelphabot.model.task.TaskIncompletePredicate;
 import seedu.jelphabot.testutil.EditTaskDescriptorBuilder;
 
 /**
@@ -142,4 +147,31 @@ public class CommandTestUtil {
         assertEquals(1, model.getFilteredTaskList().size());
     }
 
+    /**
+     * Updates {@code model}'s filtered list to show only tasks that are
+     * of the specified {@code status}.
+     */
+    public static void showTasksWithSpecifiedStatus(Model model, Status status) {
+        requireNonNull(model);
+        List<Task> taskList = model.getFilteredTaskList();
+        List<Task> tasksWithPredicate = new ArrayList<>();
+        for (Task t: taskList) {
+            if (t.getStatus() == status) {
+                tasksWithPredicate.add(t);
+            }
+        }
+
+        Predicate<Task> predicate;
+
+        if (status == Status.COMPLETE) {
+            predicate = new TaskCompletedPredicate();
+        } else {
+            predicate = new TaskIncompletePredicate();
+        }
+
+        model.updateFilteredTaskList(predicate);
+
+        assertEquals(tasksWithPredicate.size(), model.getFilteredTaskList().size());
+
+    }
 }

@@ -17,8 +17,16 @@ import seedu.jelphabot.logic.commands.ExitCommand;
 import seedu.jelphabot.logic.commands.FindCommand;
 import seedu.jelphabot.logic.commands.HelpCommand;
 import seedu.jelphabot.logic.commands.ListCommand;
+import seedu.jelphabot.logic.commands.ReminderCommand;
+import seedu.jelphabot.logic.commands.ShowCompletedCommand;
+import seedu.jelphabot.logic.commands.ShowIncompleteCommand;
+import seedu.jelphabot.logic.commands.StartTimerCommand;
+import seedu.jelphabot.logic.commands.StopTimerCommand;
 import seedu.jelphabot.logic.parser.exceptions.ParseException;
 
+/* TODO: lock add and delete commands when timer is running for a task OR allow timer for > 1 task but identify tasks by
+ * object rather than index. BUT also means that user has to have a way to end timer appropriately
+ * */
 /**
  * Parses user input.
  */
@@ -69,11 +77,27 @@ public class JelphaBotParser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
+        case ReminderCommand.COMMAND_WORD:
+            return new ReminderCommand();
+
+        case ShowCompletedCommand.COMMAND_WORD:
+            return new ShowCompletedCommand();
+
+        case ShowIncompleteCommand.COMMAND_WORD:
+            return new ShowIncompleteCommand();
+
         case DoneCommand.COMMAND_WORD:
             return new DoneCommandParser().parse(arguments);
 
         case CalendarCommand.COMMAND_WORD:
             return new CalendarCommandParser().parse(arguments);
+
+        case StartTimerCommand.COMMAND_WORD:
+            return new StartTimerCommandParser().parse(arguments);
+
+        case StopTimerCommand.COMMAND_WORD:
+            return new StopTimerCommandParser().parse(arguments);
+
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
