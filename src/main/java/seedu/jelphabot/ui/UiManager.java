@@ -42,9 +42,6 @@ public class UiManager implements Ui {
         // create second stage for MorningCallWindow
         Stage morningCallStage = new Stage();
 
-        // create stage for ProductivityPanel
-        Stage productivityStage = new Stage();
-
         try {
             mainWindow = new MainWindow(primaryStage, logic);
             mainWindow.show(); //This should be called before creating other UI parts
@@ -54,11 +51,6 @@ public class UiManager implements Ui {
             morningCallWindow = new MorningCallWindow(morningCallStage, logic);
             morningCallWindow.show();
             morningCallWindow.fillWindow();
-
-            // load productivity panel
-            productivityPanel = new ProductivityPanel(productivityStage, logic);
-            productivityPanel.show();
-            productivityPanel.fillPanel();
 
         } catch (Throwable e) {
             logger.severe(StringUtil.getDetails(e));

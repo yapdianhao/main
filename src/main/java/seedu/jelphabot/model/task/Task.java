@@ -43,6 +43,7 @@ public class Task {
         this.moduleCode = moduleCode;
         this.priority = priority;
         this.tags.addAll(tags);
+        this.duration = Duration.ZERO;
     }
 
     public Description getDescription() {
@@ -87,6 +88,10 @@ public class Task {
 
     private void setDuration() {
         this.duration = Duration.between(this.startTime, this.endTime);
+    }
+
+    public Duration getDuration() {
+        return this.duration;
     }
 
     public LocalDateTime getStartTime() {

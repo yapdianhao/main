@@ -14,6 +14,7 @@ import seedu.jelphabot.logic.parser.JelphaBotParser;
 import seedu.jelphabot.logic.parser.exceptions.ParseException;
 import seedu.jelphabot.model.Model;
 import seedu.jelphabot.model.ReadOnlyJelphaBot;
+import seedu.jelphabot.model.productivity.Productivity;
 import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.storage.Storage;
 
@@ -70,6 +71,11 @@ public class LogicManager implements Logic {
     public ObservableList<Task> getFilteredByIncompleteTaskList() {
         return model.getFilteredByIncompleteTaskList();
     }
+
+    // @Override
+    // public ObservableList<Productivity> getFilteredProductivityList() {
+    //     return model.getFilteredProductivityList();
+    // }
 
     @Override
     public Path getJelphaBotFilePath() {

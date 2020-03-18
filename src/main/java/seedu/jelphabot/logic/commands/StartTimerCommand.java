@@ -25,7 +25,6 @@ public class StartTimerCommand extends Command {
     public static final String MESSAGE_TASK_ALREADY_TIMED = "Task has already been marked as done and cannot be timed.";
 
     private Index targetIndex;
-    private LocalDateTime start;
 
     public StartTimerCommand(Index targetIndex) {
         requireNonNull(targetIndex);
@@ -42,7 +41,6 @@ public class StartTimerCommand extends Command {
         }
 
         Task taskToTime = lastShownList.get(targetIndex.getZeroBased());
-        this.start = LocalDateTime.now();
 
         if (taskToTime.getStatus() == Status.COMPLETE) {
             throw new CommandException(MESSAGE_TASK_ALREADY_TIMED);

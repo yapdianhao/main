@@ -8,6 +8,7 @@ import seedu.jelphabot.logic.commands.CommandResult;
 import seedu.jelphabot.logic.commands.exceptions.CommandException;
 import seedu.jelphabot.logic.parser.exceptions.ParseException;
 import seedu.jelphabot.model.ReadOnlyJelphaBot;
+import seedu.jelphabot.model.productivity.Productivity;
 import seedu.jelphabot.model.task.Task;
 
 /**
@@ -39,6 +40,9 @@ public interface Logic {
 
     /** Returns an unmodifiable view of the incomplete tasks in the task list */
     ObservableList<Task> getFilteredByIncompleteTaskList();
+
+//    /** Returns an unmodifiable view of overall productivity in completing tasks in the task list*/
+//    ObservableList<Productivity> getFilteredProductivityList();
 
     /**
      * Returns the user prefs' address book file path.

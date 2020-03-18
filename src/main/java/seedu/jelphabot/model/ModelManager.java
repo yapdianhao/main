@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.jelphabot.commons.core.GuiSettings;
 import seedu.jelphabot.commons.core.LogsCenter;
+import seedu.jelphabot.model.productivity.Productivity;
 import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.model.task.TaskCompletedPredicate;
 import seedu.jelphabot.model.task.TaskIncompletePredicate;
@@ -142,6 +143,12 @@ public class ModelManager implements Model {
         TaskCompletedPredicate predicate = new TaskCompletedPredicate();
         return new FilteredList<>(filteredTasks, predicate);
     }
+
+    // public ObservableList<Productivity> getFilteredProductivityList() {
+    //     // pass the list into productivity
+    //     Productivity prod = new Productivity(filteredTasks);
+    //
+    // }
 
     @Override
     public void updateFilteredTaskList(Predicate<Task> predicate) {

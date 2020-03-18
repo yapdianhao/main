@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.jelphabot.commons.core.GuiSettings;
+import seedu.jelphabot.model.productivity.Productivity;
 import seedu.jelphabot.model.task.Task;
 
 /**
@@ -90,6 +91,9 @@ public interface Model {
 
     /** Returns an unmodifiable view of the incomplete tasks in the task list */
     ObservableList<Task> getFilteredByIncompleteTaskList();
+
+    // /** Returns an unmodifiable view of overall productivity in completing tasks in the task list*/
+    // ObservableList<Productivity> getFilteredProductivityList();
 
     /**
      * Updates the filter of the filtered task list to filter by the given {@code predicate}.
