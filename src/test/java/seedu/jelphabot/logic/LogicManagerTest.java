@@ -103,7 +103,9 @@ public class LogicManagerTest {
 
     @Test
     public void getFilteredByIncompleteDueTodayTaskList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredByIncompleteDueTodayTaskList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> logic
+                                                                    .getFilteredByIncompleteDueTodayTaskList()
+                                                                    .remove(0));
     }
 
     /**

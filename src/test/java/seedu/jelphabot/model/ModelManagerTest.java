@@ -109,7 +109,8 @@ public class ModelManagerTest {
 
     @Test
     public void getFilteredByIncompleteDueTodayTaskList_modifyList_throwsUnsupportedOperationException() {
-        ObservableList<Task> filteredByIncompleteDueTodayTaskList = modelManager.getFilteredByIncompleteDueTodayTaskList();
+        ObservableList<Task> filteredByIncompleteDueTodayTaskList = modelManager
+                                                                        .getFilteredByIncompleteDueTodayTaskList();
         assertThrows(UnsupportedOperationException.class, () -> filteredByIncompleteDueTodayTaskList.remove(0));
     }
 

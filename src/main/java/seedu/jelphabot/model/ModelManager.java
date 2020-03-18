@@ -148,7 +148,8 @@ public class ModelManager implements Model {
         TaskWithinDayPredicate taskWithinDayPredicate = new TaskWithinDayPredicate();
         UniqueTaskList uniqueTaskList = new UniqueTaskList();
         FilteredList<Task> filteredIncompleteList = new FilteredList<>(filteredTasks, taskIncompletePredicate);
-        FilteredList<Task> filteredIncompleteDueTodayList = new FilteredList<>(filteredIncompleteList,taskWithinDayPredicate);
+        FilteredList<Task> filteredIncompleteDueTodayList = new FilteredList<>(filteredIncompleteList,
+            taskWithinDayPredicate);
         uniqueTaskList.setTasks(filteredIncompleteDueTodayList);
         return uniqueTaskList.asUnmodifiableObservableList();
     }
