@@ -1,10 +1,8 @@
-package seedu.jelphabot.model.task.exceptions;
+package seedu.jelphabot.model.task;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.function.Predicate;
-
-import seedu.jelphabot.model.task.Task;
-import seedu.jelphabot.model.task.TaskIncompletePredicate;
 
 /**
  * Tests that a {@code Task}'s {@code DateTime} falls within the given Date.
@@ -13,6 +11,10 @@ public class TaskWithinDayPredicate implements Predicate<Task> {
     // private final Calendar calendar;
     private final Date date;
 
+    // default constructor sets the date to today's date
+    public TaskWithinDayPredicate() {
+        date = Calendar.getInstance().getTime();
+    }
     public TaskWithinDayPredicate(Date date) {
         // this.calendar = new Calendar.Builder().setInstant(date).build();
         this.date = date;
