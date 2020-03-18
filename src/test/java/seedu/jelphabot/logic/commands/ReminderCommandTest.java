@@ -17,7 +17,7 @@ public class ReminderCommandTest {
 
 
     @Test
-    public void execute_ListIsFilteredByReminderSuccess() {
+    public void execute_listIsFilteredByReminder_success() {
         ReminderPredicate predicate = new ReminderPredicate();
         expectedModel.updateFilteredTaskList(predicate);
         assertCommandSuccess(new ReminderCommand(), model, ReminderCommand.MESSAGE_URGENT_TASKS, expectedModel);
