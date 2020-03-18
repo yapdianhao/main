@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.jelphabot.commons.core.Messages;
 import seedu.jelphabot.model.Model;
 import seedu.jelphabot.model.task.DateTimeContainsDatePredicate;
+import seedu.jelphabot.model.task.TaskWithinDayPredicate;
 
 /**
  * Lists all tasks in task list whose date corresponds with the specified date.
@@ -12,15 +13,15 @@ import seedu.jelphabot.model.task.DateTimeContainsDatePredicate;
  */
 public class CalendarCommand extends Command {
 
-    public static final String COMMAND_WORD = "cal";
+    public static final String COMMAND_WORD = "calendar";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all task that is under the due date specified.\n"
                                                    + "Parameters: DATE \n"
                                                    + "Example: " + COMMAND_WORD + " Jan-1-2020";
 
-    private final DateTimeContainsDatePredicate predicate;
+    private final TaskWithinDayPredicate predicate;
 
-    public CalendarCommand(DateTimeContainsDatePredicate predicate) {
+    public CalendarCommand(TaskWithinDayPredicate predicate) {
         this.predicate = predicate;
     }
 
