@@ -78,6 +78,11 @@ public class LogicManager implements Logic {
     // }
 
     @Override
+    public ObservableList<Task> getFilteredByIncompleteDueTodayTaskList() {
+        return model.getFilteredByIncompleteDueTodayTaskList();
+    }
+
+    @Override
     public Path getJelphaBotFilePath() {
         return model.getJelphaBotFilePath();
     }

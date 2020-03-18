@@ -97,8 +97,10 @@ public interface Model {
     /** Returns an unmodifiable view of the incomplete tasks in the task list */
     ObservableList<Task> getFilteredByIncompleteTaskList();
 
-    // /** Returns an unmodifiable view of overall productivity in completing tasks in the task list*/
-    // ObservableList<Productivity> getFilteredProductivityList();
+    /** Returns an unmodifiable view of the incomplete tasks that are due today in
+     * the task list
+     */
+    ObservableList<Task> getFilteredByIncompleteDueTodayTaskList();
 
     /**
      * Updates the filter of the filtered task list to filter by the given {@code predicate}.
