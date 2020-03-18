@@ -2,6 +2,7 @@ package seedu.jelphabot.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.Duration;
 import java.util.List;
 
 import seedu.jelphabot.commons.core.Messages;
@@ -18,8 +19,7 @@ public class StopTimerCommand extends Command {
                                                    + ": Stops the timer for the task specified by the index number.\n"
                                                    + "Parameters: INDEX (must be a positive integer)\n" + "Example: "
                                                    + COMMAND_WORD + " 1";
-    // TODO: update success message to show only important details.
-    public static final String MESSAGE_SUCCESS = "Stopped timer for %1$s. Time spent: %s";
+    public static final String MESSAGE_SUCCESS = "Stopped timer for task %d. %s %s.\nTime spent: %d Minutes %d Seconds";
     public static final String MESSAGE_NO_TIMER_TO_STOP = "No timers were started.";
 
     private Index targetIndex;
@@ -44,8 +44,13 @@ public class StopTimerCommand extends Command {
         }
 
         taskToStop.stopTimer();
+        Duration dur = taskToStop.getDuration();
+        int seconds = dur.toSecondsPart();
+        int mins = dur.toMinutesPart();
+        System.out.println("secs: " + seconds + " mins: " + mins);
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, taskToStop, taskToStop.getDuration().toMinutes()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, targetIndex.getOneBased(),
+            taskToStop.getModuleCode().toString(), taskToStop.getDescription().toString(), mins, seconds));
     }
 
     @Override
