@@ -3,7 +3,6 @@ package seedu.jelphabot.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.jelphabot.commons.core.Messages.MESSAGE_CANNOT_START_MORE_TIMERS;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import seedu.jelphabot.commons.core.Messages;
@@ -26,7 +25,6 @@ public class StartTimerCommand extends Command {
     public static final String MESSAGE_TASK_ALREADY_TIMED = "Task has already been marked as done and cannot be timed.";
 
     private Index targetIndex;
-    public boolean timerStarted = false;
 
     public StartTimerCommand(Index targetIndex) {
         requireNonNull(targetIndex);

@@ -14,7 +14,6 @@ import seedu.jelphabot.logic.parser.JelphaBotParser;
 import seedu.jelphabot.logic.parser.exceptions.ParseException;
 import seedu.jelphabot.model.Model;
 import seedu.jelphabot.model.ReadOnlyJelphaBot;
-import seedu.jelphabot.model.productivity.Productivity;
 import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.storage.Storage;
 

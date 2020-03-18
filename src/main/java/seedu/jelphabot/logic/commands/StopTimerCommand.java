@@ -47,7 +47,6 @@ public class StopTimerCommand extends Command {
         Duration dur = taskToStop.getDuration();
         int seconds = dur.toSecondsPart();
         int mins = dur.toMinutesPart();
-        System.out.println("secs: " + seconds + " mins: " + mins);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, targetIndex.getOneBased(),
             taskToStop.getModuleCode().toString(), taskToStop.getDescription().toString(), mins, seconds));

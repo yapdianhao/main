@@ -11,7 +11,6 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.jelphabot.commons.core.GuiSettings;
 import seedu.jelphabot.commons.core.LogsCenter;
-import seedu.jelphabot.model.productivity.Productivity;
 import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.model.task.TaskCompletedPredicate;
 import seedu.jelphabot.model.task.TaskIncompletePredicate;

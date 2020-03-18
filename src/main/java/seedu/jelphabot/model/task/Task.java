@@ -76,6 +76,9 @@ public class Task {
         return priority;
     }
 
+    /**
+     * Starts the timer for the task specified.
+     */
     public void startTimer() {
         this.startTime = LocalDateTime.now();
         this.timerIsRunning = true;
