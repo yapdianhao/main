@@ -7,6 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.jelphabot.logic.commands.AddCommand;
+import seedu.jelphabot.logic.commands.CalendarCommand;
 import seedu.jelphabot.logic.commands.ClearCommand;
 import seedu.jelphabot.logic.commands.Command;
 import seedu.jelphabot.logic.commands.DeleteCommand;
@@ -87,6 +88,9 @@ public class JelphaBotParser {
 
         case DoneCommand.COMMAND_WORD:
             return new DoneCommandParser().parse(arguments);
+
+        case CalendarCommand.COMMAND_WORD:
+            return new CalendarCommandParser().parse(arguments);
 
         case StartTimerCommand.COMMAND_WORD:
             return new StartTimerCommandParser().parse(arguments);

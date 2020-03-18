@@ -34,7 +34,7 @@ public class DateTime {
     /**
      * Constructs an {@code DateTime}.
      *
-     * @param dateTime A valid email address.
+     * @param dateTime A valid datetime.
      */
     public DateTime(String dateTime) {
         requireNonNull(dateTime);
