@@ -105,6 +105,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasTimingTask() {
+        return addressBook.hasTaskBeingTimed();
+    }
+
+    @Override
     public void deleteTask(Task target) {
         addressBook.removeTask(target);
     }

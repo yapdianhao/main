@@ -65,6 +65,11 @@ public interface Model {
     boolean hasTask(Task task);
 
     /**
+     * Returns true if a task being timed exists in the address book.
+     */
+    boolean hasTimingTask();
+
+    /**
      * Deletes the given task.
      * The task must exist in the address book.
      */

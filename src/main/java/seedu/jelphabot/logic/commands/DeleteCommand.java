@@ -1,6 +1,7 @@
 package seedu.jelphabot.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.jelphabot.commons.core.Messages.MESSAGE_CANNOT_DELETE;
 
 import java.util.List;
 
@@ -32,6 +33,11 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
+        if (model.hasTimingTask()) {
+            throw new CommandException(MESSAGE_CANNOT_DELETE);
+        }
+
         List<Task> lastShownList = model.getFilteredTaskList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {

@@ -18,7 +18,8 @@ public class StopTimerCommand extends Command {
                                                    + ": Stops the timer for the task specified by the index number.\n"
                                                    + "Parameters: INDEX (must be a positive integer)\n" + "Example: "
                                                    + COMMAND_WORD + " 1";
-    public static final String MESSAGE_SUCCESS = "Stopped timer for %1$s. Time spent: %lf";
+    // TODO: update success message to show only important details.
+    public static final String MESSAGE_SUCCESS = "Stopped timer for %1$s. Time spent: %s";
     public static final String MESSAGE_NO_TIMER_TO_STOP = "No timers were started.";
 
     private Index targetIndex;
@@ -38,7 +39,7 @@ public class StopTimerCommand extends Command {
 
         Task taskToStop = lastShownList.get(targetIndex.getZeroBased());
 
-        if (taskToStop.getStartTime() == null) {
+        if (!model.hasTimingTask() || taskToStop.getStartTime() == null) {
             throw new CommandException(MESSAGE_NO_TIMER_TO_STOP);
         }
 

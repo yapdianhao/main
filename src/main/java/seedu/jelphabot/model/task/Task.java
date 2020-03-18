@@ -30,6 +30,7 @@ public class Task {
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     private Duration duration;
+    private boolean timerIsRunning;
 
     /**
      * Every field must be present and not null.
@@ -44,6 +45,7 @@ public class Task {
         this.priority = priority;
         this.tags.addAll(tags);
         this.duration = Duration.ZERO;
+        this.timerIsRunning = false;
     }
 
     public Description getDescription() {
@@ -76,6 +78,7 @@ public class Task {
 
     public void startTimer() {
         this.startTime = LocalDateTime.now();
+        this.timerIsRunning = true;
     }
 
     /**
@@ -84,6 +87,7 @@ public class Task {
     public void stopTimer() {
         this.endTime = LocalDateTime.now();
         this.setDuration();
+        this.timerIsRunning = false;
     }
 
     private void setDuration() {
@@ -113,6 +117,13 @@ public class Task {
                    && otherTask.getDescription().equals(getDescription())
                    && otherTask.getDateTime().equals(getDateTime())
                    && otherTask.getModuleCode().equals(getModuleCode());
+    }
+
+    /**
+     * Returns true if the timer is running for this task.
+     */
+    public boolean isBeingTimed() {
+        return this.timerIsRunning;
     }
 
     /**
