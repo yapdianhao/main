@@ -12,11 +12,9 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.jelphabot.commons.core.GuiSettings;
 import seedu.jelphabot.commons.core.LogsCenter;
-import seedu.jelphabot.commons.util.DateUtil;
 import seedu.jelphabot.model.task.SortedTaskList;
 import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.model.task.UniqueTaskList;
-import seedu.jelphabot.model.task.predicates.FilterTaskByDatePredicate;
 import seedu.jelphabot.model.task.predicates.TaskIsCompletedPredicate;
 import seedu.jelphabot.model.task.predicates.TaskIsIncompletePredicate;
 
