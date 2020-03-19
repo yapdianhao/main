@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.jelphabot.commons.core.GuiSettings;
 import seedu.jelphabot.commons.core.LogsCenter;
+import seedu.jelphabot.model.task.SortedTaskList;
 import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.model.task.UniqueTaskList;
 import seedu.jelphabot.model.task.predicates.TaskDueWithinDayPredicate;
@@ -26,6 +27,7 @@ public class ModelManager implements Model {
     private final JelphaBot addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Task> filteredTasks;
+    private final SortedTaskList sortedTasks;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -39,6 +41,7 @@ public class ModelManager implements Model {
         this.addressBook = new JelphaBot(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredTasks = new FilteredList<>(this.addressBook.getTaskList());
+        sortedTasks = new SortedTaskList(filteredTasks);
     }
 
     public ModelManager() {
@@ -178,6 +181,11 @@ public class ModelManager implements Model {
     public void updateFilteredTaskList(Predicate<Task> predicate) {
         requireNonNull(predicate);
         filteredTasks.setPredicate(predicate);
+    }
+
+    @Override
+    public SortedTaskList getSortedTaskList() {
+        return sortedTasks;
     }
 
     @Override

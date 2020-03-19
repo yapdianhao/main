@@ -1,6 +1,5 @@
 package seedu.jelphabot.ui;
 
-import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -8,8 +7,6 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import seedu.jelphabot.commons.core.LogsCenter;
 import seedu.jelphabot.model.task.Task;
-import seedu.jelphabot.model.task.predicates.TaskDueWithinDayPredicate;
-import seedu.jelphabot.model.task.predicates.TaskDueWithinWeekPredicate;
 
 /**
  * Panel containing the list of tasks.
@@ -28,22 +25,24 @@ public class SortedTaskListPanel extends TaskListPanel {
     @javafx.fxml.FXML
     private ListView<Task> dueSomedayTaskListView;
 
-    public SortedTaskListPanel(ObservableList<Task> taskList) {
+    public SortedTaskListPanel(
+        ObservableList<Task> pinnedTaskList,
+        ObservableList<Task> overdueTaskList,
+        ObservableList<Task> dueTodayTaskList,
+        ObservableList<Task> dueThisWeekTaskList,
+        ObservableList<Task> dueSomedayTaskList
+    ) {
         super(FXML);
-        pinnedTaskListView.setItems(taskList);
+        pinnedTaskListView.setItems(pinnedTaskList);
         pinnedTaskListView.setCellFactory(listView -> new SortedTaskListPanel.SortedTaskListViewCell());
 
-        Predicate<Task> isDueToday = new TaskDueWithinDayPredicate();
-        Predicate<Task> isDueThisWeek = new TaskDueWithinWeekPredicate();
-        // TODO feed in a few tasklists instead of doing it here, split in ModelManager and feed in through MainWindow
-        // TODO set predicates properly
-        dueTodayTaskListView.setItems(taskList.filtered(isDueToday));
+        dueTodayTaskListView.setItems(dueTodayTaskList);
         dueTodayTaskListView.setCellFactory(listView -> new SortedTaskListPanel.SortedTaskListViewCell());
 
-        dueThisWeekTaskListView.setItems(taskList.filtered(isDueThisWeek.and(isDueToday.negate())));
+        dueThisWeekTaskListView.setItems(dueThisWeekTaskList);
         dueThisWeekTaskListView.setCellFactory(listView -> new SortedTaskListPanel.SortedTaskListViewCell());
 
-        dueSomedayTaskListView.setItems(taskList.filtered(isDueToday.and(isDueThisWeek).negate()));
+        dueSomedayTaskListView.setItems(dueSomedayTaskList);
         dueSomedayTaskListView.setCellFactory(listView -> new SortedTaskListPanel.SortedTaskListViewCell());
     }
 

@@ -28,7 +28,7 @@ public class DateUtil {
         return LocalDate.now().plusWeeks(1);
     }
 
-    public static LocalDate datetoLocalDate(Date date) {
+    public static LocalDate dateToLocalDate(Date date) {
         return date.toInstant()
                    .atZone(ZoneId.systemDefault())
                    .toLocalDate();
