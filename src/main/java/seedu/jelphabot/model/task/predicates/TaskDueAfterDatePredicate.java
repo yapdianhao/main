@@ -16,7 +16,7 @@ public class TaskDueAfterDatePredicate implements FilterTaskByDatePredicate {
 
     private final LocalDateTime date;
 
-    // default constructor sets the date the instant the method was called
+    // default constructor sets the date to the instant the method was called
     public TaskDueAfterDatePredicate() {
         date = LocalDateTime.now();
     }
