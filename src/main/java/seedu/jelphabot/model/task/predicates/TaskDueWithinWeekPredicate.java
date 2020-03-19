@@ -12,8 +12,8 @@ import seedu.jelphabot.model.task.Task;
 public class TaskDueWithinWeekPredicate implements Predicate<Task> {
     private final Calendar calendar;
 
-    public TaskDueWithinWeekPredicate(Date date) {
-        Calendar calendar = new Calendar.Builder().setInstant(date).build();
+    public TaskDueWithinWeekPredicate() {
+        Calendar calendar = new Calendar.Builder().setInstant(new Date()).build();
         calendar.add(Calendar.DAY_OF_MONTH, 7);
         this.calendar = calendar;
     }

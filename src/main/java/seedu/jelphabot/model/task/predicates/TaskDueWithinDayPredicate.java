@@ -1,5 +1,6 @@
 package seedu.jelphabot.model.task.predicates;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.function.Predicate;
 
@@ -12,10 +13,15 @@ public class TaskDueWithinDayPredicate implements Predicate<Task> {
     // private final Calendar calendar;
     private final Date date;
 
+    // default constructor sets the date to today's date
+    public TaskDueWithinDayPredicate() {
+        date = Calendar.getInstance().getTime();
+    }
     public TaskDueWithinDayPredicate(Date date) {
         // this.calendar = new Calendar.Builder().setInstant(date).build();
         this.date = date;
     }
+
 
     @Override
     public boolean test(Task task) {

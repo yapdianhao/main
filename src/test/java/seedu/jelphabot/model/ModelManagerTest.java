@@ -106,6 +106,14 @@ public class ModelManagerTest {
         ObservableList<Task> filteredByIncompleteTaskList = modelManager.getFilteredByIncompleteTaskList();
         assertThrows(UnsupportedOperationException.class, () -> filteredByIncompleteTaskList.remove(0));
     }
+
+    @Test
+    public void getFilteredByIncompleteDueTodayTaskList_modifyList_throwsUnsupportedOperationException() {
+        ObservableList<Task> filteredByIncompleteDueTodayTaskList = modelManager
+                                                                        .getFilteredByIncompleteDueTodayTaskList();
+        assertThrows(UnsupportedOperationException.class, () -> filteredByIncompleteDueTodayTaskList.remove(0));
+    }
+
     @Test
     public void equals() {
         JelphaBot addressBook = new JelphaBotBuilder().withTask(ASSESSMENT).withTask(BOOK_REPORT).build();

@@ -64,6 +64,11 @@ public interface Model {
     boolean hasTask(Task task);
 
     /**
+     * Returns true if a task being timed exists in the address book.
+     */
+    boolean hasTimingTask();
+
+    /**
      * Deletes the given task.
      * The task must exist in the address book.
      */
@@ -90,6 +95,11 @@ public interface Model {
 
     /** Returns an unmodifiable view of the incomplete tasks in the task list */
     ObservableList<Task> getFilteredByIncompleteTaskList();
+
+    /** Returns an unmodifiable view of the incomplete tasks that are due today in
+     * the task list
+     */
+    ObservableList<Task> getFilteredByIncompleteDueTodayTaskList();
 
     /**
      * Updates the filter of the filtered task list to filter by the given {@code predicate}.

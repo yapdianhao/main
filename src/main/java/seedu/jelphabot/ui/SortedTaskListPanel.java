@@ -1,6 +1,5 @@
 package seedu.jelphabot.ui;
 
-import java.util.Date;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -34,8 +33,8 @@ public class SortedTaskListPanel extends TaskListPanel {
         pinnedTaskListView.setItems(taskList);
         pinnedTaskListView.setCellFactory(listView -> new SortedTaskListPanel.SortedTaskListViewCell());
 
-        Predicate<Task> isDueToday = new TaskDueWithinDayPredicate(new Date());
-        Predicate<Task> isDueThisWeek = new TaskDueWithinWeekPredicate(new Date());
+        Predicate<Task> isDueToday = new TaskDueWithinDayPredicate();
+        Predicate<Task> isDueThisWeek = new TaskDueWithinWeekPredicate();
         // TODO feed in a few tasklists instead of doing it here, split in ModelManager and feed in through MainWindow
         // TODO set predicates properly
         dueTodayTaskListView.setItems(taskList.filtered(isDueToday));

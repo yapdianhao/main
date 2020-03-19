@@ -101,6 +101,13 @@ public class LogicManagerTest {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredByIncompleteTaskList().remove(0));
     }
 
+    @Test
+    public void getFilteredByIncompleteDueTodayTaskList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic
+                                                                    .getFilteredByIncompleteDueTodayTaskList()
+                                                                    .remove(0));
+    }
+
     /**
      * Executes the command and confirms that - no exceptions are thrown <br>
      * - the feedback message is equal to {@code expectedMessage} <br>
