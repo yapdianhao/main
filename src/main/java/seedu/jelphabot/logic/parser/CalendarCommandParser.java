@@ -11,7 +11,7 @@ import java.util.List;
 import seedu.jelphabot.commons.core.Messages;
 import seedu.jelphabot.logic.commands.CalendarCommand;
 import seedu.jelphabot.logic.parser.exceptions.ParseException;
-import seedu.jelphabot.model.task.TaskDueWithinDayPredicate;
+import seedu.jelphabot.model.task.predicates.TaskDueWithinDayPredicate;
 
 /**
  * Parses input argument and creates a new CalendarCommand object

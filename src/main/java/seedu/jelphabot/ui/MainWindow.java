@@ -136,7 +136,7 @@ public class MainWindow extends UiPart<Stage> {
         );
         taskListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
 
-        //TODO should be different TASK lIST
+        //TODO should be calendar Task List (Doesn't work for now :()
         calendarTaskListPanel = new TaskListPanel(logic.getFilteredCalendarTaskList());
         calendarTaskListPanelPlaceholder.getChildren().add(calendarTaskListPanel.getRoot());
 
