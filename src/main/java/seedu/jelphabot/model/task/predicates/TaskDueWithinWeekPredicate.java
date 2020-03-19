@@ -9,6 +9,7 @@ import seedu.jelphabot.model.task.Task;
 /**
  * Tests that a {@code Task}'s {@code DateTime} falls within a week of the given Date.
  */
+// TODO mark for deletion
 public class TaskDueWithinWeekPredicate implements Predicate<Task> {
     private final Calendar calendar;
 

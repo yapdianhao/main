@@ -6,6 +6,9 @@ import java.util.Date;
 import seedu.jelphabot.model.task.DateTime;
 import seedu.jelphabot.model.task.Task;
 
+/**
+ * Tests that a {@code Task}'s {@code DateTime} falls after the given Date.
+ */
 public class TaskDueAfterDatePredicate implements FilterTaskByDatePredicate {
 
     private final Date date;
@@ -19,6 +22,16 @@ public class TaskDueAfterDatePredicate implements FilterTaskByDatePredicate {
         this.date = date.getDate();
     }
 
+    public TaskDueAfterDatePredicate(Date date) {
+        this.date = date;
+    }
+
+    /**
+     * Composes two FilterTaskByDatePredicate to get a predicate that is the combination of the two.
+     *
+     * @param other another predicate that allows tasks to be filtered by date
+     * @return a FilterTaskByDatePredicate that combines both predicates
+     */
     public FilterTaskByDatePredicate and(FilterTaskByDatePredicate other) {
         return new FilterTaskByDatePredicate() {
             @Override

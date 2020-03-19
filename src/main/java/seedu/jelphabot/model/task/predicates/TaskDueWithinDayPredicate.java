@@ -10,7 +10,6 @@ import seedu.jelphabot.model.task.Task;
  * Tests that a {@code Task}'s {@code DateTime} falls within the given Date.
  */
 public class TaskDueWithinDayPredicate implements Predicate<Task> {
-    // private final Calendar calendar;
     private final Date date;
 
     // default constructor sets the date to today's date
@@ -18,10 +17,8 @@ public class TaskDueWithinDayPredicate implements Predicate<Task> {
         date = Calendar.getInstance().getTime();
     }
     public TaskDueWithinDayPredicate(Date date) {
-        // this.calendar = new Calendar.Builder().setInstant(date).build();
         this.date = date;
     }
-
 
     @Override
     public boolean test(Task task) {
@@ -29,6 +26,9 @@ public class TaskDueWithinDayPredicate implements Predicate<Task> {
         return isSameDay(taskDate);
     }
 
+    /**
+     * Tests that a {@code Task}'s {@code DateTime} falls within the given Date.
+     */
     private boolean isSameDay(Date date) {
         return this.date.getDay() == date.getDay()
                    && this.date.getMonth() == date.getMonth()
