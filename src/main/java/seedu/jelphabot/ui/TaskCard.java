@@ -12,7 +12,7 @@ import seedu.jelphabot.model.task.Task;
 /**
  * An UI component that displays information of a {@code Task}.
  */
-// TODO add back fields for new model elements
+// TODO add back fields for neaw model elements
 public class TaskCard extends UiPart<Region> {
 
     private static final String FXML = "TaskListCard.fxml";

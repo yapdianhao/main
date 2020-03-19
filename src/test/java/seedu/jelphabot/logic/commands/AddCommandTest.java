@@ -93,6 +93,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public GuiSettings getPopUpWindowGuiSettings() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setGuiSettings(GuiSettings guiSettings) {
             throw new AssertionError("This method should not be called.");
         }
@@ -128,6 +133,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean hasTimingTask() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deleteTask(Task target) {
             throw new AssertionError("This method should not be called.");
         }
@@ -139,6 +149,20 @@ public class AddCommandTest {
 
         @Override
         public ObservableList<Task> getFilteredTaskList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Task> getFilteredByIncompleteTaskList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Task> getFilteredByIncompleteDueTodayTaskList() {
+            throw new AssertionError("This method should not be called");
+        }
+        @Override
+        public ObservableList<Task> getFilteredByCompleteTaskList() {
             throw new AssertionError("This method should not be called.");
         }
 

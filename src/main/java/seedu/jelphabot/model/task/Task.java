@@ -2,6 +2,8 @@ package seedu.jelphabot.model.task;
 
 import static seedu.jelphabot.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -25,6 +27,11 @@ public class Task {
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
 
+    private LocalDateTime startTime;
+    private LocalDateTime endTime;
+    private Duration duration;
+    private boolean timerIsRunning;
+
     /**
      * Every field must be present and not null.
      */
@@ -37,6 +44,8 @@ public class Task {
         this.moduleCode = moduleCode;
         this.priority = priority;
         this.tags.addAll(tags);
+        this.duration = Duration.ZERO;
+        this.timerIsRunning = false;
     }
 
     public Description getDescription() {
@@ -68,6 +77,35 @@ public class Task {
     }
 
     /**
+     * Starts the timer for the task specified.
+     */
+    public void startTimer() {
+        this.startTime = LocalDateTime.now();
+        this.timerIsRunning = true;
+    }
+
+    /**
+     * Stops the timer for the task specified
+     */
+    public void stopTimer() {
+        this.endTime = LocalDateTime.now();
+        this.setDuration();
+        this.timerIsRunning = false;
+    }
+
+    private void setDuration() {
+        this.duration = Duration.between(this.startTime, this.endTime);
+    }
+
+    public Duration getDuration() {
+        return this.duration;
+    }
+
+    public LocalDateTime getStartTime() {
+        return this.startTime;
+    }
+
+    /**
      * Returns true if both tasks of the same description also occur at the same dateTime and have the same ModuleCode.
      * Those fields that are chosen are a combination which is meant to be unique.
      * This defines a weaker notion of equality between two tasks.
@@ -82,6 +120,13 @@ public class Task {
                    && otherTask.getDescription().equals(getDescription())
                    && otherTask.getDateTime().equals(getDateTime())
                    && otherTask.getModuleCode().equals(getModuleCode());
+    }
+
+    /**
+     * Returns true if the timer is running for this task.
+     */
+    public boolean isBeingTimed() {
+        return this.timerIsRunning;
     }
 
     /**

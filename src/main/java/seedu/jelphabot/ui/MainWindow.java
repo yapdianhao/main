@@ -12,6 +12,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.jelphabot.commons.core.GuiSettings;
 import seedu.jelphabot.commons.core.LogsCenter;
+import seedu.jelphabot.commons.util.StringUtil;
 import seedu.jelphabot.logic.Logic;
 import seedu.jelphabot.logic.commands.CommandResult;
 import seedu.jelphabot.logic.commands.exceptions.CommandException;
@@ -32,6 +33,7 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private TaskListPanel taskListPanel;
+    private ProductivityPanel productivityPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -43,6 +45,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane taskListPanelPlaceholder;
+
+    @FXML
+    private StackPane productivityListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -108,8 +113,11 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        taskListPanel = new TaskListPanel(logic.getFilteredTaskList());
+        taskListPanel = new SortedTaskListPanel(logic.getFilteredTaskList());
         taskListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
+
+        // productivityPanel = new ProductivityPanel(logic.getProductivityList());
+        // productivityListPanelPlaceholder.getChildren().add(productivityPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -161,10 +169,26 @@ public class MainWindow extends UiPart<Stage> {
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();
+
+        // after the MainWindow is closed,
+        // initialise and show the night debrief window
+        Stage nightDebriefStage = new Stage();
+
+        try {
+            NightDebriefWindow nightDebrief = new NightDebriefWindow(nightDebriefStage, logic);
+            nightDebrief.show();
+            nightDebrief.fillWindow();
+        } catch (Throwable e) {
+            logger.severe(StringUtil.getDetails(e));
+        }
     }
 
     public TaskListPanel getTaskListPanel() {
         return taskListPanel;
+    }
+
+    public ProductivityPanel getProductivityPanel() {
+        return productivityPanel;
     }
 
     /**
@@ -193,4 +217,6 @@ public class MainWindow extends UiPart<Stage> {
             throw e;
         }
     }
+
+
 }

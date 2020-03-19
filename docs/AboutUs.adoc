@@ -25,7 +25,7 @@ image::clouddoggo.png[width="150", align="left"]
 {empty}[https://github.com/Clouddoggo[github]] [<<johndoe#, portfolio>>]
 
 Role: Team Member +
-Responsibilities: Testing
+Responsibilities: Scheduling and Tracking
 
 '''
 
@@ -34,7 +34,7 @@ image::alam8064.png[width="150", align="left"]
 {empty}[http://github.com/alam8064[github]] [<<johndoe#, portfolio>>]
 
 Role: Team Member +
-Responsibilities: Documentation, Scheduling and tracking
+Responsibilities: Documentation
 
 '''
 
@@ -43,7 +43,7 @@ image::eedenong.png[width="150", align="left"]
 {empty}[http://github.com/eedenong[github]] [<<johndoe#, portfolio>>]
 
 Role: Team Member +
-Responsibilities: Dev Ops + Threading
+Responsibilities: Testing
 
 '''
 
