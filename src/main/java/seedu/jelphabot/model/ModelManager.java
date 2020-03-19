@@ -12,10 +12,11 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.jelphabot.commons.core.GuiSettings;
 import seedu.jelphabot.commons.core.LogsCenter;
+import seedu.jelphabot.commons.util.DateUtil;
 import seedu.jelphabot.model.task.SortedTaskList;
-import seedu.jelphabot.model.task.DateTimeContainsDatePredicate;
 import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.model.task.UniqueTaskList;
+import seedu.jelphabot.model.task.predicates.FilterTaskByDatePredicate;
 import seedu.jelphabot.model.task.predicates.TaskIsCompletedPredicate;
 import seedu.jelphabot.model.task.predicates.TaskIsIncompletePredicate;
 
@@ -144,10 +145,13 @@ public class ModelManager implements Model {
         return filteredTasks;
     }
 
-    // //TODO should instantiate to show tasks for today first
-    // public ObservableList<Task> getFilteredCalendarTaskList() {
-    //
-    // }
+    //TODO should instantiate to show tasks for today first
+    @Override
+    public ObservableList<Task> getFilteredCalendarTaskList() {
+        FilterTaskByDatePredicate taskDueTodayPredicate = DateUtil.getDueTodayPredicate();
+        FilteredList<Task> filteredCalendarList = new FilteredList<>(filteredTasks, taskDueTodayPredicate);
+        return filteredCalendarList;
+    }
 
     public ObservableList<Task> getFilteredByIncompleteTaskList() {
         TaskIsIncompletePredicate taskIncompletePredicate = new TaskIsIncompletePredicate();

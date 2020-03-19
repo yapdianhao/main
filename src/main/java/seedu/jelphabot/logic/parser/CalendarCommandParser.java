@@ -11,8 +11,7 @@ import java.util.List;
 import seedu.jelphabot.commons.core.Messages;
 import seedu.jelphabot.logic.commands.CalendarCommand;
 import seedu.jelphabot.logic.parser.exceptions.ParseException;
-import seedu.jelphabot.model.task.DateTimeContainsDatePredicate;
-import seedu.jelphabot.model.task.TaskWithinDayPredicate;
+import seedu.jelphabot.model.task.TaskDueWithinDayPredicate;
 
 /**
  * Parses input argument and creates a new CalendarCommand object
@@ -49,7 +48,7 @@ public class CalendarCommandParser implements Parser<CalendarCommand> {
         } catch (java.text.ParseException e) {
             e.printStackTrace();
         }
-        return new CalendarCommand(new TaskWithinDayPredicate(date));
+        return new CalendarCommand(new TaskDueWithinDayPredicate(date));
     }
 
     private static DateFormat getDateFormatOfString(String dateTimeString) {
