@@ -16,6 +16,7 @@ endif::[]
 
 By: `Team 2103T-F09-02`      Since: `Jan 2020`      Licence: `MIT`
 
+// TODO: Renumber all figures
 == Introduction
 
 JelphaBot is designed for users who *prefer to use a desktop app for managing tasks*.
@@ -147,6 +148,7 @@ Returns `Assignment 1` and `assignment task`
 * `find Tutorial Project MidTerm` +
 Returns any task having descriptions of `Tutorial`, `Project`, or `MidTerm`
 
+// tag::edit[]
 === Editing a task : `edit`
 
 Edit existing tasks by calling `edit` directly from a task page, or `edit <task_index>` from the landing page.
@@ -159,8 +161,8 @@ _Figure 5: Example of an expected result after running `edit`_
 
 ****
 * Edits the task at the specified `INDEX`.
-The index refers to the index number shown in the displayed task list.
-The index *must be a positive integer* 1, 2, 3, ...
+* The index refers to the index number shown in the displayed task list.
+* The index *must be a positive integer* 1, 2, 3, ...
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the task will be removed i.e adding of tags is not cumulative.
@@ -173,7 +175,21 @@ Examples:
 Edits the moduleCode of the 1st task to be `cs2105` and description to `Tutorial 2` respectively.
 * `edit 2 dt/Jan-2-2020 23 59 t/` +
 Edits the date and time of the 2nd task to be `Jan-2-2020 23 59` and clears all existing tags.
+// end::edit[]
 
+=== Completing a task : `done`
+
+Marks a task as done by calling `done` directly from a task page or `done <task_index>` from the landing page. +
+Format: `done INDEX`
+
+image::done.png[width="600]
+_Figure 7: Example of an expected result after running `done`_
+
+****
+* Marks the task at the specified `INDEX` as done.
+* The index refers to the index number shown in the displayed task list.
+* The index *must be a positive integer* 1, 2, 3, ...
+****
 
 // tag::delete[]
 === Deleting a task : `delete`
@@ -242,10 +258,20 @@ Format: `productivity`
 Starts timer running for a task. +
 Format: `start INDEX`
 
+* Starts the timer for the task at the specified `INDEX` if timer was not running.
+* The index refers to the index number shown in the displayed task list.
+* The index *must be a positive integer* 1, 2, 3, ...
+
 ==== Stopping timer for a task : `stop`
 
 Stops running timer for a task. +
 Format: `stop INDEX`
+
+****
+* Stops the timer for the task at the specified `INDEX` if timer was running.
+* The index refers to the index number shown in the displayed task list.
+* The index *must be a positive integer* 1, 2, 3, ...
+****
 
 ==== Receiving encouragement and criticism
 
@@ -286,6 +312,8 @@ e.g. `find Tutorial Assignment`
 [p/PRIORITY]
 [t/TAG]...` +
 e.g. `edit 1 m/CS2105 d/Tutorial 2`
+* *Done* : `done INDEX` +
+e.g. `done 1`
 * *Delete* : `delete INDEX` +
 e.g. `delete 3`
 * *Clear* : `clear`
