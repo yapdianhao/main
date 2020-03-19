@@ -3,6 +3,9 @@ package seedu.jelphabot.model.util;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Class to generate updated dates for SampleDataUtil.
+ */
 public class SampleDateUtil {
     private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MMM-d-yyyy HH mm");
     public static final String LAST_NIGHT = LocalDate.now().atStartOfDay().minusMinutes(1).format(dateTimeFormatter);
