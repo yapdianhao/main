@@ -106,6 +106,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasTimingTask() {
+        return addressBook.hasTaskBeingTimed();
+    }
+
+    @Override
     public void deleteTask(Task target) {
         addressBook.removeTask(target);
     }
@@ -161,6 +166,12 @@ public class ModelManager implements Model {
         uniqueTaskList.setTasks(filteredList);
         return uniqueTaskList.asUnmodifiableObservableList();
     }
+
+    // public ObservableList<Productivity> getFilteredProductivityList() {
+    //     // pass the list into productivity
+    //     Productivity prod = new Productivity(filteredTasks);
+    //
+    // }
 
     @Override
     public void updateFilteredTaskList(Predicate<Task> predicate) {

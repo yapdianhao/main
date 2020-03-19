@@ -25,6 +25,7 @@ public class UiManager implements Ui {
     private Logic logic;
     private MainWindow mainWindow;
     private MorningCallWindow morningCallWindow;
+    private ProductivityPanel productivityPanel;
 
     public UiManager(Logic logic) {
         super();
