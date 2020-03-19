@@ -1,10 +1,13 @@
 package seedu.jelphabot.model.task;
 
+import static seedu.jelphabot.commons.util.DateUtil.getDueSomedayPredicate;
+import static seedu.jelphabot.commons.util.DateUtil.getDueThisWeekPredicate;
+import static seedu.jelphabot.commons.util.DateUtil.getDueTodayPredicate;
+import static seedu.jelphabot.commons.util.DateUtil.getOverduePredicate;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.jelphabot.model.task.predicates.FilterTaskByDatePredicate;
-import seedu.jelphabot.model.task.predicates.TaskDueAfterDatePredicate;
-import seedu.jelphabot.model.task.predicates.TaskDueBeforeDatePredicate;
 
 /**
  * A wrapper for UniqueTaskList that separates UniqueTaskList by categories.
@@ -14,10 +17,10 @@ import seedu.jelphabot.model.task.predicates.TaskDueBeforeDatePredicate;
  */
 public class SortedTaskList {
 
-    private static final FilterTaskByDatePredicate isOverdue = new TaskDueBeforeDatePredicate();
-    private static final FilterTaskByDatePredicate isDueToday = new TaskDueAfterDatePredicate();
-    private static final FilterTaskByDatePredicate isDueThisWeek = new TaskDueAfterDatePredicate();
-    private static final FilterTaskByDatePredicate isDueSomeday = new TaskDueAfterDatePredicate();
+    private static final FilterTaskByDatePredicate isOverdue = getOverduePredicate();
+    private static final FilterTaskByDatePredicate isDueToday = getDueTodayPredicate();
+    private static final FilterTaskByDatePredicate isDueThisWeek = getDueThisWeekPredicate();
+    private static final FilterTaskByDatePredicate isDueSomeday = getDueSomedayPredicate();
 
     private final ObservableList<Task> pinnedTaskList;
     private final ObservableList<Task> overdueTaskList;

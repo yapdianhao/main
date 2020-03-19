@@ -1,6 +1,9 @@
 package seedu.jelphabot.model.task.predicates;
 
-import java.util.Calendar;
+import static seedu.jelphabot.commons.util.DateUtil.dateToLocalDateTime;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import seedu.jelphabot.model.task.DateTime;
@@ -11,19 +14,20 @@ import seedu.jelphabot.model.task.Task;
  */
 public class TaskDueAfterDatePredicate implements FilterTaskByDatePredicate {
 
-    private final Date date;
+    private final LocalDateTime date;
 
     // default constructor sets the date to today's date
     public TaskDueAfterDatePredicate() {
-        date = Calendar.getInstance().getTime();
+        date = LocalDate.now().atStartOfDay();
     }
 
-    public TaskDueAfterDatePredicate(DateTime date) {
-        this.date = date.getDate();
+    public TaskDueAfterDatePredicate(LocalDate date) {
+        this.date = date.atStartOfDay();
     }
 
-    public TaskDueAfterDatePredicate(Date date) {
-        this.date = date;
+    public TaskDueAfterDatePredicate(DateTime dateTime) {
+        Date date = dateTime.getDate();
+        this.date = dateToLocalDateTime(date);
     }
 
     /**
@@ -43,9 +47,8 @@ public class TaskDueAfterDatePredicate implements FilterTaskByDatePredicate {
 
     @Override
     public boolean test(Task task) {
-        Date taskDate = task.getDateTime().getDate();
-        System.out.println(taskDate);
-        return taskDate.after(this.date);
+        LocalDateTime taskDate = dateToLocalDateTime(task.getDateTime().getDate());
+        return taskDate.isAfter(this.date);
     }
 
     @Override
