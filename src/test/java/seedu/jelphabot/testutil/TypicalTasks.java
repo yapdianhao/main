@@ -31,7 +31,7 @@ public class TypicalTasks {
     public static final Task BOOK_REPORT = new TaskBuilder().withDescription("Book Report 1")
                                                .withStatus("COMPLETE")
                                                .withModuleCode("GES1028")
-                                               .withDateTime("Feb-1-2020 11 00")
+                                               .withDateTime("Feb-1-2e020 11 00")
                                                .withTags("project", "school").build();
     public static final Task CLASS = new TaskBuilder()
                                          .withDescription("Yoga class")
