@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
@@ -34,7 +35,9 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private SortedTaskListPanel taskListPanel;
+    private TaskListPanel calendarTaskListPanel;
     private ProductivityPanel productivityPanel;
+    private CalendarPanel calendarPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -45,7 +48,16 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
+    private TabPane mainWindowTabPane;
+
+    @FXML
     private StackPane taskListPanelPlaceholder;
+
+    @FXML
+    private StackPane calendarTaskListPanelPlaceholder;
+
+    @FXML
+    private StackPane calendarPanelPlaceholder;
 
     @FXML
     private StackPane productivityListPanelPlaceholder;
@@ -123,6 +135,12 @@ public class MainWindow extends UiPart<Stage> {
             sortedTasks.getDueSomedayTaskList()
         );
         taskListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
+
+        //TODO should be calendar Task List (Doesn't work for now :()
+        calendarTaskListPanel = new TaskListPanel(logic.getFilteredTaskList());
+        calendarTaskListPanelPlaceholder.getChildren().add(calendarTaskListPanel.getRoot());
+
+        //TODO fill calendarPanel
 
         // productivityPanel = new ProductivityPanel(logic.getProductivityList());
         // productivityListPanelPlaceholder.getChildren().add(productivityPanel.getRoot());
