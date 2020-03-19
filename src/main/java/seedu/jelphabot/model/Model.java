@@ -91,8 +91,8 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered task list */
     ObservableList<Task> getFilteredTaskList();
 
-    /** Returns an unmodifiable view of the filtered task list in the Calendar*/
-    ObservableList<Task> getFilteredCalendarTaskList();
+    // /** Returns an unmodifiable view of the filtered task list in the Calendar*/
+    // ObservableList<Task> getFilteredCalendarTaskList();
 
     /** Returns an unmodifiable view of the completed tasks in the task list */
     ObservableList<Task> getFilteredByCompleteTaskList();
