@@ -18,6 +18,6 @@ public class DueTodayCommandParser implements Parser<DueTodayCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public DueTodayCommand parse(String args) throws ParseException {
-        return new DueTodayCommand(new TaskDueWithinDayPredicate(new Date()));
+        return new DueTodayCommand(new TaskDueWithinDayPredicate());
     }
 }

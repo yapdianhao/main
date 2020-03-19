@@ -1,12 +1,15 @@
 package seedu.jelphabot.model.task;
 
+import seedu.jelphabot.model.task.predicates.TaskIsCompletedPredicate;
+import seedu.jelphabot.model.task.predicates.TaskIsIncompletePredicate;
+
 import java.util.Calendar;
 import java.util.Date;
 
 /**
  * Tests that a {@code Task}'s {@code DateTime} is due within a week from now.
  */
-public class ReminderPredicate extends TaskIncompletePredicate {
+public class ReminderPredicate extends TaskIsCompletedPredicate {
     // private final Calendar calendar;
     private final Date date = Calendar.getInstance().getTime();
 
@@ -25,6 +28,6 @@ public class ReminderPredicate extends TaskIncompletePredicate {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                   || (other instanceof TaskIncompletePredicate); // instanceof handles null
+                   || (other instanceof TaskIsIncompletePredicate); // instanceof handles null
     }
 }

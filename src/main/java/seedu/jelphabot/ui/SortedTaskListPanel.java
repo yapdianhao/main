@@ -34,8 +34,8 @@ public class SortedTaskListPanel extends TaskListPanel {
         pinnedTaskListView.setItems(taskList);
         pinnedTaskListView.setCellFactory(listView -> new SortedTaskListPanel.SortedTaskListViewCell());
 
-        Predicate<Task> isDueToday = new TaskDueWithinDayPredicate(new Date());
-        Predicate<Task> isDueThisWeek = new TaskDueWithinWeekPredicate(new Date());
+        Predicate<Task> isDueToday = new TaskDueWithinDayPredicate();
+        Predicate<Task> isDueThisWeek = new TaskDueWithinWeekPredicate();
         // TODO feed in a few tasklists instead of doing it here, split in ModelManager and feed in through MainWindow
         dueTodayTaskListView.setItems(taskList.filtered(isDueToday));
         dueTodayTaskListView.setCellFactory(listView -> new SortedTaskListPanel.SortedTaskListViewCell());
