@@ -12,6 +12,7 @@ import seedu.jelphabot.logic.commands.ClearCommand;
 import seedu.jelphabot.logic.commands.Command;
 import seedu.jelphabot.logic.commands.DeleteCommand;
 import seedu.jelphabot.logic.commands.DoneCommand;
+import seedu.jelphabot.logic.commands.DueTodayCommand;
 import seedu.jelphabot.logic.commands.EditCommand;
 import seedu.jelphabot.logic.commands.ExitCommand;
 import seedu.jelphabot.logic.commands.FindCommand;
@@ -27,6 +28,7 @@ import seedu.jelphabot.logic.parser.exceptions.ParseException;
 /* TODO: lock add and delete commands when timer is running for a task OR allow timer for > 1 task but identify tasks by
  * object rather than index. BUT also means that user has to have a way to end timer appropriately
  * */
+
 /**
  * Parses user input.
  */
@@ -97,6 +99,9 @@ public class JelphaBotParser {
 
         case StopTimerCommand.COMMAND_WORD:
             return new StopTimerCommandParser().parse(arguments);
+
+        case DueTodayCommand.COMMAND_WORD:
+            return new DueTodayCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

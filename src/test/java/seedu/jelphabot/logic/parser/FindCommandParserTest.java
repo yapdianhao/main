@@ -9,7 +9,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.jelphabot.logic.commands.FindCommand;
-import seedu.jelphabot.model.task.DescriptionContainsKeywordsPredicate;
+import seedu.jelphabot.model.task.predicates.DescriptionContainsKeywordsPredicate;
 
 public class FindCommandParserTest {
 

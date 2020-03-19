@@ -1,11 +1,14 @@
-package seedu.jelphabot.model.task;
+package seedu.jelphabot.model.task.predicates;
 
 import java.util.function.Predicate;
+
+import seedu.jelphabot.model.task.Status;
+import seedu.jelphabot.model.task.Task;
 
 /**
  * Tests that a {@code Task}'s {@code Status} is COMPLETE.
  */
-public class TaskCompletedPredicate implements Predicate<Task> {
+public class TaskIsCompletedPredicate implements Predicate<Task> {
 
     @Override
     public boolean test(Task task) {
@@ -15,6 +18,6 @@ public class TaskCompletedPredicate implements Predicate<Task> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same objcet
-                || (other instanceof TaskCompletedPredicate); // instanceof handles null
+                || (other instanceof TaskIsCompletedPredicate); // instanceof handles null
     }
 }
