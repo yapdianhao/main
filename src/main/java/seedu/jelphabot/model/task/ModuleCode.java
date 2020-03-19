@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.jelphabot.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Person's module code in the address book.
+ * Represents a Task's module code in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidModuleCode(String)}
  */
 public class ModuleCode {

@@ -28,8 +28,6 @@ class DateTimeTest {
         // invalid DateTime
         assertFalse(DateTime.isValidDateTime("")); // empty string
         assertFalse(DateTime.isValidDateTime(" ")); // spaces only
-        // TODO check this out wtf why is this valid
-        // assertFalse(DateTime.isValidDateTime("Jan-1-2020 33 69")); // illegal time
         assertFalse(DateTime.isValidDateTime("Jan-1-2020")); // date with no time
         assertFalse(DateTime.isValidDateTime("11 11")); // time with no date
 

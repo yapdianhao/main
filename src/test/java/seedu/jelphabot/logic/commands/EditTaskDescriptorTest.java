@@ -40,9 +40,7 @@ public class EditTaskDescriptorTest {
             new EditTaskDescriptorBuilder(DESC_ASSIGNMENT).withDescription(VALID_DESCRIPTION_TUTORIAL).build();
         assertNotEquals(DESC_ASSIGNMENT, editedAssignment);
 
-        // // different status -> returns false
-        // editedAssignment = new EditTaskDescriptorBuilder(DESC_ASSIGNMENT).withStatus(VALID_STATUS_TUTORIAL).build();
-        // assertNotEquals(DESC_ASSIGNMENT, editedAssignment);
+        // does not check different status -> (edittaskdescriptor should not be able to change the status of a task)
 
         // different dateTime -> returns false
         editedAssignment = new EditTaskDescriptorBuilder(DESC_ASSIGNMENT).withDateTime(VALID_DATETIME_TUTORIAL).build();

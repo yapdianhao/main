@@ -22,12 +22,12 @@ import seedu.jelphabot.logic.commands.FindCommand;
 import seedu.jelphabot.logic.commands.HelpCommand;
 import seedu.jelphabot.logic.commands.ListCommand;
 import seedu.jelphabot.logic.parser.exceptions.ParseException;
-import seedu.jelphabot.model.task.DescriptionContainsKeywordsPredicate;
 import seedu.jelphabot.model.task.Task;
+import seedu.jelphabot.model.task.predicates.DescriptionContainsKeywordsPredicate;
 import seedu.jelphabot.testutil.EditTaskDescriptorBuilder;
 import seedu.jelphabot.testutil.TaskBuilder;
 import seedu.jelphabot.testutil.TaskUtil;
-
+// todo parsecommand_done
 public class JelphaBotParserTest {
 
     private final JelphaBotParser parser = new JelphaBotParser();
