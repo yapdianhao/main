@@ -17,6 +17,11 @@ public class TaskDueWithinDayPredicate implements Predicate<Task> {
     public TaskDueWithinDayPredicate() {
         date = Calendar.getInstance().getTime();
     }
+    public TaskDueWithinDayPredicate(Date date) {
+        // this.calendar = new Calendar.Builder().setInstant(date).build();
+        this.date = date;
+    }
+
 
     @Override
     public boolean test(Task task) {

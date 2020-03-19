@@ -11,15 +11,16 @@ import java.util.GregorianCalendar;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.jelphabot.model.task.predicates.TaskDueWithinDayPredicate;
 import seedu.jelphabot.testutil.TaskBuilder;
 
-public class TaskWithinDayPredicateTest {
+public class TaskDueWithinDayPredicateTest {
     private static final Date TEST_DATE = new GregorianCalendar(2020, Calendar.MARCH, 18).getTime();
-    private static final TaskWithinDayPredicate TEST_PREDICATE = new TaskWithinDayPredicate(TEST_DATE);
+    private static final TaskDueWithinDayPredicate TEST_PREDICATE = new TaskDueWithinDayPredicate(TEST_DATE);
 
     @Test
     public void equals() {
-        TaskWithinDayPredicate predicate = new TaskWithinDayPredicate();
+        TaskDueWithinDayPredicate predicate = new TaskDueWithinDayPredicate();
 
         // same object returns true
         assertEquals(predicate, predicate);
