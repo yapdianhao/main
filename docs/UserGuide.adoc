@@ -62,7 +62,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * Parameters can be in any order e.g. if the command specifies `d/DESCRIPTION p/PRIORITY`, `p/PRIORITY d/DESCRIPTION` is also acceptable.
 ====
 
-==== Viewing help : `help`
+=== Viewing help : `help`
 
 Opens a help popup window which provides a link to this user guide.
 Format: `help`
