@@ -143,6 +143,14 @@ public class ModelManager implements Model {
         return filteredTasks;
     }
 
+    //TODO should instantiate to show tasks for today first
+    // @Override
+    // public ObservableList<Task> getFilteredCalendarTaskList() {
+    //     FilterTaskByDatePredicate taskDueTodayPredicate = DateUtil.getDueTodayPredicate();
+    //     FilteredList<Task> filteredCalendarList = new FilteredList<>(filteredTasks, taskDueTodayPredicate);
+    //     return filteredCalendarList;
+    // }
+
     public ObservableList<Task> getFilteredByIncompleteTaskList() {
         TaskIsIncompletePredicate taskIncompletePredicate = new TaskIsIncompletePredicate();
         UniqueTaskList uniqueTaskList = new UniqueTaskList();
