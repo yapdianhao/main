@@ -34,9 +34,8 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private TaskListPanel taskListPanel;
-    private TaskListPanel calendarTaskListPanel;
     private SortedTaskListPanel taskListPanel;
+    private TaskListPanel calendarTaskListPanel;
     private ProductivityPanel productivityPanel;
     private CalendarPanel calendarPanel;
     private ResultDisplay resultDisplay;
