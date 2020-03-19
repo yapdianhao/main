@@ -1,7 +1,5 @@
 package seedu.jelphabot.logic.parser;
 
-import java.util.Date;
-
 import seedu.jelphabot.logic.commands.DueTodayCommand;
 import seedu.jelphabot.logic.parser.exceptions.ParseException;
 import seedu.jelphabot.model.task.predicates.TaskDueWithinDayPredicate;

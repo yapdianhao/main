@@ -1,10 +1,10 @@
 package seedu.jelphabot.model.task;
 
-import seedu.jelphabot.model.task.predicates.TaskIsCompletedPredicate;
-import seedu.jelphabot.model.task.predicates.TaskIsIncompletePredicate;
-
 import java.util.Calendar;
 import java.util.Date;
+
+import seedu.jelphabot.model.task.predicates.TaskIsCompletedPredicate;
+import seedu.jelphabot.model.task.predicates.TaskIsIncompletePredicate;
 
 /**
  * Tests that a {@code Task}'s {@code DateTime} is due within a week from now.

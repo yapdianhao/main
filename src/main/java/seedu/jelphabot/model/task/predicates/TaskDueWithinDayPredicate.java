@@ -1,11 +1,10 @@
 package seedu.jelphabot.model.task.predicates;
 
-import seedu.jelphabot.model.task.Task;
-import seedu.jelphabot.model.task.predicates.TaskIsIncompletePredicate;
-
 import java.util.Calendar;
 import java.util.Date;
 import java.util.function.Predicate;
+
+import seedu.jelphabot.model.task.Task;
 
 /**
  * Tests that a {@code Task}'s {@code DateTime} falls within the given Date.

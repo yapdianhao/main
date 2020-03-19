@@ -1,6 +1,5 @@
 package seedu.jelphabot.ui;
 
-import java.util.Date;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
