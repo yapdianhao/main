@@ -1,27 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Accordion?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.VBox?>
-
-<VBox fx:id="SortedTaskList" prefWidth="248.0" stylesheets="@DarkTheme.css" xmlns="http://javafx.com/javafx/8"
-      xmlns:fx="http://javafx.com/fxml/1">
-   <Accordion>
-     <panes>
-       <TitledPane animated="false" text="Pinned Tasks">
-            <content>
-              <ListView fx:id="pinnedTaskListView" prefWidth="246.0" />
-            </content>
-       </TitledPane>
-       <TitledPane animated="false" text="Due Today">
-            <content>
-               <ListView fx:id="dueTodayTaskListView" prefWidth="246.0" />
-            </content>
-       </TitledPane>
-       <TitledPane animated="false" text="Due This Week">
-            <content>
-               <ListView fx:id="dueThisWeekTaskListView" prefWidth="246.0" />
+<VBox xmlns:fx="http://javafx.com/fxml/1" fx:id="SortedTaskList" prefWidth="248.0" stylesheets="@DarkTheme.css"
+      xmlns="http://javafx.com/javafx/11.0.1">
+    <Accordion>
+        <panes>
+            <TitledPane animated="false" text="Pinned Tasks">
+                <content>
+                    <ListView fx:id="pinnedTaskListView" prefWidth="246.0"/>
+                </content>
+            </TitledPane>
+            <TitledPane animated="false" text="Overdue Tasks">
+                <content>
+                    <ListView fx:id="overdueTaskListView" prefWidth="246.0"/>
+                </content>
+            </TitledPane>
+            <TitledPane animated="false" text="Due Today">
+                <content>
+                    <ListView fx:id="dueTodayTaskListView" prefWidth="246.0"/>
+                </content>
+            </TitledPane>
+            <TitledPane animated="false" text="Due This Week">
+                <content>
+                    <ListView fx:id="dueThisWeekTaskListView" prefWidth="246.0"/>
             </content>
        </TitledPane>
          <TitledPane animated="false" contentDisplay="BOTTOM" text="Due Someday">

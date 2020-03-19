@@ -19,6 +19,8 @@ public class SortedTaskListPanel extends TaskListPanel {
     @javafx.fxml.FXML
     private ListView<Task> pinnedTaskListView;
     @javafx.fxml.FXML
+    private ListView<Task> overdueTaskListView;
+    @javafx.fxml.FXML
     private ListView<Task> dueTodayTaskListView;
     @javafx.fxml.FXML
     private ListView<Task> dueThisWeekTaskListView;
@@ -35,6 +37,9 @@ public class SortedTaskListPanel extends TaskListPanel {
         super(FXML);
         pinnedTaskListView.setItems(pinnedTaskList);
         pinnedTaskListView.setCellFactory(listView -> new SortedTaskListPanel.SortedTaskListViewCell());
+
+        overdueTaskListView.setItems(overdueTaskList);
+        overdueTaskListView.setCellFactory(listView -> new SortedTaskListPanel.SortedTaskListViewCell());
 
         dueTodayTaskListView.setItems(dueTodayTaskList);
         dueTodayTaskListView.setCellFactory(listView -> new SortedTaskListPanel.SortedTaskListViewCell());
