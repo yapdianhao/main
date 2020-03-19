@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 
 import seedu.jelphabot.model.Model;
 import seedu.jelphabot.model.task.Task;
-import seedu.jelphabot.model.task.TaskCompletedPredicate;
+import seedu.jelphabot.model.task.predicates.TaskIsCompletedPredicate;
 
 /**
  * Displays to the user a list of tasks that are currently of the COMPLETE status.
@@ -18,7 +18,7 @@ public class ShowCompletedCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Displaying all completed tasks";
 
-    public static final Predicate<Task> COMPLETED_PREDICATE = new TaskCompletedPredicate();
+    public static final Predicate<Task> COMPLETED_PREDICATE = new TaskIsCompletedPredicate();
 
     @Override
     public CommandResult execute(Model model) {
