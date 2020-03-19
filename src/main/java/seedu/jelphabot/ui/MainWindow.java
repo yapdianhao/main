@@ -165,6 +165,8 @@ public class MainWindow extends UiPart<Stage> {
 
         // after the MainWindow is closed,
         // initialise and show the night debrief window
+        //TODO: set predicate to show night debrief window only once, near the end of the day
+        // e.g. are you done for the day? --> then show the NightDebriefWindow
         Stage nightDebriefStage = new Stage();
 
         try {
