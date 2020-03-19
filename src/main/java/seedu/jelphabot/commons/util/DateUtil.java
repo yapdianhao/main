@@ -67,18 +67,16 @@ public class DateUtil {
 
     /**
      * @return a predicate which filters tasks with a due date before the instant the method was called.
-     * TODO should be after now.
      */
     public static FilterTaskByDatePredicate getOverduePredicate() {
-        return new TaskDueBeforeDatePredicate(getDateToday());
+        return new TaskDueBeforeDatePredicate();
     }
 
     /**
      * @return a predicate which filters tasks with a due date the same day as the instant the method was called.
-     * TODO should be before now.
      */
     public static FilterTaskByDatePredicate getDueTodayPredicate() {
-        return new TaskDueAfterDatePredicate(getDateToday()).and(new TaskDueBeforeDatePredicate(getDateTomorrow()));
+        return new TaskDueAfterDatePredicate().and(new TaskDueBeforeDatePredicate(getDateTomorrow()));
     }
 
     /**

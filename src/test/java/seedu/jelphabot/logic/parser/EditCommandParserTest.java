@@ -36,7 +36,6 @@ import seedu.jelphabot.model.task.Description;
 import seedu.jelphabot.model.task.ModuleCode;
 import seedu.jelphabot.testutil.EditTaskDescriptorBuilder;
 
-// TODO rewrite in order: Description, Status, DateTime, ModuleCode, Priority, Set<Tag> tags
 public class EditCommandParserTest {
 
     private static final String TAG_EMPTY = " " + PREFIX_TAG;
@@ -140,6 +139,7 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_oneFieldSpecified_success() {
+        // method should only test fields corresponding to isSameTask
         // description
         Index targetIndex = INDEX_THIRD_TASK;
         String userInput = targetIndex.getOneBased() + DESCRIPTION_DESC_TUTORIAL;
