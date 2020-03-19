@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.layout.Region;
 import seedu.jelphabot.commons.core.LogsCenter;
 import seedu.jelphabot.model.task.Task;
 
@@ -12,7 +13,7 @@ import seedu.jelphabot.model.task.Task;
  * Panel containing the list of tasks.
  * Tasks are further sorted into pinned, dueToday, dueThisWeek, dueSomeday
  */
-public class SortedTaskListPanel extends TaskListPanel {
+public class SortedTaskListPanel extends UiPart<Region> {
     private static final String FXML = "SortedTaskListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(TaskListPanel.class);
 

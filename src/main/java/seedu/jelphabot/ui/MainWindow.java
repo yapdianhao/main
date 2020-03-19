@@ -33,7 +33,7 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private TaskListPanel taskListPanel;
+    private SortedTaskListPanel taskListPanel;
     private ProductivityPanel productivityPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
@@ -191,7 +191,7 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
-    public TaskListPanel getTaskListPanel() {
+    public SortedTaskListPanel getTaskListPanel() {
         return taskListPanel;
     }
 
