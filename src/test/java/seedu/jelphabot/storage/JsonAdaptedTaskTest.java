@@ -42,24 +42,25 @@ public class JsonAdaptedTaskTest {
         assertEquals(BOOK_REPORT, task.toModelType());
     }
 
-    // @Test // name should never be invalid
-    // public void toModelType_invalidDescription_throwsIllegalValueException() {
-    //     JsonAdaptedTask task =
-    //             new JsonAdaptedTask(INVALID_DESCRIPTION, VALID_STATUS, VALID_DATETIME, VALID_MODULE_CODE,
-    //             VALID_PRIORITY, VALID_TAGS);
-    //     String expectedMessage = Description.MESSAGE_CONSTRAINTS;
-    //     assertThrows(IllegalValueException.class, expectedMessage, task::toModelType);
-    // }
+    @Test
+    public void toModelType_invalidDescription_throwsIllegalValueException() {
+        JsonAdaptedTask task =
+            new JsonAdaptedTask(INVALID_DESCRIPTION, VALID_STATUS, VALID_DATETIME, VALID_MODULE_CODE,
+                VALID_PRIORITY, VALID_TAGS
+            );
+        String expectedMessage = Description.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, task::toModelType);
+    }
 
-    @Test //done
+    @Test
     public void toModelType_nullDescription_throwsIllegalValueException() {
         JsonAdaptedTask task = new JsonAdaptedTask(
-                null,
-                VALID_STATUS,
-                VALID_DATETIME,
-                VALID_MODULE_CODE,
-                VALID_PRIORITY,
-                VALID_TAGS
+            null,
+            VALID_STATUS,
+            VALID_DATETIME,
+            VALID_MODULE_CODE,
+            VALID_PRIORITY,
+            VALID_TAGS
             );
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Description.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, task::toModelType);

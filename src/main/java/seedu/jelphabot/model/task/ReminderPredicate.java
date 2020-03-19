@@ -19,6 +19,7 @@ public class ReminderPredicate extends TaskIsCompletedPredicate {
         return super.test(task) && withinAWeek(taskDate);
     }
 
+    @SuppressWarnings("deprecation")
     private boolean withinAWeek(Date date) {
         return (date.getDay() - this.date.getDay()) <= 7
                    && this.date.getMonth() == date.getMonth()

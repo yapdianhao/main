@@ -17,6 +17,7 @@ import seedu.jelphabot.logic.Logic;
 import seedu.jelphabot.logic.commands.CommandResult;
 import seedu.jelphabot.logic.commands.exceptions.CommandException;
 import seedu.jelphabot.logic.parser.exceptions.ParseException;
+import seedu.jelphabot.model.task.SortedTaskList;
 
 /**
  * The Main Window. Provides the basic application layout containing a menu bar
@@ -32,7 +33,7 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private TaskListPanel taskListPanel;
+    private SortedTaskListPanel taskListPanel;
     private ProductivityPanel productivityPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
@@ -113,7 +114,14 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        taskListPanel = new SortedTaskListPanel(logic.getFilteredTaskList());
+        SortedTaskList sortedTasks = logic.getSortedTaskList();
+        taskListPanel = new SortedTaskListPanel(
+            sortedTasks.getPinnedTaskList(),
+            sortedTasks.getOverdueTaskList(),
+            sortedTasks.getDueTodayTaskList(),
+            sortedTasks.getDueThisWeekTaskList(),
+            sortedTasks.getDueSomedayTaskList()
+        );
         taskListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
 
         // productivityPanel = new ProductivityPanel(logic.getProductivityList());
@@ -183,7 +191,7 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
-    public TaskListPanel getTaskListPanel() {
+    public SortedTaskListPanel getTaskListPanel() {
         return taskListPanel;
     }
 
