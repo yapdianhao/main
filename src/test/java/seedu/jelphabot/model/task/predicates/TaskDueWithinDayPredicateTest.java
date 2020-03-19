@@ -1,4 +1,4 @@
-package seedu.jelphabot.model.task;
+package seedu.jelphabot.model.task.predicates;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -11,7 +11,7 @@ import java.util.GregorianCalendar;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.jelphabot.model.task.predicates.TaskDueWithinDayPredicate;
+import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.testutil.TaskBuilder;
 
 public class TaskDueWithinDayPredicateTest {
