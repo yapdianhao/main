@@ -209,7 +209,7 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
-    public TaskListPanel getTaskListPanel() {
+    public SortedTaskListPanel getTaskListPanel() {
         return taskListPanel;
     }
 
