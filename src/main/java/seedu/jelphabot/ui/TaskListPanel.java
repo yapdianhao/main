@@ -26,11 +26,6 @@ public class TaskListPanel extends UiPart<Region> {
         taskListView.setCellFactory(listView -> new TaskListViewCell());
     }
 
-    // TODO ratchet placeholder constructor
-    public TaskListPanel(String file) {
-        super(file);
-    }
-
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Task} using a {@code TaskCard}.
      */

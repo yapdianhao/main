@@ -18,6 +18,7 @@ import seedu.jelphabot.logic.Logic;
 import seedu.jelphabot.logic.commands.CommandResult;
 import seedu.jelphabot.logic.commands.exceptions.CommandException;
 import seedu.jelphabot.logic.parser.exceptions.ParseException;
+import seedu.jelphabot.model.task.SortedTaskList;
 
 /**
  * The Main Window. Provides the basic application layout containing a menu bar
@@ -35,6 +36,7 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private TaskListPanel taskListPanel;
     private TaskListPanel calendarTaskListPanel;
+    private SortedTaskListPanel taskListPanel;
     private ProductivityPanel productivityPanel;
     private CalendarPanel calendarPanel;
     private ResultDisplay resultDisplay;
@@ -125,7 +127,14 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        taskListPanel = new SortedTaskListPanel(logic.getFilteredTaskList());
+        SortedTaskList sortedTasks = logic.getSortedTaskList();
+        taskListPanel = new SortedTaskListPanel(
+            sortedTasks.getPinnedTaskList(),
+            sortedTasks.getOverdueTaskList(),
+            sortedTasks.getDueTodayTaskList(),
+            sortedTasks.getDueThisWeekTaskList(),
+            sortedTasks.getDueSomedayTaskList()
+        );
         taskListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
 
         //TODO should be different TASK lIST
