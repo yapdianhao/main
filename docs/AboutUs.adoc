@@ -48,7 +48,7 @@ Responsibilities: Testing
 '''
 
 === Yap Dian Hao
-image::dianhao.png[width="150", align="left"]
+image::yapdianhao.png[width="150", align="left"]
 {empty}[http://github.com/yapdianhao[github]] [<<johndoe#, portfolio>>]
 
 Role: Team Member +
