@@ -8,7 +8,7 @@
 <?import javafx.stage.Stage?>
 <?import java.net.URL?>
 <fx:root xmlns:fx="http://javafx.com/fxml/1" minHeight="600" minWidth="450" onCloseRequest="#handleExit"
-         title="JelphaBot" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11.0.1">
+         title="JelphaBot" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8">
     <icons>
         <Image url="@/images/address_book_32.png"/>
     </icons>
@@ -30,7 +30,7 @@
                         </items>
                     </Menu>
                 </MenuBar>
-                <TabPane maxHeight="-Infinity" minHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
+                <TabPane fx:id="mainWindowTabPane" maxHeight="-Infinity" minHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
                     <tabs>
                         <Tab text="Task List">
                             <content>
@@ -46,27 +46,21 @@
                             <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                               <SplitPane fx:id="calenderViewPlaceholder" dividerPositions="0.29797979797979796"
-                                          prefHeight="376.0" prefWidth="599.3333333333334" AnchorPane.bottomAnchor="0.0"
-                                          AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                                          AnchorPane.topAnchor="0.0">
-                                   <items>
-                                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="374.0" prefWidth="215.0">
-                                           <children>
-                                               <!--                                           TODO supposed to show tasks displayed for specified days-->
-                                               <StackPane fx:id="taskListPanelPlaceholder1"/>
-                                           </children>
-                                       </AnchorPane>
-                                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-                                           <children>
-                                               <!--                                           TODO supposed to show CalendarPanel-->
-                                               <VBox fx:id="" minWidth="340" prefHeight="374.0"
-                                                     prefWidth="415.3333333333333" styleClass="pane-with-border"
-                                                     AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-                                                     AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                             <padding>
-                                                <Insets bottom="10" left="10" right="10" top="10" />
-                                             </padding>
+                              <SplitPane dividerPositions="0.29797979797979796" prefHeight="376.0" prefWidth="599.3333333333334" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <items>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="374.0" prefWidth="215.0">
+                                       <children>
+                                          <VBox fx:id="calendarTaskList" styleClass="pane-with-border" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <StackPane fx:id="calendarTaskListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+                                          </VBox>
+                                       </children></AnchorPane>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                       <children>
+                                          <VBox fx:id="calendarView" AnchorPane.bottomAnchor="0.0"
+                                                AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <children>
+                                                <StackPane fx:id="calendarPanelPlaceholder" VBox.vgrow="ALWAYS" />
+                                             </children>
                                           </VBox>
                                        </children>
                                     </AnchorPane>
@@ -79,10 +73,7 @@
                             <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                     <children>
-                                        <VBox fx:id="productivityList" minWidth="340" prefWidth="340.0"
-                                              styleClass="pane-with-border" AnchorPane.bottomAnchor="0.0"
-                                              AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                                              AnchorPane.topAnchor="0.0">
+                                        <VBox fx:id="productivityList" minWidth="340" prefWidth="340.0" styleClass="pane-with-border" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                             <padding>
                                                 <Insets bottom="10" left="10" right="10" top="10"/>
                                             </padding>
