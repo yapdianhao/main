@@ -154,7 +154,8 @@ public class ModelManager implements Model {
         UniqueTaskList uniqueTaskList = new UniqueTaskList();
         FilteredList<Task> filteredIncompleteList = new FilteredList<>(filteredTasks, taskIncompletePredicate);
         FilteredList<Task> filteredIncompleteDueTodayList = new FilteredList<>(filteredIncompleteList,
-            taskWithinDayPredicate);
+            taskWithinDayPredicate
+        );
         uniqueTaskList.setTasks(filteredIncompleteDueTodayList);
         return uniqueTaskList.asUnmodifiableObservableList();
     }
@@ -194,7 +195,7 @@ public class ModelManager implements Model {
         // state check
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook) && userPrefs.equals(other.userPrefs)
-                && filteredTasks.equals(other.filteredTasks);
+                   && filteredTasks.equals(other.filteredTasks);
     }
 
 }
