@@ -9,8 +9,9 @@ import static seedu.jelphabot.commons.util.AppUtil.checkArgument;
  */
 public class Tag {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric and non-empty";
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
+    public static final String MESSAGE_CONSTRAINTS =
+        "Tag names should only contain alphanumeric characters, dash, or underscore, and be non-empty";
+    public static final String VALIDATION_REGEX = "^[a-zA-Z0-9-_]+";
 
     public final String tagName;
 
@@ -35,8 +36,8 @@ public class Tag {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Tag // instanceof handles nulls
-                && tagName.equals(((Tag) other).tagName)); // state check
+                   || (other instanceof Tag // instanceof handles nulls
+                           && tagName.equals(((Tag) other).tagName)); // state check
     }
 
     @Override
