@@ -12,7 +12,7 @@ ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
 endif::[]
-:repoURL: https://github.com/se-edu/addressbook-level3
+:repoURL: https://github.com/AY1920S2-CS2103T-F09-2/main
 
 By: `Team 2103T-F09-02`      Since: `Jan 2020`      Licence: `MIT`
 
@@ -20,9 +20,9 @@ By: `Team 2103T-F09-02`      Since: `Jan 2020`      Licence: `MIT`
 
 JelphaBot is designed for users who *prefer to use a desktop app for managing tasks*.
 If you *prefer to work with a Command Line Interface* (CLI), JelphaBot allows you to work fast while still retaining the benefits of a Graphical User Interface (GUI).
-If you can type fast, JelphaBot can get your contact management tasks done faster than traditional GUI apps.
+If you can type fast, JelphaBot can help you get your tasks done faster than traditional GUI apps.
 
-The JelphaBot GUI is designed to allow you to *recognise important tasks at first glance* so that you can prioritise commitments and manage your time.
+The JelphaBot GUI is designed to allow you to *recognise important tasks at a glance* so that you can prioritise commitments and manage your time.
 
 Interested? Jump to the <<Quick Start>> to get started.
 Enjoy!
@@ -43,7 +43,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 . Some example commands you can try:
 
 * *`list`* : lists all tasks
-* **`add`**`d/Assignment 1 dt/10-Mar-2020 23 59 m/CS2103T` : adds a task named `Assignment 1` to the task list.
+* **`add`**`d/Assignment 1 dt/10-Mar-2020 23 59 m/CS2103T` : adds a task with description `Assignment 1` to the task list.
 * **`delete`**`3` : deletes the 3rd task shown in the current list
 * *`exit`* : exits the app
 
@@ -63,13 +63,15 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 ==== Viewing help : `help`
 
+Opens a help popup window which provides a link to this user guide.
 Format: `help`
 
-Opens a help popup which provides a link to this user guide.
+image::help.png[width="600]
+_Figure 2: Example of an expected result after running `help`_
 
 === Adding a task: `add`
 
-Adds a task to the task list +
+Adds a task to the task list. +
 Format: `d/DESCRIPTION dt/DATETIME m/MODULE_CODE [p/PRIORITY] [t/TAG]...`
 
 image::add.png[width="600"]
@@ -133,7 +135,7 @@ _Figure 4: Example of an expected result after running `find`_
 ****
 * The search is case insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
+* Only the description is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * tasks matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 ****
@@ -145,9 +147,9 @@ Returns `Assignment 1` and `assignment task`
 * `find Tutorial Project MidTerm` +
 Returns any task having descriptions of `Tutorial`, `Project`, or `MidTerm`
 
-==== Editing a task : `edit`
+=== Editing a task : `edit`
 
-Edit existing tasks by calling `edit` directly from a task page, or `edit <task_name>` from the landing page.
+Edit existing tasks by calling `edit` directly from a task page, or `edit <task_index>` from the landing page.
 . +
 Format: `edit INDEX [d/DESCRIPTION] [dt/DATETIME] [m/MODULE_CODE] [p/PRIORITY (-1, 0, or 1)]
 [t/TAG]...`
@@ -176,7 +178,7 @@ Edits the date and time of the 2nd task to be `Jan-2-2020 23 59` and clears all 
 // tag::delete[]
 === Deleting a task : `delete`
 
-Deletes tasks by calling `delete` directly from a task page or `delete <task_name>` from the landing page. +
+Deletes tasks by calling `delete` directly from a task page or `delete <task_index>` from the landing page. +
 Format: `delete INDEX`
 
 image::delete.png[width="600"]
@@ -220,15 +222,36 @@ There is no need to save manually.
 // tag::dataencryption[]
 _{explain how the user can enable/disable data encryption}_
 
-==== Pin Important tasks  `[coming in v2.0]`
-
 // end::dataencryption[]
 
 === Set Reminders and Notifications  `[coming in v2.0]`
 
 == Interface Navigation
 
-=== Colours for prioritising modules  `[coming in v2.0]`
+// tag::productivitytracker[]
+=== Track productivity : `productivity` [coming in v1.3]
+
+Switches to the productivity panel and shows the user's productivity for the day and highlights task with the most and
+least time spent. +
+Format: `productivity`
+
+// end::productivitytracker[]
+
+==== Starting timer for a task : `start`
+
+Starts timer running for a task. +
+Format: `start INDEX`
+
+==== Stopping timer for a task : `stop`
+
+Stops running timer for a task. +
+Format: `stop INDEX`
+
+==== Receiving encouragement and criticism
+
+Jelphabot will automatically track the user's productivity in the day and output the appropriate response to the user's
+achievements and task completion rate. +
+There is need to manually ask for compliments or criticism.
 
 === Integrate Calender on Interface  `[coming in v2.0]`
 
@@ -236,12 +259,12 @@ _{explain how the user can enable/disable data encryption}_
 
 === Sticky notes  `[coming in v2.0]`
 
-=== Productivity tracker  `[coming in v2.0]`
-
 === Reorganizing tasks
 
 ==== Pin Important tasks  `[coming in v2.0]`
 ==== Sort tasks (by today, week, month)  `[coming in v2.0]`
+
+=== Colour-code modules and font style for prioritised tasks `[coming in v2.0]`
 
 == FAQ
 
@@ -250,11 +273,12 @@ _{explain how the user can enable/disable data encryption}_
 
 == Command Summary
 
+* *Help* : `help`
 * *Add* `[d/DESCRIPTION] [dt/DATETIME] [m/MODULE_CODE] [p/PRIORITY] [t/TAG]…` +
 e.g. `add add d/Project TP dt/Jan-01-2020 23 59 m/CS2103T p/1 t/pair work`
-* *Clear* : `clear`
-* *Delete* : `delete INDEX` +
-e.g. `delete 3`
+* *List* : `list`
+* *Find* : `find KEYWORD [MORE_KEYWORDS]` +
+e.g. `find Tutorial Assignment`
 * *Edit* : `edit INDEX
 [d/DESCRIPTION]
 [dt/DATETIME]
@@ -262,8 +286,10 @@ e.g. `delete 3`
 [p/PRIORITY]
 [t/TAG]...` +
 e.g. `edit 1 m/CS2105 d/Tutorial 2`
-* *Find* : `find KEYWORD [MORE_KEYWORDS]` +
-e.g. `find Tutorial Assignment`
-* *List* : `list`
-* *Help* : `help`
+* *Delete* : `delete INDEX` +
+e.g. `delete 3`
+* *Clear* : `clear`
 * *Exit* : `exit`
+* *Productivity* : `productivity`
+* *Timer* : `start` or `stop` +
+e.g. `start INDEX` or `stop INDEX`
