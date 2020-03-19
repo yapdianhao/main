@@ -23,14 +23,14 @@ class TaskDueBeforeDatePredicateTest {
     }
 
     @Test
-    void test_TaskDateAfterDate_returnsTrue() {
+    void test_taskDateAfterDate_returnsTrue() {
         TaskDueBeforeDatePredicate predicate = new TaskDueBeforeDatePredicate(new DateTime("Apr-30-2020 00 01"));
         Task taskBeforeDate = new TaskBuilder().withDateTime("May-1-2020 00 01").build();
         assertFalse(predicate.test(taskBeforeDate));
     }
 
     @Test
-    void test_TaskDateBeforeDate_returnsFalse() {
+    void test_taskDateBeforeDate_returnsFalse() {
         TaskDueBeforeDatePredicate predicate = new TaskDueBeforeDatePredicate(new DateTime("May-2-2020 00 01"));
         Task taskBeforeDate = new TaskBuilder().withDateTime("May-1-2020 00 01").build();
         assertTrue(predicate.test(taskBeforeDate));

@@ -73,7 +73,9 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public SortedTaskList getSortedTaskList() { return model.getSortedTaskList();}
+    public SortedTaskList getSortedTaskList() {
+        return model.getSortedTaskList();
+    }
 
     // @Override
     // public ObservableList<Productivity> getFilteredProductivityList() {
