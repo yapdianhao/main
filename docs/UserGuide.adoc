@@ -247,7 +247,7 @@ _{explain how the user can enable/disable data encryption}_
 // tag::productivitytracker[]
 === Track productivity : `productivity` [coming in v1.3]
 
-Switches to the productivity panel and shows the user's productivity for the day and highlights task with the most and
+Switches to the productivity panel showing the user's productivity for the day and highlights tasks with the most and
 least time spent. +
 Format: `productivity`
 
@@ -319,5 +319,5 @@ e.g. `delete 3`
 * *Clear* : `clear`
 * *Exit* : `exit`
 * *Productivity* : `productivity`
-* *Timer* : `start` or `stop` +
-e.g. `start INDEX` or `stop INDEX`
+* *Timer* : `start INDEX` or `stop INDEX` +
+e.g. `start 1` or `stop 1`
