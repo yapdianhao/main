@@ -19,7 +19,7 @@ public class MorningCallWindow extends UiPart<Stage> {
 
     private static final String FXML = "MorningCallWindow.fxml";
 
-    private static final String MORNING_CALL_STRING = "Hello! Here are your incomplete tasks so far!";
+    private static final String MORNING_CALL_STRING = "Hello! Here are your tasks that are due today!";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -59,7 +59,7 @@ public class MorningCallWindow extends UiPart<Stage> {
      */
     void fillWindow() {
         // get the list of Incomplete tasks
-        ObservableList<Task> taskList = logic.getFilteredByIncompleteTaskList();
+        ObservableList<Task> taskList = logic.getFilteredByIncompleteDueTodayTaskList();
         taskListPanel = new TaskListPanel(taskList);
         taskListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
 

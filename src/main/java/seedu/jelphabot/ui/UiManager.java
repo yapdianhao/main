@@ -25,6 +25,7 @@ public class UiManager implements Ui {
     private Logic logic;
     private MainWindow mainWindow;
     private MorningCallWindow morningCallWindow;
+    private ProductivityPanel productivityPanel;
 
     public UiManager(Logic logic) {
         super();
@@ -47,6 +48,9 @@ public class UiManager implements Ui {
             mainWindow.fillInnerParts();
 
             // show morningCallWindow
+            // TODO: set predicate that only shows MorningCallWindow on the first opening of the app in the day
+            // set the start of the day to be 0700 hours
+            // implement method to track the
             morningCallWindow = new MorningCallWindow(morningCallStage, logic);
             morningCallWindow.show();
             morningCallWindow.fillWindow();

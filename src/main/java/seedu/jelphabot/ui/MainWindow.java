@@ -33,6 +33,7 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private TaskListPanel taskListPanel;
+    private ProductivityPanel productivityPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -44,6 +45,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane taskListPanelPlaceholder;
+
+    @FXML
+    private StackPane productivityListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -112,6 +116,9 @@ public class MainWindow extends UiPart<Stage> {
         taskListPanel = new TaskListPanel(logic.getFilteredTaskList());
         taskListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
 
+        // productivityPanel = new ProductivityPanel(logic.getProductivityList());
+        // productivityListPanelPlaceholder.getChildren().add(productivityPanel.getRoot());
+
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
@@ -165,6 +172,8 @@ public class MainWindow extends UiPart<Stage> {
 
         // after the MainWindow is closed,
         // initialise and show the night debrief window
+        //TODO: set predicate to show night debrief window only once, near the end of the day
+        // e.g. are you done for the day? --> then show the NightDebriefWindow
         Stage nightDebriefStage = new Stage();
 
         try {
@@ -178,6 +187,10 @@ public class MainWindow extends UiPart<Stage> {
 
     public TaskListPanel getTaskListPanel() {
         return taskListPanel;
+    }
+
+    public ProductivityPanel getProductivityPanel() {
+        return productivityPanel;
     }
 
     /**

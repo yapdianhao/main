@@ -67,6 +67,13 @@ public class JelphaBot implements ReadOnlyJelphaBot {
     }
 
     /**
+     * Returns true if a task is currently being timed.
+     */
+    public boolean hasTaskBeingTimed() {
+        return tasks.hasTaskBeingTimed();
+    }
+
+    /**
      * Adds a task to the address book.
      * The task must not already exist in the address book.
      */
