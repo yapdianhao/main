@@ -2,6 +2,7 @@ package seedu.jelphabot.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.jelphabot.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.jelphabot.commons.util.DateUtil.getDueTodayPredicate;
 
 import java.nio.file.Path;
 import java.util.function.Predicate;
@@ -11,11 +12,11 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.jelphabot.commons.core.GuiSettings;
 import seedu.jelphabot.commons.core.LogsCenter;
+import seedu.jelphabot.model.task.SortedTaskList;
 import seedu.jelphabot.model.task.Task;
-import seedu.jelphabot.model.task.TaskCompletedPredicate;
-import seedu.jelphabot.model.task.TaskIncompletePredicate;
-import seedu.jelphabot.model.task.TaskWithinDayPredicate;
 import seedu.jelphabot.model.task.UniqueTaskList;
+import seedu.jelphabot.model.task.predicates.TaskIsCompletedPredicate;
+import seedu.jelphabot.model.task.predicates.TaskIsIncompletePredicate;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -25,7 +26,7 @@ public class ModelManager implements Model {
 
     private final JelphaBot addressBook;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Task> filteredTasks;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -39,6 +40,7 @@ public class ModelManager implements Model {
         this.addressBook = new JelphaBot(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredTasks = new FilteredList<>(this.addressBook.getTaskList());
+        sortedTasks = new SortedTaskList(filteredTasks);
     }
 
     public ModelManager() {
@@ -140,8 +142,16 @@ public class ModelManager implements Model {
         return filteredTasks;
     }
 
+    //TODO should instantiate to show tasks for today first
+    // @Override
+    // public ObservableList<Task> getFilteredCalendarTaskList() {
+    //     FilterTaskByDatePredicate taskDueTodayPredicate = DateUtil.getDueTodayPredicate();
+    //     FilteredList<Task> filteredCalendarList = new FilteredList<>(filteredTasks, taskDueTodayPredicate);
+    //     return filteredCalendarList;
+    // }
+
     public ObservableList<Task> getFilteredByIncompleteTaskList() {
-        TaskIncompletePredicate taskIncompletePredicate = new TaskIncompletePredicate();
+        TaskIsIncompletePredicate taskIncompletePredicate = new TaskIsIncompletePredicate();
         UniqueTaskList uniqueTaskList = new UniqueTaskList();
         FilteredList<Task> filteredIncompleteList = new FilteredList<>(filteredTasks, taskIncompletePredicate);
         uniqueTaskList.setTasks(filteredIncompleteList);
@@ -149,18 +159,18 @@ public class ModelManager implements Model {
     }
 
     public ObservableList<Task> getFilteredByIncompleteDueTodayTaskList() {
-        TaskIncompletePredicate taskIncompletePredicate = new TaskIncompletePredicate();
-        TaskWithinDayPredicate taskWithinDayPredicate = new TaskWithinDayPredicate();
+        TaskIsIncompletePredicate taskIncompletePredicate = new TaskIsIncompletePredicate();
         UniqueTaskList uniqueTaskList = new UniqueTaskList();
         FilteredList<Task> filteredIncompleteList = new FilteredList<>(filteredTasks, taskIncompletePredicate);
         FilteredList<Task> filteredIncompleteDueTodayList = new FilteredList<>(filteredIncompleteList,
-            taskWithinDayPredicate);
+            getDueTodayPredicate()
+        );
         uniqueTaskList.setTasks(filteredIncompleteDueTodayList);
         return uniqueTaskList.asUnmodifiableObservableList();
     }
 
     public ObservableList<Task> getFilteredByCompleteTaskList() {
-        TaskCompletedPredicate predicate = new TaskCompletedPredicate();
+        TaskIsCompletedPredicate predicate = new TaskIsCompletedPredicate();
         UniqueTaskList uniqueTaskList = new UniqueTaskList();
         FilteredList<Task> filteredList = new FilteredList<>(filteredTasks, predicate);
         uniqueTaskList.setTasks(filteredList);
@@ -176,7 +186,12 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredTaskList(Predicate<Task> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        filteredTasks.setPredicate(predicate);
+    }
+
+    @Override
+    public SortedTaskList getSortedTaskList() {
+        return sortedTasks;
     }
 
     @Override
@@ -194,7 +209,7 @@ public class ModelManager implements Model {
         // state check
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook) && userPrefs.equals(other.userPrefs)
-                && filteredTasks.equals(other.filteredTasks);
+                   && filteredTasks.equals(other.filteredTasks);
     }
 
 }

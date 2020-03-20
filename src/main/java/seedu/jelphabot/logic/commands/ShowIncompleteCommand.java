@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 
 import seedu.jelphabot.model.Model;
 import seedu.jelphabot.model.task.Task;
-import seedu.jelphabot.model.task.TaskIncompletePredicate;
+import seedu.jelphabot.model.task.predicates.TaskIsIncompletePredicate;
 
 /**
  * Displays to the user a list of tasks that are currently of the INCOMPLETE status.
@@ -19,7 +19,7 @@ public class ShowIncompleteCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Displaying all incomplete tasks";
 
-    public static final Predicate<Task> INCOMPLETE_PREDICATE = new TaskIncompletePredicate();
+    public static final Predicate<Task> INCOMPLETE_PREDICATE = new TaskIsIncompletePredicate();
 
     @Override
     public CommandResult execute(Model model) {

@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.jelphabot.commons.core.GuiSettings;
+import seedu.jelphabot.model.task.SortedTaskList;
 import seedu.jelphabot.model.task.Task;
 
 /**
@@ -90,20 +91,30 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered task list */
     ObservableList<Task> getFilteredTaskList();
 
+    // /** Returns an unmodifiable view of the filtered task list in the Calendar*/
+    // ObservableList<Task> getFilteredCalendarTaskList();
+
     /** Returns an unmodifiable view of the completed tasks in the task list */
     ObservableList<Task> getFilteredByCompleteTaskList();
 
     /** Returns an unmodifiable view of the incomplete tasks in the task list */
     ObservableList<Task> getFilteredByIncompleteTaskList();
 
-    /** Returns an unmodifiable view of the incomplete tasks that are due today in
+    /**
+     * Returns an unmodifiable view of the incomplete tasks that are due today in
      * the task list
      */
     ObservableList<Task> getFilteredByIncompleteDueTodayTaskList();
 
     /**
      * Updates the filter of the filtered task list to filter by the given {@code predicate}.
+     *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredTaskList(Predicate<Task> predicate);
+
+    /**
+     * Returns an unmodifiable view of the incomplete tasks in the task list
+     */
+    SortedTaskList getSortedTaskList();
 }

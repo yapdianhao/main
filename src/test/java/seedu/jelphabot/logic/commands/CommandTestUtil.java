@@ -19,11 +19,11 @@ import seedu.jelphabot.commons.core.index.Index;
 import seedu.jelphabot.logic.commands.exceptions.CommandException;
 import seedu.jelphabot.model.JelphaBot;
 import seedu.jelphabot.model.Model;
-import seedu.jelphabot.model.task.DescriptionContainsKeywordsPredicate;
 import seedu.jelphabot.model.task.Status;
 import seedu.jelphabot.model.task.Task;
-import seedu.jelphabot.model.task.TaskCompletedPredicate;
-import seedu.jelphabot.model.task.TaskIncompletePredicate;
+import seedu.jelphabot.model.task.predicates.DescriptionContainsKeywordsPredicate;
+import seedu.jelphabot.model.task.predicates.TaskIsCompletedPredicate;
+import seedu.jelphabot.model.task.predicates.TaskIsIncompletePredicate;
 import seedu.jelphabot.testutil.EditTaskDescriptorBuilder;
 
 /**
@@ -164,9 +164,9 @@ public class CommandTestUtil {
         Predicate<Task> predicate;
 
         if (status == Status.COMPLETE) {
-            predicate = new TaskCompletedPredicate();
+            predicate = new TaskIsCompletedPredicate();
         } else {
-            predicate = new TaskIncompletePredicate();
+            predicate = new TaskIsIncompletePredicate();
         }
 
         model.updateFilteredTaskList(predicate);

@@ -1,4 +1,4 @@
-package seedu.jelphabot.model.task;
+package seedu.jelphabot.model.task.predicates;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;

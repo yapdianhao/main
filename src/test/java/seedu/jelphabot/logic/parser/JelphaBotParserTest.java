@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 import seedu.jelphabot.logic.commands.AddCommand;
 import seedu.jelphabot.logic.commands.ClearCommand;
 import seedu.jelphabot.logic.commands.DeleteCommand;
+import seedu.jelphabot.logic.commands.DoneCommand;
 import seedu.jelphabot.logic.commands.EditCommand;
 import seedu.jelphabot.logic.commands.EditCommand.EditTaskDescriptor;
 import seedu.jelphabot.logic.commands.ExitCommand;
@@ -22,12 +23,12 @@ import seedu.jelphabot.logic.commands.FindCommand;
 import seedu.jelphabot.logic.commands.HelpCommand;
 import seedu.jelphabot.logic.commands.ListCommand;
 import seedu.jelphabot.logic.parser.exceptions.ParseException;
-import seedu.jelphabot.model.task.DescriptionContainsKeywordsPredicate;
 import seedu.jelphabot.model.task.Task;
+import seedu.jelphabot.model.task.predicates.DescriptionContainsKeywordsPredicate;
 import seedu.jelphabot.testutil.EditTaskDescriptorBuilder;
 import seedu.jelphabot.testutil.TaskBuilder;
 import seedu.jelphabot.testutil.TaskUtil;
-// todo parsecommand_done
+
 public class JelphaBotParserTest {
 
     private final JelphaBotParser parser = new JelphaBotParser();
@@ -48,7 +49,7 @@ public class JelphaBotParserTest {
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_TASK.getOneBased());
+            DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_TASK.getOneBased());
         assertEquals(new DeleteCommand(INDEX_FIRST_TASK), command);
     }
 
@@ -56,9 +57,9 @@ public class JelphaBotParserTest {
     public void parseCommand_edit() throws Exception {
         Task task = new TaskBuilder().build();
         EditTaskDescriptor descriptor = new EditTaskDescriptorBuilder(task).build();
-        EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                                                                + INDEX_FIRST_TASK.getOneBased() + " " + TaskUtil
-                                                                        .getEditTaskDescriptorDetails(descriptor));
+        EditCommand command = (EditCommand) parser.parseCommand(
+            EditCommand.COMMAND_WORD + " " + INDEX_FIRST_TASK.getOneBased() + " "
+                + TaskUtil.getEditTaskDescriptorDetails(descriptor));
         assertEquals(new EditCommand(INDEX_FIRST_TASK, descriptor), command);
     }
 
@@ -72,8 +73,8 @@ public class JelphaBotParserTest {
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindCommand command =
-                (FindCommand) parser.parseCommand(
-                        FindCommand.COMMAND_WORD + " " + String.join(" ", keywords));
+            (FindCommand) parser.parseCommand(
+                FindCommand.COMMAND_WORD + " " + String.join(" ", keywords));
         assertEquals(new FindCommand(new DescriptionContainsKeywordsPredicate(keywords)), command);
     }
 
@@ -90,16 +91,25 @@ public class JelphaBotParserTest {
     }
 
     @Test
+    public void parseCommand_done() throws Exception {
+        DoneCommand command = (DoneCommand) parser.parseCommand(
+            DoneCommand.COMMAND_WORD + " " + INDEX_FIRST_TASK.getOneBased());
+        assertEquals(new DoneCommand(INDEX_FIRST_TASK), command);
+    }
+
+    @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
-        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
-            -> parser.parseCommand("")
+        assertThrows(
+            ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
+                -> parser.parseCommand("")
         );
     }
 
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, ()
-            -> parser.parseCommand("unknownCommand")
+        assertThrows(
+            ParseException.class, MESSAGE_UNKNOWN_COMMAND, ()
+                -> parser.parseCommand("unknownCommand")
         );
     }
 }

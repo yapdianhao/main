@@ -11,7 +11,7 @@ import java.util.List;
 import seedu.jelphabot.commons.core.Messages;
 import seedu.jelphabot.logic.commands.CalendarCommand;
 import seedu.jelphabot.logic.parser.exceptions.ParseException;
-import seedu.jelphabot.model.task.DateTimeContainsDatePredicate;
+import seedu.jelphabot.model.task.predicates.TaskDueWithinDayPredicate;
 
 /**
  * Parses input argument and creates a new CalendarCommand object
@@ -38,18 +38,17 @@ public class CalendarCommandParser implements Parser<CalendarCommand> {
             throw new ParseException(
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, CalendarCommand.MESSAGE_USAGE));
         }
-        String standardDateString = "";
+        Date date = null;
         try {
             if (!isValidDate(trimmedArgs)) {
                 throw new ParseException(Messages.MESSAGE_INVALID_DATE_FORMAT);
             }
             DateFormat currentFormat = getDateFormatOfString(trimmedArgs);
-            Date date = currentFormat.parse(trimmedArgs);
-            standardDateString = new SimpleDateFormat("MMM-d-yyyy").format(date);
+            date = currentFormat.parse(trimmedArgs);
         } catch (java.text.ParseException e) {
             e.printStackTrace();
         }
-        return new CalendarCommand(new DateTimeContainsDatePredicate(standardDateString));
+        return new CalendarCommand(new TaskDueWithinDayPredicate(date));
     }
 
     private static DateFormat getDateFormatOfString(String dateTimeString) {

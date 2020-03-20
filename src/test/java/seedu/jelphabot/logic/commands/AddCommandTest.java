@@ -19,6 +19,7 @@ import seedu.jelphabot.model.JelphaBot;
 import seedu.jelphabot.model.Model;
 import seedu.jelphabot.model.ReadOnlyJelphaBot;
 import seedu.jelphabot.model.ReadOnlyUserPrefs;
+import seedu.jelphabot.model.task.SortedTaskList;
 import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.testutil.TaskBuilder;
 
@@ -161,6 +162,7 @@ public class AddCommandTest {
         public ObservableList<Task> getFilteredByIncompleteDueTodayTaskList() {
             throw new AssertionError("This method should not be called");
         }
+
         @Override
         public ObservableList<Task> getFilteredByCompleteTaskList() {
             throw new AssertionError("This method should not be called.");
@@ -168,6 +170,11 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredTaskList(Predicate<Task> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public SortedTaskList getSortedTaskList() {
             throw new AssertionError("This method should not be called.");
         }
     }
