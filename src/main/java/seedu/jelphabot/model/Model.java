@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import seedu.jelphabot.commons.core.GuiSettings;
 import seedu.jelphabot.model.task.SortedTaskList;
 import seedu.jelphabot.model.task.Task;
+import seedu.jelphabot.model.reminder.Reminder;
 
 /**
  * The API of the Model component.
@@ -66,6 +67,7 @@ public interface Model {
      */
     boolean hasTask(Task task);
 
+    boolean hasReminder(Reminder reminder);
     /**
      * Returns true if a task being timed exists in the address book.
      */
@@ -82,6 +84,8 @@ public interface Model {
      * {@code task} must not already exist in the address book.
      */
     void addTask(Task task);
+
+    void addReminder(Reminder reminder);
 
     /**
      * Replaces the given task {@code target} with {@code editedTask}.

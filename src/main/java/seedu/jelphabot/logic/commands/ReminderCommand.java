@@ -17,6 +17,10 @@ public class ReminderCommand extends Command {
 
     private final Reminder reminder;
 
+    public static final String MESSAGE_DUPLICATE_REMINDER = "This task already has a reminder!";
+    public static final String MESSAGE_SUCCESS = "Added reminder for task %d!";
+
+
     public ReminderCommand(Index index, Reminder reminder) {
         requireNonNull(index);
         requireNonNull(reminder);
@@ -32,8 +36,11 @@ public class ReminderCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-
-        //to implement add reminder
+        if (model.hasReminder(reminder)) {
+            throw new CommandException(MESSAGE_DUPLICATE_REMINDER);
+        }
+        model.addReminder(reminder);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, reminder.getIndex().getOneBased()));
     }
 
     @Override

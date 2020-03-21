@@ -116,7 +116,7 @@ public class ModelManager implements Model {
 
     public boolean hasReminder(Reminder reminder) {
         requireNonNull(reminder);
-        return false; // wtf!
+        return addressBook.hasReminder(reminder);
     }
 
     @Override
@@ -133,6 +133,11 @@ public class ModelManager implements Model {
     public void addTask(Task task) {
         addressBook.addTask(task);
         updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+    }
+
+    @Override
+    public void addReminder(Reminder reminder) {
+        addressBook.addReminder(reminder);
     }
 
     @Override
