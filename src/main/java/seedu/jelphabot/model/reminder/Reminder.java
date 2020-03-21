@@ -23,11 +23,31 @@ public class Reminder {
         this.hoursToRemind = hoursToRemind;
     }
 
+    public Index getIndex() {
+        return this.index;
+    }
+
+    public ReminderDay getDaysToRemind() {
+        return this.daysToRemind;
+    }
+
+    public ReminderHour getHoursToRemind() {
+        return this.hoursToRemind;
+    }
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                    || (other instanceof Reminder // instanceof handles nulls
                            && index.equals(((Reminder) other).index)); // state check
+    }
+
+    public boolean isSameReminder(Reminder otherReminder) {
+        if (otherReminder == this) {
+            return true;
+        }
+
+        return otherReminder != null && otherReminder.getIndex().equals(getIndex());
     }
 
 }

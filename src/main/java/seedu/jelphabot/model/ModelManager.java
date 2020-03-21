@@ -115,7 +115,7 @@ public class ModelManager implements Model {
     }
 
     public boolean hasReminder(Reminder reminder) {
-        requireAllNonNull(reminder);
+        requireNonNull(reminder);
         return false; // wtf!
     }
 
