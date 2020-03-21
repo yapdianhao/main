@@ -3,8 +3,11 @@ package seedu.jelphabot.ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
-import seedu.jelphabot.model.Calendar.CalendarDate;
+import seedu.jelphabot.model.calendar.CalendarDate;
 
+/**
+ * UI component that displays the day on the calendar.
+ */
 public class CalendarDayCard extends UiPart<Region> {
     private static final String FXML = "CalendarDayCard.fxml";
 

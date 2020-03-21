@@ -18,7 +18,7 @@ import seedu.jelphabot.logic.Logic;
 import seedu.jelphabot.logic.commands.CommandResult;
 import seedu.jelphabot.logic.commands.exceptions.CommandException;
 import seedu.jelphabot.logic.parser.exceptions.ParseException;
-import seedu.jelphabot.model.Calendar.CalendarDate;
+import seedu.jelphabot.model.calendar.CalendarDate;
 import seedu.jelphabot.model.task.SortedTaskList;
 
 /**

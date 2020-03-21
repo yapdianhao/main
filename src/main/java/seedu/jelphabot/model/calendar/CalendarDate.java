@@ -1,9 +1,12 @@
-package seedu.jelphabot.model.Calendar;
-
-import seedu.jelphabot.commons.util.DateUtil;
+package seedu.jelphabot.model.calendar;
 
 import java.time.LocalDate;
 
+import seedu.jelphabot.commons.util.DateUtil;
+
+/**
+ * Class representing a date without time, mainly for the calendar UI.
+ */
 public class CalendarDate {
 
     private final LocalDate date;

@@ -7,7 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import seedu.jelphabot.commons.core.LogsCenter;
-import seedu.jelphabot.model.Calendar.CalendarDate;
+import seedu.jelphabot.model.calendar.CalendarDate;
 
 /**
  * UI component for calendar view to be displayed.
