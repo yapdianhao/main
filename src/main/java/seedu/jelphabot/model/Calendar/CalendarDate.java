@@ -1,6 +1,6 @@
 package seedu.jelphabot.model.Calendar;
 
-import seedu.jelphabot.ui.CalendarPanel;
+import seedu.jelphabot.commons.util.DateUtil;
 
 import java.time.LocalDate;
 
@@ -15,7 +15,7 @@ public class CalendarDate {
     }
 
     public static CalendarDate getCurrent() {
-        return new CalendarDate(LocalDate.now());
+        return new CalendarDate(DateUtil.getDateToday());
     }
 
     public int getDay() {

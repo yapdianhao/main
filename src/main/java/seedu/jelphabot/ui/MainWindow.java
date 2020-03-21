@@ -18,6 +18,7 @@ import seedu.jelphabot.logic.Logic;
 import seedu.jelphabot.logic.commands.CommandResult;
 import seedu.jelphabot.logic.commands.exceptions.CommandException;
 import seedu.jelphabot.logic.parser.exceptions.ParseException;
+import seedu.jelphabot.model.Calendar.CalendarDate;
 import seedu.jelphabot.model.task.SortedTaskList;
 
 /**
@@ -141,6 +142,7 @@ public class MainWindow extends UiPart<Stage> {
         calendarTaskListPanelPlaceholder.getChildren().add(calendarTaskListPanel.getRoot());
 
         //TODO fill calendarPanel
+        calendarPanel = new CalendarPanel(CalendarDate.getCurrent());
 
         // productivityPanel = new ProductivityPanel(logic.getProductivityList());
         // productivityListPanelPlaceholder.getChildren().add(productivityPanel.getRoot());
