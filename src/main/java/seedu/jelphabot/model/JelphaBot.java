@@ -7,6 +7,7 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.model.task.UniqueTaskList;
+import seedu.jelphabot.model.reminder.Reminder;
 
 /**
  * Wraps all data at the address-book level
@@ -64,6 +65,11 @@ public class JelphaBot implements ReadOnlyJelphaBot {
     public boolean hasTask(Task task) {
         requireNonNull(task);
         return tasks.contains(task);
+    }
+
+    public boolean hasReminder(Reminder reminder) {
+        requireNonNull(reminder);
+        return false;
     }
 
     /**

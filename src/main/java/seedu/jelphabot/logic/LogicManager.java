@@ -98,6 +98,11 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public Path getRemindersFilePath() {
+        return model.getRemindersFilePath();
+    }
+
+    @Override
     public GuiSettings getGuiSettings() {
         return model.getGuiSettings();
     }

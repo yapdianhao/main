@@ -51,6 +51,8 @@ public interface Model {
      */
     void setJelphaBotFilePath(Path addressBookFilePath);
 
+    Path getRemindersFilePath();
+
     /** Returns the JelphaBot */
     ReadOnlyJelphaBot getJelphaBot();
 

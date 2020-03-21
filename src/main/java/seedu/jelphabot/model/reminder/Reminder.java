@@ -1,0 +1,33 @@
+package seedu.jelphabot.model.reminder;
+
+import static java.util.Objects.requireNonNull;
+import seedu.jelphabot.commons.core.index.Index;
+
+/**
+ * Represents a reminder in Jelphabot. Reminder has an index of task to be reminded of,
+ */
+public class Reminder {
+
+    private final ReminderDay daysToRemind;
+
+    private final ReminderHour hoursToRemind;
+
+    private final Index index;
+
+    public Reminder(Index index, ReminderDay daysToRemind, ReminderHour hoursToRemind) {
+        requireNonNull(index);
+        requireNonNull(daysToRemind);
+        requireNonNull(hoursToRemind);
+        this.index = index;
+        this.daysToRemind = daysToRemind;
+        this.hoursToRemind = hoursToRemind;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                   || (other instanceof Reminder // instanceof handles nulls
+                           && index.equals(((Reminder) other).index)); // state check
+    }
+
+}

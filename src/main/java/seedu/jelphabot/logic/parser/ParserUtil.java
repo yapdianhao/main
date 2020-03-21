@@ -8,12 +8,15 @@ import java.util.Set;
 
 import seedu.jelphabot.commons.core.index.Index;
 import seedu.jelphabot.commons.util.StringUtil;
+import seedu.jelphabot.logic.commands.ReminderCommand;
 import seedu.jelphabot.logic.parser.exceptions.ParseException;
 import seedu.jelphabot.model.tag.Tag;
 import seedu.jelphabot.model.task.DateTime;
 import seedu.jelphabot.model.task.Description;
 import seedu.jelphabot.model.task.ModuleCode;
 import seedu.jelphabot.model.task.Priority;
+import seedu.jelphabot.model.reminder.ReminderHour;
+import seedu.jelphabot.model.reminder.ReminderDay;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -108,6 +111,26 @@ public class ParserUtil {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
         return new Tag(trimmedTag);
+    }
+
+    public static ReminderDay parseReminderDay(String reminderDay) throws ParseException {
+        requireNonNull(reminderDay);
+        String trimmedReminderDay = reminderDay.trim();
+        int convertedReminderDay = Integer.parseInt(trimmedReminderDay);
+        if (!ReminderDay.isValidReminderDay(convertedReminderDay)) {
+            throw new ParseException(ReminderDay.MESSAGE_CONSTRAINTS);
+        }
+        return new ReminderDay(convertedReminderDay);
+    }
+
+    public static ReminderHour parseReminderHour(String reminderHour) throws ParseException {
+        requireNonNull(reminderHour);
+        String trimmedReminderHour = reminderHour.trim();
+        int convertedReminderHour = Integer.parseInt(trimmedReminderHour);
+        if (!ReminderHour.isValidReminderHour(convertedReminderHour)) {
+            throw new ParseException(ReminderHour.MESSAGE_CONSTRAINTS);
+        }
+        return new ReminderHour(convertedReminderHour);
     }
 
     /**

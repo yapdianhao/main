@@ -15,6 +15,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
     private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
+    private Path remindersFilePath = Paths.get("data", "reminder.json");
 
     /**
      * Creates a {@code UserPrefs} with default values.
@@ -54,6 +55,10 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     public Path getJelphaBotFilePath() {
         return addressBookFilePath;
+    }
+
+    public Path getRemindersFilePath() {
+        return remindersFilePath;
     }
 
     public void setJelphaBotFilePath(Path addressBookFilePath) {

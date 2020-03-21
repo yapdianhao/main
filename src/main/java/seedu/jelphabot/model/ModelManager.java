@@ -17,6 +17,7 @@ import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.model.task.UniqueTaskList;
 import seedu.jelphabot.model.task.predicates.TaskIsCompletedPredicate;
 import seedu.jelphabot.model.task.predicates.TaskIsIncompletePredicate;
+import seedu.jelphabot.model.reminder.Reminder;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -84,6 +85,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Path getRemindersFilePath() {
+        return userPrefs.getRemindersFilePath();
+    }
+
+    @Override
     public void setJelphaBotFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
         userPrefs.setJelphaBotFilePath(addressBookFilePath);
@@ -106,6 +112,11 @@ public class ModelManager implements Model {
     public boolean hasTask(Task task) {
         requireNonNull(task);
         return addressBook.hasTask(task);
+    }
+
+    public boolean hasReminder(Reminder reminder) {
+        requireAllNonNull(reminder);
+        return false; // wtf!
     }
 
     @Override
