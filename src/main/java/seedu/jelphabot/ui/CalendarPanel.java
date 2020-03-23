@@ -30,5 +30,5 @@ public class CalendarPanel extends UiPart<Region> {
         monthYear.setText(calendarDate.getMonthName() + ", " + calendarDate.getYear());
     }
 
-    //fill gridpane with daycard method
+    //fill grid pane with daycard method
 }
