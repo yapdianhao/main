@@ -14,6 +14,7 @@ public class Messages {
                                                                  + "[MMM-d-yyyy],\n[MMM/d/yyyy],\n[d/M/y],"
                                                                  + "\n[d-MMM-yyyy],\n[d MMM yyyy]";
     public static final String MESSAGE_CANNOT_START_MORE_TIMERS = "Unable to start more than one timer at a time!";
-    public static final String MESSAGE_CANNOT_DELETE = "Unable to delete task while a timer is running.";
+    public static final String MESSAGE_DELETE_TIMING_TASK_FAILURE = "Task: %s %s, DateTime: %s cannot be deleted\n"
+                                                                        + "while timer is running.";
 
 }

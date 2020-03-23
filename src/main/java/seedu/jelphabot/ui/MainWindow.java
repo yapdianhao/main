@@ -213,6 +213,9 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Switches view to productivity panel.
+     */
     @FXML
     private void handleProductivity() {
         if (!productivityPanel.isShowing()) {
