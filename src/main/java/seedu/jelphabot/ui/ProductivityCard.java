@@ -35,7 +35,7 @@ public class ProductivityCard extends UiPart<Region> {
     @FXML
     private Label remainingTasks;
 
-    public ProductivityCard(Productivity productivity, int displayedIndex) {
+    public ProductivityCard(Productivity productivity) {
         super(FXML);
         this.productivity = productivity;
         productivityToday.setText(productivity.getTodayStatus());

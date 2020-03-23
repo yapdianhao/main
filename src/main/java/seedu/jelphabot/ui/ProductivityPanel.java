@@ -27,8 +27,9 @@ public class ProductivityPanel extends UiPart<Region> {
     public ProductivityPanel(TabPane tabPane) {
         super(FXML);
         logger.info("Initialising productivity panel stage");
-        productivityListView.setCellFactory(productivityView -> new ProductivityListViewCell());
+
         this.mainWindowTabPane = tabPane;
+        productivityListView.setCellFactory(listView -> new ProductivityListViewCell());
     }
 
     /**
@@ -61,7 +62,6 @@ public class ProductivityPanel extends UiPart<Region> {
         return mainWindowTabPane.isPressed();
     }
 
-    // TODO: check if can remove
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Productivity} using a {@code ProductivityCard}.
      */
@@ -74,7 +74,7 @@ public class ProductivityPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new ProductivityCard(productivity, getIndex() + 1).getRoot());
+                setGraphic(new ProductivityCard(productivity).getRoot());
             }
         }
     }
