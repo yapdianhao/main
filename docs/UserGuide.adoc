@@ -243,8 +243,12 @@ _{explain how the user can enable/disable data encryption}_
 
 == Interface Navigation
 
+=== Switching tabs : `Ctrl + tab`
+Switches from the current tab to the one on its right. If there are no tabs on the right, it switches to the leftmost
+tab.
+
 // tag::productivitytracker[]
-=== Track productivity : `productivity` [coming in v1.3]
+=== Track productivity : `productivity`
 
 Switches to the productivity panel showing the user's productivity for the day and highlights tasks with the most and
 least time spent. +
