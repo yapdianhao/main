@@ -1,38 +1,37 @@
 package seedu.jelphabot.model.task.predicates;
 
-import java.util.Calendar;
+import static seedu.jelphabot.commons.util.DateUtil.dateToLocalDateTime;
+import static seedu.jelphabot.commons.util.DateUtil.getDateToday;
+import static seedu.jelphabot.commons.util.DateUtil.getDateTomorrow;
+
+import java.time.LocalDateTime;
 import java.util.Date;
-import java.util.function.Predicate;
 
 import seedu.jelphabot.model.task.Task;
 
 /**
  * Tests that a {@code Task}'s {@code DateTime} falls within the given Date.
  */
-public class TaskDueWithinDayPredicate implements Predicate<Task> {
-    // private final Calendar calendar;
-    private final Date date;
+public class TaskDueWithinDayPredicate implements FilterTaskByDatePredicate {
+    private final LocalDateTime date;
 
-    // default constructor sets the date to today's date
+    // default constructor sets the date to the instant the method was called
     public TaskDueWithinDayPredicate() {
-        date = Calendar.getInstance().getTime();
+        date = LocalDateTime.now();
     }
+
     public TaskDueWithinDayPredicate(Date date) {
-        // this.calendar = new Calendar.Builder().setInstant(date).build();
-        this.date = date;
+        this.date = dateToLocalDateTime(date);
     }
 
-
+    /**
+     * Tests that a {@code Task}'s {@code DateTime} falls within the given Date.
+     */
     @Override
     public boolean test(Task task) {
-        Date taskDate = task.getDateTime().getDate();
-        return isSameDay(taskDate);
-    }
-
-    private boolean isSameDay(Date date) {
-        return this.date.getDay() == date.getDay()
-                   && this.date.getMonth() == date.getMonth()
-                   && this.date.getYear() == date.getYear();
+        LocalDateTime taskDate = dateToLocalDateTime(task.getDateTime().getDate());
+        return taskDate.isAfter(getDateToday().atStartOfDay())
+                   && taskDate.isBefore(getDateTomorrow().atStartOfDay());
     }
 
     @Override

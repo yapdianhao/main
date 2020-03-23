@@ -95,8 +95,9 @@
 
 .list-cell {
     -fx-label-padding: 0 0 0 0;
-    -fx-graphic-text-gap : 0;
+    -fx-graphic-text-gap: 0;
     -fx-padding: 0 0 0 0;
+    -fx-pref-height: 105;
 }
 
 .list-cell:filled:even {

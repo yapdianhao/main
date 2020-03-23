@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
@@ -17,6 +18,8 @@ import seedu.jelphabot.logic.Logic;
 import seedu.jelphabot.logic.commands.CommandResult;
 import seedu.jelphabot.logic.commands.exceptions.CommandException;
 import seedu.jelphabot.logic.parser.exceptions.ParseException;
+import seedu.jelphabot.model.calendar.CalendarDate;
+import seedu.jelphabot.model.task.SortedTaskList;
 
 /**
  * The Main Window. Provides the basic application layout containing a menu bar
@@ -32,8 +35,10 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private TaskListPanel taskListPanel;
+    private SortedTaskListPanel taskListPanel;
+    private TaskListPanel calendarTaskListPanel;
     private ProductivityPanel productivityPanel;
+    private CalendarPanel calendarPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -44,7 +49,16 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
+    private TabPane mainWindowTabPane;
+
+    @FXML
     private StackPane taskListPanelPlaceholder;
+
+    @FXML
+    private StackPane calendarTaskListPanelPlaceholder;
+
+    @FXML
+    private StackPane calendarPanelPlaceholder;
 
     @FXML
     private StackPane productivityListPanelPlaceholder;
@@ -113,8 +127,23 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        taskListPanel = new SortedTaskListPanel(logic.getFilteredTaskList());
+        SortedTaskList sortedTasks = logic.getSortedTaskList();
+        taskListPanel = new SortedTaskListPanel(
+            sortedTasks.getPinnedTaskList(),
+            sortedTasks.getOverdueTaskList(),
+            sortedTasks.getDueTodayTaskList(),
+            sortedTasks.getDueThisWeekTaskList(),
+            sortedTasks.getDueSomedayTaskList()
+        );
         taskListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
+
+        //TODO should be calendar Task List (Doesn't work for now :()
+        calendarTaskListPanel = new TaskListPanel(logic.getFilteredTaskList());
+        calendarTaskListPanelPlaceholder.getChildren().add(calendarTaskListPanel.getRoot());
+
+        //TODO fill calendarPanel
+        calendarPanel = new CalendarPanel(CalendarDate.getCurrent());
+        calendarPanelPlaceholder.getChildren().add(calendarPanel.getRoot());
 
         // productivityPanel = new ProductivityPanel(logic.getProductivityList());
         // productivityListPanelPlaceholder.getChildren().add(productivityPanel.getRoot());
@@ -183,7 +212,7 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
-    public TaskListPanel getTaskListPanel() {
+    public SortedTaskListPanel getTaskListPanel() {
         return taskListPanel;
     }
 
