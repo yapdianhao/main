@@ -59,7 +59,6 @@ public class ProductivityPanel extends UiPart<Region> {
      * Returns true if the productivity panel is currently being shown.
      */
     public boolean isShowing() {
-        System.out.println("check show " + tabPane.isPressed());
         return tabPane.isPressed();
     }
 
