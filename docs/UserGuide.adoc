@@ -16,7 +16,6 @@ endif::[]
 
 By: `Team 2103T-F09-02`      Since: `Jan 2020`      Licence: `MIT`
 
-// TODO: Renumber all figures
 == Introduction
 
 JelphaBot is designed for users who *prefer to use a desktop app for managing tasks*.
@@ -76,7 +75,7 @@ Adds a task to the task list. +
 Format: `d/DESCRIPTION dt/DATETIME m/MODULE_CODE [p/PRIORITY] [t/TAG]...`
 
 image::add.png[width="600"]
-_Figure 2: Example of an expected result after running `add`_
+_Figure 3: Example of an expected result after running `add`_
 
 ****
 * For dt/DATETIME inputs, we recommend the format MMM-dd-YYYY HH mm, but it also allows some other formats.
@@ -97,8 +96,8 @@ Examples:
 Shows a list of all tasks in the task list. +
 Format: `list`
 
-image::ug_figures/list.png[width="600"]
-_Figure 3: Example of an expected result after running `list`_
+image::list.png[width="600"]
+_Figure 4: Example of an expected result after running `list`_
 
 The task list is formatted so that you can distinguish urgent tasks at first glance. Tasks are tagged according to their importance:
 
@@ -131,7 +130,7 @@ Finds tasks whose description contain any of the given keywords. +
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 image::find.png[width="600"]
-_Figure 4: Example of an expected result after running `find`_
+_Figure 5: Example of an expected result after running `find`_
 
 ****
 * The search is case insensitive. e.g `hans` will match `Hans`
@@ -157,7 +156,7 @@ Format: `edit INDEX [d/DESCRIPTION] [dt/DATETIME] [m/MODULE_CODE] [p/PRIORITY (-
 [t/TAG]...`
 
 image::edit.png[width="600"]
-_Figure 5: Example of an expected result after running `edit`_
+_Figure 6: Example of an expected result after running `edit`_
 
 ****
 * Edits the task at the specified `INDEX`.
@@ -198,7 +197,7 @@ Deletes tasks by calling `delete` directly from a task page or `delete <task_ind
 Format: `delete INDEX`
 
 image::delete.png[width="600"]
-_Figure 6: Example of an expected result after running `delete`_
+_Figure 8: Example of an expected result after running `delete`_
 
 ****
 * Deletes the task at the specified `INDEX`.
@@ -222,7 +221,7 @@ Clears all entries from the task list by calling `clear` directly from a task pa
 Format: `clear`
 
 image::clear.png[width="600"]
-_Figure 7: Example of an expected result after running `clear`_
+_Figure 9: Example of an expected result after running `clear`_
 
 === Exiting the program : `exit`
 
@@ -244,10 +243,14 @@ _{explain how the user can enable/disable data encryption}_
 
 == Interface Navigation
 
-// tag::productivitytracker[]
-=== Track productivity : `productivity` [coming in v1.3]
+=== Switching tabs : `Ctrl + tab`
+Switches from the current tab to the one on its right. If there are no tabs on the right, it switches to the leftmost
+tab.
 
-Switches to the productivity panel and shows the user's productivity for the day and highlights task with the most and
+// tag::productivitytracker[]
+=== Track productivity : `productivity`
+
+Switches to the productivity panel showing the user's productivity for the day and highlights tasks with the most and
 least time spent. +
 Format: `productivity`
 
@@ -319,5 +322,5 @@ e.g. `delete 3`
 * *Clear* : `clear`
 * *Exit* : `exit`
 * *Productivity* : `productivity`
-* *Timer* : `start` or `stop` +
-e.g. `start INDEX` or `stop INDEX`
+* *Timer* : `start INDEX` or `stop INDEX` +
+e.g. `start 1` or `stop 1`
