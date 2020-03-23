@@ -61,7 +61,7 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane calendarPanelPlaceholder;
 
     @FXML
-    private StackPane productivityListPanelPlaceholder;
+    private StackPane productivityPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -147,7 +147,7 @@ public class MainWindow extends UiPart<Stage> {
 
         //TODO: fill productivityPanel
         productivityPanel = new ProductivityPanel(mainWindowTabPane);
-        productivityListPanelPlaceholder.getChildren().add(productivityPanel.getRoot());
+        productivityPanelPlaceholder.getChildren().add(productivityPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -213,11 +213,15 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Switches view to productivity panel.
+     */
     @FXML
     private void handleProductivity() {
         if (!productivityPanel.isShowing()) {
             productivityPanel.show();
         }
+        // TODO: add case when alr on panel.
     }
 
     public SortedTaskListPanel getTaskListPanel() {

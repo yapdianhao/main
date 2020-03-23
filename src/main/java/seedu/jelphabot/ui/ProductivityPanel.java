@@ -21,15 +21,15 @@ public class ProductivityPanel extends UiPart<Region> {
     private ListView<Productivity> productivityListView;
 
     @FXML
-    private TabPane tabPane;
+    private TabPane mainWindowTabPane;
 
     // TODO: insert piechart or progress bar.
     public ProductivityPanel(TabPane tabPane) {
         super(FXML);
         logger.info("Initialising productivity panel stage");
-        // productivityListView.setItems(productivityList);
-        productivityListView.setCellFactory(productivityView -> new ProductivityListViewCell());
-        this.tabPane = tabPane;
+
+        this.mainWindowTabPane = tabPane;
+        productivityListView.setCellFactory(listView -> new ProductivityListViewCell());
     }
 
     /**
@@ -52,14 +52,14 @@ public class ProductivityPanel extends UiPart<Region> {
      */
     public void show() {
         logger.fine("Showing productivity panel of application.");
-        tabPane.getSelectionModel().select(2);
+        mainWindowTabPane.getSelectionModel().select(2);
     }
 
     /**
      * Returns true if the productivity panel is currently being shown.
      */
     public boolean isShowing() {
-        return tabPane.isPressed();
+        return mainWindowTabPane.isPressed();
     }
 
     /**
@@ -74,7 +74,7 @@ public class ProductivityPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new ProductivityCard(productivity, getIndex() + 1).getRoot());
+                setGraphic(new ProductivityCard(productivity).getRoot());
             }
         }
     }
