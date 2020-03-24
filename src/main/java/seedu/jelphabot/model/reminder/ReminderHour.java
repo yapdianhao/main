@@ -7,7 +7,7 @@ public class ReminderHour {
 
     public static final String MESSAGE_CONSTRAINTS = "Reminder hour should be within 24 hours from now";
 
-    public final int reminderHour;
+    private final int reminderHour;
 
     public ReminderHour(int reminderHour) {
         requireNonNull(reminderHour);
@@ -17,6 +17,10 @@ public class ReminderHour {
 
     public static boolean isValidReminderHour(int hourToTest) {
         return 0 <= hourToTest && hourToTest <= 24;
+    }
+
+    public int getReminderHour() {
+        return this.reminderHour;
     }
 
     public boolean equals(Object other) {

@@ -7,12 +7,16 @@ public class ReminderDay {
 
     public static final String MESSAGE_CONSTRAINTS = "Reminder date should be within one week from now";
 
-    public final int reminderDay;
+    private final int reminderDay;
 
     public ReminderDay(int reminderDay) {
         requireNonNull(reminderDay);
         checkArgument(isValidReminderDay(reminderDay), MESSAGE_CONSTRAINTS);
         this.reminderDay = reminderDay;
+    }
+
+    public int getReminderDay() {
+        return this.reminderDay;
     }
 
     public static boolean isValidReminderDay(int dayToTest) {

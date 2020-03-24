@@ -95,6 +95,11 @@ public class ModelManager implements Model {
         userPrefs.setJelphaBotFilePath(addressBookFilePath);
     }
 
+    public void setJelphaBotReminderFilePath(Path reminderFilePath) {
+        requireAllNonNull(reminderFilePath);
+        userPrefs.setJelphaBotReminderFilePath(reminderFilePath);
+    }
+
     // =========== JelphaBot
     // ================================================================================
 

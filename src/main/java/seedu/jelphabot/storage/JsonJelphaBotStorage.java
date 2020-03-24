@@ -23,6 +23,8 @@ public class JsonJelphaBotStorage implements JelphaBotStorage {
 
     private Path filePath;
 
+    private Path reminderPath;
+
     public JsonJelphaBotStorage(Path filePath) {
         this.filePath = filePath;
     }

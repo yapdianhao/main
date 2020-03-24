@@ -37,6 +37,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         requireNonNull(newUserPrefs);
         setGuiSettings(newUserPrefs.getGuiSettings());
         setJelphaBotFilePath(newUserPrefs.getJelphaBotFilePath());
+        setJelphaBotReminderFilePath(newUserPrefs.getRemindersFilePath());
     }
 
     public GuiSettings getGuiSettings() {
@@ -64,6 +65,11 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     public void setJelphaBotFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
         this.addressBookFilePath = addressBookFilePath;
+    }
+
+    public void setJelphaBotReminderFilePath(Path remindersFilePath) {
+        requireNonNull(remindersFilePath);
+        this.remindersFilePath = remindersFilePath;
     }
 
     @Override
