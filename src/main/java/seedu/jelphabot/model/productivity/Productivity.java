@@ -29,7 +29,6 @@ public class Productivity {
      * Gets overall productivity of overdue tasks.
      */
     public String getProductivityForOverdueTasks() {
-        System.out.println("overdue");
         int n = sortedTaskList.getOverdueTaskList().size();
         StringBuilder response = new StringBuilder("There are ");
         response.append(n).append(" overdue tasks.");
@@ -49,7 +48,6 @@ public class Productivity {
      * Gets the status of running timers if any.
      */
     public String getTimerStatus() {
-        System.out.println("timer");
         Optional<Task> taskBeingTimed = Optional.empty();
 
         for (Task task : taskList) {
