@@ -37,4 +37,12 @@ public class CalendarDate {
         return months[getMonth() - 1];
     }
 
+    public int getDayofWeek() {
+        return date.getDayOfWeek().getValue();
+    }
+
+    public CalendarDate dateNextDay() {
+        return new CalendarDate(date.plusDays(1));
+    }
+
 }

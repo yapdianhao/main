@@ -31,4 +31,16 @@ public class CalendarPanel extends UiPart<Region> {
     }
 
     //fill grid pane with daycard method
+    // public void fillGridPane(CalendarDate firstDay) {
+    //     int weekIndex = firstDay.getDayofWeek();
+    //     for (int row = 0; row < 6; row++) {
+    //         for (int col = 0; col < 7; col++) {
+    //             CalendarDayCard calendarDayCard = new CalendarDayCard();
+    //         }
+    //     }
+    // }
+
+    // public void highlightDayCard(CalendarDate calendarDate) {
+    //
+    // }
 }
