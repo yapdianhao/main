@@ -61,7 +61,7 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane calendarPanelPlaceholder;
 
     @FXML
-    private StackPane productivityListPanelPlaceholder;
+    private StackPane productivityPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -145,8 +145,9 @@ public class MainWindow extends UiPart<Stage> {
         calendarPanel = new CalendarPanel(CalendarDate.getCurrent());
         calendarPanelPlaceholder.getChildren().add(calendarPanel.getRoot());
 
-        // productivityPanel = new ProductivityPanel(logic.getProductivityList());
-        // productivityListPanelPlaceholder.getChildren().add(productivityPanel.getRoot());
+        //TODO: fill productivityPanel
+        productivityPanel = new ProductivityPanel(mainWindowTabPane);
+        productivityPanelPlaceholder.getChildren().add(productivityPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -212,6 +213,17 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Switches view to productivity panel.
+     */
+    @FXML
+    private void handleProductivity() {
+        if (!productivityPanel.isShowing()) {
+            productivityPanel.show();
+        }
+        // TODO: add case when alr on panel.
+    }
+
     public SortedTaskListPanel getTaskListPanel() {
         return taskListPanel;
     }
@@ -233,10 +245,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
-            }
-
-            if (commandResult.isExit()) {
+            } else if (commandResult.isExit()) {
                 handleExit();
+            } else if (commandResult.isProductivity()) {
+                handleProductivity();
             }
 
             return commandResult;

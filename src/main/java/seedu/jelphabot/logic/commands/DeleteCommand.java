@@ -1,7 +1,7 @@
 package seedu.jelphabot.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.jelphabot.commons.core.Messages.MESSAGE_CANNOT_DELETE;
+import static seedu.jelphabot.commons.core.Messages.MESSAGE_DELETE_TIMING_TASK_FAILURE;
 
 import java.util.List;
 
@@ -24,6 +24,7 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted Task: %1$s";
 
+
     private final Index targetIndex;
 
     public DeleteCommand(Index targetIndex) {
@@ -34,10 +35,6 @@ public class DeleteCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasTimingTask()) {
-            throw new CommandException(MESSAGE_CANNOT_DELETE);
-        }
-
         List<Task> lastShownList = model.getFilteredTaskList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
@@ -45,6 +42,12 @@ public class DeleteCommand extends Command {
         }
 
         Task taskToDelete = lastShownList.get(targetIndex.getZeroBased());
+
+        if (taskToDelete.isBeingTimed()) {
+            throw new CommandException(String.format(MESSAGE_DELETE_TIMING_TASK_FAILURE, taskToDelete.getModuleCode(),
+                taskToDelete.getDescription(), taskToDelete.getDateTime()));
+        }
+
         model.deleteTask(taskToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));
     }
