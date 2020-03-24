@@ -37,7 +37,7 @@ public class CalendarDate {
         return months[getMonth() - 1];
     }
 
-    public int getDayofWeek() {
+    public int getDayOfWeek() {
         return date.getDayOfWeek().getValue();
     }
 

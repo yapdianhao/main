@@ -30,9 +30,9 @@ public class CalendarPanel extends UiPart<Region> {
         monthYear.setText(calendarDate.getMonthName() + ", " + calendarDate.getYear());
     }
 
-    //fill grid pane with daycard method
+    //fill grid pane with day card method
     // public void fillGridPane(CalendarDate firstDay) {
-    //     int weekIndex = firstDay.getDayofWeek();
+    //     int weekIndex = firstDay.getDayOfWeek();
     //     for (int row = 0; row < 6; row++) {
     //         for (int col = 0; col < 7; col++) {
     //             CalendarDayCard calendarDayCard = new CalendarDayCard();
