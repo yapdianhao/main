@@ -16,22 +16,19 @@ import seedu.jelphabot.model.reminder.Reminder;
 /**
  * An Immutable JelphaBot that is serializable to JSON format.
  */
-@JsonRootName(value = "addressbook")
+@JsonRootName(value = "reminders")
 class JsonSerializableReminderJelphaBot {
 
-    //public static final String MESSAGE_DUPLICATE_TASK = "Tasks list contains duplicate task(s).";
     public static final String MESSAGE_DUPLICATE_REMINDERS = "Reminders list contains duplicate reminder(s).";
-
-    //private final List<JsonAdaptedTask> tasks = new ArrayList<>();
 
     private final List<JsonAdaptedReminder> reminders = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableJelphaBot} with the given tasks.
+     * Constructs a {@code JsonSerializableJelphaBot} with the given reminders.
      */
     @JsonCreator
-    public JsonSerializableReminderJelphaBot(@JsonProperty("tasks") List<JsonAdaptedReminder> tasks) {
-        this.reminders.addAll(tasks);
+    public JsonSerializableReminderJelphaBot(@JsonProperty("reminders") List<JsonAdaptedReminder> reminders) {
+        this.reminders.addAll(reminders);
     }
 
     /**

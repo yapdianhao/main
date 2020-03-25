@@ -14,8 +14,6 @@ import seedu.jelphabot.commons.util.FileUtil;
 import seedu.jelphabot.commons.util.JsonUtil;
 import seedu.jelphabot.model.ReadOnlyJelphaBot;
 
-import javax.swing.text.html.Option;
-import javax.xml.crypto.Data;
 
 /**
  * A class to access JelphaBot data stored as a json file on the hard disk.
