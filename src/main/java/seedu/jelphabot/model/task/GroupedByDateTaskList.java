@@ -5,6 +5,8 @@ import static seedu.jelphabot.commons.util.DateUtil.getDueThisWeekPredicate;
 import static seedu.jelphabot.commons.util.DateUtil.getDueTodayPredicate;
 import static seedu.jelphabot.commons.util.DateUtil.getOverduePredicate;
 
+import java.util.Iterator;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -25,22 +27,16 @@ public class GroupedByDateTaskList implements GroupedTaskList {
     private static final FilterTaskByDatePredicate isDueSomeday = getDueSomedayPredicate();
     private static final Predicate<Task> isIncomplete = new TaskIsIncompletePredicate();
 
-    private final ObservableList<Task> pinnedTaskList;
     private final ObservableList<Task> overdueTaskList;
     private final ObservableList<Task> dueTodayTaskList;
     private final ObservableList<Task> dueThisWeekTaskList;
     private final ObservableList<Task> dueSomedayTaskList;
 
     public GroupedByDateTaskList(ObservableList<Task> taskList) {
-        pinnedTaskList = taskList.filtered(null);
         overdueTaskList = taskList.filtered(isOverdue).filtered(isIncomplete);
         dueTodayTaskList = taskList.filtered(isDueToday);
         dueThisWeekTaskList = taskList.filtered(isDueThisWeek);
         dueSomedayTaskList = taskList.filtered(isDueSomeday);
-    }
-
-    public ObservableList<Task> getPinnedTaskList() {
-        return pinnedTaskList;
     }
 
     public ObservableList<Task> getOverdueTaskList() {
@@ -57,5 +53,10 @@ public class GroupedByDateTaskList implements GroupedTaskList {
 
     public ObservableList<Task> getDueSomedayTaskList() {
         return dueSomedayTaskList;
+    }
+
+    @Override
+    public Iterator<ObservableList<Task>> iterator() {
+        return List.of(overdueTaskList, dueTodayTaskList, dueThisWeekTaskList, dueSomedayTaskList).iterator();
     }
 }

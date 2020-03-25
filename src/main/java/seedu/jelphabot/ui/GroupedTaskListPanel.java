@@ -8,6 +8,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.jelphabot.commons.core.LogsCenter;
+import seedu.jelphabot.model.task.GroupedTaskList;
 import seedu.jelphabot.model.task.Task;
 
 /**
@@ -33,39 +34,28 @@ public class GroupedTaskListPanel extends UiPart<Region> {
 
     public GroupedTaskListPanel(
         ObservableList<Task> pinnedTaskList,
-        ObservableList<Task> overdueTaskList,
-        ObservableList<Task> dueTodayTaskList,
-        ObservableList<Task> dueThisWeekTaskList,
-        ObservableList<Task> dueSomedayTaskList
+        GroupedTaskList groupedTaskList
     ) {
         super(FXML);
 
-        pinnedTaskListView.setItems(pinnedTaskList);
-        pinnedTaskListView.setCellFactory(listView -> new GroupedTaskListPanel.SortedTaskListViewCell());
-        pinnedTaskListView.prefHeightProperty().bind(Bindings.size(pinnedTaskList).multiply(PREF_CELL_HEIGHT));
+        populateListView(pinnedTaskListView, pinnedTaskList);
 
-        overdueTaskListView.setItems(overdueTaskList);
-        overdueTaskListView.setCellFactory(listView -> new GroupedTaskListPanel.SortedTaskListViewCell());
-        overdueTaskListView.prefHeightProperty().bind(Bindings.size(overdueTaskList).multiply(PREF_CELL_HEIGHT));
+        for (ObservableList<Task> taskList : groupedTaskList) {
+            populateListView(dueSomedayTaskListView, taskList);
+            // TODO somehow feed in title
+        }
+    }
 
-        dueTodayTaskListView.setItems(dueTodayTaskList);
-        dueTodayTaskListView.setCellFactory(listView -> new GroupedTaskListPanel.SortedTaskListViewCell());
-        dueTodayTaskListView.prefHeightProperty().bind(Bindings.size(dueTodayTaskList).multiply(PREF_CELL_HEIGHT));
-
-        dueThisWeekTaskListView.setItems(dueThisWeekTaskList);
-        dueThisWeekTaskListView.setCellFactory(listView -> new GroupedTaskListPanel.SortedTaskListViewCell());
-        dueThisWeekTaskListView.prefHeightProperty()
-            .bind(Bindings.size(dueThisWeekTaskList).multiply(PREF_CELL_HEIGHT));
-
-        dueSomedayTaskListView.setItems(dueSomedayTaskList);
-        dueSomedayTaskListView.setCellFactory(listView -> new GroupedTaskListPanel.SortedTaskListViewCell());
-        dueSomedayTaskListView.prefHeightProperty().bind(Bindings.size(dueSomedayTaskList).multiply(PREF_CELL_HEIGHT));
+    private void populateListView(ListView<Task> listView, ObservableList<Task> tasks) {
+        listView.setItems(tasks);
+        listView.setCellFactory(viewCell -> new GroupedTaskListViewCell());
+        listView.prefHeightProperty().bind(Bindings.size(tasks).multiply(PREF_CELL_HEIGHT));
     }
 
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Task} using a {@code TaskCard}.
      */
-    class SortedTaskListViewCell extends ListCell<Task> {
+    class GroupedTaskListViewCell extends ListCell<Task> {
         @Override
         protected void updateItem(Task task, boolean empty) {
             super.updateItem(task, empty);
