@@ -5,6 +5,7 @@ import static seedu.jelphabot.storage.JsonAdaptedTask.MISSING_FIELD_MESSAGE_FORM
 import static seedu.jelphabot.testutil.Assert.assertThrows;
 import static seedu.jelphabot.testutil.TypicalTasks.BOOK_REPORT;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -35,92 +36,88 @@ public class JsonAdaptedTaskTest {
     private static final List<JsonAdaptedTag> VALID_TAGS = BOOK_REPORT.getTags().stream()
                                                                .map(JsonAdaptedTag::new)
                                                                .collect(Collectors.toList());
+    private static final LocalDateTime VALID_START_TIME = LocalDateTime.MAX;
+    private static final LocalDateTime VALID_END_TIME = LocalDateTime.MAX;
 
     @Test
-    public void toModelType_validTaskDetails_returnsPerson() throws Exception {
+    public void toModelType_validTaskDetails_returnsTask() throws Exception {
         JsonAdaptedTask task = new JsonAdaptedTask(BOOK_REPORT);
         assertEquals(BOOK_REPORT, task.toModelType());
     }
 
-    // @Test // name should never be invalid
-    // public void toModelType_invalidDescription_throwsIllegalValueException() {
-    //     JsonAdaptedTask person =
-    //             new JsonAdaptedTask(INVALID_DESCRIPTION, VALID_STATUS, VALID_DATETIME, VALID_MODULE_CODE,
-    //             VALID_PRIORITY, VALID_TAGS);
-    //     String expectedMessage = Description.MESSAGE_CONSTRAINTS;
-    //     assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
-    // }
+    @Test
+    public void toModelType_invalidDescription_throwsIllegalValueException() {
+        JsonAdaptedTask task =
+            new JsonAdaptedTask(INVALID_DESCRIPTION, VALID_STATUS, VALID_DATETIME, VALID_MODULE_CODE,
+                VALID_PRIORITY, VALID_TAGS, VALID_START_TIME, VALID_END_TIME);
+        String expectedMessage = Description.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, task::toModelType);
+    }
 
-    @Test //done
+    @Test
     public void toModelType_nullDescription_throwsIllegalValueException() {
-        JsonAdaptedTask person = new JsonAdaptedTask(
-                null,
-                VALID_STATUS,
-                VALID_DATETIME,
-                VALID_MODULE_CODE,
-                VALID_PRIORITY,
-                VALID_TAGS
-            );
+        JsonAdaptedTask task = new JsonAdaptedTask(
+            null,
+            VALID_STATUS,
+            VALID_DATETIME,
+            VALID_MODULE_CODE,
+            VALID_PRIORITY,
+            VALID_TAGS, VALID_START_TIME, VALID_END_TIME);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Description.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+        assertThrows(IllegalValueException.class, expectedMessage, task::toModelType);
     }
 
     @Test //done
     public void toModelType_invalidModuleCode_throwsIllegalValueException() {
-        JsonAdaptedTask person =
+        JsonAdaptedTask task =
             new JsonAdaptedTask(VALID_DESCRIPTION, VALID_STATUS, VALID_DATETIME, INVALID_MODULE_CODE, VALID_PRIORITY,
-                VALID_TAGS
-            );
+                VALID_TAGS, VALID_START_TIME, VALID_END_TIME);
         String expectedMessage = ModuleCode.MESSAGE_CONSTRAINTS;
-        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+        assertThrows(IllegalValueException.class, expectedMessage, task::toModelType);
     }
 
     @Test //done
     public void toModelType_nullModuleCode_throwsIllegalValueException() {
-        JsonAdaptedTask person = new JsonAdaptedTask(
+        JsonAdaptedTask task = new JsonAdaptedTask(
                 VALID_DESCRIPTION,
                 VALID_STATUS,
                 VALID_DATETIME,
                 null,
                 VALID_PRIORITY,
-                VALID_TAGS
-            );
+                VALID_TAGS, VALID_START_TIME, VALID_END_TIME);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, ModuleCode.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+        assertThrows(IllegalValueException.class, expectedMessage, task::toModelType);
     }
 
     @Test
     public void toModelType_invalidDateTime_throwsIllegalValueException() {
-        JsonAdaptedTask person =
+        JsonAdaptedTask task =
             new JsonAdaptedTask(VALID_DESCRIPTION, VALID_STATUS, INVALID_DATETIME, VALID_MODULE_CODE, VALID_PRIORITY,
-                VALID_TAGS
-            );
+                VALID_TAGS, VALID_START_TIME, VALID_END_TIME);
         String expectedMessage = DateTime.MESSAGE_CONSTRAINTS;
-        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+        assertThrows(IllegalValueException.class, expectedMessage, task::toModelType);
     }
 
     @Test
     public void toModelType_nullDateTime_throwsIllegalValueException() {
-        JsonAdaptedTask person = new JsonAdaptedTask(
+        JsonAdaptedTask task = new JsonAdaptedTask(
             VALID_DESCRIPTION,
             VALID_STATUS,
             null,
             VALID_MODULE_CODE,
             VALID_PRIORITY,
-            VALID_TAGS
-        );
+            VALID_TAGS, VALID_START_TIME, VALID_END_TIME);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, DateTime.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+        assertThrows(IllegalValueException.class, expectedMessage, task::toModelType);
     }
 
     @Test
     public void toModelType_invalidTags_throwsIllegalValueException() {
         List<JsonAdaptedTag> invalidTags = new ArrayList<>(VALID_TAGS);
         invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
-        JsonAdaptedTask person =
+        JsonAdaptedTask task =
             new JsonAdaptedTask(VALID_DESCRIPTION, VALID_STATUS, VALID_DATETIME, VALID_MODULE_CODE, VALID_PRIORITY,
-                invalidTags
-            );
-        assertThrows(IllegalValueException.class, person::toModelType);
+                invalidTags, VALID_START_TIME, VALID_END_TIME);
+        assertThrows(IllegalValueException.class, task::toModelType);
     }
 }

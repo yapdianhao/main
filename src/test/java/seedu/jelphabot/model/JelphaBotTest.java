@@ -44,7 +44,7 @@ public class JelphaBotTest {
 
     @Test
     public void resetData_withDuplicateTasks_throwsDuplicateTaskException() {
-        // Two persons with the same identity fields
+        // Two tasks with the same identity fields
         Task editedAlice = new TaskBuilder(ASSESSMENT).withTags(VALID_TAG_GRADED)
                 .build();
         List<Task> newTasks = Arrays.asList(ASSESSMENT, editedAlice);
@@ -83,7 +83,7 @@ public class JelphaBotTest {
     }
 
     /**
-     * A stub ReadOnlyJelphaBot whose persons list can violate interface constraints.
+     * A stub ReadOnlyJelphaBot whose tasks list can violate interface constraints.
      */
     private static class JelphaBotStub implements ReadOnlyJelphaBot {
         private final ObservableList<Task> tasks = FXCollections.observableArrayList();

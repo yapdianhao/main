@@ -2,6 +2,7 @@ package seedu.jelphabot.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.jelphabot.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.jelphabot.commons.util.DateUtil.getDueTodayPredicate;
 
 import java.nio.file.Path;
 import java.util.function.Predicate;
@@ -11,7 +12,13 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.jelphabot.commons.core.GuiSettings;
 import seedu.jelphabot.commons.core.LogsCenter;
+import seedu.jelphabot.model.productivity.Productivity;
+import seedu.jelphabot.model.productivity.ProductivityList;
+import seedu.jelphabot.model.task.SortedTaskList;
 import seedu.jelphabot.model.task.Task;
+import seedu.jelphabot.model.task.UniqueTaskList;
+import seedu.jelphabot.model.task.predicates.TaskIsCompletedPredicate;
+import seedu.jelphabot.model.task.predicates.TaskIsIncompletePredicate;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -22,6 +29,8 @@ public class ModelManager implements Model {
     private final JelphaBot addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Task> filteredTasks;
+    private final SortedTaskList sortedTasks;
+    private final ProductivityList productivityList;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -35,6 +44,8 @@ public class ModelManager implements Model {
         this.addressBook = new JelphaBot(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredTasks = new FilteredList<>(this.addressBook.getTaskList());
+        sortedTasks = new SortedTaskList(filteredTasks);
+        productivityList = new ProductivityList();
     }
 
     public ModelManager() {
@@ -58,6 +69,11 @@ public class ModelManager implements Model {
     @Override
     public GuiSettings getGuiSettings() {
         return userPrefs.getGuiSettings();
+    }
+
+    @Override
+    public GuiSettings getPopUpWindowGuiSettings() {
+        return userPrefs.getPopUpWindowGuiSettings();
     }
 
     @Override
@@ -97,6 +113,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasTimingTask() {
+        return addressBook.hasTaskBeingTimed();
+    }
+
+    @Override
     public void deleteTask(Task target) {
         addressBook.removeTask(target);
     }
@@ -110,15 +131,27 @@ public class ModelManager implements Model {
     @Override
     public void setTask(Task target, Task editedTask) {
         requireAllNonNull(target, editedTask);
-
         addressBook.setTask(target, editedTask);
     }
 
-    // =========== Filtered Person List Accessors
+    // =========== Productivity List
+
+    @Override
+    public void setProductivity(Productivity productivity) {
+        requireAllNonNull(productivity);
+        productivityList.setProductivity(productivity);
+    }
+
+    @Override
+    public ProductivityList getProductivityList() {
+        return productivityList;
+    }
+
+    // =========== Filtered Task List Accessors
     // =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the
+     * Returns an unmodifiable view of the list of {@code Task} backed by the
      * internal list of {@code versionedJelphaBot}
      */
     @Override
@@ -126,10 +159,50 @@ public class ModelManager implements Model {
         return filteredTasks;
     }
 
+    //TODO should instantiate to show tasks for today first
+    // @Override
+    // public ObservableList<Task> getFilteredCalendarTaskList() {
+    //     FilterTaskByDatePredicate taskDueTodayPredicate = DateUtil.getDueTodayPredicate();
+    //     FilteredList<Task> filteredCalendarList = new FilteredList<>(filteredTasks, taskDueTodayPredicate);
+    //     return filteredCalendarList;
+    // }
+
+    public ObservableList<Task> getFilteredByIncompleteTaskList() {
+        TaskIsIncompletePredicate taskIncompletePredicate = new TaskIsIncompletePredicate();
+        UniqueTaskList uniqueTaskList = new UniqueTaskList();
+        FilteredList<Task> filteredIncompleteList = new FilteredList<>(filteredTasks, taskIncompletePredicate);
+        uniqueTaskList.setTasks(filteredIncompleteList);
+        return uniqueTaskList.asUnmodifiableObservableList();
+    }
+
+    public ObservableList<Task> getFilteredByIncompleteDueTodayTaskList() {
+        TaskIsIncompletePredicate taskIncompletePredicate = new TaskIsIncompletePredicate();
+        UniqueTaskList uniqueTaskList = new UniqueTaskList();
+        FilteredList<Task> filteredIncompleteList = new FilteredList<>(filteredTasks, taskIncompletePredicate);
+        FilteredList<Task> filteredIncompleteDueTodayList = new FilteredList<>(filteredIncompleteList,
+            getDueTodayPredicate()
+        );
+        uniqueTaskList.setTasks(filteredIncompleteDueTodayList);
+        return uniqueTaskList.asUnmodifiableObservableList();
+    }
+
+    public ObservableList<Task> getFilteredByCompleteTaskList() {
+        TaskIsCompletedPredicate predicate = new TaskIsCompletedPredicate();
+        UniqueTaskList uniqueTaskList = new UniqueTaskList();
+        FilteredList<Task> filteredList = new FilteredList<>(filteredTasks, predicate);
+        uniqueTaskList.setTasks(filteredList);
+        return uniqueTaskList.asUnmodifiableObservableList();
+    }
+
     @Override
     public void updateFilteredTaskList(Predicate<Task> predicate) {
         requireNonNull(predicate);
         filteredTasks.setPredicate(predicate);
+    }
+
+    @Override
+    public SortedTaskList getSortedTaskList() {
+        return sortedTasks;
     }
 
     @Override
@@ -147,7 +220,7 @@ public class ModelManager implements Model {
         // state check
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook) && userPrefs.equals(other.userPrefs)
-                && filteredTasks.equals(other.filteredTasks);
+                   && filteredTasks.equals(other.filteredTasks);
     }
 
 }

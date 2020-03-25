@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
@@ -12,10 +13,15 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.jelphabot.commons.core.GuiSettings;
 import seedu.jelphabot.commons.core.LogsCenter;
+import seedu.jelphabot.commons.util.StringUtil;
 import seedu.jelphabot.logic.Logic;
 import seedu.jelphabot.logic.commands.CommandResult;
 import seedu.jelphabot.logic.commands.exceptions.CommandException;
 import seedu.jelphabot.logic.parser.exceptions.ParseException;
+import seedu.jelphabot.model.calendar.CalendarDate;
+import seedu.jelphabot.model.productivity.Productivity;
+import seedu.jelphabot.model.productivity.ProductivityList;
+import seedu.jelphabot.model.task.SortedTaskList;
 
 /**
  * The Main Window. Provides the basic application layout containing a menu bar
@@ -31,9 +37,14 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private TaskListPanel taskListPanel;
+    private SortedTaskListPanel taskListPanel;
+    private TaskListPanel calendarTaskListPanel;
+    private ProductivityPanel productivityPanel;
+    private CalendarPanel calendarPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+
+    private Productivity productivity;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -42,7 +53,19 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private TabPane mainWindowTabPane;
+
+    @FXML
+    private StackPane taskListPanelPlaceholder;
+
+    @FXML
+    private StackPane calendarTaskListPanelPlaceholder;
+
+    @FXML
+    private StackPane calendarPanelPlaceholder;
+
+    @FXML
+    private StackPane productivityPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -108,8 +131,28 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        taskListPanel = new TaskListPanel(logic.getFilteredTaskList());
-        personListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
+        SortedTaskList sortedTasks = logic.getSortedTaskList();
+        taskListPanel = new SortedTaskListPanel(
+            sortedTasks.getPinnedTaskList(),
+            sortedTasks.getOverdueTaskList(),
+            sortedTasks.getDueTodayTaskList(),
+            sortedTasks.getDueThisWeekTaskList(),
+            sortedTasks.getDueSomedayTaskList()
+        );
+        taskListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
+
+        //TODO should be calendar Task List (Doesn't work for now :()
+        calendarTaskListPanel = new TaskListPanel(logic.getFilteredTaskList());
+        calendarTaskListPanelPlaceholder.getChildren().add(calendarTaskListPanel.getRoot());
+
+        //TODO fill calendarPanel
+        calendarPanel = new CalendarPanel(CalendarDate.getCurrent());
+        calendarPanelPlaceholder.getChildren().add(calendarPanel.getRoot());
+
+        ProductivityList productivityList = logic.getProductivityList();
+        productivityList.addProductivity(new Productivity(sortedTasks, logic.getFilteredTaskList()));
+        productivityPanel = new ProductivityPanel(productivityList.asUnmodifiableObservableList(), mainWindowTabPane);
+        productivityPanelPlaceholder.getChildren().add(productivityPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -161,10 +204,37 @@ public class MainWindow extends UiPart<Stage> {
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();
+
+        // after the MainWindow is closed,
+        // initialise and show the night debrief window
+        Stage nightDebriefStage = new Stage();
+
+        try {
+            NightDebriefWindow nightDebrief = new NightDebriefWindow(nightDebriefStage, logic);
+            nightDebrief.show();
+            nightDebrief.fillWindow();
+        } catch (Throwable e) {
+            logger.severe(StringUtil.getDetails(e));
+        }
     }
 
-    public TaskListPanel getTaskListPanel() {
+    /**
+     * Switches view to productivity panel.
+     */
+    @FXML
+    private void handleProductivity() {
+        if (!productivityPanel.isShowing()) {
+            productivityPanel.show();
+        }
+        // TODO: add case when alr on panel.
+    }
+
+    public SortedTaskListPanel getTaskListPanel() {
         return taskListPanel;
+    }
+
+    public ProductivityPanel getProductivityPanel() {
+        return productivityPanel;
     }
 
     /**
@@ -180,10 +250,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
-            }
-
-            if (commandResult.isExit()) {
+            } else if (commandResult.isExit()) {
                 handleExit();
+            } else if (commandResult.isProductivity()) {
+                handleProductivity();
             }
 
             return commandResult;
@@ -193,4 +263,6 @@ public class MainWindow extends UiPart<Stage> {
             throw e;
         }
     }
+
+
 }

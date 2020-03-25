@@ -14,6 +14,8 @@ import seedu.jelphabot.logic.parser.JelphaBotParser;
 import seedu.jelphabot.logic.parser.exceptions.ParseException;
 import seedu.jelphabot.model.Model;
 import seedu.jelphabot.model.ReadOnlyJelphaBot;
+import seedu.jelphabot.model.productivity.ProductivityList;
+import seedu.jelphabot.model.task.SortedTaskList;
 import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.storage.Storage;
 
@@ -61,6 +63,36 @@ public class LogicManager implements Logic {
         return model.getFilteredTaskList();
     }
 
+    // @Override
+    // public ObservableList<Task> getFilteredCalendarTaskList() {
+    //     return model.getFilteredCalendarTaskList();
+    // }
+
+    @Override
+    public ObservableList<Task> getFilteredByCompleteTaskList() {
+        return model.getFilteredByCompleteTaskList();
+    }
+
+    @Override
+    public ObservableList<Task> getFilteredByIncompleteTaskList() {
+        return model.getFilteredByIncompleteTaskList();
+    }
+
+    @Override
+    public SortedTaskList getSortedTaskList() {
+        return model.getSortedTaskList();
+    }
+
+    @Override
+    public ObservableList<Task> getFilteredByIncompleteDueTodayTaskList() {
+        return model.getFilteredByIncompleteDueTodayTaskList();
+    }
+
+    @Override
+    public ProductivityList getProductivityList() {
+        return model.getProductivityList();
+    }
+
     @Override
     public Path getJelphaBotFilePath() {
         return model.getJelphaBotFilePath();
@@ -69,6 +101,11 @@ public class LogicManager implements Logic {
     @Override
     public GuiSettings getGuiSettings() {
         return model.getGuiSettings();
+    }
+
+    @Override
+    public GuiSettings getPopUpWindowGuiSettings() {
+        return model.getPopUpWindowGuiSettings();
     }
 
     @Override

@@ -79,7 +79,7 @@ image::UiClassDiagram.png[]
 
 *API* : link:{repoURL}/src/main/java/seedu/address/ui/Ui.java[`Ui.java`]
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `TaskListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the link:{repoURL}/src/main/java/seedu/address/ui/MainWindow.java[`MainWindow`] is specified in link:{repoURL}/src/main/resources/view/MainWindow.fxml[`MainWindow.fxml`]
 
@@ -100,7 +100,7 @@ link:{repoURL}/src/main/java/seedu/address/logic/Logic.java[`Logic.java`]
 
 .  `Logic` uses the `JelphaBotParser` class to parse the user command.
 .  This results in a `Command` object which is executed by the `LogicManager`.
-.  The command execution can affect the `Model` (e.g. adding a person).
+.  The command execution can affect the `Model` (e.g. adding a task).
 .  The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 .  In addition, the `CommandResult` object can also instruct the `Ui` to perform certain actions, such as displaying help to the user.
 
@@ -123,11 +123,11 @@ The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
 * stores the Address Book data.
-* exposes an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* exposes an unmodifiable `ObservableList<Task>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
 [NOTE]
-As a more OOP model, we can store a `Tag` list in `Address Book`, which `Person` can reference. This would allow `Address Book` to only require one `Tag` object per unique `Tag`, instead of each `Person` needing their own `Tag` object. An example of how such a model may look like is given below. +
+As a more OOP model, we can store a `Tag` list in `Address Book`, which `Task` can reference. This would allow `Address Book` to only require one `Tag` object per unique `Tag`, instead of each `Task` needing their own `Tag` object. An example of how such a model may look like is given below. +
  +
 image:BetterModelClassDiagram.png[]
 
@@ -153,6 +153,64 @@ Classes used by multiple components are in the `seedu.jelphabot.commons` package
 
 This section describes some noteworthy details on how certain features are implemented.
 
+// tag::taskgroups[]
+=== Task Grouping feature in Task List tab
+==== Implementation
+
+The task grouping mechanism is facilitated by the `GroupedTaskList` interface.
+Each 'GroupedTaskList' is a container for `ObservableList<Task>` objects, each containing a unique filter over the full task list.
+
+Each `GroupedTaskList` implements the following operations:
+
+* A enum that maps strings to current valid groupings. +
+(For use with ListCommand)
+* A public method for instantiating the GroupedTaskList called getGroupedList with the unfiltered TaskList as argument.
+* Getter methods for each group defined in the extended class.
+
+When users modify the displayed grouping with the corresponding `list` command, a different GroupedTaskList is displayed in the main panel. +
+Currently, the intended groupings for JelphaBot are groupings by date (via the 'list date') and groupings by module (via the 'list module' command).
+
+The operation for retrieving the corresponding GroupedTaskLists are exposed in the `Model` interface as `Model#getGroupedByDateList()` and `Model#getGroupedByModuleList()`.
+
+Given below is an example usage scenario and how the task grouping mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time. The `MainWindow` will be initialized with `GroupedTaskListPanel` as a container for GroupedTaskList model objects. The panel is populated with sublists defined in `GroupedByDateTaskList`.
+
+Step 2. The user executes `list model` to switch to grouping tasks by module code instead. `GroupedTaskListPanel` is repopulated with sublists defined in `GroupedByModuleTaskList`.
+
+[NOTE]
+If the user tries to switch to a sublist type which is already set, the command fails its execution so that it does not execute the relatively expensive filter operations to make new sublists.
+
+==== Design Considerations
+
+===== Aspect: How to swap between groupings
+
+* **Alternative 1 (current choice):** Initializes each grouped list as a different `list` command is called.
+** Pros: Easy to implement. Scalable when more groupings are added.
+** Cons: Consecutive 'list' operations are expensive as the list is reinitalized each time.
+* **Alternative 2:** Keep instances of all GroupedList objects and update them as underlying TaskList changes.
+** Pros: Consecutive `list` operations are less expensive.
+** Cons: All other commands that update the underlying list now have additional checks as each grouped list is updated.
+
+// end::taskgroups[]
+
+=== Calendar feature
+JelphaBot has a calendar feature which provides an overarching view of their schedules and to allow users to view their tasks due.
+
+This feature offers two main functions:
+
+** Display calendar view in a selected month.
+** Display a list of tasks due for a selected date
+
+====  Implementation
+
+**Function 1: Display calendar view in a selected month**
+
+**Function 2: Display a list of tasks due for a selected date**
+
+
+==== Design Considerations
+
 // tag::undoredo[]
 === [Proposed] Undo/Redo feature
 ==== Proposed Implementation
@@ -173,18 +231,18 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 image::UndoRedoState0.png[]
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th task in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 image::UndoRedoState1.png[]
 
-Step 3. The user executes `add n/David ...` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/David ...` to add a new task. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 image::UndoRedoState2.png[]
 
 [NOTE]
 If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the task was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
 image::UndoRedoState3.png[]
 
@@ -222,7 +280,7 @@ image::CommitActivityDiagram.png[]
 ** Pros: Easy to implement.
 ** Cons: May have performance issues in terms of memory usage.
 * **Alternative 2:** Individual command knows how to undo/redo by itself.
-** Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+** Pros: Will use less memory (e.g. for `delete`, just save the task being deleted).
 ** Cons: We must ensure that the implementation of each individual command are correct.
 
 ===== Aspect: Data structure to support the undo/redo commands
@@ -297,15 +355,13 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 [width="59%",cols="22%,<23%,<25%,<30%",options="header",]
 |=======================================================================
 |Priority |As a ... |I want to ... |So that I can...
-|`* * *` |student with good work-life balance |view tasks with different labels (e.g. health, work) under different tabs |
-
-|`* * *` |student with many group projects |be able to import and export shared text files |
+|`* * *` |student with good work-life balance |view tasks with different tags (e.g. health, work) easily |
 
 |`* * *` |goal-oriented student |set goals for the next day |
 
 |`* * *` |student |track tasks I've completed in a log | better understand myself and time management.
 
-|`* * *` |student who has a flexible schedule |reorder my tasks easily |
+|`* * *` |student who has a flexible schedule |reschedule my tasks easily |
 
 |`* * *` |student taking multiple modules |*_tag my tasks_* |manage the time spent on each module.
 
@@ -334,6 +390,8 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |`* *` |unmotivated student |bot that does a morning call for me | wake up and start my day on time
 
 |`* *` |free-spirited student |set deadlines for doing tutorials and watching webcasts | do things at my own pace while not lagging behind in class
+
+|`*` |student with many group projects |be able to import and export shared text files |
 
 |`*` |who needs validation and reminders |debriefed on my achievements (task completed, migrated, scheduled) for that day and what is in store for me the next day |
 
@@ -516,7 +574,7 @@ Use case ends.
 == Non Functional Requirements
 
 .  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `11` or above installed.
-.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+.  Should be able to hold up to 1000 tasks without a noticeable sluggishness in performance for typical usage.
 .  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
 _{More to be added}_
@@ -527,6 +585,9 @@ _{More to be added}_
 [[mainstream-os]] Mainstream OS::
 Windows, Linux, Unix, OS-X
 
+
+[[graphical-user-interface]] Graphical User Interface::
+A type of user interface that allows for interaction between the user and electronic devices through graphical icons
 
 [appendix]
 == Product Survey
@@ -569,15 +630,15 @@ These instructions only provide a starting point for testers to work on; testers
 
 _{ more test cases ... }_
 
-=== Deleting a person
+=== Deleting a task
 
-. Deleting a person while all persons are listed
+. Deleting a task while all tasks are listed
 
-.. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+.. Prerequisites: List all tasks using the `list` command. Multiple tasks in the list.
 .. Test case: `delete 1` +
    Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 .. Test case: `delete 0` +
-   Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+   Expected: No task is deleted. Error details shown in the status message. Status bar remains the same.
 .. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
    Expected: Similar to previous.
 
