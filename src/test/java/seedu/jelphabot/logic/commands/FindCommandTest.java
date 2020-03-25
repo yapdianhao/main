@@ -18,7 +18,7 @@ import org.junit.jupiter.api.Test;
 import seedu.jelphabot.model.Model;
 import seedu.jelphabot.model.ModelManager;
 import seedu.jelphabot.model.UserPrefs;
-import seedu.jelphabot.model.task.DescriptionContainsKeywordsPredicate;
+import seedu.jelphabot.model.task.predicates.DescriptionContainsKeywordsPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for
@@ -51,12 +51,12 @@ public class FindCommandTest {
         // null -> returns false
         assertFalse(findFirstCommand.equals(null));
 
-        // different person -> returns false
+        // different commands -> returns false
         assertFalse(findFirstCommand.equals(findSecondCommand));
     }
 
     @Test
-    public void execute_zeroKeywords_noPersonFound() {
+    public void execute_zeroKeywords_noTaskFound() {
         String expectedMessage = String.format(MESSAGE_TASKS_LISTED_OVERVIEW, 0);
         DescriptionContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindCommand command = new FindCommand(predicate);
@@ -66,7 +66,7 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_multipleKeywords_multiplePersonsFound() {
+    public void execute_multipleKeywords_multipleTasksFound() {
         String expectedMessage = String.format(MESSAGE_TASKS_LISTED_OVERVIEW, 3);
         DescriptionContainsKeywordsPredicate predicate = preparePredicate("Yoga Milk Open");
         FindCommand command = new FindCommand(predicate);

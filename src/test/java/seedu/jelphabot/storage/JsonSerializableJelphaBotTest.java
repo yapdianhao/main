@@ -25,8 +25,8 @@ public class JsonSerializableJelphaBotTest {
         JsonSerializableJelphaBot dataFromFile = JsonUtil.readJsonFile(TYPICAL_TASKS_FILE,
                 JsonSerializableJelphaBot.class).get();
         JelphaBot addressBookFromFile = dataFromFile.toModelType();
-        JelphaBot typicalPersonsJelphaBot = TypicalTasks.getTypicalJelphaBot();
-        assertEquals(addressBookFromFile, typicalPersonsJelphaBot);
+        JelphaBot typicalTasksJelphaBot = TypicalTasks.getTypicalJelphaBot();
+        assertEquals(addressBookFromFile, typicalTasksJelphaBot);
     }
 
     @Test
@@ -40,7 +40,7 @@ public class JsonSerializableJelphaBotTest {
     public void toModelType_duplicateTasks_throwsIllegalValueException() throws Exception {
         JsonSerializableJelphaBot dataFromFile = JsonUtil.readJsonFile(DUPLICATE_TASK_FILE,
                 JsonSerializableJelphaBot.class).get();
-        assertThrows(IllegalValueException.class, JsonSerializableJelphaBot.MESSAGE_DUPLICATE_PERSON,
+        assertThrows(IllegalValueException.class, JsonSerializableJelphaBot.MESSAGE_DUPLICATE_TASK,
                 dataFromFile::toModelType);
     }
 

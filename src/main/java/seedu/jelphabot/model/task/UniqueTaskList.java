@@ -36,6 +36,10 @@ public class UniqueTaskList implements Iterable<Task> {
         return internalList.stream().anyMatch(toCheck::isSameTask);
     }
 
+    public boolean hasTaskBeingTimed() {
+        return internalList.stream().anyMatch(task -> task.isBeingTimed());
+    }
+
     /**
      * Adds a task to the list.
      * The task must not already exist in the list.

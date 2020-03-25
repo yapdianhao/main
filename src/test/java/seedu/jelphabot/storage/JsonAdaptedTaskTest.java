@@ -37,47 +37,48 @@ public class JsonAdaptedTaskTest {
                                                                .collect(Collectors.toList());
 
     @Test
-    public void toModelType_validTaskDetails_returnsPerson() throws Exception {
+    public void toModelType_validTaskDetails_returnsTask() throws Exception {
         JsonAdaptedTask task = new JsonAdaptedTask(BOOK_REPORT);
         assertEquals(BOOK_REPORT, task.toModelType());
     }
 
-    // @Test // name should never be invalid
-    // public void toModelType_invalidDescription_throwsIllegalValueException() {
-    //     JsonAdaptedTask person =
-    //             new JsonAdaptedTask(INVALID_DESCRIPTION, VALID_STATUS, VALID_DATETIME, VALID_MODULE_CODE,
-    //             VALID_PRIORITY, VALID_TAGS);
-    //     String expectedMessage = Description.MESSAGE_CONSTRAINTS;
-    //     assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
-    // }
+    @Test
+    public void toModelType_invalidDescription_throwsIllegalValueException() {
+        JsonAdaptedTask task =
+            new JsonAdaptedTask(INVALID_DESCRIPTION, VALID_STATUS, VALID_DATETIME, VALID_MODULE_CODE,
+                VALID_PRIORITY, VALID_TAGS
+            );
+        String expectedMessage = Description.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, task::toModelType);
+    }
 
-    @Test //done
+    @Test
     public void toModelType_nullDescription_throwsIllegalValueException() {
-        JsonAdaptedTask person = new JsonAdaptedTask(
-                null,
-                VALID_STATUS,
-                VALID_DATETIME,
-                VALID_MODULE_CODE,
-                VALID_PRIORITY,
-                VALID_TAGS
+        JsonAdaptedTask task = new JsonAdaptedTask(
+            null,
+            VALID_STATUS,
+            VALID_DATETIME,
+            VALID_MODULE_CODE,
+            VALID_PRIORITY,
+            VALID_TAGS
             );
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Description.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+        assertThrows(IllegalValueException.class, expectedMessage, task::toModelType);
     }
 
     @Test //done
     public void toModelType_invalidModuleCode_throwsIllegalValueException() {
-        JsonAdaptedTask person =
+        JsonAdaptedTask task =
             new JsonAdaptedTask(VALID_DESCRIPTION, VALID_STATUS, VALID_DATETIME, INVALID_MODULE_CODE, VALID_PRIORITY,
                 VALID_TAGS
             );
         String expectedMessage = ModuleCode.MESSAGE_CONSTRAINTS;
-        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+        assertThrows(IllegalValueException.class, expectedMessage, task::toModelType);
     }
 
     @Test //done
     public void toModelType_nullModuleCode_throwsIllegalValueException() {
-        JsonAdaptedTask person = new JsonAdaptedTask(
+        JsonAdaptedTask task = new JsonAdaptedTask(
                 VALID_DESCRIPTION,
                 VALID_STATUS,
                 VALID_DATETIME,
@@ -86,22 +87,22 @@ public class JsonAdaptedTaskTest {
                 VALID_TAGS
             );
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, ModuleCode.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+        assertThrows(IllegalValueException.class, expectedMessage, task::toModelType);
     }
 
     @Test
     public void toModelType_invalidDateTime_throwsIllegalValueException() {
-        JsonAdaptedTask person =
+        JsonAdaptedTask task =
             new JsonAdaptedTask(VALID_DESCRIPTION, VALID_STATUS, INVALID_DATETIME, VALID_MODULE_CODE, VALID_PRIORITY,
                 VALID_TAGS
             );
         String expectedMessage = DateTime.MESSAGE_CONSTRAINTS;
-        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+        assertThrows(IllegalValueException.class, expectedMessage, task::toModelType);
     }
 
     @Test
     public void toModelType_nullDateTime_throwsIllegalValueException() {
-        JsonAdaptedTask person = new JsonAdaptedTask(
+        JsonAdaptedTask task = new JsonAdaptedTask(
             VALID_DESCRIPTION,
             VALID_STATUS,
             null,
@@ -110,17 +111,17 @@ public class JsonAdaptedTaskTest {
             VALID_TAGS
         );
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, DateTime.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+        assertThrows(IllegalValueException.class, expectedMessage, task::toModelType);
     }
 
     @Test
     public void toModelType_invalidTags_throwsIllegalValueException() {
         List<JsonAdaptedTag> invalidTags = new ArrayList<>(VALID_TAGS);
         invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
-        JsonAdaptedTask person =
+        JsonAdaptedTask task =
             new JsonAdaptedTask(VALID_DESCRIPTION, VALID_STATUS, VALID_DATETIME, VALID_MODULE_CODE, VALID_PRIORITY,
                 invalidTags
             );
-        assertThrows(IllegalValueException.class, person::toModelType);
+        assertThrows(IllegalValueException.class, task::toModelType);
     }
 }

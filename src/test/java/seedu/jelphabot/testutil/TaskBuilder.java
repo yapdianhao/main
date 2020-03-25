@@ -15,7 +15,6 @@ import seedu.jelphabot.model.util.SampleDataUtil;
 /**
  * A utility class to help with building Task objects.
  */
-// TODO rewrite classes referencing TaskBuilder
 public class TaskBuilder {
 
     public static final String DEFAULT_DESCRIPTION = "Default Task 1";
