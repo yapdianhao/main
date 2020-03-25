@@ -361,7 +361,10 @@ Examples:
 * `calendar Jan/1/2020` +
 Highlights 1st of January in the calendar panel on the right and displays the corresponding tasks due on the left.
 
-=== Morning call/Night debrief  `[coming in v2.0]`
+=== Morning call/Night debrief
+Displays the tasks to be completed within the day (Morning Call), and the tasks that have been completed so far (Night Debrief)
+
+Morning Call and Night Debrief are separate windows that will open on app startup and exit respectively.
 
 === Sticky notes  `[coming in v2.0]`
 
