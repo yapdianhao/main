@@ -244,15 +244,15 @@ _{explain how the user can enable/disable data encryption}_
 
 == Interface Navigation
 
-=== Switching tabs : `Ctrl + tab`
-Switches from the current tab to the one on its right. If there are no tabs on the right, it switches to the leftmost
+=== Switching tabs : `Ctrl + tab` or arrow keys
+Ctrl + tab: Switches from the current tab to the one on its right. If there are no tabs on the right, it switches to the leftmost
 tab.
+Arrow keys: Switches from the current tab to the next tab corresponding to the arrow key pressed.
 
 // tag::productivitytracker[]
 === Track productivity : `productivity`
 
-Switches to the productivity panel showing the user's productivity for the day and highlights tasks with the most and
-least time spent. +
+Switches to the productivity panel showing the user's productivity for the day. +
 Format: `productivity`
 
 // end::productivitytracker[]
@@ -279,9 +279,9 @@ Format: `stop INDEX`
 
 ==== Receiving encouragement and criticism
 
-Jelphabot will automatically track the user's productivity in the day and output the appropriate response to the user's
+Jelphabot automatically tracks the user's productivity in a day and outputs the appropriate response to the user's
 achievements and task completion rate. +
-There is need to manually ask for compliments or criticism.
+There is no need to manually ask for compliments or criticism.
 
 === Integrating calender : `calendarTab`
 Switches to the calendar panel showing the user's schedule for the current month with today's date
