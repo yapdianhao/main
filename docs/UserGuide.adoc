@@ -292,8 +292,7 @@ _Figure 9: Example of an expected result after running `clear`_
 // tag::productivitytracker[]
 === Track productivity : `productivity`
 
-Switches to the productivity panel showing the user's productivity for the day and highlights tasks with the most and
-least time spent. +
+Switches to the productivity panel showing the user's productivity for the day. +
 Format: `productivity`
 
 // end::productivitytracker[]
@@ -320,9 +319,9 @@ Format: `stop INDEX`
 
 ==== Receiving encouragement and criticism
 
-Jelphabot will automatically track the user's productivity in the day and output the appropriate response to the user's
+Jelphabot automatically tracks the user's productivity in a day and outputs the appropriate response to the user's
 achievements and task completion rate. +
-There is need to manually ask for compliments or criticism.
+There is no need to manually ask for compliments or criticism.
 
 == Calendar
 === Integrating calender : `calendarTab`
