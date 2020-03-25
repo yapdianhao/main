@@ -1,11 +1,5 @@
 package seedu.jelphabot.storage;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -19,15 +13,15 @@ class JsonAdaptedReminder {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Reminder %s's field is missing!";
 
-    private final Index index;
-    private final ReminderDay reminderDay;
-    private final ReminderHour reminderHour;
+    private int index = -1;
+    private int reminderDay = -1;
+    private int reminderHour = -1;
 
     @JsonCreator
     public JsonAdaptedReminder (
-        @JsonProperty("index") Index index,
-        @JsonProperty("reminderDay") ReminderDay reminderDay,
-        @JsonProperty("reminderHour") ReminderHour reminderHour
+        @JsonProperty("index") int index,
+        @JsonProperty("reminderDay") int reminderDay,
+        @JsonProperty("reminderHour") int reminderHour
     ) {
         this.index = index;
         this.reminderDay = reminderDay;
@@ -35,31 +29,31 @@ class JsonAdaptedReminder {
     }
 
     public JsonAdaptedReminder(Reminder reminder) {
-        this.index = reminder.getIndex();
-        this.reminderDay = reminder.getDaysToRemind();
-        this.reminderHour = reminder.getHoursToRemind();
+        this.index = reminder.getIndex().getZeroBased();
+        this.reminderDay = reminder.getDaysToRemind().getReminderDay();
+        this.reminderHour = reminder.getHoursToRemind().getReminderHour();
     }
 
     public Reminder toModelType() throws IllegalValueException {
-        if (index == null) {
+        if (index < 0) {
             throw new IllegalValueException(
                 String.format(MISSING_FIELD_MESSAGE_FORMAT, Index.class.getSimpleName()));
         }
-        if (reminderDay == null) {
+        if (reminderDay < 0) {
             throw new IllegalValueException(
                 String.format(MISSING_FIELD_MESSAGE_FORMAT, ReminderDay.class.getSimpleName()));
         }
-        if (!ReminderDay.isValidReminderDay(reminderDay.getReminderDay())) {
+        if (!ReminderDay.isValidReminderDay(reminderDay)) {
             throw new IllegalValueException(ReminderDay.MESSAGE_CONSTRAINTS);
         }
-        if (reminderHour == null) {
+        if (reminderHour < 0) {
             throw new IllegalValueException(
                 String.format(MISSING_FIELD_MESSAGE_FORMAT, ReminderHour.class.getSimpleName()));
         }
-        if (!ReminderHour.isValidReminderHour(reminderHour.getReminderHour())) {
+        if (!ReminderHour.isValidReminderHour(reminderHour)) {
             throw new IllegalValueException(
                 String.format(ReminderHour.MESSAGE_CONSTRAINTS));
         }
-        return new Reminder(index, reminderDay, reminderHour);
+        return new Reminder(Index.fromOneBased(index), new ReminderDay(reminderDay), new ReminderHour(reminderHour));
     }
 }
