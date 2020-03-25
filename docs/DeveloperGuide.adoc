@@ -174,6 +174,25 @@ The operation for retrieving the corresponding GroupedTaskLists are exposed in t
 
 Given below is an example usage scenario and how the task grouping mechanism behaves at each step.
 
+Step 1. The user launches the application for the first time. The `MainWindow` will be initialized with `GroupedTaskListPanel` as a container for GroupedTaskList model objects. The panel is populated with sublists defined in `GroupedByDateTaskList`.
+
+Step 2. The user executes `list model` to switch to grouping tasks by module code instead. `GroupedTaskListPanel` is repopulated with sublists defined in `GroupedByModuleTaskList`.
+
+[NOTE]
+If the user tries to switch to a sublist type which is already set, the command fails its execution so that it does not execute the relatively expensive filter operations to make new sublists.
+
+==== Design Considerations
+
+===== Aspect: How to swap between groupings
+
+* **Alternative 1 (current choice):** Initializes each grouped list as a different `list` command is called.
+** Pros: Easy to implement. Scalable when more groupings are added.
+** Cons: Consecutive 'list' operations are expensive as the list is reinitalized each time.
+* **Alternative 2:** Keep instances of all GroupedList objects and update them as underlying TaskList changes.
+** Pros: Consecutive `list` operations are less expensive.
+** Cons: All other commands that update the underlying list now have additional checks as each grouped list is updated.
+
+// end::taskgroups[]
 
 // tag::undoredo[]
 === [Proposed] Undo/Redo feature
