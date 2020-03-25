@@ -320,8 +320,6 @@ Highlights 1st of January in the calendar panel on the right and displays the co
 
 === Morning call/Night debrief  `[coming in v2.0]`
 
-=== Sticky notes  `[coming in v2.0]`
-
 === Reorganizing tasks
 
 ==== Pin Important tasks  `[coming in v2.0]`
