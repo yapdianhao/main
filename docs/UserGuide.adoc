@@ -333,11 +333,10 @@ Format: `calendarTab`
 
 image::CalendarUi.png[width="790"]
 
-==== Change month and year view of Calendar : `changeCalendar`
-=== Change month and year view of Calendar : `changeCalendar`
+==== Change month and year view of Calendar : `calendarView`
 Displays the tasks due on specified date, while highlighting that day on the calendar.
 The task list panel on the left will display the tasks due today. +
-Format: `changeCalendar MONTHYEAR`
+Format: `calendarView MONTHYEAR`
 
 ****
 * For MONTHYEAR format, it should be MMM-YYYY, but it also allows some other formats shown when you type in the command word.
@@ -348,7 +347,7 @@ Examples:
 * `changeCalendar Apr-2020`
 Displays month of April in the year 2020 in the calendar panel on the right.
 
-=== Show tasks due on specific date : `calendar`
+==== Show tasks due on specific date : `calendar`
 Displays the tasks due on specified date, while highlighting that day on the calendar +
 Format: `calendar DATE`
 

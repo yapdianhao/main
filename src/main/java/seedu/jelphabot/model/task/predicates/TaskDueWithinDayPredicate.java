@@ -30,13 +30,12 @@ public class TaskDueWithinDayPredicate implements FilterTaskByDatePredicate {
     @Override
     public boolean test(Task task) {
         LocalDateTime taskDate = dateToLocalDateTime(task.getDateTime().getDate());
-        return taskDate.isAfter(getDateToday().atStartOfDay())
-                   && taskDate.isBefore(getDateTomorrow().atStartOfDay());
+        return taskDate.equals(date);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                   || (other instanceof TaskIsIncompletePredicate); // instanceof handles null
+                   || (other instanceof TaskDueWithinDayPredicate); // instanceof handles null
     }
 }
