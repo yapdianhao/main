@@ -17,19 +17,19 @@ import seedu.jelphabot.model.task.predicates.TaskIsIncompletePredicate;
  * Represents the user's productivity for the day and highlights overdue tasks if any.
  */
 public class TasksCompleted {
-    private ObservableList<Task> tasksDueToday;
+    private ObservableList<Task> tasksDueThisWeek;
     private ObservableList<Task> overdueTasks;
 
     public TasksCompleted(SortedTaskList sortedTaskList) {
-        this.tasksDueToday = sortedTaskList.getDueTodayTaskList();
+        this.tasksDueThisWeek = sortedTaskList.getDueThisWeekTaskList();
         this.overdueTasks = sortedTaskList.getOverdueTaskList();
     }
 
     public String getCompletionStatus() {
-        int size = tasksDueToday.size();
+        int size = tasksDueThisWeek.size();
         int completed = 0;
 
-        for (Task task : tasksDueToday) {
+        for (Task task : tasksDueThisWeek) {
             if (task.getStatus() == Status.COMPLETE) {
                 completed++;
             }
@@ -49,7 +49,7 @@ public class TasksCompleted {
             }
         }
 
-        return String.format("You completed %d out of %d tasks today! %s", completed, size, message);
+        return String.format("You completed %d out of %d tasks that are due this week!\n%s", completed, size, message);
     }
 
     /**
@@ -57,15 +57,21 @@ public class TasksCompleted {
      */
     private String getOverdueStatus() {
         int n = overdueTasks.filtered(new TaskIsIncompletePredicate()).size();
-        StringBuilder response = new StringBuilder("There are ");
+        StringBuilder response = new StringBuilder("There ");
+
+        if (n > 1) {
+            response.append("is ");
+        } else {
+            response.append("are ");
+        }
         response.append(n).append(" overdue tasks that are incomplete.");
 
         if (n > 3) {
-            response.append(" ").append(MESSAGE_CRITICISM);
+            response.append("\n").append(MESSAGE_CRITICISM);
         } else if (n > 0) {
-            response.append(" ").append(MESSAGE_ENCOURAGEMENT);
+            response.append("\n").append(MESSAGE_ENCOURAGEMENT);
         } else {
-            response.append(" ").append(MESSAGE_COMPLIMENT);
+            response.append("\n").append(MESSAGE_COMPLIMENT);
         }
 
         return response.toString();
