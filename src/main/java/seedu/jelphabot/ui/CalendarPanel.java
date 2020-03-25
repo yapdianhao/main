@@ -35,7 +35,10 @@ public class CalendarPanel extends UiPart<Region> {
         fillGridPane(firstDay);
     }
 
-    //fill grid pane with day card method, takes in first day of the month
+    /**
+     * Fills the grid pane of the calendar.
+     * @param firstDay The date representing the first day of the month.
+     */
     public void fillGridPane(CalendarDate firstDay) {
         int weekIndex = firstDay.getDayOfWeek() - 1;
         int lengthCurrMonth = firstDay.getLengthCurrMonth();
