@@ -3,6 +3,7 @@ package seedu.jelphabot.ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import seedu.jelphabot.model.calendar.CalendarDate;
 
@@ -26,7 +27,18 @@ public class CalendarDayCard extends UiPart<Region> {
         calendarDay.setText(String.valueOf(calendarDate.getDay()));
     }
 
-    public void highlightDate(CalendarDate calendarDate) {
+    public void highlightToday() {
+        calendarDay.setTextFill(Paint.valueOf("#ffffff"));
+        calendarDay.setStyle("-fx-font-weight:bold");
+        circleDay.setFill(Paint.valueOf("BLUE"));
+    }
 
+    public void setSameMonth() {
+        calendarDay.setTextFill(Paint.valueOf("000000"));
+    }
+
+    public void setDiffMonth() {
+        calendarDay.setTextFill(Paint.valueOf("808080"));
+        calendarDay.setOpacity(0.75);
     }
 }

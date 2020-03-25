@@ -33,11 +33,9 @@ public class CalendarPanel extends UiPart<Region> {
 
         CalendarDate firstDay = calendarDate.getFirstDay();
         fillGridPane(firstDay);
-        setDayColours();
-        highlightDayCard(calendarDate);
     }
 
-    //fill grid pane with day card method
+    //fill grid pane with day card method, takes in first day of the month
     public void fillGridPane(CalendarDate firstDay) {
         int weekIndex = firstDay.getDayOfWeek() - 1;
         int lengthCurrMonth = firstDay.getLengthCurrMonth();
@@ -48,19 +46,18 @@ public class CalendarPanel extends UiPart<Region> {
         for (int row = 0; row < 6; row++) {
             for (int col = 0; col < 7; col++) {
                 CalendarDayCard calendarDayCard = new CalendarDayCard(currDate);
+                if (currDate.isThisMonth()) {
+                    calendarDayCard.setSameMonth();
+                } else {
+                    calendarDayCard.setDiffMonth();
+                }
+                if (currDate.isToday()) {
+                    calendarDayCard.highlightToday();
+                }
                 calendarGrid.add(calendarDayCard.getRoot(), col, row);
                 currDate = currDate.dateNextDay();
             }
         }
     }
 
-    public void setDayColours() {
-        //day cards of diff month: grey
-
-        //this month: black, with day today blue and bold
-    }
-
-    public void highlightDayCard(CalendarDate calendarDate) {
-
-    }
 }
