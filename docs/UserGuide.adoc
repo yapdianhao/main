@@ -402,8 +402,3 @@ e.g. `calendar Jan-1-2020`
 e.g. `changeCalendar Apr-2020`
 
 == Can't delete this because it somehow breaks something
-
-// tag::dataencryption[]
-_{explain how the user can enable/disable data encryption}_
-
-// end::dataencryption[]
