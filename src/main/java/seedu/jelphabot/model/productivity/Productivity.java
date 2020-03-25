@@ -10,22 +10,28 @@ import seedu.jelphabot.model.task.Task;
 public class Productivity {
     private final SortedTaskList sortedTaskList;
     private final ObservableList<Task> taskList;
-    private StatusToday statusToday;
+    private TasksCompleted tasksCompleted;
     private RunningTimer runningTimer;
+    private TimeSpentToday timeSpentToday;
 
     public Productivity(SortedTaskList sortedTaskList, ObservableList<Task> taskList) {
         this.sortedTaskList = sortedTaskList;
         this.taskList = taskList;
-        this.statusToday = new StatusToday(sortedTaskList);
+        this.tasksCompleted = new TasksCompleted(sortedTaskList);
         this.runningTimer = new RunningTimer(taskList);
+        this.timeSpentToday = new TimeSpentToday(sortedTaskList);
 
     }
 
-    public StatusToday getStatusToday() {
-        return statusToday;
+    public TasksCompleted getTasksCompleted() {
+        return tasksCompleted;
     }
 
     public RunningTimer getRunningTimer() {
         return runningTimer;
+    }
+
+    public TimeSpentToday getTimeSpentToday() {
+        return timeSpentToday;
     }
 }

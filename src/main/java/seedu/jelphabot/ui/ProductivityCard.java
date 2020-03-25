@@ -17,15 +17,18 @@ public class ProductivityCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
-    private Label statusToday;
+    private Label tasksCompleted;
     @FXML
     private Label runningTimer;
+    @FXML
+    private Label timeSpentToday;
 
     public ProductivityCard(Productivity productivity) {
         super(FXML);
         this.productivity = productivity;
-        statusToday.setText(productivity.getStatusToday().toString());
+        tasksCompleted.setText(productivity.getTasksCompleted().toString());
         runningTimer.setText(productivity.getRunningTimer().toString());
+        timeSpentToday.setText(productivity.getTimeSpentToday().toString());
     }
 
     @Override
@@ -42,8 +45,9 @@ public class ProductivityCard extends UiPart<Region> {
 
         // state check
         ProductivityCard card = (ProductivityCard) other;
-        return statusToday.getText().equals(card.statusToday.getText())
+        return tasksCompleted.getText().equals(card.tasksCompleted.getText())
                    && runningTimer.getText().equals(card.runningTimer.getText())
+                   && timeSpentToday.getText().equals(card.timeSpentToday.getText())
                    && productivity.equals(card.productivity);
     }
 }

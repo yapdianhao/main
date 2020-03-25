@@ -8,6 +8,7 @@ import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.jelphabot.model.Model.PREDICATE_SHOW_ALL_TASKS;
 
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -80,8 +81,11 @@ public class EditCommand extends Command {
         DateTime dateTime = editTaskDescriptor.getDateTime().orElse(taskToEdit.getDateTime());
         Status updatedStatus = taskToEdit.getStatus();
         Priority updatedPriority = editTaskDescriptor.getPriority().orElse(taskToEdit.getPriority());
+        LocalDateTime startTime = taskToEdit.getStartTime();
+        LocalDateTime endTime = taskToEdit.getEndTime();
 
-        return new Task(updatedDescription, updatedStatus, dateTime, updatedModuleCode, updatedPriority, updatedTags);
+        return new Task(updatedDescription, updatedStatus, dateTime, updatedModuleCode, updatedPriority, updatedTags,
+            startTime, endTime);
     }
 
     @Override

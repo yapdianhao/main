@@ -12,28 +12,17 @@ import seedu.jelphabot.model.task.Status;
 import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.model.task.predicates.TaskIsIncompletePredicate;
 
+// TODO: update sortedtasklist when task list changes. for now, changes not reflected in respective panes.
 /**
  * Represents the user's productivity for the day and highlights overdue tasks if any.
  */
-public class StatusToday {
+public class TasksCompleted {
     private ObservableList<Task> tasksDueToday;
-    private ObservableList<Task> tasksDueThisWeek;
     private ObservableList<Task> overdueTasks;
 
-    public StatusToday(SortedTaskList sortedTaskList) {
+    public TasksCompleted(SortedTaskList sortedTaskList) {
         this.tasksDueToday = sortedTaskList.getDueTodayTaskList();
-        this.tasksDueThisWeek = sortedTaskList.getDueThisWeekTaskList();
         this.overdueTasks = sortedTaskList.getOverdueTaskList();
-    }
-
-    private Duration getTimeSpent(ObservableList<Task> taskList) {
-        Duration result = Duration.ZERO;
-        for (Task task : taskList) {
-            if (task.getDuration() != null) {
-                result = result.plus(task.getDuration());
-            }
-        }
-        return result;
     }
 
     public String getCompletionStatus() {
@@ -63,17 +52,6 @@ public class StatusToday {
         return String.format("You completed %d out of %d tasks today! %s", completed, size, message);
     }
 
-    public String getTimeSpentString() {
-        Duration durationToday = getTimeSpent(tasksDueToday);
-        Duration durationWeek = getTimeSpent(tasksDueThisWeek);
-
-        return String.format("Time spent on tasks due today: %d hours, %d minutes and %d seconds.\n"
-                                 + "Time spent on tasks due this week: %d hours, %d minutes and %d seconds.",
-            durationToday.toHoursPart(), durationToday.toMinutesPart(), durationToday.toSecondsPart(),
-            durationWeek.toHoursPart(), durationWeek.toMinutesPart(), durationWeek.toSecondsPart()
-        );
-    }
-
     /**
      * Returns the number of incomplete overdue tasks and provides criticism or encouragement depending on the number.
      */
@@ -95,6 +73,6 @@ public class StatusToday {
 
     @Override
     public String toString() {
-        return getTimeSpentString() + "\n" + getCompletionStatus() + "\n" + getOverdueStatus();
+        return getCompletionStatus() + "\n" + getOverdueStatus();
     }
 }
