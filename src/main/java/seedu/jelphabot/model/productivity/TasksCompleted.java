@@ -4,8 +4,6 @@ import static seedu.jelphabot.commons.core.Messages.MESSAGE_COMPLIMENT;
 import static seedu.jelphabot.commons.core.Messages.MESSAGE_CRITICISM;
 import static seedu.jelphabot.commons.core.Messages.MESSAGE_ENCOURAGEMENT;
 
-import java.time.Duration;
-
 import javafx.collections.ObservableList;
 import seedu.jelphabot.model.task.SortedTaskList;
 import seedu.jelphabot.model.task.Status;
@@ -14,7 +12,7 @@ import seedu.jelphabot.model.task.predicates.TaskIsIncompletePredicate;
 
 // TODO: update sortedtasklist when task list changes. for now, changes not reflected in respective panes.
 /**
- * Represents the user's productivity for the day and highlights overdue tasks if any.
+ * Highlights overdue tasks if any, and mentions number of tasks completed.
  */
 public class TasksCompleted {
     private ObservableList<Task> tasksDueThisWeek;

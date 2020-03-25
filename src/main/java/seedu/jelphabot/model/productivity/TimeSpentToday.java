@@ -1,11 +1,14 @@
 package seedu.jelphabot.model.productivity;
 
+import java.time.Duration;
+
 import javafx.collections.ObservableList;
 import seedu.jelphabot.model.task.SortedTaskList;
 import seedu.jelphabot.model.task.Task;
 
-import java.time.Duration;
-
+/**
+ * Represents the user's productivity for the day
+ */
 public class TimeSpentToday {
     private ObservableList<Task> tasksDueToday;
     private ObservableList<Task> tasksDueThisWeek;

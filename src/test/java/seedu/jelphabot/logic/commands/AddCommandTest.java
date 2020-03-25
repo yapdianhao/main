@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.Predicate;
 
+import javafx.collections.transformation.FilteredList;
+
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
@@ -39,6 +41,7 @@ public class AddCommandTest {
 
         CommandResult commandResult = new AddCommand(validTask).execute(modelStub);
 
+        System.out.println("result " + commandResult.getFeedbackToUser());
         assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validTask), commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validTask), modelStub.tasksAdded);
     }
@@ -214,6 +217,7 @@ public class AddCommandTest {
      */
     private class ModelStubAcceptingTaskAdded extends ModelStub {
         final ArrayList<Task> tasksAdded = new ArrayList<>();
+        final ArrayList<Productivity> productivityAdded = new ArrayList<>();
 
         @Override
         public boolean hasTask(Task task) {
@@ -225,6 +229,22 @@ public class AddCommandTest {
         public void addTask(Task task) {
             requireNonNull(task);
             tasksAdded.add(task);
+        }
+
+        @Override
+        public void setProductivity(Productivity productivity) {
+            requireNonNull(productivity);
+            productivityAdded.add(productivity);
+        }
+
+        @Override
+        public ObservableList<Task> getFilteredTaskList() {
+            return new FilteredList<Task>(getJelphaBot().getTaskList());
+        }
+
+        @Override
+        public SortedTaskList getSortedTaskList() {
+            return new SortedTaskList(getFilteredTaskList());
         }
 
         @Override
