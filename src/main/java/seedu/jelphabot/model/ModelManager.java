@@ -12,6 +12,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.jelphabot.commons.core.GuiSettings;
 import seedu.jelphabot.commons.core.LogsCenter;
+import seedu.jelphabot.model.productivity.Productivity;
+import seedu.jelphabot.model.productivity.ProductivityList;
 import seedu.jelphabot.model.task.SortedTaskList;
 import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.model.task.UniqueTaskList;
@@ -28,6 +30,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Task> filteredTasks;
     private final SortedTaskList sortedTasks;
+    private final ProductivityList productivityList;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -42,6 +45,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredTasks = new FilteredList<>(this.addressBook.getTaskList());
         sortedTasks = new SortedTaskList(filteredTasks);
+        productivityList = new ProductivityList();
     }
 
     public ModelManager() {
@@ -127,8 +131,20 @@ public class ModelManager implements Model {
     @Override
     public void setTask(Task target, Task editedTask) {
         requireAllNonNull(target, editedTask);
-
         addressBook.setTask(target, editedTask);
+    }
+
+    // =========== Productivity List
+
+    @Override
+    public void setProductivity(Productivity productivity) {
+        requireAllNonNull(productivity);
+        productivityList.setProductivity(productivity);
+    }
+
+    @Override
+    public ProductivityList getProductivityList() {
+        return productivityList;
     }
 
     // =========== Filtered Task List Accessors
@@ -177,12 +193,6 @@ public class ModelManager implements Model {
         uniqueTaskList.setTasks(filteredList);
         return uniqueTaskList.asUnmodifiableObservableList();
     }
-
-    // public ObservableList<Productivity> getFilteredProductivityList() {
-    //     // pass the list into productivity
-    //     Productivity prod = new Productivity(filteredTasks);
-    //
-    // }
 
     @Override
     public void updateFilteredTaskList(Predicate<Task> predicate) {

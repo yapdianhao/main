@@ -19,6 +19,7 @@ import seedu.jelphabot.commons.core.index.Index;
 import seedu.jelphabot.commons.util.CollectionUtil;
 import seedu.jelphabot.logic.commands.exceptions.CommandException;
 import seedu.jelphabot.model.Model;
+import seedu.jelphabot.model.productivity.Productivity;
 import seedu.jelphabot.model.tag.Tag;
 import seedu.jelphabot.model.task.DateTime;
 import seedu.jelphabot.model.task.Description;
@@ -101,6 +102,7 @@ public class EditCommand extends Command {
 
         model.setTask(taskToEdit, editedTask);
         model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+        model.setProductivity(new Productivity(model.getSortedTaskList(), model.getFilteredTaskList()));
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, editedTask));
     }
 

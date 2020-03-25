@@ -1,63 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Region?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Text?>
-
-<VBox xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
-    <ScrollPane fitToWidth="true">
-        <content>
-            <VBox>
-                <children>
-               <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                  <children>
-                      <Label fx:id="idTimer" styleClass="cell_big_label" text="Running Timers">
-                          <minWidth>
-                              <!-- Ensures that the label text is never truncated -->
-                              <Region fx:constant="USE_PREF_SIZE" />
-                          </minWidth>
-                      </Label>
-                      <Text fx:id="runningTimers" />
-                  </children>
-               </AnchorPane>
-               <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                  <children>
-                      <Label fx:id="idToday" styleClass="cell_big_label" text="Productivity Today">
-                          <minWidth>
-                              <!-- Ensures that the label text is never truncated -->
-                              <Region fx:constant="USE_PREF_SIZE" />
-                          </minWidth>
-                      </Label>
-                      <Text fx:id="productivityToday" />
-                  </children>
-               </AnchorPane>
-               <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                  <children>
-                      <Label fx:id="idOverdue" styleClass="cell_big_label" text="Overdue Tasks">
-                          <minWidth>
-                              <!-- Ensures that the label text is never truncated -->
-                              <Region fx:constant="USE_PREF_SIZE" />
-                          </minWidth>
-                      </Label>
-                      <Text fx:id="overdueTasks" />
-                  </children>
-               </AnchorPane>
-               <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                  <children>
-                      <Label fx:id="idRemaining" styleClass="cell_big_label" text="Remaining Tasks">
-                          <minWidth>
-                              <!-- Ensures that the label text is never truncated -->
-                              <Region fx:constant="USE_PREF_SIZE" />
-                          </minWidth>
-                      </Label>
-                      <Text fx:id="remainingTasks" />
-                  </children>
-               </AnchorPane>
-                </children>
-            </VBox>
-        </content>
-    </ScrollPane>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <ListView fx:id="productivityListView" VBox.vgrow="ALWAYS" />
 </VBox>

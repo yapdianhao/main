@@ -10,6 +10,7 @@ import seedu.jelphabot.commons.core.Messages;
 import seedu.jelphabot.commons.core.index.Index;
 import seedu.jelphabot.logic.commands.exceptions.CommandException;
 import seedu.jelphabot.model.Model;
+import seedu.jelphabot.model.productivity.Productivity;
 import seedu.jelphabot.model.tag.Tag;
 import seedu.jelphabot.model.task.DateTime;
 import seedu.jelphabot.model.task.Description;
@@ -61,6 +62,7 @@ public class DoneCommand extends Command {
 
         model.setTask(taskToMarkDone, doneTask);
         model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+        model.setProductivity(new Productivity(model.getSortedTaskList(), model.getFilteredTaskList()));
         return new CommandResult(String.format(MESSAGE_MARK_TASK_COMPLETE_SUCCESS, doneTask));
     }
 
