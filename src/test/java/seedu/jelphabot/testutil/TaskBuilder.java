@@ -1,5 +1,6 @@
 package seedu.jelphabot.testutil;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -29,6 +30,8 @@ public class TaskBuilder {
     private ModuleCode moduleCode;
     private Priority priority;
     private Set<Tag> tags;
+    private LocalDateTime startTime;
+    private LocalDateTime endTime;
 
     public TaskBuilder() {
         description = new Description(DEFAULT_DESCRIPTION);
@@ -37,6 +40,8 @@ public class TaskBuilder {
         moduleCode = new ModuleCode(DEFAULT_MODULE_CODE);
         priority = Priority.toPriority(DEFAULT_PRIORITY);
         tags = new HashSet<>();
+        startTime = LocalDateTime.MAX;
+        endTime = LocalDateTime.MAX;
     }
 
     /**
@@ -49,6 +54,8 @@ public class TaskBuilder {
         moduleCode = taskToCopy.getModuleCode();
         priority = taskToCopy.getPriority();
         tags = new HashSet<>(taskToCopy.getTags());
+        startTime = taskToCopy.getStartTime();
+        endTime = taskToCopy.getEndTime();
     }
 
     /**
@@ -102,7 +109,7 @@ public class TaskBuilder {
     }
 
     public Task build() {
-        return new Task(description, status, dateTime, moduleCode, priority, tags);
+        return new Task(description, status, dateTime, moduleCode, priority, tags, startTime, endTime);
     }
 
 }

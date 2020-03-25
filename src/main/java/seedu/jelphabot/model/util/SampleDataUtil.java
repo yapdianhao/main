@@ -8,6 +8,7 @@ import static seedu.jelphabot.model.util.SampleDateUtil.NEXT_WEEK;
 import static seedu.jelphabot.model.util.SampleDateUtil.TODAY_MORNING;
 import static seedu.jelphabot.model.util.SampleDateUtil.TONIGHT;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -30,31 +31,40 @@ public class SampleDataUtil {
     public static Task[] getSampleTasks() {
         return new Task[]{
             new Task(new Description("Individual Assignment 1"), Status.INCOMPLETE, new DateTime(LAST_NIGHT),
-                new ModuleCode("CS3230"), Priority.HIGH, getTagSet("graded")
+                new ModuleCode("CS3230"), Priority.HIGH, getTagSet("graded"), LocalDateTime.MAX,
+                LocalDateTime.MAX
             ),
             new Task(new Description("Tutorial 3"), Status.INCOMPLETE, new DateTime(LAST_WEEK),
-                new ModuleCode("ACC1101"), Priority.LOW, getTagSet("classpart", "SU-able")
+                new ModuleCode("ACC1101"), Priority.LOW, getTagSet("classpart", "SU-able"), LocalDateTime.MAX,
+                LocalDateTime.MAX
             ),
             new Task(new Description("MidTerm Revision Papers"), Status.INCOMPLETE, new DateTime(NEXT_MONTH),
-                new ModuleCode("ST2334"), Priority.MEDIUM, getTagSet("exam")
+                new ModuleCode("ST2334"), Priority.MEDIUM, getTagSet("exam"), LocalDateTime.MAX,
+                LocalDateTime.MAX
             ),
             new Task(new Description("Consultation with David Li"), Status.INCOMPLETE, new DateTime(NEXT_WEEK),
-                new ModuleCode("PF1103"), Priority.MEDIUM, getTagSet("consult", "prepare")
+                new ModuleCode("PF1103"), Priority.MEDIUM, getTagSet("consult", "prepare"), LocalDateTime.MAX,
+                LocalDateTime.MAX
             ),
             new Task(new Description("Tutorial 4"), Status.INCOMPLETE, new DateTime(TODAY_MORNING),
-                new ModuleCode("ACC1101"), Priority.LOW, getTagSet("classpart", "Su-able")
+                new ModuleCode("ACC1101"), Priority.LOW, getTagSet("classpart", "Su-able"), LocalDateTime.MAX,
+                LocalDateTime.MAX
             ),
             new Task(new Description("Graded Homework 3"), Status.INCOMPLETE, new DateTime(FIVE_DAYS_LATER),
-                new ModuleCode("MA1101R"), Priority.HIGH, getTagSet("graded", "SU-able")
+                new ModuleCode("MA1101R"), Priority.HIGH, getTagSet("graded", "SU-able"), LocalDateTime.MAX,
+                LocalDateTime.MAX
             ),
             new Task(new Description("Lab 1"), Status.INCOMPLETE, new DateTime(FIVE_DAYS_LATER),
-                new ModuleCode("MA1101R"), Priority.LOW, getTagSet("ungraded", "SU-able")
+                new ModuleCode("MA1101R"), Priority.LOW, getTagSet("ungraded", "SU-able"), LocalDateTime.MAX,
+                LocalDateTime.MAX
             ),
             new Task(new Description("Assignment 3"), Status.INCOMPLETE, new DateTime(TONIGHT),
-                new ModuleCode("ST2334"), Priority.MEDIUM, getTagSet("schoolwork")
+                new ModuleCode("ST2334"), Priority.MEDIUM, getTagSet("schoolwork"), LocalDateTime.MAX,
+                LocalDateTime.MAX
             ),
             new Task(new Description("Readings"), Status.INCOMPLETE, new DateTime(NEXT_MONTH),
-                new ModuleCode("EC1103"), Priority.MEDIUM, getTagSet("readings", "SU-able")
+                new ModuleCode("EC1103"), Priority.MEDIUM, getTagSet("readings", "SU-able"), LocalDateTime.MAX,
+                LocalDateTime.MAX
             )
         };
     }
