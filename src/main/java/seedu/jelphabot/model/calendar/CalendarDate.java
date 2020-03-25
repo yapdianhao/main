@@ -58,6 +58,11 @@ public class CalendarDate {
         return prevMonth.lengthOfMonth();
     }
 
+    /**
+     * Creates a date of the previous month with the specified day input.
+     * @param day Specified day for the previous month.
+     * @return CalendarDate object.
+     */
     public CalendarDate createPrevMonthDate(int day) {
         LocalDate prevMonth = date.minusMonths(1);
         LocalDate datePrevMonth = prevMonth.withDayOfMonth(day);

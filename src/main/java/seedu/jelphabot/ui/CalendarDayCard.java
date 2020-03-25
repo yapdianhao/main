@@ -27,16 +27,25 @@ public class CalendarDayCard extends UiPart<Region> {
         calendarDay.setText(String.valueOf(calendarDate.getDay()));
     }
 
+    /**
+     * Highlights today's date on the calendar.
+     */
     public void highlightToday() {
         calendarDay.setTextFill(Paint.valueOf("#ffffff"));
         calendarDay.setStyle("-fx-font-weight:bold");
         circleDay.setFill(Paint.valueOf("BLUE"));
     }
 
+    /**
+     * Sets the colour of labels for dates this month.
+     */
     public void setSameMonth() {
         calendarDay.setTextFill(Paint.valueOf("000000"));
     }
 
+    /**
+     * Sets the colour of labels for trailing dates from the previous and next months.
+     */
     public void setDiffMonth() {
         calendarDay.setTextFill(Paint.valueOf("808080"));
         calendarDay.setOpacity(0.75);
