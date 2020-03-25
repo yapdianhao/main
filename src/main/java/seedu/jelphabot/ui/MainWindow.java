@@ -19,6 +19,8 @@ import seedu.jelphabot.logic.commands.CommandResult;
 import seedu.jelphabot.logic.commands.exceptions.CommandException;
 import seedu.jelphabot.logic.parser.exceptions.ParseException;
 import seedu.jelphabot.model.calendar.CalendarDate;
+import seedu.jelphabot.model.productivity.Productivity;
+import seedu.jelphabot.model.productivity.ProductivityList;
 import seedu.jelphabot.model.task.GroupedByDateTaskList;
 
 /**
@@ -41,6 +43,8 @@ public class MainWindow extends UiPart<Stage> {
     private CalendarPanel calendarPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+
+    private Productivity productivity;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -145,8 +149,9 @@ public class MainWindow extends UiPart<Stage> {
         calendarPanel = new CalendarPanel(CalendarDate.getCurrent());
         calendarPanelPlaceholder.getChildren().add(calendarPanel.getRoot());
 
-        //TODO: fill productivityPanel
-        productivityPanel = new ProductivityPanel(mainWindowTabPane);
+        ProductivityList productivityList = logic.getProductivityList();
+        productivityList.addProductivity(new Productivity(sortedTasks, logic.getFilteredTaskList()));
+        productivityPanel = new ProductivityPanel(productivityList.asUnmodifiableObservableList(), mainWindowTabPane);
         productivityPanelPlaceholder.getChildren().add(productivityPanel.getRoot());
 
         resultDisplay = new ResultDisplay();

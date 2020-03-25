@@ -5,6 +5,8 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.jelphabot.commons.core.GuiSettings;
+import seedu.jelphabot.model.productivity.Productivity;
+import seedu.jelphabot.model.productivity.ProductivityList;
 import seedu.jelphabot.model.task.GroupedByDateTaskList;
 import seedu.jelphabot.model.task.Task;
 
@@ -88,6 +90,11 @@ public interface Model {
      */
     void setTask(Task target, Task editedTask);
 
+    /**
+     * Replaces the existing productivity with {@code productivity}.
+     */
+    void setProductivity(Productivity productivity);
+
     /** Returns an unmodifiable view of the filtered task list */
     ObservableList<Task> getFilteredTaskList();
 
@@ -105,6 +112,11 @@ public interface Model {
      * the task list
      */
     ObservableList<Task> getFilteredByIncompleteDueTodayTaskList();
+
+    /**
+     * Returns an unmodifiable view of the user's productivity.
+     */
+    ProductivityList getProductivityList();
 
     /**
      * Updates the filter of the filtered task list to filter by the given {@code predicate}.
