@@ -7,41 +7,28 @@ import javafx.scene.layout.Region;
 import seedu.jelphabot.model.productivity.Productivity;
 
 /**
- * An UI component that displays information of {@code Productivity}.
+ * An UI component that displays information of a {@code Productivity}.
  */
-// TODO use piechart for visualisation (or progress bar)
 public class ProductivityCard extends UiPart<Region> {
-
     private static final String FXML = "ProductivityCard.fxml";
-
-    /**
-     * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
-     * As a consequence, UI elements' variable names cannot be set to such keywords
-     * or an exception will be thrown by JavaFX during runtime.
-     *
-     * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on JelphaBot level 4</a>
-     */
 
     public final Productivity productivity;
 
     @FXML
     private HBox cardPane;
     @FXML
-    private Label productivityToday;
+    private Label tasksCompleted;
     @FXML
-    private Label runningTimers;
+    private Label runningTimer;
     @FXML
-    private Label overdueTasks;
-    @FXML
-    private Label remainingTasks;
+    private Label timeSpentToday;
 
     public ProductivityCard(Productivity productivity) {
         super(FXML);
         this.productivity = productivity;
-        productivityToday.setText(productivity.getTodayStatus());
-        runningTimers.setText(productivity.getTimerStatus());
-        overdueTasks.setText(productivity.getProductivityForOverdueTasks());
-        remainingTasks.setText(productivity.getRemainingTaskStatus());
+        tasksCompleted.setText(productivity.getTasksCompleted().toString());
+        runningTimer.setText(productivity.getRunningTimer().toString());
+        timeSpentToday.setText(productivity.getTimeSpentToday().toString());
     }
 
     @Override
@@ -58,8 +45,9 @@ public class ProductivityCard extends UiPart<Region> {
 
         // state check
         ProductivityCard card = (ProductivityCard) other;
-        // TODO: update the test check
-        return productivityToday.getText().equals(card.productivityToday.getText())
+        return tasksCompleted.getText().equals(card.tasksCompleted.getText())
+                   && runningTimer.getText().equals(card.runningTimer.getText())
+                   && timeSpentToday.getText().equals(card.timeSpentToday.getText())
                    && productivity.equals(card.productivity);
     }
 }

@@ -2,6 +2,7 @@ package seedu.jelphabot.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.jelphabot.commons.core.Messages.MESSAGE_CANNOT_START_MORE_TIMERS;
+import static seedu.jelphabot.model.Model.PREDICATE_SHOW_ALL_TASKS;
 
 import java.util.List;
 
@@ -9,6 +10,7 @@ import seedu.jelphabot.commons.core.Messages;
 import seedu.jelphabot.commons.core.index.Index;
 import seedu.jelphabot.logic.commands.exceptions.CommandException;
 import seedu.jelphabot.model.Model;
+import seedu.jelphabot.model.productivity.Productivity;
 import seedu.jelphabot.model.task.Status;
 import seedu.jelphabot.model.task.Task;
 
@@ -41,6 +43,7 @@ public class StartTimerCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
+        Task dummy = lastShownList.get(targetIndex.getZeroBased());
         Task taskToTime = lastShownList.get(targetIndex.getZeroBased());
 
         if (taskToTime.getStatus() == Status.COMPLETE) {
@@ -52,7 +55,9 @@ public class StartTimerCommand extends Command {
         }
 
         taskToTime.startTimer();
-
+        model.setTask(dummy, taskToTime);
+        model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+        model.setProductivity(new Productivity(model.getSortedTaskList(), model.getFilteredTaskList()));
         return new CommandResult(String.format(MESSAGE_SUCCESS, taskToTime));
     }
 
