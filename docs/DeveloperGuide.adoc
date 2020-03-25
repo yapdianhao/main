@@ -341,7 +341,7 @@ Refer to the guide <<DevOps#, here>>.
 * prefer using a desktop app over other types
 * wants to distinguish at first glance important and unimportant tasks
 * can type fast; prefers typing over mouse input
-* is reasonably comfortable using CLI apps
+* is reasonably comfortable using CLI (Command Line Interface) apps
 
 *Value proposition*: The user will be able to manage tasks faster than a typical mouse/GUI driven app, and the visual
 representation of tasks in the UI will allow the user to look through entire lists of tasks more quickly than in
@@ -569,6 +569,35 @@ Use case resumes from step 2
 2.  JelphaBot removes all listed tasks and returns an empty list.
 +
 Use case ends.
+
+=== Use case: UC8 - Add Reminders
+*MSS*
+
+1. User enters reminder for tasks that want to be reminded for.
+2. JelphaBot adds a reminder and displays the result to the user.
++
+*Extensions*
+
+[none]
+* 1a1. JelphaBot detects that the task the reminder is associated to does not exist.
+[none]
++
+** 1a2. User enters new task index to be reminded.
+** Steps 1b1-1b2 are repeated until the command entered is correct.
++
+Use case resumes from step 2
+
+[none]
+* 1b. JelphaBot detects an error in the entered command.
++
+[none]
+** 1b1. JelphaBot detects error and displays the correct input format to be expected.
++
+1b2. User enters new command.
+[none]
+** Steps 1b1-1b2 are repeated until the command entered is correct.
++
+Use case resumes from step 2.
 
 [appendix]
 == Non Functional Requirements
