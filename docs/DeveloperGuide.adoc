@@ -153,9 +153,25 @@ Classes used by multiple components are in the `seedu.jelphabot.commons` package
 
 This section describes some noteworthy details on how certain features are implemented.
 
+=== Calendar feature
+JelphaBot has a calendar feature which provides an overarching view of their schedules and to allow users to view their tasks due.
+
+This feature offers two main functions:
+
+** Display calendar view in a selected month.
+** Display a list of tasks due for a selected date
+
+====  Implementation
+
+**Function 1: Display calendar view in a selected month**
+
+**Function 2: Display a list of tasks due for a selected date**
+
+
+==== Design Considerations
+
 // tag::undoredo[]
 === [Proposed] Undo/Redo feature
-==== Proposed Implementation
 
 The undo/redo mechanism is facilitated by `VersionedAddressBook`.
 It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`.
@@ -301,6 +317,8 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |goal-oriented student |set goals for the next day |
 
+|`* * *` |visual student |be able to see my tasks due for specific days in a week or month | plan my schedule easily.
+
 |`* * *` |student |track tasks I've completed in a log | better understand myself and time management.
 
 |`* * *` |student who has a flexible schedule |reschedule my tasks easily |
@@ -314,6 +332,8 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |`* * *` |lazy student |which of my classes have graded attendance |have more time to laze.
 
 |`* * *` |busy student |what tasks are important at first glance |manage my time well.
+
+|`* * *` |organised student | be able to have a visual overarching view of my events and deadlines in a calendar|view my deadlines for specific days of school week with ease.
 
 |`* * *` |student who loves to procrastinate | get reminders of tasks I have delayed | don't forget them
 

@@ -41,6 +41,29 @@ public class CalendarDate {
         return date.getDayOfWeek().getValue();
     }
 
+    public CalendarDate getFirstDay() {
+        return new CalendarDate(date.minusDays(getDay() - 1));
+    }
+
+    public int getLengthCurrMonth() {
+        return date.lengthOfMonth();
+    }
+
+    public int getLengthPrevMonth() {
+        LocalDate prevMonth = date.minusMonths(1);
+        return prevMonth.lengthOfMonth();
+    }
+
+    public CalendarDate createPrevMonthDate(int day) {
+        LocalDate prevMonth = date.minusMonths(1);
+        LocalDate datePrevMonth = prevMonth.withDayOfMonth(day);
+        return new CalendarDate(datePrevMonth);
+    }
+
+    public CalendarDate datePrevDay() {
+        return new CalendarDate(date.minusDays(1));
+    }
+
     public CalendarDate dateNextDay() {
         return new CalendarDate(date.plusDays(1));
     }
