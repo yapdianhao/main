@@ -7,7 +7,7 @@ import javafx.collections.ObservableList;
 import seedu.jelphabot.commons.core.GuiSettings;
 import seedu.jelphabot.model.productivity.Productivity;
 import seedu.jelphabot.model.productivity.ProductivityList;
-import seedu.jelphabot.model.task.GroupedByDateTaskList;
+import seedu.jelphabot.model.task.GroupedTaskList;
 import seedu.jelphabot.model.task.Task;
 
 /**
@@ -128,5 +128,5 @@ public interface Model {
     /**
      * Returns an unmodifiable view of the incomplete tasks in the task list
      */
-    GroupedByDateTaskList getSortedTaskList();
+    GroupedTaskList getGroupedTaskList();
 }

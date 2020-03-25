@@ -5,12 +5,11 @@ import static seedu.jelphabot.commons.util.DateUtil.getDueThisWeekPredicate;
 import static seedu.jelphabot.commons.util.DateUtil.getDueTodayPredicate;
 import static seedu.jelphabot.commons.util.DateUtil.getOverduePredicate;
 
-import javafx.collections.FXCollections;
+import java.util.function.Predicate;
+
 import javafx.collections.ObservableList;
 import seedu.jelphabot.model.task.predicates.FilterTaskByDatePredicate;
 import seedu.jelphabot.model.task.predicates.TaskIsIncompletePredicate;
-
-import java.util.function.Predicate;
 
 /**
  * A container for ObservableList<Task> that splits the TaskList into groups.
@@ -32,8 +31,7 @@ public class GroupedByDateTaskList implements GroupedTaskList {
     private final ObservableList<Task> dueThisWeekTaskList;
     private final ObservableList<Task> dueSomedayTaskList;
 
-    // Interface is private to prevent public instantiation
-    private GroupedByDateTaskList(ObservableList<Task> taskList) {
+    public GroupedByDateTaskList(ObservableList<Task> taskList) {
         pinnedTaskList = taskList.filtered(null);
         overdueTaskList = taskList.filtered(isOverdue).filtered(isIncomplete);
         dueTodayTaskList = taskList.filtered(isDueToday);
@@ -59,10 +57,5 @@ public class GroupedByDateTaskList implements GroupedTaskList {
 
     public ObservableList<Task> getDueSomedayTaskList() {
         return dueSomedayTaskList;
-    }
-
-    @Override
-    public ObservableList<Task> getGroupedList(ObservableList<Task> taskList) {
-        return null;
     }
 }
