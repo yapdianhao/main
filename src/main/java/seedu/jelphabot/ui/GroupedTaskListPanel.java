@@ -14,8 +14,8 @@ import seedu.jelphabot.model.task.Task;
  * Panel containing the list of tasks.
  * Tasks are further sorted into pinned, dueToday, dueThisWeek, dueSomeday
  */
-public class SortedTaskListPanel extends UiPart<Region> {
-    private static final String FXML = "SortedTaskListPanel.fxml";
+public class GroupedTaskListPanel extends UiPart<Region> {
+    private static final String FXML = "GroupedTaskListPanel.fxml";
     private static final int PREF_CELL_HEIGHT = 105;
 
     private final Logger logger = LogsCenter.getLogger(TaskListPanel.class);
@@ -31,7 +31,7 @@ public class SortedTaskListPanel extends UiPart<Region> {
     @javafx.fxml.FXML
     private ListView<Task> dueSomedayTaskListView;
 
-    public SortedTaskListPanel(
+    public GroupedTaskListPanel(
         ObservableList<Task> pinnedTaskList,
         ObservableList<Task> overdueTaskList,
         ObservableList<Task> dueTodayTaskList,
@@ -41,24 +41,24 @@ public class SortedTaskListPanel extends UiPart<Region> {
         super(FXML);
 
         pinnedTaskListView.setItems(pinnedTaskList);
-        pinnedTaskListView.setCellFactory(listView -> new SortedTaskListPanel.SortedTaskListViewCell());
+        pinnedTaskListView.setCellFactory(listView -> new GroupedTaskListPanel.SortedTaskListViewCell());
         pinnedTaskListView.prefHeightProperty().bind(Bindings.size(pinnedTaskList).multiply(PREF_CELL_HEIGHT));
 
         overdueTaskListView.setItems(overdueTaskList);
-        overdueTaskListView.setCellFactory(listView -> new SortedTaskListPanel.SortedTaskListViewCell());
+        overdueTaskListView.setCellFactory(listView -> new GroupedTaskListPanel.SortedTaskListViewCell());
         overdueTaskListView.prefHeightProperty().bind(Bindings.size(overdueTaskList).multiply(PREF_CELL_HEIGHT));
 
         dueTodayTaskListView.setItems(dueTodayTaskList);
-        dueTodayTaskListView.setCellFactory(listView -> new SortedTaskListPanel.SortedTaskListViewCell());
+        dueTodayTaskListView.setCellFactory(listView -> new GroupedTaskListPanel.SortedTaskListViewCell());
         dueTodayTaskListView.prefHeightProperty().bind(Bindings.size(dueTodayTaskList).multiply(PREF_CELL_HEIGHT));
 
         dueThisWeekTaskListView.setItems(dueThisWeekTaskList);
-        dueThisWeekTaskListView.setCellFactory(listView -> new SortedTaskListPanel.SortedTaskListViewCell());
+        dueThisWeekTaskListView.setCellFactory(listView -> new GroupedTaskListPanel.SortedTaskListViewCell());
         dueThisWeekTaskListView.prefHeightProperty()
             .bind(Bindings.size(dueThisWeekTaskList).multiply(PREF_CELL_HEIGHT));
 
         dueSomedayTaskListView.setItems(dueSomedayTaskList);
-        dueSomedayTaskListView.setCellFactory(listView -> new SortedTaskListPanel.SortedTaskListViewCell());
+        dueSomedayTaskListView.setCellFactory(listView -> new GroupedTaskListPanel.SortedTaskListViewCell());
         dueSomedayTaskListView.prefHeightProperty().bind(Bindings.size(dueSomedayTaskList).multiply(PREF_CELL_HEIGHT));
     }
 

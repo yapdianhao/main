@@ -1,5 +1,7 @@
 package seedu.jelphabot.model.task;
 
+import javafx.collections.ObservableList;
+
 /**
  * TODO skeleton class
  * A container for ObservableList<Task> that splits the TaskList into groups.
@@ -7,5 +9,7 @@ package seedu.jelphabot.model.task;
  * Separation is done over @code{ObservableList} through use of filters.
  * <p>
  */
-public class GroupedByModuleTaskList {
+public class GroupedByModuleTaskList implements GroupedTaskList {
+    public GroupedByModuleTaskList(ObservableList<Task> tasks) {
+    }
 }

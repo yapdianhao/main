@@ -37,7 +37,7 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private SortedTaskListPanel taskListPanel;
+    private GroupedTaskListPanel taskListPanel;
     private TaskListPanel calendarTaskListPanel;
     private ProductivityPanel productivityPanel;
     private CalendarPanel calendarPanel;
@@ -132,7 +132,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         GroupedByDateTaskList sortedTasks = logic.getSortedTaskList();
-        taskListPanel = new SortedTaskListPanel(
+        taskListPanel = new GroupedTaskListPanel(
             sortedTasks.getPinnedTaskList(),
             sortedTasks.getOverdueTaskList(),
             sortedTasks.getDueTodayTaskList(),
@@ -229,7 +229,7 @@ public class MainWindow extends UiPart<Stage> {
         // TODO: add case when alr on panel.
     }
 
-    public SortedTaskListPanel getTaskListPanel() {
+    public GroupedTaskListPanel getTaskListPanel() {
         return taskListPanel;
     }
 
