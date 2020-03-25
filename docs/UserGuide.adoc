@@ -417,6 +417,8 @@ e.g. `done 1`
 e.g. `delete 3`
 * *Clear* : `clear`
 * *Exit* : `exit`
+* *Reminder* : `reminder INDEX rd/days rh/hours` +
+e.g. `reminder 2 rd/1 rh/1`
 * *Productivity* : `productivity`
 * *Timer* : `start INDEX` or `stop INDEX` +
 e.g. `start 1` or `stop 1`

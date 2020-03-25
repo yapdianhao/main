@@ -341,7 +341,7 @@ Refer to the guide <<DevOps#, here>>.
 * prefer using a desktop app over other types
 * wants to distinguish at first glance important and unimportant tasks
 * can type fast; prefers typing over mouse input
-* is reasonably comfortable using CLI apps
+* is reasonably comfortable using CLI (Command Line Interface) apps
 
 *Value proposition*: The user will be able to manage tasks faster than a typical mouse/GUI driven app, and the visual
 representation of tasks in the UI will allow the user to look through entire lists of tasks more quickly than in
