@@ -8,19 +8,23 @@ import static seedu.jelphabot.commons.util.DateUtil.getOverduePredicate;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.jelphabot.model.task.predicates.FilterTaskByDatePredicate;
+import seedu.jelphabot.model.task.predicates.TaskIsIncompletePredicate;
+
+import java.util.function.Predicate;
 
 /**
- * A wrapper for UniqueTaskList that separates UniqueTaskList by categories.
- * Separation is done over @code{UniqueTaskList} through use of filters.
+ * A container for ObservableList<Task> that splits the TaskList into groups.
+ * GroupedByDateTaskList groups Tasks by how close the due date is to the current date.
+ * Separation is done over @code{ObservableList} through use of filters.
  * <p>
- * Supports a minimal set of list operations.
  */
-public class SortedTaskList {
+public class GroupedByDateTaskList implements GroupedTaskList {
 
     private static final FilterTaskByDatePredicate isOverdue = getOverduePredicate();
     private static final FilterTaskByDatePredicate isDueToday = getDueTodayPredicate();
     private static final FilterTaskByDatePredicate isDueThisWeek = getDueThisWeekPredicate();
     private static final FilterTaskByDatePredicate isDueSomeday = getDueSomedayPredicate();
+    private static final Predicate<Task> isIncomplete = new TaskIsIncompletePredicate();
 
     private final ObservableList<Task> pinnedTaskList;
     private final ObservableList<Task> overdueTaskList;
@@ -28,12 +32,13 @@ public class SortedTaskList {
     private final ObservableList<Task> dueThisWeekTaskList;
     private final ObservableList<Task> dueSomedayTaskList;
 
-    public SortedTaskList(ObservableList<Task> taskList) {
-        pinnedTaskList = FXCollections.unmodifiableObservableList(taskList.filtered(null));
-        overdueTaskList = FXCollections.unmodifiableObservableList(taskList.filtered(isOverdue));
-        dueTodayTaskList = FXCollections.unmodifiableObservableList(taskList.filtered(isDueToday));
-        dueThisWeekTaskList = FXCollections.unmodifiableObservableList(taskList.filtered(isDueThisWeek));
-        dueSomedayTaskList = FXCollections.unmodifiableObservableList(taskList.filtered(isDueSomeday));
+    // Interface is private to prevent public instantiation
+    private GroupedByDateTaskList(ObservableList<Task> taskList) {
+        pinnedTaskList = taskList.filtered(null);
+        overdueTaskList = taskList.filtered(isOverdue).filtered(isIncomplete);
+        dueTodayTaskList = taskList.filtered(isDueToday);
+        dueThisWeekTaskList = taskList.filtered(isDueThisWeek);
+        dueSomedayTaskList = taskList.filtered(isDueSomeday);
     }
 
     public ObservableList<Task> getPinnedTaskList() {
@@ -54,5 +59,10 @@ public class SortedTaskList {
 
     public ObservableList<Task> getDueSomedayTaskList() {
         return dueSomedayTaskList;
+    }
+
+    @Override
+    public ObservableList<Task> getGroupedList(ObservableList<Task> taskList) {
+        return null;
     }
 }

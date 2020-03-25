@@ -8,7 +8,7 @@ import seedu.jelphabot.logic.commands.CommandResult;
 import seedu.jelphabot.logic.commands.exceptions.CommandException;
 import seedu.jelphabot.logic.parser.exceptions.ParseException;
 import seedu.jelphabot.model.ReadOnlyJelphaBot;
-import seedu.jelphabot.model.task.SortedTaskList;
+import seedu.jelphabot.model.task.GroupedByDateTaskList;
 import seedu.jelphabot.model.task.Task;
 
 /**
@@ -50,7 +50,7 @@ public interface Logic {
     /**
      * Returns a wrapper for categorised tasks in the task list
      */
-    SortedTaskList getSortedTaskList();
+    GroupedByDateTaskList getSortedTaskList();
 
     /**
      * Returns an unmodifiable view of the incomplete tasks that are due today in

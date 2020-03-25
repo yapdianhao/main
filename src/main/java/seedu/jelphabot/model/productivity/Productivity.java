@@ -9,7 +9,7 @@ import static seedu.jelphabot.commons.core.Messages.MESSAGE_NO_TIMERS;
 import java.util.Optional;
 
 import javafx.collections.ObservableList;
-import seedu.jelphabot.model.task.SortedTaskList;
+import seedu.jelphabot.model.task.GroupedByDateTaskList;
 import seedu.jelphabot.model.task.Task;
 
 
@@ -17,11 +17,11 @@ import seedu.jelphabot.model.task.Task;
  * Represents the overall productivity of the user in a day.
  */
 public class Productivity {
-    private final SortedTaskList sortedTaskList;
+    private final GroupedByDateTaskList groupedByDateTaskList;
     private final ObservableList<Task> taskList;
 
-    public Productivity(SortedTaskList sortedTaskList, ObservableList<Task> taskList) {
-        this.sortedTaskList = sortedTaskList;
+    public Productivity(GroupedByDateTaskList groupedByDateTaskList, ObservableList<Task> taskList) {
+        this.groupedByDateTaskList = groupedByDateTaskList;
         this.taskList = taskList;
     }
 
@@ -30,7 +30,7 @@ public class Productivity {
      */
     public String getProductivityForOverdueTasks() {
         System.out.println("overdue");
-        int n = sortedTaskList.getOverdueTaskList().size();
+        int n = groupedByDateTaskList.getOverdueTaskList().size();
         StringBuilder response = new StringBuilder("There are ");
         response.append(n).append(" overdue tasks.");
 

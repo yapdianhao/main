@@ -153,6 +153,28 @@ Classes used by multiple components are in the `seedu.jelphabot.commons` package
 
 This section describes some noteworthy details on how certain features are implemented.
 
+// tag::taskgroups[]
+=== Task Grouping feature in Task List tab
+==== Implementation
+
+The task grouping mechanism is facilitated by the `GroupedTaskList` interface.
+Each 'GroupedTaskList' is a container for `ObservableList<Task>` objects, each containing a unique filter over the full task list.
+
+Each `GroupedTaskList` implements the following operations:
+
+* A enum that maps strings to current valid groupings. +
+(For use with ListCommand)
+* A public method for instantiating the GroupedTaskList called getGroupedList with the unfiltered TaskList as argument.
+* Getter methods for each group defined in the extended class.
+
+When users modify the displayed grouping with the corresponding `list` command, a different GroupedTaskList is displayed in the main panel. +
+Currently, the intended groupings for JelphaBot are groupings by date (via the 'list date') and groupings by module (via the 'list module' command).
+
+The operation for retrieving the corresponding GroupedTaskLists are exposed in the `Model` interface as `Model#getGroupedByDateList()` and `Model#getGroupedByModuleList()`.
+
+Given below is an example usage scenario and how the task grouping mechanism behaves at each step.
+
+
 // tag::undoredo[]
 === [Proposed] Undo/Redo feature
 ==== Proposed Implementation

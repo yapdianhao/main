@@ -19,7 +19,7 @@ import seedu.jelphabot.logic.commands.CommandResult;
 import seedu.jelphabot.logic.commands.exceptions.CommandException;
 import seedu.jelphabot.logic.parser.exceptions.ParseException;
 import seedu.jelphabot.model.calendar.CalendarDate;
-import seedu.jelphabot.model.task.SortedTaskList;
+import seedu.jelphabot.model.task.GroupedByDateTaskList;
 
 /**
  * The Main Window. Provides the basic application layout containing a menu bar
@@ -127,7 +127,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        SortedTaskList sortedTasks = logic.getSortedTaskList();
+        GroupedByDateTaskList sortedTasks = logic.getSortedTaskList();
         taskListPanel = new SortedTaskListPanel(
             sortedTasks.getPinnedTaskList(),
             sortedTasks.getOverdueTaskList(),

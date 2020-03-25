@@ -19,7 +19,7 @@ import seedu.jelphabot.model.JelphaBot;
 import seedu.jelphabot.model.Model;
 import seedu.jelphabot.model.ReadOnlyJelphaBot;
 import seedu.jelphabot.model.ReadOnlyUserPrefs;
-import seedu.jelphabot.model.task.SortedTaskList;
+import seedu.jelphabot.model.task.GroupedByDateTaskList;
 import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.testutil.TaskBuilder;
 
@@ -174,7 +174,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public SortedTaskList getSortedTaskList() {
+        public GroupedByDateTaskList getSortedTaskList() {
             throw new AssertionError("This method should not be called.");
         }
     }
