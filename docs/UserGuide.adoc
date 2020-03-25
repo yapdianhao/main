@@ -61,15 +61,57 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * Parameters can be in any order e.g. if the command specifies `d/DESCRIPTION p/PRIORITY`, `p/PRIORITY d/DESCRIPTION` is also acceptable.
 ====
 
-=== Viewing help : `help`
+=== Getting Started
+[ Placeholder image for labelled main screen to introduce navigation ]
 
-Opens a help popup window which provides a link to this user guide.
+
+JelphaBot has four tabs, Task List, Calendar, Productivity and Notes.
+You can switch between tabs anytime by pressing `Ctrl + tab` on your keyboard to move to the tab on the right.
+If you are already on the rightmost tab, it wraps around to the leftmost tab.
+
+Commands can be entered from the bottom input box.
+
+==== Saving the data
+
+JelphaBot automatically saves your data whenever you make a change. There is no need to save manually.
+
+==== Viewing help : `help`
+
+If you can't recall the command you need, the `help` command opens a help popup window which links to this user guide. +
 Format: `help`
 
 image::help.png[width="600]
 _Figure 2: Example of an expected result after running `help`_
 
-=== Adding a task: `add`
+=== Exiting the program : `exit`
+
+You can exit the program anytime by entering the `exit` command directly from any page. +
+Format: `exit`
+// no image needed
+
+=== Managing Tasks
+
+JelphaBot allows you to track and manage your tasks. You can view and sort all your tasks from the Task List page.
+
+==== Reading the task list
+
+The task list is formatted so that you can distinguish urgent tasks at first glance. Tasks are tagged according to their importance:
+
+* Default
+* *High Priority*
+* _Low priority_
+
+Tasks marked as _low priority_ will be _italicized_ to denote optional tasks. +
+Tasks are marked as *high priority* will be *bolded* to denote important tasks.
+
+Go to the respective links to find out more  about <<#add, adding>> or <<#edit, editing>> task priority.
+
+The start of every task will be labelled with a module code so that you can visually categorize them.
+
+You can also tag tasks with additional information. To read more about tags, go <<#Tags, here>>
+
+// tag::add[]
+==== Adding a task: `add`
 
 Adds a task to the task list. +
 Format: `d/DESCRIPTION dt/DATETIME m/MODULE_CODE [p/PRIORITY] [t/TAG]...`
@@ -90,41 +132,42 @@ Examples:
 
 * `add add d/Assignment 1 dt/Jan-01-2020 23 59 m/CS3230 p/1`
 * `add add d/Project TP dt/Jan-01-2020 23 59 m/CS2103T p/1 t/pair work`
+// end::add[]
 
-=== Listing all tasks : `list`
+// tag::list[]
+==== Listing all tasks : `list`
 
-Shows a list of all tasks in the task list. +
-Format: `list`
+Shows a list of all tasks in the task list. Optional arguments can be added to define sorting order for your tasks. +
+Format: `list [SORTING_ORDER]`
+
+****
+* If no `SORTING_ORDER` is provided, tasks will be grouped by date by default.
+* Valid `SORTING_ORDER` values are `date` (groups tasks by date) and `module` (Groups tasks by module code)
+****
 
 image::list.png[width="600"]
 _Figure 4: Example of an expected result after running `list`_
 
-The task list is formatted so that you can distinguish urgent tasks at first glance. Tasks are tagged according to their importance:
+===== Group tasks by Date : `list date`
+Tasks are grouped based on the following categories:
 
-* Default
-* *Important*
-* _Optional_
-
-Deadlines that are marked as low priority (`p/-1`) will be _italicized_ to denote that there is no penalty for not meeting the deadline. (or that it denotes an approximate deadline )
-
-Deadlines that are marked as high priority (`p/1`) will be *bolded* to denote that they are more urgent.
-
-Tasks will be organized into drop down menus based on the following Categories:
-
-* Now  +
-(Showing tasks due within the next 4 hours)
-* Today +
+* Pinned +
+(Pinned tasks will always be displayed at the top. To read more about pinning tasks, go <<#pin, here>>)
+* Overdue  +
+(Showing tasks which are uncompleted and past their due date)
+* Due Today +
 (Showing tasks due by the end of the day)
-* This week +
+* Due This week +
 (Showing tasks due by the end of the week, defined as before the next upcoming Monday)
-* This month +
-(Showing tasks due by the end of the month, defined as all tasks within the same Month and Year as the current date)
+* Due Sometime +
+(Showing all other tasks that do not fit into prior categories)
 
-The start of every task will be labelled with a visual tag so that you can visually categorize them.
+===== Group tasks by Date : `list module`
+Tasks are grouped based on their defined module code. Modules will be presented in alphabetical order.
 
-To read more about tags, go <<#Tags, here>>
+// end::list[]
 
-=== Locating tasks by name: `find`
+==== Locating tasks by name: `find`
 
 Finds tasks whose description contain any of the given keywords. +
 Format: `find KEYWORD [MORE_KEYWORDS]`
@@ -148,7 +191,7 @@ Returns `Assignment 1` and `assignment task`
 Returns any task having descriptions of `Tutorial`, `Project`, or `MidTerm`
 
 // tag::edit[]
-=== Editing a task : `edit`
+==== Editing a task : `edit`
 
 Edit existing tasks by calling `edit` directly from a task page, or `edit <task_index>` from the landing page.
 . +
@@ -176,7 +219,7 @@ Edits the moduleCode of the 1st task to be `cs2105` and description to `Tutorial
 Edits the date and time of the 2nd task to be `Jan-2-2020 23 59` and clears all existing tags.
 // end::edit[]
 
-=== Completing a task : `done`
+==== Completing a task : `done`
 
 Marks a task as done by calling `done` directly from a task page or `done <task_index>` from the landing page. +
 Format: `done INDEX`
@@ -191,7 +234,7 @@ _Figure 7: Example of an expected result after running `done`_
 ****
 
 // tag::delete[]
-=== Deleting a task : `delete`
+==== Deleting a task : `delete`
 
 Deletes tasks by calling `delete` directly from a task page or `delete <task_index>` from the landing page. +
 Format: `delete INDEX`
@@ -216,7 +259,24 @@ Deletes the 2nd task in the task list.
 Deletes the 1st task in the results of the `find` command.
 
 // end::delete[]
-==== Clearing all entries : `clear`
+
+// tag::pin[]
+==== Pin Important tasks  : `pin`
+
+You can pin important tasks to the top of the tasklist with the `pin` command. +
+Pinned tasks will always be displayed in the Pinned Tasks grouping in the task list. +
+Trying to `pin` a task that is already pinned will unpin it instead.
+
+// end::pin[]
+
+==== Sort tasks : `sort`  [coming in v2.0]
+
+You can change how tasks are sorted with the `sort` command.
+Format: `sort SORTING_ORDER`
+
+Valid `SORTING_ORDER` values include `date`, `module`, and `priority`.
+
+==== Clearing all task entries : `clear`
 
 Clears all entries from the task list by calling `clear` directly from a task page or from the landing page. +
 Format: `clear`
@@ -224,35 +284,15 @@ Format: `clear`
 image::clear.png[width="600"]
 _Figure 9: Example of an expected result after running `clear`_
 
-=== Exiting the program : `exit`
 
-Exits the program by calling `exit` directly from a task page or from the landing page. +
-Format: `exit`
-// no image needed
+== Set Reminders and Notifications  `[coming in v2.0]`
 
-==== Saving the data
-
-Address book data are saved in the hard disk automatically after any command that changes the data. +
-There is no need to save manually.
-
-// tag::dataencryption[]
-_{explain how the user can enable/disable data encryption}_
-
-// end::dataencryption[]
-
-=== Set Reminders and Notifications  `[coming in v2.0]`
-
-== Interface Navigation
-
-=== Switching tabs : `Ctrl + tab`
-Switches from the current tab to the one on its right. If there are no tabs on the right, it switches to the leftmost
-tab.
+== Productivity Tracking
 
 // tag::productivitytracker[]
 === Track productivity : `productivity`
 
-Switches to the productivity panel showing the user's productivity for the day and highlights tasks with the most and
-least time spent. +
+Switches to the productivity panel showing the user's productivity for the day. +
 Format: `productivity`
 
 // end::productivitytracker[]
@@ -279,17 +319,18 @@ Format: `stop INDEX`
 
 ==== Receiving encouragement and criticism
 
-Jelphabot will automatically track the user's productivity in the day and output the appropriate response to the user's
+Jelphabot automatically tracks the user's productivity in a day and outputs the appropriate response to the user's
 achievements and task completion rate. +
-There is need to manually ask for compliments or criticism.
+There is no need to manually ask for compliments or criticism.
 
+== Calendar
 === Integrating calender : `calendarTab`
 Switches to the calendar panel showing the user's schedule for the current month with today's date
 highlighted. +
 
 Format: `calendarTab`
 
-==== Change month and year view of Calendar : `changeCalendar`
+=== Change month and year view of Calendar : `changeCalendar`
 Displays the tasks due on specified date, while highlighting that day on the calendar.
 The task list panel on the left will display the tasks due today. +
 Format: `changeCalendar MONTHYEAR`
@@ -303,7 +344,7 @@ Examples:
 * `changeCalendar Apr-2020`
 Displays month of April in the year 2020 in the calendar panel on the right.
 
-==== Show tasks due on specific date : `calendar`
+=== Show tasks due on specific date : `calendar`
 Displays the tasks due on specified date, while highlighting that day on the calendar +
 Format: `calendar DATE`
 
@@ -321,11 +362,6 @@ Highlights 1st of January in the calendar panel on the right and displays the co
 === Morning call/Night debrief  `[coming in v2.0]`
 
 === Sticky notes  `[coming in v2.0]`
-
-=== Reorganizing tasks
-
-==== Pin Important tasks  `[coming in v2.0]`
-==== Sort tasks (by today, week, month)  `[coming in v2.0]`
 
 === Colour-code modules and font style for prioritised tasks `[coming in v2.0]`
 
@@ -364,4 +400,4 @@ e.g. `calendar Jan-1-2020`
 * *Change Calendar View* : `changeCalendar MONTHYEAR` +
 e.g. `changeCalendar Apr-2020`
 
-
+== Can't delete this because it somehow breaks something
