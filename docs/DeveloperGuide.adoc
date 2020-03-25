@@ -194,6 +194,23 @@ If the user tries to switch to a sublist type which is already set, the command 
 
 // end::taskgroups[]
 
+=== Calendar feature
+JelphaBot has a calendar feature which provides an overarching view of their schedules and to allow users to view their tasks due.
+
+This feature offers two main functions:
+
+** Display calendar view in a selected month.
+** Display a list of tasks due for a selected date
+
+====  Implementation
+
+**Function 1: Display calendar view in a selected month**
+
+**Function 2: Display a list of tasks due for a selected date**
+
+
+==== Design Considerations
+
 // tag::undoredo[]
 === [Proposed] Undo/Redo feature
 ==== Proposed Implementation
