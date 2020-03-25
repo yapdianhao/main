@@ -2,6 +2,7 @@ package seedu.jelphabot.ui;
 
 import java.util.logging.Logger;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -10,6 +11,7 @@ import javafx.scene.layout.Region;
 import seedu.jelphabot.commons.core.LogsCenter;
 import seedu.jelphabot.model.productivity.Productivity;
 
+// TODO: add progress bar for all tasks due today/this week
 /**
  * The Productivity Panel. Provides the basic application layout of productivity of tasks.
  */
@@ -18,17 +20,16 @@ public class ProductivityPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(ProductivityPanel.class);
 
     @FXML
+    private TabPane mainWindowTabPane;
+    @FXML
     private ListView<Productivity> productivityListView;
 
-    @FXML
-    private TabPane mainWindowTabPane;
-
     // TODO: insert piechart or progress bar.
-    public ProductivityPanel(TabPane tabPane) {
+    public ProductivityPanel(ObservableList<Productivity> productivityList, TabPane tabPane) {
         super(FXML);
         logger.info("Initialising productivity panel stage");
-
         this.mainWindowTabPane = tabPane;
+        productivityListView.setItems(productivityList);
         productivityListView.setCellFactory(listView -> new ProductivityListViewCell());
     }
 
@@ -63,7 +64,7 @@ public class ProductivityPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Productivity} using a {@code ProductivityCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Task} using a {@code TaskCard}.
      */
     class ProductivityListViewCell extends ListCell<Productivity> {
         @Override
