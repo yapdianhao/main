@@ -23,6 +23,7 @@ public class StartTimerCommand extends Command {
                                                    + COMMAND_WORD + " 1";
     public static final String MESSAGE_SUCCESS = "Started timer for %1$s";
     public static final String MESSAGE_TASK_ALREADY_TIMED = "Task has already been marked as done and cannot be timed.";
+    public static final String MESSAGE_TIMER_ALREADY_STARTED = "Timer for this task has already been started.";
 
     private Index targetIndex;
 
@@ -40,14 +41,14 @@ public class StartTimerCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-        if (model.hasTimingTask()) {
-            throw new CommandException(MESSAGE_CANNOT_START_MORE_TIMERS);
-        }
-
         Task taskToTime = lastShownList.get(targetIndex.getZeroBased());
 
         if (taskToTime.getStatus() == Status.COMPLETE) {
             throw new CommandException(MESSAGE_TASK_ALREADY_TIMED);
+        } else if (taskToTime.isBeingTimed()) {
+            throw new CommandException(MESSAGE_TIMER_ALREADY_STARTED);
+        } else if (model.hasTimingTask()) {
+            throw new CommandException(MESSAGE_CANNOT_START_MORE_TIMERS);
         }
 
         taskToTime.startTimer();

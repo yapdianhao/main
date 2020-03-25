@@ -2,7 +2,6 @@ package seedu.jelphabot.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.jelphabot.model.productivity.Productivity;
@@ -13,7 +12,7 @@ import seedu.jelphabot.model.productivity.Productivity;
 // TODO use piechart for visualisation (or progress bar)
 public class ProductivityCard extends UiPart<Region> {
 
-    private static final String FXML = "ProductivityListCard.fxml";
+    private static final String FXML = "ProductivityCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -28,29 +27,21 @@ public class ProductivityCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
-    private Label description;
+    private Label productivityToday;
     @FXML
-    private Label id;
+    private Label runningTimers;
     @FXML
-    private Label moduleCode;
+    private Label overdueTasks;
     @FXML
-    private Label status;
-    @FXML
-    private FlowPane tags;
-    @FXML
-    private Label dateTime;
+    private Label remainingTasks;
 
-    public ProductivityCard(Productivity productivity, int displayedIndex) {
+    public ProductivityCard(Productivity productivity) {
         super(FXML);
         this.productivity = productivity;
-        id.setText(displayedIndex + ". ");
-        // description.setText(productivity.getDescription().fullDescription);
-        // moduleCode.setText(productivity.getModuleCode().value);
-        // status.setText(productivity.getStatus().name());
-        // dateTime.setText(productivity.getDateTime().getDisplayValue());
-        // productivity.getTags().stream()
-        //     .sorted(Comparator.comparing(tag -> tag.tagName))
-        //     .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        productivityToday.setText(productivity.getTodayStatus());
+        runningTimers.setText(productivity.getTimerStatus());
+        overdueTasks.setText(productivity.getProductivityForOverdueTasks());
+        remainingTasks.setText(productivity.getRemainingTaskStatus());
     }
 
     @Override
@@ -67,7 +58,8 @@ public class ProductivityCard extends UiPart<Region> {
 
         // state check
         ProductivityCard card = (ProductivityCard) other;
-        return id.getText().equals(card.id.getText())
+        // TODO: update the test check
+        return productivityToday.getText().equals(card.productivityToday.getText())
                    && productivity.equals(card.productivity);
     }
 }
