@@ -36,7 +36,7 @@ public class Task {
      * Every field must be present and not null.
      */
     public Task(Description description, Status status, DateTime dateTime, ModuleCode moduleCode,
-        Priority priority, Set<Tag> tags) {
+        Priority priority, Set<Tag> tags, LocalDateTime startTime, LocalDateTime endTime) {
         requireAllNonNull(description, status, dateTime, moduleCode, tags);
         this.description = description;
         this.status = status;
@@ -46,6 +46,8 @@ public class Task {
         this.tags.addAll(tags);
         this.duration = Duration.ZERO;
         this.timerIsRunning = false;
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 
     public Description getDescription() {
@@ -103,6 +105,10 @@ public class Task {
 
     public LocalDateTime getStartTime() {
         return this.startTime;
+    }
+
+    public LocalDateTime getEndTime() {
+        return this.endTime;
     }
 
     /**
