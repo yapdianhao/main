@@ -269,6 +269,18 @@ Trying to `pin` a task that is already pinned will unpin it instead.
 
 // end::pin[]
 
+// tag::showcompleted[]
+==== Show all completed tasks : `show-completed`
+You can display all the tasks in your tasklist that have been completed.
+
+// end::showcompleted[]
+
+// tag::showincomplete[]
+==== Show all incomplete tasks: `show-incomplete`
+You can display all the tasks in your tasklist that are currently incomplete.
+
+// end::showincomplete[]
+
 ==== Sort tasks : `sort`  [coming in v2.0]
 
 You can change how tasks are sorted with the `sort` command.
@@ -396,6 +408,8 @@ e.g. `done 1`
 e.g. `delete 3`
 * *Clear* : `clear`
 * *Exit* : `exit`
+* *Show Completed Tasks*: `show-completed`
+* *Show Incomplete Tasks*: `show-incomplete`
 * *Productivity* : `productivity`
 * *Timer* : `start INDEX` or `stop INDEX` +
 e.g. `start 1` or `stop 1`
