@@ -17,9 +17,6 @@ public class ProductivityPanel extends UiPart<Region> {
     private static final String FXML = "ProductivityPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(ProductivityPanel.class);
 
-    // @FXML
-    // private Text productivityView;
-
     @FXML
     private HBox cardPane;
     @FXML
