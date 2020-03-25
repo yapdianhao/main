@@ -3,9 +3,9 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
-
 
 <VBox xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
@@ -13,26 +13,30 @@
            <padding>
                <Insets bottom="5" left="15" right="5" top="5" />
            </padding>
-           <Label styleClass="cell_big_label" text="Running Timer">
+           <Label styleClass="cell_big_label" text="Time Spent On Tasks">
                <minWidth>
                    <!-- Ensures that the label text is never truncated -->
                    <Region fx:constant="USE_PREF_SIZE" />
                </minWidth>
            </Label>
-           <Label fx:id="timeSpentToday" styleClass="cell_big_label" text="\$timeSpentToday" />
+           <Label fx:id="timeSpentToday" styleClass="cell_medium_label" text="\$timeSpentToday" />
        </VBox>
         <VBox alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="105" prefHeight="163.0" prefWidth="195.0">
             <padding>
                 <Insets bottom="5" left="15" right="5" top="5" />
             </padding>
-            <Label styleClass="cell_big_label" text="Today's Productivity">
-                <minWidth>
-                    <!-- Ensures that the label text is never truncated -->
-                    <Region fx:constant="USE_PREF_SIZE" />
-                </minWidth>
-            </Label>
-         <ProgressBar maxWidth="-Infinity" prefWidth="200.0" progress="0.0" />
-            <Label fx:id="tasksCompleted" styleClass="cell_big_label" text="\$tasksCompleted" />
+         <SplitPane dividerPositions="0.29797979797979796" prefHeight="160.0" prefWidth="200.0">
+           <items>
+                  <Label styleClass="cell_big_label" text="Today's Productivity">
+                      <minWidth>
+                          <!-- Ensures that the label text is never truncated -->
+                          <Region fx:constant="USE_PREF_SIZE" />
+                      </minWidth>
+                  </Label>
+               <ProgressBar maxWidth="-Infinity" prefWidth="200.0" progress="0.0" />
+           </items>
+         </SplitPane>
+            <Label fx:id="tasksCompleted" styleClass="cell_medium_label" text="\$tasksCompleted" />
         </VBox>
         <VBox alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="105" prefHeight="163.0" prefWidth="195.0">
             <padding>
@@ -44,7 +48,7 @@
                     <Region fx:constant="USE_PREF_SIZE" />
                 </minWidth>
             </Label>
-            <Label fx:id="runningTimer" styleClass="cell_big_label" text="\$runningTimer" />
+            <Label fx:id="runningTimer" styleClass="cell_medium_label" text="\$runningTimer" />
         </VBox>
    </children>
 </VBox>

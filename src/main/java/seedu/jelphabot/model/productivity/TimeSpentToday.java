@@ -33,8 +33,8 @@ public class TimeSpentToday {
         Duration durationToday = getTimeSpent(tasksDueToday);
         Duration durationWeek = getTimeSpent(tasksDueThisWeek);
 
-        return String.format("Time spent on tasks due today: %d hours, %d minutes and %d seconds.\n"
-                                 + "Time spent on tasks due this week: %d hours, %d minutes and %d seconds.",
+        return String.format("Due today: %d hours, %d minutes and %d seconds.\n"
+                                 + "\nDue this week: %d hours, %d minutes and %d seconds.",
             durationToday.toHoursPart(), durationToday.toMinutesPart(), durationToday.toSecondsPart(),
             durationWeek.toHoursPart(), durationWeek.toMinutesPart(), durationWeek.toSecondsPart()
         );

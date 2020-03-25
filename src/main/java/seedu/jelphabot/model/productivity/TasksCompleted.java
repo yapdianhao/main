@@ -58,9 +58,9 @@ public class TasksCompleted {
         StringBuilder response = new StringBuilder("There ");
 
         if (n > 1) {
-            response.append("is ");
-        } else {
             response.append("are ");
+        } else {
+            response.append("is ");
         }
         response.append(n).append(" overdue tasks that are incomplete.");
 
@@ -77,6 +77,6 @@ public class TasksCompleted {
 
     @Override
     public String toString() {
-        return getCompletionStatus() + "\n" + getOverdueStatus();
+        return getCompletionStatus() + "\n\n" + getOverdueStatus();
     }
 }
