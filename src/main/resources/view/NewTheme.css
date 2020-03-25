@@ -3,17 +3,17 @@
     background-color: #383838; /* Used in the default.html file */
 }
 
-/*.label {*/
-/*    -fx-font-size: 11pt;*/
-/*    -fx-font-family: "Segoe UI Semibold";*/
-/*    -fx-text-fill: #555555;*/
-/*    -fx-opacity: 0.9;*/
-/*}*/
+.label {
+    -fx-font-size: 11pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: #555555;
+    -fx-opacity: 0.9;
+}
 
 .label-bright {
     -fx-font-size: 11pt;
     -fx-font-family: "Segoe UI Semibold";
-    -fx-text-fill: black;
+    -fx-text-fill: white;
     -fx-opacity: 1;
 }
 
@@ -84,7 +84,7 @@
 .split-pane {
     -fx-border-radius: 1;
     -fx-border-width: 1;
-    -fx-background-color: derive(cornsilk, 20%);
+    -fx-background-color: derive(#1d1d1d, 20%);
 }
 
 .list-view {
