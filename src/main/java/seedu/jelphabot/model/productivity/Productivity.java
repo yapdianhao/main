@@ -1,7 +1,6 @@
 package seedu.jelphabot.model.productivity;
 
 import static seedu.jelphabot.commons.util.DateUtil.getDueThisWeekPredicate;
-import static seedu.jelphabot.commons.util.DateUtil.getDueTodayPredicate;
 import static seedu.jelphabot.commons.util.DateUtil.getOverduePredicate;
 
 import javafx.collections.ObservableList;
