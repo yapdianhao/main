@@ -22,7 +22,7 @@ public class CalendarDate {
     }
 
     public boolean isToday() {
-        return date.equals(getCurrent());
+        return date.equals(DateUtil.getDateToday());
     }
 
     public int getDay() {
