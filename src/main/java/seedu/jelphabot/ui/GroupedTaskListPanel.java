@@ -31,6 +31,8 @@ public class GroupedTaskListPanel extends UiPart<Region> {
     private ListView<Task> dueThisWeekTaskListView;
     @javafx.fxml.FXML
     private ListView<Task> dueSomedayTaskListView;
+    // @javafx.fxml.FXML
+    // private ListView<ObservableList<Task>> groupings;
 
     public GroupedTaskListPanel(
         ObservableList<Task> pinnedTaskList,
@@ -42,11 +44,12 @@ public class GroupedTaskListPanel extends UiPart<Region> {
 
         for (ObservableList<Task> taskList : groupedTaskList) {
             populateListView(dueSomedayTaskListView, taskList);
-            // TODO somehow feed in title
+            // TODO somehow feed in title and list view name
         }
     }
 
     private void populateListView(ListView<Task> listView, ObservableList<Task> tasks) {
+        // TODO if listview doesnt contain any items hide that category
         listView.setItems(tasks);
         listView.setCellFactory(viewCell -> new GroupedTaskListViewCell());
         listView.prefHeightProperty().bind(Bindings.size(tasks).multiply(PREF_CELL_HEIGHT));

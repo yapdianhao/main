@@ -27,6 +27,8 @@ public class GroupedByDateTaskList implements GroupedTaskList {
     private static final FilterTaskByDatePredicate isDueSomeday = getDueSomedayPredicate();
     private static final Predicate<Task> isIncomplete = new TaskIsIncompletePredicate();
 
+    // TODO move pinnedTaskList out
+    private final ObservableList<Task> pinnedTaskList;
     private final ObservableList<Task> overdueTaskList;
     private final ObservableList<Task> dueTodayTaskList;
     private final ObservableList<Task> dueThisWeekTaskList;
@@ -37,6 +39,11 @@ public class GroupedByDateTaskList implements GroupedTaskList {
         dueTodayTaskList = taskList.filtered(isDueToday);
         dueThisWeekTaskList = taskList.filtered(isDueThisWeek);
         dueSomedayTaskList = taskList.filtered(isDueSomeday);
+        pinnedTaskList = taskList.filtered(null);
+    }
+
+    public ObservableList<Task> getPinnedTaskList() {
+        return pinnedTaskList;
     }
 
     public ObservableList<Task> getOverdueTaskList() {

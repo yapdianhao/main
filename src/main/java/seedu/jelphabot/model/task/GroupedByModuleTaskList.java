@@ -1,5 +1,7 @@
 package seedu.jelphabot.model.task;
 
+import java.util.Iterator;
+
 import javafx.collections.ObservableList;
 
 /**
@@ -11,5 +13,10 @@ import javafx.collections.ObservableList;
  */
 public class GroupedByModuleTaskList implements GroupedTaskList {
     public GroupedByModuleTaskList(ObservableList<Task> tasks) {
+    }
+
+    @Override
+    public Iterator<ObservableList<Task>> iterator() {
+        return null;
     }
 }

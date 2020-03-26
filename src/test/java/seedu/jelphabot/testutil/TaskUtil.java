@@ -16,7 +16,6 @@ import seedu.jelphabot.model.task.Task;
 /**
  * A utility class for Task.
  */
-// TODO: rewrite this class to add in new model class details
 public class TaskUtil {
 
     /**
@@ -28,6 +27,7 @@ public class TaskUtil {
 
     /**
      * Returns the part of command string for the given {@code task}'s details.
+     * Does not include status as status cannot be set from a command string.
      */
     public static String getTaskDetails(Task task) {
         StringBuilder sb = new StringBuilder();
