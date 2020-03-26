@@ -2,6 +2,8 @@ package seedu.jelphabot.ui;
 
 import java.util.logging.Logger;
 
+import static seedu.jelphabot.commons.util.DateUtil.getDueTodayPredicate;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -22,8 +24,6 @@ import seedu.jelphabot.model.calendar.CalendarDate;
 import seedu.jelphabot.model.productivity.Productivity;
 import seedu.jelphabot.model.productivity.ProductivityList;
 import seedu.jelphabot.model.task.GroupedTaskList;
-
-import static seedu.jelphabot.commons.util.DateUtil.getDueTodayPredicate;
 
 /**
  * The Main Window. Provides the basic application layout containing a menu bar
