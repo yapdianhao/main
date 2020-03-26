@@ -13,7 +13,6 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.jelphabot.commons.core.GuiSettings;
 import seedu.jelphabot.commons.core.LogsCenter;
-import seedu.jelphabot.commons.util.StringUtil;
 import seedu.jelphabot.logic.Logic;
 import seedu.jelphabot.logic.commands.CommandResult;
 import seedu.jelphabot.logic.commands.exceptions.CommandException;
@@ -43,6 +42,7 @@ public class MainWindow extends UiPart<Stage> {
     private CalendarPanel calendarPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private SummaryPanel summaryPanel;
 
     private Productivity productivity;
 
@@ -66,6 +66,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane productivityPanelPlaceholder;
+
+    @FXML
+    private StackPane summaryPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -154,6 +157,11 @@ public class MainWindow extends UiPart<Stage> {
         productivityPanel = new ProductivityPanel(productivityList.asUnmodifiableObservableList(), mainWindowTabPane);
         productivityPanelPlaceholder.getChildren().add(productivityPanel.getRoot());
 
+        // TODO: set the second argument to be the list of tasks that are completed within the day
+        summaryPanel = new SummaryPanel(logic.getFilteredByIncompleteDueTodayTaskList(),
+            logic.getFilteredByCompleteTaskList(), mainWindowTabPane);
+        summaryPanelPlaceholder.getChildren().add(summaryPanel.getRoot());
+
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
@@ -204,18 +212,6 @@ public class MainWindow extends UiPart<Stage> {
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();
-
-        // after the MainWindow is closed,
-        // initialise and show the night debrief window
-        Stage nightDebriefStage = new Stage();
-
-        try {
-            NightDebriefWindow nightDebrief = new NightDebriefWindow(nightDebriefStage, logic);
-            nightDebrief.show();
-            nightDebrief.fillWindow();
-        } catch (Throwable e) {
-            logger.severe(StringUtil.getDetails(e));
-        }
     }
 
     /**
@@ -236,6 +232,13 @@ public class MainWindow extends UiPart<Stage> {
     private void handleCalendar() {
         if (!calendarPanel.isShowing()) {
             calendarPanel.show();
+        }
+    }
+
+    @FXML
+    private void handleSummary() {
+        if (!summaryPanel.isShowing()) {
+            summaryPanel.show();
         }
     }
 
@@ -266,6 +269,8 @@ public class MainWindow extends UiPart<Stage> {
                 handleProductivity();
             } else if (commandResult.isCalendar()) {
                 handleCalendar();
+            } else if (commandResult.isSummary()) {
+                handleSummary();
             }
 
             return commandResult;
