@@ -26,8 +26,7 @@ public class TaskDueAfterDatePredicate implements FilterTaskByDatePredicate {
     }
 
     public TaskDueAfterDatePredicate(DateTime dateTime) {
-        Date date = dateTime.getDate();
-        this.date = dateToLocalDateTime(date);
+        this.date = dateTime.getDateTime();
     }
 
     /**
@@ -47,7 +46,7 @@ public class TaskDueAfterDatePredicate implements FilterTaskByDatePredicate {
 
     @Override
     public boolean test(Task task) {
-        LocalDateTime taskDate = dateToLocalDateTime(task.getDateTime().getDate());
+        LocalDateTime taskDate = task.getDateTime().getDateTime();
         return taskDate.isAfter(this.date);
     }
 

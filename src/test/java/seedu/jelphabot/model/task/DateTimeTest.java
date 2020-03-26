@@ -50,6 +50,11 @@ class DateTimeTest {
     }
 
     @Test
+    public void construct() {
+        new DateTime("May-1-2020 1111");
+    }
+
+    @Test
     public void isValidDateTime_validDateTime_returnsTrue() {
         // valid DateTime formats
         assertTrue(DateTime.isValidDateTime("May-1-2020 11 11")); // MMM-d-yyyy HH mm

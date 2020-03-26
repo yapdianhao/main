@@ -31,8 +31,7 @@ public class TaskDueBeforeDatePredicate implements FilterTaskByDatePredicate {
      * @param dateTime the internal model representation of DateTime.
      */
     public TaskDueBeforeDatePredicate(DateTime dateTime) {
-        Date date = dateTime.getDate();
-        this.date = dateToLocalDateTime(date);
+        this.date = dateTime.getDateTime();
     }
 
     /**
@@ -52,7 +51,7 @@ public class TaskDueBeforeDatePredicate implements FilterTaskByDatePredicate {
 
     @Override
     public boolean test(Task task) {
-        LocalDateTime taskDate = dateToLocalDateTime(task.getDateTime().getDate());
+        LocalDateTime taskDate = task.getDateTime().getDateTime();
         return taskDate.isBefore(this.date);
     }
 

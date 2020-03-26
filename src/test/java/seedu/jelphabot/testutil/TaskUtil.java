@@ -32,7 +32,7 @@ public class TaskUtil {
     public static String getTaskDetails(Task task) {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_DESCRIPTION + task.getDescription().fullDescription + " ");
-        sb.append(PREFIX_DATETIME + task.getDateTime().value + " ");
+        sb.append(PREFIX_DATETIME + task.getDateTime().toString() + " ");
         sb.append(PREFIX_MODULE_CODE + task.getModuleCode().value + " ");
         sb.append(PREFIX_PRIORITY + task.getPriority().toString() + " ");
         task.getTags().stream().forEach(s -> sb.append(PREFIX_TAG + s.tagName + " "));

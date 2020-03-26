@@ -1,5 +1,6 @@
 package seedu.jelphabot.model.task;
 
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -11,19 +12,18 @@ import seedu.jelphabot.model.task.predicates.TaskIsIncompletePredicate;
  */
 public class ReminderPredicate extends TaskIsCompletedPredicate {
     // private final Calendar calendar;
-    private final Date date = Calendar.getInstance().getTime();
+    private final LocalDate date = LocalDate.now();
 
     @Override
     public boolean test(Task task) {
-        Date taskDate = task.getDateTime().getDate();
+        LocalDate taskDate = task.getDateTime().getDate();
         return super.test(task) && withinAWeek(taskDate);
     }
 
     @SuppressWarnings("deprecation")
-    private boolean withinAWeek(Date date) {
-        return (date.getDay() - this.date.getDay()) <= 7
-                   && this.date.getMonth() == date.getMonth()
-                   && this.date.getYear() == date.getYear();
+    private boolean withinAWeek(LocalDate taskDate) {
+        return !taskDate.isAfter(date.plusDays(7))
+                   && !taskDate.isBefore(date);
     }
 
     @Override
