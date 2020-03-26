@@ -206,8 +206,21 @@ This feature offers two main functions:
 
 **Function 1: Display calendar view in a selected month**
 
-**Function 2: Display a list of tasks due for a selected date**
+In order to change the calendar view for another month and/or year, the user enters the `calendar MONTHYEAR` command +
+(e.g. `calendar Apr-2020`)
 
+**-insert sequence diagram-**
+
+Upon the completion of the execution of the command, the calendar view would display the month view for April 2020 instead.
+
+**Function 2: Display a list of tgit asks due for a selected date**
+
+In order to display the task list for specific input dates, the user enters the `calendar DATE` command +
+(e.g. calendar jan-1-2020)
+
+**-insert sequence diagram-**
+
+Upon the completion of the execution of the command, the tasks due on 1st January 2020 would be displayed to the user on the task list panel to the left.
 === Productivity feature
 JelphaBot has a productivity feature which provides an overarching view of user's overall productivity.
 
