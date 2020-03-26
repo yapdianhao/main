@@ -1,7 +1,6 @@
 package seedu.jelphabot.model.productivity;
 
 import java.time.Duration;
-import java.time.LocalDateTime;
 
 import javafx.collections.ObservableList;
 import seedu.jelphabot.model.task.SortedTaskList;
