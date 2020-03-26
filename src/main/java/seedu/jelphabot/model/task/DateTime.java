@@ -3,15 +3,12 @@ package seedu.jelphabot.model.task;
 import static java.util.Objects.requireNonNull;
 import static seedu.jelphabot.commons.util.AppUtil.checkArgument;
 
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -22,7 +19,7 @@ public class DateTime {
     private static final String STANDARD_FORMAT = "MMM-d-uuuu HH mm";
     public static final String MESSAGE_CONSTRAINTS =
         "Date should be of the format Month-Day-Year where Month is a three-letter abbreviation. "
-        + ". Time should be in the 24 hour format HH mm.";
+            + ". Time should be in the 24 hour format HH mm.";
     private static final String DISPLAY_FORMAT = "d-MMM-uuuu HH mm";
 
     public static final DateTimeFormatter standardFormatter =

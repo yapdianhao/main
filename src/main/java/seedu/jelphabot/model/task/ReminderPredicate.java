@@ -1,8 +1,6 @@
 package seedu.jelphabot.model.task;
 
 import java.time.LocalDate;
-import java.util.Calendar;
-import java.util.Date;
 
 import seedu.jelphabot.model.task.predicates.TaskIsCompletedPredicate;
 import seedu.jelphabot.model.task.predicates.TaskIsIncompletePredicate;
