@@ -13,19 +13,28 @@ import seedu.jelphabot.model.task.predicates.TaskIsIncompletePredicate;
  * Highlights overdue tasks if any, and mentions number of tasks completed.
  */
 public class TasksCompleted {
+    private ObservableList<Task> tasksDueToday;
     private ObservableList<Task> tasksDueThisWeek;
     private ObservableList<Task> overdueTasks;
 
-    public TasksCompleted(ObservableList<Task> tasksDueThisWeek, ObservableList<Task> overdueTasks) {
+    public TasksCompleted(ObservableList<Task> tasksDueToday, ObservableList<Task> tasksDueThisWeek,
+        ObservableList<Task> overdueTasks) {
+        this.tasksDueToday = tasksDueToday;
         this.tasksDueThisWeek = tasksDueThisWeek;
         this.overdueTasks = overdueTasks;
     }
 
     public String getCompletionStatus() {
-        int size = tasksDueThisWeek.size();
+        int size = tasksDueThisWeek.size() + tasksDueToday.size();
         int completed = 0;
 
         for (Task task : tasksDueThisWeek) {
+            if (task.getStatus() == Status.COMPLETE) {
+                completed++;
+            }
+        }
+
+        for (Task task : tasksDueToday) {
             if (task.getStatus() == Status.COMPLETE) {
                 completed++;
             }
