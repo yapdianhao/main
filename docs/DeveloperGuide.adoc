@@ -416,8 +416,6 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`*` |someone who doesnt always open the computer to run a jar file in the morning |have a convenient way to enter and receive notifications |
 
-|`*` |loner |have a bot to talk to me | will not be so lonely anymore
-
 |`*` |lives alone and cook myself |know that what stuffs I have to buy at fairprice |cook my meals
 
 |`*` |irresponsible student |scolded |learn from my mistakes and be more responsible in the future
