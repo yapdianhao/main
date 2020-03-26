@@ -32,6 +32,7 @@ public class CalendarPanel extends UiPart<Region> {
 
     public CalendarPanel(CalendarDate calendarDate, TabPane mainWindowTabPane) {
         super(FXML);
+        logger.info("Initialising calendar panel stage");
         this.mainWindowTabPane = mainWindowTabPane;
         this.calendarDate = calendarDate;
         monthYear.setText(calendarDate.getMonthName() + ", " + calendarDate.getYear());
@@ -60,6 +61,7 @@ public class CalendarPanel extends UiPart<Region> {
                     calendarDayCard.setDiffMonth();
                 }
                 if (currDate.isToday()) {
+                    logger.info("today date");
                     calendarDayCard.highlightToday();
                 }
                 calendarGrid.add(calendarDayCard.getRoot(), col, row);
