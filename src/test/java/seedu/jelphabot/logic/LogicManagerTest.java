@@ -71,7 +71,8 @@ public class LogicManagerTest {
     public void execute_storageThrowsIoException_throwsCommandException() {
         // Setup LogicManager with JsonJelphaBotIoExceptionThrowingStub
         JsonJelphaBotStorage addressBookStorage = new JsonJelphaBotIoExceptionThrowingStub(
-            temporaryFolder.resolve("ioExceptionJelphaBot.json"));
+            temporaryFolder.resolve("ioExceptionJelphaBot.json"),
+            temporaryFolder.resolve("ioExceptionReminder.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(
             temporaryFolder.resolve("ioExceptionUserPrefs.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
