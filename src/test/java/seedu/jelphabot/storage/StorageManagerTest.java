@@ -24,7 +24,8 @@ public class StorageManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonJelphaBotStorage jelphaBotStorage = new JsonJelphaBotStorage(getTempFilePath("ab"));
+        JsonJelphaBotStorage jelphaBotStorage = new JsonJelphaBotStorage(
+            getTempFilePath("ab"), getTempFilePath("reminder"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
         storageManager = new StorageManager(jelphaBotStorage, userPrefsStorage);
     }
