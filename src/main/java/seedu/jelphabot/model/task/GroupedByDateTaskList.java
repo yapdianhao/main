@@ -14,7 +14,7 @@ import seedu.jelphabot.model.task.predicates.FilterTaskByDatePredicate;
 import seedu.jelphabot.model.task.predicates.TaskIsIncompletePredicate;
 
 /**
- * A container for ObservableList<Task> that splits the TaskList into groups.
+ * A container for ObservableList&lt;Task&gt; that splits the TaskList into groups.
  * GroupedByDateTaskList groups Tasks by how close the due date is to the current date.
  * Separation is done over @code{ObservableList} through use of filters.
  * <p>
