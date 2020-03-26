@@ -42,6 +42,7 @@ public class MainWindow extends UiPart<Stage> {
     private ProductivityPanel productivityPanel;
     private CalendarPanel calendarPanel;
     private ResultDisplay resultDisplay;
+    private SummaryPanel summaryPanel;
     private HelpWindow helpWindow;
 
     private Productivity productivity;
@@ -72,6 +73,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private StackPane summaryPanelPlaceholder;
 
     public MainWindow(Stage primaryStage, Logic logic) {
         super(FXML, primaryStage);
@@ -144,6 +148,10 @@ public class MainWindow extends UiPart<Stage> {
 
         calendarPanel = new CalendarPanel(CalendarDate.getCurrent(), mainWindowTabPane);
         calendarPanelPlaceholder.getChildren().add(calendarPanel.getRoot());
+
+        summaryPanel = new SummaryPanel(logic.getFilteredByIncompleteDueTodayTaskList(),
+            logic.getFilteredByCompleteTaskList(), mainWindowTabPane);
+        summaryPanelPlaceholder.getChildren().add(summaryPanel.getRoot());
 
         ProductivityList productivityList = logic.getProductivityList();
         productivityList.addProductivity(new Productivity(logic.getFilteredTaskList()));
@@ -223,6 +231,16 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Switches view to summary panel.
+     */
+    @FXML
+    private void handleSummary() {
+        if (!summaryPanel.isShowing()) {
+            summaryPanel.show();
+        }
+    }
+
     public GroupedTaskListPanel getTaskListPanel() {
         return taskListPanel;
     }
@@ -250,6 +268,8 @@ public class MainWindow extends UiPart<Stage> {
                 handleProductivity();
             } else if (commandResult.isCalendar()) {
                 handleCalendar();
+            } else if (commandResult.isSummary()) {
+                handleSummary();
             }
 
             return commandResult;
