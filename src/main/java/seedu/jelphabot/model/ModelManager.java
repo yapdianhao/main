@@ -47,8 +47,7 @@ public class ModelManager implements Model {
         this.readOnlyJelphaBot = new JelphaBot(readOnlyJelphaBot);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredTasks = new FilteredList<>(this.readOnlyJelphaBot.getTaskList());
-        filteredTasks = new FilteredList<>(this.addressBook.getTaskList());
-        filteredCalendarTasks = new FilteredList<>(this.addressBook.getTaskList());
+        filteredCalendarTasks = new FilteredList<>(this.readOnlyJelphaBot.getTaskList());
         sortedTasks = new SortedTaskList(filteredTasks);
         productivityList = new ProductivityList();
     }
