@@ -23,7 +23,9 @@ public class CalendarCommand extends Command {
 
     private final TaskDueWithinDayPredicate predicate;
 
-    public CalendarCommand() { predicate = null; }
+    public CalendarCommand() {
+        predicate = null;
+    }
 
     public CalendarCommand(TaskDueWithinDayPredicate predicate) {
         this.predicate = predicate;

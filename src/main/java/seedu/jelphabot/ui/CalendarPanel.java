@@ -68,6 +68,9 @@ public class CalendarPanel extends UiPart<Region> {
         }
     }
 
+    /**
+     * Switches to display the calendar panel tab.
+     */
     public void show() {
         logger.fine("Showing calendar panel of application.");
         mainWindowTabPane.getSelectionModel().select(1);
