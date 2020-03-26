@@ -446,5 +446,3 @@ e.g. `start 1` or `stop 1`
 e.g. `calendar Jan-1-2020`
 * *Change Calendar View* : `changeCalendar MONTHYEAR` +
 e.g. `changeCalendar Apr-2020`
-
-== Can't delete this because it somehow breaks something
