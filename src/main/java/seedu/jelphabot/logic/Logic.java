@@ -75,6 +75,8 @@ public interface Logic {
      */
     Path getJelphaBotFilePath();
 
+    Path getRemindersFilePath();
+
     /**
      * Returns the user prefs' GUI settings.
      */

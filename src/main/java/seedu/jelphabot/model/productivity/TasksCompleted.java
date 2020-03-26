@@ -16,17 +16,19 @@ public class TasksCompleted {
     private ObservableList<Task> tasksDueToday;
     private ObservableList<Task> tasksDueThisWeek;
     private ObservableList<Task> overdueTasks;
+    private double percentage;
 
     public TasksCompleted(ObservableList<Task> tasksDueToday, ObservableList<Task> tasksDueThisWeek,
         ObservableList<Task> overdueTasks) {
         this.tasksDueToday = tasksDueToday;
         this.tasksDueThisWeek = tasksDueThisWeek;
         this.overdueTasks = overdueTasks;
+        this.percentage = 0;
     }
 
     public String getCompletionStatus() {
-        int size = tasksDueThisWeek.size() + tasksDueToday.size();
-        int completed = 0;
+        double size = tasksDueThisWeek.size() + tasksDueToday.size();
+        double completed = 0;
 
         for (Task task : tasksDueThisWeek) {
             if (task.getStatus() == Status.COMPLETE) {
@@ -44,6 +46,7 @@ public class TasksCompleted {
 
         if (size > 0) {
             double percentage = completed / size;
+            this.percentage = percentage;
 
             if (percentage > 0.7) {
                 message = "Great work today!";
@@ -54,7 +57,8 @@ public class TasksCompleted {
             }
         }
 
-        return String.format("You completed %d out of %d tasks that are due this week!\n%s", completed, size, message);
+        return String.format("You completed %.0f out of %.0f tasks that are due this week!\n%s", completed,
+            size, message);
     }
 
     /**
@@ -65,11 +69,10 @@ public class TasksCompleted {
         StringBuilder response = new StringBuilder("There ");
 
         if (n > 1) {
-            response.append("are ");
+            response.append("are ").append(n).append(" overdue tasks that are incomplete.");
         } else {
-            response.append("is ");
+            response.append("is ").append(n).append(" overdue task that is incomplete.");
         }
-        response.append(n).append(" overdue tasks that are incomplete.");
 
         if (n > 3) {
             response.append("\n").append(MESSAGE_CRITICISM);
@@ -80,6 +83,10 @@ public class TasksCompleted {
         }
 
         return response.toString();
+    }
+
+    public double getPercentage() {
+        return this.percentage;
     }
 
     @Override
