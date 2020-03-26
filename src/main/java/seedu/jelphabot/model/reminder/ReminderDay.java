@@ -1,6 +1,5 @@
 package seedu.jelphabot.model.reminder;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.jelphabot.commons.util.AppUtil.checkArgument;
 
 /**
@@ -13,7 +12,6 @@ public class ReminderDay {
     private final int reminderDay;
 
     public ReminderDay(int reminderDay) {
-        requireNonNull(reminderDay);
         checkArgument(isValidReminderDay(reminderDay), MESSAGE_CONSTRAINTS);
         this.reminderDay = reminderDay;
     }
@@ -31,9 +29,14 @@ public class ReminderDay {
         return 0 <= dayToTest && dayToTest <= 7;
     }
 
+    /**
+     * Returns a boolean to determine whether two reminders share the same day.
+     * @param other
+     * @return boolean
+     */
     public boolean equals(Object other) {
         return other == this
-                   || (other instanceof ReminderDay && reminderDay ==
-                                                           ((ReminderDay) other).reminderDay);
+                   || (other instanceof ReminderDay && reminderDay
+                                                           == ((ReminderDay) other).reminderDay);
     }
 }

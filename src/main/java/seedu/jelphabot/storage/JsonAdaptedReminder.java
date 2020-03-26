@@ -3,12 +3,15 @@ package seedu.jelphabot.storage;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import seedu.jelphabot.commons.exceptions.IllegalValueException;
 import seedu.jelphabot.commons.core.index.Index;
+import seedu.jelphabot.commons.exceptions.IllegalValueException;
 import seedu.jelphabot.model.reminder.Reminder;
 import seedu.jelphabot.model.reminder.ReminderDay;
 import seedu.jelphabot.model.reminder.ReminderHour;
 
+/**
+ * Jackson-friendly version of {@link Reminder}.
+ */
 class JsonAdaptedReminder {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Reminder %s's field is missing!";
@@ -17,6 +20,9 @@ class JsonAdaptedReminder {
     private final String reminderDay;
     private final String reminderHour;
 
+    /**
+     * Constructs a {@code JsonAdaptedReminder} with the given reminder details.
+     */
     @JsonCreator
     public JsonAdaptedReminder (
         @JsonProperty("index") int index,
@@ -28,12 +34,22 @@ class JsonAdaptedReminder {
         this.reminderHour = reminderHour + "";
     }
 
+    /**
+     * Converts a given {@code Reminder} into this class for Jackson use.
+     */
     public JsonAdaptedReminder(Reminder reminder) {
         this.index = reminder.getIndex().getZeroBased() + "";
         this.reminderDay = reminder.getDaysToRemind().getReminderDay() + "";
         this.reminderHour = reminder.getHoursToRemind().getReminderHour() + "";
     }
 
+    /**
+     * Converts this Jackson-friendly adapted reminder object into the model's
+     * {@code Reminder} object.
+     *
+     * @throws IllegalValueException if there were any data constraints violated in
+     *                               the adapted reminder.
+     */
     public Reminder toModelType() throws IllegalValueException {
         if (index == null) {
             throw new IllegalValueException(

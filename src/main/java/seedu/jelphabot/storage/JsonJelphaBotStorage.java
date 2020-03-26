@@ -44,6 +44,7 @@ public class JsonJelphaBotStorage implements JelphaBotStorage {
         return readJelphaBot(filePath);
     }
 
+    @Override
     public Optional<ReadOnlyJelphaBot> readJelphaBot(boolean isReminder) throws DataConversionException {
         requireNonNull(reminderPath);
 
@@ -88,6 +89,7 @@ public class JsonJelphaBotStorage implements JelphaBotStorage {
         saveJelphaBot(jelphaBot, filePath);
     }
 
+    @Override
     public void saveJelphaBot(ReadOnlyJelphaBot jelphaBot, boolean isReminder) throws IOException {
         requireNonNull(jelphaBot);
         requireNonNull(reminderPath);

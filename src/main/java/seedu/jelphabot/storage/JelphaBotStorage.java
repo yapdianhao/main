@@ -7,8 +7,6 @@ import java.util.Optional;
 import seedu.jelphabot.commons.exceptions.DataConversionException;
 import seedu.jelphabot.model.ReadOnlyJelphaBot;
 
-import javax.swing.text.html.Option;
-
 /**
  * Represents a storage for {@link seedu.jelphabot.model.JelphaBot}.
  */
@@ -27,9 +25,14 @@ public interface JelphaBotStorage {
      * @throws DataConversionException if the data in storage is not in the expected format.
      * @throws IOException if there was any problem when reading from the storage.
      */
-
     Optional<ReadOnlyJelphaBot> readJelphaBot() throws DataConversionException, IOException;
 
+    /**
+     * Returns JelphaBot reminders as a {@link ReadOnlyJelphaBot}.
+     *   Returns {@code Optional.empty()} if storage file is not found.
+     * @throws DataConversionException if the data in storage is not in the expected format.
+     * @throws IOException if there was any problem when reading from the storage.
+     */
     Optional<ReadOnlyJelphaBot> readJelphaBot(boolean isReminder) throws DataConversionException, IOException;
     /**
      * @see #getJelphaBotFilePath()
@@ -38,11 +41,16 @@ public interface JelphaBotStorage {
 
     /**
      * Saves the given {@link ReadOnlyJelphaBot} to the storage.
-     * @param addressBook cannot be null.
+     * @param jelphaBot cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
     void saveJelphaBot(ReadOnlyJelphaBot jelphaBot) throws IOException;
 
+    /**
+     * Saves the given {@link ReadOnlyJelphaBot} which contains only reminders to the storage.
+     * @param jelphaBot cannot be null.
+     * @throws IOException if there was any problem writing to the file.
+     */
     void saveJelphaBot(ReadOnlyJelphaBot jelphaBot, boolean isReminder) throws IOException;
 
     /**
