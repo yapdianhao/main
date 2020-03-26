@@ -33,7 +33,7 @@ public class CalendarDayCard extends UiPart<Region> {
     public void highlightToday() {
         calendarDay.setTextFill(Paint.valueOf("#ffffff"));
         calendarDay.setStyle("-fx-font-weight:bold");
-        circleDay.setFill(Paint.valueOf("BLUE"));
+        circleDay.setFill(Paint.valueOf("#4169E1"));
     }
 
     /**
