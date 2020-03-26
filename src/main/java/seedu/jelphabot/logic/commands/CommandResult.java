@@ -22,14 +22,18 @@ public class CommandResult {
     /** The application should switch to the productivity tab. */
     private final boolean productivity;
 
+    /** The application should switch to the productivity tab. */
+    private final boolean calendar;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean productivity) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean productivity, boolean calendar) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
         this.productivity = productivity;
+        this.calendar = calendar;
     }
 
     /**
@@ -37,7 +41,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, false);
+        this(feedbackToUser, false, false, false, false);
     }
 
     public String getFeedbackToUser() {
@@ -56,6 +60,10 @@ public class CommandResult {
         return productivity;
     }
 
+    public boolean isCalendar() {
+        return calendar;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -71,12 +79,13 @@ public class CommandResult {
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
                 && exit == otherCommandResult.exit
-                && productivity == otherCommandResult.productivity;
+                && productivity == otherCommandResult.productivity
+                && calendar == otherCommandResult.calendar;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit, productivity);
+        return Objects.hash(feedbackToUser, showHelp, exit, productivity, calendar);
     }
 
 }
