@@ -59,5 +59,4 @@ public class CalendarCommandTest {
         // different commands -> returns false
         assertFalse(calendarFirstCommand.equals(calendarSecondCommand));
     }
-
 }
