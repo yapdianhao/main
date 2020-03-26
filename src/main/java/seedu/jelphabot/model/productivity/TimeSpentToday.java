@@ -3,7 +3,6 @@ package seedu.jelphabot.model.productivity;
 import java.time.Duration;
 
 import javafx.collections.ObservableList;
-import seedu.jelphabot.model.task.SortedTaskList;
 import seedu.jelphabot.model.task.Task;
 
 /**
@@ -13,15 +12,20 @@ public class TimeSpentToday {
     private ObservableList<Task> tasksDueToday;
     private ObservableList<Task> tasksDueThisWeek;
 
-    public TimeSpentToday(SortedTaskList sortedTaskList) {
-        this.tasksDueToday = sortedTaskList.getDueTodayTaskList();
-        this.tasksDueThisWeek = sortedTaskList.getDueThisWeekTaskList();
+    public TimeSpentToday(ObservableList<Task> tasksDueToday, ObservableList<Task> tasksDueThisWeek) {
+        this.tasksDueToday = tasksDueToday;
+        this.tasksDueThisWeek = tasksDueThisWeek;
     }
 
     private Duration getTimeSpent(ObservableList<Task> taskList) {
         Duration result = Duration.ZERO;
         for (Task task : taskList) {
-            if (task.getDuration() != null) {
+            // TODO:
+            // if (task.isBeingTimed()) {
+            //     System.out.println("is being timed");
+            //     result = result.plus(Duration.between(task.getStartTime(), LocalDateTime.now()));
+            // }
+            if (task.getDuration() != Duration.ZERO) {
                 result = result.plus(task.getDuration());
             }
         }

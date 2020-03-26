@@ -1,7 +1,6 @@
 package seedu.jelphabot.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.jelphabot.commons.core.Messages.MESSAGE_DELETE_TIMING_TASK_FAILURE;
 
 import java.util.List;
 
@@ -24,6 +23,7 @@ public class DeleteCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n" + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted Task: %1$s";
+    public static final String MESSAGE_DELETE_RUNNING_TASK = "Deleted Task with running timer: %1$s ";
 
 
     private final Index targetIndex;
@@ -43,15 +43,14 @@ public class DeleteCommand extends Command {
         }
 
         Task taskToDelete = lastShownList.get(targetIndex.getZeroBased());
+        model.deleteTask(taskToDelete);
+        model.setProductivity(new Productivity(model.getFilteredTaskList()));
 
         if (taskToDelete.isBeingTimed()) {
-            throw new CommandException(String.format(MESSAGE_DELETE_TIMING_TASK_FAILURE, taskToDelete.getModuleCode(),
-                taskToDelete.getDescription(), taskToDelete.getDateTime()));
+            return new CommandResult(String.format(MESSAGE_DELETE_RUNNING_TASK, taskToDelete));
+        } else {
+            return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));
         }
-
-        model.deleteTask(taskToDelete);
-        model.setProductivity(new Productivity(model.getSortedTaskList(), model.getFilteredTaskList()));
-        return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));
     }
 
     @Override

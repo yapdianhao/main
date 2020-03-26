@@ -5,12 +5,10 @@ import static seedu.jelphabot.commons.core.Messages.MESSAGE_CRITICISM;
 import static seedu.jelphabot.commons.core.Messages.MESSAGE_ENCOURAGEMENT;
 
 import javafx.collections.ObservableList;
-import seedu.jelphabot.model.task.SortedTaskList;
 import seedu.jelphabot.model.task.Status;
 import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.model.task.predicates.TaskIsIncompletePredicate;
 
-// TODO: update sortedtasklist when task list changes. for now, changes not reflected in respective panes.
 /**
  * Highlights overdue tasks if any, and mentions number of tasks completed.
  */
@@ -18,9 +16,9 @@ public class TasksCompleted {
     private ObservableList<Task> tasksDueThisWeek;
     private ObservableList<Task> overdueTasks;
 
-    public TasksCompleted(SortedTaskList sortedTaskList) {
-        this.tasksDueThisWeek = sortedTaskList.getDueThisWeekTaskList();
-        this.overdueTasks = sortedTaskList.getOverdueTaskList();
+    public TasksCompleted(ObservableList<Task> tasksDueThisWeek, ObservableList<Task> overdueTasks) {
+        this.tasksDueThisWeek = tasksDueThisWeek;
+        this.overdueTasks = overdueTasks;
     }
 
     public String getCompletionStatus() {
