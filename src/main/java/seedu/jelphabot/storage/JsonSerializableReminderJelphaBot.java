@@ -11,24 +11,24 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.jelphabot.commons.exceptions.IllegalValueException;
 import seedu.jelphabot.model.JelphaBot;
 import seedu.jelphabot.model.ReadOnlyJelphaBot;
-import seedu.jelphabot.model.task.Task;
+import seedu.jelphabot.model.reminder.Reminder;
 
 /**
  * An Immutable JelphaBot that is serializable to JSON format.
  */
-@JsonRootName(value = "jelphabot")
-class JsonSerializableJelphaBot {
+@JsonRootName(value = "reminders")
+class JsonSerializableReminderJelphaBot {
 
-    public static final String MESSAGE_DUPLICATE_TASK = "Tasks list contains duplicate task(s).";
+    public static final String MESSAGE_DUPLICATE_REMINDERS = "Reminders list contains duplicate reminder(s).";
 
-    private final List<JsonAdaptedTask> tasks = new ArrayList<>();
+    private final List<JsonAdaptedReminder> reminders = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableJelphaBot} with the given tasks.
+     * Constructs a {@code JsonSerializableJelphaBot} with the given reminders.
      */
     @JsonCreator
-    public JsonSerializableJelphaBot(@JsonProperty("tasks") List<JsonAdaptedTask> tasks) {
-        this.tasks.addAll(tasks);
+    public JsonSerializableReminderJelphaBot(@JsonProperty("reminders") List<JsonAdaptedReminder> reminders) {
+        this.reminders.addAll(reminders);
     }
 
     /**
@@ -36,8 +36,8 @@ class JsonSerializableJelphaBot {
      *
      * @param source future changes to this will not affect the created {@code JsonSerializableJelphaBot}.
      */
-    public JsonSerializableJelphaBot(ReadOnlyJelphaBot source) {
-        tasks.addAll(source.getTaskList().stream().map(JsonAdaptedTask::new).collect(Collectors.toList()));
+    public JsonSerializableReminderJelphaBot(ReadOnlyJelphaBot source) {
+        reminders.addAll(source.getReminderList().stream().map(JsonAdaptedReminder::new).collect(Collectors.toList()));
     }
 
     /**
@@ -47,14 +47,14 @@ class JsonSerializableJelphaBot {
      */
     public JelphaBot toModelType() throws IllegalValueException {
         JelphaBot jelphaBot = new JelphaBot();
-        for (JsonAdaptedTask jsonAdaptedTask : tasks) {
-            Task task = jsonAdaptedTask.toModelType();
-            if (jelphaBot.hasTask(task)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_TASK);
+        // jelphabot's reminders.
+        for (JsonAdaptedReminder jsonAdaptedReminder : reminders) {
+            Reminder reminder = jsonAdaptedReminder.toModelType();
+            if (jelphaBot.hasReminder(reminder)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_REMINDERS);
             }
-            jelphaBot.addTask(task);
+            jelphaBot.addReminder(reminder);
         }
-
         return jelphaBot;
     }
 
