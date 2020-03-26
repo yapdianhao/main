@@ -20,6 +20,7 @@ public class TimeSpentToday {
     private Duration getTimeSpent(ObservableList<Task> taskList) {
         Duration result = Duration.ZERO;
         for (Task task : taskList) {
+            System.out.println("duration: " + task.getDuration());
             // TODO:
             // if (task.isBeingTimed()) {
             //     System.out.println("is being timed");
@@ -35,7 +36,7 @@ public class TimeSpentToday {
     @Override
     public String toString() {
         Duration durationToday = getTimeSpent(tasksDueToday);
-        Duration durationWeek = getTimeSpent(tasksDueThisWeek);
+        Duration durationWeek = durationToday.plus(getTimeSpent(tasksDueThisWeek));
 
         return String.format("Due today: %d hours, %d minutes and %d seconds.\n"
                                  + "\nDue this week: %d hours, %d minutes and %d seconds.",
