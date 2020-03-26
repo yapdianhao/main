@@ -14,8 +14,6 @@ import seedu.jelphabot.commons.core.GuiSettings;
 import seedu.jelphabot.commons.core.LogsCenter;
 import seedu.jelphabot.model.productivity.Productivity;
 import seedu.jelphabot.model.productivity.ProductivityList;
-import seedu.jelphabot.model.task.GroupedByDateTaskList;
-import seedu.jelphabot.model.task.GroupedTaskList;
 import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.model.task.UniqueTaskList;
 import seedu.jelphabot.model.task.predicates.TaskIsCompletedPredicate;
@@ -30,7 +28,6 @@ public class ModelManager implements Model {
     private final JelphaBot addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Task> filteredTasks;
-    private final GroupedTaskList groupedTasks;
     private final ProductivityList productivityList;
 
     /**
@@ -45,7 +42,6 @@ public class ModelManager implements Model {
         this.addressBook = new JelphaBot(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredTasks = new FilteredList<>(this.addressBook.getTaskList());
-        groupedTasks = new GroupedByDateTaskList(this.addressBook.getTaskList());
         productivityList = new ProductivityList();
     }
 
