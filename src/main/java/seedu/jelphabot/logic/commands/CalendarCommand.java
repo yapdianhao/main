@@ -14,11 +14,18 @@ public class CalendarCommand extends Command {
 
     public static final String COMMAND_WORD = "calendar";
 
+    //update this
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all task that is under the due date specified.\n"
                                                    + "Parameters: DATE \n"
                                                    + "Example: " + COMMAND_WORD + " Jan-1-2020";
 
+    public static final String MESSAGE_SWITCH_PANEL_ACKNOWLEDGEMENT = "Switched to calendar panel.";
+
     private final TaskDueWithinDayPredicate predicate;
+
+    public CalendarCommand() {
+        predicate = null;
+    }
 
     public CalendarCommand(TaskDueWithinDayPredicate predicate) {
         this.predicate = predicate;
@@ -26,10 +33,14 @@ public class CalendarCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
-        requireNonNull(model);
-        model.updateFilteredTaskList(predicate);
-        return new CommandResult(
-            String.format(Messages.MESSAGE_TASKS_LISTED_OVERVIEW, model.getFilteredTaskList().size()));
+        if (predicate == null) {
+            return new CommandResult(MESSAGE_SWITCH_PANEL_ACKNOWLEDGEMENT, false, false, false, true);
+        } else {
+            requireNonNull(model);
+            model.updateFilteredTaskList(predicate);
+            return new CommandResult(
+                String.format(Messages.MESSAGE_TASKS_LISTED_OVERVIEW, model.getFilteredTaskList().size()));
+        }
     }
 
     @Override
