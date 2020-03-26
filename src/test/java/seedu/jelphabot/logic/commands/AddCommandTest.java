@@ -23,6 +23,7 @@ import seedu.jelphabot.model.ReadOnlyUserPrefs;
 import seedu.jelphabot.model.productivity.Productivity;
 import seedu.jelphabot.model.productivity.ProductivityList;
 import seedu.jelphabot.model.task.GroupedByDateTaskList;
+import seedu.jelphabot.model.reminder.Reminder;
 import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.testutil.TaskBuilder;
 
@@ -112,12 +113,21 @@ public class AddCommandTest {
         }
 
         @Override
+        public Path getRemindersFilePath() {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
         public void setJelphaBotFilePath(Path addressBookFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void addTask(Task task) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addReminder(Reminder reminder) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -133,6 +143,11 @@ public class AddCommandTest {
 
         @Override
         public boolean hasTask(Task task) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasReminder(Reminder reminder) {
             throw new AssertionError("This method should not be called.");
         }
 

@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import seedu.jelphabot.commons.core.GuiSettings;
 import seedu.jelphabot.model.productivity.Productivity;
 import seedu.jelphabot.model.productivity.ProductivityList;
+import seedu.jelphabot.model.reminder.Reminder;
 import seedu.jelphabot.model.task.Task;
 
 /**
@@ -52,6 +53,8 @@ public interface Model {
      */
     void setJelphaBotFilePath(Path addressBookFilePath);
 
+    Path getRemindersFilePath();
+
     /** Returns the JelphaBot */
     ReadOnlyJelphaBot getJelphaBot();
 
@@ -65,6 +68,7 @@ public interface Model {
      */
     boolean hasTask(Task task);
 
+    boolean hasReminder(Reminder reminder);
     /**
      * Returns true if a task being timed exists in the address book.
      */
@@ -81,6 +85,8 @@ public interface Model {
      * {@code task} must not already exist in the address book.
      */
     void addTask(Task task);
+
+    void addReminder(Reminder reminder);
 
     /**
      * Replaces the given task {@code target} with {@code editedTask}.

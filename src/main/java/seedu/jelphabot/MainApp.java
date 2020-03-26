@@ -56,8 +56,9 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        JelphaBotStorage addressBookStorage = new JsonJelphaBotStorage(userPrefs.getJelphaBotFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        JelphaBotStorage jelphaBotStorage = new JsonJelphaBotStorage(
+            userPrefs.getJelphaBotFilePath(), userPrefs.getRemindersFilePath());
+        storage = new StorageManager(jelphaBotStorage, userPrefsStorage);
 
         initLogging(config);
 
@@ -75,21 +76,28 @@ public class MainApp extends Application {
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         Optional<ReadOnlyJelphaBot> jelphaBotOptional;
+        Optional<ReadOnlyJelphaBot> jelphaBotReminderOptional;
         ReadOnlyJelphaBot initialData;
+        ReadOnlyJelphaBot initialReminderData;
         try {
             jelphaBotOptional = storage.readJelphaBot();
+            jelphaBotReminderOptional = storage.readJelphaBot(true);
             if (!jelphaBotOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample JelphaBot");
             }
             initialData = jelphaBotOptional.orElseGet(SampleDataUtil::getSampleJelphaBot);
+            initialReminderData = jelphaBotReminderOptional.orElseGet(SampleDataUtil::getSampleJelphaBot);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty JelphaBot");
             initialData = new JelphaBot();
+            initialReminderData = new JelphaBot();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty JelphaBot");
             initialData = new JelphaBot();
+            initialReminderData = new JelphaBot();
         }
 
+        initialData.setReminders(initialReminderData.getReminderList());
         return new ModelManager(initialData, userPrefs);
     }
 
@@ -174,6 +182,7 @@ public class MainApp extends Application {
     @Override
     public void stop() {
         logger.info("============================ [ Stopping JelphaBot ] =============================");
+
         try {
             storage.saveUserPrefs(model.getUserPrefs());
         } catch (IOException e) {
