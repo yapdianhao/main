@@ -2,6 +2,7 @@ package seedu.jelphabot.logic;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -65,10 +66,10 @@ public class LogicManager implements Logic {
         return model.getFilteredTaskList();
     }
 
-    // @Override
-    // public ObservableList<Task> getFilteredCalendarTaskList() {
-    //     return model.getFilteredCalendarTaskList();
-    // }
+    @Override
+    public ObservableList<Task> getFilteredCalendarTaskList() {
+        return model.getFilteredCalendarTaskList();
+    }
 
     @Override
     public ObservableList<Task> getFilteredByCompleteTaskList() {
@@ -119,4 +120,15 @@ public class LogicManager implements Logic {
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
     }
+
+    /**
+     * Updates the filter of the filtered calendar task list to filter by the given {@code predicate}.
+     *
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    @Override
+    public void updateFilteredCalendarTaskList(Predicate<Task> predicate) {
+        model.updateFilteredCalendarTaskList(predicate);
+    }
+
 }

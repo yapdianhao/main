@@ -29,6 +29,7 @@ public class ModelManager implements Model {
     private final JelphaBot readOnlyJelphaBot;
     private final UserPrefs userPrefs;
     private final FilteredList<Task> filteredTasks;
+    private final FilteredList<Task> filteredCalendarTasks;
     private final ProductivityList productivityList;
 
     /**
@@ -43,6 +44,7 @@ public class ModelManager implements Model {
         this.readOnlyJelphaBot = new JelphaBot(readOnlyJelphaBot);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredTasks = new FilteredList<>(this.readOnlyJelphaBot.getTaskList());
+        filteredCalendarTasks = new FilteredList<>(this.readOnlyJelphaBot.getTaskList());
         productivityList = new ProductivityList();
     }
 
@@ -178,13 +180,10 @@ public class ModelManager implements Model {
         return filteredTasks;
     }
 
-    //TODO should instantiate to show tasks for today first
-    // @Override
-    // public ObservableList<Task> getFilteredCalendarTaskList() {
-    //     FilterTaskByDatePredicate taskDueTodayPredicate = DateUtil.getDueTodayPredicate();
-    //     FilteredList<Task> filteredCalendarList = new FilteredList<>(filteredTasks, taskDueTodayPredicate);
-    //     return filteredCalendarList;
-    // }
+    @Override
+    public ObservableList<Task> getFilteredCalendarTaskList() {
+        return filteredCalendarTasks;
+    }
 
     public ObservableList<Task> getFilteredByIncompleteTaskList() {
         TaskIsIncompletePredicate taskIncompletePredicate = new TaskIsIncompletePredicate();
@@ -217,6 +216,17 @@ public class ModelManager implements Model {
     public void updateFilteredTaskList(Predicate<Task> predicate) {
         requireNonNull(predicate);
         filteredTasks.setPredicate(predicate);
+    }
+
+    /**
+     * Updates the filter of the filtered calendar task list to filter by the given {@code predicate}.
+     *
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    @Override
+    public void updateFilteredCalendarTaskList(Predicate<Task> predicate) {
+        requireNonNull(predicate);
+        filteredCalendarTasks.setPredicate(predicate);
     }
 
     @Override

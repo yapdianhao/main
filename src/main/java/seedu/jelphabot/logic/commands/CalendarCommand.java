@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.jelphabot.commons.core.Messages;
 import seedu.jelphabot.model.Model;
+
 import seedu.jelphabot.model.task.predicates.TaskDueWithinDayPredicate;
 
 /**
@@ -37,9 +38,9 @@ public class CalendarCommand extends Command {
             return new CommandResult(MESSAGE_SWITCH_PANEL_ACKNOWLEDGEMENT, false, false, false, true);
         } else {
             requireNonNull(model);
-            model.updateFilteredTaskList(predicate);
+            model.updateFilteredCalendarTaskList(predicate);
             return new CommandResult(
-                String.format(Messages.MESSAGE_TASKS_LISTED_OVERVIEW, model.getFilteredTaskList().size()));
+                String.format(Messages.MESSAGE_TASKS_LISTED_OVERVIEW, model.getFilteredCalendarTaskList().size()));
         }
     }
 
