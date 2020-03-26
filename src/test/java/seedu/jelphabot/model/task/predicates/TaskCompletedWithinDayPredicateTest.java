@@ -10,20 +10,20 @@ import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.testutil.TaskBuilder;
 
 public class TaskCompletedWithinDayPredicateTest {
-    private final TaskCompletedWithinDayPredicate TEST_PRED = new TaskCompletedWithinDayPredicate(
+    private final TaskCompletedWithinDayPredicate testPred = new TaskCompletedWithinDayPredicate(
         new DateTime("Apr-30-2020 23 59"));
 
     @Test
     void test_taskDoneSameDayDifferentTime_returnsTrue() {
         Task task = new TaskBuilder().withDateTime("Apr-30-2020 00 01").build();
         task.setDoneTime(new DateTime("Apr-30-2020 12 00"));
-        assertTrue(TEST_PRED.test(task));
+        assertTrue(testPred.test(task));
     }
 
     @Test
     void test_taskDoneDifferentDay_returnsFalse() {
         Task task = new TaskBuilder().withDateTime("Apr-30-2020 00 01").build();
         task.setDoneTime(new DateTime("May-10-2020 00 01"));
-        assertFalse(TEST_PRED.test(task));
+        assertFalse(testPred.test(task));
     }
 }
