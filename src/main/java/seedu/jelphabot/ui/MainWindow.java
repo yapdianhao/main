@@ -13,6 +13,8 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.jelphabot.commons.core.GuiSettings;
 import seedu.jelphabot.commons.core.LogsCenter;
+import seedu.jelphabot.commons.util.DateUtil;
+import seedu.jelphabot.commons.util.StringUtil;
 import seedu.jelphabot.logic.Logic;
 import seedu.jelphabot.logic.commands.CommandResult;
 import seedu.jelphabot.logic.commands.exceptions.CommandException;
@@ -141,11 +143,10 @@ public class MainWindow extends UiPart<Stage> {
         );
         taskListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
 
-        //TODO should be calendar Task List (Doesn't work for now :()
-        calendarTaskListPanel = new TaskListPanel(logic.getFilteredTaskList());
+        calendarTaskListPanel = new TaskListPanel(logic.getFilteredCalendarTaskList());
+        logic.updateFilteredCalendarTaskList(DateUtil.getDueTodayPredicate());
         calendarTaskListPanelPlaceholder.getChildren().add(calendarTaskListPanel.getRoot());
 
-        //TODO fill calendarPanel
         calendarPanel = new CalendarPanel(CalendarDate.getCurrent(), mainWindowTabPane);
         calendarPanelPlaceholder.getChildren().add(calendarPanel.getRoot());
 
@@ -277,6 +278,5 @@ public class MainWindow extends UiPart<Stage> {
             throw e;
         }
     }
-
 
 }

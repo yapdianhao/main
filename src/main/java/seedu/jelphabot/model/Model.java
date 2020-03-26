@@ -103,8 +103,8 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered task list */
     ObservableList<Task> getFilteredTaskList();
 
-    // /** Returns an unmodifiable view of the filtered task list in the Calendar*/
-    // ObservableList<Task> getFilteredCalendarTaskList();
+    /** Returns an unmodifiable view of the filtered task list in the Calendar*/
+    ObservableList<Task> getFilteredCalendarTaskList();
 
     /**
      * Returns an unmodifiable view of the user's productivity.
@@ -117,4 +117,11 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredTaskList(Predicate<Task> predicate);
+
+    /**
+     * Updates the filter of the filtered calendar task list to filter by the given {@code predicate}.
+     *
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredCalendarTaskList(Predicate<Task> predicate);
 }
