@@ -2,7 +2,6 @@ package seedu.jelphabot.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.jelphabot.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.jelphabot.commons.util.DateUtil.getDueTodayPredicate;
 
 import java.nio.file.Path;
 import java.util.function.Predicate;
@@ -16,9 +15,6 @@ import seedu.jelphabot.model.productivity.Productivity;
 import seedu.jelphabot.model.productivity.ProductivityList;
 import seedu.jelphabot.model.task.SortedTaskList;
 import seedu.jelphabot.model.task.Task;
-import seedu.jelphabot.model.task.UniqueTaskList;
-import seedu.jelphabot.model.task.predicates.TaskIsCompletedPredicate;
-import seedu.jelphabot.model.task.predicates.TaskIsIncompletePredicate;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -166,33 +162,6 @@ public class ModelManager implements Model {
     //     FilteredList<Task> filteredCalendarList = new FilteredList<>(filteredTasks, taskDueTodayPredicate);
     //     return filteredCalendarList;
     // }
-
-    public ObservableList<Task> getFilteredByIncompleteTaskList() {
-        TaskIsIncompletePredicate taskIncompletePredicate = new TaskIsIncompletePredicate();
-        UniqueTaskList uniqueTaskList = new UniqueTaskList();
-        FilteredList<Task> filteredIncompleteList = new FilteredList<>(filteredTasks, taskIncompletePredicate);
-        uniqueTaskList.setTasks(filteredIncompleteList);
-        return uniqueTaskList.asUnmodifiableObservableList();
-    }
-
-    public ObservableList<Task> getFilteredByIncompleteDueTodayTaskList() {
-        TaskIsIncompletePredicate taskIncompletePredicate = new TaskIsIncompletePredicate();
-        UniqueTaskList uniqueTaskList = new UniqueTaskList();
-        FilteredList<Task> filteredIncompleteList = new FilteredList<>(filteredTasks, taskIncompletePredicate);
-        FilteredList<Task> filteredIncompleteDueTodayList = new FilteredList<>(filteredIncompleteList,
-            getDueTodayPredicate()
-        );
-        uniqueTaskList.setTasks(filteredIncompleteDueTodayList);
-        return uniqueTaskList.asUnmodifiableObservableList();
-    }
-
-    public ObservableList<Task> getFilteredByCompleteTaskList() {
-        TaskIsCompletedPredicate predicate = new TaskIsCompletedPredicate();
-        UniqueTaskList uniqueTaskList = new UniqueTaskList();
-        FilteredList<Task> filteredList = new FilteredList<>(filteredTasks, predicate);
-        uniqueTaskList.setTasks(filteredList);
-        return uniqueTaskList.asUnmodifiableObservableList();
-    }
 
     @Override
     public void updateFilteredTaskList(Predicate<Task> predicate) {

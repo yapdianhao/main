@@ -1,10 +1,13 @@
 package seedu.jelphabot.logic;
 
+import static seedu.jelphabot.commons.util.DateUtil.getDueTodayPredicate;
+
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import seedu.jelphabot.commons.core.GuiSettings;
 import seedu.jelphabot.commons.core.LogsCenter;
 import seedu.jelphabot.logic.commands.Command;
@@ -17,6 +20,9 @@ import seedu.jelphabot.model.ReadOnlyJelphaBot;
 import seedu.jelphabot.model.productivity.ProductivityList;
 import seedu.jelphabot.model.task.SortedTaskList;
 import seedu.jelphabot.model.task.Task;
+import seedu.jelphabot.model.task.UniqueTaskList;
+import seedu.jelphabot.model.task.predicates.TaskIsCompletedPredicate;
+import seedu.jelphabot.model.task.predicates.TaskIsIncompletePredicate;
 import seedu.jelphabot.storage.Storage;
 
 /**
@@ -29,11 +35,13 @@ public class LogicManager implements Logic {
     private final Model model;
     private final Storage storage;
     private final JelphaBotParser jelphaBotParser;
+    private final SortedTaskList sortedTaskList;
 
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
         jelphaBotParser = new JelphaBotParser();
+        this.sortedTaskList = model.getSortedTaskList();
     }
 
     @Override
@@ -68,14 +76,31 @@ public class LogicManager implements Logic {
     //     return model.getFilteredCalendarTaskList();
     // }
 
+    // makeshift implementation to ensure that build still runs as per normal
+    // TODO: implement this method in a way that does not require the creation of another UniqueTaskList
     @Override
     public ObservableList<Task> getFilteredByCompleteTaskList() {
-        return model.getFilteredByCompleteTaskList();
+        ObservableList<Task> filteredTasks = model.getFilteredTaskList();
+        TaskIsCompletedPredicate predicate = new TaskIsCompletedPredicate();
+        UniqueTaskList uniqueTaskList = new UniqueTaskList();
+        FilteredList<Task> filteredList = new FilteredList<>(filteredTasks, predicate);
+        uniqueTaskList.setTasks(filteredList);
+        return uniqueTaskList.asUnmodifiableObservableList();
     }
 
+    // makeshift implementation to ensure that build still runs as per normal
+    // TODO: implement this method in a way that does not require the creation of another UniqueTaskList
     @Override
     public ObservableList<Task> getFilteredByIncompleteTaskList() {
-        return model.getFilteredByIncompleteTaskList();
+        ObservableList<Task> filteredTasks = model.getFilteredTaskList();
+        TaskIsIncompletePredicate taskIncompletePredicate = new TaskIsIncompletePredicate();
+        UniqueTaskList uniqueTaskList = new UniqueTaskList();
+        FilteredList<Task> filteredIncompleteList = new FilteredList<>(filteredTasks, taskIncompletePredicate);
+        FilteredList<Task> filteredIncompleteDueTodayList = new FilteredList<>(filteredIncompleteList,
+            getDueTodayPredicate()
+        );
+        uniqueTaskList.setTasks(filteredIncompleteDueTodayList);
+        return uniqueTaskList.asUnmodifiableObservableList();
     }
 
     @Override
@@ -83,9 +108,12 @@ public class LogicManager implements Logic {
         return model.getSortedTaskList();
     }
 
-    @Override
+    // public ObservableList<Task> getFilteredByCompletedTodayTaskList() {
+    //
+    // }
+
     public ObservableList<Task> getFilteredByIncompleteDueTodayTaskList() {
-        return model.getFilteredByIncompleteDueTodayTaskList();
+        return sortedTaskList.getDueTodayTaskList();
     }
 
     @Override

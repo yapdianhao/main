@@ -101,18 +101,6 @@ public interface Model {
     // /** Returns an unmodifiable view of the filtered task list in the Calendar*/
     // ObservableList<Task> getFilteredCalendarTaskList();
 
-    /** Returns an unmodifiable view of the completed tasks in the task list */
-    ObservableList<Task> getFilteredByCompleteTaskList();
-
-    /** Returns an unmodifiable view of the incomplete tasks in the task list */
-    ObservableList<Task> getFilteredByIncompleteTaskList();
-
-    /**
-     * Returns an unmodifiable view of the incomplete tasks that are due today in
-     * the task list
-     */
-    ObservableList<Task> getFilteredByIncompleteDueTodayTaskList();
-
     /**
      * Returns an unmodifiable view of the user's productivity.
      */
