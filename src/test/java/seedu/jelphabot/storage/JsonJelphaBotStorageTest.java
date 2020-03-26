@@ -30,7 +30,8 @@ public class JsonJelphaBotStorageTest {
     }
 
     private java.util.Optional<ReadOnlyJelphaBot> readJelphaBot(String filePath) throws Exception {
-        return new JsonJelphaBotStorage(Paths.get(filePath)).readJelphaBot(addToTestDataPathIfNotNull(filePath));
+        return new JsonJelphaBotStorage(Paths.get(filePath))
+                   .readJelphaBot(addToTestDataPathIfNotNull(filePath));
     }
 
     private Path addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {

@@ -42,7 +42,8 @@ public class LogicManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonJelphaBotStorage addressBookStorage = new JsonJelphaBotStorage(temporaryFolder.resolve("addressBook.json"));
+        JsonJelphaBotStorage addressBookStorage = new JsonJelphaBotStorage(
+            temporaryFolder.resolve("jelphaBot.json"), temporaryFolder.resolve("reminder.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
@@ -174,8 +175,8 @@ public class LogicManagerTest {
      * A stub class to throw an {@code IOException} when the save method is called.
      */
     private static class JsonJelphaBotIoExceptionThrowingStub extends JsonJelphaBotStorage {
-        private JsonJelphaBotIoExceptionThrowingStub(Path filePath) {
-            super(filePath);
+        private JsonJelphaBotIoExceptionThrowingStub(Path filePath, Path reminderPath) {
+            super(filePath, reminderPath);
         }
 
         @Override

@@ -1,9 +1,11 @@
 package seedu.jelphabot.model;
 
 import java.util.List;
+
 import javafx.collections.ObservableList;
-import seedu.jelphabot.model.task.Task;
+
 import seedu.jelphabot.model.reminder.Reminder;
+import seedu.jelphabot.model.task.Task;
 
 /**
  * Unmodifiable view of an address book

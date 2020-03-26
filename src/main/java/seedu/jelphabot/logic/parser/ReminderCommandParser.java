@@ -8,15 +8,21 @@ import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_REMIND_HOUR;
 import seedu.jelphabot.commons.core.index.Index;
 import seedu.jelphabot.logic.commands.ReminderCommand;
 import seedu.jelphabot.logic.parser.exceptions.ParseException;
-import seedu.jelphabot.model.reminder.ReminderHour;
-import seedu.jelphabot.model.reminder.ReminderDay;
 import seedu.jelphabot.model.reminder.Reminder;
+import seedu.jelphabot.model.reminder.ReminderDay;
+import seedu.jelphabot.model.reminder.ReminderHour;
 
 /**
  * Parses input arguments and returns a new ReminderCommand Object.
  */
 public class ReminderCommandParser implements Parser<ReminderCommand> {
 
+    /**
+     * Parses the given {@code String} of arguments in the context of the ReminderCommand
+     * and returns a ReminderCommand object for execution.
+     *
+     * @throws ParseException if the user input does not conform the expected format
+     */
     public ReminderCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =

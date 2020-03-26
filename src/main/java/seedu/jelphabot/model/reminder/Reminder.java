@@ -1,10 +1,12 @@
 package seedu.jelphabot.model.reminder;
 
 import static java.util.Objects.requireNonNull;
+
 import seedu.jelphabot.commons.core.index.Index;
 
 /**
- * Represents a reminder in Jelphabot. Reminder has an index of task to be reminded of,
+ * Represents a reminder in Jelphabot. Reminder has an index of task to be reminded of, and days and hours before
+ * the task dues.
  */
 public class Reminder {
 
@@ -42,6 +44,11 @@ public class Reminder {
                            && index.equals(((Reminder) other).index)); // state check
     }
 
+    /**
+     * Returns true is both reminder refers to the same task.
+     * @param otherReminder
+     * @return boolean
+     */
     public boolean isSameReminder(Reminder otherReminder) {
         if (otherReminder == this) {
             return true;

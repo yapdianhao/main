@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.jelphabot.model.reminder.Reminder;
 import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.model.task.exceptions.DuplicateTaskException;
 import seedu.jelphabot.testutil.TaskBuilder;
@@ -87,6 +88,7 @@ public class JelphaBotTest {
      */
     private static class JelphaBotStub implements ReadOnlyJelphaBot {
         private final ObservableList<Task> tasks = FXCollections.observableArrayList();
+        private final ObservableList<Reminder> reminders = FXCollections.observableArrayList();
 
         JelphaBotStub(Collection<Task> tasks) {
             this.tasks.setAll(tasks);
@@ -96,6 +98,7 @@ public class JelphaBotTest {
         public ObservableList<Task> getTaskList() {
             return tasks;
         }
+
     }
 
 }

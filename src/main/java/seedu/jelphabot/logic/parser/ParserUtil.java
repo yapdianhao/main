@@ -8,15 +8,14 @@ import java.util.Set;
 
 import seedu.jelphabot.commons.core.index.Index;
 import seedu.jelphabot.commons.util.StringUtil;
-import seedu.jelphabot.logic.commands.ReminderCommand;
 import seedu.jelphabot.logic.parser.exceptions.ParseException;
+import seedu.jelphabot.model.reminder.ReminderHour;
+import seedu.jelphabot.model.reminder.ReminderDay;
 import seedu.jelphabot.model.tag.Tag;
 import seedu.jelphabot.model.task.DateTime;
 import seedu.jelphabot.model.task.Description;
 import seedu.jelphabot.model.task.ModuleCode;
 import seedu.jelphabot.model.task.Priority;
-import seedu.jelphabot.model.reminder.ReminderHour;
-import seedu.jelphabot.model.reminder.ReminderDay;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -113,6 +112,12 @@ public class ParserUtil {
         return new Tag(trimmedTag);
     }
 
+    /**
+     * Parses a {@code String reminderDay} into a {@code ReminderDay}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code reminderDay} is invalid.
+     */
     public static ReminderDay parseReminderDay(String reminderDay) throws ParseException {
         requireNonNull(reminderDay);
         String trimmedReminderDay = reminderDay.trim();
@@ -123,6 +128,12 @@ public class ParserUtil {
         return new ReminderDay(convertedReminderDay);
     }
 
+    /**
+     * Parses a {@code String reminderHour} into a {@code ReminderHour}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code reminderHour} is invalid.
+     */
     public static ReminderHour parseReminderHour(String reminderHour) throws ParseException {
         requireNonNull(reminderHour);
         String trimmedReminderHour = reminderHour.trim();

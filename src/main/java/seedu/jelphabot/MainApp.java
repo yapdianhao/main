@@ -56,7 +56,8 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        JelphaBotStorage jelphaBotStorage = new JsonJelphaBotStorage(userPrefs.getJelphaBotFilePath(), userPrefs.getRemindersFilePath());
+        JelphaBotStorage jelphaBotStorage = new JsonJelphaBotStorage(
+            userPrefs.getJelphaBotFilePath(), userPrefs.getRemindersFilePath());
         storage = new StorageManager(jelphaBotStorage, userPrefsStorage);
 
         initLogging(config);

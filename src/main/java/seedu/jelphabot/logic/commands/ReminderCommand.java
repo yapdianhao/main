@@ -2,13 +2,14 @@ package seedu.jelphabot.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.jelphabot.commons.core.Messages;
-import seedu.jelphabot.logic.commands.exceptions.CommandException;
 import seedu.jelphabot.model.Model;
 import seedu.jelphabot.model.reminder.Reminder;
-import seedu.jelphabot.model.task.ReminderPredicate;
-import seedu.jelphabot.commons.core.index.Index;
 import seedu.jelphabot.model.task.Task;
+
+import seedu.jelphabot.commons.core.Messages;
+import seedu.jelphabot.commons.core.index.Index;
+
+import seedu.jelphabot.logic.commands.exceptions.CommandException;
 
 import java.util.List;
 
@@ -17,15 +18,16 @@ import java.util.List;
  */
 public class ReminderCommand extends Command {
 
-    private final Index index;
-
-    private final Reminder reminder;
-
     public static final String MESSAGE_DUPLICATE_REMINDER = "This task already has a reminder!";
     public static final String MESSAGE_TASK_ALREADY_MARKED_COMPLETE = "The specified task has already "
                                                                           + "been marked as complete!";
     public static final String MESSAGE_SUCCESS = "Added reminder for task %d!";
-
+    public static final String COMMAND_WORD = "reminder";
+    public static final String MESSAGE_URGENT_TASKS = "These are the tasks that due soon!";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks a reminder on the given task "
+                                                   + " on the specified date.";
+    private final Reminder reminder;
+    private final Index index;
 
     public ReminderCommand(Index index, Reminder reminder) {
         requireNonNull(index);
@@ -33,12 +35,6 @@ public class ReminderCommand extends Command {
         this.index = index;
         this.reminder = reminder;
     }
-
-    public static final String COMMAND_WORD = "reminder";
-    public static final String MESSAGE_URGENT_TASKS = "These are the tasks that due soon!";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks a reminder on the given task " +
-                                                   " on the specified date.";
-    private final ReminderPredicate reminderPredicate = new ReminderPredicate();
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
@@ -63,6 +59,6 @@ public class ReminderCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                    || (other instanceof ReminderCommand // instanceof handles nulls
-                           && reminderPredicate.equals(((ReminderCommand) other).reminderPredicate)); // state check
+                           && index.equals(((ReminderCommand) other).index)); // state check
     }
 }
