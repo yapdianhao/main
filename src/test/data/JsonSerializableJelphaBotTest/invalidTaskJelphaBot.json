@@ -4,6 +4,7 @@
     "dateTime" : "Not a DateTime",
     "priority" : "LOW",
     "tagged" : [ "friends" ],
+    "duration" : "PT25.9462948S",
     "description" : "Assignment 1",
     "moduleCode" : "CS3230"
   } ]

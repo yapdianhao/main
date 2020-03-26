@@ -7,7 +7,7 @@ import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.time.LocalDateTime;
+import java.time.Duration;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -59,8 +59,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Task task = new Task(description, Status.INCOMPLETE, dateTime, moduleCode, priority, tagList,
-            LocalDateTime.MAX, LocalDateTime.MAX);
+        Task task = new Task(description, Status.INCOMPLETE, dateTime, moduleCode, priority, tagList, Duration.ZERO);
 
         return new AddCommand(task);
     }

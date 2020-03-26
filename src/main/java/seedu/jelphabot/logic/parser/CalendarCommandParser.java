@@ -1,7 +1,5 @@
 package seedu.jelphabot.logic.parser;
 
-import static seedu.jelphabot.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -33,18 +31,20 @@ public class CalendarCommandParser implements Parser<CalendarCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public CalendarCommand parse(String args) throws ParseException {
-        String trimmedArgs = args.trim();
-        if (trimmedArgs.isEmpty()) {
-            throw new ParseException(
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, CalendarCommand.MESSAGE_USAGE));
+        String input = args.trim();
+        if (input.isEmpty()) {
+            // throw new ParseException(
+            //     String.format(MESSAGE_INVALID_COMMAND_FORMAT, CalendarCommand.MESSAGE_USAGE));
+            return new CalendarCommand();
         }
+        //case for switching month view and switching date for task list
         Date date = null;
         try {
-            if (!isValidDate(trimmedArgs)) {
+            if (!isValidDate(input)) {
                 throw new ParseException(Messages.MESSAGE_INVALID_DATE_FORMAT);
             }
-            DateFormat currentFormat = getDateFormatOfString(trimmedArgs);
-            date = currentFormat.parse(trimmedArgs);
+            DateFormat currentFormat = getDateFormatOfString(input);
+            date = currentFormat.parse(input);
         } catch (java.text.ParseException e) {
             e.printStackTrace();
         }

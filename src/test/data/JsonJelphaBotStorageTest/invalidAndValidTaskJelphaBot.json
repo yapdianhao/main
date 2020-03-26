@@ -4,6 +4,7 @@
     "dateTime" : "Jan-1-2020 22 00",
     "priority" : "LOW",
     "tagged" : [ "friends" ],
+    "duration" : "PT25.9462948S",
     "description" : "Valid Task",
     "moduleCode" : "CS3230"
   }, {
@@ -11,6 +12,7 @@
     "dateTime" : "Jan-1-2020 22 00",
     "priority" : "LOW",
     "tagged" : [ "friends" ],
+    "duration" : "PT25.9462948S",
     "description" : "Task with Invalid Module Code",
     "moduleCode" : "3230T"
   } ]

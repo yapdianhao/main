@@ -146,11 +146,11 @@ public class MainWindow extends UiPart<Stage> {
         calendarTaskListPanelPlaceholder.getChildren().add(calendarTaskListPanel.getRoot());
 
         //TODO fill calendarPanel
-        calendarPanel = new CalendarPanel(CalendarDate.getCurrent());
+        calendarPanel = new CalendarPanel(CalendarDate.getCurrent(), mainWindowTabPane);
         calendarPanelPlaceholder.getChildren().add(calendarPanel.getRoot());
 
         ProductivityList productivityList = logic.getProductivityList();
-        productivityList.addProductivity(new Productivity(sortedTasks, logic.getFilteredTaskList()));
+        productivityList.addProductivity(new Productivity(logic.getFilteredTaskList()));
         productivityPanel = new ProductivityPanel(productivityList.asUnmodifiableObservableList(), mainWindowTabPane);
         productivityPanelPlaceholder.getChildren().add(productivityPanel.getRoot());
 
@@ -229,6 +229,16 @@ public class MainWindow extends UiPart<Stage> {
         // TODO: add case when alr on panel.
     }
 
+    /**
+     * Switches view to calendar panel.
+     */
+    @FXML
+    private void handleCalendar() {
+        if (!calendarPanel.isShowing()) {
+            calendarPanel.show();
+        }
+    }
+
     public SortedTaskListPanel getTaskListPanel() {
         return taskListPanel;
     }
@@ -254,6 +264,8 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             } else if (commandResult.isProductivity()) {
                 handleProductivity();
+            } else if (commandResult.isCalendar()) {
+                handleCalendar();
             }
 
             return commandResult;
