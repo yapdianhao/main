@@ -32,7 +32,6 @@ public class ModelManager implements Model {
     private final JelphaBot readOnlyJelphaBot;
     private final UserPrefs userPrefs;
     private final FilteredList<Task> filteredTasks;
-    //private final UniqueReminderList reminderList;
     private final SortedTaskList sortedTasks;
     private final ProductivityList productivityList;
 
@@ -48,8 +47,6 @@ public class ModelManager implements Model {
         this.readOnlyJelphaBot = new JelphaBot(readOnlyJelphaBot);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredTasks = new FilteredList<>(this.readOnlyJelphaBot.getTaskList());
-        //reminderList = new UniqueReminderList();
-        //reminderList.setReminders(this.readOnlyJelphaBot.getReminderList());
         sortedTasks = new SortedTaskList(filteredTasks);
         productivityList = new ProductivityList();
     }
@@ -235,11 +232,6 @@ public class ModelManager implements Model {
     public void updateFilteredTaskList(Predicate<Task> predicate) {
         requireNonNull(predicate);
         filteredTasks.setPredicate(predicate);
-    }
-
-    @Override
-    public SortedTaskList getSortedTaskList() {
-        return sortedTasks;
     }
 
     @Override
