@@ -213,7 +213,7 @@ In order to change the calendar view for another month and/or year, the user ent
 
 Upon the completion of the execution of the command, the calendar view would display the month view for April 2020 instead.
 
-**Function 2: Display a list of tasks due for a selected date**
+**Function 2: Display a list of tgit asks due for a selected date**
 
 In order to display the task list for specific input dates, the user enters the `calendar DATE` command +
 (e.g. calendar jan-1-2020)
