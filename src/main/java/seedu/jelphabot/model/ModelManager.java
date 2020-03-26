@@ -13,6 +13,7 @@ import seedu.jelphabot.commons.core.GuiSettings;
 import seedu.jelphabot.commons.core.LogsCenter;
 import seedu.jelphabot.model.productivity.Productivity;
 import seedu.jelphabot.model.productivity.ProductivityList;
+import seedu.jelphabot.model.reminder.Reminder;
 import seedu.jelphabot.model.task.SortedTaskList;
 import seedu.jelphabot.model.task.Task;
 
@@ -22,24 +23,24 @@ import seedu.jelphabot.model.task.Task;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final JelphaBot addressBook;
+    private final JelphaBot readOnlyJelphaBot;
     private final UserPrefs userPrefs;
     private final FilteredList<Task> filteredTasks;
     private final SortedTaskList sortedTasks;
     private final ProductivityList productivityList;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given readOnlyJelphaBot and userPrefs.
      */
-    public ModelManager(ReadOnlyJelphaBot addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyJelphaBot readOnlyJelphaBot, ReadOnlyUserPrefs userPrefs) {
         super();
-        requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(readOnlyJelphaBot, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book: " + readOnlyJelphaBot + " and user prefs " + userPrefs);
 
-        this.addressBook = new JelphaBot(addressBook);
+        this.readOnlyJelphaBot = new JelphaBot(readOnlyJelphaBot);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredTasks = new FilteredList<>(this.addressBook.getTaskList());
+        filteredTasks = new FilteredList<>(this.readOnlyJelphaBot.getTaskList());
         sortedTasks = new SortedTaskList(filteredTasks);
         productivityList = new ProductivityList();
     }
@@ -84,9 +85,19 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setJelphaBotFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setJelphaBotFilePath(addressBookFilePath);
+    public Path getRemindersFilePath() {
+        return userPrefs.getRemindersFilePath();
+    }
+
+    @Override
+    public void setJelphaBotFilePath(Path readOnlyJelphaBotFilePath) {
+        requireNonNull(readOnlyJelphaBotFilePath);
+        userPrefs.setJelphaBotFilePath(readOnlyJelphaBotFilePath);
+    }
+
+    public void setJelphaBotReminderFilePath(Path reminderFilePath) {
+        requireAllNonNull(reminderFilePath);
+        userPrefs.setJelphaBotReminderFilePath(reminderFilePath);
     }
 
     // =========== JelphaBot
@@ -94,40 +105,51 @@ public class ModelManager implements Model {
 
     @Override
     public ReadOnlyJelphaBot getJelphaBot() {
-        return addressBook;
+        return readOnlyJelphaBot;
     }
 
     @Override
-    public void setJelphaBot(ReadOnlyJelphaBot addressBook) {
-        this.addressBook.resetData(addressBook);
+    public void setJelphaBot(ReadOnlyJelphaBot readOnlyJelphaBot) {
+        this.readOnlyJelphaBot.resetData(readOnlyJelphaBot);
     }
 
     @Override
     public boolean hasTask(Task task) {
         requireNonNull(task);
-        return addressBook.hasTask(task);
+        return readOnlyJelphaBot.hasTask(task);
+    }
+
+    @Override
+    public boolean hasReminder(Reminder reminder) {
+        requireNonNull(reminder);
+        return readOnlyJelphaBot.hasReminder(reminder);
     }
 
     @Override
     public boolean hasTimingTask() {
-        return addressBook.hasTaskBeingTimed();
+        return readOnlyJelphaBot.hasTaskBeingTimed();
     }
 
     @Override
     public void deleteTask(Task target) {
-        addressBook.removeTask(target);
+        readOnlyJelphaBot.removeTask(target);
     }
 
     @Override
     public void addTask(Task task) {
-        addressBook.addTask(task);
+        readOnlyJelphaBot.addTask(task);
         updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+    }
+
+    @Override
+    public void addReminder(Reminder reminder) {
+        readOnlyJelphaBot.addReminder(reminder);
     }
 
     @Override
     public void setTask(Task target, Task editedTask) {
         requireAllNonNull(target, editedTask);
-        addressBook.setTask(target, editedTask);
+        readOnlyJelphaBot.setTask(target, editedTask);
     }
 
     // =========== Productivity List
@@ -188,7 +210,7 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return addressBook.equals(other.addressBook) && userPrefs.equals(other.userPrefs)
+        return readOnlyJelphaBot.equals(other.readOnlyJelphaBot) && userPrefs.equals(other.userPrefs)
                    && filteredTasks.equals(other.filteredTasks);
     }
 

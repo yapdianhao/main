@@ -54,6 +54,7 @@ public class LogicManager implements Logic {
 
         try {
             storage.saveJelphaBot(model.getJelphaBot());
+            storage.saveJelphaBot(model.getJelphaBot(), true);
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
@@ -124,6 +125,11 @@ public class LogicManager implements Logic {
     @Override
     public Path getJelphaBotFilePath() {
         return model.getJelphaBotFilePath();
+    }
+
+    @Override
+    public Path getRemindersFilePath() {
+        return model.getRemindersFilePath();
     }
 
     @Override

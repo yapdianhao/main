@@ -43,7 +43,12 @@ public class UiManager implements Ui {
             mainWindow.show(); //This should be called before creating other UI parts
             mainWindow.fillInnerParts();
 
-        } catch (Throwable e) {
+            // show morningCallWindow
+            //morningCallWindow = new MorningCallWindow(morningCallStage, logic);
+            //morningCallWindow.show();
+            //morningCallWindow.fillWindow();
+
+        } catch (Exception e) {
             logger.severe(StringUtil.getDetails(e));
             showFatalErrorDialogAndShutdown("Fatal error during initializing", e);
         }

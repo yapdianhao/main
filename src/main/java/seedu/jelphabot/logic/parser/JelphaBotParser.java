@@ -81,7 +81,7 @@ public class JelphaBotParser {
             return new HelpCommand();
 
         case ReminderCommand.COMMAND_WORD:
-            return new ReminderCommand();
+            return new ReminderCommandParser().parse(arguments);
 
         case ShowCompletedCommand.COMMAND_WORD:
             return new ShowCompletedCommand();
