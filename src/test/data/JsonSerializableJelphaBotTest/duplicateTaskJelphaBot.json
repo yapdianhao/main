@@ -4,6 +4,7 @@
     "dateTime" : "Feb-1-2020 11 00",
     "priority" : "HIGH",
     "tagged" : [ "school" ],
+    "duration" : "PT25.9462948S",
     "description" : "Online Midterm Assessment",
     "moduleCode" : "MA1101R"
   }, {
@@ -11,6 +12,7 @@
     "dateTime" : "Feb-1-2020 11 00",
     "priority" : "HIGH",
     "tagged" : [ "school" ],
+    "duration" : "PT25.9462948S",
     "description" : "Online Midterm Assessment",
     "moduleCode" : "MA1101R"
   } ]

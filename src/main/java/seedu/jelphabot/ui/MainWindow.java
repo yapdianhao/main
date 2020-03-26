@@ -150,7 +150,7 @@ public class MainWindow extends UiPart<Stage> {
         calendarPanelPlaceholder.getChildren().add(calendarPanel.getRoot());
 
         ProductivityList productivityList = logic.getProductivityList();
-        productivityList.addProductivity(new Productivity(sortedTasks, logic.getFilteredTaskList()));
+        productivityList.addProductivity(new Productivity(logic.getFilteredTaskList()));
         productivityPanel = new ProductivityPanel(productivityList.asUnmodifiableObservableList(), mainWindowTabPane);
         productivityPanelPlaceholder.getChildren().add(productivityPanel.getRoot());
 
