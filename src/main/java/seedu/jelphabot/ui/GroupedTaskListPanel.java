@@ -16,7 +16,7 @@ import seedu.jelphabot.model.task.Task;
  * Tasks are further sorted into pinned, dueToday, dueThisWeek, dueSomeday
  */
 public class GroupedTaskListPanel extends UiPart<Region> {
-    private static final String FXML = "GroupedTaskListPanel.fxml";
+    private static final String FXML = "SortedTaskListPanel.fxml";
     private static final int PREF_CELL_HEIGHT = 105;
 
     private final Logger logger = LogsCenter.getLogger(TaskListPanel.class);
@@ -42,12 +42,20 @@ public class GroupedTaskListPanel extends UiPart<Region> {
 
         populateListView(pinnedTaskListView, pinnedTaskList);
 
+        ListView[] lists =
+            new ListView[]{overdueTaskListView, dueTodayTaskListView, dueThisWeekTaskListView, dueSomedayTaskListView};
+        int i = 0;
         for (ObservableList<Task> taskList : groupedTaskList) {
-            populateListView(dueSomedayTaskListView, taskList);
+            populateListView((ListView<Task>) lists[i], taskList);
             // TODO somehow feed in title and list view name
+            i++;
         }
     }
 
+    /**
+     * @param listView
+     * @param tasks
+     */
     private void populateListView(ListView<Task> listView, ObservableList<Task> tasks) {
         // TODO if listview doesnt contain any items hide that category
         listView.setItems(tasks);

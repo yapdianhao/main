@@ -6,7 +6,7 @@ import javafx.collections.ObservableList;
 
 /**
  * Interface representing a TaskList which is split into sub-groups by predefined groups.
- * Each 'GroupedTaskList' is a container for `ObservableList<Task>` objects,
+ * Each 'GroupedTaskList' is a container for `ObservableList&lt;Task> objects,
  * each containing a unique filter over the full task list.
  * Classes which extend GroupedTaskList are expected to provide a getter method for each grouping defined.
  */
@@ -15,10 +15,11 @@ public interface GroupedTaskList extends Iterable<ObservableList<Task>> {
         return group.construct(tasks);
     }
 
+    /**
+     * GroupedTaskList.Groupings define a set of fixed enum mappings from the commandArgument to the corresponding
+     * constructor.
+     */
     enum Grouping {
-        /**
-         * The const enum mappings provide a mapping from the commandArgument to the corresponding constructor
-         */
         DATE("DATE_GROUPING", GroupedByDateTaskList::new),
         MODULE("MODULE_GROUPING", GroupedByModuleTaskList::new);
 
