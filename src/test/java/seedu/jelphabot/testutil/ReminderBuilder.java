@@ -4,14 +4,25 @@ import seedu.jelphabot.commons.core.index.Index;
 import seedu.jelphabot.model.reminder.Reminder;
 import seedu.jelphabot.model.reminder.ReminderDay;
 import seedu.jelphabot.model.reminder.ReminderHour;
+
 /**
  * A utility class to help build Reminder objects.
  */
 public class ReminderBuilder {
 
+    public static final int DEFAULT_INDEX = 1;
+    public static final int DEFAULT_REMINDERDAY = 1;
+    public static final int DEFAULT_REMINDERHOUR = 1;
+
     private Index index;
     private ReminderDay reminderDay;
     private ReminderHour reminderHour;
+
+    public ReminderBuilder() {
+        index = Index.fromOneBased(DEFAULT_INDEX);
+        reminderDay = new ReminderDay(DEFAULT_REMINDERDAY);
+        reminderHour = new ReminderHour(DEFAULT_REMINDERHOUR);
+    }
 
     /**
      * Initializes the ReminderBuilder with the data of {@code reminderToCopy}.
@@ -46,6 +57,7 @@ public class ReminderBuilder {
         this.reminderHour = reminderHour;
         return this;
     }
+
     public Reminder build() {
         return new Reminder(index, reminderDay, reminderHour);
     }
