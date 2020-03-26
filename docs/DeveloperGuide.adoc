@@ -221,6 +221,21 @@ In order to display the task list for specific input dates, the user enters the 
 **-insert sequence diagram-**
 
 Upon the completion of the execution of the command, the tasks due on 1st January 2020 would be displayed to the user on the task list panel to the left.
+=== Productivity feature
+JelphaBot has a productivity feature which provides an overarching view of user's overall productivity.
+
+This feature offers two main functions:
+
+** Time how long a task takes to be completed.
+** Displays overall productivity for the day and week.
+
+====  Implementation
+
+**Function 1: Starts timer for a specified task**
+
+**Function 2: Stops timer for a specified task**
+
+**Function 3: Displays overall productivity for day and week**
 
 ==== Design Considerations
 
