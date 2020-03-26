@@ -22,7 +22,6 @@ import seedu.jelphabot.model.ReadOnlyJelphaBot;
 import seedu.jelphabot.model.ReadOnlyUserPrefs;
 import seedu.jelphabot.model.productivity.Productivity;
 import seedu.jelphabot.model.productivity.ProductivityList;
-import seedu.jelphabot.model.task.GroupedByDateTaskList;
 import seedu.jelphabot.model.reminder.Reminder;
 import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.testutil.TaskBuilder;
@@ -201,10 +200,6 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-        @Override
-        public GroupedByDateTaskList getSortedTaskList() {
-            throw new AssertionError("This method should not be called.");
-        }
     }
 
     /**
@@ -253,11 +248,6 @@ public class AddCommandTest {
         @Override
         public ObservableList<Task> getFilteredTaskList() {
             return new FilteredList<Task>(getJelphaBot().getTaskList());
-        }
-
-        @Override
-        public SortedTaskList getSortedTaskList() {
-            return new SortedTaskList(getFilteredTaskList());
         }
 
         @Override
