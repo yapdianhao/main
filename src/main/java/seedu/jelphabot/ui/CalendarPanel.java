@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.TabPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import seedu.jelphabot.commons.core.LogsCenter;
@@ -21,13 +22,17 @@ public class CalendarPanel extends UiPart<Region> {
     private ArrayList<CalendarDayCard> monthDayCards;
 
     @FXML
+    private TabPane mainWindowTabPane;
+
+    @FXML
     private GridPane calendarGrid;
 
     @FXML
     private Label monthYear;
 
-    public CalendarPanel(CalendarDate calendarDate) {
+    public CalendarPanel(CalendarDate calendarDate, TabPane mainWindowTabPane) {
         super(FXML);
+        this.mainWindowTabPane = mainWindowTabPane;
         this.calendarDate = calendarDate;
         monthYear.setText(calendarDate.getMonthName() + ", " + calendarDate.getYear());
 
@@ -62,5 +67,21 @@ public class CalendarPanel extends UiPart<Region> {
             }
         }
     }
+
+    /**
+     * Switches to display the calendar panel tab.
+     */
+    public void show() {
+        logger.fine("Showing calendar panel of application.");
+        mainWindowTabPane.getSelectionModel().select(1);
+    }
+
+    /**
+     * Returns true if the calendar panel is currently being shown.
+     */
+    public boolean isShowing() {
+        return mainWindowTabPane.isPressed();
+    }
+
 
 }

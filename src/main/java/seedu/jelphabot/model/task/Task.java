@@ -82,7 +82,6 @@ public class Task {
     public void startTimer() {
         this.startTime = LocalDateTime.now();
         this.timerIsRunning = true;
-        System.out.println("start: " + startTime);
     }
 
     /**
