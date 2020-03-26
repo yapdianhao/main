@@ -209,6 +209,7 @@ _Figure 6: Example of an expected result after running `edit`_
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the task will be removed i.e adding of tags is not cumulative.
 * You can remove all the task's tags by typing `t/` without specifying any tags after it.
+* The task to edit cannot have a running timer.
 ****
 
 Examples:
@@ -246,7 +247,6 @@ _Figure 8: Example of an expected result after running `delete`_
 * Deletes the task at the specified `INDEX`.
 * The index refers to the index number shown in the displayed task list.
 * The index *must be a positive integer* 1, 2, 3, ...
-* Task to be deleted cannot have a running timer.
 ****
 
 Examples:
@@ -326,9 +326,11 @@ Format: `productivity`
 Starts timer running for a task. +
 Format: `start INDEX`
 
+****
 * Starts the timer for the task at the specified `INDEX` if timer was not running.
 * The index refers to the index number shown in the displayed task list.
 * The index *must be a positive integer* 1, 2, 3, ...
+****
 
 ==== Stopping timer for a task : `stop`
 
