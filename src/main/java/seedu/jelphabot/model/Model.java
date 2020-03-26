@@ -8,7 +8,6 @@ import seedu.jelphabot.commons.core.GuiSettings;
 import seedu.jelphabot.model.productivity.Productivity;
 import seedu.jelphabot.model.productivity.ProductivityList;
 import seedu.jelphabot.model.reminder.Reminder;
-import seedu.jelphabot.model.task.SortedTaskList;
 import seedu.jelphabot.model.task.Task;
 
 /**
@@ -118,9 +117,4 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredTaskList(Predicate<Task> predicate);
-
-    /**
-     * Returns an unmodifiable view of the incomplete tasks in the task list
-     */
-    SortedTaskList getSortedTaskList();
 }

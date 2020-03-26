@@ -20,7 +20,7 @@ import seedu.jelphabot.logic.parser.exceptions.ParseException;
 import seedu.jelphabot.model.calendar.CalendarDate;
 import seedu.jelphabot.model.productivity.Productivity;
 import seedu.jelphabot.model.productivity.ProductivityList;
-import seedu.jelphabot.model.task.SortedTaskList;
+import seedu.jelphabot.model.task.GroupedTaskList;
 
 /**
  * The Main Window. Provides the basic application layout containing a menu bar
@@ -36,7 +36,7 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private SortedTaskListPanel taskListPanel;
+    private GroupedTaskListPanel taskListPanel;
     private TaskListPanel calendarTaskListPanel;
     private ProductivityPanel productivityPanel;
     private CalendarPanel calendarPanel;
@@ -134,13 +134,10 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        SortedTaskList sortedTasks = logic.getSortedTaskList();
-        taskListPanel = new SortedTaskListPanel(
-            sortedTasks.getPinnedTaskList(),
-            sortedTasks.getOverdueTaskList(),
-            sortedTasks.getDueTodayTaskList(),
-            sortedTasks.getDueThisWeekTaskList(),
-            sortedTasks.getDueSomedayTaskList()
+        GroupedTaskList sortedTasks = logic.getGroupedTaskList(GroupedTaskList.Grouping.DATE);
+        taskListPanel = new GroupedTaskListPanel(
+            logic.getFilteredTaskList(),
+            sortedTasks
         );
         taskListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
 
@@ -242,7 +239,7 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
-    public SortedTaskListPanel getTaskListPanel() {
+    public GroupedTaskListPanel getTaskListPanel() {
         return taskListPanel;
     }
 
