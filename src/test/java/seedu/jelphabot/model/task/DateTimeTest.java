@@ -5,6 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.jelphabot.testutil.Assert.assertThrows;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import org.junit.jupiter.api.Test;
 
 class DateTimeTest {
@@ -47,6 +50,13 @@ class DateTimeTest {
         assertFalse(DateTime.isValidDateTime("May 2 2020 22 00")); // wrong format: MMM d yyyy HH mm
         assertFalse(DateTime.isValidDateTime("2020 2 May 22 00")); // wrong format: yyy d MMM
         assertFalse(DateTime.isValidDateTime("2 05 2020 22 00")); // wrong format: d MM yyyy
+    }
+
+    @Test
+    public void construct() {
+        DateTimeFormatter formatter = DateTime.STANDARD_FORMATTER;
+        String stringRep = formatter.format(LocalDateTime.now());
+        LocalDateTime fromFormat = LocalDateTime.parse(stringRep, formatter);
     }
 
     @Test
