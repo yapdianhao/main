@@ -1,11 +1,11 @@
 package seedu.jelphabot.model.productivity;
 
-import javafx.collections.ObservableList;
-import seedu.jelphabot.model.task.Task;
-import seedu.jelphabot.model.task.predicates.TaskDueBeforeDatePredicate;
-
 import static seedu.jelphabot.commons.util.DateUtil.getDueThisWeekPredicate;
 import static seedu.jelphabot.commons.util.DateUtil.getDueTodayPredicate;
+import static seedu.jelphabot.commons.util.DateUtil.getOverduePredicate;
+
+import javafx.collections.ObservableList;
+import seedu.jelphabot.model.task.Task;
 
 /**
  * Represents the overall productivity of the user.
@@ -33,9 +33,12 @@ public class Productivity {
         return timeSpentToday;
     }
 
+    /**
+     * Creates the respective productivity objects.
+     */
     private void createProductivites() {
         ObservableList<Task> tasksDueThisWeek = taskList.filtered(getDueThisWeekPredicate());
-        this.tasksCompleted = new TasksCompleted(tasksDueThisWeek, taskList.filtered(new TaskDueBeforeDatePredicate()));
+        this.tasksCompleted = new TasksCompleted(tasksDueThisWeek, taskList.filtered(getOverduePredicate()));
         this.runningTimer = new RunningTimer(taskList);
         this.timeSpentToday = new TimeSpentToday(taskList.filtered(getDueTodayPredicate()), tasksDueThisWeek);
     }
