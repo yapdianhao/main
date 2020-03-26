@@ -139,12 +139,6 @@ public class LogicManager implements Logic {
     //
     // }
 
-
-    @Override
-    public ObservableList<Task> getFilteredByReminder() {
-        return model.getFilteredByReminder();
-    }
-
     @Override
     public ProductivityList getProductivityList() {
         return model.getProductivityList();

@@ -24,8 +24,8 @@ public class UiManager implements Ui {
 
     private Logic logic;
     private MainWindow mainWindow;
-    private MorningCallWindow morningCallWindow;
     private ProductivityPanel productivityPanel;
+    private ReminderPopup reminderPopup;
 
     public UiManager(Logic logic) {
         super();
@@ -40,7 +40,7 @@ public class UiManager implements Ui {
         primaryStage.getIcons().add(getImage(ICON_APPLICATION));
 
         // create second stage for MorningCallWindow
-        Stage morningCallStage = new Stage();
+        Stage reminderStage = new Stage();
 
         try {
             mainWindow = new MainWindow(primaryStage, logic);

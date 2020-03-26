@@ -116,7 +116,7 @@ public interface Model {
      * as specified by the user
      * @return
      */
-    public ObservableList<Task> getFilteredByReminder();
+    //public ObservableList<Task> getFilteredByReminder();
 
     /**
      * Returns an unmodifiable view of the user's productivity.
