@@ -3,7 +3,6 @@ package seedu.jelphabot.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.assertCommandSuccess;
-// import static seedu.jelphabot.logic.commands.CalendarCommand;
 import static seedu.jelphabot.testutil.TypicalTasks.getTypicalJelphaBot;
 
 import org.junit.jupiter.api.Test;
@@ -14,8 +13,8 @@ import seedu.jelphabot.model.UserPrefs;
 import seedu.jelphabot.model.task.predicates.TaskDueWithinDayPredicate;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Collections;
 import java.util.Date;
 
 public class CalendarCommandTest {
@@ -32,7 +31,13 @@ public class CalendarCommandTest {
     @Test
     public void equals() {
         TaskDueWithinDayPredicate firstPredicate = new TaskDueWithinDayPredicate();
-        Date date = new Date(2020, 1, 1);
+        DateFormat format = new SimpleDateFormat("MMM-d-yyyy");
+        Date date = null;
+        try {
+            date = format.parse("jan-1-2020");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         TaskDueWithinDayPredicate secondPredicate = new TaskDueWithinDayPredicate(date);
 
         CalendarCommand calendarFirstCommand = new CalendarCommand(firstPredicate);
