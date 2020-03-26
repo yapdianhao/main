@@ -211,6 +211,14 @@ This feature offers two main functions:
 
 ==== Design Considerations
 
+// tag::morningcallnightdebrief[]
+
+=== Morning Call / Night Debrief feature
+
+JelphaBot has a Morning Call and Night Debrief feature which provides an overview of the tasks to be completed
+for the day (Morning Call), and all tasks that are completed in the tasklist thus far (Night Debrief).
+
+Both come in the form of a separate window that opens upon app startup for Morning Call, and app exit for Night Debrief.
 // tag::undoredo[]
 === [Proposed] Undo/Redo feature
 ==== Proposed Implementation
