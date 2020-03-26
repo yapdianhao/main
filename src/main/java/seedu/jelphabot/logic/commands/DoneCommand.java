@@ -63,7 +63,7 @@ public class DoneCommand extends Command {
 
         model.setTask(taskToMarkDone, doneTask);
         model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
-        model.setProductivity(new Productivity(model.getSortedTaskList(), model.getFilteredTaskList()));
+        model.setProductivity(new Productivity(model.getFilteredTaskList()));
         return new CommandResult(String.format(MESSAGE_MARK_TASK_COMPLETE_SUCCESS, doneTask));
     }
 

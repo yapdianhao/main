@@ -1,26 +1,24 @@
 package seedu.jelphabot.model.productivity;
 
 import javafx.collections.ObservableList;
-import seedu.jelphabot.model.task.SortedTaskList;
 import seedu.jelphabot.model.task.Task;
+import seedu.jelphabot.model.task.predicates.TaskDueBeforeDatePredicate;
+
+import static seedu.jelphabot.commons.util.DateUtil.getDueThisWeekPredicate;
+import static seedu.jelphabot.commons.util.DateUtil.getDueTodayPredicate;
 
 /**
  * Represents the overall productivity of the user.
  */
 public class Productivity {
-    private final SortedTaskList sortedTaskList;
     private final ObservableList<Task> taskList;
     private TasksCompleted tasksCompleted;
     private RunningTimer runningTimer;
     private TimeSpentToday timeSpentToday;
 
-    public Productivity(SortedTaskList sortedTaskList, ObservableList<Task> taskList) {
-        this.sortedTaskList = sortedTaskList;
+    public Productivity(ObservableList<Task> taskList) {
         this.taskList = taskList;
-        this.tasksCompleted = new TasksCompleted(sortedTaskList);
-        this.runningTimer = new RunningTimer(taskList);
-        this.timeSpentToday = new TimeSpentToday(sortedTaskList);
-
+        createProductivites();
     }
 
     public TasksCompleted getTasksCompleted() {
@@ -33,5 +31,12 @@ public class Productivity {
 
     public TimeSpentToday getTimeSpentToday() {
         return timeSpentToday;
+    }
+
+    private void createProductivites() {
+        ObservableList<Task> tasksDueThisWeek = taskList.filtered(getDueThisWeekPredicate());
+        this.tasksCompleted = new TasksCompleted(tasksDueThisWeek, taskList.filtered(new TaskDueBeforeDatePredicate()));
+        this.runningTimer = new RunningTimer(taskList);
+        this.timeSpentToday = new TimeSpentToday(taskList.filtered(getDueTodayPredicate()), tasksDueThisWeek);
     }
 }
