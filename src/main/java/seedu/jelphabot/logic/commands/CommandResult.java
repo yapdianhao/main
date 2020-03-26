@@ -88,13 +88,13 @@ public class CommandResult {
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
                 && exit == otherCommandResult.exit
-                && productivity == otherCommandResult.productivity
+                && productivity == otherCommandResult.productivity && summary == otherCommandResult.summary
                 && calendar == otherCommandResult.calendar;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit, productivity, calendar);
+        return Objects.hash(feedbackToUser, showHelp, exit, productivity, summary, calendar);
     }
 
 }

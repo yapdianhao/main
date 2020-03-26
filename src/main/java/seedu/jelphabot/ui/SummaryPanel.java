@@ -12,6 +12,9 @@ import javafx.scene.layout.Region;
 import seedu.jelphabot.commons.core.LogsCenter;
 import seedu.jelphabot.model.task.Task;
 
+/**
+ * The Summary Panel. Provides the basic application layout of the summary of tasks due today,
+ */
 public class SummaryPanel extends UiPart<Region> {
     private static final String FXML = "SummaryPanel.fxml";
 
@@ -27,7 +30,8 @@ public class SummaryPanel extends UiPart<Region> {
     @FXML
     private ListView<Task> completedTodayTaskListView;
 
-    public SummaryPanel(ObservableList<Task> dueTodayTaskList, ObservableList<Task> completedTodayTaskList, TabPane tabPane) {
+    public SummaryPanel(ObservableList<Task> dueTodayTaskList,
+        ObservableList<Task> completedTodayTaskList, TabPane tabPane) {
         super(FXML);
         logger.info("Initialising summary panel stage");
         this.mainWindowTabPane = tabPane;
@@ -37,7 +41,8 @@ public class SummaryPanel extends UiPart<Region> {
 
         completedTodayTaskListView.setItems(completedTodayTaskList);
         completedTodayTaskListView.setCellFactory(ListView -> new SummaryTaskListViewCell());
-        completedTodayTaskListView.prefHeightProperty().bind(Bindings.size(completedTodayTaskList).multiply(PREF_CELL_HEIGHT));
+        completedTodayTaskListView.prefHeightProperty()
+            .bind(Bindings.size(completedTodayTaskList).multiply(PREF_CELL_HEIGHT));
     }
 
     /**
@@ -56,19 +61,20 @@ public class SummaryPanel extends UiPart<Region> {
         return mainWindowTabPane.isPressed();
     }
 }
-    /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Task} using a {@code TaskCard}.
-     */
-    class SummaryTaskListViewCell extends ListCell<Task> {
-        @Override
-        protected void updateItem(Task task, boolean empty) {
-            super.updateItem(task, empty);
 
-            if (empty || task == null) {
-                setGraphic(null);
-                setText(null);
-            } else {
-                setGraphic(new TaskCard(task, getIndex() + 1).getRoot());
-            }
+/**
+ * Custom {@code ListCell} that displays the graphics of a {@code Task} using a {@code TaskCard}.
+ */
+class SummaryTaskListViewCell extends ListCell<Task> {
+    @Override
+    protected void updateItem(Task task, boolean empty) {
+        super.updateItem(task, empty);
+
+        if (empty || task == null) {
+            setGraphic(null);
+            setText(null);
+        } else {
+            setGraphic(new TaskCard(task, getIndex() + 1).getRoot());
         }
     }
+}
