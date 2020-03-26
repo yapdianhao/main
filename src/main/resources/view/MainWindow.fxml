@@ -87,11 +87,17 @@
                                 </VBox>
                             </content>
                         </Tab>
-                  <Tab text="Notes">
-                    <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                    </content>
-                  </Tab>
+                      <Tab text="Summary">
+                            <content>
+                                <VBox fx:id="summaryPanel" minWidth="340" prefWidth="340.0" styleClass="pane-with-border">
+                                    <padding>
+                                        <Insets bottom="10" left="10" right="10" top="10"/>
+                                    </padding>
+                                    <StackPane fx:id="summaryPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+                                </VBox>
+
+                        </content>
+                      </Tab>
                     </tabs>
                 </TabPane>
 

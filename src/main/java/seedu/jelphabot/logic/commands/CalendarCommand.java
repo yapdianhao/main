@@ -35,7 +35,7 @@ public class CalendarCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         if (predicate == null) {
-            return new CommandResult(MESSAGE_SWITCH_PANEL_ACKNOWLEDGEMENT, false, false, false, true);
+            return new CommandResult(MESSAGE_SWITCH_PANEL_ACKNOWLEDGEMENT, false, false, false, true, false);
         } else {
             requireNonNull(model);
             model.updateFilteredCalendarTaskList(predicate);

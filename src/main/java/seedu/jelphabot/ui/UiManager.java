@@ -11,7 +11,6 @@ import seedu.jelphabot.MainApp;
 import seedu.jelphabot.commons.core.LogsCenter;
 import seedu.jelphabot.commons.util.StringUtil;
 import seedu.jelphabot.logic.Logic;
-import seedu.jelphabot.model.reminder.Reminder;
 
 /**
  * The manager of the UI component.
@@ -25,8 +24,7 @@ public class UiManager implements Ui {
 
     private Logic logic;
     private MainWindow mainWindow;
-    //private ReminderPopup reminderPopup;
-    //private MorningCallWindow morningCallWindow;
+    private MorningCallWindow morningCallWindow;
     private ProductivityPanel productivityPanel;
 
     public UiManager(Logic logic) {
@@ -42,7 +40,7 @@ public class UiManager implements Ui {
         primaryStage.getIcons().add(getImage(ICON_APPLICATION));
 
         // create second stage for MorningCallWindow
-        Stage reminderStage = new Stage();
+        Stage morningCallStage = new Stage();
 
         try {
             mainWindow = new MainWindow(primaryStage, logic);
@@ -50,9 +48,9 @@ public class UiManager implements Ui {
             mainWindow.fillInnerParts();
 
             // show morningCallWindow
-            //reminderPopup = new ReminderPopup(reminderStage, logic);
-            //reminderPopup.show();
-            //reminderPopup.fillWindow();
+            //morningCallWindow = new MorningCallWindow(morningCallStage, logic);
+            //morningCallWindow.show();
+            //morningCallWindow.fillWindow();
 
         } catch (Exception e) {
             logger.severe(StringUtil.getDetails(e));
