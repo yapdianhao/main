@@ -7,6 +7,9 @@ import static seedu.jelphabot.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 class DateTimeTest {
 
     @Test
@@ -51,7 +54,9 @@ class DateTimeTest {
 
     @Test
     public void construct() {
-        new DateTime("May-1-2020 1111");
+        DateTimeFormatter formatter = DateTime.standardFormatter;
+        String stringRep = formatter.format(LocalDateTime.now());
+        LocalDateTime fromFormat = LocalDateTime.parse(stringRep, formatter);
     }
 
     @Test

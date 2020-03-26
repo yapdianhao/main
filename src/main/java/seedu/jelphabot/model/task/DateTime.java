@@ -19,22 +19,23 @@ import java.util.List;
  */
 public class DateTime {
 
-    private static final String STANDARD_FORMAT = "MMM-d-yyyy HHmm";
-    public static final String MESSAGE_CONSTRAINTS = "Date should be of the format " + STANDARD_FORMAT
-                                                         + ". Time should be in the 24 hour format HH mm.";
-    private static final String DISPLAY_FORMAT = "d-MMM-yyyy HH mm";
+    private static final String STANDARD_FORMAT = "MMM-d-uuuu HH mm";
+    public static final String MESSAGE_CONSTRAINTS =
+        "Date should be of the format Month-Day-Year where Month is a three-letter abbreviation. "
+        + ". Time should be in the 24 hour format HH mm.";
+    private static final String DISPLAY_FORMAT = "d-MMM-uuuu HH mm";
 
-    private static final DateTimeFormatter standardFormatter =
+    public static final DateTimeFormatter standardFormatter =
         DateTimeFormatter.ofPattern(STANDARD_FORMAT).withResolverStyle(ResolverStyle.STRICT);
-    private static final DateTimeFormatter displayFormatter =
+    public static final DateTimeFormatter displayFormatter =
         DateTimeFormatter.ofPattern(DISPLAY_FORMAT).withResolverStyle(ResolverStyle.STRICT);
     private static final List<DateTimeFormatter> dateFormats =
         Arrays.asList(
             standardFormatter,
-            DateTimeFormatter.ofPattern("MMM/d/yyyy HH mm").withResolverStyle(ResolverStyle.STRICT),
+            DateTimeFormatter.ofPattern("MMM/d/uuuu HH mm").withResolverStyle(ResolverStyle.STRICT),
             DateTimeFormatter.ofPattern("d/M/y HH mm").withResolverStyle(ResolverStyle.STRICT),
             displayFormatter,
-            DateTimeFormatter.ofPattern("d MMM yyyy HH mm").withResolverStyle(ResolverStyle.STRICT)
+            DateTimeFormatter.ofPattern("d MMM uuuu HH mm").withResolverStyle(ResolverStyle.STRICT)
         );
 
     public final LocalDateTime value;
@@ -47,7 +48,6 @@ public class DateTime {
     public DateTime(String dateTime) {
         requireNonNull(dateTime);
         checkArgument(isValidDateTime(dateTime), MESSAGE_CONSTRAINTS);
-        System.out.println(standardFormatter.parse(dateTime));
         value = LocalDateTime.parse(dateTime, standardFormatter);
     }
 
@@ -83,7 +83,8 @@ public class DateTime {
      * Converts stored dateTime value to the standard format
      * (Standard format is the DateTimeFormatter used for storing the date in Json and is defined in
      * #DateTime.STANDARD_FORMAT).
-     * @return
+     *
+     * @return A string with the Date rendered in standard format
      */
     @Override
     public String toString() {
