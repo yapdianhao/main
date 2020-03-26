@@ -209,6 +209,7 @@ _Figure 6: Example of an expected result after running `edit`_
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the task will be removed i.e adding of tags is not cumulative.
 * You can remove all the task's tags by typing `t/` without specifying any tags after it.
+* The task to edit cannot have a running timer.
 ****
 
 Examples:
@@ -246,7 +247,6 @@ _Figure 8: Example of an expected result after running `delete`_
 * Deletes the task at the specified `INDEX`.
 * The index refers to the index number shown in the displayed task list.
 * The index *must be a positive integer* 1, 2, 3, ...
-* Task to be deleted cannot have a running timer.
 ****
 
 Examples:
@@ -269,6 +269,18 @@ Trying to `pin` a task that is already pinned will unpin it instead.
 
 // end::pin[]
 
+// tag::showcompleted[]
+==== Show all completed tasks : `show-completed`
+You can display all the tasks in your tasklist that have been completed.
+
+// end::showcompleted[]
+
+// tag::showincomplete[]
+==== Show all incomplete tasks: `show-incomplete`
+You can display all the tasks in your tasklist that are currently incomplete.
+
+// end::showincomplete[]
+
 ==== Sort tasks : `sort`  [coming in v2.0]
 
 You can change how tasks are sorted with the `sort` command.
@@ -287,6 +299,30 @@ _Figure 9: Example of an expected result after running `clear`_
 
 == Set Reminders and Notifications  `[coming in v2.0]`
 
+=== Adding reminder : `reminder`
+Adds a reminder to the specific task, reminding the user if the task is within the timeframe specified
+by the user. +
+Format: `reminder INDEX rd/days rh/hours`
+
+* Adds a reminder to the task which is at the specified `INDEX`.
+* The index refers to the index number shown in the displayed task list.
+* The index *must be a positive integer* 1, 2, 3, ....
+* `days` refers to the number of days the user wanted to be reminded
+before the task is due.
+* `hours` refers to the number of hours the user wanted to be reminded before the task
+is due.
+
+****
+* Users can only specify `days` to be within a week.
+* Users can only specify `hours` to be within 24 hours, since any hours greater than 24 can be
+converted into a day.
+* Tasks that are completed need not to be reminded for.
+* Tasks that have a reminder cannot have any other reminders.
+****
+
+=== Removing reminder `[coming in v2.0]`
+=== Reminder popup notification `[coming in v2.0]`
+
 == Productivity Tracking
 
 // tag::productivitytracker[]
@@ -302,9 +338,11 @@ Format: `productivity`
 Starts timer running for a task. +
 Format: `start INDEX`
 
+****
 * Starts the timer for the task at the specified `INDEX` if timer was not running.
 * The index refers to the index number shown in the displayed task list.
 * The index *must be a positive integer* 1, 2, 3, ...
+****
 
 ==== Stopping timer for a task : `stop`
 
@@ -361,7 +399,10 @@ Examples:
 * `calendar Jan/1/2020` +
 Highlights 1st of January in the calendar panel on the right and displays the corresponding tasks due on the left.
 
-=== Morning call/Night debrief  `[coming in v2.0]`
+=== Morning call/Night debrief
+Displays the tasks to be completed within the day (Morning Call), and the tasks that have been completed so far (Night Debrief)
+
+Morning Call and Night Debrief are separate windows that will open on app startup and exit respectively.
 
 === Sticky notes  `[coming in v2.0]`
 
@@ -393,6 +434,10 @@ e.g. `done 1`
 e.g. `delete 3`
 * *Clear* : `clear`
 * *Exit* : `exit`
+* *Show Completed Tasks*: `show-completed`
+* *Show Incomplete Tasks*: `show-incomplete`
+* *Reminder* : `reminder INDEX rd/days rh/hours` +
+e.g. `reminder 2 rd/1 rh/1`
 * *Productivity* : `productivity`
 * *Timer* : `start INDEX` or `stop INDEX` +
 e.g. `start 1` or `stop 1`

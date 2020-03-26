@@ -1,6 +1,6 @@
 package seedu.jelphabot.storage;
 
-import java.time.LocalDateTime;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -32,8 +32,7 @@ class JsonAdaptedTask {
     private final String moduleCode;
     private final Priority priority;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
-    private final LocalDateTime startTime;
-    private final LocalDateTime endTime;
+    private final Duration duration;
 
     /**
      * Constructs a {@code JsonAdaptedTask} with the given task details.
@@ -46,8 +45,7 @@ class JsonAdaptedTask {
         @JsonProperty("module") String moduleCode,
         @JsonProperty("priority") Priority priority,
         @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
-        @JsonProperty("startTime") LocalDateTime startTime,
-        @JsonProperty("endTime") LocalDateTime endTime) {
+        @JsonProperty("duration") Duration duration) {
         this.description = description;
         this.status = status;
         this.dateTime = dateTime;
@@ -56,8 +54,7 @@ class JsonAdaptedTask {
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
-        this.startTime = startTime;
-        this.endTime = endTime;
+        this.duration = duration;
     }
 
     /**
@@ -70,8 +67,7 @@ class JsonAdaptedTask {
         this.moduleCode = source.getModuleCode().value;
         this.priority = source.getPriority();
         tagged.addAll(source.getTags().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()));
-        this.startTime = source.getStartTime();
-        this.endTime = source.getEndTime();
+        this.duration = source.getDuration();
     }
 
     /**
@@ -123,9 +119,7 @@ class JsonAdaptedTask {
                 modelModuleCode,
                 priority,
                 modelTags,
-                startTime,
-                endTime
-        );
+                duration);
     }
 
 }

@@ -35,19 +35,17 @@ public class Task {
     /**
      * Every field must be present and not null.
      */
-    public Task(Description description, Status status, DateTime dateTime, ModuleCode moduleCode,
-        Priority priority, Set<Tag> tags, LocalDateTime startTime, LocalDateTime endTime) {
-        requireAllNonNull(description, status, dateTime, moduleCode, tags);
+    public Task(Description description, Status status, DateTime dateTime, ModuleCode moduleCode, Priority priority,
+                Set<Tag> tags, Duration duration) {
+        requireAllNonNull(description, status, dateTime, moduleCode, tags, duration);
         this.description = description;
         this.status = status;
         this.dateTime = dateTime;
         this.moduleCode = moduleCode;
         this.priority = priority;
         this.tags.addAll(tags);
-        this.duration = Duration.ZERO;
+        this.duration = duration;
         this.timerIsRunning = false;
-        this.startTime = startTime;
-        this.endTime = endTime;
     }
 
     public Description getDescription() {
@@ -84,6 +82,7 @@ public class Task {
     public void startTimer() {
         this.startTime = LocalDateTime.now();
         this.timerIsRunning = true;
+        System.out.println("start: " + startTime);
     }
 
     /**
@@ -96,7 +95,8 @@ public class Task {
     }
 
     private void setDuration() {
-        this.duration = Duration.between(this.startTime, this.endTime);
+        this.duration = this.duration.plus(Duration.between(this.startTime, this.endTime));
+        System.out.println("dur " + this.duration);
     }
 
     public Duration getDuration() {
