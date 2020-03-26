@@ -3,7 +3,7 @@ package seedu.jelphabot.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.jelphabot.model.Model.PREDICATE_SHOW_ALL_TASKS;
 
-import java.time.LocalDateTime;
+import java.time.Duration;
 import java.util.List;
 import java.util.Set;
 
@@ -81,10 +81,9 @@ public class DoneCommand extends Command {
         DateTime dateTime = task.getDateTime();
         Status status = Status.COMPLETE;
         Priority priority = task.getPriority();
-        LocalDateTime startTime = task.getStartTime();
-        LocalDateTime endTime = task.getEndTime();
+        Duration duration = task.getDuration();
 
-        return new Task(description, status, dateTime, moduleCode, priority, tags, startTime, endTime);
+        return new Task(description, status, dateTime, moduleCode, priority, tags, duration);
     }
 
     @Override
