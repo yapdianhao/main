@@ -15,10 +15,8 @@ import seedu.jelphabot.commons.core.LogsCenter;
 import seedu.jelphabot.model.productivity.Productivity;
 import seedu.jelphabot.model.productivity.ProductivityList;
 import seedu.jelphabot.model.reminder.Reminder;
-import seedu.jelphabot.model.task.SortedTaskList;
 import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.model.task.UniqueTaskList;
-import seedu.jelphabot.model.task.predicates.FilterTaskByDatePredicate;
 import seedu.jelphabot.model.task.predicates.TaskIsCompletedPredicate;
 import seedu.jelphabot.model.task.predicates.TaskIsIncompletePredicate;
 
@@ -32,7 +30,6 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Task> filteredTasks;
     private final FilteredList<Task> filteredCalendarTasks;
-    private final SortedTaskList sortedTasks;
     private final ProductivityList productivityList;
 
     /**
@@ -48,7 +45,6 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredTasks = new FilteredList<>(this.readOnlyJelphaBot.getTaskList());
         filteredCalendarTasks = new FilteredList<>(this.readOnlyJelphaBot.getTaskList());
-        sortedTasks = new SortedTaskList(filteredTasks);
         productivityList = new ProductivityList();
     }
 
@@ -231,11 +227,6 @@ public class ModelManager implements Model {
     public void updateFilteredCalendarTaskList(Predicate<Task> predicate) {
         requireNonNull(predicate);
         filteredCalendarTasks.setPredicate(predicate);
-    }
-
-    @Override
-    public SortedTaskList getSortedTaskList() {
-        return sortedTasks;
     }
 
     @Override
