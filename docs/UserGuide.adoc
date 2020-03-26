@@ -287,6 +287,30 @@ _Figure 9: Example of an expected result after running `clear`_
 
 == Set Reminders and Notifications  `[coming in v2.0]`
 
+=== Adding reminder : `reminder`
+Adds a reminder to the specific task, reminding the user if the task is within the timeframe specified
+by the user. +
+Format: `reminder INDEX rd/days rh/hours`
+
+* Adds a reminder to the task which is at the specified `INDEX`.
+* The index refers to the index number shown in the displayed task list.
+* The index *must be a positive integer* 1, 2, 3, ....
+* `days` refers to the number of days the user wanted to be reminded
+before the task is due.
+* `hours` refers to the number of hours the user wanted to be reminded before the task
+is due.
+
+****
+* Users can only specify `days` to be within a week.
+* Users can only specify `hours` to be within 24 hours, since any hours greater than 24 can be
+converted into a day.
+* Tasks that are completed need not to be reminded for.
+* Tasks that have a reminder cannot have any other reminders.
+****
+
+=== Removing reminder `[coming in v2.0]`
+=== Reminder popup notification `[coming in v2.0]`
+
 == Productivity Tracking
 
 // tag::productivitytracker[]
@@ -332,10 +356,12 @@ highlighted. +
 
 Format: `calendarTab`
 
-=== Change month and year view of Calendar : `changeCalendar`
+image::CalendarUi.png[width="790"]
+
+==== Change month and year view of Calendar : `calendarView`
 Displays the tasks due on specified date, while highlighting that day on the calendar.
 The task list panel on the left will display the tasks due today. +
-Format: `changeCalendar MONTHYEAR`
+Format: `calendarView MONTHYEAR`
 
 ****
 * For MONTHYEAR format, it should be MMM-YYYY, but it also allows some other formats shown when you type in the command word.
@@ -346,7 +372,7 @@ Examples:
 * `changeCalendar Apr-2020`
 Displays month of April in the year 2020 in the calendar panel on the right.
 
-=== Show tasks due on specific date : `calendar`
+==== Show tasks due on specific date : `calendar`
 Displays the tasks due on specified date, while highlighting that day on the calendar +
 Format: `calendar DATE`
 
@@ -393,6 +419,8 @@ e.g. `done 1`
 e.g. `delete 3`
 * *Clear* : `clear`
 * *Exit* : `exit`
+* *Reminder* : `reminder INDEX rd/days rh/hours` +
+e.g. `reminder 2 rd/1 rh/1`
 * *Productivity* : `productivity`
 * *Timer* : `start INDEX` or `stop INDEX` +
 e.g. `start 1` or `stop 1`
