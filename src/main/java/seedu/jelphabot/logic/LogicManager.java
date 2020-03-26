@@ -15,7 +15,8 @@ import seedu.jelphabot.logic.parser.exceptions.ParseException;
 import seedu.jelphabot.model.Model;
 import seedu.jelphabot.model.ReadOnlyJelphaBot;
 import seedu.jelphabot.model.productivity.ProductivityList;
-import seedu.jelphabot.model.task.SortedTaskList;
+import seedu.jelphabot.model.task.GroupedTaskList;
+import seedu.jelphabot.model.task.GroupedTaskList.Grouping;
 import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.storage.Storage;
 
@@ -80,8 +81,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public SortedTaskList getSortedTaskList() {
-        return model.getSortedTaskList();
+    public GroupedTaskList getGroupedTaskList(Grouping grouping) {
+        return GroupedTaskList.makeGroupedTaskList(model.getFilteredTaskList(), grouping);
     }
 
     @Override
