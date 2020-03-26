@@ -1,5 +1,6 @@
 package seedu.jelphabot.ui;
 
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
@@ -17,6 +18,7 @@ public class CalendarPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(CalendarPanel.class);
 
     private CalendarDate calendarDate;
+    private ArrayList<CalendarDayCard> monthDayCards;
 
     @FXML
     private GridPane calendarGrid;
@@ -28,19 +30,37 @@ public class CalendarPanel extends UiPart<Region> {
         super(FXML);
         this.calendarDate = calendarDate;
         monthYear.setText(calendarDate.getMonthName() + ", " + calendarDate.getYear());
+
+        CalendarDate firstDay = calendarDate.getFirstDay();
+        fillGridPane(firstDay);
     }
 
-    //fill grid pane with day card method
-    // public void fillGridPane(CalendarDate firstDay) {
-    //     int weekIndex = firstDay.getDayOfWeek();
-    //     for (int row = 0; row < 6; row++) {
-    //         for (int col = 0; col < 7; col++) {
-    //             CalendarDayCard calendarDayCard = new CalendarDayCard();
-    //         }
-    //     }
-    // }
+    /**
+     * Fills the grid pane of the calendar.
+     * @param firstDay The date representing the first day of the month.
+     */
+    public void fillGridPane(CalendarDate firstDay) {
+        int weekIndex = firstDay.getDayOfWeek() - 1;
+        int lengthCurrMonth = firstDay.getLengthCurrMonth();
+        int lengthPrevMonth = firstDay.getLengthPrevMonth();
+        int day = lengthPrevMonth - weekIndex + 1;
+        CalendarDate currDate = firstDay.createPrevMonthDate(day);
 
-    // public void highlightDayCard(CalendarDate calendarDate) {
-    //
-    // }
+        for (int row = 0; row < 6; row++) {
+            for (int col = 0; col < 7; col++) {
+                CalendarDayCard calendarDayCard = new CalendarDayCard(currDate);
+                if (currDate.isThisMonth()) {
+                    calendarDayCard.setSameMonth();
+                } else {
+                    calendarDayCard.setDiffMonth();
+                }
+                if (currDate.isToday()) {
+                    calendarDayCard.highlightToday();
+                }
+                calendarGrid.add(calendarDayCard.getRoot(), col, row);
+                currDate = currDate.dateNextDay();
+            }
+        }
+    }
+
 }

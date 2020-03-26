@@ -5,6 +5,7 @@
     "dateTime" : "Feb-1-2020 11 00",
     "priority" : "HIGH",
     "tagged" : [ "school" ],
+    "duration" : "PT25.9462948S",
     "description" : "Online Midterm Assessment",
     "moduleCode" : "MA1101R"
   }, {
@@ -12,6 +13,7 @@
     "dateTime" : "Feb-1-2020 11 00",
     "priority" : "MEDIUM",
     "tagged" : [ "project", "school" ],
+    "duration" : "PT25.9462948S",
     "description" : "Book Report 1",
     "moduleCode" : "GES1028"
   }, {
@@ -19,6 +21,7 @@
     "dateTime" : "Feb-1-2020 11 00",
     "priority" : "MEDIUM",
     "tagged" : [ ],
+    "duration" : "PT25.9462948S",
     "description" : "Yoga class",
     "moduleCode" : "YG1011"
   }, {
@@ -26,6 +29,7 @@
     "dateTime" : "Feb-1-2020 11 00",
     "priority" : "MEDIUM",
     "tagged" : [ ],
+    "duration" : "PT25.9462948S",
     "description" : "Daniel Meier",
     "moduleCode" : "DT1101"
   }, {
@@ -33,6 +37,7 @@
     "dateTime" : "Feb-1-2020 11 00",
     "priority" : "MEDIUM",
     "tagged" : [ ],
+    "duration" : "PT25.9462948S",
     "description" : "Milk errand",
     "moduleCode" : "MYB1101"
   }, {
@@ -40,6 +45,7 @@
     "dateTime" : "Feb-1-2020 11 00",
     "priority" : "MEDIUM",
     "tagged" : [ "school" ],
+    "duration" : "PT25.9462948S",
     "description" : "Open book finals",
     "moduleCode" : "CS3230"
   }, {
@@ -47,6 +53,7 @@
     "dateTime" : "Feb-1-2020 11 00",
     "priority" : "MEDIUM",
     "tagged" : [ "project", "school" ],
+    "duration" : "PT25.9462948S",
     "description" : "Group project meeting",
     "moduleCode" : "CS2103T"
   } ]
