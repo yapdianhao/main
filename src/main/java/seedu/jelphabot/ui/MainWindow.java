@@ -2,8 +2,6 @@ package seedu.jelphabot.ui;
 
 import java.util.logging.Logger;
 
-import static seedu.jelphabot.commons.util.DateUtil.getDueTodayPredicate;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -15,6 +13,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.jelphabot.commons.core.GuiSettings;
 import seedu.jelphabot.commons.core.LogsCenter;
+import seedu.jelphabot.commons.util.DateUtil;
 import seedu.jelphabot.commons.util.StringUtil;
 import seedu.jelphabot.logic.Logic;
 import seedu.jelphabot.logic.commands.CommandResult;
@@ -141,7 +140,7 @@ public class MainWindow extends UiPart<Stage> {
         taskListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
 
         calendarTaskListPanel = new TaskListPanel(logic.getFilteredCalendarTaskList());
-        logic.updateFilteredCalendarTaskList(getDueTodayPredicate());
+        logic.updateFilteredCalendarTaskList(DateUtil.getDueTodayPredicate());
         calendarTaskListPanelPlaceholder.getChildren().add(calendarTaskListPanel.getRoot());
 
         calendarPanel = new CalendarPanel(CalendarDate.getCurrent(), mainWindowTabPane);
