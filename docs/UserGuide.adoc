@@ -269,6 +269,18 @@ Trying to `pin` a task that is already pinned will unpin it instead.
 
 // end::pin[]
 
+// tag::showcompleted[]
+==== Show all completed tasks : `show-completed`
+You can display all the tasks in your tasklist that have been completed.
+
+// end::showcompleted[]
+
+// tag::showincomplete[]
+==== Show all incomplete tasks: `show-incomplete`
+You can display all the tasks in your tasklist that are currently incomplete.
+
+// end::showincomplete[]
+
 ==== Sort tasks : `sort`  [coming in v2.0]
 
 You can change how tasks are sorted with the `sort` command.
@@ -350,18 +362,20 @@ achievements and task completion rate. +
 There is no need to manually ask for compliments or criticism.
 
 == Calendar
-=== Integrating calender : `calendarTab`
-Switches to the calendar panel showing the user's schedule for the current month with today's date
+=== Integrating calender : `calendar`
+Apart from the function to switch tabs by pressing `Ctrl + tab` on your keyboard, the user can enter the `calendar` command
+to manually switch to the calendar tab.
+The calendar panel will then show the user's schedule for the current month with today's date
 highlighted. +
 
-Format: `calendarTab`
+Format: `calendar`
 
 image::CalendarUi.png[width="790"]
 
-==== Change month and year view of Calendar : `calendarView`
+==== Change month and year view of Calendar : `calendar`
 Displays the tasks due on specified date, while highlighting that day on the calendar.
 The task list panel on the left will display the tasks due today. +
-Format: `calendarView MONTHYEAR`
+Format: `calendar MONTHYEAR`
 
 ****
 * For MONTHYEAR format, it should be MMM-YYYY, but it also allows some other formats shown when you type in the command word.
@@ -369,7 +383,7 @@ Format: `calendarView MONTHYEAR`
 
 Examples:
 
-* `changeCalendar Apr-2020`
+* `calendar Apr-2020`
 Displays month of April in the year 2020 in the calendar panel on the right.
 
 ==== Show tasks due on specific date : `calendar`
@@ -387,7 +401,10 @@ Examples:
 * `calendar Jan/1/2020` +
 Highlights 1st of January in the calendar panel on the right and displays the corresponding tasks due on the left.
 
-=== Morning call/Night debrief  `[coming in v2.0]`
+=== Morning call/Night debrief
+Displays the tasks to be completed within the day (Morning Call), and the tasks that have been completed so far (Night Debrief)
+
+Morning Call and Night Debrief are separate windows that will open on app startup and exit respectively.
 
 === Sticky notes  `[coming in v2.0]`
 
@@ -419,6 +436,8 @@ e.g. `done 1`
 e.g. `delete 3`
 * *Clear* : `clear`
 * *Exit* : `exit`
+* *Show Completed Tasks*: `show-completed`
+* *Show Incomplete Tasks*: `show-incomplete`
 * *Reminder* : `reminder INDEX rd/days rh/hours` +
 e.g. `reminder 2 rd/1 rh/1`
 * *Productivity* : `productivity`
@@ -427,7 +446,7 @@ e.g. `start 1` or `stop 1`
 * *Calendar* : `calendar`
 * *Calendar Date* : `calendar DATE` +
 e.g. `calendar Jan-1-2020`
-* *Change Calendar View* : `changeCalendar MONTHYEAR` +
+* *Change Calendar View* : `change MONTHYEAR` +
 e.g. `changeCalendar Apr-2020`
 
 == Can't delete this because it somehow breaks something
