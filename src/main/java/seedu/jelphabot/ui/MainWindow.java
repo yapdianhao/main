@@ -14,7 +14,6 @@ import javafx.stage.Stage;
 import seedu.jelphabot.commons.core.GuiSettings;
 import seedu.jelphabot.commons.core.LogsCenter;
 import seedu.jelphabot.commons.util.DateUtil;
-import seedu.jelphabot.commons.util.StringUtil;
 import seedu.jelphabot.logic.Logic;
 import seedu.jelphabot.logic.commands.CommandResult;
 import seedu.jelphabot.logic.commands.exceptions.CommandException;
@@ -201,18 +200,6 @@ public class MainWindow extends UiPart<Stage> {
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();
-
-        // after the MainWindow is closed,
-        // initialise and show the night debrief window
-        Stage nightDebriefStage = new Stage();
-
-        try {
-            NightDebriefWindow nightDebrief = new NightDebriefWindow(nightDebriefStage, logic);
-            nightDebrief.show();
-            nightDebrief.fillWindow();
-        } catch (Throwable e) {
-            logger.severe(StringUtil.getDetails(e));
-        }
     }
 
     /**

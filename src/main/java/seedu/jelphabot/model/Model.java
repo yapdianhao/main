@@ -1,6 +1,7 @@
 package seedu.jelphabot.model;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -105,6 +106,10 @@ public interface Model {
 
     /** Returns an unmodifiable view of the filtered task list in the Calendar*/
     ObservableList<Task> getFilteredCalendarTaskList();
+
+    List<Task> getTaskListFromJelphaBot();
+
+    List<Reminder> getReminderListFromJelphaBot();
 
     /**
      * Returns an unmodifiable view of the user's productivity.
