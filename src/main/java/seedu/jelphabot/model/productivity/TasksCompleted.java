@@ -57,7 +57,8 @@ public class TasksCompleted {
             }
         }
 
-        return String.format("You completed %.0f out of %.0f tasks that are due this week!\n%s", completed, size, message);
+        return String.format("You completed %.0f out of %.0f tasks that are due this week!\n%s", completed,
+            size, message);
     }
 
     /**
