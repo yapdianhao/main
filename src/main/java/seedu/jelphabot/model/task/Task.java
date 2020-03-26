@@ -102,6 +102,10 @@ public class Task {
         this.doneTime = LocalDateTime.now();
     }
 
+    public void setDoneTime(DateTime datetime) {
+        this.doneTime = datetime.getDateTime();
+    }
+
     public Duration getDuration() {
         return this.duration;
     }
