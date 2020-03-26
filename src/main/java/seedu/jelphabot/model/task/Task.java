@@ -29,6 +29,7 @@ public class Task {
 
     private LocalDateTime startTime;
     private LocalDateTime endTime;
+    private LocalDateTime doneTime;
     private Duration duration;
     private boolean timerIsRunning;
 
@@ -97,6 +98,10 @@ public class Task {
         this.duration = this.duration.plus(Duration.between(this.startTime, this.endTime));
     }
 
+    public void setDoneTime() {
+        this.doneTime = LocalDateTime.now();
+    }
+
     public Duration getDuration() {
         return this.duration;
     }
@@ -107,6 +112,10 @@ public class Task {
 
     public LocalDateTime getEndTime() {
         return this.endTime;
+    }
+
+    public LocalDateTime getDoneTime() {
+        return this.doneTime;
     }
 
     /**
