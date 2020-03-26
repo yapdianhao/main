@@ -17,6 +17,7 @@ import seedu.jelphabot.model.productivity.ProductivityList;
 import seedu.jelphabot.model.task.SortedTaskList;
 import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.model.task.UniqueTaskList;
+import seedu.jelphabot.model.task.predicates.FilterTaskByDatePredicate;
 import seedu.jelphabot.model.task.predicates.TaskIsCompletedPredicate;
 import seedu.jelphabot.model.task.predicates.TaskIsIncompletePredicate;
 
@@ -29,6 +30,7 @@ public class ModelManager implements Model {
     private final JelphaBot addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Task> filteredTasks;
+    private final FilteredList<Task> filteredCalendarTasks;
     private final SortedTaskList sortedTasks;
     private final ProductivityList productivityList;
 
@@ -44,6 +46,7 @@ public class ModelManager implements Model {
         this.addressBook = new JelphaBot(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredTasks = new FilteredList<>(this.addressBook.getTaskList());
+        filteredCalendarTasks = new FilteredList<>(this.addressBook.getTaskList());
         sortedTasks = new SortedTaskList(filteredTasks);
         productivityList = new ProductivityList();
     }
@@ -159,13 +162,10 @@ public class ModelManager implements Model {
         return filteredTasks;
     }
 
-    //TODO should instantiate to show tasks for today first
-    // @Override
-    // public ObservableList<Task> getFilteredCalendarTaskList() {
-    //     FilterTaskByDatePredicate taskDueTodayPredicate = DateUtil.getDueTodayPredicate();
-    //     FilteredList<Task> filteredCalendarList = new FilteredList<>(filteredTasks, taskDueTodayPredicate);
-    //     return filteredCalendarList;
-    // }
+    @Override
+    public ObservableList<Task> getFilteredCalendarTaskList() {
+        return filteredCalendarTasks;
+    }
 
     public ObservableList<Task> getFilteredByIncompleteTaskList() {
         TaskIsIncompletePredicate taskIncompletePredicate = new TaskIsIncompletePredicate();
@@ -198,6 +198,17 @@ public class ModelManager implements Model {
     public void updateFilteredTaskList(Predicate<Task> predicate) {
         requireNonNull(predicate);
         filteredTasks.setPredicate(predicate);
+    }
+
+    /**
+     * Updates the filter of the filtered calendar task list to filter by the given {@code predicate}.
+     *
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    @Override
+    public void updateFilteredCalendarTaskList(Predicate<Task> predicate) {
+        requireNonNull(predicate);
+        filteredCalendarTasks.setPredicate(predicate);
     }
 
     @Override

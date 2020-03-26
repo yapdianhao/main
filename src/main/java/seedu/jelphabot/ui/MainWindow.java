@@ -23,6 +23,8 @@ import seedu.jelphabot.model.productivity.Productivity;
 import seedu.jelphabot.model.productivity.ProductivityList;
 import seedu.jelphabot.model.task.SortedTaskList;
 
+import static seedu.jelphabot.commons.util.DateUtil.getDueTodayPredicate;
+
 /**
  * The Main Window. Provides the basic application layout containing a menu bar
  * and space where other JavaFX elements can be placed.
@@ -141,8 +143,8 @@ public class MainWindow extends UiPart<Stage> {
         );
         taskListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
 
-        //TODO should be calendar Task List (Doesn't work for now :()
-        calendarTaskListPanel = new TaskListPanel(logic.getFilteredTaskList());
+        calendarTaskListPanel = new TaskListPanel(logic.getFilteredCalendarTaskList());
+        logic.updateFilteredCalendarTaskList(getDueTodayPredicate());
         calendarTaskListPanelPlaceholder.getChildren().add(calendarTaskListPanel.getRoot());
 
         calendarPanel = new CalendarPanel(CalendarDate.getCurrent(), mainWindowTabPane);
