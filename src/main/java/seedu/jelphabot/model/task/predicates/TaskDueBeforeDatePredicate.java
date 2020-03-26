@@ -1,10 +1,7 @@
 package seedu.jelphabot.model.task.predicates;
 
-import static seedu.jelphabot.commons.util.DateUtil.dateToLocalDateTime;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 import seedu.jelphabot.model.task.DateTime;
 import seedu.jelphabot.model.task.Task;
@@ -31,8 +28,7 @@ public class TaskDueBeforeDatePredicate implements FilterTaskByDatePredicate {
      * @param dateTime the internal model representation of DateTime.
      */
     public TaskDueBeforeDatePredicate(DateTime dateTime) {
-        Date date = dateTime.getDate();
-        this.date = dateToLocalDateTime(date);
+        this.date = dateTime.getDateTime();
     }
 
     /**
@@ -52,7 +48,7 @@ public class TaskDueBeforeDatePredicate implements FilterTaskByDatePredicate {
 
     @Override
     public boolean test(Task task) {
-        LocalDateTime taskDate = dateToLocalDateTime(task.getDateTime().getDate());
+        LocalDateTime taskDate = task.getDateTime().getDateTime();
         return taskDate.isBefore(this.date);
     }
 
