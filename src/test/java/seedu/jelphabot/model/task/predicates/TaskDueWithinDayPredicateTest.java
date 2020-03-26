@@ -18,7 +18,7 @@ class TaskDueWithinDayPredicateTest {
         TaskDueWithinDayPredicate predicate = new TaskDueWithinDayPredicate(new DateTime("Apr-30-2020 00 01"));
         Task task = new TaskBuilder().withDateTime("Apr-30-2020 00 02").build();
         assertTrue(predicate.test(task));
-}
+    }
 
     @Test
     void test_taskDateDifferent_returnsFalse() {
