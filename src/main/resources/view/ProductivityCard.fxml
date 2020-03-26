@@ -3,15 +3,32 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
-<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
-
-<VBox xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+<!-- TODO: fix UI -->
+<VBox xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
        <VBox alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="105" prefHeight="163.0" prefWidth="195.0">
            <padding>
-               <Insets bottom="5" left="15" right="5" top="5" />
+               <Insets bottom="4" left="15" right="4" top="3" />
+           </padding>
+           <HBox prefHeight="35.0" prefWidth="195.0">
+               <children>
+                   <Label styleClass="cell_big_label" text="Today's Productivity   " HBox.hgrow="NEVER">
+                       <minWidth>
+                           <!-- Ensures that the label text is never truncated -->
+                           <Region fx:constant="USE_PREF_SIZE" />
+                       </minWidth>
+                   </Label>
+                   <ProgressBar fx:id="tasksCompletionProgress" maxWidth="-Infinity" prefWidth="200.0" progress="0.0" />
+               </children>
+           </HBox>
+           <Label fx:id="tasksCompleted" styleClass="cell_medium_label" text="\$tasksCompleted" />
+       </VBox>
+       <VBox alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="105" prefHeight="130.0" prefWidth="195.0">
+           <padding>
+               <Insets bottom="4" left="15" right="4" top="3" />
            </padding>
            <Label styleClass="cell_big_label" text="Time Spent On Tasks">
                <minWidth>
@@ -21,26 +38,9 @@
            </Label>
            <Label fx:id="timeSpentToday" styleClass="cell_medium_label" text="\$timeSpentToday" />
        </VBox>
-        <VBox alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="105" prefHeight="163.0" prefWidth="195.0">
+        <VBox alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="105" prefHeight="130.0" prefWidth="195.0">
             <padding>
-                <Insets bottom="5" left="15" right="5" top="5" />
-            </padding>
-         <SplitPane dividerPositions="0.29797979797979796" prefHeight="160.0" prefWidth="200.0">
-           <items>
-                  <Label styleClass="cell_big_label" text="Today's Productivity">
-                      <minWidth>
-                          <!-- Ensures that the label text is never truncated -->
-                          <Region fx:constant="USE_PREF_SIZE" />
-                      </minWidth>
-                  </Label>
-               <ProgressBar maxWidth="-Infinity" prefWidth="200.0" progress="0.0" />
-           </items>
-         </SplitPane>
-            <Label fx:id="tasksCompleted" styleClass="cell_medium_label" text="\$tasksCompleted" />
-        </VBox>
-        <VBox alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="105" prefHeight="163.0" prefWidth="195.0">
-            <padding>
-                <Insets bottom="5" left="15" right="5" top="5" />
+                <Insets bottom="4" left="15" right="4" top="3" />
             </padding>
             <Label styleClass="cell_big_label" text="Running Timer">
                 <minWidth>

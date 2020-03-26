@@ -20,7 +20,6 @@ public class TimeSpentToday {
     private Duration getTimeSpent(ObservableList<Task> taskList) {
         Duration result = Duration.ZERO;
         for (Task task : taskList) {
-            System.out.println("duration: " + task.getDuration());
             // TODO:
             // if (task.isBeingTimed()) {
             //     System.out.println("is being timed");
