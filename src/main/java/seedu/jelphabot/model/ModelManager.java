@@ -5,6 +5,7 @@ import static seedu.jelphabot.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.jelphabot.commons.util.DateUtil.getDueTodayPredicate;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -15,6 +16,7 @@ import seedu.jelphabot.commons.core.LogsCenter;
 import seedu.jelphabot.model.productivity.Productivity;
 import seedu.jelphabot.model.productivity.ProductivityList;
 import seedu.jelphabot.model.reminder.Reminder;
+import seedu.jelphabot.model.task.ReminderPredicate;
 import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.model.task.UniqueTaskList;
 import seedu.jelphabot.model.task.predicates.TaskIsCompletedPredicate;
@@ -208,6 +210,16 @@ public class ModelManager implements Model {
         TaskIsCompletedPredicate predicate = new TaskIsCompletedPredicate();
         UniqueTaskList uniqueTaskList = new UniqueTaskList();
         FilteredList<Task> filteredList = new FilteredList<>(filteredTasks, predicate);
+        uniqueTaskList.setTasks(filteredList);
+        return uniqueTaskList.asUnmodifiableObservableList();
+    }
+
+    public ObservableList<Task> getFilteredByReminder() {
+        UniqueTaskList uniqueTaskList = new UniqueTaskList();
+        List<Task> taskList = this.readOnlyJelphaBot.getTasksAsList();
+        List<Reminder> reminderList = this.readOnlyJelphaBot.getRemindersAsList();
+        ReminderPredicate reminderPredicate = new ReminderPredicate(taskList, reminderList);
+        FilteredList<Task> filteredList = new FilteredList<>(filteredTasks, reminderPredicate);
         uniqueTaskList.setTasks(filteredList);
         return uniqueTaskList.asUnmodifiableObservableList();
     }
