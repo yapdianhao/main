@@ -6,10 +6,9 @@ import static seedu.jelphabot.commons.util.AppUtil.checkArgument;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * Class representing the Date and Time of the modelled task.
@@ -26,14 +25,14 @@ public class DateTime {
         DateTimeFormatter.ofPattern(STANDARD_FORMAT).withResolverStyle(ResolverStyle.STRICT);
     public static final DateTimeFormatter DISPLAY_FORMATTER =
         DateTimeFormatter.ofPattern(DISPLAY_FORMAT).withResolverStyle(ResolverStyle.STRICT);
-    private static final List<DateTimeFormatter> dateFormats =
-        Arrays.asList(
-            STANDARD_FORMATTER,
-            DateTimeFormatter.ofPattern("MMM/d/uuuu HH mm").withResolverStyle(ResolverStyle.STRICT),
-            DateTimeFormatter.ofPattern("d/M/y HH mm").withResolverStyle(ResolverStyle.STRICT),
-            DISPLAY_FORMATTER,
-            DateTimeFormatter.ofPattern("d MMM uuuu HH mm").withResolverStyle(ResolverStyle.STRICT)
-        );
+    private static final DateTimeFormatter ACCEPTED_INPUT_FORMATTER =
+        new DateTimeFormatterBuilder()
+            .appendOptional(STANDARD_FORMATTER)
+            .appendOptional(DISPLAY_FORMATTER)
+            .appendOptional(DateTimeFormatter.ofPattern("MMM/d/uuuu HH mm"))
+            .appendOptional(DateTimeFormatter.ofPattern("d/M/u HH mm"))
+            .appendOptional(DateTimeFormatter.ofPattern("d MMM uuuu HH mm"))
+            .toFormatter().withResolverStyle(ResolverStyle.STRICT);
 
     public final LocalDateTime value;
 
@@ -45,7 +44,7 @@ public class DateTime {
     public DateTime(String dateTime) {
         requireNonNull(dateTime);
         checkArgument(isValidDateTime(dateTime), MESSAGE_CONSTRAINTS);
-        value = LocalDateTime.parse(dateTime, STANDARD_FORMATTER);
+        value = LocalDateTime.parse(dateTime, ACCEPTED_INPUT_FORMATTER);
     }
 
     /**
@@ -55,15 +54,12 @@ public class DateTime {
      * @return The boolean representing whether the date provided is valid.
      */
     public static boolean isValidDateTime(String test) {
-        for (DateTimeFormatter df : dateFormats) {
-            try {
-                System.out.println(df.parse(test));
-                return true;
-            } catch (DateTimeParseException e) {
-                // do nothing, try next
-            }
+        try {
+            LocalDateTime.parse(test, ACCEPTED_INPUT_FORMATTER);
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
         }
-        return false;
     }
 
     /**
