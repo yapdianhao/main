@@ -95,7 +95,6 @@ public class Task {
 
     private void setDuration() {
         this.duration = this.duration.plus(Duration.between(this.startTime, this.endTime));
-        System.out.println("dur " + this.duration);
     }
 
     public Duration getDuration() {
