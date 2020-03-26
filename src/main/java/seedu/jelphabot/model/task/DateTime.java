@@ -16,22 +16,22 @@ import java.util.List;
  */
 public class DateTime {
 
-    private static final String STANDARD_FORMAT = "MMM-d-uuuu HH mm";
     public static final String MESSAGE_CONSTRAINTS =
         "Date should be of the format Month-Day-Year where Month is a three-letter abbreviation. "
             + ". Time should be in the 24 hour format HH mm.";
-    private static final String DISPLAY_FORMAT = "d-MMM-uuuu HH mm";
 
-    public static final DateTimeFormatter standardFormatter =
+    private static final String STANDARD_FORMAT = "MMM-d-uuuu HH mm";
+    private static final String DISPLAY_FORMAT = "d-MMM-uuuu HH mm";
+    public static final DateTimeFormatter STANDARD_FORMATTER =
         DateTimeFormatter.ofPattern(STANDARD_FORMAT).withResolverStyle(ResolverStyle.STRICT);
-    public static final DateTimeFormatter displayFormatter =
+    public static final DateTimeFormatter DISPLAY_FORMATTER =
         DateTimeFormatter.ofPattern(DISPLAY_FORMAT).withResolverStyle(ResolverStyle.STRICT);
     private static final List<DateTimeFormatter> dateFormats =
         Arrays.asList(
-            standardFormatter,
+            STANDARD_FORMATTER,
             DateTimeFormatter.ofPattern("MMM/d/uuuu HH mm").withResolverStyle(ResolverStyle.STRICT),
             DateTimeFormatter.ofPattern("d/M/y HH mm").withResolverStyle(ResolverStyle.STRICT),
-            displayFormatter,
+            DISPLAY_FORMATTER,
             DateTimeFormatter.ofPattern("d MMM uuuu HH mm").withResolverStyle(ResolverStyle.STRICT)
         );
 
@@ -45,7 +45,7 @@ public class DateTime {
     public DateTime(String dateTime) {
         requireNonNull(dateTime);
         checkArgument(isValidDateTime(dateTime), MESSAGE_CONSTRAINTS);
-        value = LocalDateTime.parse(dateTime, standardFormatter);
+        value = LocalDateTime.parse(dateTime, STANDARD_FORMATTER);
     }
 
     /**
@@ -73,7 +73,7 @@ public class DateTime {
      * @return dateString converted to display format.
      */
     public String getDisplayValue() {
-        return value.format(displayFormatter);
+        return value.format(DISPLAY_FORMATTER);
     }
 
     /**
@@ -85,7 +85,7 @@ public class DateTime {
      */
     @Override
     public String toString() {
-        return value.format(standardFormatter);
+        return value.format(STANDARD_FORMATTER);
     }
 
     @Override

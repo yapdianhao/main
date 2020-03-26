@@ -54,7 +54,7 @@ class DateTimeTest {
 
     @Test
     public void construct() {
-        DateTimeFormatter formatter = DateTime.standardFormatter;
+        DateTimeFormatter formatter = DateTime.STANDARD_FORMATTER;
         String stringRep = formatter.format(LocalDateTime.now());
         LocalDateTime fromFormat = LocalDateTime.parse(stringRep, formatter);
     }
