@@ -18,7 +18,9 @@ By: `Team 2103T-F09-02`      Since: `Jan 2020`      Licence: `MIT`
 
 == Introduction
 
-JelphaBot is designed for users who *prefer to use a desktop app for managing tasks*.
+Welcome to JelphaBot! +
+
+JelphaBot is designed for university students who *prefer to use a desktop app for managing tasks*.
 If you *prefer to work with a Command Line Interface* (CLI), JelphaBot allows you to work fast while still retaining the benefits of a Graphical User Interface (GUI).
 If you can type fast, JelphaBot can help you get your tasks done faster than traditional GUI apps.
 
@@ -26,6 +28,20 @@ The JelphaBot GUI is designed to allow you to *recognise important tasks at a gl
 
 Interested? Jump to the <<Quick Start>> to get started.
 Enjoy!
+
+====
+*Preface*
+
+This section explains the usage of certain repeated symbols and icons throughout the document. Happy reading!
+
+[width="100%",cols="40%,<60%,options="header",]
+|=======================================================================
+|*Symbol* | *What does it mean?*
+|<icon image>| sentence
+|<icon image>| sentence
+|=======================================================================
+
+====
 
 == Quick Start
 
@@ -54,6 +70,11 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 == Features
 ====
 *Command Format*
+
+**Task list commands**
+
+These command formats are applicable for these following commands: +
+Add Command, Edit Command, Find Command.
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add d/DESCRIPTION`, `DESCRIPTION` is a parameter which can be used as `add d/Assignment 1`.
 * Items in square brackets are optional e.g `d/DESCRIPTION [p/PRIORITY]` can be used as `d/Assignment 1 p/0` or as `d/Assignment 1`.
@@ -290,6 +311,24 @@ Valid `SORTING_ORDER` values include `date`, `module`, and `priority`.
 
 ==== Clearing all task entries : `clear`
 
+// tag::pin[]
+==== Pin Important tasks  : `pin`
+
+You can pin important tasks to the top of the tasklist with the `pin` command. +
+Pinned tasks will always be displayed in the Pinned Tasks grouping in the task list. +
+Trying to `pin` a task that is already pinned will unpin it instead.
+
+// end::pin[]
+
+==== Sort tasks : `sort`  [coming in v2.0]
+
+You can change how tasks are sorted with the `sort` command.
+Format: `sort SORTING_ORDER`
+
+Valid `SORTING_ORDER` values include `date`, `module`, and `priority`.
+
+==== Clearing all task entries : `clear`
+
 Clears all entries from the task list by calling `clear` directly from a task page or from the landing page. +
 Format: `clear`
 
@@ -386,7 +425,7 @@ Examples:
 * `calendar Apr-2020`
 Displays month of April in the year 2020 in the calendar panel on the right.
 
-==== Show tasks due on specific date : `calendar`
+=== Show tasks due on specific date : `calendar`
 Displays the tasks due on specified date, while highlighting that day on the calendar +
 Format: `calendar DATE`
 
@@ -448,5 +487,3 @@ e.g. `start 1` or `stop 1`
 e.g. `calendar Jan-1-2020`
 * *Change Calendar View* : `change MONTHYEAR` +
 e.g. `changeCalendar Apr-2020`
-
-== Can't delete this because it somehow breaks something

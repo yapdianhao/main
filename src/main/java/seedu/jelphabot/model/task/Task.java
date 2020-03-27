@@ -29,6 +29,7 @@ public class Task {
 
     private LocalDateTime startTime;
     private LocalDateTime endTime;
+    private LocalDateTime doneTime;
     private TimeSpent timeSpent;
     private boolean isTiming;
 
@@ -97,8 +98,20 @@ public class Task {
         return this.timeSpent;
     }
 
+    public void setDoneTime() {
+        this.doneTime = LocalDateTime.now();
+    }
+
+    public void setDoneTime(DateTime datetime) {
+        this.doneTime = datetime.getDateTime();
+    }
+
     public LocalDateTime getStartTime() {
         return this.startTime;
+    }
+
+    public LocalDateTime getDoneTime() {
+        return this.doneTime;
     }
 
     /**

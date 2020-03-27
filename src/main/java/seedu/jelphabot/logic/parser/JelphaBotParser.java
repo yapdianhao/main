@@ -23,6 +23,7 @@ import seedu.jelphabot.logic.commands.ShowCompletedCommand;
 import seedu.jelphabot.logic.commands.ShowIncompleteCommand;
 import seedu.jelphabot.logic.commands.StartTimerCommand;
 import seedu.jelphabot.logic.commands.StopTimerCommand;
+import seedu.jelphabot.logic.commands.SummaryCommand;
 import seedu.jelphabot.logic.parser.exceptions.ParseException;
 
 /**
@@ -89,6 +90,9 @@ public class JelphaBotParser {
 
         case CalendarCommand.COMMAND_WORD:
             return new CalendarCommandParser().parse(arguments);
+
+        case SummaryCommand.COMMAND_WORD:
+            return new SummaryCommand();
 
         case ProductivityCommand.COMMAND_WORD:
             return new ProductivityCommand();

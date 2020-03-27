@@ -48,6 +48,7 @@ public class CalendarCommandParser implements Parser<CalendarCommand> {
         } catch (java.text.ParseException e) {
             e.printStackTrace();
         }
+
         return new CalendarCommand(new TaskDueWithinDayPredicate(date));
     }
 
