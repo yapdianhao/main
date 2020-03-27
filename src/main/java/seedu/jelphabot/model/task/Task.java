@@ -30,23 +30,23 @@ public class Task {
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     private LocalDateTime doneTime;
-    private Duration duration;
-    private boolean timerIsRunning;
+    private TimeSpent timeSpent;
+    private boolean isTiming;
 
     /**
      * Every field must be present and not null.
      */
     public Task(Description description, Status status, DateTime dateTime, ModuleCode moduleCode, Priority priority,
-                Set<Tag> tags, Duration duration) {
-        requireAllNonNull(description, status, dateTime, moduleCode, tags, duration);
+                Set<Tag> tags, TimeSpent timeSpent) {
+        requireAllNonNull(description, status, dateTime, moduleCode, tags, timeSpent);
         this.description = description;
         this.status = status;
         this.dateTime = dateTime;
         this.moduleCode = moduleCode;
         this.priority = priority;
         this.tags.addAll(tags);
-        this.duration = duration;
-        this.timerIsRunning = false;
+        this.timeSpent = timeSpent;
+        this.isTiming = false;
     }
 
     public Description getDescription() {
@@ -82,7 +82,7 @@ public class Task {
      */
     public void startTimer() {
         this.startTime = LocalDateTime.now();
-        this.timerIsRunning = true;
+        this.isTiming = true;
     }
 
     /**
@@ -90,12 +90,12 @@ public class Task {
      */
     public void stopTimer() {
         this.endTime = LocalDateTime.now();
-        this.setDuration();
-        this.timerIsRunning = false;
+        this.isTiming = false;
+        this.timeSpent.addTime(new TimeSpent(Duration.between(this.startTime, this.endTime)));
     }
 
-    private void setDuration() {
-        this.duration = this.duration.plus(Duration.between(this.startTime, this.endTime));
+    public TimeSpent getTimeSpent() {
+        return this.timeSpent;
     }
 
     public void setDoneTime() {
@@ -106,16 +106,8 @@ public class Task {
         this.doneTime = datetime.getDateTime();
     }
 
-    public Duration getDuration() {
-        return this.duration;
-    }
-
     public LocalDateTime getStartTime() {
         return this.startTime;
-    }
-
-    public LocalDateTime getEndTime() {
-        return this.endTime;
     }
 
     public LocalDateTime getDoneTime() {
@@ -143,7 +135,7 @@ public class Task {
      * Returns true if the timer is running for this task.
      */
     public boolean isBeingTimed() {
-        return this.timerIsRunning;
+        return this.isTiming;
     }
 
     /**

@@ -21,6 +21,7 @@
         </Label>
         <Label fx:id="moduleCode" styleClass="cell_big_label" text="\$moduleCode" />
          <Label fx:id="status" styleClass="cell_small_label" text="\$status" />
+          <Label fx:id="timeSpent" styleClass="cell_small_label" text="\$timeSpent" />
       </HBox>
       <FlowPane fx:id="tags" />
      <Label fx:id="description" styleClass="cell_medium_label" text="\$first" />
