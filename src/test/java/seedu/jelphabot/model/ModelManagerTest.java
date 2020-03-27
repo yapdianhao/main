@@ -94,6 +94,10 @@ public class ModelManagerTest {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredTaskList().remove(0));
     }
 
+    @Test
+    public void getFilteredCalendarTaskList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredCalendarTaskList().remove(0));
+    }
 
     @Test
     public void equals() {

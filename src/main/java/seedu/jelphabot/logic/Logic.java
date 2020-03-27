@@ -51,6 +51,11 @@ public interface Logic {
     ObservableList<Task> getFilteredByCompleteTaskList();
 
     /**
+     * Returns an unmodifiable view of the tasks that were completed within the day.
+     */
+    ObservableList<Task> getFilteredByCompletedTodayTaskList();
+
+    /**
      * Returns an unmodifiable view of the incomplete tasks in the task list.
      */
     ObservableList<Task> getFilteredByIncompleteTaskList();

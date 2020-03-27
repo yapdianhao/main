@@ -26,6 +26,7 @@ import seedu.jelphabot.model.task.GroupedTaskList.Grouping;
 import seedu.jelphabot.model.task.ReminderPredicate;
 import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.model.task.UniqueTaskList;
+import seedu.jelphabot.model.task.predicates.TaskCompletedWithinDayPredicate;
 import seedu.jelphabot.model.task.predicates.TaskIsCompletedPredicate;
 import seedu.jelphabot.model.task.predicates.TaskIsIncompletePredicate;
 import seedu.jelphabot.storage.Storage;
@@ -86,10 +87,14 @@ public class LogicManager implements Logic {
     public ObservableList<Task> getFilteredByCompleteTaskList() {
         ObservableList<Task> filteredTasks = model.getFilteredTaskList();
         TaskIsCompletedPredicate predicate = new TaskIsCompletedPredicate();
-        UniqueTaskList uniqueTaskList = new UniqueTaskList();
-        FilteredList<Task> filteredList = new FilteredList<>(filteredTasks, predicate);
-        uniqueTaskList.setTasks(filteredList);
-        return uniqueTaskList.asUnmodifiableObservableList();
+        return new FilteredList<>(filteredTasks, predicate);
+    }
+
+    @Override
+    public ObservableList<Task> getFilteredByCompletedTodayTaskList() {
+        ObservableList<Task> filteredTasks = model.getFilteredTaskList();
+        TaskCompletedWithinDayPredicate pred = new TaskCompletedWithinDayPredicate();
+        return new FilteredList<>(filteredTasks, pred);
     }
 
     public ObservableList<Task> getFilteredByReminder() {
@@ -109,25 +114,14 @@ public class LogicManager implements Logic {
     public ObservableList<Task> getFilteredByIncompleteTaskList() {
         ObservableList<Task> filteredTasks = model.getFilteredTaskList();
         TaskIsIncompletePredicate taskIncompletePredicate = new TaskIsIncompletePredicate();
-        UniqueTaskList uniqueTaskList = new UniqueTaskList();
-        FilteredList<Task> filteredIncompleteList = new FilteredList<>(filteredTasks, taskIncompletePredicate);
-        FilteredList<Task> filteredIncompleteDueTodayList = new FilteredList<>(filteredIncompleteList,
-            getDueTodayPredicate()
-        );
-        uniqueTaskList.setTasks(filteredIncompleteDueTodayList);
-        return uniqueTaskList.asUnmodifiableObservableList();
+        return new FilteredList<>(filteredTasks, taskIncompletePredicate);
     }
 
     public ObservableList<Task> getFilteredByIncompleteDueTodayTaskList() {
         ObservableList<Task> filteredTasks = model.getFilteredTaskList();
         TaskIsIncompletePredicate taskIncompletePredicate = new TaskIsIncompletePredicate();
-        UniqueTaskList uniqueTaskList = new UniqueTaskList();
         FilteredList<Task> filteredIncompleteList = new FilteredList<>(filteredTasks, taskIncompletePredicate);
-        FilteredList<Task> filteredIncompleteDueTodayList = new FilteredList<>(filteredIncompleteList,
-            getDueTodayPredicate()
-        );
-        uniqueTaskList.setTasks(filteredIncompleteDueTodayList);
-        return uniqueTaskList.asUnmodifiableObservableList();
+        return new FilteredList<>(filteredIncompleteList, getDueTodayPredicate());
     }
 
     @Override
