@@ -9,6 +9,8 @@ import java.util.Set;
 import seedu.jelphabot.commons.core.index.Index;
 import seedu.jelphabot.commons.util.StringUtil;
 import seedu.jelphabot.logic.parser.exceptions.ParseException;
+import seedu.jelphabot.model.reminder.ReminderDay;
+import seedu.jelphabot.model.reminder.ReminderHour;
 import seedu.jelphabot.model.tag.Tag;
 import seedu.jelphabot.model.task.DateTime;
 import seedu.jelphabot.model.task.Description;
@@ -108,6 +110,38 @@ public class ParserUtil {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
         return new Tag(trimmedTag);
+    }
+
+    /**
+     * Parses a {@code String reminderDay} into a {@code ReminderDay}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code reminderDay} is invalid.
+     */
+    public static ReminderDay parseReminderDay(String reminderDay) throws ParseException {
+        requireNonNull(reminderDay);
+        String trimmedReminderDay = reminderDay.trim();
+        int convertedReminderDay = Integer.parseInt(trimmedReminderDay);
+        if (!ReminderDay.isValidReminderDay(convertedReminderDay)) {
+            throw new ParseException(ReminderDay.MESSAGE_CONSTRAINTS);
+        }
+        return new ReminderDay(convertedReminderDay);
+    }
+
+    /**
+     * Parses a {@code String reminderHour} into a {@code ReminderHour}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code reminderHour} is invalid.
+     */
+    public static ReminderHour parseReminderHour(String reminderHour) throws ParseException {
+        requireNonNull(reminderHour);
+        String trimmedReminderHour = reminderHour.trim();
+        int convertedReminderHour = Integer.parseInt(trimmedReminderHour);
+        if (!ReminderHour.isValidReminderHour(convertedReminderHour)) {
+            throw new ParseException(ReminderHour.MESSAGE_CONSTRAINTS);
+        }
+        return new ReminderHour(convertedReminderHour);
     }
 
     /**

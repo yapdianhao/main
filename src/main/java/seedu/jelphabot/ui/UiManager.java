@@ -48,11 +48,11 @@ public class UiManager implements Ui {
             mainWindow.fillInnerParts();
 
             // show morningCallWindow
-            morningCallWindow = new MorningCallWindow(morningCallStage, logic);
-            morningCallWindow.show();
-            morningCallWindow.fillWindow();
+            //morningCallWindow = new MorningCallWindow(morningCallStage, logic);
+            //morningCallWindow.show();
+            //morningCallWindow.fillWindow();
 
-        } catch (Throwable e) {
+        } catch (Exception e) {
             logger.severe(StringUtil.getDetails(e));
             showFatalErrorDialogAndShutdown("Fatal error during initializing", e);
         }
