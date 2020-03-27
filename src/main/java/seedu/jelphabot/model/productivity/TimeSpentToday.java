@@ -4,6 +4,7 @@ import java.time.Duration;
 
 import javafx.collections.ObservableList;
 import seedu.jelphabot.model.task.Task;
+import seedu.jelphabot.model.task.TimeSpent;
 
 /**
  * Represents the user's productivity for the day
@@ -17,30 +18,17 @@ public class TimeSpentToday {
         this.tasksDueThisWeek = tasksDueThisWeek;
     }
 
-    private Duration getTimeSpent(ObservableList<Task> taskList) {
-        Duration result = Duration.ZERO;
+    private TimeSpent getTimeSpent(ObservableList<Task> taskList) {
+        TimeSpent result = new TimeSpent(Duration.ZERO);
         for (Task task : taskList) {
-            // TODO:
-            // if (task.isBeingTimed()) {
-            //     System.out.println("is being timed");
-            //     result = result.plus(Duration.between(task.getStartTime(), LocalDateTime.now()));
-            // }
-            if (task.getDuration() != Duration.ZERO) {
-                result = result.plus(task.getDuration());
-            }
+            result.addTime(task.getTimeSpent());
         }
         return result;
     }
 
     @Override
     public String toString() {
-        Duration durationToday = getTimeSpent(tasksDueToday);
-        Duration durationWeek = durationToday.plus(getTimeSpent(tasksDueThisWeek));
-
-        return String.format("Due today: %d hours, %d minutes and %d seconds.\n"
-                                 + "\nDue this week: %d hours, %d minutes and %d seconds.",
-            durationToday.toHoursPart(), durationToday.toMinutesPart(), durationToday.toSecondsPart(),
-            durationWeek.toHoursPart(), durationWeek.toMinutesPart(), durationWeek.toSecondsPart()
-        );
+        return String.format("Due today: %s.\n\nDue in next 7 days: %s.", getTimeSpent(tasksDueToday),
+            getTimeSpent(tasksDueThisWeek));
     }
 }

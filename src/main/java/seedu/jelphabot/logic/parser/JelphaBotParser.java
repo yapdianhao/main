@@ -26,10 +26,6 @@ import seedu.jelphabot.logic.commands.StopTimerCommand;
 import seedu.jelphabot.logic.commands.SummaryCommand;
 import seedu.jelphabot.logic.parser.exceptions.ParseException;
 
-/* TODO: JEL - lock add and delete commands when timer is running for a task OR allow timer for > 1 task but identify
- * tasks by object rather than index. BUT also means that user has to have a way to end timer appropriately
- * */
-
 /**
  * Parses user input.
  */
