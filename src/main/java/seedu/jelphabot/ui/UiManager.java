@@ -47,7 +47,11 @@ public class UiManager implements Ui {
             mainWindow.show(); //This should be called before creating other UI parts
             mainWindow.fillInnerParts();
 
-            // show morningCallWindow
+            reminderPopup = new ReminderPopup(reminderStage, logic);
+            reminderPopup.show();
+            reminderPopup.fillWindow();
+
+            //show morningCallWindow
             //morningCallWindow = new MorningCallWindow(morningCallStage, logic);
             //morningCallWindow.show();
             //morningCallWindow.fillWindow();

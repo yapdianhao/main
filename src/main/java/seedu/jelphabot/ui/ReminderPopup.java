@@ -1,10 +1,12 @@
 package seedu.jelphabot.ui;
 
+//import java.util.List;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.layout.StackPane;
+//import javafx.stage.Popup;
 import javafx.stage.Stage;
 import seedu.jelphabot.commons.core.GuiSettings;
 import seedu.jelphabot.commons.core.LogsCenter;
@@ -21,6 +23,8 @@ public class ReminderPopup extends UiPart<Stage> {
     public static final String REMINDERS_STRING = "Here are your tasks that due soon!";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
+    //private final List<Popup> popupList;
+    //private final List<Task> toBeReminded;
 
     private Stage reminderStage;
     private Logic logic;
