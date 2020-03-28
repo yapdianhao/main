@@ -16,6 +16,8 @@ import seedu.jelphabot.model.Model;
 import seedu.jelphabot.model.ModelManager;
 import seedu.jelphabot.model.UserPrefs;
 import seedu.jelphabot.model.task.predicates.TaskDueWithinDayPredicate;
+import seedu.jelphabot.ui.CalendarPanel;
+import seedu.jelphabot.ui.MainWindow;
 
 /**
  * Contains integration tests (interaction with the Model) for
@@ -24,6 +26,7 @@ import seedu.jelphabot.model.task.predicates.TaskDueWithinDayPredicate;
 public class CalendarCommandTest {
     private Model model = new ModelManager(getTypicalJelphaBot(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalJelphaBot(), new UserPrefs());
+    private CalendarPanel calendarPanel = MainWindow.getCalendarPanel();
 
     @Test
     public void execute_calendar_success() {
@@ -44,14 +47,14 @@ public class CalendarCommandTest {
         }
         TaskDueWithinDayPredicate secondPredicate = new TaskDueWithinDayPredicate(date);
 
-        CalendarCommand calendarFirstCommand = new CalendarCommand(firstPredicate);
-        CalendarCommand calendarSecondCommand = new CalendarCommand(secondPredicate);
+        CalendarCommand calendarFirstCommand = new CalendarCommand(firstPredicate, calendarPanel);
+        CalendarCommand calendarSecondCommand = new CalendarCommand(secondPredicate, calendarPanel);
 
         // same object -> returns true
         assertTrue(calendarFirstCommand.equals(calendarFirstCommand));
 
         // same values -> returns true
-        CalendarCommand calendarFirstCommandCopy = new CalendarCommand(firstPredicate);
+        CalendarCommand calendarFirstCommandCopy = new CalendarCommand(firstPredicate, calendarPanel);
         assertTrue(calendarFirstCommand.equals(calendarFirstCommandCopy));
 
         // different types -> returns false

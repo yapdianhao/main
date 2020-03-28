@@ -30,6 +30,7 @@ import seedu.jelphabot.model.task.GroupedTaskList;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
+    private static CalendarPanel calendarPanel;
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -40,7 +41,6 @@ public class MainWindow extends UiPart<Stage> {
     private GroupedTaskListPanel taskListPanel;
     private TaskListPanel calendarTaskListPanel;
     private ProductivityPanel productivityPanel;
-    private CalendarPanel calendarPanel;
     private ResultDisplay resultDisplay;
     private SummaryPanel summaryPanel;
     private HelpWindow helpWindow;
@@ -94,6 +94,10 @@ public class MainWindow extends UiPart<Stage> {
 
     public Stage getPrimaryStage() {
         return primaryStage;
+    }
+
+    public static CalendarPanel getCalendarPanel() {
+        return calendarPanel;
     }
 
     private void setAccelerators() {

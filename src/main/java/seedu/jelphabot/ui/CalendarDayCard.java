@@ -27,6 +27,10 @@ public class CalendarDayCard extends UiPart<Region> {
         calendarDay.setText(String.valueOf(calendarDate.getDay()));
     }
 
+    public CalendarDate getDate() {
+        return calendarDate;
+    }
+
     /**
      * Highlights today's date on the calendar.
      */
@@ -34,6 +38,28 @@ public class CalendarDayCard extends UiPart<Region> {
         calendarDay.setTextFill(Paint.valueOf("#ffffff"));
         calendarDay.setStyle("-fx-font-weight:bold");
         circleDay.setFill(Paint.valueOf("#4169E1"));
+    }
+
+    /**
+     * Remove highlight for today's date on the calendar.
+     */
+    public void removeHighlightedToday() {
+        calendarDay.setTextFill(Paint.valueOf("#4169E1"));
+        circleDay.setFill(Paint.valueOf("#FFF8DC")); //cornsilk, background colour
+    }
+
+    /**
+     * Remove highlight for a date on the calendar.
+     */
+    public void removeHighlightedDay() {
+        circleDay.setFill(Paint.valueOf("#FFF8DC")); //cornsilk, background colour
+    }
+
+    /**
+     * Highlights the day card on the calendar when calendar command is run.
+     */
+    public void highlightDay() {
+        circleDay.setFill(Paint.valueOf("#B0C4DE"));
     }
 
     /**
