@@ -3,7 +3,6 @@ package seedu.jelphabot.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDate;
-import java.time.Year;
 import java.time.YearMonth;
 
 import seedu.jelphabot.commons.core.Messages;
@@ -30,7 +29,7 @@ public class CalendarCommand extends Command {
     public static final String MESSAGE_SWITCH_PANEL_ACKNOWLEDGEMENT = "Switched to calendar panel.";
 
     public static final String MESSAGE_SWITCH_CALENDAR_VIEW_ACKNOWLEDGEMENT = "Switched calendar panel to : %s";
-    public static final String  MESSAGE_SWITCH_CALENDAR_TODAY_ACKNOWLEDGEMENT = "Switched calendar panel to : %s, "
+    public static final String MESSAGE_SWITCH_CALENDAR_TODAY_ACKNOWLEDGEMENT = "Switched calendar panel to : %s, "
                                                                                     + "displaying all your tasks "
                                                                                     + "due today!";
 

@@ -6,18 +6,13 @@ import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
-import seedu.jelphabot.commons.core.LogsCenter;
 import seedu.jelphabot.model.calendar.CalendarDate;
-
-import java.util.logging.Logger;
 
 /**
  * UI component that displays the day on the calendar.
  */
 public class CalendarDayCard extends UiPart<Region> {
     private static final String FXML = "CalendarDayCard.fxml";
-
-    private final Logger logger = LogsCenter.getLogger(CalendarDayCard.class);
 
     private CalendarDate calendarDate;
 

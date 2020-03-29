@@ -1,9 +1,6 @@
 package seedu.jelphabot.model.task.predicates;
 
-import static seedu.jelphabot.commons.util.DateUtil.dateToLocalDate;
-
 import java.time.LocalDate;
-import java.util.Date;
 
 import seedu.jelphabot.model.task.DateTime;
 import seedu.jelphabot.model.task.Task;

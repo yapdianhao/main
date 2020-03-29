@@ -77,6 +77,10 @@ public class CalendarPanel extends UiPart<Region> {
         logger.info("length of dayCardsInMonth " + dayCardsInMonth.size());
     }
 
+    /**
+     * Updatest the MonthYear Label of the Calendar Panel with the inputted parameter.
+     * @param yearMonth Specifies the year and month of the calendar to be set to.
+     */
     public void changeMonthYearLabel(YearMonth yearMonth) {
         calendarDate = new CalendarDate(yearMonth.atEndOfMonth());
         monthYear.setText(calendarDate.getMonthName() + ", " + calendarDate.getYear());
