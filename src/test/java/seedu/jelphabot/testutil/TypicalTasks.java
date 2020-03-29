@@ -17,7 +17,6 @@ import java.util.List;
 import seedu.jelphabot.model.JelphaBot;
 import seedu.jelphabot.model.task.Task;
 
-// TODO: add start and end time
 /**
  * A utility class containing a list of {@code Task} objects to be used in tests.
  */

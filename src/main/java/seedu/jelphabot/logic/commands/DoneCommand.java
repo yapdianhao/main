@@ -3,7 +3,6 @@ package seedu.jelphabot.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.jelphabot.model.Model.PREDICATE_SHOW_ALL_TASKS;
 
-import java.time.Duration;
 import java.util.List;
 import java.util.Set;
 
@@ -19,6 +18,7 @@ import seedu.jelphabot.model.task.ModuleCode;
 import seedu.jelphabot.model.task.Priority;
 import seedu.jelphabot.model.task.Status;
 import seedu.jelphabot.model.task.Task;
+import seedu.jelphabot.model.task.TimeSpent;
 
 /**
  * Marks the specified as done by updating it's status to COMPLETE.
@@ -56,6 +56,7 @@ public class DoneCommand extends Command {
 
         Task taskToMarkDone = lastShownList.get(index.getZeroBased());
         Task doneTask = createDoneTask(taskToMarkDone);
+        doneTask.setDoneTime();
 
         if (taskToMarkDone.equals(doneTask)) {
             throw new CommandException(MESSAGE_TASK_ALREADY_MARKED_COMPLETE);
@@ -81,9 +82,9 @@ public class DoneCommand extends Command {
         DateTime dateTime = task.getDateTime();
         Status status = Status.COMPLETE;
         Priority priority = task.getPriority();
-        Duration duration = task.getDuration();
+        TimeSpent timeSpent = task.getTimeSpent();
 
-        return new Task(description, status, dateTime, moduleCode, priority, tags, duration);
+        return new Task(description, status, dateTime, moduleCode, priority, tags, timeSpent);
     }
 
     @Override

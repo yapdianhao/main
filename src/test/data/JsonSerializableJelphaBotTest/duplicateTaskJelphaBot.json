@@ -1,19 +1,23 @@
 {
   "tasks": [ {
     "status" : "INCOMPLETE",
-    "dateTime" : "Feb-1-2020 11 00",
+    "dateTime" : "Mar-26-2020 23 59",
     "priority" : "HIGH",
-    "tagged" : [ "school" ],
-    "duration" : "PT25.9462948S",
-    "description" : "Online Midterm Assessment",
-    "moduleCode" : "MA1101R"
+    "tagged" : [ "graded" ],
+    "timeSpent" : {
+      "duration" : "PT7M"
+    },
+    "description" : "Individual Assignment 1",
+    "moduleCode" : "CS3230"
   }, {
     "status" : "INCOMPLETE",
-    "dateTime" : "Feb-1-2020 11 00",
+    "dateTime" : "Mar-26-2020 23 59",
     "priority" : "HIGH",
-    "tagged" : [ "school" ],
-    "duration" : "PT25.9462948S",
-    "description" : "Online Midterm Assessment",
-    "moduleCode" : "MA1101R"
+    "tagged" : [ "graded" ],
+    "timeSpent" : {
+      "duration" : "PT7M"
+    },
+    "description" : "Individual Assignment 1",
+    "moduleCode" : "CS3230"
   } ]
 }

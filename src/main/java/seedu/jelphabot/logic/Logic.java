@@ -1,6 +1,7 @@
 package seedu.jelphabot.logic;
 
 import java.nio.file.Path;
+import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.jelphabot.commons.core.GuiSettings;
@@ -40,9 +41,19 @@ public interface Logic {
     ObservableList<Task> getFilteredTaskList();
 
     /**
+     * Returns an unmodifiable view of the filtered list of tasks in the Calendar.
+     */
+    ObservableList<Task> getFilteredCalendarTaskList();
+
+    /**
      * Returns an unmodifiable view of the completed tasks in the task list.
      */
     ObservableList<Task> getFilteredByCompleteTaskList();
+
+    /**
+     * Returns an unmodifiable view of the tasks that were completed within the day.
+     */
+    ObservableList<Task> getFilteredByCompletedTodayTaskList();
 
     /**
      * Returns an unmodifiable view of the incomplete tasks in the task list.
@@ -86,4 +97,11 @@ public interface Logic {
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
+
+    /**
+     * Updates the filter of the filtered calendar task list to filter by the given {@code predicate}.
+     *
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredCalendarTaskList(Predicate<Task> predicate);
 }
