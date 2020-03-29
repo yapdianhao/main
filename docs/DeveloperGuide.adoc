@@ -374,14 +374,14 @@ Refer to the guide <<DevOps#, here>>.
 *Target user profile*:
 
 * NUS students who need to manage a large number of tasks
-* prefer using a desktop app over other types
-* wants to distinguish at first glance important and unimportant tasks
-* can type fast; prefers typing over mouse input
-* is reasonably comfortable using CLI (Command Line Interface) apps
+* Prefers using a desktop app over other types
+* Wants to distinguish at first glance important and unimportant tasks
+* Can type fast; prefers typing over mouse input
+* Is reasonably comfortable using CLI (Command Line Interface) applications
 
-*Value proposition*: The user will be able to manage tasks faster than a typical mouse/GUI driven app, and the visual
-representation of tasks in the UI will allow the user to look through entire lists of tasks more quickly than in
-the terminal.
+*Value proposition*: Using this application will increase the user's efficiency in managing tasks than when
+using a typical mouse/GUI driven application. The visual representation of tasks in the UI will also allow the user to
+look through entire lists of tasks more quickly than in the terminal.
 
 [appendix]
 == User Stories
@@ -391,57 +391,63 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 [width="59%",cols="22%,<23%,<25%,<30%",options="header",]
 |=======================================================================
 |Priority |As a ... |I want to ... |So that I can...
+|`* * *` |organised student |be able to have a visual overarching view of my events and deadlines in a calendar. |
+
+|`* * *` |visual student |be able to see my tasks due for specific days in a week or month |easily plan my schedule.
+
 |`* * *` |student with good work-life balance |view tasks with different tags (e.g. health, work) easily |
 
-|`* * *` |goal-oriented student |set goals for the next day |
+|`* * *` |goal-oriented student |set goals for the next day |commit myself to what I want to achieve.
 
 |`* * *` |student |track tasks I've completed in a log | better understand myself and time management.
 
-|`* * *` |student who has a flexible schedule |reschedule my tasks easily |
+|`* * *` |student with a flexible schedule |reschedule my tasks easily |
 
-|`* * *` |student taking multiple modules |*_tag my tasks_* |manage the time spent on each module.
+|`* * *` |student taking multiple modules |*_tag_* my tasks |manage the time spent on each module.
 
-|`* * *` |student who has a flexible schedule |*_remove tasks_* when they are no longer relevant |
+|`* * *` |student with a flexible schedule |*_remove tasks_* when they are no longer relevant |
 
 |`* * *` |student who gets tasks done frequently |marks my tasks as completed |focus on the unfinished ones.
 
-|`* * *` |lazy student |which of my classes have graded attendance |have more time to laze.
+|`* * *` |student who does not stay on campus |which of my classes does not have graded attendance |so that I can minimise travelling time.
 
 |`* * *` |busy student |what tasks are important at first glance |manage my time well.
 
-|`* * *` |student who loves to procrastinate | get reminders of tasks I have delayed | don't forget them
+|`* * *` |student who loves to procrastinate | get reminders of tasks I have delayed | don't forget to complete them.
 
-|`* * *` |hall resident |keep track of my events and commitments | plan my time properly
+|`* * *` |hall resident |keep track of my events and commitments | plan my time properly.
 
-|`* *` |student |track my habits| know if I have strayed from my goal
+|`* * *` |busy student |track the amount of time spent on each task | plan my schedule effectively.
 
-|`* *` |student |keep track of number of tasks completed and the number of tasks I have to complete by a certain date time |
+|`* * *` |goal-oriented student |keep track of my progress in a day | be motivated to be more productive.
+
+|`* *` |student |keep track of number of tasks completed and the number of tasks I have to complete by a certain date/time |
 
 |`* *` |student who actively keeps track of upcoming tasks |view tasks specifically for a range of date/time |
 
 |`* *` |visual student |customize my tags |
 
-|`* *` |forgetful student |reminders for exam dates | plan my revision efficiently
+|`* *` |student that is driven by motivation |receive timely compliments | stay motivated to complete my tasks on time.
 
-|`* *` |unmotivated student |bot that does a morning call for me | wake up and start my day on time
+|`* *` |forgetful student |reminders for exam dates | plan my revision efficiently.
 
-|`* *` |free-spirited student |set deadlines for doing tutorials and watching webcasts | do things at my own pace while not lagging behind in class
+|`* *` |unmotivated student |bot that does a morning call for me | wake up and start my day on time.
+
+|`* *` |free-spirited student |set deadlines for doing tutorials and watching webcasts | do things at my own pace while not lagging behind in class.
+
+|`* *` |who needs validation and reminders |debriefed on my achievements (task completed, migrated, scheduled) for that day and what is in store for me the next day |
 
 |`*` |student with many group projects |be able to import and export shared text files |
 
-|`*` |who needs validation and reminders |debriefed on my achievements (task completed, migrated, scheduled) for that day and what is in store for me the next day |
+|`*` |irresponsible student |motivated to complete my tasks |actually complete my tasks in time.
 
-|`*` |irresponsible student |“motivated” to complete my tasks | actually complete my tasks in time
+|`*` |user who doesn't always open the computer to run a jar file in the morning |have a convenient way to enter and receive notifications |
 
-|`*` |student that is driven by motivation |receive timely compliments | stay motivated to complete my tasks on time
+|`*` |irresponsible student |criticised |learn from my mistakes and be more responsible in the future.
 
-|`*` |someone who doesnt always open the computer to run a jar file in the morning |have a convenient way to enter and receive notifications |
+|`*` |talented student |know which hackathons I already participated in | polish my portfolio.
 
-|`*` |lives alone and cook myself |know that what stuffs I have to buy at fairprice |cook my meals
-
-|`*` |irresponsible student |scolded |learn from my mistakes and be more responsible in the future
-
-|`*` |talented student |know which hackathons I already participated in | polish my portfolio
+|`*` |student |track my habits| know if I have strayed from my goal.
 |=======================================================================
 
 _{More to be added}_
