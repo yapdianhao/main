@@ -3,6 +3,7 @@ package seedu.jelphabot.ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import seedu.jelphabot.model.calendar.CalendarDate;
@@ -27,6 +28,10 @@ public class CalendarDayCard extends UiPart<Region> {
         calendarDay.setText(String.valueOf(calendarDate.getDay()));
     }
 
+    public CalendarDate getDate() {
+        return calendarDate;
+    }
+
     /**
      * Highlights today's date on the calendar.
      */
@@ -34,6 +39,28 @@ public class CalendarDayCard extends UiPart<Region> {
         calendarDay.setTextFill(Paint.valueOf("#ffffff"));
         calendarDay.setStyle("-fx-font-weight:bold");
         circleDay.setFill(Paint.valueOf("#4169E1"));
+    }
+
+    /**
+     * Remove highlight for today's date on the calendar.
+     */
+    public void removeHighlightedToday() {
+        calendarDay.setTextFill(Paint.valueOf("#4169E1"));
+        circleDay.setFill(Color.TRANSPARENT);
+    }
+
+    /**
+     * Remove highlight for a date on the calendar.
+     */
+    public void removeHighlightedDay() {
+        circleDay.setFill(Color.TRANSPARENT);
+    }
+
+    /**
+     * Highlights the day card on the calendar when calendar command is run.
+     */
+    public void highlightDay() {
+        circleDay.setFill(Paint.valueOf("#B0C4DE"));
     }
 
     /**

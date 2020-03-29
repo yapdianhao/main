@@ -1,12 +1,14 @@
 package seedu.jelphabot.logic.parser;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.time.LocalDate;
+import java.time.YearMonth;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 
 import seedu.jelphabot.commons.core.Messages;
+import seedu.jelphabot.commons.util.DateUtil;
 import seedu.jelphabot.logic.commands.CalendarCommand;
 import seedu.jelphabot.logic.parser.exceptions.ParseException;
 import seedu.jelphabot.model.task.predicates.TaskDueWithinDayPredicate;
@@ -16,14 +18,24 @@ import seedu.jelphabot.model.task.predicates.TaskDueWithinDayPredicate;
  */
 public class CalendarCommandParser implements Parser<CalendarCommand> {
 
-    private static final List<DateFormat> dateFormats =
-        Arrays.asList(
-            new SimpleDateFormat("MMM-d-yyyy"),
-            new SimpleDateFormat("MMM/d/yyyy"),
-            new SimpleDateFormat("d/M/y"),
-            new SimpleDateFormat("d-MMM-yyyy"),
-            new SimpleDateFormat("d MMM yyyy")
-        );
+    private static final DateTimeFormatter ACCEPTED_DATE_FORMATS =
+        new DateTimeFormatterBuilder()
+            .appendOptional(DateTimeFormatter.ofPattern("MMM-d-uuuu"))
+            .appendOptional(DateTimeFormatter.ofPattern("MMM/d/uuuu"))
+            .appendOptional(DateTimeFormatter.ofPattern("d-MMM-uuuu"))
+            .appendOptional(DateTimeFormatter.ofPattern("d/MMM/uuuu"))
+            .toFormatter().withResolverStyle(ResolverStyle.STRICT);
+
+    private static final DateTimeFormatter ACCEPTED_YEARMONTH_FORMATS =
+        new DateTimeFormatterBuilder()
+            .appendOptional(DateTimeFormatter.ofPattern("MMM-uuuu"))
+            .appendOptional(DateTimeFormatter.ofPattern("MMM/uuuu"))
+            .appendOptional(DateTimeFormatter.ofPattern("uuuu/MMM"))
+            .appendOptional(DateTimeFormatter.ofPattern("uuuu-MM"))
+            .appendOptional(DateTimeFormatter.ofPattern("uuuu/MM"))
+            .appendOptional(DateTimeFormatter.ofPattern("uu-MM"))
+            .appendOptional(DateTimeFormatter.ofPattern("uu/MM"))
+            .toFormatter().withResolverStyle(ResolverStyle.STRICT);
 
     /**
      * Parses the given {@code String} of argument in the context of the CalendarCommand
@@ -36,49 +48,56 @@ public class CalendarCommandParser implements Parser<CalendarCommand> {
             // throw new ParseException(
             //     String.format(MESSAGE_INVALID_COMMAND_FORMAT, CalendarCommand.MESSAGE_USAGE));
             return new CalendarCommand();
-        }
-        //case for switching month view and switching date for task list
-        Date date = null;
-        try {
+        } else if (input.length() > 8) {
+            //case for switching date for task list
             if (!isValidDate(input)) {
                 throw new ParseException(Messages.MESSAGE_INVALID_DATE_FORMAT);
             }
-            DateFormat currentFormat = getDateFormatOfString(input);
-            date = currentFormat.parse(input);
-        } catch (java.text.ParseException e) {
-            e.printStackTrace();
-        }
-
-        return new CalendarCommand(new TaskDueWithinDayPredicate(date));
-    }
-
-    private static DateFormat getDateFormatOfString(String dateTimeString) {
-        for (DateFormat df : dateFormats) {
-            try {
-                df.parse(dateTimeString);
-                return df;
-            } catch (java.text.ParseException e) {
-                // do nothing, try next
+            LocalDate date = LocalDate.parse(input, ACCEPTED_DATE_FORMATS);
+            return new CalendarCommand(new TaskDueWithinDayPredicate(date));
+        } else if (input.equals("today")) {
+            YearMonth yearMonth = YearMonth.now();
+            return new CalendarCommand(new TaskDueWithinDayPredicate(DateUtil.getDateToday()), yearMonth);
+        } else {
+            //case for switching month view
+            if (!isValidYearMonth(input)) {
+                throw new ParseException(Messages.MESSAGE_INVALID_YEARMONTH_FORMAT);
             }
+            YearMonth yearMonth = YearMonth.parse(input, ACCEPTED_YEARMONTH_FORMATS);
+            return new CalendarCommand(yearMonth);
         }
-        return null;
     }
 
     /**
-     * Returns if the given string is a valid date format, specified in the List dateFormatStrings.
+     * Returns if the given string is a valid date format, specified in
+     * the ACCEPTED_DATE_FORMATS DateTimeFormatter.
      *
      * @param test The date to be checked.
      * @return The boolean representing whether the date provided is valid.
      */
     public static boolean isValidDate(String test) {
-        for (DateFormat df : dateFormats) {
-            try {
-                df.parse(test);
-                return true;
-            } catch (java.text.ParseException e) {
-                // do nothing, try next
-            }
+        try {
+            LocalDate.parse(test, ACCEPTED_DATE_FORMATS);
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
         }
-        return false;
     }
+
+    /**
+     * Returns if the given string is a valid date format, specified in
+     * the ACCEPTED_YEARMONTH_FORMATS DateTimeFormatter.
+     *
+     * @param test The date of yearmonth to be checked.
+     * @return The boolean representing whether the date provided is valid.
+     */
+    public static boolean isValidYearMonth(String test) {
+        try {
+            YearMonth.parse(test, ACCEPTED_YEARMONTH_FORMATS);
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+    }
+
 }

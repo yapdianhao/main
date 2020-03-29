@@ -5,10 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.jelphabot.testutil.TypicalTasks.getTypicalJelphaBot;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
@@ -32,16 +29,11 @@ public class CalendarCommandTest {
         assertCommandSuccess(new CalendarCommand(), model, expectedCommandResult, expectedModel);
     }
 
+    //TODO can add comparison for YearMonth param
     @Test
     public void equals() {
         TaskDueWithinDayPredicate firstPredicate = new TaskDueWithinDayPredicate();
-        DateFormat format = new SimpleDateFormat("MMM-d-yyyy");
-        Date date = null;
-        try {
-            date = format.parse("jan-1-2020");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        LocalDate date = LocalDate.now().plusMonths(1).plusDays(1);
         TaskDueWithinDayPredicate secondPredicate = new TaskDueWithinDayPredicate(date);
 
         CalendarCommand calendarFirstCommand = new CalendarCommand(firstPredicate);
