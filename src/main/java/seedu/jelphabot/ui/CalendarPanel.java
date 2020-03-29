@@ -15,11 +15,13 @@ import seedu.jelphabot.model.calendar.CalendarDate;
  * UI component for calendar view to be displayed.
  */
 public class CalendarPanel extends UiPart<Region> {
+
     private static final String FXML = "CalendarPanel.fxml";
+    private static ArrayList<CalendarDayCard> dayCardsInMonth;
     private final Logger logger = LogsCenter.getLogger(CalendarPanel.class);
 
     private CalendarDate calendarDate;
-    private ArrayList<CalendarDayCard> monthDayCards;
+    private CalendarDayCard highlightedDay;
 
     @FXML
     private TabPane mainWindowTabPane;
@@ -47,22 +49,24 @@ public class CalendarPanel extends UiPart<Region> {
      */
     public void fillGridPane(CalendarDate firstDay) {
         int weekIndex = firstDay.getDayOfWeek() - 1;
-        int lengthCurrMonth = firstDay.getLengthCurrMonth();
         int lengthPrevMonth = firstDay.getLengthPrevMonth();
         int day = lengthPrevMonth - weekIndex + 1;
         CalendarDate currDate = firstDay.createPrevMonthDate(day);
+        dayCardsInMonth = new ArrayList<>();
 
         for (int row = 0; row < 6; row++) {
             for (int col = 0; col < 7; col++) {
                 CalendarDayCard calendarDayCard = new CalendarDayCard(currDate);
                 if (currDate.isThisMonth()) {
                     calendarDayCard.setSameMonth();
+                    dayCardsInMonth.add(calendarDayCard);
                 } else {
                     calendarDayCard.setDiffMonth();
                 }
                 if (currDate.isToday()) {
-                    logger.info("today date");
+                    // logger.info("today date");
                     calendarDayCard.highlightToday();
+                    highlightedDay = calendarDayCard;
                 }
                 calendarGrid.add(calendarDayCard.getRoot(), col, row);
                 currDate = currDate.dateNextDay();
@@ -85,5 +89,19 @@ public class CalendarPanel extends UiPart<Region> {
         return mainWindowTabPane.isPressed();
     }
 
+    public static CalendarDayCard getDayCard(int dayIndex) {
+        return CalendarPanel.dayCardsInMonth.get(dayIndex - 1);
+    }
 
+    public CalendarDayCard getHighlightedDay() {
+        return highlightedDay;
+    }
+
+    public void setHighlightedDay(int dayIndex) {
+        highlightedDay = dayCardsInMonth.get(dayIndex - 1);
+    }
+
+    public boolean isTodayHighlighted() {
+        return highlightedDay.getDate().isToday();
+    }
 }

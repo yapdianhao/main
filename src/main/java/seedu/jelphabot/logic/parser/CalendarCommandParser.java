@@ -10,6 +10,7 @@ import seedu.jelphabot.commons.core.Messages;
 import seedu.jelphabot.logic.commands.CalendarCommand;
 import seedu.jelphabot.logic.parser.exceptions.ParseException;
 import seedu.jelphabot.model.task.predicates.TaskDueWithinDayPredicate;
+import seedu.jelphabot.ui.MainWindow;
 
 /**
  * Parses input argument and creates a new CalendarCommand object
@@ -49,7 +50,7 @@ public class CalendarCommandParser implements Parser<CalendarCommand> {
             e.printStackTrace();
         }
 
-        return new CalendarCommand(new TaskDueWithinDayPredicate(date));
+        return new CalendarCommand(new TaskDueWithinDayPredicate(date), MainWindow.getCalendarPanel());
     }
 
     private static DateFormat getDateFormatOfString(String dateTimeString) {

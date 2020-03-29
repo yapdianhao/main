@@ -27,6 +27,10 @@ public class TaskDueWithinDayPredicate implements FilterTaskByDatePredicate {
         this.date = dateTime.getDate();
     }
 
+    public LocalDate getDate() {
+        return date;
+    }
+
     /**
      * Tests that a {@code Task}'s {@code DateTime} falls within the given Date.
      */
