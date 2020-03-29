@@ -20,6 +20,7 @@ import seedu.jelphabot.model.task.Task;
 public class ReminderPopup extends UiPart<Stage> {
 
     public static final String FXML = "ReminderPopup.fxml";
+
     public static final String REMINDERS_STRING = "Here are your tasks that due soon!";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
