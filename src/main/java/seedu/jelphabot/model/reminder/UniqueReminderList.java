@@ -1,4 +1,4 @@
-package seedu.jelphabot.model.task;
+package seedu.jelphabot.model.reminder;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.jelphabot.commons.util.CollectionUtil.requireAllNonNull;
@@ -9,7 +9,6 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.jelphabot.model.reminder.Reminder;
 import seedu.jelphabot.model.reminder.exceptions.DuplicateReminderException;
 import seedu.jelphabot.model.reminder.exceptions.ReminderNotFoundException;
 

@@ -20,6 +20,7 @@ import seedu.jelphabot.model.task.ModuleCode;
 import seedu.jelphabot.model.task.Priority;
 import seedu.jelphabot.model.task.Status;
 import seedu.jelphabot.model.task.Task;
+import seedu.jelphabot.model.task.TimeSpent;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -59,7 +60,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Task task = new Task(description, Status.INCOMPLETE, dateTime, moduleCode, priority, tagList, Duration.ZERO);
+        Task task = new Task(description, Status.INCOMPLETE, dateTime, moduleCode, priority, tagList,
+            new TimeSpent(Duration.ZERO));
 
         return new AddCommand(task);
     }

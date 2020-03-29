@@ -14,7 +14,7 @@ import seedu.jelphabot.model.productivity.Productivity;
 import seedu.jelphabot.model.task.Status;
 import seedu.jelphabot.model.task.Task;
 
-// TODO: show time spent while timer is running.
+// TODO: allow more than 1 timer running at a time.
 /**
  * Starts a timer for a task.
  */

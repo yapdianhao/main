@@ -23,11 +23,8 @@ import seedu.jelphabot.logic.commands.ShowCompletedCommand;
 import seedu.jelphabot.logic.commands.ShowIncompleteCommand;
 import seedu.jelphabot.logic.commands.StartTimerCommand;
 import seedu.jelphabot.logic.commands.StopTimerCommand;
+import seedu.jelphabot.logic.commands.SummaryCommand;
 import seedu.jelphabot.logic.parser.exceptions.ParseException;
-
-/* TODO: JEL - lock add and delete commands when timer is running for a task OR allow timer for > 1 task but identify
- * tasks by object rather than index. BUT also means that user has to have a way to end timer appropriately
- * */
 
 /**
  * Parses user input.
@@ -93,6 +90,9 @@ public class JelphaBotParser {
 
         case CalendarCommand.COMMAND_WORD:
             return new CalendarCommandParser().parse(arguments);
+
+        case SummaryCommand.COMMAND_WORD:
+            return new SummaryCommand();
 
         case ProductivityCommand.COMMAND_WORD:
             return new ProductivityCommand();

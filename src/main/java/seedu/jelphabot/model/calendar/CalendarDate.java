@@ -21,8 +21,12 @@ public class CalendarDate {
         return new CalendarDate(DateUtil.getDateToday());
     }
 
+    public LocalDate getDate() {
+        return date;
+    }
+
     public boolean isToday() {
-        return date.equals(getCurrent());
+        return date.equals(DateUtil.getDateToday());
     }
 
     public int getDay() {
@@ -69,8 +73,8 @@ public class CalendarDate {
         return new CalendarDate(datePrevMonth);
     }
 
-    public boolean isThisMonth() {
-        return getMonth() == getCurrent().getMonth();
+    public boolean isSameMonth(int month) {
+        return getMonth() == month;
     }
 
     public CalendarDate dateNextDay() {
