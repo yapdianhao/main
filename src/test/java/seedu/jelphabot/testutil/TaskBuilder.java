@@ -1,5 +1,6 @@
 package seedu.jelphabot.testutil;
 
+import java.time.Duration;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -10,12 +11,12 @@ import seedu.jelphabot.model.task.ModuleCode;
 import seedu.jelphabot.model.task.Priority;
 import seedu.jelphabot.model.task.Status;
 import seedu.jelphabot.model.task.Task;
+import seedu.jelphabot.model.task.TimeSpent;
 import seedu.jelphabot.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building Task objects.
  */
-// TODO rewrite classes referencing TaskBuilder
 public class TaskBuilder {
 
     public static final String DEFAULT_DESCRIPTION = "Default Task 1";
@@ -23,6 +24,7 @@ public class TaskBuilder {
     public static final String DEFAULT_DATETIME = "May-1-2020 00 01";
     public static final String DEFAULT_MODULE_CODE = "TES1000";
     public static final String DEFAULT_PRIORITY = "0";
+    public static final Duration DEFAULT_TIME_SPENT = Duration.ZERO;
 
     private Description description;
     private Status status;
@@ -30,6 +32,7 @@ public class TaskBuilder {
     private ModuleCode moduleCode;
     private Priority priority;
     private Set<Tag> tags;
+    private TimeSpent timeSpent;
 
     public TaskBuilder() {
         description = new Description(DEFAULT_DESCRIPTION);
@@ -38,6 +41,7 @@ public class TaskBuilder {
         moduleCode = new ModuleCode(DEFAULT_MODULE_CODE);
         priority = Priority.toPriority(DEFAULT_PRIORITY);
         tags = new HashSet<>();
+        timeSpent = new TimeSpent(DEFAULT_TIME_SPENT);
     }
 
     /**
@@ -50,6 +54,7 @@ public class TaskBuilder {
         moduleCode = taskToCopy.getModuleCode();
         priority = taskToCopy.getPriority();
         tags = new HashSet<>(taskToCopy.getTags());
+        timeSpent = taskToCopy.getTimeSpent();
     }
 
     /**
@@ -103,7 +108,7 @@ public class TaskBuilder {
     }
 
     public Task build() {
-        return new Task(description, status, dateTime, moduleCode, priority, tags);
+        return new Task(description, status, dateTime, moduleCode, priority, tags, timeSpent);
     }
 
 }

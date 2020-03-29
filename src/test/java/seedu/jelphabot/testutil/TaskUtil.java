@@ -14,28 +14,28 @@ import seedu.jelphabot.model.tag.Tag;
 import seedu.jelphabot.model.task.Task;
 
 /**
- * A utility class for Person.
+ * A utility class for Task.
  */
-// TODO: rewrite this class to add in new model class details
 public class TaskUtil {
 
     /**
-     * Returns an add command string for adding the {@code person}.
+     * Returns an add command string for adding the {@code task}.
      */
     public static String getAddCommand(Task task) {
         return AddCommand.COMMAND_WORD + " " + getTaskDetails(task);
     }
 
     /**
-     * Returns the part of command string for the given {@code person}'s details.
+     * Returns the part of command string for the given {@code task}'s details.
+     * Does not include status as status cannot be set from a command string.
      */
     public static String getTaskDetails(Task task) {
         StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_DESCRIPTION + task.getDescription().fullDescription + " ");
-        sb.append(PREFIX_DATETIME + task.getDateTime().value + " ");
-        sb.append(PREFIX_MODULE_CODE + task.getModuleCode().value + " ");
-        sb.append(PREFIX_PRIORITY + task.getPriority().toString() + " ");
-        task.getTags().stream().forEach(s -> sb.append(PREFIX_TAG + s.tagName + " "));
+        sb.append(PREFIX_DESCRIPTION).append(task.getDescription().fullDescription).append(" ");
+        sb.append(PREFIX_DATETIME).append(task.getDateTime().toString()).append(" ");
+        sb.append(PREFIX_MODULE_CODE).append(task.getModuleCode().value).append(" ");
+        sb.append(PREFIX_PRIORITY).append(task.getPriority().toString()).append(" ");
+        task.getTags().forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
         return sb.toString();
     }
 
@@ -45,11 +45,11 @@ public class TaskUtil {
     public static String getEditTaskDescriptorDetails(EditTaskDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getDescription()
-                .ifPresent(name -> sb.append(PREFIX_DESCRIPTION).append(name.fullDescription).append(" "));
+            .ifPresent(name -> sb.append(PREFIX_DESCRIPTION).append(name.toString()).append(" "));
         descriptor.getDateTime()
-            .ifPresent(dateTime -> sb.append(PREFIX_DATETIME).append(dateTime.value).append(" "));
+            .ifPresent(dateTime -> sb.append(PREFIX_DATETIME).append(dateTime.toString()).append(" "));
         descriptor.getModuleCode()
-                .ifPresent(moduleCode -> sb.append(PREFIX_MODULE_CODE).append(moduleCode.value).append(" "));
+            .ifPresent(moduleCode -> sb.append(PREFIX_MODULE_CODE).append(moduleCode.toString()).append(" "));
         descriptor.getPriority()
             .ifPresent(priority -> sb.append(PREFIX_PRIORITY).append(priority.toString()).append(" "));
         if (descriptor.getTags().isPresent()) {

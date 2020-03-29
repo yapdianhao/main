@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 import seedu.jelphabot.logic.commands.FindCommand;
 import seedu.jelphabot.logic.parser.exceptions.ParseException;
-import seedu.jelphabot.model.task.DescriptionContainsKeywordsPredicate;
+import seedu.jelphabot.model.task.predicates.DescriptionContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object

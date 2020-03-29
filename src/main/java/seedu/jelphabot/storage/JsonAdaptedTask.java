@@ -17,6 +17,7 @@ import seedu.jelphabot.model.task.ModuleCode;
 import seedu.jelphabot.model.task.Priority;
 import seedu.jelphabot.model.task.Status;
 import seedu.jelphabot.model.task.Task;
+import seedu.jelphabot.model.task.TimeSpent;
 
 /**
  * Jackson-friendly version of {@link Task}.
@@ -31,19 +32,20 @@ class JsonAdaptedTask {
     private final String moduleCode;
     private final Priority priority;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final TimeSpent timeSpent;
 
     /**
-     * Constructs a {@code JsonAdaptedTask} with the given person details.
+     * Constructs a {@code JsonAdaptedTask} with the given task details.
      */
     @JsonCreator
     public JsonAdaptedTask(
-            @JsonProperty("desc") String description,
-            @JsonProperty("status") Status status,
-            @JsonProperty("dateTime") String dateTime,
-            @JsonProperty("module") String moduleCode,
-            @JsonProperty("priority") Priority priority,
-            @JsonProperty("tagged") List<JsonAdaptedTag> tagged
-    ) {
+        @JsonProperty("desc") String description,
+        @JsonProperty("status") Status status,
+        @JsonProperty("dateTime") String dateTime,
+        @JsonProperty("module") String moduleCode,
+        @JsonProperty("priority") Priority priority,
+        @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
+        @JsonProperty("timeSpent") TimeSpent timeSpent) {
         this.description = description;
         this.status = status;
         this.dateTime = dateTime;
@@ -52,6 +54,7 @@ class JsonAdaptedTask {
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
+        this.timeSpent = timeSpent;
     }
 
     /**
@@ -64,19 +67,20 @@ class JsonAdaptedTask {
         this.moduleCode = source.getModuleCode().value;
         this.priority = source.getPriority();
         tagged.addAll(source.getTags().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()));
+        this.timeSpent = source.getTimeSpent();
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's
+     * Converts this Jackson-friendly adapted task object into the model's
      * {@code Task} object.
      *
      * @throws IllegalValueException if there were any data constraints violated in
-     *                               the adapted person.
+     *                               the adapted task.
      */
     public Task toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
+        final List<Tag> taskTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tagged) {
-            personTags.add(tag.toModelType());
+            taskTags.add(tag.toModelType());
         }
 
         if (description == null) {
@@ -106,7 +110,7 @@ class JsonAdaptedTask {
         }
         final DateTime modelDateTime = new DateTime(dateTime);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
+        final Set<Tag> modelTags = new HashSet<>(taskTags);
 
         return new Task(
                 modelDescription,
@@ -114,7 +118,8 @@ class JsonAdaptedTask {
                 modelDateTime,
                 modelModuleCode,
                 priority,
-                modelTags
+                modelTags,
+                timeSpent
         );
     }
 

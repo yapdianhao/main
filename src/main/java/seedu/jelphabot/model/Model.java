@@ -1,10 +1,14 @@
 package seedu.jelphabot.model;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.jelphabot.commons.core.GuiSettings;
+import seedu.jelphabot.model.productivity.Productivity;
+import seedu.jelphabot.model.productivity.ProductivityList;
+import seedu.jelphabot.model.reminder.Reminder;
 import seedu.jelphabot.model.task.Task;
 
 /**
@@ -31,6 +35,11 @@ public interface Model {
     GuiSettings getGuiSettings();
 
     /**
+     * Returns the GUI settings for a popup window
+     */
+    GuiSettings getPopUpWindowGuiSettings();
+
+    /**
      * Sets the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
@@ -45,6 +54,8 @@ public interface Model {
      */
     void setJelphaBotFilePath(Path addressBookFilePath);
 
+    Path getRemindersFilePath();
+
     /** Returns the JelphaBot */
     ReadOnlyJelphaBot getJelphaBot();
 
@@ -58,6 +69,12 @@ public interface Model {
      */
     boolean hasTask(Task task);
 
+    boolean hasReminder(Reminder reminder);
+    /**
+     * Returns true if a task being timed exists in the address book.
+     */
+    boolean hasTimingTask();
+
     /**
      * Deletes the given task.
      * The task must exist in the address book.
@@ -70,6 +87,8 @@ public interface Model {
      */
     void addTask(Task task);
 
+    void addReminder(Reminder reminder);
+
     /**
      * Replaces the given task {@code target} with {@code editedTask}.
      * {@code target} must exist in the address book.
@@ -77,12 +96,44 @@ public interface Model {
      */
     void setTask(Task target, Task editedTask);
 
+    /**
+     * Replaces the existing productivity with {@code productivity}.
+     */
+    void setProductivity(Productivity productivity);
+
     /** Returns an unmodifiable view of the filtered task list */
     ObservableList<Task> getFilteredTaskList();
 
+    /** Returns an unmodifiable view of the filtered task list in the Calendar*/
+    ObservableList<Task> getFilteredCalendarTaskList();
+
+    List<Task> getTaskListFromJelphaBot();
+
+    List<Reminder> getReminderListFromJelphaBot();
+
+    /**
+     * Returns an unmodifiable view of the incomplete tasks that are due soon,
+     * as specified by the user
+     * @return
+     */
+    //public ObservableList<Task> getFilteredByReminder();
+
+    /**
+     * Returns an unmodifiable view of the user's productivity.
+     */
+    ProductivityList getProductivityList();
+
     /**
      * Updates the filter of the filtered task list to filter by the given {@code predicate}.
+     *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredTaskList(Predicate<Task> predicate);
+
+    /**
+     * Updates the filter of the filtered calendar task list to filter by the given {@code predicate}.
+     *
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredCalendarTaskList(Predicate<Task> predicate);
 }

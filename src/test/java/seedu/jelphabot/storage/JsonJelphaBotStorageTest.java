@@ -30,7 +30,8 @@ public class JsonJelphaBotStorageTest {
     }
 
     private java.util.Optional<ReadOnlyJelphaBot> readJelphaBot(String filePath) throws Exception {
-        return new JsonJelphaBotStorage(Paths.get(filePath)).readJelphaBot(addToTestDataPathIfNotNull(filePath));
+        return new JsonJelphaBotStorage(Paths.get(filePath), testFolder.resolve("reminder.json"))
+                   .readJelphaBot(addToTestDataPathIfNotNull(filePath));
     }
 
     private Path addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {
@@ -50,20 +51,21 @@ public class JsonJelphaBotStorageTest {
     }
 
     @Test
-    public void readJelphaBot_invalidPersonJelphaBot_throwDataConversionException() {
+    public void readJelphaBot_invalidTaskJelphaBot_throwDataConversionException() {
         assertThrows(DataConversionException.class, () -> readJelphaBot("invalidTaskJelphaBot.json"));
     }
 
     @Test
-    public void readJelphaBot_invalidAndValidPersonJelphaBot_throwDataConversionException() {
+    public void readJelphaBot_invalidAndValidTaskJelphaBot_throwDataConversionException() {
         assertThrows(DataConversionException.class, () -> readJelphaBot("invalidAndValidTaskJelphaBot.json"));
     }
 
     @Test
     public void readAndSaveJelphaBot_allInOrder_success() throws Exception {
         Path filePath = testFolder.resolve("TempJelphaBot.json");
+        Path reminderPath = testFolder.resolve("TempReminder.json");
         JelphaBot original = getTypicalJelphaBot();
-        JsonJelphaBotStorage jsonJelphaBotStorage = new JsonJelphaBotStorage(filePath);
+        JsonJelphaBotStorage jsonJelphaBotStorage = new JsonJelphaBotStorage(filePath, reminderPath);
 
         // Save in new file and read back
         jsonJelphaBotStorage.saveJelphaBot(original, filePath);
@@ -95,7 +97,7 @@ public class JsonJelphaBotStorageTest {
      */
     private void saveJelphaBot(ReadOnlyJelphaBot addressBook, String filePath) {
         try {
-            new JsonJelphaBotStorage(Paths.get(filePath))
+            new JsonJelphaBotStorage(Paths.get(filePath), testFolder.resolve("reminder.json"))
                     .saveJelphaBot(addressBook, addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);

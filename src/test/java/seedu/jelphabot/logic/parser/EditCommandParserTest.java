@@ -36,7 +36,6 @@ import seedu.jelphabot.model.task.Description;
 import seedu.jelphabot.model.task.ModuleCode;
 import seedu.jelphabot.testutil.EditTaskDescriptorBuilder;
 
-// TODO rewrite in order: Description, Status, DateTime, ModuleCode, Priority, Set<Tag> tags
 public class EditCommandParserTest {
 
     private static final String TAG_EMPTY = " " + PREFIX_TAG;
@@ -84,10 +83,7 @@ public class EditCommandParserTest {
         // invalid tag
         assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS);
 
-        // valid phone followed by invalid phone. The test case for invalid phone followed by valid phone
-        // is tested at {@code parse_invalidValueFollowedByValidValue_success()}
-
-        // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Person} being edited,
+        // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Task} being edited,
         // parsing it together with a valid tag results in error
         assertParseFailure(
             parser,
@@ -143,6 +139,7 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_oneFieldSpecified_success() {
+        // method should only test fields corresponding to isSameTask
         // description
         Index targetIndex = INDEX_THIRD_TASK;
         String userInput = targetIndex.getOneBased() + DESCRIPTION_DESC_TUTORIAL;

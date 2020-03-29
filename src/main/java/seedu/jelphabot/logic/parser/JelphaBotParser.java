@@ -7,14 +7,23 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.jelphabot.logic.commands.AddCommand;
+import seedu.jelphabot.logic.commands.CalendarCommand;
 import seedu.jelphabot.logic.commands.ClearCommand;
 import seedu.jelphabot.logic.commands.Command;
 import seedu.jelphabot.logic.commands.DeleteCommand;
+import seedu.jelphabot.logic.commands.DoneCommand;
 import seedu.jelphabot.logic.commands.EditCommand;
 import seedu.jelphabot.logic.commands.ExitCommand;
 import seedu.jelphabot.logic.commands.FindCommand;
 import seedu.jelphabot.logic.commands.HelpCommand;
 import seedu.jelphabot.logic.commands.ListCommand;
+import seedu.jelphabot.logic.commands.ProductivityCommand;
+import seedu.jelphabot.logic.commands.ReminderCommand;
+import seedu.jelphabot.logic.commands.ShowCompletedCommand;
+import seedu.jelphabot.logic.commands.ShowIncompleteCommand;
+import seedu.jelphabot.logic.commands.StartTimerCommand;
+import seedu.jelphabot.logic.commands.StopTimerCommand;
+import seedu.jelphabot.logic.commands.SummaryCommand;
 import seedu.jelphabot.logic.parser.exceptions.ParseException;
 
 /**
@@ -66,6 +75,33 @@ public class JelphaBotParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case ReminderCommand.COMMAND_WORD:
+            return new ReminderCommandParser().parse(arguments);
+
+        case ShowCompletedCommand.COMMAND_WORD:
+            return new ShowCompletedCommand();
+
+        case ShowIncompleteCommand.COMMAND_WORD:
+            return new ShowIncompleteCommand();
+
+        case DoneCommand.COMMAND_WORD:
+            return new DoneCommandParser().parse(arguments);
+
+        case CalendarCommand.COMMAND_WORD:
+            return new CalendarCommandParser().parse(arguments);
+
+        case SummaryCommand.COMMAND_WORD:
+            return new SummaryCommand();
+
+        case ProductivityCommand.COMMAND_WORD:
+            return new ProductivityCommand();
+
+        case StartTimerCommand.COMMAND_WORD:
+            return new StartTimerCommandParser().parse(arguments);
+
+        case StopTimerCommand.COMMAND_WORD:
+            return new StopTimerCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

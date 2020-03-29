@@ -24,6 +24,9 @@ public class UiManager implements Ui {
 
     private Logic logic;
     private MainWindow mainWindow;
+    //private MorningCallWindow;
+    private ProductivityPanel productivityPanel;
+    private ReminderPopup reminderPopup;
 
     public UiManager(Logic logic) {
         super();
@@ -37,12 +40,24 @@ public class UiManager implements Ui {
         //Set the application icon.
         primaryStage.getIcons().add(getImage(ICON_APPLICATION));
 
+        // create second stage for MorningCallWindow
+        Stage reminderStage = new Stage();
+
         try {
             mainWindow = new MainWindow(primaryStage, logic);
             mainWindow.show(); //This should be called before creating other UI parts
             mainWindow.fillInnerParts();
 
-        } catch (Throwable e) {
+            reminderPopup = new ReminderPopup(reminderStage, logic);
+            reminderPopup.show();
+            reminderPopup.fillWindow();
+
+            //show morningCallWindow
+            //morningCallWindow = new MorningCallWindow(morningCallStage, logic);
+            //morningCallWindow.show();
+            //morningCallWindow.fillWindow();
+
+        } catch (Exception e) {
             logger.severe(StringUtil.getDetails(e));
             showFatalErrorDialogAndShutdown("Fatal error during initializing", e);
         }

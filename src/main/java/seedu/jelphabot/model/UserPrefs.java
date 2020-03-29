@@ -14,7 +14,8 @@ import seedu.jelphabot.commons.core.GuiSettings;
 public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
-    private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
+    private Path addressBookFilePath = Paths.get("data" , "jelphabot.json");
+    private Path remindersFilePath = Paths.get("data", "reminder.json");
 
     /**
      * Creates a {@code UserPrefs} with default values.
@@ -36,10 +37,16 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         requireNonNull(newUserPrefs);
         setGuiSettings(newUserPrefs.getGuiSettings());
         setJelphaBotFilePath(newUserPrefs.getJelphaBotFilePath());
+        setJelphaBotReminderFilePath(newUserPrefs.getRemindersFilePath());
     }
 
     public GuiSettings getGuiSettings() {
         return guiSettings;
+    }
+
+    public GuiSettings getPopUpWindowGuiSettings() {
+        // create a new GuiSettings object with smaller dimensions than the default
+        return new GuiSettings(540.0, 400.0);
     }
 
     public void setGuiSettings(GuiSettings guiSettings) {
@@ -51,9 +58,18 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         return addressBookFilePath;
     }
 
+    public Path getRemindersFilePath() {
+        return remindersFilePath;
+    }
+
     public void setJelphaBotFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
         this.addressBookFilePath = addressBookFilePath;
+    }
+
+    public void setJelphaBotReminderFilePath(Path remindersFilePath) {
+        requireNonNull(remindersFilePath);
+        this.remindersFilePath = remindersFilePath;
     }
 
     @Override

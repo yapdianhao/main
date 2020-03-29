@@ -16,10 +16,10 @@ import seedu.jelphabot.model.task.Task;
 /**
  * An Immutable JelphaBot that is serializable to JSON format.
  */
-@JsonRootName(value = "addressbook")
+@JsonRootName(value = "jelphabot")
 class JsonSerializableJelphaBot {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+    public static final String MESSAGE_DUPLICATE_TASK = "Tasks list contains duplicate task(s).";
 
     private final List<JsonAdaptedTask> tasks = new ArrayList<>();
 
@@ -47,13 +47,14 @@ class JsonSerializableJelphaBot {
      */
     public JelphaBot toModelType() throws IllegalValueException {
         JelphaBot jelphaBot = new JelphaBot();
-        for (JsonAdaptedTask jsonAdaptedPerson : tasks) {
-            Task task = jsonAdaptedPerson.toModelType();
+        for (JsonAdaptedTask jsonAdaptedTask : tasks) {
+            Task task = jsonAdaptedTask.toModelType();
             if (jelphaBot.hasTask(task)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+                throw new IllegalValueException(MESSAGE_DUPLICATE_TASK);
             }
             jelphaBot.addTask(task);
         }
+
         return jelphaBot;
     }
 

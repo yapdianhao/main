@@ -14,6 +14,7 @@ import seedu.jelphabot.commons.util.FileUtil;
 import seedu.jelphabot.commons.util.JsonUtil;
 import seedu.jelphabot.model.ReadOnlyJelphaBot;
 
+
 /**
  * A class to access JelphaBot data stored as a json file on the hard disk.
  */
@@ -23,17 +24,41 @@ public class JsonJelphaBotStorage implements JelphaBotStorage {
 
     private Path filePath;
 
-    public JsonJelphaBotStorage(Path filePath) {
+    private Path reminderPath;
+
+    public JsonJelphaBotStorage(Path filePath, Path reminderPath) {
         this.filePath = filePath;
+        this.reminderPath = reminderPath;
     }
 
     public Path getJelphaBotFilePath() {
         return filePath;
     }
 
+    public Path getJelphaBotReminderPath() {
+        return reminderPath;
+    }
+
     @Override
     public Optional<ReadOnlyJelphaBot> readJelphaBot() throws DataConversionException {
         return readJelphaBot(filePath);
+    }
+
+    @Override
+    public Optional<ReadOnlyJelphaBot> readJelphaBot(boolean isReminder) throws DataConversionException {
+        requireNonNull(reminderPath);
+
+        Optional<JsonSerializableReminderJelphaBot> jsonReminderJelphaBot = JsonUtil.readJsonFile(
+            reminderPath, JsonSerializableReminderJelphaBot.class);
+        if (!jsonReminderJelphaBot.isPresent()) {
+            return Optional.empty();
+        }
+        try {
+            return Optional.of(jsonReminderJelphaBot.get().toModelType());
+        } catch (IllegalValueException ive) {
+            logger.info("Illegal values found in " + reminderPath + ": " + ive.getMessage());
+            throw new DataConversionException(ive);
+        }
     }
 
     /**
@@ -62,6 +87,14 @@ public class JsonJelphaBotStorage implements JelphaBotStorage {
     @Override
     public void saveJelphaBot(ReadOnlyJelphaBot jelphaBot) throws IOException {
         saveJelphaBot(jelphaBot, filePath);
+    }
+
+    @Override
+    public void saveJelphaBot(ReadOnlyJelphaBot jelphaBot, boolean isReminder) throws IOException {
+        requireNonNull(jelphaBot);
+        requireNonNull(reminderPath);
+        FileUtil.createIfMissing(reminderPath);
+        JsonUtil.saveJsonFile(new JsonSerializableReminderJelphaBot(jelphaBot), reminderPath);
     }
 
     /**

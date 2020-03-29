@@ -16,7 +16,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.jelphabot.commons.core.GuiSettings;
-import seedu.jelphabot.model.task.DescriptionContainsKeywordsPredicate;
+import seedu.jelphabot.model.task.predicates.DescriptionContainsKeywordsPredicate;
 import seedu.jelphabot.testutil.JelphaBotBuilder;
 
 public class ModelManagerTest {
@@ -74,17 +74,17 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
+    public void hasTask_nullTask_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.hasTask(null));
     }
 
     @Test
-    public void hasPerson_personNotInJelphaBot_returnsFalse() {
+    public void hasTask_taskNotInJelphaBot_returnsFalse() {
         assertFalse(modelManager.hasTask(ASSESSMENT));
     }
 
     @Test
-    public void hasPerson_personInJelphaBot_returnsTrue() {
+    public void hasTask_taskInJelphaBot_returnsTrue() {
         modelManager.addTask(ASSESSMENT);
         assertTrue(modelManager.hasTask(ASSESSMENT));
     }
@@ -92,6 +92,11 @@ public class ModelManagerTest {
     @Test
     public void getFilteredTaskList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredTaskList().remove(0));
+    }
+
+    @Test
+    public void getFilteredCalendarTaskList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredCalendarTaskList().remove(0));
     }
 
     @Test
