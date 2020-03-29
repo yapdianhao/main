@@ -86,19 +86,6 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 [[Features]]
 
 == Features
-====
-*Command Format*
-
-**Task list commands**
-
-These command formats are applicable for the following commands: +
-Add Command, Edit Command, Find Command.
-
-* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add d/DESCRIPTION`, `DESCRIPTION` is a parameter which can be used as `add d/Assignment 1`.
-* Items in square brackets are optional e.g `d/DESCRIPTION [p/PRIORITY]` can be used as `d/Assignment 1 p/0` or as `d/Assignment 1`.
-* Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/project`, `t/project t/graded` etc.
-* Parameters can be in any order e.g. if the command specifies `d/DESCRIPTION p/PRIORITY`, `p/PRIORITY d/DESCRIPTION` is also acceptable.
-====
 
 === General
 Upon running JelphaBot, you will see various components on it's main display screen. The components of the main screen is labelled below.
@@ -106,6 +93,7 @@ Upon running JelphaBot, you will see various components on it's main display scr
 image::MainUi.png[width="790"]
 
 The function of each component is as follows:
+
 1. *Tabs Panel*: This is where you can navigate between the different features located in various tabs.
 2. *Main Panel*: This is the main display screen which corresponds to the tab it is under.
 3. *Results Display*: This is where the results of your commands are displayed as JelphaBot interacts with you!
@@ -141,7 +129,22 @@ Format: `exit`
 
 === Managing Tasks
 
-JelphaBot allows you to track and manage your tasks. You can view and sort all your tasks from the Task List page.
+JelphaBot allows you to track and manage your tasks.
+You can view and sort all your tasks from the Task List page.
+
+====
+*Command Format for Task list commands*
+
+These command formats are applicable for the following commands: +
+`add`, `edit`, `find`.
+
+* Parts of the command in `UPPER_CASE` represent command parameters that have to be supplied by you. +
+e.g. in `add d/DESCRIPTION`, `DESCRIPTION` represents a field where you can provide the appropriate description, such as `add d/Assignment 1`.
+* Parameters in square brackets are optional e.g `d/DESCRIPTION [p/PRIORITY]` can be used as `d/Assignment 1 p/0` or as `d/Assignment 1`.
+* Parameters with a trailing `…`​can be used as many times as you want, or can also be omitted. +
+e.g. `[t/TAG]...` can be used as `t/project`, `t/project t/graded` etc.
+* Parameters can be in any order e.g. if the command specifies `d/DESCRIPTION p/PRIORITY`, `p/PRIORITY d/DESCRIPTION` is also acceptable.
+====
 
 ==== Reading the task list
 
@@ -152,7 +155,7 @@ with a module code so that you can visually categorize them. Tasks are tagged ac
 * *High Priority* tasks will be *bolded* to denote important tasks.
 * _Low priority_ tasks will be _italicized_ to denote optional tasks.
 
-The start of every task will be labelled with a module code so that you can visually categorize them.
+The start of every task will be labelled with a module code so that you can visually categorize them. +
 Go <<#add, here>> to read more about adding tasks with priority and <<#edit, here>> for editing task priority.
 
 You can also tag tasks with additional information. To read more about tags, go <<#Tags, here>>
@@ -168,13 +171,19 @@ Format: `d/DESCRIPTION dt/DATETIME m/MODULE_CODE [p/PRIORITY] [t/TAG]...`
 image::ug_figures/add.png[width="600"]
 
 ****
-* For dt/DATETIME inputs, we recommend the format MMM-dd-YYYY HH mm, but it also allows some other formats.
-// TODO list datetime accepted formats here
-* Values that p/PRIORITY can take are -1, 0 or 1. If not specified, DEFAULTS TO 1.
+* For dt/DATETIME inputs, please use the format MMM-dd-YYYY HH mm. +
+** MMM: the corresponding month in 3 letters.
+** dd:  the corresponding day in 2 numbers.
+** YYYY: the corresponding year (AD) as 4 numbers.
+** HH: the hour the task is due, in 24-hour format.
+** mm: the minute the task is due.
+
+* Values that p/PRIORITY can take are -1, 0 or 1.
 ****
 
 [TIP]
-A task can have any number of tags (including 0)
+A task can have any number of tags (including 0) +
+If the priority field is not specified, the default priority used is Normal Priority.
 
 Examples:
 
