@@ -105,7 +105,9 @@ JelphaBot automatically saves your data whenever you make a change. There is no 
 If you can't recall the command you need, the `help` command opens a help popup window which links to this user guide. +
 Format: `help`
 
-image::help.png[width="600]
+[.text-center]
+image::ug_figures/help.png[width="600]
+[.text-center]
 _Figure 2: Example of an expected result after running `help`_
 
 === Exiting the program : `exit`
@@ -122,14 +124,11 @@ JelphaBot allows you to track and manage your tasks. You can view and sort all y
 
 The task list is formatted so that you can distinguish urgent tasks at first glance. Tasks are tagged according to their importance:
 
-* Default
-* *High Priority*
-* _Low priority_
+* Default priority
+* *High Priority* tasks will be *bolded* to denote important tasks.
+* _Low priority_ tasks will be _italicized_ to denote optional tasks.
 
-Tasks marked as _low priority_ will be _italicized_ to denote optional tasks. +
-Tasks are marked as *high priority* will be *bolded* to denote important tasks.
-
-Go to the respective links to find out more  about <<#add, adding>> or <<#edit, editing>> task priority.
+Go to the respective links to find out more  about <<#add, adding>> or <<#edit, editing>> Tasks with priority.
 
 The start of every task will be labelled with a module code so that you can visually categorize them.
 
@@ -141,7 +140,9 @@ You can also tag tasks with additional information. To read more about tags, go 
 Adds a task to the task list. +
 Format: `d/DESCRIPTION dt/DATETIME m/MODULE_CODE [p/PRIORITY] [t/TAG]...`
 
-image::add.png[width="600"]
+[.text-center]
+image::ug_figures/add.png[width="600"]
+[.text-center]
 _Figure 3: Example of an expected result after running `add`_
 
 ****
@@ -169,8 +170,9 @@ Format: `list [SORTING_ORDER]`
 * If no `SORTING_ORDER` is provided, tasks will be grouped by date by default.
 * Valid `SORTING_ORDER` values are `date` (groups tasks by date) and `module` (Groups tasks by module code)
 ****
-
-image::list.png[width="600"]
+[.text-center]
+image::ug_figures/list.png[width="600"]
+[.text-center]
 _Figure 4: Example of an expected result after running `list`_
 
 ===== Group tasks by Date : `list date`
@@ -196,8 +198,9 @@ Tasks are grouped based on their defined module code. Modules will be presented 
 
 Finds tasks whose description contain any of the given keywords. +
 Format: `find KEYWORD [MORE_KEYWORDS]`
-
-image::find.png[width="600"]
+[.text-center]
+image::ug_figures/find.png[width="600"]
+[.text-center]
 _Figure 5: Example of an expected result after running `find`_
 
 ****
