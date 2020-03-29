@@ -16,34 +16,49 @@ endif::[]
 
 By: `Team 2103T-F09-02`      Since: `Jan 2020`      Licence: `MIT`
 
-== Introduction
-
+== Preface
+=== Introduction
 Welcome to JelphaBot! +
+If you are just starting out, this quick start section will help you get JelphaBot started right
+away! It will equip you with the basics so that you can quickly enjoy and master the features offered.
 
-JelphaBot is designed for university students who *prefer to use a desktop app for managing tasks*.
-If you *prefer to work with a Command Line Interface* (CLI), JelphaBot allows you to work fast while still retaining the benefits of a Graphical User Interface (GUI).
-If you can type fast, JelphaBot can help you get your tasks done faster than traditional GUI apps.
+JelphaBot is *a desktop app for managing tasks* specially designed by and for NUS students that allows you to
+*recognise important tasks at a glance* so that you can prioritise commitments and manage your time.
 
-The JelphaBot GUI is designed to allow you to *recognise important tasks at a glance* so that you can prioritise commitments and manage your time.
+You can enter commands in JelphaBot through a *Command Line Interface* (CLI), which means that if you can *type quickly*,
+JelphaBot can help you get work done faster than a traditional mouse-controlled Graphical User Interface (GUI),
+*while still retaining the benefits of a beautiful user interface*.
 
 Interested? Jump to the <<Quick Start>> to get started.
 Enjoy!
 
-====
-*Preface*
+== Quick Start
 
-This section explains the usage of certain repeated symbols and icons throughout the document. Happy reading!
+=== Using the User Guide
+This User Guide is filled with information to help you set up and make the best out of you very own customizable JelphaBot!
+You will be able to learn more about the commands are available for you, together with examples of how they are used.
+These commands are also consolidated under <<Command Summary>> for your convenience.
+
+To aid in your understanding throughout this User Guide, you may find it useful to refer to the following table below for the different symbols and
+formatting used throughout this guide.
 
 [width="100%",cols="40%,<60%,options="header",]
 |=======================================================================
 |*Symbol* | *What does it mean?*
-|<icon image>| sentence
-|<icon image>| sentence
+a| `code` | Command that can be typed into the command box
+ifdef::env-github[]
+| :white_check_mark: | Expected result after executing the command
+| :bulb: | Tips and tricks that might be useful
+| :information_source: | Additional information that is good to know
+| :heavy_exclamation_mark: | Important pointers to take note
+endif::[]
+ifndef::env-github[]
+a| icon:check[role="green", size="2x"] | Expected result after executing the command
+a| icon:lightbulb-o[role="icon-tip", size="2x"] | Tips and tricks that might be useful
+a| icon:info-circle[role="icon-note", size="2x"] | Additional information that is good to know
+a| icon:exclamation-circle[role="icon-important", size="2x"] | Important pointers to take note
+endif::[]
 |=======================================================================
-
-====
-
-== Quick Start
 
 . Ensure you have Java `11` or above installed in your Computer.
 . Download the latest `jelphabot.jar` link:{repoURL}/releases[here].
@@ -65,9 +80,6 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 . Refer to <<Features>> for details of each command.
 
-== How to use this guide
-TO BE EDITED
-
 [[Features]]
 
 == Features
@@ -85,15 +97,20 @@ Add Command, Edit Command, Find Command.
 * Parameters can be in any order e.g. if the command specifies `d/DESCRIPTION p/PRIORITY`, `p/PRIORITY d/DESCRIPTION` is also acceptable.
 ====
 
-=== Getting Started
-[ Placeholder image for labelled main screen to introduce navigation ]
+=== General
+Upon running JelphaBot, you will see various components on it's main display screen. The components of the main screen is labelled below.
 
+image::MainUi.png[width="790"]
 
-JelphaBot has four tabs, Task List, Calendar, Productivity and Summary.
+The function of each component is as follows:
+1. *Tabs Panel*: This is where you can navigate between the different features located in various tabs.
+2. *Main Panel*: This is the main display screen which corresponds to the tab it is under.
+3. *Results Display*: This is where the results of your commands are displayed as JelphaBot interacts with you!
+4. *Command Box*: This is where you key in your own respective commands.
+
+As seen above, JelphaBot has four tabs, Task List, Calendar, Productivity and Notes.
 You can switch between tabs anytime by pressing `Ctrl + tab` on your keyboard to move to the tab on the right.
 If you are already on the rightmost tab, it wraps around to the leftmost tab.
-
-Commands can be entered into the input box at the bottom.
 
 ==== Saving the data
 
@@ -104,10 +121,12 @@ JelphaBot automatically saves your data whenever you make a change. There is no 
 If you can't recall the command you need, the `help` command opens a help popup window which links to this user guide. +
 Format: `help`
 
+[.text-center]
 image::ug_figures/help.png[width="600]
+[.text-center]
 _Figure 2: Example of an expected result after running `help`_
 
-=== Exiting the program : `exit`
+==== Exiting the program : `exit`
 
 You can exit the program anytime by entering the `exit` command directly from any page. +
 Format: `exit`
@@ -126,14 +145,12 @@ JelphaBot allows you to track and manage your tasks. You can view and sort all y
 The task list is formatted so that you can distinguish urgent tasks at first glance. The start of every task is labelled
 with a module code so that you can visually categorize them. Tasks are tagged according to their importance:
 
-* Default
-* *High Priority*
-* _Low priority_
+* Default priority
+* *High Priority* tasks will be *bolded* to denote important tasks.
+* _Low priority_ tasks will be _italicized_ to denote optional tasks.
 
-Tasks marked as _low priority_ will be _italicized_ to denote optional tasks. +
-Tasks are marked as *high priority* will be *bolded* to denote important tasks.
-
-Go <<#add, here>> to read more about adding task priority and <<#edit, here>> for editing task priority.
+The start of every task will be labelled with a module code so that you can visually categorize them.
+Go <<#add, here>> to read more about adding tasks with priority and <<#edit, here>> for editing task priority.
 
 You can also tag tasks with additional information. To read more about tags, go <<#Tags, here>>
 
@@ -143,7 +160,9 @@ You can also tag tasks with additional information. To read more about tags, go 
 Add a task to your task list. +
 Format: `d/DESCRIPTION dt/DATETIME m/MODULE_CODE [p/PRIORITY] [t/TAG]...`
 
+[.text-center]
 image::ug_figures/add.png[width="600"]
+[.text-center]
 _Figure 3: Example of an expected result after running `add`_
 
 ****
@@ -171,8 +190,9 @@ Format: `list [SORTING_ORDER]`
 * If no `SORTING_ORDER` is provided, tasks will be grouped by date by default.
 * Valid `SORTING_ORDER` values are `date` (groups tasks by date) and `module` (Groups tasks by module code)
 ****
-
+[.text-center]
 image::ug_figures/list.png[width="600"]
+[.text-center]
 _Figure 4: Example of an expected result after running `list`_
 
 ===== Group tasks by Date : `list date`
@@ -198,8 +218,9 @@ Groups tasks based on their defined module code. Modules will be presented in al
 
 Finds tasks in your task list whose description contain any of the given keywords. +
 Format: `find KEYWORD [MORE_KEYWORDS]`
-
+[.text-center]
 image::ug_figures/find.png[width="600"]
+[.text-center]
 _Figure 5: Example of an expected result after running `find`_
 
 ****
@@ -323,9 +344,9 @@ Format: `sort SORTING_ORDER`
 
 Valid `SORTING_ORDER` values include `date`, `module`, and `priority`.
 
-== Set Reminders and Notifications  `[coming in v2.0]`
+=== Set Reminders and Notifications  `[coming in v2.0]`
 
-=== Adding reminder : `reminder`
+==== Adding reminder : `reminder`
 Adds a reminder to your specified task and reminds you of the task if the current time is within the time-frame specified
 by you. +
 Format: `reminder INDEX rd/DAYS rh/HOURS`
@@ -343,17 +364,16 @@ Format: `reminder INDEX rd/DAYS rh/HOURS`
 * Tasks can only have one reminder.
 ****
 
-=== Removing reminder `[coming in v2.0]`
-=== Reminder popup notification `[coming in v2.0]`
+==== Removing reminder `[coming in v2.0]`
+==== Reminder popup notification `[coming in v2.0]`
 
-== Productivity Tracking
+=== Productivity Tracking
 
 // tag::productivitytracker[]
-=== Track productivity : `productivity`
-
-Apart from the function to switch tabs by pressing `Ctrl + tab` on your keyboard, you can enter the command `productivity`
-to manually switch to the productivity tab. +
-Unless the task has been marked as complete, you can repeatedly start and stop the timer to continue timing the task. +
+==== Track productivity : `productivity`
+Apart from the function to switch tabs by pressing `Ctrl + tab` on your keyboard, you can enter the `productivity` command
+to manually switch to the producivity tab.
+The productivity panel will then show you your productivity for the day. +
 Format: `productivity`
 
 image::ug_figures/productivityTab.png[width="790"]
@@ -397,12 +417,12 @@ JelphaBot automatically tracks the user's productivity in a day and outputs the 
 achievements and task completion rate. +
 There is no need to manually ask for compliments or criticism.
 
-== Calendar
-=== Integrating calender : `calendar`
-Apart from the function to switch tabs by pressing `Ctrl + tab` on your keyboard, you can enter the command `calendar`
+=== Calendar
+==== View calender : `calendar`
+Apart from the function to switch tabs by pressing `Ctrl + tab` on your keyboard, you can enter the `calendar` command
 to manually switch to the calendar tab.
-The calendar panel will then show the user's schedule for the current month with today's date
-highlighted. +
+The calendar panel will then show you your schedule for the current month with today's date highlighted. +
+
 Format: `calendar`
 
 image::CalendarUi.png[width="790"]
@@ -419,9 +439,12 @@ Format: `calendar MONTHYEAR`
 Examples:
 
 * `calendar Apr-2020`
+
+image::CalendarView.png[width="790"]
+
 Displays month of April in the year 2020 in the calendar panel on the right.
 
-=== Show tasks due on specific date : `calendar`
+==== Show tasks due on specific date : `calendar`
 Displays the tasks due on specified date, while highlighting that day on the calendar +
 Format: `calendar DATE`
 
@@ -432,16 +455,32 @@ Format: `calendar DATE`
 
 Examples:
 
-* `calendar Jan-1-2020`
-* `calendar Jan/1/2020` +
-Highlights 1st of January in the calendar panel on the right and displays the corresponding tasks due on the left.
+* `calendar Mar-1-2020`
+* `calendar Mar/1/2020` +
 
-== Morning call/Night debrief
+image::CalendarDate.png[width="790"]
+
+Highlights 1st of March in the calendar panel on the right and displays the corresponding tasks due on the left.
+
+==== Navigate directly to today's date on Calendar : `calendar`
+Immediately displays the calendar view for this month and highlights today's date.
+The task list panel on the left will display the tasks due today as well. +
+Format: `calendar today`
+
+Examples:
+
+* `calendar today` +
+
+image::CalendarToday.png[width="790"]
+
+Displays month of March in the year 2020 in the calendar panel on the right, with today's date highlighted and displays the corresponding tasks due today on the left.
+
+=== Morning call/Night debrief
 Displays the tasks to be completed within the day (Morning Call), and the tasks that have been completed so far (Night Debrief)
 
 Morning Call and Night Debrief are separate windows that will open on app startup and exit respectively.
 
-== Colour-code modules and font style for prioritised tasks `[coming in v2.0]`
+=== Colour-code modules and font style for prioritised tasks `[coming in v2.0]`
 
 == FAQ
 
@@ -479,5 +518,6 @@ e.g. `start 1` or `stop 1`
 * *Calendar* : `calendar`
 * *Calendar Date* : `calendar DATE` +
 e.g. `calendar Jan-1-2020`
-* *Change Calendar View* : `change MONTHYEAR` +
+* *Change Calendar View* : `calendar MONTHYEAR` +
 e.g. `changeCalendar Apr-2020`
+* *Today's Calendar View* : `calendar today`
