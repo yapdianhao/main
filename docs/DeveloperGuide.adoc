@@ -298,12 +298,16 @@ the command fails its execution so that it does not execute that start or stop o
 === Morning Call / Night Debrief feature
 
 JelphaBot has a Morning Call and Night Debrief feature which provides an overview of the tasks to be completed
-for the day (Morning Call), and all tasks that are completed in the tasklist thus far (Night Debrief).
+for the day (Morning Call), and all tasks that have been complete within the day (Night Debrief).
 
-Both come in the form of a separate window that opens upon app startup for Morning Call, and app exit for Night Debrief.
-// tag::undoredo[]
-=== [Proposed] Undo/Redo feature
-==== Proposed Implementation
+==== Implementation
+
+To view the respective tasks, the user enters the `summary` command.
+
+-insert sequence diagram-
+
+Upon the completion of the execution of the command, the summary tab will be displayed with the contents of the Morning Call under "Due Today", and Night Debrief under "Done Today".
+
 
 The undo/redo mechanism is facilitated by `VersionedAddressBook`.
 It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`.
