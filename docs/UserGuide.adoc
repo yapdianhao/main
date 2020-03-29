@@ -32,10 +32,11 @@ Interested? Jump to the <<Quick Start>> to get started.
 Enjoy!
 
 === How to Use This Guide
-The following table  explains the usage of certain repeated symbols and icons throughout the document. Happy reading!
+The following table explains the usage of certain repeated symbols and icons throughout the document. Happy reading!
 
-[width="70%",cols="^15%,85%"]
-|===
+[width="100%",cols="40%,<60%,options="header",]
+|=======================================================================
+|*Symbol* | *What does it mean?*
 a| `code` | Command that can be typed into the command box
 ifdef::env-github[]
 | :white_check_mark: | Expected result after executing the command
@@ -49,8 +50,7 @@ a| icon:lightbulb-o[role="icon-tip", size="2x"] | Tips and tricks that might be 
 a| icon:info-circle[role="icon-note", size="2x"] | Additional information that is good to know
 a| icon:exclamation-circle[role="icon-important", size="2x"] | Important pointers to take note
 endif::[]
-|===
-
+|=======================================================================
 
 == Quick Start
 
