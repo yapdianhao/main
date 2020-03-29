@@ -8,6 +8,7 @@ import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.jelphabot.model.Model.PREDICATE_SHOW_ALL_TASKS;
 
+import java.time.Duration;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -19,6 +20,7 @@ import seedu.jelphabot.commons.core.index.Index;
 import seedu.jelphabot.commons.util.CollectionUtil;
 import seedu.jelphabot.logic.commands.exceptions.CommandException;
 import seedu.jelphabot.model.Model;
+import seedu.jelphabot.model.productivity.Productivity;
 import seedu.jelphabot.model.tag.Tag;
 import seedu.jelphabot.model.task.DateTime;
 import seedu.jelphabot.model.task.Description;
@@ -50,6 +52,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task list.";
+    public static final String MESSAGE_CANNOT_EDIT_TASK = "This task cannot be edited while the timer is running.";
 
     private final Index index;
     private final EditTaskDescriptor editTaskDescriptor;
@@ -79,8 +82,11 @@ public class EditCommand extends Command {
         DateTime dateTime = editTaskDescriptor.getDateTime().orElse(taskToEdit.getDateTime());
         Status updatedStatus = taskToEdit.getStatus();
         Priority updatedPriority = editTaskDescriptor.getPriority().orElse(taskToEdit.getPriority());
+        Duration duration = taskToEdit.getDuration();
 
-        return new Task(updatedDescription, updatedStatus, dateTime, updatedModuleCode, updatedPriority, updatedTags);
+        return new Task(updatedDescription, updatedStatus, dateTime, updatedModuleCode, updatedPriority, updatedTags,
+            duration
+        );
     }
 
     @Override
@@ -97,10 +103,13 @@ public class EditCommand extends Command {
 
         if (!taskToEdit.isSameTask(editedTask) && model.hasTask(editedTask)) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
+        } else if (taskToEdit.isBeingTimed()) {
+            throw new CommandException(MESSAGE_CANNOT_EDIT_TASK);
         }
 
         model.setTask(taskToEdit, editedTask);
         model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+        model.setProductivity(new Productivity(model.getFilteredTaskList()));
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, editedTask));
     }
 

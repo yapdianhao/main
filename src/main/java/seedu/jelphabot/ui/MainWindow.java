@@ -19,7 +19,9 @@ import seedu.jelphabot.logic.commands.CommandResult;
 import seedu.jelphabot.logic.commands.exceptions.CommandException;
 import seedu.jelphabot.logic.parser.exceptions.ParseException;
 import seedu.jelphabot.model.calendar.CalendarDate;
-import seedu.jelphabot.model.task.SortedTaskList;
+import seedu.jelphabot.model.productivity.Productivity;
+import seedu.jelphabot.model.productivity.ProductivityList;
+import seedu.jelphabot.model.task.GroupedTaskList;
 
 /**
  * The Main Window. Provides the basic application layout containing a menu bar
@@ -35,12 +37,14 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private SortedTaskListPanel taskListPanel;
+    private GroupedTaskListPanel taskListPanel;
     private TaskListPanel calendarTaskListPanel;
     private ProductivityPanel productivityPanel;
     private CalendarPanel calendarPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+
+    private Productivity productivity;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -127,13 +131,10 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        SortedTaskList sortedTasks = logic.getSortedTaskList();
-        taskListPanel = new SortedTaskListPanel(
-            sortedTasks.getPinnedTaskList(),
-            sortedTasks.getOverdueTaskList(),
-            sortedTasks.getDueTodayTaskList(),
-            sortedTasks.getDueThisWeekTaskList(),
-            sortedTasks.getDueSomedayTaskList()
+        GroupedTaskList sortedTasks = logic.getGroupedTaskList(GroupedTaskList.Grouping.DATE);
+        taskListPanel = new GroupedTaskListPanel(
+            logic.getFilteredTaskList(),
+            sortedTasks
         );
         taskListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
 
@@ -142,11 +143,12 @@ public class MainWindow extends UiPart<Stage> {
         calendarTaskListPanelPlaceholder.getChildren().add(calendarTaskListPanel.getRoot());
 
         //TODO fill calendarPanel
-        calendarPanel = new CalendarPanel(CalendarDate.getCurrent());
+        calendarPanel = new CalendarPanel(CalendarDate.getCurrent(), mainWindowTabPane);
         calendarPanelPlaceholder.getChildren().add(calendarPanel.getRoot());
 
-        //TODO: fill productivityPanel
-        productivityPanel = new ProductivityPanel(mainWindowTabPane);
+        ProductivityList productivityList = logic.getProductivityList();
+        productivityList.addProductivity(new Productivity(logic.getFilteredTaskList()));
+        productivityPanel = new ProductivityPanel(productivityList.asUnmodifiableObservableList(), mainWindowTabPane);
         productivityPanelPlaceholder.getChildren().add(productivityPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -224,7 +226,17 @@ public class MainWindow extends UiPart<Stage> {
         // TODO: add case when alr on panel.
     }
 
-    public SortedTaskListPanel getTaskListPanel() {
+    /**
+     * Switches view to calendar panel.
+     */
+    @FXML
+    private void handleCalendar() {
+        if (!calendarPanel.isShowing()) {
+            calendarPanel.show();
+        }
+    }
+
+    public GroupedTaskListPanel getTaskListPanel() {
         return taskListPanel;
     }
 
@@ -249,6 +261,8 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             } else if (commandResult.isProductivity()) {
                 handleProductivity();
+            } else if (commandResult.isCalendar()) {
+                handleCalendar();
             }
 
             return commandResult;

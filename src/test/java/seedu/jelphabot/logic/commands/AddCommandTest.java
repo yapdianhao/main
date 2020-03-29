@@ -13,13 +13,16 @@ import java.util.function.Predicate;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import seedu.jelphabot.commons.core.GuiSettings;
 import seedu.jelphabot.logic.commands.exceptions.CommandException;
 import seedu.jelphabot.model.JelphaBot;
 import seedu.jelphabot.model.Model;
 import seedu.jelphabot.model.ReadOnlyJelphaBot;
 import seedu.jelphabot.model.ReadOnlyUserPrefs;
-import seedu.jelphabot.model.task.SortedTaskList;
+import seedu.jelphabot.model.productivity.Productivity;
+import seedu.jelphabot.model.productivity.ProductivityList;
+import seedu.jelphabot.model.reminder.Reminder;
 import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.testutil.TaskBuilder;
 
@@ -109,12 +112,21 @@ public class AddCommandTest {
         }
 
         @Override
+        public Path getRemindersFilePath() {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
         public void setJelphaBotFilePath(Path addressBookFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void addTask(Task task) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addReminder(Reminder reminder) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -134,6 +146,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean hasReminder(Reminder reminder) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasTimingTask() {
             throw new AssertionError("This method should not be called.");
         }
@@ -145,6 +162,16 @@ public class AddCommandTest {
 
         @Override
         public void setTask(Task target, Task editedTask) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setProductivity(Productivity productivity) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ProductivityList getProductivityList() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -173,10 +200,6 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-        @Override
-        public SortedTaskList getSortedTaskList() {
-            throw new AssertionError("This method should not be called.");
-        }
     }
 
     /**
@@ -202,6 +225,7 @@ public class AddCommandTest {
      */
     private class ModelStubAcceptingTaskAdded extends ModelStub {
         final ArrayList<Task> tasksAdded = new ArrayList<>();
+        final ArrayList<Productivity> productivityAdded = new ArrayList<>();
 
         @Override
         public boolean hasTask(Task task) {
@@ -213,6 +237,17 @@ public class AddCommandTest {
         public void addTask(Task task) {
             requireNonNull(task);
             tasksAdded.add(task);
+        }
+
+        @Override
+        public void setProductivity(Productivity productivity) {
+            requireNonNull(productivity);
+            productivityAdded.add(productivity);
+        }
+
+        @Override
+        public ObservableList<Task> getFilteredTaskList() {
+            return new FilteredList<Task>(getJelphaBot().getTaskList());
         }
 
         @Override

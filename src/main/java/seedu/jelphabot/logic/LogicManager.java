@@ -14,7 +14,9 @@ import seedu.jelphabot.logic.parser.JelphaBotParser;
 import seedu.jelphabot.logic.parser.exceptions.ParseException;
 import seedu.jelphabot.model.Model;
 import seedu.jelphabot.model.ReadOnlyJelphaBot;
-import seedu.jelphabot.model.task.SortedTaskList;
+import seedu.jelphabot.model.productivity.ProductivityList;
+import seedu.jelphabot.model.task.GroupedTaskList;
+import seedu.jelphabot.model.task.GroupedTaskList.Grouping;
 import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.storage.Storage;
 
@@ -45,6 +47,7 @@ public class LogicManager implements Logic {
 
         try {
             storage.saveJelphaBot(model.getJelphaBot());
+            storage.saveJelphaBot(model.getJelphaBot(), true);
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
@@ -78,14 +81,9 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public SortedTaskList getSortedTaskList() {
-        return model.getSortedTaskList();
+    public GroupedTaskList getGroupedTaskList(Grouping grouping) {
+        return GroupedTaskList.makeGroupedTaskList(model.getFilteredTaskList(), grouping);
     }
-
-    // @Override
-    // public ObservableList<Productivity> getFilteredProductivityList() {
-    //     return model.getFilteredProductivityList();
-    // }
 
     @Override
     public ObservableList<Task> getFilteredByIncompleteDueTodayTaskList() {
@@ -93,8 +91,18 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public ProductivityList getProductivityList() {
+        return model.getProductivityList();
+    }
+
+    @Override
     public Path getJelphaBotFilePath() {
         return model.getJelphaBotFilePath();
+    }
+
+    @Override
+    public Path getRemindersFilePath() {
+        return model.getRemindersFilePath();
     }
 
     @Override

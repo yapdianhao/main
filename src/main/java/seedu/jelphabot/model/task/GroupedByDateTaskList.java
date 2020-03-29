@@ -5,35 +5,41 @@ import static seedu.jelphabot.commons.util.DateUtil.getDueThisWeekPredicate;
 import static seedu.jelphabot.commons.util.DateUtil.getDueTodayPredicate;
 import static seedu.jelphabot.commons.util.DateUtil.getOverduePredicate;
 
-import javafx.collections.FXCollections;
+import java.util.Iterator;
+import java.util.List;
+import java.util.function.Predicate;
+
 import javafx.collections.ObservableList;
 import seedu.jelphabot.model.task.predicates.FilterTaskByDatePredicate;
+import seedu.jelphabot.model.task.predicates.TaskIsIncompletePredicate;
 
 /**
- * A wrapper for UniqueTaskList that separates UniqueTaskList by categories.
- * Separation is done over @code{UniqueTaskList} through use of filters.
+ * A container for ObservableList&lt;Task&gt; that splits the TaskList into groups.
+ * GroupedByDateTaskList groups Tasks by how close the due date is to the current date.
+ * Separation is done over @code{ObservableList} through use of filters.
  * <p>
- * Supports a minimal set of list operations.
  */
-public class SortedTaskList {
+public class GroupedByDateTaskList implements GroupedTaskList {
 
     private static final FilterTaskByDatePredicate isOverdue = getOverduePredicate();
     private static final FilterTaskByDatePredicate isDueToday = getDueTodayPredicate();
     private static final FilterTaskByDatePredicate isDueThisWeek = getDueThisWeekPredicate();
     private static final FilterTaskByDatePredicate isDueSomeday = getDueSomedayPredicate();
+    private static final Predicate<Task> isIncomplete = new TaskIsIncompletePredicate();
 
+    // TODO move pinnedTaskList out
     private final ObservableList<Task> pinnedTaskList;
     private final ObservableList<Task> overdueTaskList;
     private final ObservableList<Task> dueTodayTaskList;
     private final ObservableList<Task> dueThisWeekTaskList;
     private final ObservableList<Task> dueSomedayTaskList;
 
-    public SortedTaskList(ObservableList<Task> taskList) {
-        pinnedTaskList = FXCollections.unmodifiableObservableList(taskList.filtered(null));
-        overdueTaskList = FXCollections.unmodifiableObservableList(taskList.filtered(isOverdue));
-        dueTodayTaskList = FXCollections.unmodifiableObservableList(taskList.filtered(isDueToday));
-        dueThisWeekTaskList = FXCollections.unmodifiableObservableList(taskList.filtered(isDueThisWeek));
-        dueSomedayTaskList = FXCollections.unmodifiableObservableList(taskList.filtered(isDueSomeday));
+    public GroupedByDateTaskList(ObservableList<Task> taskList) {
+        overdueTaskList = taskList.filtered(isOverdue).filtered(isIncomplete);
+        dueTodayTaskList = taskList.filtered(isDueToday);
+        dueThisWeekTaskList = taskList.filtered(isDueThisWeek);
+        dueSomedayTaskList = taskList.filtered(isDueSomeday);
+        pinnedTaskList = taskList.filtered(null);
     }
 
     public ObservableList<Task> getPinnedTaskList() {
@@ -54,5 +60,10 @@ public class SortedTaskList {
 
     public ObservableList<Task> getDueSomedayTaskList() {
         return dueSomedayTaskList;
+    }
+
+    @Override
+    public Iterator<ObservableList<Task>> iterator() {
+        return List.of(overdueTaskList, dueTodayTaskList, dueThisWeekTaskList, dueSomedayTaskList).iterator();
     }
 }

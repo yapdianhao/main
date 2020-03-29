@@ -5,7 +5,9 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.jelphabot.model.reminder.Reminder;
 import seedu.jelphabot.model.task.Task;
+import seedu.jelphabot.model.task.UniqueReminderList;
 import seedu.jelphabot.model.task.UniqueTaskList;
 
 /**
@@ -15,6 +17,7 @@ import seedu.jelphabot.model.task.UniqueTaskList;
 public class JelphaBot implements ReadOnlyJelphaBot {
 
     private final UniqueTaskList tasks;
+    private final UniqueReminderList reminders;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -25,6 +28,7 @@ public class JelphaBot implements ReadOnlyJelphaBot {
      */
     {
         tasks = new UniqueTaskList();
+        reminders = new UniqueReminderList();
     }
 
     public JelphaBot() {}
@@ -47,23 +51,35 @@ public class JelphaBot implements ReadOnlyJelphaBot {
         this.tasks.setTasks(tasks);
     }
 
+    public void setReminders(List<Reminder> reminders) {
+        this.reminders.setReminders(reminders);
+    }
+
     /**
      * Resets the existing data of this {@code JelphaBot} with {@code newData}.
      */
     public void resetData(ReadOnlyJelphaBot newData) {
         requireNonNull(newData);
-
+        setReminders(newData.getReminderList());
         setTasks(newData.getTaskList());
     }
 
     //// task-level operations
 
     /**
-     * Returns true if a task with the same identity as {@code task} exists in the address book.
+     * Returns true if a task with the same identity as {@code task} exists in the JelphaBot.
      */
     public boolean hasTask(Task task) {
         requireNonNull(task);
         return tasks.contains(task);
+    }
+
+    /**
+     * Returns true if a reminder with the same identity as {@code reminder} exists in JelphaBot.
+     */
+    public boolean hasReminder(Reminder reminder) {
+        requireNonNull(reminder);
+        return reminders.contains(reminder);
     }
 
     /**
@@ -79,6 +95,10 @@ public class JelphaBot implements ReadOnlyJelphaBot {
      */
     public void addTask(Task p) {
         tasks.add(p);
+    }
+
+    public void addReminder(Reminder r) {
+        reminders.add(r);
     }
 
     /**
@@ -111,6 +131,11 @@ public class JelphaBot implements ReadOnlyJelphaBot {
     @Override
     public ObservableList<Task> getTaskList() {
         return tasks.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<Reminder> getReminderList() {
+        return reminders.asUnmodifiableObservableList();
     }
 
     @Override

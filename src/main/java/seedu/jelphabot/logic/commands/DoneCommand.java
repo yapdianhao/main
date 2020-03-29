@@ -3,6 +3,7 @@ package seedu.jelphabot.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.jelphabot.model.Model.PREDICATE_SHOW_ALL_TASKS;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.Set;
 
@@ -10,6 +11,7 @@ import seedu.jelphabot.commons.core.Messages;
 import seedu.jelphabot.commons.core.index.Index;
 import seedu.jelphabot.logic.commands.exceptions.CommandException;
 import seedu.jelphabot.model.Model;
+import seedu.jelphabot.model.productivity.Productivity;
 import seedu.jelphabot.model.tag.Tag;
 import seedu.jelphabot.model.task.DateTime;
 import seedu.jelphabot.model.task.Description;
@@ -61,6 +63,7 @@ public class DoneCommand extends Command {
 
         model.setTask(taskToMarkDone, doneTask);
         model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+        model.setProductivity(new Productivity(model.getFilteredTaskList()));
         return new CommandResult(String.format(MESSAGE_MARK_TASK_COMPLETE_SUCCESS, doneTask));
     }
 
@@ -78,8 +81,9 @@ public class DoneCommand extends Command {
         DateTime dateTime = task.getDateTime();
         Status status = Status.COMPLETE;
         Priority priority = task.getPriority();
+        Duration duration = task.getDuration();
 
-        return new Task(description, status, dateTime, moduleCode, priority, tags);
+        return new Task(description, status, dateTime, moduleCode, priority, tags, duration);
     }
 
     @Override

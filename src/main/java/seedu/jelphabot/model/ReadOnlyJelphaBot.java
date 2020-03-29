@@ -1,6 +1,10 @@
 package seedu.jelphabot.model;
 
+import java.util.List;
+
 import javafx.collections.ObservableList;
+
+import seedu.jelphabot.model.reminder.Reminder;
 import seedu.jelphabot.model.task.Task;
 
 /**
@@ -13,5 +17,11 @@ public interface ReadOnlyJelphaBot {
      * This list will not contain any duplicate tasks.
      */
     ObservableList<Task> getTaskList();
+
+    ObservableList<Reminder> getReminderList();
+
+    void setTasks(List<Task> tasks);
+
+    void setReminders(List<Reminder> reminders);
 
 }

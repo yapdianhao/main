@@ -2,31 +2,53 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.*?>
-<HBox xmlns:fx="http://javafx.com/fxml/1" id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/11">
-    <GridPane HBox.hgrow="ALWAYS">
-        <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
-        </columnConstraints>
-        <VBox alignment="CENTER_LEFT" minHeight="105" prefHeight="105.0" prefWidth="195.0" GridPane.columnIndex="0">
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<!-- TODO: fix UI -->
+<VBox xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+       <VBox alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="105" prefHeight="163.0" prefWidth="195.0">
+           <padding>
+               <Insets bottom="4" left="15" right="4" top="3" />
+           </padding>
+           <HBox prefHeight="35.0" prefWidth="195.0">
+               <children>
+                   <Label styleClass="cell_big_label" text="Today's Productivity   " HBox.hgrow="NEVER">
+                       <minWidth>
+                           <!-- Ensures that the label text is never truncated -->
+                           <Region fx:constant="USE_PREF_SIZE" />
+                       </minWidth>
+                   </Label>
+                   <ProgressBar fx:id="tasksCompletionProgress" maxWidth="-Infinity" prefWidth="200.0" progress="0.0" />
+               </children>
+           </HBox>
+           <Label fx:id="tasksCompleted" styleClass="cell_medium_label" text="\$tasksCompleted" />
+       </VBox>
+       <VBox alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="105" prefHeight="130.0" prefWidth="195.0">
+           <padding>
+               <Insets bottom="4" left="15" right="4" top="3" />
+           </padding>
+           <Label styleClass="cell_big_label" text="Time Spent On Tasks">
+               <minWidth>
+                   <!-- Ensures that the label text is never truncated -->
+                   <Region fx:constant="USE_PREF_SIZE" />
+               </minWidth>
+           </Label>
+           <Label fx:id="timeSpentToday" styleClass="cell_medium_label" text="\$timeSpentToday" />
+       </VBox>
+        <VBox alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="105" prefHeight="130.0" prefWidth="195.0">
             <padding>
-                <Insets bottom="5" left="15" right="5" top="5" />
+                <Insets bottom="4" left="15" right="4" top="3" />
             </padding>
-            <HBox alignment="CENTER_LEFT" spacing="5">
-                <Label fx:id="id" styleClass="cell_big_label">
-                    <minWidth>
-                        <!-- Ensures that the label text is never truncated -->
-                        <Region fx:constant="USE_PREF_SIZE" />
-                    </minWidth>
-                </Label>
-                <Label fx:id="productivityToday" styleClass="cell_medium_label" text="\productivityToday" />
-                <Label fx:id="runningTimers" styleClass="cell_medium_label" text="\runningTimers" />
-            </HBox>
-            <Label fx:id="overdueTasks" styleClass="cell_medium_label" text="\overdueTasks" />
-            <Label fx:id="remainingTasks" styleClass="cell_medium_label" text="\remainingTasks" />
+            <Label styleClass="cell_big_label" text="Running Timer">
+                <minWidth>
+                    <!-- Ensures that the label text is never truncated -->
+                    <Region fx:constant="USE_PREF_SIZE" />
+                </minWidth>
+            </Label>
+            <Label fx:id="runningTimer" styleClass="cell_medium_label" text="\$runningTimer" />
         </VBox>
-        <rowConstraints>
-            <RowConstraints />
-        </rowConstraints>
-    </GridPane>
-</HBox>
+   </children>
+</VBox>

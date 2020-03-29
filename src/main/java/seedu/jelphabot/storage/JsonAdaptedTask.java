@@ -1,5 +1,6 @@
 package seedu.jelphabot.storage;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -31,19 +32,20 @@ class JsonAdaptedTask {
     private final String moduleCode;
     private final Priority priority;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final Duration duration;
 
     /**
      * Constructs a {@code JsonAdaptedTask} with the given task details.
      */
     @JsonCreator
     public JsonAdaptedTask(
-            @JsonProperty("desc") String description,
-            @JsonProperty("status") Status status,
-            @JsonProperty("dateTime") String dateTime,
-            @JsonProperty("module") String moduleCode,
-            @JsonProperty("priority") Priority priority,
-            @JsonProperty("tagged") List<JsonAdaptedTag> tagged
-    ) {
+        @JsonProperty("desc") String description,
+        @JsonProperty("status") Status status,
+        @JsonProperty("dateTime") String dateTime,
+        @JsonProperty("module") String moduleCode,
+        @JsonProperty("priority") Priority priority,
+        @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
+        @JsonProperty("duration") Duration duration) {
         this.description = description;
         this.status = status;
         this.dateTime = dateTime;
@@ -52,6 +54,7 @@ class JsonAdaptedTask {
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
+        this.duration = duration;
     }
 
     /**
@@ -64,6 +67,7 @@ class JsonAdaptedTask {
         this.moduleCode = source.getModuleCode().value;
         this.priority = source.getPriority();
         tagged.addAll(source.getTags().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()));
+        this.duration = source.getDuration();
     }
 
     /**
@@ -114,8 +118,8 @@ class JsonAdaptedTask {
                 modelDateTime,
                 modelModuleCode,
                 priority,
-                modelTags
-        );
+                modelTags,
+                duration);
     }
 
 }
