@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import javafx.scene.image.Image;
 import seedu.jelphabot.MainApp;
+import seedu.jelphabot.logic.parser.exceptions.ParseException;
 
 /**
  * A container for App specific utility functions
@@ -36,4 +37,5 @@ public class AppUtil {
             throw new IllegalArgumentException(errorMessage);
         }
     }
+
 }

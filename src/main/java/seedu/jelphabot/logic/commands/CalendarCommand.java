@@ -3,12 +3,16 @@ package seedu.jelphabot.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDate;
+import java.time.Year;
+import java.time.YearMonth;
 
 import seedu.jelphabot.commons.core.Messages;
 import seedu.jelphabot.commons.util.DateUtil;
 import seedu.jelphabot.model.Model;
+import seedu.jelphabot.model.calendar.CalendarDate;
 import seedu.jelphabot.model.task.predicates.TaskDueWithinDayPredicate;
 import seedu.jelphabot.ui.CalendarPanel;
+import seedu.jelphabot.ui.MainWindow;
 
 /**
  * Lists all tasks in task list whose date corresponds with the specified date.
@@ -25,42 +29,60 @@ public class CalendarCommand extends Command {
 
     public static final String MESSAGE_SWITCH_PANEL_ACKNOWLEDGEMENT = "Switched to calendar panel.";
 
+    public static final String MESSAGE_SWITCH_CALENDAR_VIEW_ACKNOWLEDGEMENT = "Switched calendar panel to : %s";
+
     private final TaskDueWithinDayPredicate predicate;
-    private CalendarPanel calendarPanel;
+    private final YearMonth yearMonth;
+
+    private CalendarPanel calendarPanel = MainWindow.getCalendarPanel();
 
     public CalendarCommand() {
         predicate = null;
+        yearMonth = null;
     }
 
-    public CalendarCommand(TaskDueWithinDayPredicate predicate, CalendarPanel calendarPanel) {
+    public CalendarCommand(TaskDueWithinDayPredicate predicate) {
         this.predicate = predicate;
-        this.calendarPanel = calendarPanel;
+        yearMonth = null;
+    }
+
+    public CalendarCommand(YearMonth yearMonth) {
+        this.predicate = null;
+        this.yearMonth = yearMonth;
     }
 
     @Override
     public CommandResult execute(Model model) {
-        if (predicate == null) {
+        if (predicate == null && yearMonth == null) {
             return new CommandResult(MESSAGE_SWITCH_PANEL_ACKNOWLEDGEMENT, false, false, false, true, false);
-        } else {
+        } else if (yearMonth == null) { //switch task list for specific dates
             requireNonNull(model);
             model.updateFilteredCalendarTaskList(predicate);
 
-            if (calendarPanel.isTodayHighlighted()) {
-                calendarPanel.getHighlightedDay().removeHighlightedToday();
-            } else {
-                calendarPanel.getHighlightedDay().removeHighlightedDay();
-            }
-
             LocalDate date = predicate.getDate();
-            int dayIndex = date.getDayOfMonth();
-            if (date.equals(DateUtil.getDateToday())) {
-                calendarPanel.getDayCard(dayIndex).highlightToday();
-            } else {
-                calendarPanel.getDayCard(dayIndex).highlightDay();
+            if (date.getMonthValue() == DateUtil.getDateToday().getMonthValue()) {
+                if (calendarPanel.isTodayHighlighted()) {
+                    calendarPanel.getHighlightedDay().removeHighlightedToday();
+                } else {
+                    calendarPanel.getHighlightedDay().removeHighlightedDay();
+                }
+
+                int dayIndex = date.getDayOfMonth();
+                if (date.equals(DateUtil.getDateToday())) {
+                    calendarPanel.getDayCard(dayIndex).highlightToday();
+                } else {
+                    calendarPanel.getDayCard(dayIndex).highlightDay();
+                }
+                calendarPanel.setHighlightedDay(dayIndex);
             }
-            calendarPanel.setHighlightedDay(dayIndex);
             return new CommandResult(
                 String.format(Messages.MESSAGE_TASKS_LISTED_OVERVIEW, model.getFilteredCalendarTaskList().size()));
+        } else { //switch calendar view
+            CalendarDate newDate = new CalendarDate(yearMonth.atDay(1));
+            calendarPanel.changeMonthYearLabel(yearMonth);
+            calendarPanel.fillGridPane(newDate);
+            return new CommandResult(String.format(MESSAGE_SWITCH_CALENDAR_VIEW_ACKNOWLEDGEMENT,
+                                                    calendarPanel.getMonthYear()));
         }
     }
 

@@ -19,8 +19,8 @@ public class TaskDueWithinDayPredicate implements FilterTaskByDatePredicate {
         date = LocalDate.now();
     }
 
-    public TaskDueWithinDayPredicate(Date date) {
-        this.date = dateToLocalDate(date);
+    public TaskDueWithinDayPredicate(LocalDate date) {
+        this.date = date;
     }
 
     public TaskDueWithinDayPredicate(DateTime dateTime) {
