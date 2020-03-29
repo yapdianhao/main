@@ -30,6 +30,9 @@ public class CalendarCommand extends Command {
     public static final String MESSAGE_SWITCH_PANEL_ACKNOWLEDGEMENT = "Switched to calendar panel.";
 
     public static final String MESSAGE_SWITCH_CALENDAR_VIEW_ACKNOWLEDGEMENT = "Switched calendar panel to : %s";
+    public static final String  MESSAGE_SWITCH_CALENDAR_TODAY_ACKNOWLEDGEMENT = "Switched calendar panel to : %s, "
+                                                                                    + "displaying all your tasks "
+                                                                                    + "due today!";
 
     private final TaskDueWithinDayPredicate predicate;
     private final YearMonth yearMonth;
@@ -51,6 +54,11 @@ public class CalendarCommand extends Command {
         this.yearMonth = yearMonth;
     }
 
+    public CalendarCommand(TaskDueWithinDayPredicate predicate, YearMonth yearMonth) {
+        this.predicate = predicate;
+        this.yearMonth = yearMonth;
+    }
+
     @Override
     public CommandResult execute(Model model) {
         if (predicate == null && yearMonth == null) {
@@ -60,7 +68,7 @@ public class CalendarCommand extends Command {
             model.updateFilteredCalendarTaskList(predicate);
 
             LocalDate date = predicate.getDate();
-            if (date.getMonthValue() == DateUtil.getDateToday().getMonthValue()) {
+            if (date.getMonthValue() == calendarPanel.getCalendarMonth()) {
                 if (calendarPanel.isTodayHighlighted()) {
                     calendarPanel.getHighlightedDay().removeHighlightedToday();
                 } else {
@@ -77,12 +85,23 @@ public class CalendarCommand extends Command {
             }
             return new CommandResult(
                 String.format(Messages.MESSAGE_TASKS_LISTED_OVERVIEW, model.getFilteredCalendarTaskList().size()));
-        } else { //switch calendar view
+        } else if (predicate == null) { //switch calendar view
             CalendarDate newDate = new CalendarDate(yearMonth.atDay(1));
             calendarPanel.changeMonthYearLabel(yearMonth);
             calendarPanel.fillGridPane(newDate);
             return new CommandResult(String.format(MESSAGE_SWITCH_CALENDAR_VIEW_ACKNOWLEDGEMENT,
                                                     calendarPanel.getMonthYear()));
+        } else { //switch calendar view and task list for today
+            CalendarDate newDate = new CalendarDate(yearMonth.atDay(1));
+            calendarPanel.changeMonthYearLabel(yearMonth);
+            calendarPanel.fillGridPane(newDate);
+            requireNonNull(model);
+            model.updateFilteredCalendarTaskList(predicate);
+            calendarPanel.getHighlightedDay().removeHighlightedDay();
+            calendarPanel.getDayCard(DateUtil.getDateToday().getDayOfMonth()).highlightToday();
+            calendarPanel.setHighlightedDay(DateUtil.getDateToday().getDayOfMonth());
+            return new CommandResult(String.format(MESSAGE_SWITCH_CALENDAR_TODAY_ACKNOWLEDGEMENT,
+                calendarPanel.getMonthYear()));
         }
     }
 

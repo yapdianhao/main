@@ -1,7 +1,6 @@
 package seedu.jelphabot.logic.parser;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
@@ -9,6 +8,7 @@ import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
 
 import seedu.jelphabot.commons.core.Messages;
+import seedu.jelphabot.commons.util.DateUtil;
 import seedu.jelphabot.logic.commands.CalendarCommand;
 import seedu.jelphabot.logic.parser.exceptions.ParseException;
 import seedu.jelphabot.model.task.predicates.TaskDueWithinDayPredicate;
@@ -55,6 +55,9 @@ public class CalendarCommandParser implements Parser<CalendarCommand> {
             }
             LocalDate date = LocalDate.parse(input, ACCEPTED_DATE_FORMATS);
             return new CalendarCommand(new TaskDueWithinDayPredicate(date));
+        } else if (input.equals("today")) {
+            YearMonth yearMonth = YearMonth.now();
+            return new CalendarCommand(new TaskDueWithinDayPredicate(DateUtil.getDateToday()), yearMonth);
         } else {
             //case for switching month view
             if (!isValidYearMonth(input)) {

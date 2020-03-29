@@ -86,6 +86,10 @@ public class CalendarPanel extends UiPart<Region> {
         return monthYear.getText();
     }
 
+    public int getCalendarMonth() {
+        return calendarDate.getMonth();
+    }
+
     /**
      * Switches to display the calendar panel tab.
      */
