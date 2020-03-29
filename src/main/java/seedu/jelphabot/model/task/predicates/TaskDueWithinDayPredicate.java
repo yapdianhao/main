@@ -1,9 +1,6 @@
 package seedu.jelphabot.model.task.predicates;
 
-import static seedu.jelphabot.commons.util.DateUtil.dateToLocalDate;
-
 import java.time.LocalDate;
-import java.util.Date;
 
 import seedu.jelphabot.model.task.DateTime;
 import seedu.jelphabot.model.task.Task;
@@ -19,8 +16,8 @@ public class TaskDueWithinDayPredicate implements FilterTaskByDatePredicate {
         date = LocalDate.now();
     }
 
-    public TaskDueWithinDayPredicate(Date date) {
-        this.date = dateToLocalDate(date);
+    public TaskDueWithinDayPredicate(LocalDate date) {
+        this.date = date;
     }
 
     public TaskDueWithinDayPredicate(DateTime dateTime) {
