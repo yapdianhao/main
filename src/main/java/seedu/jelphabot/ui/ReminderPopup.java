@@ -73,7 +73,10 @@ public class ReminderPopup extends UiPart<Stage> {
         return taskListPanel;
     }
 
-
+    /**
+     * Shows the reminder popup. If no reminders are pending,
+     * a popup is not required.
+     */
     void show() {
         logger.info("Showing reminderStage");
         if (taskList.size() == 0) {
