@@ -32,6 +32,9 @@ JelphaBot can help you get work done faster than a traditional mouse-controlled 
 Interested? Jump to the <<Quick Start>> to get started.
 Enjoy!
 
+
+== Quick Start
+
 === Using the User Guide
 This User Guide is filled with information to help you set up and make the best out of you very own customizable JelphaBot!
 You will be able to learn more about the commands are available for you, together with examples of how they are used.
