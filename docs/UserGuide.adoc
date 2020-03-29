@@ -16,32 +16,41 @@ endif::[]
 
 By: `Team 2103T-F09-02`      Since: `Jan 2020`      Licence: `MIT`
 
-== Introduction
+== Preface
+=== Introduction
 
-Welcome to JelphaBot! +
+Welcome to JelphaBot!
 
-JelphaBot is designed for university students who *prefer to use a desktop app for managing tasks*.
-If you *prefer to work with a Command Line Interface* (CLI), JelphaBot allows you to work fast while still retaining the benefits of a Graphical User Interface (GUI).
-If you can type fast, JelphaBot can help you get your tasks done faster than traditional GUI apps.
+JelphaBot is *a desktop app for managing tasks* specially designed by and for NUS students that allows you to
+*recognise important tasks at a glance* so that you can prioritise commitments and manage your time.
 
-The JelphaBot GUI is designed to allow you to *recognise important tasks at a glance* so that you can prioritise commitments and manage your time.
+You can enter commands in JelphaBot through a *Command Line Interface* (CLI), which means that if you can *type quickly*,
+JelphaBot can help you get work done faster than a traditional mouse-controlled Graphical User Interface (GUI),
+*while still retaining the benefits of a beautiful user interface*.
 
 Interested? Jump to the <<Quick Start>> to get started.
 Enjoy!
 
-====
-*Preface*
-
-This section explains the usage of certain repeated symbols and icons throughout the document. Happy reading!
+=== How to Use This Guide
+The following table contains the formatting and symbols used in this guide.
 
 [width="100%",cols="40%,<60%,options="header",]
 |=======================================================================
 |*Symbol* | *What does it mean?*
-|<icon image>| sentence
-|<icon image>| sentence
+a| `code` | Command that can be typed into the command box
+ifdef::env-github[]
+| :white_check_mark: | Expected result after executing the command
+| :bulb: | Tips and tricks that might be useful
+| :information_source: | Additional information that is good to know
+| :heavy_exclamation_mark: | Important pointers to take note
+endif::[]
+ifndef::env-github[]
+a| icon:check[role="green", size="2x"] | Expected result after executing the command
+a| icon:lightbulb-o[role="icon-tip", size="2x"] | Tips and tricks that might be useful
+a| icon:info-circle[role="icon-note", size="2x"] | Additional information that is good to know
+a| icon:exclamation-circle[role="icon-important", size="2x"] | Important pointers to take note
+endif::[]
 |=======================================================================
-
-====
 
 == Quick Start
 
@@ -104,7 +113,9 @@ JelphaBot automatically saves your data whenever you make a change. There is no 
 If you can't recall the command you need, the `help` command opens a help popup window which links to this user guide. +
 Format: `help`
 
-image::help.png[width="600]
+[.text-center]
+image::ug_figures/help.png[width="600]
+[.text-center]
 _Figure 2: Example of an expected result after running `help`_
 
 === Exiting the program : `exit`
@@ -126,14 +137,12 @@ JelphaBot allows you to track and manage your tasks. You can view and sort all y
 The task list is formatted so that you can distinguish urgent tasks at first glance. The start of every task is labelled
 with a module code so that you can visually categorize them. Tasks are tagged according to their importance:
 
-* Default
-* *High Priority*
-* _Low priority_
+* Default priority
+* *High Priority* tasks will be *bolded* to denote important tasks.
+* _Low priority_ tasks will be _italicized_ to denote optional tasks.
 
-Tasks marked as _low priority_ will be _italicized_ to denote optional tasks. +
-Tasks are marked as *high priority* will be *bolded* to denote important tasks.
-
-Go <<#add, here>> to read more about adding task priority and <<#edit, here>> for editing task priority.
+The start of every task will be labelled with a module code so that you can visually categorize them.
+Go <<#add, here>> to read more about adding tasks with priority and <<#edit, here>> for editing task priority.
 
 You can also tag tasks with additional information. To read more about tags, go <<#Tags, here>>
 
@@ -143,7 +152,9 @@ You can also tag tasks with additional information. To read more about tags, go 
 Add a task to your task list. +
 Format: `d/DESCRIPTION dt/DATETIME m/MODULE_CODE [p/PRIORITY] [t/TAG]...`
 
-image::add.png[width="600"]
+[.text-center]
+image::ug_figures/add.png[width="600"]
+[.text-center]
 _Figure 3: Example of an expected result after running `add`_
 
 ****
@@ -171,8 +182,9 @@ Format: `list [SORTING_ORDER]`
 * If no `SORTING_ORDER` is provided, tasks will be grouped by date by default.
 * Valid `SORTING_ORDER` values are `date` (groups tasks by date) and `module` (Groups tasks by module code)
 ****
-
-image::list.png[width="600"]
+[.text-center]
+image::ug_figures/list.png[width="600"]
+[.text-center]
 _Figure 4: Example of an expected result after running `list`_
 
 ===== Group tasks by Date : `list date`
@@ -198,8 +210,9 @@ Groups tasks based on their defined module code. Modules will be presented in al
 
 Finds tasks in your task list whose description contain any of the given keywords. +
 Format: `find KEYWORD [MORE_KEYWORDS]`
-
-image::find.png[width="600"]
+[.text-center]
+image::ug_figures/find.png[width="600"]
+[.text-center]
 _Figure 5: Example of an expected result after running `find`_
 
 ****
@@ -252,7 +265,7 @@ Edits the date and time of the 2nd task to be `Jan-2-2020 23 59` and clears all 
 Marks a task in your task list as done. +
 Format: `done INDEX`
 
-image::done.png[width="600]
+image::images/ug_figures/done.png[width="600]
 _Figure 7: Example of an expected result after running `done`_
 
 ****
@@ -267,7 +280,7 @@ _Figure 7: Example of an expected result after running `done`_
 Delete a task from your task list. +
 Format: `delete INDEX`
 
-image::delete.png[width="600"]
+image::images/ug_figures/delete.png[width="600"]
 _Figure 8: Example of an expected result after running `delete`_
 
 ****
