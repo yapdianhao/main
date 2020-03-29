@@ -616,14 +616,16 @@ Use case ends.
 1. User enters reminder for tasks that want to be reminded for.
 2. JelphaBot adds a reminder and displays the result to the user.
 +
+Use case ends.
+
 *Extensions*
 
 [none]
-* 1a1. JelphaBot detects that the task the reminder is associated to does not exist.
+* 1a. JelphaBot detects that the task the reminder is associated to does not exist.
 [none]
 +
-** 1a2. User enters new task index to be reminded.
-** Steps 1b1-1b2 are repeated until the command entered is correct.
+** 1a1. User enters new task index to be reminded.
+** Steps 1a1-1a2 are repeated until the command entered is correct.
 +
 Use case resumes from step 2
 
@@ -635,6 +637,60 @@ Use case resumes from step 2
 +
 1b2. User enters new command.
 [none]
+** Steps 1b1-1b2 are repeated until the command entered is correct.
++
+Use case resumes from step 2.
+
+=== Use Case: UC9 - Start timer
+*MSS*
+
+1. User enters command to start timer for task to be timed.
+2. JelphaBot tracks the time taken.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. JelphaBot detects the task has been mark as completed.
+[none]
++
+** 1a1. JelphaBot displays to user that the task has been marked as completed.
++
+Use case ends.
+
+* 1b. JelphaBot detects that the specified task does not exist.
++
+[none]
+** 1b1. JelphaBot detects error and displays the correct input format to be expected.
+** 1b2. User enters new task index to start timing.
+** Steps 1b1-1b2 are repeated until the command entered is correct.
++
+Use case resumes from step 2.
+
+=== Use case 10: UC10 - Stop timer
+*MSS*
+
+1. User enters command to stop timer for task being.
+2. JelphaBot stores time spent on the task.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. Jelphabot detects the task does not have a running timer.
+[none]
++
+** 1a1. Jelphabot displays to user that the task does not have a running timer.
++
+Use case ends.
+
+* 1b. JelphaBot detects that the specified task does not exist.
++
+[none]
+** 1b1. JelphaBot detects error and displays the correct input format to be expected.
+** 1b2. User enters new task index to stop timing.
 ** Steps 1b1-1b2 are repeated until the command entered is correct.
 +
 Use case resumes from step 2.
@@ -689,7 +745,7 @@ These instructions only provide a starting point for testers to work on; testers
 
 .. Download the jar file and copy into an empty folder
 .. Double-click the jar file +
-   Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   Expected: Shows the GUI with a set of sample tasks. The window size may not be optimum.
 
 . Saving window preferences
 
