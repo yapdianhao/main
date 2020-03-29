@@ -32,6 +32,7 @@ JelphaBot can help you get work done faster than a traditional mouse-controlled 
 Interested? Jump to the <<Quick Start>> to get started.
 Enjoy!
 
+
 == Quick Start
 
 === Using the User Guide
@@ -149,8 +150,7 @@ with a module code so that you can visually categorize them. Tasks are tagged ac
 * *High Priority* tasks will be *bolded* to denote important tasks.
 * _Low priority_ tasks will be _italicized_ to denote optional tasks.
 
-The start of every task will be labelled with a module code so that you can visually categorize them.
-Go <<#add, here>> to read more about adding tasks with priority and <<#edit, here>> for editing task priority.
+Go <<#add, here>> to read more about adding task priority and <<#edit, here>> for editing task priority.
 
 You can also tag tasks with additional information. To read more about tags, go <<#Tags, here>>
 
