@@ -112,6 +112,13 @@ public interface Model {
     List<Reminder> getReminderListFromJelphaBot();
 
     /**
+     * Returns an unmodifiable view of the incomplete tasks that are due soon,
+     * as specified by the user
+     * @return
+     */
+    //public ObservableList<Task> getFilteredByReminder();
+
+    /**
      * Returns an unmodifiable view of the user's productivity.
      */
     ProductivityList getProductivityList();
