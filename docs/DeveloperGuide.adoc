@@ -41,17 +41,17 @@ and explains the design considerations of these implementations.
 [width="70%",cols="^15%,85%"]
 |===
 a| `code` | Command that can be typed
-//ifdef::env-github[]
+ifdef::env-github[]
 | :bulb: | Tips and tricks that might be useful
 | :information_source: | Additional information that is good to know
 | :heavy_exclamation_mark: | Important pointers to take note
-//endif::[]
-//ifndef::env-github[]
-//a| [.java]#name# | Reference to the codebase (such as component, class and method names)
-//a| icon:lightbulb-o[role="icon-tip", size="2x"] | Tips and tricks that might be useful
-//a| icon:info-circle[role="icon-note", size="2x"] | Additional information that is good to know
-//a| icon:exclamation-circle[role="icon-important", size="2x"] | Important pointers to take note
-//endif::[]
+endif::[]
+ifndef::env-github[]
+a| [.java]#name# | Reference to the codebase (such as component, class and method names)
+a| icon:lightbulb-o[role="icon-tip", size="2x"] | Tips and tricks that might be useful
+a| icon:info-circle[role="icon-note", size="2x"] | Additional information that is good to know
+a| icon:exclamation-circle[role="icon-important", size="2x"] | Important pointers to take note
+endif::[]
 |===
 
 == Setting up
