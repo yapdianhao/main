@@ -52,7 +52,7 @@ This section explains the usage of certain repeated symbols and icons throughout
 The GUI should appear in a few seconds.
 +
 image::Ui.png[width="790"]
-_Figure 1: Expected result after running `Jelphabot`_
+_Figure 1: Expected result after running `JelphaBot`_
 +
 . Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
@@ -65,6 +65,9 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 . Refer to <<Features>> for details of each command.
 
+== How to use this guide
+TO BE EDITED
+
 [[Features]]
 
 == Features
@@ -73,7 +76,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 **Task list commands**
 
-These command formats are applicable for these following commands: +
+These command formats are applicable for the following commands: +
 Add Command, Edit Command, Find Command.
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add d/DESCRIPTION`, `DESCRIPTION` is a parameter which can be used as `add d/Assignment 1`.
@@ -86,11 +89,11 @@ Add Command, Edit Command, Find Command.
 [ Placeholder image for labelled main screen to introduce navigation ]
 
 
-JelphaBot has four tabs, Task List, Calendar, Productivity and Notes.
+JelphaBot has four tabs, Task List, Calendar, Productivity and Summary.
 You can switch between tabs anytime by pressing `Ctrl + tab` on your keyboard to move to the tab on the right.
 If you are already on the rightmost tab, it wraps around to the leftmost tab.
 
-Commands can be entered from the bottom input box.
+Commands can be entered into the input box at the bottom.
 
 ==== Saving the data
 
@@ -110,13 +113,18 @@ You can exit the program anytime by entering the `exit` command directly from an
 Format: `exit`
 // no image needed
 
+****
+* Exiting the application before stopping any running timer wil cause all recorded time since the timer was started to be lost.
+****
+
 === Managing Tasks
 
 JelphaBot allows you to track and manage your tasks. You can view and sort all your tasks from the Task List page.
 
 ==== Reading the task list
 
-The task list is formatted so that you can distinguish urgent tasks at first glance. Tasks are tagged according to their importance:
+The task list is formatted so that you can distinguish urgent tasks at first glance. The start of every task is labelled
+with a module code so that you can visually categorize them. Tasks are tagged according to their importance:
 
 * Default
 * *High Priority*
@@ -125,16 +133,14 @@ The task list is formatted so that you can distinguish urgent tasks at first gla
 Tasks marked as _low priority_ will be _italicized_ to denote optional tasks. +
 Tasks are marked as *high priority* will be *bolded* to denote important tasks.
 
-Go to the respective links to find out more  about <<#add, adding>> or <<#edit, editing>> task priority.
-
-The start of every task will be labelled with a module code so that you can visually categorize them.
+Go <<#add, here>> to read more about adding task priority and <<#edit, here>> for editing task priority.
 
 You can also tag tasks with additional information. To read more about tags, go <<#Tags, here>>
 
 // tag::add[]
 ==== Adding a task: `add`
 
-Adds a task to the task list. +
+Add a task to your task list. +
 Format: `d/DESCRIPTION dt/DATETIME m/MODULE_CODE [p/PRIORITY] [t/TAG]...`
 
 image::add.png[width="600"]
@@ -158,7 +164,7 @@ Examples:
 // tag::list[]
 ==== Listing all tasks : `list`
 
-Shows a list of all tasks in the task list. Optional arguments can be added to define sorting order for your tasks. +
+List all tasks in your task list. Optional arguments can be added to dictate sorting order for your tasks. +
 Format: `list [SORTING_ORDER]`
 
 ****
@@ -170,27 +176,27 @@ image::list.png[width="600"]
 _Figure 4: Example of an expected result after running `list`_
 
 ===== Group tasks by Date : `list date`
-Tasks are grouped based on the following categories:
+Group your tasks into the following categories:
 
 * Pinned +
 (Pinned tasks will always be displayed at the top. To read more about pinning tasks, go <<#pin, here>>)
 * Overdue  +
-(Showing tasks which are uncompleted and past their due date)
+(Shows tasks which are uncompleted and past their due date)
 * Due Today +
-(Showing tasks due by the end of the day)
+(Shows tasks due by the end of the day)
 * Due This week +
-(Showing tasks due by the end of the week, defined as before the next upcoming Monday)
+(Shows tasks due by the end of the week, defined as before the next upcoming Monday)
 * Due Sometime +
-(Showing all other tasks that do not fit into prior categories)
+(Shows all other tasks that do not fit into prior categories)
 
 ===== Group tasks by Date : `list module`
-Tasks are grouped based on their defined module code. Modules will be presented in alphabetical order.
+Groups tasks based on their defined module code. Modules will be presented in alphabetical order.
 
 // end::list[]
 
 ==== Locating tasks by name: `find`
 
-Finds tasks whose description contain any of the given keywords. +
+Finds tasks in your task list whose description contain any of the given keywords. +
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 image::find.png[width="600"]
@@ -201,7 +207,7 @@ _Figure 5: Example of an expected result after running `find`_
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the description is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* tasks matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Tasks matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 ****
 
 Examples:
@@ -214,7 +220,7 @@ Returns any task having descriptions of `Tutorial`, `Project`, or `MidTerm`
 // tag::edit[]
 ==== Editing a task : `edit`
 
-Edit existing tasks by calling `edit` directly from a task page, or `edit <task_index>` from the landing page.
+Edit an existing task in your task list.
 . +
 Format: `edit INDEX [d/DESCRIPTION] [dt/DATETIME] [m/MODULE_CODE] [p/PRIORITY (-1, 0, or 1)]
 [t/TAG]...`
@@ -243,7 +249,7 @@ Edits the date and time of the 2nd task to be `Jan-2-2020 23 59` and clears all 
 
 ==== Completing a task : `done`
 
-Marks a task as done by calling `done` directly from a task page or `done <task_index>` from the landing page. +
+Marks a task in your task list as done. +
 Format: `done INDEX`
 
 image::done.png[width="600]
@@ -258,7 +264,7 @@ _Figure 7: Example of an expected result after running `done`_
 // tag::delete[]
 ==== Deleting a task : `delete`
 
-Deletes tasks by calling `delete` directly from a task page or `delete <task_index>` from the landing page. +
+Delete a task from your task list. +
 Format: `delete INDEX`
 
 image::delete.png[width="600"]
@@ -281,24 +287,32 @@ Deletes the 1st task in the results of the `find` command.
 
 // end::delete[]
 
+==== Clearing all task entries : `clear`
+
+Clears all entries from your task list. +
+Format: `clear`
+
+image::clear.png[width="600"]
+_Figure 9: Example of an expected result after running `clear`_
+
 // tag::pin[]
 ==== Pin Important tasks  : `pin`
 
-You can pin important tasks to the top of the tasklist with the `pin` command. +
-Pinned tasks will always be displayed in the Pinned Tasks grouping in the task list. +
-Trying to `pin` a task that is already pinned will unpin it instead.
+You can pin important tasks to the top of the task list with the `pin` command. +
+Pinned tasks will always be displayed in the Pinned Tasks group in the task list. +
+Trying to `pin` a task that is already pinned will unpin it.
 
 // end::pin[]
 
 // tag::showcompleted[]
 ==== Show all completed tasks : `show-completed`
-You can display all the tasks in your tasklist that have been completed.
+You can display all the tasks in your task list that have been completed.
 
 // end::showcompleted[]
 
 // tag::showincomplete[]
 ==== Show all incomplete tasks: `show-incomplete`
-You can display all the tasks in your tasklist that are currently incomplete.
+You can display all the tasks in your task list that are currently incomplete.
 
 // end::showincomplete[]
 
@@ -309,54 +323,24 @@ Format: `sort SORTING_ORDER`
 
 Valid `SORTING_ORDER` values include `date`, `module`, and `priority`.
 
-==== Clearing all task entries : `clear`
-
-// tag::pin[]
-==== Pin Important tasks  : `pin`
-
-You can pin important tasks to the top of the tasklist with the `pin` command. +
-Pinned tasks will always be displayed in the Pinned Tasks grouping in the task list. +
-Trying to `pin` a task that is already pinned will unpin it instead.
-
-// end::pin[]
-
-==== Sort tasks : `sort`  [coming in v2.0]
-
-You can change how tasks are sorted with the `sort` command.
-Format: `sort SORTING_ORDER`
-
-Valid `SORTING_ORDER` values include `date`, `module`, and `priority`.
-
-==== Clearing all task entries : `clear`
-
-Clears all entries from the task list by calling `clear` directly from a task page or from the landing page. +
-Format: `clear`
-
-image::clear.png[width="600"]
-_Figure 9: Example of an expected result after running `clear`_
-
-
 == Set Reminders and Notifications  `[coming in v2.0]`
 
 === Adding reminder : `reminder`
-Adds a reminder to the specific task, reminding the user if the task is within the timeframe specified
-by the user. +
-Format: `reminder INDEX rd/days rh/hours`
+Adds a reminder to your specified task and reminds you of the task if the current time is within the time-frame specified
+by you. +
+Format: `reminder INDEX rd/DAYS rh/HOURS`
 
 * Adds a reminder to the task which is at the specified `INDEX`.
 * The index refers to the index number shown in the displayed task list.
 * The index *must be a positive integer* 1, 2, 3, ....
-* `days` refers to the number of days the user wanted to be reminded
-before the task is due.
-* `hours` refers to the number of hours the user wanted to be reminded before the task
-is due.
+* `DAYS` refers to the number of days before the due date of the task when you want to be reminded of it.
+* `HOURS` refers to the number of hours before the due date of the task when you want to be reminded of it.
 
 ****
-* Users can only specify `days` to be within a week.
-* Users can only specify `hours` to be within 24 hours, since any hours greater than 24 can be
-converted into a day.
-* Tasks that are completed need not to be reminded for.
-* Tasks that have a reminder cannot have any other reminders.
+* You can only specify `DAYS` to be in the range 0 - 7 inclusive.
+* You can only specify `HOURS` to be in the range 0 - 24 inclusive.
+* Tasks that are completed cannot have a reminder.
+* Tasks can only have one reminder.
 ****
 
 === Removing reminder `[coming in v2.0]`
@@ -367,8 +351,13 @@ converted into a day.
 // tag::productivitytracker[]
 === Track productivity : `productivity`
 
-Switches to the productivity panel showing the user's productivity for the day. +
+Apart from the function to switch tabs by pressing `Ctrl + tab` on your keyboard, you can enter the command `productivity`
+to manually switch to the productivity tab. +
+Unless the task has been marked as complete, you can repeatedly start and stop the timer to continue timing the task. +
 Format: `productivity`
+
+image::productivityTab.png[width="790"]
+_Figure #: Expected result after running `productivity`_
 
 // end::productivitytracker[]
 
@@ -377,10 +366,14 @@ Format: `productivity`
 Starts timer running for a task. +
 Format: `start INDEX`
 
+image::start.png[width="790"]
+_Figure #: Expected result after running `start`_
+
 ****
 * Starts the timer for the task at the specified `INDEX` if timer was not running.
 * The index refers to the index number shown in the displayed task list.
 * The index *must be a positive integer* 1, 2, 3, ...
+* The task to be timed cannot be a completed task.
 ****
 
 ==== Stopping timer for a task : `stop`
@@ -388,25 +381,28 @@ Format: `start INDEX`
 Stops running timer for a task. +
 Format: `stop INDEX`
 
+image::stop.png[width="790"]
+_Figure #: Expected result after running `stop`_
+
 ****
 * Stops the timer for the task at the specified `INDEX` if timer was running.
 * The index refers to the index number shown in the displayed task list.
 * The index *must be a positive integer* 1, 2, 3, ...
+* The task has to have a running timer.
 ****
 
 ==== Receiving encouragement and criticism
 
-Jelphabot automatically tracks the user's productivity in a day and outputs the appropriate response to the user's
+JelphaBot automatically tracks the user's productivity in a day and outputs the appropriate response to the user's
 achievements and task completion rate. +
 There is no need to manually ask for compliments or criticism.
 
 == Calendar
 === Integrating calender : `calendar`
-Apart from the function to switch tabs by pressing `Ctrl + tab` on your keyboard, the user can enter the `calendar` command
+Apart from the function to switch tabs by pressing `Ctrl + tab` on your keyboard, you can enter the command `calendar`
 to manually switch to the calendar tab.
 The calendar panel will then show the user's schedule for the current month with today's date
 highlighted. +
-
 Format: `calendar`
 
 image::CalendarUi.png[width="790"]
@@ -475,7 +471,7 @@ e.g. `delete 3`
 * *Exit* : `exit`
 * *Show Completed Tasks*: `show-completed`
 * *Show Incomplete Tasks*: `show-incomplete`
-* *Reminder* : `reminder INDEX rd/days rh/hours` +
+* *Reminder* : `reminder INDEX rd/DAYS rh/HOURS` +
 e.g. `reminder 2 rd/1 rh/1`
 * *Productivity* : `productivity`
 * *Timer* : `start INDEX` or `stop INDEX` +
