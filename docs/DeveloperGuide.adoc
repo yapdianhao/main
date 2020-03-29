@@ -16,6 +16,44 @@ endif::[]
 
 By: `Team 2103T-F09-02`      Since: `Jan 2020`      Licence: `MIT`
 
+== Preface
+=== Introduction
+
+JelphaBot is *a desktop app for managing tasks* for NUS students. JelphaBot is designed to allow these students
+to manage tasks conveniently and aids students by *allowing important tasks to be easily recognised*.
+
+Users enter commands in JelphaBot through a *Command Line Interface* (CLI). However, a Graphical User Interface (GUI)
+is still used for improved design and user experience.
+
+JelphaBot is based on the AddressBook-Level3 (AB3) project created by SE-EDU initiative at https://se-education.org
+
+This Developer Guide consists of the following sections:
+
+* <<Setting Up, Setting Up>> - Assists new developers in cloning and initializing a copy of JelphaBot.
+* <<Design, Design>> - Provides an overview of the architecture design.
+* <<Implementation, Implementation>> - Brief explanation of how features in JelphaBot were implemented on top of AB3,
+and explains the design considerations of these implementations.
+* <<Documentation, Documentation>> - A guide for generating and publishing documentation.
+* <<Testing, Testing>> - A guide for developers to set up and run test code.
+* <<Dev Ops, Dev Ops>> - A guide for developers to build, test and release JelphaBot.
+
+=== How to Use this Guide
+[width="70%",cols="^15%,85%"]
+|===
+a| `code` | Command that can be typed
+//ifdef::env-github[]
+| :bulb: | Tips and tricks that might be useful
+| :information_source: | Additional information that is good to know
+| :heavy_exclamation_mark: | Important pointers to take note
+//endif::[]
+//ifndef::env-github[]
+//a| [.java]#name# | Reference to the codebase (such as component, class and method names)
+//a| icon:lightbulb-o[role="icon-tip", size="2x"] | Tips and tricks that might be useful
+//a| icon:info-circle[role="icon-note", size="2x"] | Additional information that is good to know
+//a| icon:exclamation-circle[role="icon-important", size="2x"] | Important pointers to take note
+//endif::[]
+|===
+
 == Setting up
 
 Refer to the guide <<SettingUp#, here>>.
@@ -388,7 +426,7 @@ the terminal.
 
 Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (unlikely to have) - `*`
 
-[width="59%",cols="22%,<23%,<25%,<30%",options="header",]
+[width="100%",cols="12%,<23%,<25%,<30%",options="header",]
 |=======================================================================
 |Priority |As a ... |I want to ... |So that I can...
 |`* * *` |student with good work-life balance |view tasks with different tags (e.g. health, work) easily |
