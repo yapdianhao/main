@@ -32,8 +32,6 @@ JelphaBot can help you get work done faster than a traditional mouse-controlled 
 Interested? Jump to the <<Quick Start>> to get started.
 Enjoy!
 
-== Quick Start
-
 === Using the User Guide
 This User Guide is filled with information to help you set up and make the best out of you very own customizable JelphaBot!
 You will be able to learn more about the commands are available for you, together with examples of how they are used.
@@ -60,6 +58,8 @@ a| icon:exclamation-circle[role="icon-important", size="2x"] | Important pointer
 endif::[]
 |=======================================================================
 
+
+== Quick Start
 . Ensure you have Java `11` or above installed in your Computer.
 . Download the latest `jelphabot.jar` link:{repoURL}/releases[here].
 . Copy the file to the folder you want to use as the home folder for your JelphaBot.
@@ -246,12 +246,13 @@ Edit an existing task in your task list.
 Format: `edit INDEX [d/DESCRIPTION] [dt/DATETIME] [m/MODULE_CODE] [p/PRIORITY (-1, 0, or 1)]
 [t/TAG]...`
 
-image::edit.png[width="600"]
+[.text-center]
+image::ug_figures/edit.png[width="600"]
+[.text-center]
 _Figure 6: Example of an expected result after running `edit`_
 
 ****
-* Edits the task at the specified `INDEX`.
-* The index refers to the index number shown in the displayed task list.
+* Edits the task at the specified `INDEX`, which is the index number shown in the displayed task list.
 * The index *must be a positive integer* 1, 2, 3, ...
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
@@ -313,8 +314,11 @@ Deletes the 1st task in the results of the `find` command.
 Clears all entries from your task list. +
 Format: `clear`
 
-image::clear.png[width="600"]
+[.text-center]
+image::ug_figures/clear.png[width="600"]
+[.text-center]
 _Figure 9: Example of an expected result after running `clear`_
+
 
 // tag::pin[]
 ==== Pin Important tasks  : `pin`
@@ -344,7 +348,6 @@ Format: `sort SORTING_ORDER`
 
 Valid `SORTING_ORDER` values include `date`, `module`, and `priority`.
 
-==== Clearing all task entries : `clear`
 
 // tag::pin[]
 ==== Pin Important tasks  : `pin`
@@ -354,14 +357,6 @@ Pinned tasks will always be displayed in the Pinned Tasks grouping in the task l
 Trying to `pin` a task that is already pinned will unpin it instead.
 
 // end::pin[]
-
-==== Clearing all task entries : `clear`
-
-Clears all entries from the task list by calling `clear` directly from a task page or from the landing page. +
-Format: `clear`
-
-image::clear.png[width="600"]
-_Figure 9: Example of an expected result after running `clear`_
 
 == Set Reminders and Notifications  `[coming in v2.0]`
 
@@ -395,7 +390,9 @@ to manually switch to the producivity tab.
 The productivity panel will then show you your productivity for the day. +
 Format: `productivity`
 
-image::productivityTab.png[width="790"]
+[.text-center]
+image::ug_figures/productivityTab.png[width="790"]
+[.text-center]
 _Figure #: Expected result after running `productivity`_
 
 // end::productivitytracker[]
@@ -405,7 +402,9 @@ _Figure #: Expected result after running `productivity`_
 Starts timer running for a task. +
 Format: `start INDEX`
 
-image::start.png[width="790"]
+[.text-center]
+image::ug_figures/start.png[width="790"]
+[.text-center]
 _Figure #: Expected result after running `start`_
 
 ****
@@ -420,7 +419,9 @@ _Figure #: Expected result after running `start`_
 Stops running timer for a task. +
 Format: `stop INDEX`
 
-image::stop.png[width="790"]
+[.text-center]
+image::ug_figures/stop.png[width="790"]
+[.text-center]
 _Figure #: Expected result after running `stop`_
 
 ****
