@@ -1,5 +1,6 @@
 package seedu.jelphabot.ui;
 
+import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
@@ -48,6 +49,7 @@ public class CalendarPanel extends UiPart<Region> {
      * @param firstDay The date representing the first day of the month.
      */
     public void fillGridPane(CalendarDate firstDay) {
+        calendarGrid.getChildren().clear();
         int weekIndex = firstDay.getDayOfWeek() - 1;
         int lengthPrevMonth = firstDay.getLengthPrevMonth();
         int day = lengthPrevMonth - weekIndex + 1;
@@ -57,7 +59,7 @@ public class CalendarPanel extends UiPart<Region> {
         for (int row = 0; row < 6; row++) {
             for (int col = 0; col < 7; col++) {
                 CalendarDayCard calendarDayCard = new CalendarDayCard(currDate);
-                if (currDate.isThisMonth()) {
+                if (currDate.isSameMonth(firstDay.getMonth())) {
                     calendarDayCard.setSameMonth();
                     dayCardsInMonth.add(calendarDayCard);
                 } else {
@@ -72,6 +74,24 @@ public class CalendarPanel extends UiPart<Region> {
                 currDate = currDate.dateNextDay();
             }
         }
+        logger.info("length of dayCardsInMonth " + dayCardsInMonth.size());
+    }
+
+    /**
+     * Updatest the MonthYear Label of the Calendar Panel with the inputted parameter.
+     * @param yearMonth Specifies the year and month of the calendar to be set to.
+     */
+    public void changeMonthYearLabel(YearMonth yearMonth) {
+        calendarDate = new CalendarDate(yearMonth.atEndOfMonth());
+        monthYear.setText(calendarDate.getMonthName() + ", " + calendarDate.getYear());
+    }
+
+    public String getMonthYear() {
+        return monthYear.getText();
+    }
+
+    public int getCalendarMonth() {
+        return calendarDate.getMonth();
     }
 
     /**
