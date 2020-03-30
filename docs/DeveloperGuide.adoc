@@ -69,7 +69,9 @@ The data in JelphaBot is stored as .json files in the `data` subdirectory.
 The *_Architecture Diagram_* given below explains the high-level design of the App.
 
 .Architecture Diagram
-image::ArchitectureDiagram.png[align="center"]
+image::ArchitectureDiagram2.png[]
+
+The *_Architecture Diagram_* given above explains the high-level design of the App. Given below is a quick overview of each component.
 
 [TIP]
 The `.puml` files used to create diagrams in this document can be found in the link:{repoURL}/docs/diagrams/[diagrams] folder.
@@ -312,9 +314,15 @@ the command fails its execution so that it does not execute that start or stop o
 === Morning Call / Night Debrief feature
 
 JelphaBot has a Morning Call and Night Debrief feature which provides an overview of the tasks to be completed
-for the day (Morning Call), and all tasks that are completed in the tasklist thus far (Night Debrief).
+for the day (Morning Call), and all tasks that have been complete within the day (Night Debrief).
 
 Both come in the form of a separate window that opens upon app startup for Morning Call, and app exit for Night Debrief.
+
+==== Implementation
+
+To view the respective tasks, the user enters the `summary` command.
+// end::morningcallnightdebrief[]
+
 // tag::undoredo[]
 === [Proposed] Undo/Redo feature
 ==== Proposed Implementation
@@ -386,15 +394,7 @@ image::CommitActivityDiagram.png[]
 * **Alternative 2:** Individual command knows how to undo/redo by itself.
 ** Pros: Will use less memory (e.g. for `delete`, just save the task being deleted).
 ** Cons: We must ensure that the implementation of each individual command are correct.
-
-===== Aspect: Data structure to support the undo/redo commands
-
-* **Alternative 1 (current choice):** Use a list to store the history of JelphaBot states.
-** Pros: Easy for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.
-** Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update both `HistoryManager` and `VersionedAddressBook`.
-* **Alternative 2:** Use `HistoryManager` for undo/redo
-** Pros: We do not need to maintain a separate list, and just reuse what is already in the codebase.
-** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
+=======
 // end::undoredo[]
 
 === Logging
