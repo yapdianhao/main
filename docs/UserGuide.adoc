@@ -358,16 +358,6 @@ Format: `sort SORTING_ORDER`
 
 Valid `SORTING_ORDER` values include `date`, `module`, and `priority`.
 
-
-// tag::pin[]
-==== Pin Important tasks  : `pin`
-
-You can pin important tasks to the top of the tasklist with the `pin` command. +
-Pinned tasks will always be displayed in the Pinned Tasks grouping in the task list. +
-Trying to `pin` a task that is already pinned will unpin it instead.
-
-// end::pin[]
-
 === Set Reminders and Notifications (Dian Hao)
 
 ==== Adding reminder : `reminder`

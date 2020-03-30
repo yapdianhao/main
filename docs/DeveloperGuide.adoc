@@ -729,7 +729,7 @@ Use case ends.
 +
 Use case resumes from step 2.
 
-=== Use case 10: UC10 - Stop timer
+=== Use Case: UC10 - Stop timer
 *MSS*
 
 1. User enters command to stop timer for task being.
