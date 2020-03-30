@@ -133,7 +133,6 @@ public class LogicManager implements Logic {
     //
     // }
 
-
     @Override
     public ProductivityList getProductivityList() {
         return model.getProductivityList();
