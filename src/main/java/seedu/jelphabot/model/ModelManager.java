@@ -195,7 +195,6 @@ public class ModelManager implements Model {
         return filteredTasks;
     }
 
-    @Override
     public ObservableList<Reminder> getFilteredReminderList() {
         return filteredReminders;
     }

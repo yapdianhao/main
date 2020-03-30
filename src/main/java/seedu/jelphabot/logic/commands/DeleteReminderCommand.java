@@ -17,8 +17,10 @@ public class DeleteReminderCommand extends Command {
     public static final String COMMAND_WORD = "delrem";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-                                                   + ": Deletes the reminder identified by the index number of the task used in the displayed task list.\n"
-                                                   + "Parameters: INDEX (must be a positive integer)\n" + "Example: " + COMMAND_WORD + " 1";
+                                                   + ": Deletes the reminder identified by the index number"
+                                                   + " of the task used in the displayed task list.\n"
+                                                   + "Parameters: INDEX (must be a positive integer)\n"
+                                                   + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_REMINDER_SUCCESS = "Deleted Reminder: %1$s";
 
