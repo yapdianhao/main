@@ -1,7 +1,6 @@
 package seedu.jelphabot.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.jelphabot.commons.core.Messages.MESSAGE_CANNOT_START_MORE_TIMERS;
 import static seedu.jelphabot.model.Model.PREDICATE_SHOW_ALL_TASKS;
 
 import java.util.List;
@@ -14,7 +13,6 @@ import seedu.jelphabot.model.productivity.Productivity;
 import seedu.jelphabot.model.task.Status;
 import seedu.jelphabot.model.task.Task;
 
-// TODO: allow more than 1 timer running at a time.
 /**
  * Starts a timer for a task.
  */
@@ -51,8 +49,6 @@ public class StartTimerCommand extends Command {
             throw new CommandException(MESSAGE_TASK_ALREADY_TIMED);
         } else if (taskToTime.isBeingTimed()) {
             throw new CommandException(MESSAGE_TIMER_ALREADY_STARTED);
-        } else if (model.hasTimingTask()) {
-            throw new CommandException(MESSAGE_CANNOT_START_MORE_TIMERS);
         }
 
         taskToTime.startTimer();

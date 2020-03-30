@@ -43,7 +43,7 @@ public class StopTimerCommand extends Command {
         Task dummy = lastShownList.get(targetIndex.getZeroBased());
         Task taskToStop = lastShownList.get(targetIndex.getZeroBased());
 
-        if (!model.hasTimingTask() || taskToStop.getStartTime() == null) {
+        if (!taskToStop.isBeingTimed()) {
             throw new CommandException(MESSAGE_NO_TIMER_TO_STOP);
         }
 
