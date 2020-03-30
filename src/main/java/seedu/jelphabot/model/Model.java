@@ -82,6 +82,12 @@ public interface Model {
     void deleteTask(Task target);
 
     /**
+     * Deletes the given reminder.
+     * @param reminder
+     */
+    void deleteReminder(Reminder reminder);
+
+    /**
      * Adds the given task.
      * {@code task} must not already exist in the address book.
      */
@@ -103,6 +109,8 @@ public interface Model {
 
     /** Returns an unmodifiable view of the filtered task list */
     ObservableList<Task> getFilteredTaskList();
+
+    ObservableList<Reminder> getFilteredReminderList();
 
     /** Returns an unmodifiable view of the filtered task list in the Calendar*/
     ObservableList<Task> getFilteredCalendarTaskList();

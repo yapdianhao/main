@@ -137,6 +137,9 @@ public class JelphaBot implements ReadOnlyJelphaBot {
         tasks.remove(key);
     }
 
+    public void removeReminder(Reminder key) {
+        reminders.remove(key);
+    }
     //// util methods
 
     @Override

@@ -26,6 +26,7 @@ public class ModelManager implements Model {
     private final JelphaBot readOnlyJelphaBot;
     private final UserPrefs userPrefs;
     private final FilteredList<Task> filteredTasks;
+    private final FilteredList<Reminder> filteredReminders;
     private final FilteredList<Task> filteredCalendarTasks;
     private final ProductivityList productivityList;
 
@@ -41,6 +42,7 @@ public class ModelManager implements Model {
         this.readOnlyJelphaBot = new JelphaBot(readOnlyJelphaBot);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredTasks = new FilteredList<>(this.readOnlyJelphaBot.getTaskList());
+        filteredReminders = new FilteredList<>(this.readOnlyJelphaBot.getReminderList());
         filteredCalendarTasks = new FilteredList<>(this.readOnlyJelphaBot.getTaskList());
         productivityList = new ProductivityList();
     }
@@ -138,6 +140,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deleteReminder(Reminder reminder) {
+        readOnlyJelphaBot.removeReminder(reminder);
+    }
+
+    @Override
     public void addTask(Task task) {
         readOnlyJelphaBot.addTask(task);
         updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
@@ -147,6 +154,8 @@ public class ModelManager implements Model {
     public void addReminder(Reminder reminder) {
         readOnlyJelphaBot.addReminder(reminder);
     }
+
+
 
     @Override
     public void setTask(Task target, Task editedTask) {
@@ -184,6 +193,11 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Task> getFilteredTaskList() {
         return filteredTasks;
+    }
+
+    @Override
+    public ObservableList<Reminder> getFilteredReminderList() {
+        return filteredReminders;
     }
 
     @Override
