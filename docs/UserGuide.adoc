@@ -32,8 +32,23 @@ JelphaBot can help you get work done faster than a traditional mouse-controlled 
 Interested? Jump to the <<Quick Start>> to get started.
 Enjoy!
 
+Upon running JelphaBot, you will see various components on it's main display screen. The components of the main screen is labelled below.
 
-== Quick Start
+.Brief overview of the app
+image::MainUi.png[width="790"]
+
+The function of each component is as follows:
+
+1. *Tabs Panel*: This is where you can navigate between the different features located in various tabs.
+2. *Main Panel*: This is the main display screen which corresponds to the tab it is under.
+3. *Results Display*: This is where the results of your commands are displayed as JelphaBot interacts with you!
+4. *Command Box*: This is where you key in your own respective commands.
+
+As seen above, JelphaBot has four tabs, Task List, Calendar, Productivity and Notes.
+You can switch between tabs anytime by pressing kbd:[Ctrl] + kbd:[Tab] on your keyboard to move to the tab on the right.
+If you are already on the rightmost tab, it wraps around to the leftmost tab.
+
+=== Purpose of this document
 
 === Using the User Guide
 This User Guide is filled with information to help you set up and make the best out of you very own customizable JelphaBot!
@@ -49,29 +64,31 @@ formatting used throughout this guide.
 a| `code` | Command that can be typed into the command box
 ifdef::env-github[]
 | :white_check_mark: | Expected result after executing the command
+| kbd:[Key] | A Key that you should press on your keyboard
 | :bulb: | Tips and tricks that might be useful
 | :information_source: | Additional information that is good to know
 | :heavy_exclamation_mark: | Important pointers to take note
 endif::[]
 ifndef::env-github[]
 a| icon:check[role="green", size="2x"] | Expected result after executing the command
+a| kbd:[Key] | A Key that you should press on your keyboard
 a| icon:lightbulb-o[role="icon-tip", size="2x"] | Tips and tricks that might be useful
 a| icon:info-circle[role="icon-note", size="2x"] | Additional information that is good to know
 a| icon:exclamation-circle[role="icon-important", size="2x"] | Important pointers to take note
 endif::[]
 |=======================================================================
 
-
 == Quick Start
 . Ensure you have Java `11` or above installed in your Computer.
 . Download the latest `jelphabot.jar` link:{repoURL}/releases[here].
 . Copy the file to the folder you want to use as the home folder for your JelphaBot.
 . Double-click the file to start the app.
-The GUI should appear in a few seconds.
+The GUI should appear in a few seconds. You should see a list of tasks as shown in the following diagram.
 +
 .Expected result after running `JelphaBot`
 image::Ui.png[width="790"]
 +
+If you do not see this, you can follow the instructons here (link to Troubleshooting) to reset Jelphabot
 . Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 . Some example commands you can try:
@@ -82,30 +99,13 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * *`exit`* : exits the app
 
 . Refer to <<Features>> for details of each command.
+A full list of commands is available here (link to command list)
 
 [[Features]]
 
 == Features
 
-=== General
-Upon running JelphaBot, you will see various components on it's main display screen. The components of the main screen is labelled below.
-
-image::MainUi.png[width="790"]
-
-The function of each component is as follows:
-
-1. *Tabs Panel*: This is where you can navigate between the different features located in various tabs.
-2. *Main Panel*: This is the main display screen which corresponds to the tab it is under.
-3. *Results Display*: This is where the results of your commands are displayed as JelphaBot interacts with you!
-4. *Command Box*: This is where you key in your own respective commands.
-
-As seen above, JelphaBot has four tabs, Task List, Calendar, Productivity and Notes.
-You can switch between tabs anytime by pressing `Ctrl + tab` on your keyboard to move to the tab on the right.
-If you are already on the rightmost tab, it wraps around to the leftmost tab.
-
-==== Saving the data
-
-JelphaBot automatically saves your data whenever you make a change. There is no need to save manually.
+=== Common commands
 
 ==== Viewing help : `help`
 
@@ -127,7 +127,7 @@ Format: `exit`
 * Exiting the application before stopping any running timer wil cause all recorded time since the timer was started to be lost.
 ****
 
-=== Managing Tasks
+=== Managing Tasks (Yao Jie)
 
 JelphaBot allows you to track and manage your tasks.
 You can view and sort all your tasks from the Task List page.
@@ -284,7 +284,7 @@ Marks a task in your task list as done. +
 Format: `done INDEX`
 
 [.text-center]
-Example of an expected result after running `done`
+.Example of an expected result after running `done`
 image::images/ug_figures/done.png[width="600]
 
 ****
@@ -368,9 +368,9 @@ Trying to `pin` a task that is already pinned will unpin it instead.
 
 // end::pin[]
 
-== Set Reminders and Notifications  `[coming in v2.0]`
+=== Set Reminders and Notifications (Dian Hao)
 
-=== Adding reminder : `reminder`
+==== Adding reminder : `reminder`
 Adds a reminder to your specified task and reminds you of the task if the current time is within the time-frame specified
 by you. +
 Format: `reminder INDEX rd/DAYS rh/HOURS`
@@ -391,7 +391,7 @@ Format: `reminder INDEX rd/DAYS rh/HOURS`
 ==== Removing reminder `[coming in v2.0]`
 ==== Reminder popup notification `[coming in v2.0]`
 
-=== Productivity Tracking
+=== Productivity Tracking (Jel)
 
 // tag::productivitytracker[]
 ==== Track productivity : `productivity`
@@ -444,7 +444,7 @@ JelphaBot automatically tracks the user's productivity in a day and outputs the 
 achievements and task completion rate. +
 There is no need to manually ask for compliments or criticism.
 
-=== Calendar
+=== Calendar (Amanda)
 ==== View calender : `calendar`
 Apart from the function to switch tabs by pressing `Ctrl + tab` on your keyboard, you can enter the `calendar` command
 to manually switch to the calendar tab.
@@ -502,7 +502,7 @@ image::CalendarToday.png[width="790"]
 
 Displays month of March in the year 2020 in the calendar panel on the right, with today's date highlighted and displays the corresponding tasks due today on the left.
 
-=== Morning call/Night debrief
+=== Morning call/Night debrief (Eden)
 Displays the tasks to be completed within the day (Morning Call), and the tasks that have been completed so far (Night Debrief)
 
 Morning Call and Night Debrief are separate windows that will open on app startup and exit respectively.
@@ -513,6 +513,10 @@ Morning Call and Night Debrief are separate windows that will open on app startu
 
 *Q*: How do I transfer my data to another Computer? +
 *A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
+
+
+Q2: Saving the data
+A: JelphaBot automatically saves your data whenever you make a change. There is no need to save manually.
 
 == Command Summary
 
