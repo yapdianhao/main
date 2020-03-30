@@ -128,11 +128,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasTimingTask() {
-        return readOnlyJelphaBot.hasTaskBeingTimed();
-    }
-
-    @Override
     public void deleteTask(Task target) {
         readOnlyJelphaBot.removeTask(target);
     }

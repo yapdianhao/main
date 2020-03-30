@@ -34,6 +34,7 @@ Enjoy!
 
 Upon running JelphaBot, you will see various components on it's main display screen. The components of the main screen is labelled below.
 
+[.text-center]
 .Brief overview of the app
 image::MainUi.png[width="790"]
 
@@ -85,6 +86,7 @@ endif::[]
 . Double-click the file to start the app.
 The GUI should appear in a few seconds. You should see a list of tasks as shown in the following diagram.
 +
+[.text-center]
 .Expected result after running `JelphaBot`
 image::Ui.png[width="790"]
 +
@@ -228,8 +230,9 @@ Groups tasks based on their defined module code. Modules will be presented in al
 
 Finds tasks in your task list whose description contain any of the given keywords. +
 Format: `find KEYWORD [MORE_KEYWORDS]`
+
 [.text-center]
-.Example of an expected result after running `find`
+.Example of an expected result after running `find tutorial`
 image::ug_figures/find.png[width="600"]
 
 ****
@@ -358,16 +361,6 @@ Format: `sort SORTING_ORDER`
 
 Valid `SORTING_ORDER` values include `date`, `module`, and `priority`.
 
-
-// tag::pin[]
-==== Pin Important tasks  : `pin`
-
-You can pin important tasks to the top of the tasklist with the `pin` command. +
-Pinned tasks will always be displayed in the Pinned Tasks grouping in the task list. +
-Trying to `pin` a task that is already pinned will unpin it instead.
-
-// end::pin[]
-
 === Set Reminders and Notifications (Dian Hao)
 
 ==== Adding reminder : `reminder`
@@ -395,13 +388,13 @@ Format: `reminder INDEX rd/DAYS rh/HOURS`
 
 // tag::productivitytracker[]
 ==== Track productivity : `productivity`
-Apart from the function to switch tabs by pressing `Ctrl + tab` on your keyboard, you can enter the `productivity` command
+Apart from the function to switch tabs by pressing kbd:[Ctrl] + kbd:[tab] on your keyboard, you can enter the `productivity` command
 to manually switch to the producivity tab.
 The productivity panel will then show you your productivity for the day. +
 Format: `productivity`
 
 [.text-center]
-.Expected result after running `productivity`
+.Example of expected result after running `productivity`
 image::ug_figures/productivityTab.png[width="790"]
 
 // end::productivitytracker[]
@@ -412,7 +405,7 @@ Starts timer running for a task. +
 Format: `start INDEX`
 
 [.text-center]
-.Expected result after running `start`
+.Example of expected result after running `start 1`
 image::ug_figures/start.png[width="790"]
 
 ****
@@ -446,12 +439,14 @@ There is no need to manually ask for compliments or criticism.
 
 === Calendar (Amanda)
 ==== View calender : `calendar`
-Apart from the function to switch tabs by pressing `Ctrl + tab` on your keyboard, you can enter the `calendar` command
+Apart from the function to switch tabs by pressing kbd:[Ctrl] + kbd:[tab] on your keyboard, you can enter the `calendar` command
 to manually switch to the calendar tab.
 The calendar panel will then show you your schedule for the current month with today's date highlighted. +
 
 Format: `calendar`
 
+[.text-center]
+.Example of expected result after running `calendar`
 image::CalendarUi.png[width="790"]
 
 ==== Change month and year view of Calendar : `calendar`
@@ -467,6 +462,8 @@ Examples:
 
 * `calendar Apr-2020`
 
+[.text-center]
+.Example of expected result after running `calendar Apr-2020`
 image::CalendarView.png[width="790"]
 
 Displays month of April in the year 2020 in the calendar panel on the right.
@@ -485,6 +482,8 @@ Examples:
 * `calendar Mar-1-2020`
 * `calendar Mar/1/2020` +
 
+[.text-center]
+.Example of expected result after running `calendar Mar-1-2020`
 image::CalendarDate.png[width="790"]
 
 Highlights 1st of March in the calendar panel on the right and displays the corresponding tasks due on the left.
@@ -498,14 +497,38 @@ Examples:
 
 * `calendar today` +
 
+[.text-center]
+.Example of expected result after running `calendar today`
 image::CalendarToday.png[width="790"]
 
 Displays month of March in the year 2020 in the calendar panel on the right, with today's date highlighted and displays the corresponding tasks due today on the left.
 
 === Morning call/Night debrief (Eden)
-Displays the tasks to be completed within the day (Morning Call), and the tasks that have been completed so far (Night Debrief)
+Morning Call Displays the tasks that are due today, and Night Debrief displays the tasks that have been completed within the day.
 
-Morning Call and Night Debrief are separate windows that will open on app startup and exit respectively.
+The tasks listed in Morning Call and Night Debrief are displayed in under the Summary tab as separate sections under "Due Today" and "Completed Today" respectively.
+
+==== Viewing the summary tab: `summary`
+
+The Summary tab can be viewed by entering the command `summary`
+
+Format: `summary`
+
+[.text-center]
+.Expected result after running `summary`
+image::SummaryView.png[width="790"]
+
+Displays the two dropdown tabs that show the tasks that are Due Today, and Completed Today.
+
+Once a task under the Due Today tab is marked as done, it will appear under the Completed Today tab.
+
+[.text-center]
+.Expected result after running `done 5`, which marks the task for ACC1101 Tutorial 4 as completed
+image::SummaryViewAfterTaskComplete.png[width="790"]
+
+
+
+
 
 === Colour-code modules and font style for prioritised tasks `[coming in v2.0]`
 

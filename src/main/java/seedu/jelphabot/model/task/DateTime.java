@@ -17,7 +17,7 @@ public class DateTime {
 
     public static final String MESSAGE_CONSTRAINTS =
         "Date should be of the format Month-Day-Year where Month is a three-letter abbreviation. "
-            + ". Time should be in the 24 hour format HH mm.";
+            + "Time should be in the 24 hour format HH mm.";
 
     private static final String STANDARD_FORMAT = "MMM-d-uuuu HH mm";
     private static final String DISPLAY_FORMAT = "d-MMM-uuuu HH mm";
