@@ -24,12 +24,10 @@ public class Messages {
                                                                       + "[uuuu/MM], E.g. 2020/01\n"
                                                                       + "[uu-MM], E.g. 20-01\n"
                                                                       + "[uu/MM], E.g. 20/01";
-    public static final String MESSAGE_CANNOT_START_MORE_TIMERS = "Unable to start more than one timer at a time!";
     public static final String MESSAGE_COMPLIMENT = "Good work! (:";
     public static final String MESSAGE_ENCOURAGEMENT = "You can do better than this!";
     public static final String MESSAGE_CRITICISM = "Do better! You have many unfinished tasks that are past their"
                                                        + " due date!";
-    public static final String MESSAGE_CURRENT_TIMERS = "Timer is currently running for\nTask %d: %s %s, DateTime: %s";
     public static final String MESSAGE_NO_TIMERS = "There are no tasks being timed at the moment.";
 
 }

@@ -13,7 +13,7 @@ import seedu.jelphabot.model.task.predicates.TaskDueWithinDayPredicate;
 public class Productivity {
     private final ObservableList<Task> taskList;
     private TasksCompleted tasksCompleted;
-    private RunningTimer runningTimer;
+    private RunningTimers runningTimers;
     private TimeSpentToday timeSpentToday;
 
     public Productivity(ObservableList<Task> taskList) {
@@ -25,8 +25,8 @@ public class Productivity {
         return tasksCompleted;
     }
 
-    public RunningTimer getRunningTimer() {
-        return runningTimer;
+    public RunningTimers getRunningTimers() {
+        return runningTimers;
     }
 
     public TimeSpentToday getTimeSpentToday() {
@@ -41,7 +41,7 @@ public class Productivity {
         ObservableList<Task> tasksDueThisWeek = taskList.filtered(getDueThisWeekPredicate());
         this.tasksCompleted = new TasksCompleted(tasksDueToday, tasksDueThisWeek,
             taskList.filtered(getOverduePredicate()));
-        this.runningTimer = new RunningTimer(taskList);
+        this.runningTimers = new RunningTimers(taskList);
         this.timeSpentToday = new TimeSpentToday(tasksDueToday, tasksDueThisWeek);
     }
 }
