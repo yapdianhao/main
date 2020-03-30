@@ -493,9 +493,17 @@ image::CalendarToday.png[width="790"]
 Displays month of March in the year 2020 in the calendar panel on the right, with today's date highlighted and displays the corresponding tasks due today on the left.
 
 === Morning call/Night debrief (Eden)
-Displays the tasks to be completed within the day (Morning Call), and the tasks that have been completed so far (Night Debrief)
+Morning Call Displays the tasks that are due today, and Night Debrief displays the tasks that have been completed within the day.
 
-Morning Call and Night Debrief are separate windows that will open on app startup and exit respectively.
+The tasks listed in Morning Call and Night Debrief are displayed in under the Summary tab as separate sections under "Due Today" and "Completed Today" respectively.
+
+==== Viewing the summary tab: `summary`
+
+The Summary tab can be viewed by entering the command `summary`
+
+Format: `summary`
+
+image::SummaryView.png[width="790"]
 
 === Colour-code modules and font style for prioritised tasks `[coming in v2.0]`
 
