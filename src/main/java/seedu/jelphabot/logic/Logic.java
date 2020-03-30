@@ -72,6 +72,11 @@ public interface Logic {
     ObservableList<Task> getFilteredByIncompleteDueTodayTaskList();
 
     /**
+     * Returns an unmodifiable view of the incomplete tasks that are due soon,
+     * as specified by the user.
+     */
+    public ObservableList<Task> getFilteredByReminder();
+    /**
      * Returns an unmodifiable view of the user's productivity.
      */
     ProductivityList getProductivityList();
