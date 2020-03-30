@@ -321,6 +321,10 @@ Both come in the form of a separate window that opens upon app startup for Morni
 ==== Implementation
 
 To view the respective tasks, the user enters the `summary` command.
+
+.Sequence of execution of the `summary` command
+
+image::SummarySequenceDiagram.png[]
 // end::morningcallnightdebrief[]
 
 // tag::undoredo[]
