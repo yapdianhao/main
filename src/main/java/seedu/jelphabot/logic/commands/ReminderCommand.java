@@ -2,6 +2,9 @@ package seedu.jelphabot.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_REMIND_DAY;
+import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_REMIND_HOUR;
+
 import java.util.List;
 
 import seedu.jelphabot.commons.core.Messages;
@@ -21,9 +24,13 @@ public class ReminderCommand extends Command {
                                                                           + "been marked as complete!";
     public static final String MESSAGE_SUCCESS = "Added reminder for task %d!";
     public static final String COMMAND_WORD = "reminder";
-    public static final String MESSAGE_URGENT_TASKS = "These are the tasks that due soon!";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks a reminder on the given task "
-                                                   + " on the specified date.";
+                                                   + " on the specified date. "
+                                                   + "Parameters:\n" + "INDEX (must be a positive integer) "
+                                                   + "    " + "[" + PREFIX_REMIND_DAY
+                                                   + "DAYS TO REMIND (between 0 and 7)]\n"
+                                                   + "    " + "[" + PREFIX_REMIND_HOUR
+                                                   + "HOURS TO REMIND (between 0 and 24)]\n";
     private final Reminder reminder;
     private final Index index;
 
@@ -39,6 +46,7 @@ public class ReminderCommand extends Command {
         requireNonNull(model);
         List<Task> lastShownList = model.getFilteredTaskList();
         if (model.hasReminder(reminder)) {
+            //model.setReminder(reminder, reminder);
             throw new CommandException(MESSAGE_DUPLICATE_REMINDER);
         }
         if (index.getZeroBased() >= lastShownList.size()) {

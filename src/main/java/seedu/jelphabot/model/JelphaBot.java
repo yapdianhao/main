@@ -122,6 +122,10 @@ public class JelphaBot implements ReadOnlyJelphaBot {
 
         tasks.setTask(target, editedTask);
     }
+    public void setReminder(Reminder target, Reminder newReminder) {
+        requireNonNull(newReminder);
+        reminders.setReminder(target, newReminder);
+    }
 
     /**
      * Removes {@code key} from this {@code JelphaBot}.
