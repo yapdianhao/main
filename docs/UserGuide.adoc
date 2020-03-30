@@ -503,7 +503,21 @@ The Summary tab can be viewed by entering the command `summary`
 
 Format: `summary`
 
+[.text-center]
+.Expected result after running `summary`
 image::SummaryView.png[width="790"]
+
+Displays the two dropdown tabs that show the tasks that are Due Today, and Completed Today.
+
+Once a task under the Due Today tab is marked as done, it will appear under the Completed Today tab.
+
+[.text-center]
+.Expected result after running `done 5`, which marks the task for ACC1101 Tutorial 4 as completed
+image::SummaryViewAfterTaskComplete.png[width="790"]
+
+
+
+
 
 === Colour-code modules and font style for prioritised tasks `[coming in v2.0]`
 
