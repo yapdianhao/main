@@ -17,7 +17,7 @@ import seedu.jelphabot.model.task.Task;
  */
 public class GroupedTaskListPanel extends UiPart<Region> {
     private static final String FXML = "SortedTaskListPanel.fxml";
-    private static final int PREF_CELL_HEIGHT = 105;
+    private static final int PREF_CELL_HEIGHT = 100;
 
     private final Logger logger = LogsCenter.getLogger(TaskListPanel.class);
 
