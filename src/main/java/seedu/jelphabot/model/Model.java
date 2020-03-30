@@ -97,11 +97,6 @@ public interface Model {
     void setTask(Task target, Task editedTask);
 
     /**
-     * Replaces the given reminder (@code target} with {@code editedReminder}.
-     */
-    void setReminder(Reminder reminder, Reminder newReminder);
-
-    /**
      * Replaces the existing productivity with {@code productivity}.
      */
     void setProductivity(Productivity productivity);
