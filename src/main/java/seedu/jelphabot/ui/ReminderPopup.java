@@ -3,6 +3,7 @@ package seedu.jelphabot.ui;
 //import java.util.List;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.layout.StackPane;
@@ -24,6 +25,8 @@ public class ReminderPopup extends UiPart<Stage> {
     public static final String REMINDERS_STRING = "Here are your tasks that due soon!";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
+
+    private final ObservableList<Task> taskList;
     //private final List<Popup> popupList;
     //private final List<Task> toBeReminded;
 
@@ -44,6 +47,7 @@ public class ReminderPopup extends UiPart<Stage> {
         logger.info("Initialising reminders");
         this.reminderStage = reminderStage;
         this.logic = logic;
+        this.taskList = FXCollections.observableArrayList();
         setWindowDefaultSize(logic.getPopUpWindowGuiSettings());
     }
 
@@ -52,7 +56,10 @@ public class ReminderPopup extends UiPart<Stage> {
      */
     void fillWindow() {
         // get the list of Incomplete tasks
-        ObservableList<Task> taskList = logic.getFilteredByReminder();
+        //ObservableList<Task> taskList = logic.getFilteredByReminder();
+        for (Task task : logic.getFilteredByReminder()) {
+            taskList.add(task);
+        }
         taskListPanel = new TaskListPanel(taskList);
         taskListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
 
@@ -66,9 +73,17 @@ public class ReminderPopup extends UiPart<Stage> {
         return taskListPanel;
     }
 
+    /**
+     * Shows the reminder popup. If no reminders are pending,
+     * a popup is not required.
+     */
     void show() {
         logger.info("Showing reminderStage");
-        reminderStage.show();
+        if (taskList.size() == 0) {
+            return;
+        } else {
+            reminderStage.show();
+        }
     }
 
     /**
