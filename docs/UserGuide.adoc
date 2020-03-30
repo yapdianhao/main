@@ -526,12 +526,7 @@ e.g. `add add d/Project TP dt/Jan-01-2020 23 59 m/CS2103T p/1 t/pair work`
 * *List* : `list`
 * *Find* : `find KEYWORD [MORE_KEYWORDS]` +
 e.g. `find Tutorial Assignment`
-* *Edit* : `edit INDEX
-[d/DESCRIPTION]
-[dt/DATETIME]
-[m/MODULE_CODE]
-[p/PRIORITY]
-[t/TAG]...` +
+* *Edit* : `edit INDEX [d/DESCRIPTION] [dt/DATETIME] [m/MODULE_CODE] [p/PRIORITY] [t/TAG]...` +
 e.g. `edit 1 m/CS2105 d/Tutorial 2`
 * *Done* : `done INDEX` +
 e.g. `done 1`
