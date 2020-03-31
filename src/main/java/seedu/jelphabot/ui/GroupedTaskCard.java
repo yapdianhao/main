@@ -7,7 +7,7 @@ import seedu.jelphabot.model.task.Task;
  */
 public class GroupedTaskCard extends TaskCard {
 
-    private static final String FXML = "GroupedTaskListCard.fxml";
+    private static final String FxmlFileLocation = "GroupedTaskListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -18,6 +18,6 @@ public class GroupedTaskCard extends TaskCard {
      */
 
     public GroupedTaskCard(Task task, int displayedIndex) {
-        super(FXML, task, displayedIndex);
+        super(FxmlFileLocation, task, displayedIndex);
     }
 }
