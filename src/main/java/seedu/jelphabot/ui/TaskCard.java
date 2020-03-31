@@ -51,8 +51,8 @@ public class TaskCard extends UiPart<Region> {
         populateChildElements(task, displayedIndex);
     }
 
-    public TaskCard(String FXML, Task task, int displayedIndex) {
-        super(FXML);
+    public TaskCard(String fxmlFileLocation, Task task, int displayedIndex) {
+        super(fxmlFileLocation);
         this.task = task;
         populateChildElements(task, displayedIndex);
     }
