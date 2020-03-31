@@ -8,7 +8,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.function.Predicate;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableSet;
 
 /**
  * A container for ObservableList&lt;Task&gt; that splits the TaskList into groups.
@@ -17,14 +19,16 @@ import javafx.collections.ObservableList;
  * <p>
  */
 public class GroupedByModuleTaskList implements GroupedTaskList {
-    private final List<ObservableList<Task>> moduleCodeTaskList = new  ArrayList<>();
+    private final List<ObservableList<Task>> moduleCodeTaskList = new ArrayList<>();
+    private final ObservableSet<ModuleCode> moduleCodes = FXCollections.observableSet();
 
     public GroupedByModuleTaskList(ObservableList<Task> taskList) {
         requireAllNonNull(taskList);
-        HashSet<ModuleCode> moduleCodes = new HashSet<>();
+        HashSet<ModuleCode> replacement = new HashSet<>();
         for (Task task : taskList) {
-            moduleCodes.add(task.getModuleCode());
+            replacement.add(task.getModuleCode());
         }
+        moduleCodes.addAll(replacement);
         for (ModuleCode code : moduleCodes) {
             moduleCodeTaskList.add(taskList.filtered(hasModuleCode(code)));
         }
@@ -46,7 +50,7 @@ public class GroupedByModuleTaskList implements GroupedTaskList {
 
     @Override
     public Iterator<String> getGroupNames() {
-        Iterator<ObservableList<Task>> it = moduleCodeTaskList.iterator();
+        Iterator<ModuleCode> it = moduleCodes.iterator();
         return new Iterator<String>() {
             @Override
             public boolean hasNext() {

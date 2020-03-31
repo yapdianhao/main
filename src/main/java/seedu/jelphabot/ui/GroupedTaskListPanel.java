@@ -34,17 +34,21 @@ public class GroupedTaskListPanel extends UiPart<Region> {
 
         Iterator<String> groupNames = groupedTaskList.getGroupNames();
         ArrayList<SubgroupTaskListPanel> groupedPanels = new ArrayList<>();
+
+        // Set pinned items
+        groupedPanels.add(new SubgroupTaskListPanel("Pinned", pinnedTaskList, 0));
         for (ObservableList<Task> taskList : groupedTaskList) {
             // TODO display index dynamcally
-            groupedPanels.add(new SubgroupTaskListPanel(groupNames.next(), taskList, 1));
+            groupedPanels.add(new SubgroupTaskListPanel(groupNames.next(), taskList, 0));
         }
+        taskListGroups.setCellFactory(viewCell -> new GroupedTaskListPanel.GroupedTaskListViewCell());
         taskListGroups.setItems(FXCollections.observableArrayList(groupedPanels));
     }
 
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Task} using a {@code GroupedTaskCard}.
      */
-    class SubgroupTaskListViewCell extends ListCell<SubgroupTaskListPanel> {
+    class GroupedTaskListViewCell extends ListCell<SubgroupTaskListPanel> {
         @Override
         protected void updateItem(SubgroupTaskListPanel task, boolean empty) {
             super.updateItem(task, empty);
@@ -53,7 +57,7 @@ public class GroupedTaskListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new TaskCard(task, getIndex() + 1).getRoot());
+                setGraphic(task.getRoot());
             }
         }
     }
