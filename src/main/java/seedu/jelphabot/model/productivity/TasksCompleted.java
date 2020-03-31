@@ -57,7 +57,7 @@ public class TasksCompleted {
             }
         }
 
-        return String.format("You completed %.0f out of %.0f tasks that are due this week!\n%s", completed,
+        return String.format("%.0f out of %.0f tasks done!\n%s", completed,
             size, message);
     }
 
@@ -89,8 +89,7 @@ public class TasksCompleted {
         return this.percentage;
     }
 
-    @Override
-    public String toString() {
-        return getCompletionStatus() + "\n\n" + getOverdueStatus();
+    public String[] toStringArray() {
+        return new String[] {getCompletionStatus(), getOverdueStatus()};
     }
 }
