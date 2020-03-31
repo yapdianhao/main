@@ -58,6 +58,7 @@ public class ReminderPopup extends UiPart<Stage> {
         // get the list of Incomplete tasks
         //ObservableList<Task> taskList = logic.getFilteredByReminder();
         for (Task task : logic.getFilteredByReminder()) {
+            logger.info("added reminder");
             taskList.add(task);
         }
         taskListPanel = new TaskListPanel(taskList);

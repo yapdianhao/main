@@ -31,8 +31,13 @@ public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
     private static CalendarPanel calendarPanel;
+    private static boolean firstStart = true;
+    private static final String WELCOME_STRING = "Welcome to JelphaBot! Here are the tasks that you have due today!\n"
+                                                     + "To go back to the list of your tasks, type list!";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
+
+
 
     private Stage primaryStage;
     private Logic logic;
@@ -239,9 +244,14 @@ public class MainWindow extends UiPart<Stage> {
      * Switches view to summary panel.
      */
     @FXML
-    private void handleSummary() {
+    public void handleSummary() {
         if (!summaryPanel.isShowing()) {
             summaryPanel.show();
+        }
+
+        if (firstStart) {
+            resultDisplay.setFeedbackToUser(WELCOME_STRING);
+            firstStart = false;
         }
     }
 
