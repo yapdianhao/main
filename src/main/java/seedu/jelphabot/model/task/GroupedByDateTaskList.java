@@ -62,6 +62,10 @@ public class GroupedByDateTaskList implements GroupedTaskList {
         return dueSomedayTaskList;
     }
 
+    public Iterator<String> getGroupNames() {
+        return List.of("Pinned", "Overdue", "Due Today", "Due This Week", "Due Later").iterator();
+    }
+
     @Override
     public Iterator<ObservableList<Task>> iterator() {
         return List.of(overdueTaskList, dueTodayTaskList, dueThisWeekTaskList, dueSomedayTaskList).iterator();

@@ -144,7 +144,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        GroupedTaskList sortedTasks = logic.getGroupedTaskList(GroupedTaskList.Grouping.MODULE);
+        GroupedTaskList sortedTasks = logic.getGroupedTaskList(GroupedTaskList.Grouping.DATE);
         taskListPanel = new GroupedTaskListPanel(
             logic.getFilteredTaskList(),
             sortedTasks

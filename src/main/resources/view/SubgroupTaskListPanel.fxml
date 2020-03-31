@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.text.Font?>
+
+<TitledPane fx:id="grouping" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            style="-fx-background-color: #946b2d;" text="Group Title" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <content>
+      <ListView fx:id="groupingList" stylesheets="@DarkTheme.css" />
+   </content>
+   <font>
+      <Font size="20.0" />
+   </font>
+</TitledPane>

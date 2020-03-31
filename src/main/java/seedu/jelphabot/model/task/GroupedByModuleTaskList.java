@@ -25,10 +25,8 @@ public class GroupedByModuleTaskList implements GroupedTaskList {
         for (Task task : taskList) {
             moduleCodes.add(task.getModuleCode());
         }
-        // for (ModuleCode code : moduleCodes) {
-        Iterator<ModuleCode> it = moduleCodes.iterator();
-        for (int i = 0; i < 4; i++) {
-            moduleCodeTaskList.add(taskList.filtered(hasModuleCode(it.next())));
+        for (ModuleCode code : moduleCodes) {
+            moduleCodeTaskList.add(taskList.filtered(hasModuleCode(code)));
         }
     }
 
@@ -44,5 +42,21 @@ public class GroupedByModuleTaskList implements GroupedTaskList {
     @Override
     public Iterator<ObservableList<Task>> iterator() {
         return moduleCodeTaskList.iterator();
+    }
+
+    @Override
+    public Iterator<String> getGroupNames() {
+        Iterator<ObservableList<Task>> it = moduleCodeTaskList.iterator();
+        return new Iterator<String>() {
+            @Override
+            public boolean hasNext() {
+                return it.hasNext();
+            }
+
+            @Override
+            public String next() {
+                return it.next().toString();
+            }
+        };
     }
 }
