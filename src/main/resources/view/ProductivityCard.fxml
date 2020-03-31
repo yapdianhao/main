@@ -15,7 +15,7 @@
            <padding>
                <Insets bottom="4" left="15" right="4" top="3" />
            </padding>
-               <Label styleClass="cell_big_label" text="Productivity Report" HBox.hgrow="NEVER">
+               <Label graphicTextGap="0.0" styleClass="cell_big_label" text="Productivity Report" HBox.hgrow="NEVER">
                    <minWidth>
                        <!-- Ensures that the label text is never truncated -->
                        <Region fx:constant="USE_PREF_SIZE" />
