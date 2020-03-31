@@ -75,7 +75,7 @@ public class GroupedTaskListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new TaskCard(task, getIndex() + 1).getRoot());
+                setGraphic(new GroupedTaskCard(task, getIndex() + 1).getRoot());
             }
         }
     }
