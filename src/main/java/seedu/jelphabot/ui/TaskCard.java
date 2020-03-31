@@ -42,6 +42,8 @@ public class TaskCard extends UiPart<Region> {
     private Label priority;
     @FXML
     private FlowPane tags;
+    @FXML
+    private Label dateTime;
 
     public TaskCard(Task task, int displayedIndex) {
         super(FXML);
@@ -62,6 +64,7 @@ public class TaskCard extends UiPart<Region> {
         status.setText(task.getStatus().name());
         timeSpent.setText("(time spent: " + task.getTimeSpent().toString() + ")");
         //TODO add in task PRIORITY
+        dateTime.setText(task.getDateTime().getDisplayValue());
         task.getTags().stream()
             .sorted(Comparator.comparing(tag -> tag.tagName))
             .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
