@@ -46,8 +46,8 @@ public class DeleteReminderCommand extends Command {
             throw new CommandException(MESSAGE_DELETE_REMINDER_FAILURE);
         } else {
             model.deleteReminder(toDelete);
-            return new CommandResult(String.format(MESSAGE_DELETE_REMINDER_SUCCESS, "task "
-                                                                                        + this.targetIndex.getOneBased()));
+            return new CommandResult(String.format(MESSAGE_DELETE_REMINDER_SUCCESS,
+                "task " + this.targetIndex.getOneBased()));
         }
     }
 
