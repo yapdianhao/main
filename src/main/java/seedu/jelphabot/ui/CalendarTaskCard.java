@@ -1,5 +1,7 @@
 package seedu.jelphabot.ui;
 
+import java.util.Comparator;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -7,8 +9,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.jelphabot.model.task.Task;
 
-import java.util.Comparator;
-
+/**
+ * An UI component that displays information of a {@code Task} in Calendar.
+ */
 public class CalendarTaskCard extends UiPart<Region> {
 
     private static final String FXML = "CalendarTaskListCard.fxml";
@@ -48,7 +51,7 @@ public class CalendarTaskCard extends UiPart<Region> {
 
 
     /**
-     * Populates the child elements in the taskCard
+     * Populates the child elements in the CalendarTaskCard
      *
      * @param task           the task to populate.
      * @param displayedIndex the indicated index.
