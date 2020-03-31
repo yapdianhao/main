@@ -24,7 +24,6 @@ public class UiManager implements Ui {
 
     private Logic logic;
     private MainWindow mainWindow;
-    //private MorningCallWindow;
     private ProductivityPanel productivityPanel;
     private ReminderPopup reminderPopup;
 
@@ -56,6 +55,8 @@ public class UiManager implements Ui {
             //morningCallWindow = new MorningCallWindow(morningCallStage, logic);
             //morningCallWindow.show();
             //morningCallWindow.fillWindow();
+            // show summary tab first as "Morning call"
+            mainWindow.handleSummary();
 
         } catch (Exception e) {
             logger.severe(StringUtil.getDetails(e));
