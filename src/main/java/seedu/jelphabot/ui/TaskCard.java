@@ -25,7 +25,7 @@ public class TaskCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on JelphaBot level 4</a>
      */
 
-    public final Person person;
+    public final Task task;
 
     @FXML
     private HBox cardPane;
@@ -48,7 +48,7 @@ public class TaskCard extends UiPart<Region> {
 
     public TaskCard(Task task, int displayedIndex) {
         super(FXML);
-        this.person = person;
+        this.task = task;
         id.setText(displayedIndex + ". ");
         description.setText(task.getDescription().fullDescription);
         moduleCode.setText(task.getModuleCode().value);
