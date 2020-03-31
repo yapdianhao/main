@@ -17,13 +17,13 @@ import seedu.jelphabot.model.UserPrefs;
 public class StorageManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
-    private JelphaBotStorage addressBookStorage;
+    private JelphaBotStorage jelphaBotStorage;
     private UserPrefsStorage userPrefsStorage;
 
 
-    public StorageManager(JelphaBotStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(JelphaBotStorage jelphaBotStorage, UserPrefsStorage userPrefsStorage) {
         super();
-        this.addressBookStorage = addressBookStorage;
+        this.jelphaBotStorage = jelphaBotStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
 
@@ -49,29 +49,43 @@ public class StorageManager implements Storage {
 
     @Override
     public Path getJelphaBotFilePath() {
-        return addressBookStorage.getJelphaBotFilePath();
+        return jelphaBotStorage.getJelphaBotFilePath();
+    }
+
+    @Override
+    public Path getJelphaBotReminderPath() {
+        return jelphaBotStorage.getJelphaBotReminderPath();
     }
 
     @Override
     public Optional<ReadOnlyJelphaBot> readJelphaBot() throws DataConversionException, IOException {
-        return readJelphaBot(addressBookStorage.getJelphaBotFilePath());
+        return readJelphaBot(jelphaBotStorage.getJelphaBotFilePath());
+    }
+
+    public Optional<ReadOnlyJelphaBot> readJelphaBot(boolean isReminder) throws DataConversionException, IOException {
+        return jelphaBotStorage.readJelphaBot(isReminder);
     }
 
     @Override
     public Optional<ReadOnlyJelphaBot> readJelphaBot(Path filePath) throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return addressBookStorage.readJelphaBot(filePath);
+        return jelphaBotStorage.readJelphaBot(filePath);
     }
 
     @Override
-    public void saveJelphaBot(ReadOnlyJelphaBot addressBook) throws IOException {
-        saveJelphaBot(addressBook, addressBookStorage.getJelphaBotFilePath());
+    public void saveJelphaBot(ReadOnlyJelphaBot jelphaBot) throws IOException {
+        saveJelphaBot(jelphaBot, jelphaBotStorage.getJelphaBotFilePath());
     }
 
     @Override
-    public void saveJelphaBot(ReadOnlyJelphaBot addressBook, Path filePath) throws IOException {
+    public void saveJelphaBot(ReadOnlyJelphaBot jelphaBot, boolean isReminder) throws IOException {
+        jelphaBotStorage.saveJelphaBot(jelphaBot, true);
+    }
+
+    @Override
+    public void saveJelphaBot(ReadOnlyJelphaBot jelphaBot, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        addressBookStorage.saveJelphaBot(addressBook, filePath);
+        jelphaBotStorage.saveJelphaBot(jelphaBot, filePath);
     }
 
 }

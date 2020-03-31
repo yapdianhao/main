@@ -8,6 +8,7 @@ import static seedu.jelphabot.testutil.Assert.assertThrows;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -22,7 +23,7 @@ import seedu.jelphabot.model.ReadOnlyJelphaBot;
 import seedu.jelphabot.model.ReadOnlyUserPrefs;
 import seedu.jelphabot.model.productivity.Productivity;
 import seedu.jelphabot.model.productivity.ProductivityList;
-import seedu.jelphabot.model.task.SortedTaskList;
+import seedu.jelphabot.model.reminder.Reminder;
 import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.testutil.TaskBuilder;
 
@@ -112,6 +113,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public Path getRemindersFilePath() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setJelphaBotFilePath(Path addressBookFilePath) {
             throw new AssertionError("This method should not be called.");
         }
@@ -122,7 +128,22 @@ public class AddCommandTest {
         }
 
         @Override
+        public void addReminder(Reminder reminder) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ReadOnlyJelphaBot getJelphaBot() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public List<Task> getTaskListFromJelphaBot() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public List<Reminder> getReminderListFromJelphaBot() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -137,12 +158,17 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasTimingTask() {
+        public boolean hasReminder(Reminder reminder) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void deleteTask(Task target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteReminder(Reminder reminder) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -167,17 +193,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public ObservableList<Task> getFilteredByIncompleteTaskList() {
+        public ObservableList<Reminder> getFilteredReminderList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ObservableList<Task> getFilteredByIncompleteDueTodayTaskList() {
-            throw new AssertionError("This method should not be called");
-        }
-
-        @Override
-        public ObservableList<Task> getFilteredByCompleteTaskList() {
+        public ObservableList<Task> getFilteredCalendarTaskList() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -187,9 +208,10 @@ public class AddCommandTest {
         }
 
         @Override
-        public SortedTaskList getSortedTaskList() {
+        public void updateFilteredCalendarTaskList(Predicate<Task> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
     }
 
     /**
@@ -238,11 +260,6 @@ public class AddCommandTest {
         @Override
         public ObservableList<Task> getFilteredTaskList() {
             return new FilteredList<Task>(getJelphaBot().getTaskList());
-        }
-
-        @Override
-        public SortedTaskList getSortedTaskList() {
-            return new SortedTaskList(getFilteredTaskList());
         }
 
         @Override

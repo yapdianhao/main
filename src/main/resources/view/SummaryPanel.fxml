@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml/1" stylesheets="@DarkTheme.css" xmlns="http://javafx.com/javafx/8">
+    <ScrollPane fitToWidth="true">
+        <content>
+            <VBox>
+                <children>
+                    <TitledPane animated="false" maxHeight="1.7976931348623157E308" prefWidth="587.0"
+                                text="Due Today">
+                        <content>
+                            <ListView fx:id="dueTodayTaskListView" maxHeight="1.7976931348623157E308"
+                                      prefWidth="585.0" />
+                        </content>
+                    </TitledPane>
+                    <TitledPane animated="false" maxHeight="1.7976931348623157E308" prefWidth="587.0"
+                                text="Completed Today">
+                        <content>
+                            <ListView fx:id="completedTodayTaskListView" maxHeight="1.7976931348623157E308"
+                                      prefWidth="585.0" />
+                        </content>
+                    </TitledPane>
+                </children>
+            </VBox>
+        </content>
+    </ScrollPane>
+</VBox>

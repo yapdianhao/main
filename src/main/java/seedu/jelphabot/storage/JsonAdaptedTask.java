@@ -1,6 +1,5 @@
 package seedu.jelphabot.storage;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -18,6 +17,7 @@ import seedu.jelphabot.model.task.ModuleCode;
 import seedu.jelphabot.model.task.Priority;
 import seedu.jelphabot.model.task.Status;
 import seedu.jelphabot.model.task.Task;
+import seedu.jelphabot.model.task.TimeSpent;
 
 /**
  * Jackson-friendly version of {@link Task}.
@@ -32,8 +32,7 @@ class JsonAdaptedTask {
     private final String moduleCode;
     private final Priority priority;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
-    private final LocalDateTime startTime;
-    private final LocalDateTime endTime;
+    private final TimeSpent timeSpent;
 
     /**
      * Constructs a {@code JsonAdaptedTask} with the given task details.
@@ -46,8 +45,7 @@ class JsonAdaptedTask {
         @JsonProperty("module") String moduleCode,
         @JsonProperty("priority") Priority priority,
         @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
-        @JsonProperty("startTime") LocalDateTime startTime,
-        @JsonProperty("endTime") LocalDateTime endTime) {
+        @JsonProperty("timeSpent") TimeSpent timeSpent) {
         this.description = description;
         this.status = status;
         this.dateTime = dateTime;
@@ -56,8 +54,7 @@ class JsonAdaptedTask {
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
-        this.startTime = startTime;
-        this.endTime = endTime;
+        this.timeSpent = timeSpent;
     }
 
     /**
@@ -70,8 +67,7 @@ class JsonAdaptedTask {
         this.moduleCode = source.getModuleCode().value;
         this.priority = source.getPriority();
         tagged.addAll(source.getTags().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()));
-        this.startTime = source.getStartTime();
-        this.endTime = source.getEndTime();
+        this.timeSpent = source.getTimeSpent();
     }
 
     /**
@@ -123,8 +119,7 @@ class JsonAdaptedTask {
                 modelModuleCode,
                 priority,
                 modelTags,
-                startTime,
-                endTime
+                timeSpent
         );
     }
 

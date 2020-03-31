@@ -16,7 +16,7 @@ import seedu.jelphabot.model.task.Task;
 /**
  * An Immutable JelphaBot that is serializable to JSON format.
  */
-@JsonRootName(value = "addressbook")
+@JsonRootName(value = "jelphabot")
 class JsonSerializableJelphaBot {
 
     public static final String MESSAGE_DUPLICATE_TASK = "Tasks list contains duplicate task(s).";
@@ -54,6 +54,7 @@ class JsonSerializableJelphaBot {
             }
             jelphaBot.addTask(task);
         }
+
         return jelphaBot;
     }
 

@@ -38,6 +38,8 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label status;
     @FXML
+    private Label timeSpent;
+    @FXML
     private Label priority;
     @FXML
     private FlowPane tags;
@@ -51,6 +53,7 @@ public class TaskCard extends UiPart<Region> {
         description.setText(task.getDescription().fullDescription);
         moduleCode.setText(task.getModuleCode().value);
         status.setText(task.getStatus().name());
+        timeSpent.setText("(time spent: " + task.getTimeSpent().toString() + ")");
         //TODO add in task PRIORITY
         dateTime.setText(task.getDateTime().getDisplayValue());
         task.getTags().stream()

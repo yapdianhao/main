@@ -24,8 +24,9 @@ public class UiManager implements Ui {
 
     private Logic logic;
     private MainWindow mainWindow;
-    private MorningCallWindow morningCallWindow;
+    //private MorningCallWindow;
     private ProductivityPanel productivityPanel;
+    private ReminderPopup reminderPopup;
 
     public UiManager(Logic logic) {
         super();
@@ -40,22 +41,25 @@ public class UiManager implements Ui {
         primaryStage.getIcons().add(getImage(ICON_APPLICATION));
 
         // create second stage for MorningCallWindow
-        Stage morningCallStage = new Stage();
+        Stage reminderStage = new Stage();
 
         try {
             mainWindow = new MainWindow(primaryStage, logic);
             mainWindow.show(); //This should be called before creating other UI parts
             mainWindow.fillInnerParts();
 
-            // show morningCallWindow
-            // TODO: set predicate that only shows MorningCallWindow on the first opening of the app in the day
-            // set the start of the day to be 0700 hours
-            // implement method to track the
-            morningCallWindow = new MorningCallWindow(morningCallStage, logic);
-            morningCallWindow.show();
-            morningCallWindow.fillWindow();
+            reminderPopup = new ReminderPopup(reminderStage, logic);
+            reminderPopup.show();
+            reminderPopup.fillWindow();
 
-        } catch (Throwable e) {
+            //show morningCallWindow
+            //morningCallWindow = new MorningCallWindow(morningCallStage, logic);
+            //morningCallWindow.show();
+            //morningCallWindow.fillWindow();
+            // show summary tab first as "Morning call"
+            mainWindow.handleSummary();
+
+        } catch (Exception e) {
             logger.severe(StringUtil.getDetails(e));
             showFatalErrorDialogAndShutdown("Fatal error during initializing", e);
         }

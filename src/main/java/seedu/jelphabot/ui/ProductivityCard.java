@@ -2,6 +2,7 @@ package seedu.jelphabot.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.jelphabot.model.productivity.Productivity;
@@ -22,13 +23,16 @@ public class ProductivityCard extends UiPart<Region> {
     private Label runningTimer;
     @FXML
     private Label timeSpentToday;
+    @FXML
+    private ProgressBar tasksCompletionProgress;
 
     public ProductivityCard(Productivity productivity) {
         super(FXML);
         this.productivity = productivity;
         tasksCompleted.setText(productivity.getTasksCompleted().toString());
-        runningTimer.setText(productivity.getRunningTimer().toString());
+        runningTimer.setText(productivity.getRunningTimers().toString());
         timeSpentToday.setText(productivity.getTimeSpentToday().toString());
+        tasksCompletionProgress.setProgress(productivity.getTasksCompleted().getPercentage());
     }
 
     @Override

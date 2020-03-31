@@ -2,9 +2,12 @@ package seedu.jelphabot.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.jelphabot.model.reminder.Reminder;
+import seedu.jelphabot.model.reminder.UniqueReminderList;
 import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.model.task.UniqueTaskList;
 
@@ -14,7 +17,10 @@ import seedu.jelphabot.model.task.UniqueTaskList;
  */
 public class JelphaBot implements ReadOnlyJelphaBot {
 
+    private final List<Task> taskList;
+    private final List<Reminder> reminderList;
     private final UniqueTaskList tasks;
+    private final UniqueReminderList reminders;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -24,7 +30,10 @@ public class JelphaBot implements ReadOnlyJelphaBot {
      *   among constructors.
      */
     {
+        taskList = new ArrayList<>();
+        reminderList = new ArrayList<>();
         tasks = new UniqueTaskList();
+        reminders = new UniqueReminderList();
     }
 
     public JelphaBot() {}
@@ -47,23 +56,41 @@ public class JelphaBot implements ReadOnlyJelphaBot {
         this.tasks.setTasks(tasks);
     }
 
+    public void setReminders(List<Reminder> reminders) {
+        this.reminders.setReminders(reminders);
+    }
+
     /**
      * Resets the existing data of this {@code JelphaBot} with {@code newData}.
      */
     public void resetData(ReadOnlyJelphaBot newData) {
         requireNonNull(newData);
-
+        for (Task task : newData.getTaskList()) {
+            taskList.add(task);
+        }
+        for (Reminder reminder : newData.getReminderList()) {
+            reminderList.add(reminder);
+        }
+        setReminders(newData.getReminderList());
         setTasks(newData.getTaskList());
     }
 
     //// task-level operations
 
     /**
-     * Returns true if a task with the same identity as {@code task} exists in the address book.
+     * Returns true if a task with the same identity as {@code task} exists in the JelphaBot.
      */
     public boolean hasTask(Task task) {
         requireNonNull(task);
         return tasks.contains(task);
+    }
+
+    /**
+     * Returns true if a reminder with the same identity as {@code reminder} exists in JelphaBot.
+     */
+    public boolean hasReminder(Reminder reminder) {
+        requireNonNull(reminder);
+        return reminders.contains(reminder);
     }
 
     /**
@@ -81,6 +108,10 @@ public class JelphaBot implements ReadOnlyJelphaBot {
         tasks.add(p);
     }
 
+    public void addReminder(Reminder r) {
+        reminders.add(r);
+    }
+
     /**
      * Replaces the given task {@code target} in the list with {@code editedTask}.
      * {@code target} must exist in the address book.
@@ -92,6 +123,12 @@ public class JelphaBot implements ReadOnlyJelphaBot {
         tasks.setTask(target, editedTask);
     }
 
+    /*
+    public void setReminder(Reminder target, Reminder newReminder) {
+        requireNonNull(newReminder);
+        reminders.setReminder(target, newReminder);
+    }*/
+
     /**
      * Removes {@code key} from this {@code JelphaBot}.
      * {@code key} must exist in the address book.
@@ -100,6 +137,9 @@ public class JelphaBot implements ReadOnlyJelphaBot {
         tasks.remove(key);
     }
 
+    public void removeReminder(Reminder key) {
+        reminders.remove(key);
+    }
     //// util methods
 
     @Override
@@ -111,6 +151,19 @@ public class JelphaBot implements ReadOnlyJelphaBot {
     @Override
     public ObservableList<Task> getTaskList() {
         return tasks.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<Reminder> getReminderList() {
+        return reminders.asUnmodifiableObservableList();
+    }
+
+    public List<Task> getTasksAsList() {
+        return taskList;
+    }
+
+    public List<Reminder> getRemindersAsList() {
+        return reminderList;
     }
 
     @Override

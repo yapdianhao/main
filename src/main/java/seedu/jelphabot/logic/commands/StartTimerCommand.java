@@ -1,7 +1,6 @@
 package seedu.jelphabot.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.jelphabot.commons.core.Messages.MESSAGE_CANNOT_START_MORE_TIMERS;
 import static seedu.jelphabot.model.Model.PREDICATE_SHOW_ALL_TASKS;
 
 import java.util.List;
@@ -23,7 +22,7 @@ public class StartTimerCommand extends Command {
                                                    + ": Starts the timer for the task specified by the index number.\n"
                                                    + "Parameters: INDEX (must be a positive integer)\n" + "Example: "
                                                    + COMMAND_WORD + " 1";
-    public static final String MESSAGE_SUCCESS = "Started timer for %1$s";
+    public static final String MESSAGE_SUCCESS = "Started timer for task %d. %s %s.";
     public static final String MESSAGE_TASK_ALREADY_TIMED = "Task has already been marked as done and cannot be timed.";
     public static final String MESSAGE_TIMER_ALREADY_STARTED = "Timer for this task has already been started.";
 
@@ -50,15 +49,14 @@ public class StartTimerCommand extends Command {
             throw new CommandException(MESSAGE_TASK_ALREADY_TIMED);
         } else if (taskToTime.isBeingTimed()) {
             throw new CommandException(MESSAGE_TIMER_ALREADY_STARTED);
-        } else if (model.hasTimingTask()) {
-            throw new CommandException(MESSAGE_CANNOT_START_MORE_TIMERS);
         }
 
         taskToTime.startTimer();
         model.setTask(dummy, taskToTime);
         model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
-        model.setProductivity(new Productivity(model.getSortedTaskList(), model.getFilteredTaskList()));
-        return new CommandResult(String.format(MESSAGE_SUCCESS, taskToTime));
+        model.setProductivity(new Productivity(model.getFilteredTaskList()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, targetIndex.getOneBased(),
+            taskToTime.getModuleCode().toString(), taskToTime.getDescription().toString()));
     }
 
     @Override
