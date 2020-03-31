@@ -116,6 +116,7 @@ public class AddCommandTest {
         public Path getRemindersFilePath() {
             throw new AssertionError("This method should not be called.");
         }
+
         @Override
         public void setJelphaBotFilePath(Path addressBookFilePath) {
             throw new AssertionError("This method should not be called.");
@@ -167,6 +168,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void deleteReminder(Reminder reminder) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setTask(Task target, Task editedTask) {
             throw new AssertionError("This method should not be called.");
         }
@@ -183,6 +189,11 @@ public class AddCommandTest {
 
         @Override
         public ObservableList<Task> getFilteredTaskList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Reminder> getFilteredReminderList() {
             throw new AssertionError("This method should not be called.");
         }
 

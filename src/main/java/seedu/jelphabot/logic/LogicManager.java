@@ -98,6 +98,7 @@ public class LogicManager implements Logic {
     }
 
     public ObservableList<Task> getFilteredByReminder() {
+        logger.info("reached filtered by reminder");
         UniqueTaskList uniqueTaskList = new UniqueTaskList();
         List<Task> taskList = model.getTaskListFromJelphaBot();
         List<Reminder> reminderList = model.getReminderListFromJelphaBot();
@@ -105,6 +106,7 @@ public class LogicManager implements Logic {
         ReminderPredicate reminderPredicate = new ReminderPredicate(taskList, reminderList);
         FilteredList<Task> filteredList = new FilteredList<>(filteredTasks, reminderPredicate);
         uniqueTaskList.setTasks(filteredList);
+        logger.info("" + filteredList.size());
         return uniqueTaskList.asUnmodifiableObservableList();
     }
 
