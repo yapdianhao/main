@@ -1,7 +1,5 @@
 package seedu.jelphabot.ui;
 
-import java.util.Comparator;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -9,12 +7,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.jelphabot.model.task.Task;
 
-/**
- * An UI component that displays information of a {@code Task}.
- */
-public class TaskCard extends UiPart<Region> {
+import java.util.Comparator;
 
-    private static final String FXML = "GroupedTaskListCard.fxml";
+public class CalendarTaskCard extends UiPart<Region> {
+
+    private static final String FXML = "CalendarTaskListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -42,12 +39,15 @@ public class TaskCard extends UiPart<Region> {
     private Label priority;
     @FXML
     private FlowPane tags;
+    @FXML
+    private Label dateTime;
 
-    public TaskCard(Task task, int displayedIndex) {
+    public CalendarTaskCard(Task task, int displayedIndex) {
         super(FXML);
         this.task = task;
         populateChildElements(task, displayedIndex);
     }
+
 
     /**
      * Populates the child elements in the taskCard
@@ -62,6 +62,7 @@ public class TaskCard extends UiPart<Region> {
         status.setText(task.getStatus().name());
         timeSpent.setText("(time spent: " + task.getTimeSpent().toString() + ")");
         //TODO add in task PRIORITY
+        dateTime.setText(task.getDateTime().getDisplayValue());
         task.getTags().stream()
             .sorted(Comparator.comparing(tag -> tag.tagName))
             .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
@@ -80,7 +81,7 @@ public class TaskCard extends UiPart<Region> {
         }
 
         // state check
-        TaskCard card = (TaskCard) other;
+        CalendarTaskCard card = (CalendarTaskCard) other;
         return id.getText().equals(card.id.getText())
                    && task.equals(card.task);
     }
