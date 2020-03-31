@@ -42,23 +42,23 @@ public class GroupedByDateTaskList implements GroupedTaskList {
         pinnedTaskList = taskList.filtered(null);
     }
 
-    public ObservableList<Task> getPinnedTaskList() {
+    private ObservableList<Task> getPinnedTaskList() {
         return pinnedTaskList;
     }
 
-    public ObservableList<Task> getOverdueTaskList() {
+    private ObservableList<Task> getOverdueTaskList() {
         return overdueTaskList;
     }
 
-    public ObservableList<Task> getDueTodayTaskList() {
+    private ObservableList<Task> getDueTodayTaskList() {
         return dueTodayTaskList;
     }
 
-    public ObservableList<Task> getDueThisWeekTaskList() {
+    private ObservableList<Task> getDueThisWeekTaskList() {
         return dueThisWeekTaskList;
     }
 
-    public ObservableList<Task> getDueSomedayTaskList() {
+    private ObservableList<Task> getDueSomedayTaskList() {
         return dueSomedayTaskList;
     }
 
