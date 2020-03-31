@@ -26,6 +26,10 @@ public class TaskListPanel extends UiPart<Region> {
         taskListView.setCellFactory(listView -> new TaskListViewCell());
     }
 
+    // public void show() {
+    //     logger.fine()
+    // }
+
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Task} using a {@code TaskCard}.
      */
