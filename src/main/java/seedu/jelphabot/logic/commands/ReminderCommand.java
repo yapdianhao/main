@@ -20,7 +20,7 @@ import seedu.jelphabot.model.task.Task;
 public class ReminderCommand extends Command {
 
     public static final String MESSAGE_DUPLICATE_REMINDER = "This task already has a reminder!"
-         + "Please delete the current reminder with delrem [INDEX] first!";
+        + "Please delete the current reminder with delrem [INDEX] first!";;
     public static final String MESSAGE_TASK_ALREADY_MARKED_COMPLETE = "The specified task has already "
                                                                           + "been marked as complete!";
     public static final String MESSAGE_SUCCESS = "Added reminder for task %d!";
