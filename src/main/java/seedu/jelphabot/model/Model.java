@@ -70,10 +70,6 @@ public interface Model {
     boolean hasTask(Task task);
 
     boolean hasReminder(Reminder reminder);
-    /**
-     * Returns true if a task being timed exists in the address book.
-     */
-    boolean hasTimingTask();
 
     /**
      * Deletes the given task.
