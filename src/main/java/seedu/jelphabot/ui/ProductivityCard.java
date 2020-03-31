@@ -30,7 +30,7 @@ public class ProductivityCard extends UiPart<Region> {
         super(FXML);
         this.productivity = productivity;
         tasksCompleted.setText(productivity.getTasksCompleted().toString());
-        runningTimer.setText(productivity.getRunningTimer().toString());
+        runningTimer.setText(productivity.getRunningTimers().toString());
         timeSpentToday.setText(productivity.getTimeSpentToday().toString());
         tasksCompletionProgress.setProgress(productivity.getTasksCompleted().getPercentage());
     }
