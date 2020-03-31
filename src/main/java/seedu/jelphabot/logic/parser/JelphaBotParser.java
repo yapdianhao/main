@@ -11,6 +11,7 @@ import seedu.jelphabot.logic.commands.CalendarCommand;
 import seedu.jelphabot.logic.commands.ClearCommand;
 import seedu.jelphabot.logic.commands.Command;
 import seedu.jelphabot.logic.commands.DeleteCommand;
+import seedu.jelphabot.logic.commands.DeleteReminderCommand;
 import seedu.jelphabot.logic.commands.DoneCommand;
 import seedu.jelphabot.logic.commands.EditCommand;
 import seedu.jelphabot.logic.commands.ExitCommand;
@@ -60,6 +61,9 @@ public class JelphaBotParser {
 
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
+
+        case DeleteReminderCommand.COMMAND_WORD:
+            return new DeleteReminderCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
