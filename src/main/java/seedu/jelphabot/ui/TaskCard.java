@@ -12,10 +12,9 @@ import seedu.jelphabot.model.task.Task;
 /**
  * An UI component that displays information of a {@code Task}.
  */
-// TODO add back fields for new model elements
 public class TaskCard extends UiPart<Region> {
 
-    private static final String FXML = "TaskListCard.fxml";
+    private static final String FXML = "GroupedTaskListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -38,6 +37,8 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label status;
     @FXML
+    private Label timeSpent;
+    @FXML
     private Label priority;
     @FXML
     private FlowPane tags;
@@ -47,10 +48,21 @@ public class TaskCard extends UiPart<Region> {
     public TaskCard(Task task, int displayedIndex) {
         super(FXML);
         this.task = task;
+        populateChildElements(task, displayedIndex);
+    }
+
+    /**
+     * Populates the child elements in the taskCard
+     *
+     * @param task           the task to populate.
+     * @param displayedIndex the indicated index.
+     */
+    private void populateChildElements(Task task, int displayedIndex) {
         id.setText(displayedIndex + ". ");
         description.setText(task.getDescription().fullDescription);
         moduleCode.setText(task.getModuleCode().value);
         status.setText(task.getStatus().name());
+        timeSpent.setText("(SPENT: " + task.getTimeSpent().toString() + ")");
         //TODO add in task PRIORITY
         dateTime.setText(task.getDateTime().getDisplayValue());
         task.getTags().stream()

@@ -27,6 +27,9 @@ public interface Storage extends JelphaBotStorage, UserPrefsStorage {
     Optional<ReadOnlyJelphaBot> readJelphaBot() throws DataConversionException, IOException;
 
     @Override
-    void saveJelphaBot(ReadOnlyJelphaBot addressBook) throws IOException;
+    void saveJelphaBot(ReadOnlyJelphaBot jelphaBot) throws IOException;
+
+    @Override
+    void saveJelphaBot(ReadOnlyJelphaBot jelphaBot, boolean isReminder) throws IOException;
 
 }

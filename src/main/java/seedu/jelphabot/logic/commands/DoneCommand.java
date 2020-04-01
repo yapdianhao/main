@@ -3,7 +3,6 @@ package seedu.jelphabot.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.jelphabot.model.Model.PREDICATE_SHOW_ALL_TASKS;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
@@ -19,6 +18,7 @@ import seedu.jelphabot.model.task.ModuleCode;
 import seedu.jelphabot.model.task.Priority;
 import seedu.jelphabot.model.task.Status;
 import seedu.jelphabot.model.task.Task;
+import seedu.jelphabot.model.task.TimeSpent;
 
 /**
  * Marks the specified as done by updating it's status to COMPLETE.
@@ -56,6 +56,7 @@ public class DoneCommand extends Command {
 
         Task taskToMarkDone = lastShownList.get(index.getZeroBased());
         Task doneTask = createDoneTask(taskToMarkDone);
+        doneTask.setDoneTime();
 
         if (taskToMarkDone.equals(doneTask)) {
             throw new CommandException(MESSAGE_TASK_ALREADY_MARKED_COMPLETE);
@@ -63,7 +64,7 @@ public class DoneCommand extends Command {
 
         model.setTask(taskToMarkDone, doneTask);
         model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
-        model.setProductivity(new Productivity(model.getSortedTaskList(), model.getFilteredTaskList()));
+        model.setProductivity(new Productivity(model.getFilteredTaskList()));
         return new CommandResult(String.format(MESSAGE_MARK_TASK_COMPLETE_SUCCESS, doneTask));
     }
 
@@ -81,10 +82,9 @@ public class DoneCommand extends Command {
         DateTime dateTime = task.getDateTime();
         Status status = Status.COMPLETE;
         Priority priority = task.getPriority();
-        LocalDateTime startTime = task.getStartTime();
-        LocalDateTime endTime = task.getEndTime();
+        TimeSpent timeSpent = task.getTimeSpent();
 
-        return new Task(description, status, dateTime, moduleCode, priority, tags, startTime, endTime);
+        return new Task(description, status, dateTime, moduleCode, priority, tags, timeSpent);
     }
 
     @Override

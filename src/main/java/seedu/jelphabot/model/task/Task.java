@@ -29,25 +29,24 @@ public class Task {
 
     private LocalDateTime startTime;
     private LocalDateTime endTime;
-    private Duration duration;
-    private boolean timerIsRunning;
+    private LocalDateTime doneTime;
+    private TimeSpent timeSpent;
+    private boolean isTiming;
 
     /**
      * Every field must be present and not null.
      */
-    public Task(Description description, Status status, DateTime dateTime, ModuleCode moduleCode,
-        Priority priority, Set<Tag> tags, LocalDateTime startTime, LocalDateTime endTime) {
-        requireAllNonNull(description, status, dateTime, moduleCode, tags);
+    public Task(Description description, Status status, DateTime dateTime, ModuleCode moduleCode, Priority priority,
+                Set<Tag> tags, TimeSpent timeSpent) {
+        requireAllNonNull(description, status, dateTime, moduleCode, tags, timeSpent);
         this.description = description;
         this.status = status;
         this.dateTime = dateTime;
         this.moduleCode = moduleCode;
         this.priority = priority;
         this.tags.addAll(tags);
-        this.duration = Duration.ZERO;
-        this.timerIsRunning = false;
-        this.startTime = startTime;
-        this.endTime = endTime;
+        this.timeSpent = timeSpent;
+        this.isTiming = false;
     }
 
     public Description getDescription() {
@@ -83,7 +82,7 @@ public class Task {
      */
     public void startTimer() {
         this.startTime = LocalDateTime.now();
-        this.timerIsRunning = true;
+        this.isTiming = true;
     }
 
     /**
@@ -91,24 +90,28 @@ public class Task {
      */
     public void stopTimer() {
         this.endTime = LocalDateTime.now();
-        this.setDuration();
-        this.timerIsRunning = false;
+        this.isTiming = false;
+        this.timeSpent.addTime(new TimeSpent(Duration.between(this.startTime, this.endTime)));
     }
 
-    private void setDuration() {
-        this.duration = Duration.between(this.startTime, this.endTime);
+    public TimeSpent getTimeSpent() {
+        return this.timeSpent;
     }
 
-    public Duration getDuration() {
-        return this.duration;
+    public void setDoneTime() {
+        this.doneTime = LocalDateTime.now();
+    }
+
+    public void setDoneTime(DateTime datetime) {
+        this.doneTime = datetime.getDateTime();
     }
 
     public LocalDateTime getStartTime() {
         return this.startTime;
     }
 
-    public LocalDateTime getEndTime() {
-        return this.endTime;
+    public LocalDateTime getDoneTime() {
+        return this.doneTime;
     }
 
     /**
@@ -132,7 +135,7 @@ public class Task {
      * Returns true if the timer is running for this task.
      */
     public boolean isBeingTimed() {
-        return this.timerIsRunning;
+        return this.isTiming;
     }
 
     /**

@@ -11,7 +11,6 @@ import javafx.scene.layout.Region;
 import seedu.jelphabot.commons.core.LogsCenter;
 import seedu.jelphabot.model.productivity.Productivity;
 
-// TODO: add progress bar for all tasks due today/this week
 /**
  * The Productivity Panel. Provides the basic application layout of productivity of tasks.
  */
@@ -24,7 +23,6 @@ public class ProductivityPanel extends UiPart<Region> {
     @FXML
     private ListView<Productivity> productivityListView;
 
-    // TODO: insert piechart or progress bar.
     public ProductivityPanel(ObservableList<Productivity> productivityList, TabPane tabPane) {
         super(FXML);
         logger.info("Initialising productivity panel stage");

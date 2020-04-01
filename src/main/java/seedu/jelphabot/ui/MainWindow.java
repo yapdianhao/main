@@ -13,7 +13,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.jelphabot.commons.core.GuiSettings;
 import seedu.jelphabot.commons.core.LogsCenter;
-import seedu.jelphabot.commons.util.StringUtil;
+import seedu.jelphabot.commons.util.DateUtil;
 import seedu.jelphabot.logic.Logic;
 import seedu.jelphabot.logic.commands.CommandResult;
 import seedu.jelphabot.logic.commands.exceptions.CommandException;
@@ -21,7 +21,7 @@ import seedu.jelphabot.logic.parser.exceptions.ParseException;
 import seedu.jelphabot.model.calendar.CalendarDate;
 import seedu.jelphabot.model.productivity.Productivity;
 import seedu.jelphabot.model.productivity.ProductivityList;
-import seedu.jelphabot.model.task.SortedTaskList;
+import seedu.jelphabot.model.task.GroupedTaskList;
 
 /**
  * The Main Window. Provides the basic application layout containing a menu bar
@@ -30,18 +30,24 @@ import seedu.jelphabot.model.task.SortedTaskList;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
+    private static CalendarPanel calendarPanel;
+    private static boolean firstStart = true;
+    private static final String WELCOME_STRING = "Welcome to JelphaBot! Here are the tasks that you have due today!\n"
+                                                     + "To go back to the list of your tasks, type list!";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
+
+
 
     private Stage primaryStage;
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private SortedTaskListPanel taskListPanel;
-    private TaskListPanel calendarTaskListPanel;
+    private GroupedTaskListPanel taskListPanel;
+    private CalendarTaskListPanel calendarTaskListPanel;
     private ProductivityPanel productivityPanel;
-    private CalendarPanel calendarPanel;
     private ResultDisplay resultDisplay;
+    private SummaryPanel summaryPanel;
     private HelpWindow helpWindow;
 
     private Productivity productivity;
@@ -73,6 +79,9 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private StackPane statusbarPlaceholder;
 
+    @FXML
+    private StackPane summaryPanelPlaceholder;
+
     public MainWindow(Stage primaryStage, Logic logic) {
         super(FXML, primaryStage);
 
@@ -90,6 +99,10 @@ public class MainWindow extends UiPart<Stage> {
 
     public Stage getPrimaryStage() {
         return primaryStage;
+    }
+
+    public static CalendarPanel getCalendarPanel() {
+        return calendarPanel;
     }
 
     private void setAccelerators() {
@@ -131,26 +144,27 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        SortedTaskList sortedTasks = logic.getSortedTaskList();
-        taskListPanel = new SortedTaskListPanel(
-            sortedTasks.getPinnedTaskList(),
-            sortedTasks.getOverdueTaskList(),
-            sortedTasks.getDueTodayTaskList(),
-            sortedTasks.getDueThisWeekTaskList(),
-            sortedTasks.getDueSomedayTaskList()
+        GroupedTaskList sortedTasks = logic.getGroupedTaskList(GroupedTaskList.Grouping.MODULE);
+        taskListPanel = new GroupedTaskListPanel(
+            logic.getFilteredTaskList(),
+            sortedTasks
         );
         taskListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
 
-        //TODO should be calendar Task List (Doesn't work for now :()
-        calendarTaskListPanel = new TaskListPanel(logic.getFilteredTaskList());
+        //update getFilteredCalendarTaskList
+        calendarTaskListPanel = new CalendarTaskListPanel(logic.getFilteredCalendarTaskList());
+        logic.updateFilteredCalendarTaskList(DateUtil.getDueTodayPredicate());
         calendarTaskListPanelPlaceholder.getChildren().add(calendarTaskListPanel.getRoot());
 
-        //TODO fill calendarPanel
-        calendarPanel = new CalendarPanel(CalendarDate.getCurrent());
+        calendarPanel = new CalendarPanel(CalendarDate.getCurrent(), mainWindowTabPane);
         calendarPanelPlaceholder.getChildren().add(calendarPanel.getRoot());
 
+        summaryPanel = new SummaryPanel(logic.getFilteredByIncompleteDueTodayTaskList(),
+            logic.getFilteredByCompletedTodayTaskList(), mainWindowTabPane);
+        summaryPanelPlaceholder.getChildren().add(summaryPanel.getRoot());
+
         ProductivityList productivityList = logic.getProductivityList();
-        productivityList.addProductivity(new Productivity(sortedTasks, logic.getFilteredTaskList()));
+        productivityList.addProductivity(new Productivity(logic.getFilteredTaskList()));
         productivityPanel = new ProductivityPanel(productivityList.asUnmodifiableObservableList(), mainWindowTabPane);
         productivityPanelPlaceholder.getChildren().add(productivityPanel.getRoot());
 
@@ -204,18 +218,6 @@ public class MainWindow extends UiPart<Stage> {
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();
-
-        // after the MainWindow is closed,
-        // initialise and show the night debrief window
-        Stage nightDebriefStage = new Stage();
-
-        try {
-            NightDebriefWindow nightDebrief = new NightDebriefWindow(nightDebriefStage, logic);
-            nightDebrief.show();
-            nightDebrief.fillWindow();
-        } catch (Throwable e) {
-            logger.severe(StringUtil.getDetails(e));
-        }
     }
 
     /**
@@ -229,7 +231,40 @@ public class MainWindow extends UiPart<Stage> {
         // TODO: add case when alr on panel.
     }
 
-    public SortedTaskListPanel getTaskListPanel() {
+    /**
+     * Switches view to calendar panel.
+     */
+    @FXML
+    private void handleCalendar() {
+        if (!calendarPanel.isShowing()) {
+            calendarPanel.show();
+        }
+    }
+
+    /**
+     * Switches view to summary panel.
+     */
+    @FXML
+    public void handleSummary() {
+        if (!summaryPanel.isShowing()) {
+            summaryPanel.show();
+        }
+
+        if (firstStart) {
+            resultDisplay.setFeedbackToUser(WELCOME_STRING);
+            firstStart = false;
+        }
+    }
+
+    /**
+     * Switches view to Task List panel.
+     */
+    @FXML
+    private void handleTaskList() {
+        mainWindowTabPane.getSelectionModel().select(0);
+    }
+
+    public GroupedTaskListPanel getTaskListPanel() {
         return taskListPanel;
     }
 
@@ -252,8 +287,26 @@ public class MainWindow extends UiPart<Stage> {
                 handleHelp();
             } else if (commandResult.isExit()) {
                 handleExit();
-            } else if (commandResult.isProductivity()) {
+            }
+
+            switch (commandResult.getTabSwitch()) {
+            case CALENDAR:
+                handleCalendar();
+                break;
+            case PRODUCTIVITY:
                 handleProductivity();
+                break;
+            case SUMMARY:
+                handleSummary();
+                break;
+            case TASK_LIST:
+                handleTaskList();
+                break;
+            case STAY_ON_CURRENT:
+                // do nothing
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + commandResult.getTabSwitch());
             }
 
             return commandResult;
@@ -263,6 +316,5 @@ public class MainWindow extends UiPart<Stage> {
             throw e;
         }
     }
-
 
 }

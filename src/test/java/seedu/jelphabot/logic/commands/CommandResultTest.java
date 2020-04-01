@@ -14,7 +14,7 @@ public class CommandResultTest {
 
         // same values -> returns true
         assertTrue(commandResult.equals(new CommandResult("feedback")));
-        assertTrue(commandResult.equals(new CommandResult("feedback", false, false, false)));
+        assertTrue(commandResult.equals(new CommandResult("feedback")));
 
         // same object -> returns true
         assertTrue(commandResult.equals(commandResult));
@@ -29,13 +29,22 @@ public class CommandResultTest {
         assertFalse(commandResult.equals(new CommandResult("different")));
 
         // different showHelp value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", true, false, false)));
+        assertFalse(commandResult.equals(new CommandResult("feedback", true, false)));
 
         // different exit value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", false, true, false)));
+        assertFalse(commandResult.equals(new CommandResult("feedback", false, true)));
 
         // different productivity value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", false, false, true)));
+        assertFalse(commandResult.equals(new CommandResult("feedback").isShowProductivity()));
+
+        // different calendar value -> returns false
+        assertFalse(commandResult.equals(new CommandResult("feedback").isShowCalendar()));
+
+        // different task list value -> returns false
+        assertFalse(commandResult.equals(new CommandResult("feedback").isShowTaskList()));
+
+        // different summary value -> returns false
+        assertFalse(commandResult.equals(new CommandResult("feedback").isShowSummary()));
     }
 
     @Test
@@ -49,12 +58,21 @@ public class CommandResultTest {
         assertNotEquals(commandResult.hashCode(), new CommandResult("different").hashCode());
 
         // different showHelp value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", true, false, false).hashCode());
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", true, false).hashCode());
 
         // different exit value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, true, false).hashCode());
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, true).hashCode());
 
         // different productivity value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, false, true).hashCode());
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback").isShowProductivity().hashCode());
+
+        // different calendar value -> returns different hashcode
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback").isShowCalendar().hashCode());
+
+        // different summary value -> returns different hashcode
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback").isShowSummary().hashCode());
+
+        // different task list value -> returns different hashcode
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback").isShowTaskList().hashCode());
     }
 }

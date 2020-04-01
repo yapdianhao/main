@@ -2,6 +2,7 @@ package seedu.jelphabot.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.jelphabot.model.productivity.Productivity;
@@ -19,16 +20,27 @@ public class ProductivityCard extends UiPart<Region> {
     @FXML
     private Label tasksCompleted;
     @FXML
-    private Label runningTimer;
+    private Label remark;
+    @FXML
+    private Label overdueStatus;
+    @FXML
+    private Label runningTimers;
     @FXML
     private Label timeSpentToday;
+    @FXML
+    private ProgressBar tasksCompletionProgress;
 
     public ProductivityCard(Productivity productivity) {
         super(FXML);
         this.productivity = productivity;
-        tasksCompleted.setText(productivity.getTasksCompleted().toString());
-        runningTimer.setText(productivity.getRunningTimer().toString());
+        String[] tmp = productivity.getTasksCompleted().toStringArray();
+        String[] completion = tmp[0].split("\n");
+        tasksCompleted.setText("   " + completion[0]);
+        remark.setText(completion[1]);
+        overdueStatus.setText(tmp[1]);
+        runningTimers.setText(productivity.getRunningTimers().toString());
         timeSpentToday.setText(productivity.getTimeSpentToday().toString());
+        tasksCompletionProgress.setProgress(productivity.getTasksCompleted().getPercentage());
     }
 
     @Override
@@ -46,7 +58,9 @@ public class ProductivityCard extends UiPart<Region> {
         // state check
         ProductivityCard card = (ProductivityCard) other;
         return tasksCompleted.getText().equals(card.tasksCompleted.getText())
-                   && runningTimer.getText().equals(card.runningTimer.getText())
+                   && runningTimers.getText().equals(card.runningTimers.getText())
+                   && remark.getText().equals(card.remark.getText())
+                   && overdueStatus.getText().equals(card.overdueStatus.getText())
                    && timeSpentToday.getText().equals(card.timeSpentToday.getText())
                    && productivity.equals(card.productivity);
     }
