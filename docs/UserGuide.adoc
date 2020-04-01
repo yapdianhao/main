@@ -389,9 +389,11 @@ Format: `reminder INDEX rd/DAYS rh/HOURS`
 // tag::productivitytracker[]
 ==== Track productivity : `productivity`
 Apart from the function to switch tabs by pressing kbd:[Ctrl] + kbd:[tab] on your keyboard, you can enter the `productivity` command
-to manually switch to the producivity tab.
+or its shortcut `:p` to manually switch to the producivity tab.
 The productivity panel will then show you your productivity for the day. +
-Format: `productivity`
+
+Format: `productivity` +
+Shortcut: `:p`
 
 [.text-center]
 .Example of expected result after running `productivity`
@@ -440,10 +442,11 @@ There is no need to manually ask for compliments or criticism.
 === Calendar (Amanda)
 ==== View calender : `calendar`
 Apart from the function to switch tabs by pressing kbd:[Ctrl] + kbd:[tab] on your keyboard, you can enter the `calendar` command
-to manually switch to the calendar tab.
+or its shortcut `:c` to manually switch to the calendar tab.
 The calendar panel will then show you your schedule for the current month with today's date highlighted. +
 
-Format: `calendar`
+Format: `calendar` +
+Shorcut: `:c`
 
 [.text-center]
 .Example of expected result after running `calendar`
@@ -510,9 +513,10 @@ The tasks listed in Morning Call and Night Debrief are displayed in under the Su
 
 ==== Viewing the summary tab: `summary`
 
-The Summary tab can be viewed by entering the command `summary`
+The Summary tab can be viewed by entering the command `summary` or its shortcut `:s`
 
 Format: `summary`
+Shorcut: `:s`
 
 [.text-center]
 .Expected result after running `summary`
