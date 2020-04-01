@@ -76,6 +76,8 @@ public class CommandTestUtil {
     //reminder hour > 24
     public static final String INVALID_REMINDER_HOUR = "30";
 
+    public static final String NEGATIVE_INDEX = "-1";
+
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
