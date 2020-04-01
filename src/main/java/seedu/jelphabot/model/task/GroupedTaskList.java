@@ -16,7 +16,7 @@ public interface GroupedTaskList extends Iterable<ObservableList<Task>> {
         return group.construct(tasks);
     }
 
-    public Iterator<String> getGroupNames();
+    Iterator<String> getGroupNames();
 
     /**
      * GroupedTaskList.Groupings define a set of fixed enum mappings from the commandArgument to the corresponding

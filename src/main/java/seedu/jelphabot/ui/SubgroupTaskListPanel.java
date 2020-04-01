@@ -29,7 +29,7 @@ public class SubgroupTaskListPanel extends UiPart<Region> {
     private ListView<Task> groupingList;
 
     // TODO display index dynamcally
-    int startIndex;
+    private int startIndex;
 
     // TODO do not display if list is empty
     public SubgroupTaskListPanel(String title, ObservableList<Task> tasks, int startIndex) {

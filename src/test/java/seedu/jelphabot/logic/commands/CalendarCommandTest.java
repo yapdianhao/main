@@ -24,8 +24,8 @@ public class CalendarCommandTest {
 
     @Test
     public void execute_calendar_success() {
-        CommandResult expectedCommandResult = new CommandResult(CalendarCommand.MESSAGE_SWITCH_PANEL_ACKNOWLEDGEMENT,
-            false, false, false, true, false);
+        CommandResult expectedCommandResult =
+            new CommandResult(CalendarCommand.MESSAGE_SWITCH_PANEL_ACKNOWLEDGEMENT).isShowCalendar();
         assertCommandSuccess(new CalendarCommand(), model, expectedCommandResult, expectedModel);
     }
 

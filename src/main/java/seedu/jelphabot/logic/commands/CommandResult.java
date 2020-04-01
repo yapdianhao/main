@@ -20,7 +20,7 @@ public class CommandResult {
      * The application should exit.
      */
     private final boolean exit;
-    private switchTab toSwitch = switchTab.STAY_ON_CURRENT;
+    private SwitchTab toSwitch = SwitchTab.STAY_ON_CURRENT;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
@@ -44,7 +44,7 @@ public class CommandResult {
      * @return Sets the "switch to window" flag to Task List.
      */
     public CommandResult isShowTaskList() {
-        this.toSwitch = switchTab.TASK_LIST;
+        this.toSwitch = SwitchTab.TASK_LIST;
         return this;
     }
 
@@ -65,7 +65,7 @@ public class CommandResult {
      * @return Sets the "toSwitch" flag to Productivity.
      */
     public CommandResult isShowProductivity() {
-        this.toSwitch = switchTab.PRODUCTIVITY;
+        this.toSwitch = SwitchTab.PRODUCTIVITY;
         return this;
     }
 
@@ -74,7 +74,7 @@ public class CommandResult {
      * @return Sets the "toSwitch" flag to Calendar.
      */
     public CommandResult isShowCalendar() {
-        this.toSwitch = switchTab.CALENDAR;
+        this.toSwitch = SwitchTab.CALENDAR;
         return this;
     }
 
@@ -83,11 +83,11 @@ public class CommandResult {
      * @return Sets the "toSwitch" flag to Summary.
      */
     public CommandResult isShowSummary() {
-        this.toSwitch = switchTab.SUMMARY;
+        this.toSwitch = SwitchTab.SUMMARY;
         return this;
     }
 
-    public switchTab getTabSwitch() {
+    public SwitchTab getTabSwitch() {
         return toSwitch;
     }
 
@@ -111,13 +111,13 @@ public class CommandResult {
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit);
+        return Objects.hash(feedbackToUser, showHelp, exit, toSwitch);
     }
 
     /**
      * Enum representing switch that indicates if the command should switch to another window.
      */
-    public enum switchTab {
+    public enum SwitchTab {
         CALENDAR,
         PRODUCTIVITY,
         SUMMARY,

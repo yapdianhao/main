@@ -34,6 +34,10 @@ public class GroupedByModuleTaskList implements GroupedTaskList {
         }
     }
 
+    /**
+     * @param moduleCode The ModuleCode to be tested
+     * @return a predicate which tests Tasks for the parameter module code.
+     */
     private Predicate<Task> hasModuleCode(ModuleCode moduleCode) {
         return new Predicate<Task>() {
             @Override
