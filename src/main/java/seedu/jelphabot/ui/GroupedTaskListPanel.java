@@ -18,6 +18,7 @@ import seedu.jelphabot.model.task.Task;
  * Tasks are further sorted into subgroups
  */
 public class GroupedTaskListPanel extends UiPart<Region> {
+
     private static final String FXML = "GroupedTaskListPanel.fxml";
     private static final int PREF_CELL_HEIGHT = 100;
 
