@@ -26,10 +26,7 @@ public class GroupedTaskListPanel extends UiPart<Region> {
     @javafx.fxml.FXML
     private ListView<SubgroupTaskListPanel> taskListGroups;
 
-    public GroupedTaskListPanel(
-        ObservableList<Task> pinnedTaskList,
-        GroupedTaskList groupedTaskList
-    ) {
+    public GroupedTaskListPanel(ObservableList<Task> pinnedTaskList, GroupedTaskList groupedTaskList) {
         super(FXML);
 
         Iterator<String> groupNames = groupedTaskList.getGroupNames();
