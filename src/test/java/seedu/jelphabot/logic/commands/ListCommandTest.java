@@ -28,7 +28,8 @@ public class ListCommandTest {
 
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
-        assertCommandSuccess(new ListCommand(), model, new CommandResult(ListCommand.MESSAGE_SUCCESS).isShowTaskList(),
+        assertCommandSuccess(new ListCommand(), model,
+            new CommandResult(ListCommand.MESSAGE_SWITCH_PANEL_ACKNOWLEDGEMENT).isShowDateTaskList(),
             expectedModel
         );
     }
@@ -36,7 +37,9 @@ public class ListCommandTest {
     @Test
     public void execute_listIsFiltered_showsEverything() {
         showTaskAtIndex(model, INDEX_FIRST_TASK);
-        assertCommandSuccess(new ListCommand(), model, new CommandResult(ListCommand.MESSAGE_SUCCESS).isShowTaskList(),
-            expectedModel);
+        assertCommandSuccess(new ListCommand(), model,
+            new CommandResult(ListCommand.MESSAGE_SWITCH_PANEL_ACKNOWLEDGEMENT).isShowDateTaskList(),
+            expectedModel
+        );
     }
 }
