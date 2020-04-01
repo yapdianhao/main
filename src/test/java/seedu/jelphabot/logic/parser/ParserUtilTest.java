@@ -24,13 +24,13 @@ public class ParserUtilTest {
     private static final String INVALID_DESCRIPTION = "@ssignment !";
     private static final String INVALID_MODULE_CODE = "ASFE1000R";
     private static final String INVALID_DATETIME = "03/10/-2020 33 79";
-    private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_TAG = "#graded";
 
     private static final String VALID_DESCRIPTION = "Assignment 1";
     private static final String VALID_MODULE_CODE = "AS1000";
     private static final String VALID_DATETIME = "Mar-20-2020 11 50";
-    private static final String VALID_TAG_1 = "friend";
-    private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_TAG_1 = "graded";
+    private static final String VALID_TAG_2 = "project";
 
     private static final String WHITESPACE = " \t\r\n";
 
