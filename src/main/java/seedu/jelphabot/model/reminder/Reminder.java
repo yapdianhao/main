@@ -49,12 +49,19 @@ public class Reminder {
      * @param otherReminder
      * @return boolean
      */
-    public boolean isSameReminder(Reminder otherReminder) {
-        if (otherReminder == this) {
+    public boolean isSameReminder(Object other) {
+        if (other == this) {
             return true;
         }
 
-        return otherReminder != null && otherReminder.getIndex().equals(getIndex());
+        if (!(other instanceof Reminder)) {
+            return false;
+        }
+
+        Reminder otherReminder = (Reminder) other;
+        return otherReminder.getIndex().equals(getIndex())
+                   && otherReminder.getDaysToRemind().equals(getDaysToRemind())
+                   && otherReminder.getHoursToRemind().equals(getHoursToRemind());
     }
 
 }

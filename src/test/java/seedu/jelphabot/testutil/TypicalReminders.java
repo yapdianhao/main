@@ -6,8 +6,6 @@ import java.util.List;
 
 import seedu.jelphabot.model.JelphaBot;
 import seedu.jelphabot.model.reminder.Reminder;
-import seedu.jelphabot.model.reminder.ReminderDay;
-import seedu.jelphabot.model.reminder.ReminderHour;
 
 /**
  * A utility class containing a list of {@code Reminder} objects to be used in tests.
@@ -15,14 +13,14 @@ import seedu.jelphabot.model.reminder.ReminderHour;
 public class TypicalReminders {
 
     public static final Reminder ASSESSMENT_REMINDER =
-        new ReminderBuilder().withIndex(1)
-            .withReminderDay(new ReminderDay(1))
-            .withReminderHour(new ReminderHour(1)).build();
+        new ReminderBuilder().withIndex("1")
+            .withReminderDay("1")
+            .withReminderHour("1").build();
 
     public static final Reminder BOOK_REPORT_REMINDER =
-        new ReminderBuilder().withIndex(2)
-            .withReminderDay(new ReminderDay(2))
-            .withReminderHour(new ReminderHour(2)).build();
+        new ReminderBuilder().withIndex("2")
+            .withReminderDay("2")
+            .withReminderHour("2").build();
 
     private TypicalReminders() {
     }
