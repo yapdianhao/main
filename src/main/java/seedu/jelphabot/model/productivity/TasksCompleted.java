@@ -70,8 +70,10 @@ public class TasksCompleted {
 
         if (n > 1) {
             response.append("are ").append(n).append(" overdue tasks that are incomplete.");
-        } else {
+        } else if (n == 1) {
             response.append("is ").append(n).append(" overdue task that is incomplete.");
+        } else {
+            response.append("are ").append(" no overdue tasks that are incomplete.");
         }
 
         if (n > 3) {
