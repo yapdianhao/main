@@ -34,7 +34,7 @@
         </rowConstraints>
     </GridPane>
 <!--    <Label fx:id="dateTime" styleClass="cell_medium_label" text="\$dateTime"/>-->
-<!--    <padding>-->
-<!--        <Insets left="16.0" right="16.0"/>-->
-<!--    </padding>-->
+    <padding>
+        <Insets left="16.0" right="16.0"/>
+    </padding>
 </HBox>
