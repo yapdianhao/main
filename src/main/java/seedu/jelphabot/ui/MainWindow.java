@@ -22,6 +22,7 @@ import seedu.jelphabot.model.calendar.CalendarDate;
 import seedu.jelphabot.model.productivity.Productivity;
 import seedu.jelphabot.model.productivity.ProductivityList;
 import seedu.jelphabot.model.task.GroupedTaskList;
+import seedu.jelphabot.model.task.GroupedTaskList.Grouping;
 
 /**
  * The Main Window. Provides the basic application layout containing a menu bar
@@ -44,7 +45,7 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private GroupedTaskListPanel taskListPanel;
-    private TaskListPanel calendarTaskListPanel;
+    private CalendarTaskListPanel calendarTaskListPanel;
     private ProductivityPanel productivityPanel;
     private ResultDisplay resultDisplay;
     private SummaryPanel summaryPanel;
@@ -144,14 +145,15 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        GroupedTaskList sortedTasks = logic.getGroupedTaskList(GroupedTaskList.Grouping.DATE);
+        GroupedTaskList sortedTasks = logic.getGroupedTaskList(Grouping.MODULE);
         taskListPanel = new GroupedTaskListPanel(
             logic.getFilteredTaskList(),
             sortedTasks
         );
         taskListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
 
-        calendarTaskListPanel = new TaskListPanel(logic.getFilteredCalendarTaskList());
+        //update getFilteredCalendarTaskList
+        calendarTaskListPanel = new CalendarTaskListPanel(logic.getFilteredCalendarTaskList());
         logic.updateFilteredCalendarTaskList(DateUtil.getDueTodayPredicate());
         calendarTaskListPanelPlaceholder.getChildren().add(calendarTaskListPanel.getRoot());
 
@@ -255,6 +257,18 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Switches view to Task List panel.
+     */
+    @FXML
+    private void handleTaskList(Grouping sublistGrouping) {
+        mainWindowTabPane.getSelectionModel().select(0);
+        GroupedTaskList groupedTasks = logic.getGroupedTaskList(sublistGrouping);
+        taskListPanel = new GroupedTaskListPanel(logic.getFilteredTaskList(), groupedTasks);
+        taskListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
+
+    }
+
     public GroupedTaskListPanel getTaskListPanel() {
         return taskListPanel;
     }
@@ -278,12 +292,27 @@ public class MainWindow extends UiPart<Stage> {
                 handleHelp();
             } else if (commandResult.isExit()) {
                 handleExit();
-            } else if (commandResult.isProductivity()) {
-                handleProductivity();
-            } else if (commandResult.isCalendar()) {
+            }
+
+            switch (commandResult.getTabSwitch()) {
+            case CALENDAR:
                 handleCalendar();
-            } else if (commandResult.isSummary()) {
+                break;
+            case PRODUCTIVITY:
+                handleProductivity();
+                break;
+            case SUMMARY:
                 handleSummary();
+                break;
+            case TASK_LIST_DATE:
+                handleTaskList(Grouping.DATE);
+                break;
+            case TASK_LIST_MODULE:
+                handleTaskList(Grouping.MODULE);
+                break;
+            default:
+                // do nothing
+                break;
             }
 
             return commandResult;

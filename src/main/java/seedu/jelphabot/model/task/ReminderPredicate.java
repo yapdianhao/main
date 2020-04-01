@@ -4,19 +4,21 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.logging.Logger;
 
+import seedu.jelphabot.commons.core.LogsCenter;
 import seedu.jelphabot.model.reminder.Reminder;
-import seedu.jelphabot.model.task.predicates.TaskIsCompletedPredicate;
 import seedu.jelphabot.model.task.predicates.TaskIsIncompletePredicate;
 
 /**
  * Tests that a {@code Task}'s {@code DateTime} is due within a week from now.
  */
-public class ReminderPredicate extends TaskIsCompletedPredicate {
+public class ReminderPredicate extends TaskIsIncompletePredicate {
 
     private final LocalDate currDate = LocalDate.now();
     private final LocalTime currTime = LocalTime.now();
     private final LocalDateTime currDateTime = LocalDateTime.now();
+    private final Logger logger = LogsCenter.getLogger(ReminderPredicate.class);
 
     private final List<Task> taskList;
     private final List<Reminder> reminderList;
@@ -28,10 +30,14 @@ public class ReminderPredicate extends TaskIsCompletedPredicate {
 
     @Override
     public boolean test(Task task) {
+        logger.info("At reminder predicate");
         int reminderKey = taskList.indexOf(task);
+        logger.info("reminderKey " + reminderKey);
         Reminder correspondingReminder = null;
         for (Reminder reminder : reminderList) {
-            if (reminder.getIndex().getOneBased() == reminderKey) {
+            logger.info("reminder index: " + reminder.getIndex().getZeroBased());
+            if (reminder.getIndex().getZeroBased() == reminderKey) {
+                logger.info("" + true);
                 correspondingReminder = reminder;
                 break;
             }
@@ -39,7 +45,8 @@ public class ReminderPredicate extends TaskIsCompletedPredicate {
         if (correspondingReminder == null) {
             return false;
         } else {
-            return super.test(task) && shouldBeReminded(task, correspondingReminder);
+            logger.info("hey " + (super.test(task) && shouldBeReminded(task, correspondingReminder)));
+            return shouldBeReminded(task, correspondingReminder);
         }
     }
 
@@ -51,11 +58,25 @@ public class ReminderPredicate extends TaskIsCompletedPredicate {
      */
     public boolean shouldBeReminded(Task task, Reminder reminder) {
         LocalDateTime taskDateTime = task.getDateTime().getDateTime();
+        logger.info("" + taskDateTime);
+        logger.info("shouldBeReminded " + taskDateTime.minusDays(reminder.getDaysToRemind().getReminderDay())
+                                              .isAfter(currDateTime));
+        logger.info("shouldBeReminded1 " + taskDateTime
+                                               .minusHours(reminder.getHoursToRemind()
+                                                               .getReminderHour())
+                                               .isAfter(currDateTime));
+        logger.info("shouldBeReminded2 " + taskDateTime
+                                               .minusDays(reminder.getDaysToRemind()
+                                                              .getReminderDay())
+                                               .isBefore(currDateTime));
+        if (taskDateTime.isBefore(currDateTime)) {
+            return true;
+        }
         if (taskDateTime.minusDays(reminder.getDaysToRemind().getReminderDay())
                 .isAfter(currDateTime)) {
             return true;
-        } else if (taskDateTime.minusDays((long) reminder.getDaysToRemind().getReminderDay()).isEqual(currDateTime)) {
-            if (taskDateTime.getHour() - reminder.getHoursToRemind().getReminderHour() <= currTime.getHour()) {
+        } else if (taskDateTime.minusDays(reminder.getDaysToRemind().getReminderDay()).isBefore(currDateTime)) {
+            if (taskDateTime.minusHours(reminder.getHoursToRemind().getReminderHour()).isAfter(currDateTime)) {
                 return true;
             }
         }

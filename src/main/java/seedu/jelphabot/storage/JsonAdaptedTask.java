@@ -78,11 +78,6 @@ class JsonAdaptedTask {
      *                               the adapted task.
      */
     public Task toModelType() throws IllegalValueException {
-        final List<Tag> taskTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tagged) {
-            taskTags.add(tag.toModelType());
-        }
-
         if (description == null) {
             throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, Description.class.getSimpleName()));
@@ -103,12 +98,24 @@ class JsonAdaptedTask {
 
         if (dateTime == null) {
             throw new IllegalValueException(
-                    String.format(MISSING_FIELD_MESSAGE_FORMAT, DateTime.class.getSimpleName()));
+                String.format(MISSING_FIELD_MESSAGE_FORMAT, DateTime.class.getSimpleName()));
         }
         if (!DateTime.isValidDateTime(dateTime)) {
             throw new IllegalValueException(DateTime.MESSAGE_CONSTRAINTS);
         }
         final DateTime modelDateTime = new DateTime(dateTime);
+
+        if (priority == null) {
+            throw new IllegalValueException(
+                String.format(MISSING_FIELD_MESSAGE_FORMAT, Priority.class.getSimpleName()));
+        }
+
+        final Priority modelPriority = priority;
+
+        final List<Tag> taskTags = new ArrayList<>();
+        for (JsonAdaptedTag tag : tagged) {
+            taskTags.add(tag.toModelType());
+        }
 
         final Set<Tag> modelTags = new HashSet<>(taskTags);
 
@@ -117,7 +124,7 @@ class JsonAdaptedTask {
                 status,
                 modelDateTime,
                 modelModuleCode,
-                priority,
+                modelPriority,
                 modelTags,
                 timeSpent
         );

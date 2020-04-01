@@ -1,5 +1,7 @@
 package seedu.jelphabot.model.productivity;
 
+import static seedu.jelphabot.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.time.Duration;
 
 import javafx.collections.ObservableList;
@@ -14,6 +16,7 @@ public class TimeSpentToday {
     private ObservableList<Task> tasksDueThisWeek;
 
     public TimeSpentToday(ObservableList<Task> tasksDueToday, ObservableList<Task> tasksDueThisWeek) {
+        requireAllNonNull(tasksDueToday, tasksDueThisWeek);
         this.tasksDueToday = tasksDueToday;
         this.tasksDueThisWeek = tasksDueThisWeek;
     }
@@ -28,7 +31,7 @@ public class TimeSpentToday {
 
     @Override
     public String toString() {
-        return String.format("Due today: %s.\n\nDue in next 7 days: %s.", getTimeSpent(tasksDueToday),
+        return String.format("Tasks due today: %s.\nTasks due in next 7 days: %s.", getTimeSpent(tasksDueToday),
             getTimeSpent(tasksDueThisWeek));
     }
 }

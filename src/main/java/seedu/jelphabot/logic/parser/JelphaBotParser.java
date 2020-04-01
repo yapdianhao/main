@@ -72,7 +72,7 @@ public class JelphaBotParser {
             return new FindCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+            return new ListCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
@@ -92,13 +92,16 @@ public class JelphaBotParser {
         case DoneCommand.COMMAND_WORD:
             return new DoneCommandParser().parse(arguments);
 
-        case CalendarCommand.COMMAND_WORD:
+        case CalendarCommand.COMMAND_WORD: // fallthrough
+        case CalendarCommand.COMMAND_SHORTCUT:
             return new CalendarCommandParser().parse(arguments);
 
-        case SummaryCommand.COMMAND_WORD:
+        case SummaryCommand.COMMAND_WORD: // fallthrough
+        case SummaryCommand.COMMAND_SHORTCUT:
             return new SummaryCommand();
 
-        case ProductivityCommand.COMMAND_WORD:
+        case ProductivityCommand.COMMAND_WORD: // fallthrough
+        case ProductivityCommand.COMMAND_SHORTCUT:
             return new ProductivityCommand();
 
         case StartTimerCommand.COMMAND_WORD:

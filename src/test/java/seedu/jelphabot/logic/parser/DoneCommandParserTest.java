@@ -17,6 +17,7 @@ import seedu.jelphabot.logic.commands.DoneCommand;
  * therefore should be covered by the ParserUtilTest.
  */
 public class DoneCommandParserTest {
+
     private DoneCommandParser parser = new DoneCommandParser();
 
     @Test

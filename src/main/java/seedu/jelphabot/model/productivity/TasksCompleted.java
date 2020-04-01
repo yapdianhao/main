@@ -3,6 +3,7 @@ package seedu.jelphabot.model.productivity;
 import static seedu.jelphabot.commons.core.Messages.MESSAGE_COMPLIMENT;
 import static seedu.jelphabot.commons.core.Messages.MESSAGE_CRITICISM;
 import static seedu.jelphabot.commons.core.Messages.MESSAGE_ENCOURAGEMENT;
+import static seedu.jelphabot.commons.util.CollectionUtil.requireAllNonNull;
 
 import javafx.collections.ObservableList;
 import seedu.jelphabot.model.task.Status;
@@ -20,6 +21,7 @@ public class TasksCompleted {
 
     public TasksCompleted(ObservableList<Task> tasksDueToday, ObservableList<Task> tasksDueThisWeek,
         ObservableList<Task> overdueTasks) {
+        requireAllNonNull(tasksDueToday, tasksDueThisWeek, overdueTasks);
         this.tasksDueToday = tasksDueToday;
         this.tasksDueThisWeek = tasksDueThisWeek;
         this.overdueTasks = overdueTasks;
@@ -57,7 +59,7 @@ public class TasksCompleted {
             }
         }
 
-        return String.format("You completed %.0f out of %.0f tasks that are due this week!\n%s", completed,
+        return String.format("%.0f out of %.0f tasks done!\n%s", completed,
             size, message);
     }
 
@@ -70,8 +72,10 @@ public class TasksCompleted {
 
         if (n > 1) {
             response.append("are ").append(n).append(" overdue tasks that are incomplete.");
-        } else {
+        } else if (n == 1) {
             response.append("is ").append(n).append(" overdue task that is incomplete.");
+        } else {
+            response.append("are ").append(" no overdue tasks that are incomplete.");
         }
 
         if (n > 3) {
@@ -89,8 +93,7 @@ public class TasksCompleted {
         return this.percentage;
     }
 
-    @Override
-    public String toString() {
-        return getCompletionStatus() + "\n\n" + getOverdueStatus();
+    public String[] toStringArray() {
+        return new String[] {getCompletionStatus(), getOverdueStatus()};
     }
 }

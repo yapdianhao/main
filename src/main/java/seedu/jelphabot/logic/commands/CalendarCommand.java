@@ -20,6 +20,7 @@ import seedu.jelphabot.ui.MainWindow;
 public class CalendarCommand extends Command {
 
     public static final String COMMAND_WORD = "calendar";
+    public static final String COMMAND_SHORTCUT = ":c";
 
     //update this
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all task that is under the due date specified.\n"
@@ -30,8 +31,8 @@ public class CalendarCommand extends Command {
 
     public static final String MESSAGE_SWITCH_CALENDAR_VIEW_ACKNOWLEDGEMENT = "Switched calendar panel to : %s";
     public static final String MESSAGE_SWITCH_CALENDAR_TODAY_ACKNOWLEDGEMENT = "Switched calendar panel to : %s, "
-                                                                                    + "displaying all your tasks "
-                                                                                    + "due today!";
+                                                                                   + "displaying all your tasks "
+                                                                                   + "due today!";
 
     private final TaskDueWithinDayPredicate predicate;
     private final YearMonth yearMonth;
@@ -61,7 +62,7 @@ public class CalendarCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         if (predicate == null && yearMonth == null) {
-            return new CommandResult(MESSAGE_SWITCH_PANEL_ACKNOWLEDGEMENT, false, false, false, true, false);
+            return new CommandResult(MESSAGE_SWITCH_PANEL_ACKNOWLEDGEMENT, false, false).isShowCalendar();
         } else if (yearMonth == null) { //switch task list for specific dates
             requireNonNull(model);
             model.updateFilteredCalendarTaskList(predicate);
@@ -76,9 +77,9 @@ public class CalendarCommand extends Command {
 
                 int dayIndex = date.getDayOfMonth();
                 if (date.equals(DateUtil.getDateToday())) {
-                    calendarPanel.getDayCard(dayIndex).highlightToday();
+                    CalendarPanel.getDayCard(dayIndex).highlightToday();
                 } else {
-                    calendarPanel.getDayCard(dayIndex).highlightDay();
+                    CalendarPanel.getDayCard(dayIndex).highlightDay();
                 }
                 calendarPanel.setHighlightedDay(dayIndex);
             }
@@ -89,7 +90,8 @@ public class CalendarCommand extends Command {
             calendarPanel.changeMonthYearLabel(yearMonth);
             calendarPanel.fillGridPane(newDate);
             return new CommandResult(String.format(MESSAGE_SWITCH_CALENDAR_VIEW_ACKNOWLEDGEMENT,
-                                                    calendarPanel.getMonthYear()));
+                calendarPanel.getMonthYear()
+            ));
         } else { //switch calendar view and task list for today
             CalendarDate newDate = new CalendarDate(yearMonth.atDay(1));
             calendarPanel.changeMonthYearLabel(yearMonth);
@@ -97,10 +99,11 @@ public class CalendarCommand extends Command {
             requireNonNull(model);
             model.updateFilteredCalendarTaskList(predicate);
             calendarPanel.getHighlightedDay().removeHighlightedDay();
-            calendarPanel.getDayCard(DateUtil.getDateToday().getDayOfMonth()).highlightToday();
+            CalendarPanel.getDayCard(DateUtil.getDateToday().getDayOfMonth()).highlightToday();
             calendarPanel.setHighlightedDay(DateUtil.getDateToday().getDayOfMonth());
             return new CommandResult(String.format(MESSAGE_SWITCH_CALENDAR_TODAY_ACKNOWLEDGEMENT,
-                calendarPanel.getMonthYear()));
+                calendarPanel.getMonthYear()
+            ));
         }
     }
 

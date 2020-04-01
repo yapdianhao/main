@@ -19,13 +19,14 @@ import seedu.jelphabot.model.task.predicates.TaskDueWithinDayPredicate;
  * {@code CalendarCommand}.
  */
 public class CalendarCommandTest {
+
     private Model model = new ModelManager(getTypicalJelphaBot(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalJelphaBot(), new UserPrefs());
 
     @Test
     public void execute_calendar_success() {
-        CommandResult expectedCommandResult = new CommandResult(CalendarCommand.MESSAGE_SWITCH_PANEL_ACKNOWLEDGEMENT,
-            false, false, false, true, false);
+        CommandResult expectedCommandResult =
+            new CommandResult(CalendarCommand.MESSAGE_SWITCH_PANEL_ACKNOWLEDGEMENT).isShowCalendar();
         assertCommandSuccess(new CalendarCommand(), model, expectedCommandResult, expectedModel);
     }
 

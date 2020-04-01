@@ -8,6 +8,7 @@ import seedu.jelphabot.model.Model;
 public class ProductivityCommand extends Command {
 
     public static final String COMMAND_WORD = "productivity";
+    public static final String COMMAND_SHORTCUT = ":p";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows productivity panel.\n"
                                                    + "Example: " + COMMAND_WORD;
@@ -16,6 +17,6 @@ public class ProductivityCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
-        return new CommandResult(MESSAGE_SWITCH_PANEL_ACKNOWLEDGEMENT, false, false, true, false, false);
+        return new CommandResult(MESSAGE_SWITCH_PANEL_ACKNOWLEDGEMENT).isShowProductivity();
     }
 }
