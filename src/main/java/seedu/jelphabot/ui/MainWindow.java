@@ -144,7 +144,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        GroupedTaskList sortedTasks = logic.getGroupedTaskList(GroupedTaskList.Grouping.DATE);
+        GroupedTaskList sortedTasks = logic.getGroupedTaskList(GroupedTaskList.Grouping.MODULE);
         taskListPanel = new GroupedTaskListPanel(
             logic.getFilteredTaskList(),
             sortedTasks
@@ -255,6 +255,14 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Switches view to Task List panel.
+     */
+    @FXML
+    private void handleTaskList() {
+        mainWindowTabPane.getSelectionModel().select(0);
+    }
+
     public GroupedTaskListPanel getTaskListPanel() {
         return taskListPanel;
     }
@@ -278,12 +286,26 @@ public class MainWindow extends UiPart<Stage> {
                 handleHelp();
             } else if (commandResult.isExit()) {
                 handleExit();
-            } else if (commandResult.isProductivity()) {
-                handleProductivity();
-            } else if (commandResult.isCalendar()) {
+            }
+
+            switch (commandResult.getTabSwitch()) {
+            case CALENDAR:
                 handleCalendar();
-            } else if (commandResult.isSummary()) {
+                break;
+            case PRODUCTIVITY:
+                handleProductivity();
+                break;
+            case SUMMARY:
                 handleSummary();
+                break;
+            case TASK_LIST:
+                handleTaskList();
+                break;
+            case STAY_ON_CURRENT:
+                // do nothing
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + commandResult.getTabSwitch());
             }
 
             return commandResult;
