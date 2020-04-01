@@ -10,11 +10,11 @@ import javafx.scene.layout.Region;
 import seedu.jelphabot.model.task.Task;
 
 /**
- * An UI component that displays information of a {@code Task}.
+ * An UI component that displays information of a {@code Task} in Calendar.
  */
-public class TaskCard extends UiPart<Region> {
+public class CalendarTaskCard extends UiPart<Region> {
 
-    private static final String FXML = "GroupedTaskListCard.fxml";
+    private static final String FXML = "CalendarTaskListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -42,17 +42,16 @@ public class TaskCard extends UiPart<Region> {
     private Label priority;
     @FXML
     private FlowPane tags;
-    @FXML
-    private Label dateTime;
 
-    public TaskCard(Task task, int displayedIndex) {
+    public CalendarTaskCard(Task task, int displayedIndex) {
         super(FXML);
         this.task = task;
         populateChildElements(task, displayedIndex);
     }
 
+
     /**
-     * Populates the child elements in the taskCard
+     * Populates the child elements in the CalendarTaskCard
      *
      * @param task           the task to populate.
      * @param displayedIndex the indicated index.
@@ -62,9 +61,8 @@ public class TaskCard extends UiPart<Region> {
         description.setText(task.getDescription().fullDescription);
         moduleCode.setText(task.getModuleCode().value);
         status.setText(task.getStatus().name());
-        timeSpent.setText("(SPENT: " + task.getTimeSpent().toString() + ")");
+        timeSpent.setText("(time spent: " + task.getTimeSpent().toString() + ")");
         //TODO add in task PRIORITY
-        dateTime.setText(task.getDateTime().getDisplayValue());
         task.getTags().stream()
             .sorted(Comparator.comparing(tag -> tag.tagName))
             .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
@@ -83,7 +81,7 @@ public class TaskCard extends UiPart<Region> {
         }
 
         // state check
-        TaskCard card = (TaskCard) other;
+        CalendarTaskCard card = (CalendarTaskCard) other;
         return id.getText().equals(card.id.getText())
                    && task.equals(card.task);
     }
