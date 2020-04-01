@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.jelphabot.model.task.Priority;
 import seedu.jelphabot.model.task.Task;
 
 /**
@@ -39,8 +40,6 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label timeSpent;
     @FXML
-    private Label priority;
-    @FXML
     private FlowPane tags;
     @FXML
     private Label dateTime;
@@ -48,23 +47,24 @@ public class TaskCard extends UiPart<Region> {
     public TaskCard(Task task, int displayedIndex) {
         super(FXML);
         this.task = task;
-        populateChildElements(task, displayedIndex);
-    }
 
-    /**
-     * Populates the child elements in the taskCard
-     *
-     * @param task           the task to populate.
-     * @param displayedIndex the indicated index.
-     */
-    private void populateChildElements(Task task, int displayedIndex) {
+        // Populate base elements
         id.setText(displayedIndex + ". ");
         description.setText(task.getDescription().fullDescription);
+        // Set priority settings
+        if (task.getPriority().equals(Priority.HIGH)) {
+            description.setId("highPriority");
+            moduleCode.setId("highPriority");
+        } else if (task.getPriority() == Priority.LOW) {
+            description.setId("lowPriority");
+            moduleCode.setId("lowPriority");
+        } else {
+            description.setId("normalPriority");
+            moduleCode.setId("normalPriority");
+        }
         moduleCode.setText(task.getModuleCode().value);
         status.setText(task.getStatus().name());
-        String spent = task.getTimeSpent().toString();
-        timeSpent.setText("(SPENT: " + spent + ")");
-        //TODO add in task PRIORITY
+        timeSpent.setText("(SPENT: " + task.getTimeSpent().toString() + ")");
         dateTime.setText(task.getDateTime().getDisplayValue());
         task.getTags().stream()
             .sorted(Comparator.comparing(tag -> tag.tagName))
