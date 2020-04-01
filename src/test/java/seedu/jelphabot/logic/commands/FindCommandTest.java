@@ -25,6 +25,7 @@ import seedu.jelphabot.model.task.predicates.DescriptionContainsKeywordsPredicat
  * {@code FindCommand}.
  */
 public class FindCommandTest {
+
     private Model model = new ModelManager(getTypicalJelphaBot(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalJelphaBot(), new UserPrefs());
 
