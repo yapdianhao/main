@@ -23,8 +23,8 @@ public interface GroupedTaskList extends Iterable<ObservableList<Task>> {
      * constructor.
      */
     enum Grouping {
-        DATE("DATE_GROUPING", GroupedByDateTaskList::new),
-        MODULE("MODULE_GROUPING", GroupedByModuleTaskList::new);
+        DATE("date", GroupedByDateTaskList::new),
+        MODULE("module", GroupedByModuleTaskList::new);
 
         public final String commandArgument;
         private final Function<ObservableList<Task>, GroupedTaskList> constructor;
