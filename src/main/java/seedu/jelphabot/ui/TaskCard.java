@@ -62,7 +62,8 @@ public class TaskCard extends UiPart<Region> {
         description.setText(task.getDescription().fullDescription);
         moduleCode.setText(task.getModuleCode().value);
         status.setText(task.getStatus().name());
-        timeSpent.setText("(SPENT: " + task.getTimeSpent().toString() + ")");
+        String spent = task.getTimeSpent().toString();
+        timeSpent.setText("(SPENT: " + spent + ")");
         //TODO add in task PRIORITY
         dateTime.setText(task.getDateTime().getDisplayValue());
         task.getTags().stream()

@@ -1,5 +1,6 @@
 package seedu.jelphabot.model.productivity;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.jelphabot.commons.util.DateUtil.getDueThisWeekPredicate;
 import static seedu.jelphabot.commons.util.DateUtil.getOverduePredicate;
 
@@ -17,6 +18,7 @@ public class Productivity {
     private TimeSpentToday timeSpentToday;
 
     public Productivity(ObservableList<Task> taskList) {
+        requireNonNull(taskList);
         this.taskList = taskList;
         createProductivites();
     }
