@@ -22,7 +22,7 @@ public class ReminderPopup extends UiPart<Stage> {
 
     public static final String FXML = "ReminderPopup.fxml";
 
-    public static final String REMINDERS_STRING = "Here are your tasks that due soon!";
+    public static final String REMINDERS_STRING = "Here are your tasks that are due soon!";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -61,6 +61,7 @@ public class ReminderPopup extends UiPart<Stage> {
             logger.info("added reminder");
             taskList.add(task);
         }
+        logger.info("taskList size " + taskList.size());
         taskListPanel = new TaskListPanel(taskList);
         taskListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
 
@@ -80,6 +81,7 @@ public class ReminderPopup extends UiPart<Stage> {
      */
     void show() {
         logger.info("Showing reminderStage");
+        logger.info("reminded size: " + taskList.size());
         if (taskList.size() == 0) {
             return;
         } else {

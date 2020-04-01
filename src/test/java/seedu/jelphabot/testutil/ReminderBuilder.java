@@ -37,24 +37,24 @@ public class ReminderBuilder {
     /**
      * Sets the {@code Index} of the {@code Reminder} that we are building.
      */
-    public ReminderBuilder withIndex(int index) {
-        this.index = Index.fromOneBased(index);
+    public ReminderBuilder withIndex(String index) {
+        this.index = Index.fromZeroBased(Integer.parseInt(index));
         return this;
     }
 
     /**
      * Sets the {@code ReminderDay} of the {@code Reminder} that we are building.
      */
-    public ReminderBuilder withReminderDay(ReminderDay reminderDay) {
-        this.reminderDay = reminderDay;
+    public ReminderBuilder withReminderDay(String reminderDay) {
+        this.reminderDay = new ReminderDay(Integer.parseInt(reminderDay));
         return this;
     }
 
     /**
      * Sets the {@code ReminderHour} of the {@code Reminder} that we are building.
      */
-    public ReminderBuilder withReminderHour(ReminderHour reminderHour) {
-        this.reminderHour = reminderHour;
+    public ReminderBuilder withReminderHour(String reminderHour) {
+        this.reminderHour = new ReminderHour(Integer.parseInt(reminderHour));
         return this;
     }
 

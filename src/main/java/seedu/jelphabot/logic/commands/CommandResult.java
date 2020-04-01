@@ -16,29 +16,19 @@ public class CommandResult {
      */
     private final boolean showHelp;
 
-    /** The application should exit. */
+    /**
+     * The application should exit.
+     */
     private final boolean exit;
-
-    /** The application should switch to the productivity tab. */
-    private final boolean productivity;
-
-    /** The application should switch to the productivity tab. */
-    private final boolean calendar;
-
-    /** the application should switch to the summary tab. */
-    private final boolean summary;
+    private SwitchTab toSwitch = SwitchTab.STAY_ON_CURRENT;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit,
-        boolean productivity, boolean calendar, boolean summary) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
-        this.productivity = productivity;
-        this.calendar = calendar;
-        this.summary = summary;
     }
 
     /**
@@ -46,7 +36,16 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, false, false, false);
+        this(feedbackToUser, false, false);
+    }
+
+    /**
+     * The application should switch to the Task List tab
+     * @return Sets the "switch to window" flag to Task List.
+     */
+    public CommandResult isShowTaskList() {
+        this.toSwitch = SwitchTab.TASK_LIST;
+        return this;
     }
 
     public String getFeedbackToUser() {
@@ -61,16 +60,35 @@ public class CommandResult {
         return exit;
     }
 
-    public boolean isProductivity() {
-        return productivity;
+    /**
+     * The application should switch to the productivity tab.
+     * @return Sets the "toSwitch" flag to Productivity.
+     */
+    public CommandResult isShowProductivity() {
+        this.toSwitch = SwitchTab.PRODUCTIVITY;
+        return this;
     }
 
-    public boolean isCalendar() {
-        return calendar;
+    /**
+     * The application should switch to the Calendar tab.
+     * @return Sets the "toSwitch" flag to Calendar.
+     */
+    public CommandResult isShowCalendar() {
+        this.toSwitch = SwitchTab.CALENDAR;
+        return this;
     }
 
-    public boolean isSummary() {
-        return summary;
+    /**
+     * The application should switch to the Summary tab.
+     * @return Sets the "toSwitch" flag to Summary.
+     */
+    public CommandResult isShowSummary() {
+        this.toSwitch = SwitchTab.SUMMARY;
+        return this;
+    }
+
+    public SwitchTab getTabSwitch() {
+        return toSwitch;
     }
 
     @Override
@@ -86,15 +104,25 @@ public class CommandResult {
 
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
-                && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit
-                && productivity == otherCommandResult.productivity && summary == otherCommandResult.summary
-                && calendar == otherCommandResult.calendar;
+                   && showHelp == otherCommandResult.showHelp
+                   && exit == otherCommandResult.exit
+                   && toSwitch == otherCommandResult.toSwitch;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit, productivity, summary, calendar);
+        return Objects.hash(feedbackToUser, showHelp, exit, toSwitch);
+    }
+
+    /**
+     * Enum representing switch that indicates if the command should switch to another window.
+     */
+    public enum SwitchTab {
+        CALENDAR,
+        PRODUCTIVITY,
+        SUMMARY,
+        TASK_LIST,
+        STAY_ON_CURRENT
     }
 
 }
