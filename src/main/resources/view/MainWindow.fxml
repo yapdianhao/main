@@ -53,7 +53,7 @@
                             <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <SplitPane fx:id="calendarPane" dividerPositions="0.475" prefHeight="376.0"
+                              <SplitPane fx:id="calendarPane" dividerPositions="0.53" prefHeight="376.0"
                                          prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                 <items>
                                   <AnchorPane minHeight="0.0" minWidth="0.0">
