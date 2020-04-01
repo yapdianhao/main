@@ -6,6 +6,8 @@ import javafx.collections.ObservableList;
 import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.model.task.TimeSpent;
 
+import static seedu.jelphabot.commons.util.CollectionUtil.requireAllNonNull;
+
 /**
  * Represents the user's productivity for the day
  */
@@ -14,6 +16,7 @@ public class TimeSpentToday {
     private ObservableList<Task> tasksDueThisWeek;
 
     public TimeSpentToday(ObservableList<Task> tasksDueToday, ObservableList<Task> tasksDueThisWeek) {
+        requireAllNonNull(tasksDueToday, tasksDueThisWeek);
         this.tasksDueToday = tasksDueToday;
         this.tasksDueThisWeek = tasksDueThisWeek;
     }

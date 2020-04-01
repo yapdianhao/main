@@ -3,6 +3,7 @@ package seedu.jelphabot.model.productivity;
 import static seedu.jelphabot.commons.core.Messages.MESSAGE_COMPLIMENT;
 import static seedu.jelphabot.commons.core.Messages.MESSAGE_CRITICISM;
 import static seedu.jelphabot.commons.core.Messages.MESSAGE_ENCOURAGEMENT;
+import static seedu.jelphabot.commons.util.CollectionUtil.requireAllNonNull;
 
 import javafx.collections.ObservableList;
 import seedu.jelphabot.model.task.Status;
@@ -20,6 +21,7 @@ public class TasksCompleted {
 
     public TasksCompleted(ObservableList<Task> tasksDueToday, ObservableList<Task> tasksDueThisWeek,
         ObservableList<Task> overdueTasks) {
+        requireAllNonNull(tasksDueToday, tasksDueThisWeek, overdueTasks);
         this.tasksDueToday = tasksDueToday;
         this.tasksDueThisWeek = tasksDueThisWeek;
         this.overdueTasks = overdueTasks;
