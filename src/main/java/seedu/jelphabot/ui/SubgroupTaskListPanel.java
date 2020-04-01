@@ -17,6 +17,7 @@ import seedu.jelphabot.model.task.Task;
  * Tasks are further sorted into pinned, dueToday, dueThisWeek, dueSomeday
  */
 public class SubgroupTaskListPanel extends UiPart<Region> {
+
     private static final String FXML = "SubgroupTaskListPanel.fxml";
     private static final int PREF_CELL_HEIGHT = 100;
 

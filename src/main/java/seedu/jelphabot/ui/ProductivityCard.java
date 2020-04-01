@@ -5,12 +5,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+
 import seedu.jelphabot.model.productivity.Productivity;
 
 /**
  * An UI component that displays information of a {@code Productivity}.
  */
 public class ProductivityCard extends UiPart<Region> {
+
     private static final String FXML = "ProductivityCard.fxml";
 
     public final Productivity productivity;

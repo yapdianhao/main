@@ -14,6 +14,7 @@ import seedu.jelphabot.commons.util.FileUtil;
  * Represents the parsed command-line parameters given to the application.
  */
 public class AppParameters {
+
     private static final Logger logger = LogsCenter.getLogger(AppParameters.class);
 
     private Path configPath;

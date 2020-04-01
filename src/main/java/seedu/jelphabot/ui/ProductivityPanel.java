@@ -15,6 +15,7 @@ import seedu.jelphabot.model.productivity.Productivity;
  * The Productivity Panel. Provides the basic application layout of productivity of tasks.
  */
 public class ProductivityPanel extends UiPart<Region> {
+
     private static final String FXML = "ProductivityPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(ProductivityPanel.class);
 

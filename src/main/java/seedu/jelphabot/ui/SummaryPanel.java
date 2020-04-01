@@ -16,6 +16,7 @@ import seedu.jelphabot.model.task.Task;
  * The Summary Panel. Provides the basic application layout of the summary of tasks due today,
  */
 public class SummaryPanel extends UiPart<Region> {
+
     private static final String FXML = "SummaryPanel.fxml";
 
     private static final int PREF_CELL_HEIGHT = 210;

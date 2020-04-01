@@ -45,7 +45,7 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private GroupedTaskListPanel taskListPanel;
-    private TaskListPanel calendarTaskListPanel;
+    private CalendarTaskListPanel calendarTaskListPanel;
     private ProductivityPanel productivityPanel;
     private ResultDisplay resultDisplay;
     private SummaryPanel summaryPanel;
@@ -152,7 +152,8 @@ public class MainWindow extends UiPart<Stage> {
         );
         taskListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
 
-        calendarTaskListPanel = new TaskListPanel(logic.getFilteredCalendarTaskList());
+        //update getFilteredCalendarTaskList
+        calendarTaskListPanel = new CalendarTaskListPanel(logic.getFilteredCalendarTaskList());
         logic.updateFilteredCalendarTaskList(DateUtil.getDueTodayPredicate());
         calendarTaskListPanelPlaceholder.getChildren().add(calendarTaskListPanel.getRoot());
 
