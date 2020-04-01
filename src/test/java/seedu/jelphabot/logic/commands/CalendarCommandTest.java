@@ -19,6 +19,7 @@ import seedu.jelphabot.model.task.predicates.TaskDueWithinDayPredicate;
  * {@code CalendarCommand}.
  */
 public class CalendarCommandTest {
+
     private Model model = new ModelManager(getTypicalJelphaBot(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalJelphaBot(), new UserPrefs());
 

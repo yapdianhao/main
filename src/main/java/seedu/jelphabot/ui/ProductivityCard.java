@@ -12,6 +12,7 @@ import seedu.jelphabot.model.productivity.Productivity;
  * An UI component that displays information of a {@code Productivity}.
  */
 public class ProductivityCard extends UiPart<Region> {
+
     private static final String FXML = "ProductivityCard.fxml";
 
     public final Productivity productivity;

@@ -9,6 +9,7 @@ import seedu.jelphabot.model.Model;
 import seedu.jelphabot.model.ModelManager;
 
 public class HelpCommandTest {
+
     private Model model = new ModelManager();
     private Model expectedModel = new ModelManager();
 
