@@ -58,7 +58,7 @@ public class ReminderTest {
         // different type -> returns false
         assertNotEquals(5, ASSESSMENT_REMINDER);
 
-        // different task -> returns false
+        // different reminder -> returns false
         assertNotEquals(ASSESSMENT_REMINDER, BOOK_REPORT_REMINDER);
 
         // different reminder day -> returns false
