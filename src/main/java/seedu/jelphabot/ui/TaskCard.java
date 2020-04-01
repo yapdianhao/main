@@ -48,14 +48,25 @@ public class TaskCard extends UiPart<Region> {
         super(FXML);
         this.task = task;
 
+        // Populate base elements
         id.setText(displayedIndex + ". ");
         description.setText(task.getDescription().fullDescription);
+        // Set priority settings
         if (task.getPriority().equals(Priority.HIGH)) {
             description.setId("highPriority");
+            moduleCode.setId("highPriority");
+            Label important = new Label("Important");
+            tags.getChildren().add(important);
+            important.setId("tagsImportant");
         } else if (task.getPriority() == Priority.LOW) {
             description.setId("lowPriority");
+            moduleCode.setId("lowPriority");
+            Label optional = new Label("Optional");
+            tags.getChildren().add(optional);
+            optional.setId("tagsOptional");
         } else {
             description.setId("normalPriority");
+            moduleCode.setId("normalPriority");
         }
         moduleCode.setText(task.getModuleCode().value);
         status.setText(task.getStatus().name());
