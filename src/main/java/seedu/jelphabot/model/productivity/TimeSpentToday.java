@@ -1,12 +1,12 @@
 package seedu.jelphabot.model.productivity;
 
+import static seedu.jelphabot.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.time.Duration;
 
 import javafx.collections.ObservableList;
 import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.model.task.TimeSpent;
-
-import static seedu.jelphabot.commons.util.CollectionUtil.requireAllNonNull;
 
 /**
  * Represents the user's productivity for the day
