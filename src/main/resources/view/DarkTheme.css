@@ -357,3 +357,22 @@
     -fx-border-width: 1;
     -fx-background-color: derive(cornsilk, 20%);
 }
+
+#highPriority {
+    -fx-font-size: 14pt;
+    -fx-font-family: "Segoe UI Bold";
+    -fx-font-weight: bolder;
+}
+
+#normalPriority {
+    -fx-font-size: 14pt;
+    -fx-font-family: "Segoe UI";
+}
+
+#lowPriority {
+    -fx-font-size: 14pt;
+    -fx-font-family: "Segoe UI Light";
+    -fx-font-style: italic;
+    -fx-text-fill: #cdcdcd;
+}
+
