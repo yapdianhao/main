@@ -14,8 +14,8 @@ public class ProductivityCommandTest {
 
     @Test
     public void execute_productivity_success() {
-        CommandResult expectedCommandResult = new CommandResult(MESSAGE_SWITCH_PANEL_ACKNOWLEDGEMENT, false,
-            false, true, false, false);
+        CommandResult expectedCommandResult =
+            new CommandResult(MESSAGE_SWITCH_PANEL_ACKNOWLEDGEMENT).isShowProductivity();
         assertCommandSuccess(new ProductivityCommand(), model, expectedCommandResult, expectedModel);
     }
 }

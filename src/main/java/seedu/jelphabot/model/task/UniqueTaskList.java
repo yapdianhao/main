@@ -128,7 +128,7 @@ public class UniqueTaskList implements Iterable<Task> {
     /**
      * Returns true if {@code tasks} contains only unique tasks.
      */
-    private boolean tasksAreUnique(List<Task> tasks) {
+    private static boolean tasksAreUnique(List<Task> tasks) {
         for (int i = 0; i < tasks.size() - 1; i++) {
             for (int j = i + 1; j < tasks.size(); j++) {
                 if (tasks.get(i).isSameTask(tasks.get(j))) {

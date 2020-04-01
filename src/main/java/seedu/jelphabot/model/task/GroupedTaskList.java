@@ -1,5 +1,6 @@
 package seedu.jelphabot.model.task;
 
+import java.util.Iterator;
 import java.util.function.Function;
 
 import javafx.collections.ObservableList;
@@ -14,6 +15,8 @@ public interface GroupedTaskList extends Iterable<ObservableList<Task>> {
     static GroupedTaskList makeGroupedTaskList(ObservableList<Task> tasks, Grouping group) {
         return group.construct(tasks);
     }
+
+    Iterator<String> getGroupNames();
 
     /**
      * GroupedTaskList.Groupings define a set of fixed enum mappings from the commandArgument to the corresponding

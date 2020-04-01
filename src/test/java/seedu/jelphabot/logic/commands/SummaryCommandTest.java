@@ -13,8 +13,8 @@ public class SummaryCommandTest {
 
     @Test
     public void execute_summary_success() {
-        CommandResult expectedCommandResult = new CommandResult(SummaryCommand.MESSAGE_SWITCH_PANEL_ACKNOWLEDGEMENT,
-            false, false, false, false, true);
+        CommandResult expectedCommandResult =
+            new CommandResult(SummaryCommand.MESSAGE_SWITCH_PANEL_ACKNOWLEDGEMENT).isShowSummary();
         assertCommandSuccess(new SummaryCommand(), model, expectedCommandResult, expectedModel);
     }
 }

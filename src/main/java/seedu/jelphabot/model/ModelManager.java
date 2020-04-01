@@ -115,8 +115,6 @@ public class ModelManager implements Model {
         this.readOnlyJelphaBot.resetData(readOnlyJelphaBot);
     }
 
-
-
     @Override
     public boolean hasTask(Task task) {
         requireNonNull(task);
