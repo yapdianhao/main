@@ -48,8 +48,8 @@ public class UiManager implements Ui {
             mainWindow.fillInnerParts();
 
             reminderPopup = new ReminderPopup(reminderStage, logic);
-            reminderPopup.show();
             reminderPopup.fillWindow();
+            reminderPopup.show();
 
             //show morningCallWindow
             //morningCallWindow = new MorningCallWindow(morningCallStage, logic);
