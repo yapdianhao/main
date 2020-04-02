@@ -35,7 +35,7 @@ public class MainWindow extends UiPart<Stage> {
     private static final String FXML = "MainWindow.fxml";
     private static CalendarPanel calendarPanel;
     private static boolean firstStart = true;
-    private static final String WELCOME_STRING = "Welcome to JelphaBot! Here are the tasks that you have due today!\n"
+    private static final String WELCOME_STRING = "Welcome to JelphaBot!\n"
                                                      + "To go back to the list of your tasks, type list!";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
@@ -264,7 +264,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void handleTaskList(GroupedTaskList.Category sublistCategory) {
-        mainWindowTabPane.getSelectionModel().select(0);
+        mainWindowTabPane.getSelectionModel().select(1);
         GroupedTaskList groupedTasks = logic.getGroupedTaskList(sublistCategory);
         taskListPanel = new GroupedTaskListPanel(logic.getPinnedTaskList(), groupedTasks);
         taskListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());

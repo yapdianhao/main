@@ -7,10 +7,10 @@ import seedu.jelphabot.model.task.Task;
 /**
  * Gives an overview of the tasks that are due today.
  */
-public class TasksDueToday {
+public class TasksIncompleteDueToday {
     private ObservableList<Task> tasksDueToday;
 
-    public TasksDueToday(ObservableList<Task> tasksDueToday) {
+    public TasksIncompleteDueToday(ObservableList<Task> tasksDueToday) {
         requireAllNonNull(tasksDueToday);
         this.tasksDueToday = tasksDueToday;
     }
