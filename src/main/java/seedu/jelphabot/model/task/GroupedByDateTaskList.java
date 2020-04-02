@@ -6,7 +6,6 @@ import static seedu.jelphabot.commons.util.DateUtil.getDueThisWeekPredicate;
 import static seedu.jelphabot.commons.util.DateUtil.getDueTodayPredicate;
 import static seedu.jelphabot.commons.util.DateUtil.getOverduePredicate;
 
-import java.util.Iterator;
 import java.util.function.Predicate;
 
 import javafx.beans.binding.NumberBinding;
@@ -66,7 +65,7 @@ public class GroupedByDateTaskList implements GroupedTaskList {
 
     @Override
     public ObservableList<SubGroupTaskList> getList() {
-        return dueDateTaskLists;
+        return dueDateTaskLists.filtered(sublist -> !sublist.isEmpty());
     }
 
     @Override
@@ -74,10 +73,10 @@ public class GroupedByDateTaskList implements GroupedTaskList {
         return sizeBinding.intValue();
     }
 
-    @Override
-    public Iterator<SubGroupTaskList> iterator() {
-        return dueDateTaskLists.iterator();
-    }
+    // @Override
+    // public Iterator<SubGroupTaskList> iterator() {
+    //     return dueDateTaskLists.iterator();
+    // }
 
     @Override
     public Task get(int id) {

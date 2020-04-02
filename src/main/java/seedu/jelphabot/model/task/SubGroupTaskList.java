@@ -3,6 +3,7 @@ package seedu.jelphabot.model.task;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.IntegerBinding;
 import javafx.beans.binding.NumberBinding;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 
 /**
@@ -37,11 +38,19 @@ public class SubGroupTaskList {
         return size.intValue();
     }
 
+    public boolean isEmpty() {
+        return taskList.isEmpty();
+    }
+
     public NumberBinding sizeBinding() {
         return size;
     }
 
     public NumberBinding startIndexBinding() {
         return startIndex;
+    }
+
+    public void addListener(ListChangeListener<Task> deleteOnEmptyList) {
+        taskList.addListener(deleteOnEmptyList);
     }
 }
