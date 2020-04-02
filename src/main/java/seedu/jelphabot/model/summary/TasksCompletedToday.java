@@ -16,5 +16,19 @@ public class TasksCompletedToday {
         this.tasksCompletedToday = tasksCompletedToday;
     }
 
-    //TODO: implement method to get the tasks that are completed today
+    public String getTasksCompletedTodayString() {
+        // For each of the tasks, arrange them in the format example:
+        // [ ] (CS3230) Assignment 1
+        StringBuilder sb = new StringBuilder();
+
+        for (Task task: tasksCompletedToday) {
+            String moduleCodeString = task.getModuleCode().toString();
+            String descriptionString = task.getDescription().toString();
+            String toAppend = String.format("[ ] (%s) %s\n", moduleCodeString, descriptionString);
+            sb.append(toAppend);
+        }
+
+        return sb.toString();
+    }
+
 }

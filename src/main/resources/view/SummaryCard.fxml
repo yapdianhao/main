@@ -3,11 +3,16 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox prefWidth="363.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
+<VBox xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox prefHeight="33.0" prefWidth="363.0">
+      <VBox maxHeight="-Infinity" minHeight="85" prefWidth="195.0" prefHeight="140.0">
          <children>
-            <Label alignment="CENTER" text="Welcome to JelphaBot!" />
+            <Label prefHeight="24.0" prefWidth="155.0" styleClass="cell_big_label" alignment="CENTER"
+                   text="Welcome to JelphaBot!">
+                <minWidth>
+                    <Region fx:constant="USE_PREF_SIZE"/>
+                </minWidth>
+            </Label>
             <Label fx:id="breakline" text="\$breakline" />
          </children></VBox>
       <VBox prefHeight="200.0" prefWidth="363.0">
