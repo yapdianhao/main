@@ -155,8 +155,6 @@ public class ModelManager implements Model {
         readOnlyJelphaBot.addReminder(reminder);
     }
 
-
-
     @Override
     public void setTask(Task target, Task editedTask) {
         requireAllNonNull(target, editedTask);
@@ -198,7 +196,11 @@ public class ModelManager implements Model {
         if (lastShownList != null && lastShownList.getCategory() == category) {
             return lastShownList;
         } else {
-            lastShownList = GroupedTaskList.makeGroupedTaskList(getFilteredTaskList(), category, getPinnedTaskList());
+            lastShownList = GroupedTaskList.makeGroupedTaskList(
+                getFilteredTaskList(),
+                category,
+                getPinnedTaskList()
+            );
             return lastShownList;
         }
     }

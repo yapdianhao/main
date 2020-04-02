@@ -91,7 +91,7 @@ public class DoneCommandTest {
 
     @Test // Test against Category.MODULE as tasks that are overdue and completed are not shown.
     public void execute_taskAlreadyCompletedFilteredList_failure() {
-        showTaskAtIndex(model, INDEX_FIRST_TASK);
+        showTaskAtIndex(model, INDEX_FIRST_TASK, GroupedTaskList.Category.MODULE);
 
         Task taskInList =
             model.getGroupedTaskList(GroupedTaskList.Category.MODULE).get(INDEX_FIRST_TASK.getZeroBased());
