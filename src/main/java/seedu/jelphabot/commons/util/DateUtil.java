@@ -4,8 +4,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.function.Predicate;
 
-import seedu.jelphabot.model.task.predicates.FilterTaskByDatePredicate;
+import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.model.task.predicates.TaskDueAfterDatePredicate;
 import seedu.jelphabot.model.task.predicates.TaskDueBeforeDatePredicate;
 
@@ -68,14 +69,14 @@ public class DateUtil {
     /**
      * @return a predicate which filters tasks with a due date before the instant the method was called.
      */
-    public static FilterTaskByDatePredicate getOverduePredicate() {
+    public static Predicate<Task> getOverduePredicate() {
         return new TaskDueBeforeDatePredicate();
     }
 
     /**
      * @return a predicate which filters tasks with a due date the same day as the instant the method was called.
      */
-    public static FilterTaskByDatePredicate getDueTodayPredicate() {
+    public static Predicate<Task> getDueTodayPredicate() {
         return new TaskDueAfterDatePredicate(getDateToday()).and(new TaskDueBeforeDatePredicate(getDateTomorrow()));
     }
 
@@ -83,7 +84,7 @@ public class DateUtil {
      * @return a predicate which filters tasks with a due date between one and seven days after the instant the
      * method was called.
      */
-    public static FilterTaskByDatePredicate getDueThisWeekPredicate() {
+    public static Predicate<Task> getDueThisWeekPredicate() {
         return new TaskDueAfterDatePredicate(getDateTomorrow()).and(new TaskDueBeforeDatePredicate(getDateNextWeek()));
     }
 
@@ -91,7 +92,7 @@ public class DateUtil {
      * @return a predicate which filters tasks with a due date more than seven days after the instant the
      * method was called.
      */
-    public static FilterTaskByDatePredicate getDueSomedayPredicate() {
+    public static Predicate<Task> getDueSomedayPredicate() {
         return new TaskDueAfterDatePredicate(getDateNextWeek());
     }
 }
