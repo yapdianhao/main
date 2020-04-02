@@ -11,6 +11,7 @@ import javafx.scene.layout.Region;
 import seedu.jelphabot.commons.core.LogsCenter;
 import seedu.jelphabot.model.productivity.Productivity;
 
+// TODO: might refactor out to different productivity cards.
 /**
  * The Productivity Panel. Provides the basic application layout of productivity of tasks.
  */
