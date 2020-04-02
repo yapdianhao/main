@@ -1,5 +1,6 @@
 package seedu.jelphabot.model.task;
 
+import javafx.beans.binding.Bindings;
 import javafx.collections.ObservableList;
 
 /**
@@ -27,6 +28,6 @@ public class SubGroupTaskList {
     }
 
     public int size() {
-        return taskList.size();
+        return Bindings.size(taskList).getValue();
     }
 }

@@ -33,7 +33,7 @@ public class ModelManager implements Model {
     private final FilteredList<Task> filteredCalendarTasks;
     private final ProductivityList productivityList;
 
-    private GroupedTaskList lastShownList = null;
+    private GroupedTaskList lastShownList;
 
     /**
      * Initializes a ModelManager with the given readOnlyJelphaBot and userPrefs.
@@ -50,6 +50,7 @@ public class ModelManager implements Model {
         filteredReminders = new FilteredList<>(this.readOnlyJelphaBot.getReminderList());
         filteredCalendarTasks = new FilteredList<>(this.readOnlyJelphaBot.getTaskList());
         productivityList = new ProductivityList();
+        lastShownList = getGroupedTaskList(GroupedTaskList.Category.DATE);
     }
 
     public ModelManager() {

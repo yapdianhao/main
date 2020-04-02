@@ -12,6 +12,7 @@ import static seedu.jelphabot.logic.commands.CommandTestUtil.assertCommandSucces
 import static seedu.jelphabot.logic.commands.CommandTestUtil.showTaskAtIndex;
 import static seedu.jelphabot.testutil.TypicalIndexes.INDEX_FIRST_TASK;
 import static seedu.jelphabot.testutil.TypicalIndexes.INDEX_SECOND_TASK;
+import static seedu.jelphabot.testutil.TypicalIndexes.INDEX_THIRD_TASK;
 import static seedu.jelphabot.testutil.TypicalTasks.getTypicalJelphaBot;
 
 import org.junit.jupiter.api.Test;
@@ -124,7 +125,7 @@ public class EditCommandTest {
 
     @Test
     public void execute_invalidTaskIndexUnfilteredList_failure() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredTaskList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(model.getLastShownList().size() + 1);
         EditTaskDescriptor descriptor =
             new EditTaskDescriptorBuilder().withDescription(VALID_DESCRIPTION_TUTORIAL).build();
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
@@ -139,7 +140,7 @@ public class EditCommandTest {
     @Test
     public void execute_invalidTaskIndexFilteredList_failure() {
         showTaskAtIndex(model, INDEX_FIRST_TASK);
-        Index outOfBoundIndex = INDEX_SECOND_TASK;
+        Index outOfBoundIndex = INDEX_THIRD_TASK;
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getJelphaBot().getTaskList().size());
 

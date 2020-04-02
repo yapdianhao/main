@@ -41,7 +41,7 @@ public class GroupedByDateTaskList implements GroupedTaskList {
         dueDateTaskLists.add(new SubGroupTaskList("isDueThisWeek", taskList.filtered(isDueThisWeek)));
         dueDateTaskLists.add(new SubGroupTaskList("isDueSomeday", taskList.filtered(isDueSomeday)));
 
-        NumberBinding tempSize = Bindings.createIntegerBinding(pinnedTasks::size);
+        NumberBinding tempSize = Bindings.createIntegerBinding(() -> 0);
         for (SubGroupTaskList subList : dueDateTaskLists) {
             tempSize = tempSize.add(Bindings.size(subList.getList()));
         }

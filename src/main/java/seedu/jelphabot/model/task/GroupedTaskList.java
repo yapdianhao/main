@@ -29,7 +29,8 @@ public interface GroupedTaskList extends Iterable<SubGroupTaskList>, ViewTaskLis
         public final String commandArgument;
         private final BiFunction<ObservableList<Task>, PinnedTaskList, GroupedTaskList> constructor;
 
-        Category(String commandArgument, BiFunction<ObservableList<Task>, PinnedTaskList, GroupedTaskList> groupedTaskListConstructor) {
+        Category(String commandArgument,
+            BiFunction<ObservableList<Task>, PinnedTaskList, GroupedTaskList> groupedTaskListConstructor) {
             this.commandArgument = commandArgument;
             this.constructor = groupedTaskListConstructor;
         }
