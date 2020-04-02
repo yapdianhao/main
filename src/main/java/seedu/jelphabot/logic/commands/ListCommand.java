@@ -11,6 +11,9 @@ import seedu.jelphabot.model.Model;
 public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
+    public static final String COMMAND_SHORTCUT = ":l";
+    public static final String COMMAND_SHORTCUT_TWO = ":L";
+
 
     public static final String DATE_GROUPING = "date";
     public static final String MODULE_GROUPING = "module";

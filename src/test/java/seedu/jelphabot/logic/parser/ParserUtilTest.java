@@ -81,7 +81,7 @@ public class ParserUtilTest {
     // module code tests
     @Test
     public void parseModuleCode_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseModuleCode((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseModuleCode(null));
     }
 
     @Test
@@ -105,7 +105,7 @@ public class ParserUtilTest {
     // datetime tests
     @Test
     public void parseDateTime_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseDateTime((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseDateTime(null));
     }
 
     @Test
