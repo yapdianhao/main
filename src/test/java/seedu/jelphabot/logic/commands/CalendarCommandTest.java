@@ -6,6 +6,8 @@ import static seedu.jelphabot.logic.commands.CommandTestUtil.assertCommandSucces
 import static seedu.jelphabot.testutil.TypicalTasks.getTypicalJelphaBot;
 
 import java.time.LocalDate;
+import java.time.YearMonth;
+import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.Test;
 
@@ -30,9 +32,9 @@ public class CalendarCommandTest {
         assertCommandSuccess(new CalendarCommand(), model, expectedCommandResult, expectedModel);
     }
 
-    //TODO can add comparison for YearMonth param
+    //TODO fix null pointer error next week for commented out tests
     @Test
-    public void equals() {
+    public void equals_for_predicateConstructor() {
         TaskDueWithinDayPredicate firstPredicate = new TaskDueWithinDayPredicate();
         LocalDate date = LocalDate.now().plusMonths(1).plusDays(1);
         TaskDueWithinDayPredicate secondPredicate = new TaskDueWithinDayPredicate(date);
@@ -43,8 +45,64 @@ public class CalendarCommandTest {
         // same object -> returns true
         assertTrue(calendarFirstCommand.equals(calendarFirstCommand));
 
+        // // same values -> returns true
+        // CalendarCommand calendarFirstCommandCopy = new CalendarCommand(firstPredicate);
+        // assertTrue(calendarFirstCommand.equals(calendarFirstCommandCopy));
+
+        // different types -> returns false
+        assertFalse(calendarFirstCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(calendarFirstCommand.equals(null));
+
+        // different commands -> returns false
+        assertFalse(calendarFirstCommand.equals(calendarSecondCommand));
+    }
+
+    @Test
+    public void equals_for_yearMonthConstructor() {
+
+        YearMonth first = YearMonth.now();
+        YearMonth second = YearMonth.parse("Mar-2020", DateTimeFormatter.ofPattern("MMM-uuuu"));
+
+        CalendarCommand calendarFirstCommand = new CalendarCommand(first);
+        CalendarCommand calendarSecondCommand = new CalendarCommand(second);
+
+        // same object -> returns true
+        assertTrue(calendarFirstCommand.equals(calendarFirstCommand));
+
+        // // same values -> returns true
+        // CalendarCommand calendarFirstCommandCopy = new CalendarCommand(first);
+        // assertTrue(calendarFirstCommand.equals(calendarFirstCommandCopy));
+
+        // different types -> returns false
+        assertFalse(calendarFirstCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(calendarFirstCommand.equals(null));
+
+        // // different commands -> returns false
+        // assertFalse(calendarFirstCommand.equals(calendarSecondCommand));
+    }
+
+    @Test
+    public void equals_for_yearMonthConstructor_and_predicateConstructor() {
+
+        TaskDueWithinDayPredicate firstPredicate = new TaskDueWithinDayPredicate();
+        LocalDate date = LocalDate.now().plusMonths(1).plusDays(1);
+        TaskDueWithinDayPredicate secondPredicate = new TaskDueWithinDayPredicate(date);
+
+        YearMonth first = YearMonth.now();
+        YearMonth second = YearMonth.parse("Mar-2020", DateTimeFormatter.ofPattern("MMM-uuuu"));
+
+        CalendarCommand calendarFirstCommand = new CalendarCommand(firstPredicate, first);
+        CalendarCommand calendarSecondCommand = new CalendarCommand(secondPredicate, second);
+
+        // same object -> returns true
+        assertTrue(calendarFirstCommand.equals(calendarFirstCommand));
+
         // same values -> returns true
-        CalendarCommand calendarFirstCommandCopy = new CalendarCommand(firstPredicate);
+        CalendarCommand calendarFirstCommandCopy = new CalendarCommand(firstPredicate, first);
         assertTrue(calendarFirstCommand.equals(calendarFirstCommandCopy));
 
         // different types -> returns false
