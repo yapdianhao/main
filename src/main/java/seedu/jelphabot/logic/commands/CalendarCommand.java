@@ -112,7 +112,8 @@ public class CalendarCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                    || (other instanceof CalendarCommand // instanceof handles nulls
-                           && predicate.equals(((CalendarCommand) other).predicate)); // state check
+                           && predicate.equals(((CalendarCommand) other).predicate)
+                           && yearMonth.equals(((CalendarCommand) other).yearMonth)); // state check
     }
 
 }
