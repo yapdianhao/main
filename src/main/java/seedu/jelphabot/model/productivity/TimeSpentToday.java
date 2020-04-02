@@ -31,7 +31,7 @@ public class TimeSpentToday {
 
     @Override
     public String toString() {
-        return String.format("Tasks due today: %s.\nTasks due in next 6 days: %s.", getTimeSpent(tasksDueToday),
+        return String.format("Tasks due today: %s.\nTasks due in next 7 days: %s.", getTimeSpent(tasksDueToday),
             getTimeSpent(tasksDueThisWeek));
     }
 }

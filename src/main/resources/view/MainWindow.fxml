@@ -8,7 +8,7 @@
 <?import javafx.stage.Stage?>
 <?import java.net.URL?>
 
-<fx:root minHeight="600" minWidth="450" onCloseRequest="#handleExit" title="JelphaBot" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root minHeight="600" minWidth="450" onCloseRequest="#handleExit" title="JelphaBot" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <icons>
         <Image url="@/images/address_book_32.png" />
     </icons>
@@ -32,6 +32,23 @@
                 </MenuBar>
                 <TabPane fx:id="mainWindowTabPane" maxHeight="-Infinity" minHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
                     <tabs>
+                        <Tab>
+                            <content>
+                                <VBox fx:id="summaryPanel" minWidth="340" prefWidth="340.0" styleClass="pane-with-border">
+                                    <padding>
+                                        <Insets bottom="10" left="10" right="10" top="10" />
+                                    </padding>
+                                    <StackPane fx:id="summaryPanelPlaceholder" VBox.vgrow="ALWAYS" />
+                                </VBox>
+                            </content>
+                            <graphic>
+                                <Label graphicTextGap="0.0" text="ummary">
+                                    <graphic>
+                                        <Label styleClass="bold-letter" text="S" />
+                                    </graphic>
+                                </Label>
+                            </graphic>
+                        </Tab>
                         <Tab>
                             <content>
                                 <VBox fx:id="taskList" minWidth="340" prefWidth="340.0" styleClass="pane-with-border">
@@ -100,23 +117,6 @@
                                 </Label>
                             </graphic>
                         </Tab>
-                      <Tab>
-                            <content>
-                                <VBox fx:id="summaryPanel" minWidth="340" prefWidth="340.0" styleClass="pane-with-border">
-                                    <padding>
-                                        <Insets bottom="10" left="10" right="10" top="10" />
-                                    </padding>
-                                    <StackPane fx:id="summaryPanelPlaceholder" VBox.vgrow="ALWAYS" />
-                                </VBox>
-                        </content>
-                          <graphic>
-                              <Label graphicTextGap="0.0" text="ummary">
-                                  <graphic>
-                                      <Label styleClass="bold-letter" text="S" />
-                                  </graphic>
-                              </Label>
-                          </graphic>
-                      </Tab>
                     </tabs>
                 </TabPane>
 

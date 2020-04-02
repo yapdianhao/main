@@ -3,7 +3,7 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.text.Font?>
-<TitledPane xmlns:fx="http://javafx.com/fxml/1" fx:id="category" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" text="Group Title" xmlns="http://javafx.com/javafx/11">
+<TitledPane xmlns:fx="http://javafx.com/fxml/1" fx:id="category" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" text="Group Title" xmlns="http://javafx.com/javafx/11.0.1">
    <content>
       <ListView fx:id="groupingList" maxWidth="1.7976931348623157E308" stylesheets="@JelphaBotTheme.css" />
    </content>

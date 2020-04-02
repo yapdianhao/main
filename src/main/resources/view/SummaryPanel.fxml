@@ -1,31 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TitledPane?>
-<?import javafx.scene.layout.VBox?>
-<VBox xmlns:fx="http://javafx.com/fxml/1" stylesheets="@JelphaBotTheme.css" xmlns="http://javafx.com/javafx/8">
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-    <ScrollPane fitToWidth="true">
-        <content>
-            <VBox>
-                <children>
-                    <TitledPane animated="false" maxHeight="1.7976931348623157E308" prefWidth="587.0"
-                                text="Due Today">
-                        <content>
-                            <ListView fx:id="dueTodayTaskListView" maxHeight="1.7976931348623157E308"
-                                      prefWidth="585.0" />
-                        </content>
-                    </TitledPane>
-                    <TitledPane animated="false" maxHeight="1.7976931348623157E308" prefWidth="587.0"
-                                text="Completed Today">
-                        <content>
-                            <ListView fx:id="completedTodayTaskListView" maxHeight="1.7976931348623157E308"
-                                      prefWidth="585.0" />
-                        </content>
-                    </TitledPane>
-                </children>
-            </VBox>
-        </content>
-    </ScrollPane>
+<VBox stylesheets="@JelphaBotTheme.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ListView fx:id="summaryPanelListView"/>
+   </children>
 </VBox>

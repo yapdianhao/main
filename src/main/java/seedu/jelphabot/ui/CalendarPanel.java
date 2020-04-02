@@ -35,8 +35,6 @@ public class CalendarPanel extends UiPart<Region> {
 
     public CalendarPanel(CalendarDate calendarDate, TabPane mainWindowTabPane) {
         super(FXML);
-
-        assert calendarDate != null && mainWindowTabPane != null : "calendar date or tab pane is null";
         logger.info("Initialising calendar panel stage");
         this.mainWindowTabPane = mainWindowTabPane;
         this.calendarDate = calendarDate;
@@ -101,7 +99,7 @@ public class CalendarPanel extends UiPart<Region> {
      */
     public void show() {
         logger.fine("Showing calendar panel of application.");
-        mainWindowTabPane.getSelectionModel().select(1);
+        mainWindowTabPane.getSelectionModel().select(2);
     }
 
     /**

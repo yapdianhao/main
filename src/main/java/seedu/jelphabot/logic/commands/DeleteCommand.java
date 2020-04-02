@@ -7,6 +7,7 @@ import seedu.jelphabot.commons.core.index.Index;
 import seedu.jelphabot.logic.commands.exceptions.CommandException;
 import seedu.jelphabot.model.Model;
 import seedu.jelphabot.model.productivity.Productivity;
+import seedu.jelphabot.model.summary.Summary;
 import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.model.task.ViewTaskList;
 
@@ -44,7 +45,8 @@ public class DeleteCommand extends Command {
 
         Task taskToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteTask(taskToDelete);
-        model.setProductivity(new Productivity(model.getFilteredTaskList(), true, true, true));
+        model.setProductivity(new Productivity(model.getFilteredTaskList()));
+        model.setSummary(new Summary(model.getFilteredTaskList()));
 
         if (taskToDelete.isBeingTimed()) {
             return new CommandResult(String.format(MESSAGE_DELETE_RUNNING_TASK, taskToDelete));

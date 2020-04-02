@@ -18,19 +18,9 @@ public class Productivity {
     private RunningTimers runningTimers;
     private TimeSpentToday timeSpentToday;
 
-    // booleans to decide which sub-productivity needs to be re-rendered.
-    private boolean hasNewOrEditedTasks;
-    private boolean hasNewTimer;
-    private boolean hasChangeInTimeSpent;
-
-    public Productivity(ObservableList<Task> taskList, boolean hasNewOrEditedTasks, boolean hasNewTimer,
-        boolean hasChangeInTimeSpent) {
+    public Productivity(ObservableList<Task> taskList) {
         requireNonNull(taskList);
         this.taskList = taskList;
-        this.hasNewOrEditedTasks = hasNewOrEditedTasks;
-        this.hasNewTimer = hasNewTimer;
-        this.hasChangeInTimeSpent = hasChangeInTimeSpent;
-
         createProductivites();
     }
 
@@ -52,18 +42,9 @@ public class Productivity {
     private void createProductivites() {
         ObservableList<Task> tasksDueToday = taskList.filtered(new TaskDueWithinDayPredicate());
         ObservableList<Task> tasksDueThisWeek = taskList.filtered(getDueThisWeekPredicate());
-
-        if (tasksCompleted == null || hasNewOrEditedTasks) {
-            this.tasksCompleted = new TasksCompleted(tasksDueToday, tasksDueThisWeek,
-                taskList.filtered(getOverduePredicate()));
-        }
-
-        if (runningTimers == null || hasNewTimer) {
-            this.runningTimers = new RunningTimers(taskList);
-        }
-
-        if (timeSpentToday == null || hasChangeInTimeSpent) {
-            this.timeSpentToday = new TimeSpentToday(tasksDueToday, tasksDueThisWeek);
-        }
+        this.tasksCompleted = new TasksCompleted(tasksDueToday, tasksDueThisWeek,
+            taskList.filtered(getOverduePredicate()));
+        this.runningTimers = new RunningTimers(taskList);
+        this.timeSpentToday = new TimeSpentToday(tasksDueToday, tasksDueThisWeek);
     }
 }
