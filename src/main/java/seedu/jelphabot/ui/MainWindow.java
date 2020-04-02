@@ -40,8 +40,6 @@ public class MainWindow extends UiPart<Stage> {
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
-
-
     private Stage primaryStage;
     private Logic logic;
 
@@ -147,11 +145,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        GroupedTaskList groupedTasks = logic.getGroupedTaskList(Category.DATE);
-        taskListPanel = new GroupedTaskListPanel(
-            logic.getPinnedTaskList(),
-            groupedTasks
-        );
+        taskListPanel = new GroupedTaskListPanel(logic.getGroupedTaskList(Category.DATE));
         taskListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
 
         //update getFilteredCalendarTaskList
@@ -266,7 +260,7 @@ public class MainWindow extends UiPart<Stage> {
     private void handleTaskList(GroupedTaskList.Category sublistCategory) {
         mainWindowTabPane.getSelectionModel().select(1);
         GroupedTaskList groupedTasks = logic.getGroupedTaskList(sublistCategory);
-        taskListPanel = new GroupedTaskListPanel(logic.getPinnedTaskList(), groupedTasks);
+        taskListPanel = new GroupedTaskListPanel(groupedTasks);
         taskListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
 
     }
@@ -312,6 +306,7 @@ public class MainWindow extends UiPart<Stage> {
             case TASK_LIST_MODULE:
                 handleTaskList(Category.MODULE);
                 break;
+            case STAY_ON_CURRENT:
             default:
                 // do nothing
                 break;

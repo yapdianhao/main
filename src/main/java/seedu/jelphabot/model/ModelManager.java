@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.beans.binding.Bindings;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.jelphabot.commons.core.GuiSettings;
@@ -158,8 +159,6 @@ public class ModelManager implements Model {
         readOnlyJelphaBot.addReminder(reminder);
     }
 
-
-
     @Override
     public void setTask(Task target, Task editedTask) {
         requireAllNonNull(target, editedTask);
@@ -215,14 +214,19 @@ public class ModelManager implements Model {
         if (lastShownList != null && lastShownList.getCategory() == category) {
             return lastShownList;
         } else {
-            lastShownList = GroupedTaskList.makeGroupedTaskList(getFilteredTaskList(), category, getPinnedTaskList());
+            lastShownList = GroupedTaskList.makeGroupedTaskList(
+                getFilteredTaskList(),
+                category,
+                getPinnedTaskList()
+            );
             return lastShownList;
         }
     }
 
     @Override
     public PinnedTaskList getPinnedTaskList() {
-        return new PinnedTaskList(filteredTasks);
+        // TODO implement pinned tasks
+        return new PinnedTaskList(filteredTasks.filtered(task -> false), Bindings.createIntegerBinding(() -> 0));
     }
 
     @Override
