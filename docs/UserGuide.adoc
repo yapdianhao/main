@@ -213,13 +213,16 @@ Group your tasks into the following categories:
 * Pinned +
 (Pinned tasks will always be displayed at the top. To read more about pinning tasks, go <<#pin, here>>)
 * Overdue  +
-(Shows tasks which are uncompleted and past their due date)
+(Shows tasks which are incomplete and past their due date)
 * Due Today +
 (Shows tasks due by the end of the day)
 * Due This week +
 (Shows tasks due by the end of the week, defined as before the next upcoming Monday)
 * Due Sometime +
 (Shows all other tasks that do not fit into prior categories)
+
+[TIP]
+Tasks which are due and completed will not be shown, as we assume you no longer need them.
 
 ===== Group tasks by Date : `list module`
 Groups tasks based on their defined module code. Modules will be presented in alphabetical order.
@@ -334,7 +337,7 @@ image::ug_figures/clear.png[width="600"]
 
 
 // tag::pin[]
-==== Pin Important tasks  : `pin`
+==== Pin Important tasks  : `pin` (Coming in V1.4)
 
 You can pin important tasks to the top of the task list with the `pin` command. +
 Pinned tasks will always be displayed in the Pinned Tasks group in the task list. +
