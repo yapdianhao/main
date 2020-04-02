@@ -23,6 +23,7 @@ public class ClearCommand extends Command {
         model.setJelphaBot(new JelphaBot());
         model.setProductivity(new Productivity(model.getFilteredTaskList()));
         model.setSummary(new Summary(model.getFilteredTaskList()));
+        model.setProductivity(new Productivity(model.getFilteredTaskList(), true, true, true));
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

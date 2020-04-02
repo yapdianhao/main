@@ -55,6 +55,7 @@ public class AddCommand extends Command {
         model.addTask(toAdd);
         model.setProductivity(new Productivity(model.getFilteredTaskList()));
         model.setSummary(new Summary(model.getFilteredTaskList()));
+        model.setProductivity(new Productivity(model.getFilteredTaskList(), true, false, false));
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 

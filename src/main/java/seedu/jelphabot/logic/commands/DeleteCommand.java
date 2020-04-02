@@ -47,6 +47,7 @@ public class DeleteCommand extends Command {
         model.deleteTask(taskToDelete);
         model.setProductivity(new Productivity(model.getFilteredTaskList()));
         model.setSummary(new Summary(model.getFilteredTaskList()));
+        model.setProductivity(new Productivity(model.getFilteredTaskList(), true, true, true));
 
         if (taskToDelete.isBeingTimed()) {
             return new CommandResult(String.format(MESSAGE_DELETE_RUNNING_TASK, taskToDelete));
