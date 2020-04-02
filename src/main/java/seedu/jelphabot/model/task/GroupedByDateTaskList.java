@@ -65,7 +65,7 @@ public class GroupedByDateTaskList implements GroupedTaskList {
 
     @Override
     public ObservableList<SubgroupTaskList> getList() {
-        return dueDateTaskLists.filtered(sublist -> !sublist.isEmpty());
+        return dueDateTaskLists;
     }
 
     @Override

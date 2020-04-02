@@ -32,7 +32,7 @@ public class GroupedByModuleTaskList implements GroupedTaskList {
                 new SubgroupTaskList(code.toString(), taskList.filtered(hasModuleCode(code)), tempSize);
             moduleCodeTaskLists.add(moduleCodeSubList);
             moduleCodeSubList.addListener(makeDeleteOnEmptyListener(moduleCodeSubList));
-            tempSize = tempSize.add(moduleCodeSubList.size());
+            tempSize = tempSize.add(moduleCodeSubList.sizeBinding());
         }
         this.sizeBinding = tempSize;
     }
