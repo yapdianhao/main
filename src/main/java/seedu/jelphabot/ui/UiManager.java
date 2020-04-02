@@ -50,11 +50,6 @@ public class UiManager implements Ui {
             reminderPopup = new ReminderPopup(reminderStage, logic);
             reminderPopup.fillWindow();
             reminderPopup.show();
-
-            //show morningCallWindow
-            //morningCallWindow = new MorningCallWindow(morningCallStage, logic);
-            //morningCallWindow.show();
-            //morningCallWindow.fillWindow();
             // show summary tab first as "Morning call"
             mainWindow.handleSummary();
 

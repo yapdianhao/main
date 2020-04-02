@@ -78,19 +78,15 @@ public class TasksCompleted {
             response.append("are ").append(" no overdue tasks that are incomplete.");
         }
 
-        return response.toString();
-    }
-
-    private String getRemark() {
-        int n = overdueTasks.filtered(new TaskIsIncompletePredicate()).size();
-
         if (n > 3) {
-            return MESSAGE_CRITICISM;
+            response.append("\n").append(MESSAGE_CRITICISM);
         } else if (n > 0) {
-            return MESSAGE_ENCOURAGEMENT;
+            response.append("\n").append(MESSAGE_ENCOURAGEMENT);
         } else {
-            return MESSAGE_COMPLIMENT;
+            response.append("\n").append(MESSAGE_COMPLIMENT);
         }
+
+        return response.toString();
     }
 
     public double getPercentage() {
@@ -98,6 +94,6 @@ public class TasksCompleted {
     }
 
     public String[] toStringArray() {
-        return new String[] {getCompletionStatus(), getRemark(), getOverdueStatus()};
+        return new String[] {getCompletionStatus(), getOverdueStatus()};
     }
 }

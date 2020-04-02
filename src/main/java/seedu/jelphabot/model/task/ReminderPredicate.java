@@ -1,4 +1,4 @@
-package seedu.jelphabot.model.task.predicates;
+package seedu.jelphabot.model.task;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -8,7 +8,8 @@ import java.util.logging.Logger;
 
 import seedu.jelphabot.commons.core.LogsCenter;
 import seedu.jelphabot.model.reminder.Reminder;
-import seedu.jelphabot.model.task.Task;
+import seedu.jelphabot.model.task.predicates.TaskIsIncompletePredicate;
+
 /**
  * Tests that a {@code Task}'s {@code DateTime} is due within a week from now.
  */

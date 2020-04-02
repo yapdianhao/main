@@ -10,6 +10,7 @@ import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_TAG;
 import seedu.jelphabot.logic.commands.exceptions.CommandException;
 import seedu.jelphabot.model.Model;
 import seedu.jelphabot.model.productivity.Productivity;
+import seedu.jelphabot.model.summary.Summary;
 import seedu.jelphabot.model.task.Task;
 
 /**
@@ -52,7 +53,8 @@ public class AddCommand extends Command {
         }
 
         model.addTask(toAdd);
-        model.setProductivity(new Productivity(model.getFilteredTaskList(), true, false, false));
+        model.setProductivity(new Productivity(model.getFilteredTaskList()));
+        model.setSummary(new Summary(model.getFilteredTaskList()));
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 

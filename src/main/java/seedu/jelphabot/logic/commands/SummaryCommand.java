@@ -1,6 +1,7 @@
 package seedu.jelphabot.logic.commands;
 
 import seedu.jelphabot.model.Model;
+import seedu.jelphabot.model.summary.Summary;
 
 /**
  * Switches to the summary panel.
@@ -16,6 +17,7 @@ public class SummaryCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
+        model.setSummary(new Summary(model.getFilteredTaskList()));
         return new CommandResult(MESSAGE_SWITCH_PANEL_ACKNOWLEDGEMENT, false, false).isShowSummary();
     }
 }
