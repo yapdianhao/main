@@ -13,7 +13,7 @@ import seedu.jelphabot.model.task.Task;
 /**
  * Panel containing the list of tasks.
  */
-public class TaskListPanel extends UiPart<Region> {
+public class CalendarTaskListPanel extends UiPart<Region> {
 
     private static final String FXML = "TaskListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(TaskListPanel.class);
@@ -21,7 +21,7 @@ public class TaskListPanel extends UiPart<Region> {
     @FXML
     private ListView<Task> taskListView;
 
-    public TaskListPanel(ObservableList<Task> taskList) {
+    public CalendarTaskListPanel(ObservableList<Task> taskList) {
         super(FXML);
         taskListView.setItems(taskList);
         taskListView.setCellFactory(listView -> new TaskListViewCell());
@@ -39,9 +39,10 @@ public class TaskListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new TaskCard(task, getIndex() + 1).getRoot());
+                setGraphic(new CalendarTaskCard(task, getIndex() + 1).getRoot());
             }
         }
     }
 
 }
+

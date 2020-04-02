@@ -5,7 +5,7 @@
 <?import javafx.scene.text.Font?>
 <TitledPane xmlns:fx="http://javafx.com/fxml/1" fx:id="grouping" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" text="Group Title" xmlns="http://javafx.com/javafx/11.0.1">
    <content>
-      <ListView fx:id="groupingList" maxWidth="1.7976931348623157E308" stylesheets="@DarkTheme.css" />
+      <ListView fx:id="groupingList" maxWidth="1.7976931348623157E308" stylesheets="@JelphaBotTheme.css" />
    </content>
    <font>
       <Font size="20.0" />

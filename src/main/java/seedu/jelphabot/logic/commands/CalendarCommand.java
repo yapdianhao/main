@@ -20,6 +20,8 @@ import seedu.jelphabot.ui.MainWindow;
 public class CalendarCommand extends Command {
 
     public static final String COMMAND_WORD = "calendar";
+    public static final String COMMAND_SHORTCUT_UPPER = ":C";
+    public static final String COMMAND_SHORTCUT_LOWER = ":c";
 
     //update this
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all task that is under the due date specified.\n"

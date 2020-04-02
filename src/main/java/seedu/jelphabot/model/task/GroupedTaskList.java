@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.function.Function;
 
 import javafx.collections.ObservableList;
+import seedu.jelphabot.commons.core.index.Index;
 
 /**
  * Interface representing a TaskList which is split into sub-groups by predefined groups.
@@ -16,6 +17,8 @@ public interface GroupedTaskList extends Iterable<ObservableList<Task>> {
         return group.construct(tasks);
     }
 
+    Task getTaskById(Index id);
+
     Iterator<String> getGroupNames();
 
     /**
@@ -23,8 +26,8 @@ public interface GroupedTaskList extends Iterable<ObservableList<Task>> {
      * constructor.
      */
     enum Grouping {
-        DATE("DATE_GROUPING", GroupedByDateTaskList::new),
-        MODULE("MODULE_GROUPING", GroupedByModuleTaskList::new);
+        DATE("date", GroupedByDateTaskList::new),
+        MODULE("module", GroupedByModuleTaskList::new);
 
         public final String commandArgument;
         private final Function<ObservableList<Task>, GroupedTaskList> constructor;

@@ -32,6 +32,7 @@ import seedu.jelphabot.storage.StorageManager;
 import seedu.jelphabot.testutil.TaskBuilder;
 
 public class LogicManagerTest {
+
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy exception");
 
     @TempDir
@@ -64,7 +65,7 @@ public class LogicManagerTest {
     @Test
     public void execute_validCommand_success() throws Exception {
         String listCommand = ListCommand.COMMAND_WORD;
-        assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
+        assertCommandSuccess(listCommand, ListCommand.MESSAGE_SWITCH_PANEL_ACKNOWLEDGEMENT, model);
     }
 
     @Test

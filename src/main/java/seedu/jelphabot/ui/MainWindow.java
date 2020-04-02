@@ -22,6 +22,7 @@ import seedu.jelphabot.model.calendar.CalendarDate;
 import seedu.jelphabot.model.productivity.Productivity;
 import seedu.jelphabot.model.productivity.ProductivityList;
 import seedu.jelphabot.model.task.GroupedTaskList;
+import seedu.jelphabot.model.task.GroupedTaskList.Grouping;
 
 /**
  * The Main Window. Provides the basic application layout containing a menu bar
@@ -44,7 +45,7 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private GroupedTaskListPanel taskListPanel;
-    private TaskListPanel calendarTaskListPanel;
+    private CalendarTaskListPanel calendarTaskListPanel;
     private ProductivityPanel productivityPanel;
     private ResultDisplay resultDisplay;
     private SummaryPanel summaryPanel;
@@ -144,14 +145,15 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        GroupedTaskList sortedTasks = logic.getGroupedTaskList(GroupedTaskList.Grouping.MODULE);
+        GroupedTaskList sortedTasks = logic.getGroupedTaskList(Grouping.MODULE);
         taskListPanel = new GroupedTaskListPanel(
             logic.getFilteredTaskList(),
             sortedTasks
         );
         taskListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
 
-        calendarTaskListPanel = new TaskListPanel(logic.getFilteredCalendarTaskList());
+        //update getFilteredCalendarTaskList
+        calendarTaskListPanel = new CalendarTaskListPanel(logic.getFilteredCalendarTaskList());
         logic.updateFilteredCalendarTaskList(DateUtil.getDueTodayPredicate());
         calendarTaskListPanelPlaceholder.getChildren().add(calendarTaskListPanel.getRoot());
 
@@ -259,8 +261,12 @@ public class MainWindow extends UiPart<Stage> {
      * Switches view to Task List panel.
      */
     @FXML
-    private void handleTaskList() {
+    private void handleTaskList(Grouping sublistGrouping) {
         mainWindowTabPane.getSelectionModel().select(0);
+        GroupedTaskList groupedTasks = logic.getGroupedTaskList(sublistGrouping);
+        taskListPanel = new GroupedTaskListPanel(logic.getFilteredTaskList(), groupedTasks);
+        taskListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
+
     }
 
     public GroupedTaskListPanel getTaskListPanel() {
@@ -298,14 +304,15 @@ public class MainWindow extends UiPart<Stage> {
             case SUMMARY:
                 handleSummary();
                 break;
-            case TASK_LIST:
-                handleTaskList();
+            case TASK_LIST_DATE:
+                handleTaskList(Grouping.DATE);
                 break;
-            case STAY_ON_CURRENT:
-                // do nothing
+            case TASK_LIST_MODULE:
+                handleTaskList(Grouping.MODULE);
                 break;
             default:
-                throw new IllegalStateException("Unexpected value: " + commandResult.getTabSwitch());
+                // do nothing
+                break;
             }
 
             return commandResult;

@@ -76,9 +76,7 @@ public class ReminderPredicate extends TaskIsIncompletePredicate {
                 .isAfter(currDateTime)) {
             return true;
         } else if (taskDateTime.minusDays(reminder.getDaysToRemind().getReminderDay()).isBefore(currDateTime)) {
-            if (taskDateTime.minusHours(reminder.getHoursToRemind().getReminderHour()).isAfter(currDateTime)) {
-                return true;
-            }
+            return taskDateTime.minusHours(reminder.getHoursToRemind().getReminderHour()).isAfter(currDateTime);
         }
         return false;
     }

@@ -20,6 +20,7 @@ import seedu.jelphabot.model.UserPrefs;
 import seedu.jelphabot.model.task.Task;
 
 public class DoneCommandTest {
+
     private Model model = new ModelManager(getTypicalJelphaBot(), new UserPrefs());
 
     @Test

@@ -1,5 +1,6 @@
 package seedu.jelphabot.model.productivity;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.jelphabot.commons.util.DateUtil.getDueThisWeekPredicate;
 import static seedu.jelphabot.commons.util.DateUtil.getOverduePredicate;
 
@@ -11,12 +12,14 @@ import seedu.jelphabot.model.task.predicates.TaskDueWithinDayPredicate;
  * Represents the overall productivity of the user.
  */
 public class Productivity {
+
     private final ObservableList<Task> taskList;
     private TasksCompleted tasksCompleted;
     private RunningTimers runningTimers;
     private TimeSpentToday timeSpentToday;
 
     public Productivity(ObservableList<Task> taskList) {
+        requireNonNull(taskList);
         this.taskList = taskList;
         createProductivites();
     }

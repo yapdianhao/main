@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import seedu.jelphabot.commons.core.index.Index;
 import seedu.jelphabot.model.task.predicates.FilterTaskByDatePredicate;
 import seedu.jelphabot.model.task.predicates.TaskIsIncompletePredicate;
 
@@ -27,16 +28,23 @@ public class GroupedByDateTaskList implements GroupedTaskList {
     private static final FilterTaskByDatePredicate isDueSomeday = getDueSomedayPredicate();
     private static final Predicate<Task> isIncomplete = new TaskIsIncompletePredicate();
 
+    private final ObservableList<Task> taskList;
     private final ObservableList<Task> overdueTaskList;
     private final ObservableList<Task> dueTodayTaskList;
     private final ObservableList<Task> dueThisWeekTaskList;
     private final ObservableList<Task> dueSomedayTaskList;
 
     public GroupedByDateTaskList(ObservableList<Task> taskList) {
+        this.taskList = taskList;
         overdueTaskList = taskList.filtered(isOverdue).filtered(isIncomplete);
         dueTodayTaskList = taskList.filtered(isDueToday);
         dueThisWeekTaskList = taskList.filtered(isDueThisWeek);
         dueSomedayTaskList = taskList.filtered(isDueSomeday);
+    }
+
+    @Override
+    public Task getTaskById(Index id) {
+        return null;
     }
 
     public Iterator<String> getGroupNames() {
