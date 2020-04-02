@@ -20,7 +20,7 @@ import seedu.jelphabot.commons.core.index.Index;
  * <p>
  */
 public class GroupedByModuleTaskList implements GroupedTaskList {
-    private final ObservableList<SubGroupTaskList> moduleCodeTaskLists = FXCollections.observableArrayList();
+    private final ObservableList<SubgroupTaskList> moduleCodeTaskLists = FXCollections.observableArrayList();
     private final NumberBinding sizeBinding;
 
     public GroupedByModuleTaskList(ObservableList<Task> taskList, PinnedTaskList pinnedTasks) {
@@ -28,8 +28,8 @@ public class GroupedByModuleTaskList implements GroupedTaskList {
         moduleCodeTaskLists.add(pinnedTasks);
         NumberBinding tempSize = Bindings.createIntegerBinding(pinnedTasks::size);
         for (ModuleCode code : getUniqueModuleSet(taskList)) {
-            SubGroupTaskList moduleCodeSubList =
-                new SubGroupTaskList(code.toString(), taskList.filtered(hasModuleCode(code)), tempSize);
+            SubgroupTaskList moduleCodeSubList =
+                new SubgroupTaskList(code.toString(), taskList.filtered(hasModuleCode(code)), tempSize);
             moduleCodeTaskLists.add(moduleCodeSubList);
             moduleCodeSubList.addListener(makeDeleteOnEmptyListener(moduleCodeSubList));
             tempSize = tempSize.add(moduleCodeSubList.size());
@@ -46,10 +46,10 @@ public class GroupedByModuleTaskList implements GroupedTaskList {
     }
 
     /**
-     * @param moduleCodeSubList the SubGroupTaskList to be removed
-     * @return a listener which removes the respective SubGroupTaskList when the inner ObservableList is empty.
+     * @param moduleCodeSubList the SubgroupTaskList to be removed
+     * @return a listener which removes the respective SubgroupTaskList when the inner ObservableList is empty.
      */
-    private ListChangeListener<Task> makeDeleteOnEmptyListener(SubGroupTaskList moduleCodeSubList) {
+    private ListChangeListener<Task> makeDeleteOnEmptyListener(SubgroupTaskList moduleCodeSubList) {
         return change -> {
             if (moduleCodeSubList.isEmpty()) {
                 GroupedByModuleTaskList.this.moduleCodeTaskLists.remove(moduleCodeSubList);
@@ -66,7 +66,7 @@ public class GroupedByModuleTaskList implements GroupedTaskList {
     }
 
     // @Override
-    // public Iterator<SubGroupTaskList> iterator() {
+    // public Iterator<SubgroupTaskList> iterator() {
     //     return moduleCodeTaskLists.iterator();
     // }
 
@@ -76,7 +76,7 @@ public class GroupedByModuleTaskList implements GroupedTaskList {
     }
 
     @Override
-    public ObservableList<SubGroupTaskList> getList() {
+    public ObservableList<SubgroupTaskList> getList() {
         return moduleCodeTaskLists;
     }
 
@@ -88,7 +88,7 @@ public class GroupedByModuleTaskList implements GroupedTaskList {
     @Override
     public Task get(int id) {
         assert id < size();
-        for (SubGroupTaskList sublist : moduleCodeTaskLists) {
+        for (SubgroupTaskList sublist : moduleCodeTaskLists) {
             if (id < sublist.size()) {
                 return sublist.get(id);
             } else {

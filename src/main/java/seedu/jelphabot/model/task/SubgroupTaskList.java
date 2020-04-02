@@ -9,13 +9,13 @@ import javafx.collections.ObservableList;
 /**
  * Wrapper class for a ObservableList Tasks.
  */
-public class SubGroupTaskList {
+public class SubgroupTaskList {
     private final String groupName;
     private final ObservableList<Task> taskList;
     private final IntegerBinding size;
     private final NumberBinding startIndex;
 
-    SubGroupTaskList(String groupName, ObservableList<Task> taskList, NumberBinding startIndex) {
+    SubgroupTaskList(String groupName, ObservableList<Task> taskList, NumberBinding startIndex) {
         this.groupName = groupName;
         this.taskList = taskList;
         this.size = Bindings.size(taskList);

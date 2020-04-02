@@ -10,7 +10,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.Region;
 import seedu.jelphabot.commons.core.LogsCenter;
-import seedu.jelphabot.model.task.SubGroupTaskList;
+import seedu.jelphabot.model.task.SubgroupTaskList;
 import seedu.jelphabot.model.task.Task;
 
 /**
@@ -31,9 +31,9 @@ public class SubgroupTaskListPanel extends UiPart<Region> {
     @FXML
     private ListView<Task> groupingList;
 
-    private SubGroupTaskList subGroupTaskList;
+    private SubgroupTaskList subGroupTaskList;
 
-    public SubgroupTaskListPanel(SubGroupTaskList subGroupTaskList) {
+    public SubgroupTaskListPanel(SubgroupTaskList subGroupTaskList) {
         super(FXML);
         this.subGroupTaskList = subGroupTaskList;
         category.setText(subGroupTaskList.getGroupName());
