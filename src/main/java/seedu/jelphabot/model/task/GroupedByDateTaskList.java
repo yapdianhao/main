@@ -5,13 +5,12 @@ import static seedu.jelphabot.commons.util.DateUtil.getDueThisWeekPredicate;
 import static seedu.jelphabot.commons.util.DateUtil.getDueTodayPredicate;
 import static seedu.jelphabot.commons.util.DateUtil.getOverduePredicate;
 
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.NumberBinding;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.jelphabot.commons.core.index.Index;
 import seedu.jelphabot.model.task.predicates.TaskIsIncompletePredicate;
@@ -30,7 +29,7 @@ public class GroupedByDateTaskList implements GroupedTaskList {
     private static final Predicate<Task> isDueSomeday = getDueSomedayPredicate();
     private static final Predicate<Task> isIncomplete = new TaskIsIncompletePredicate();
 
-    private final List<SubGroupTaskList> dueDateTaskLists = new ArrayList<>();
+    private final ObservableList<SubGroupTaskList> dueDateTaskLists = FXCollections.observableArrayList();
     private final NumberBinding sizeBinding;
 
     public GroupedByDateTaskList(ObservableList<Task> taskList, PinnedTaskList pinnedTasks) {
@@ -54,7 +53,7 @@ public class GroupedByDateTaskList implements GroupedTaskList {
 
     @Override
     public ObservableList<SubGroupTaskList> getList() {
-        return null;
+        return dueDateTaskLists;
     }
 
     @Override
