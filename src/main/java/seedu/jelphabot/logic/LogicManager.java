@@ -21,6 +21,7 @@ import seedu.jelphabot.model.Model;
 import seedu.jelphabot.model.ReadOnlyJelphaBot;
 import seedu.jelphabot.model.productivity.ProductivityList;
 import seedu.jelphabot.model.reminder.Reminder;
+import seedu.jelphabot.model.summary.SummaryList;
 import seedu.jelphabot.model.task.GroupedTaskList;
 import seedu.jelphabot.model.task.GroupedTaskList.Grouping;
 import seedu.jelphabot.model.task.ReminderPredicate;
@@ -131,9 +132,10 @@ public class LogicManager implements Logic {
         return GroupedTaskList.makeGroupedTaskList(model.getFilteredTaskList(), grouping);
     }
 
-    // public ObservableList<Task> getFilteredByCompletedTodayTaskList() {
-    //
-    // }
+    @Override
+    public SummaryList getSummaryList() {
+        return model.getSummaryList();
+    }
 
     @Override
     public ProductivityList getProductivityList() {

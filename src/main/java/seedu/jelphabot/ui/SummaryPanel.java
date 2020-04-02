@@ -30,7 +30,7 @@ public class SummaryPanel extends UiPart<Region> {
     private TabPane mainWindowTabPane;
 
     @FXML
-    private ListView<Task> summaryPanelListView;
+    private ListView<Summary> summaryPanelListView;
 
     // @FXML
     // private ListView<Task> dueTodayTaskListView;
@@ -38,13 +38,13 @@ public class SummaryPanel extends UiPart<Region> {
     // @FXML
     // private ListView<Task> completedTodayTaskListView;
 
-    public SummaryPanel(ObservableList<Task> dueTodayTaskList,
-        ObservableList<Task> completedTodayTaskList, TabPane tabPane) {
+    public SummaryPanel(ObservableList<Summary> summaryList, TabPane tabPane) {
         super(FXML);
         logger.info("Initialising summary panel stage");
         this.dueTodayTaskList = dueTodayTaskList;
         this.completedTodayTaskList = completedTodayTaskList;
         this.mainWindowTabPane = tabPane;
+        summaryPanelListView.setItems();
         // dueTodayTaskListView.setItems(dueTodayTaskList);
         // dueTodayTaskListView.setCellFactory(ListView -> new SummaryTaskListViewCell());
         // dueTodayTaskListView.prefHeightProperty().bind(Bindings.size(dueTodayTaskList).multiply(PREF_CELL_HEIGHT));
@@ -77,17 +77,17 @@ public class SummaryPanel extends UiPart<Region> {
 /**
  * Custom {@code ListCell} that displays the graphics of a {@code Task} using a {@code TaskCard}.
  */
-class SummaryTaskListViewCell extends ListCell<Task> {
+class SummaryTaskListViewCell extends ListCell<Summary> {
     @Override
     protected void updateItem(Summary summary, boolean empty) {
         super.updateItem(summary, empty);
 
-        if (empty || task == null) {
+        if (empty || summary == null) {
             setGraphic(null);
             setText(null);
         } else {
-            setGraphic(new SummaryCard())
-            setGraphic(new TaskCard(task, getIndex() + 1).getRoot());
+            setGraphic(new SummaryCard(summary).getRoot());
+            //setGraphic(new TaskCard(task, getIndex() + 1).getRoot());
         }
     }
 }

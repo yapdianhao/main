@@ -4,22 +4,22 @@ import static java.util.Objects.requireNonNull;
 
 import javafx.collections.ObservableList;
 import seedu.jelphabot.model.task.Task;
+import seedu.jelphabot.model.task.predicates.TaskCompletedWithinDayPredicate;
+import seedu.jelphabot.model.task.predicates.TaskDueWithinDayPredicate;
 
 /**
  * Represents a Summary for the user.
  */
 public class Summary {
-    private final ObservableList<Task> dueTodayTaskList;
-    private final ObservableList<Task> completedTodayTaskList;
+    private final ObservableList<Task> taskList;
 
     private TasksDueToday tasksDueToday;
     private TasksCompletedToday tasksCompletedToday;
 
-    public Summary(ObservableList<Task> dueTodayTaskList, ObservableList<Task> completedTodayTaskList) {
-        requireNonNull(dueTodayTaskList);
-        requireNonNull(completedTodayTaskList);
-        this.dueTodayTaskList = dueTodayTaskList;
-        this.completedTodayTaskList = completedTodayTaskList;
+    public Summary(ObservableList<Task> taskList) {
+        requireNonNull(taskList);
+        this.taskList = taskList;
+        populateSummary();
     }
 
     public TasksDueToday getTasksDueToday() {
@@ -34,6 +34,8 @@ public class Summary {
      * populates the respective Summary objects.
      */
     private void populateSummary() {
+        ObservableList<Task> dueTodayTaskList = taskList.filtered(new TaskDueWithinDayPredicate());
+        ObservableList<Task> completedTodayTaskList = taskList.filtered(new TaskCompletedWithinDayPredicate());
         this.tasksDueToday = new TasksDueToday(dueTodayTaskList);
         this.tasksCompletedToday = new TasksCompletedToday(completedTodayTaskList);
     }

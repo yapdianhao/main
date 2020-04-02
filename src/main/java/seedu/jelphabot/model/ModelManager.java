@@ -15,6 +15,8 @@ import seedu.jelphabot.commons.core.LogsCenter;
 import seedu.jelphabot.model.productivity.Productivity;
 import seedu.jelphabot.model.productivity.ProductivityList;
 import seedu.jelphabot.model.reminder.Reminder;
+import seedu.jelphabot.model.summary.Summary;
+import seedu.jelphabot.model.summary.SummaryList;
 import seedu.jelphabot.model.task.Task;
 
 /**
@@ -29,7 +31,7 @@ public class ModelManager implements Model {
     private final FilteredList<Reminder> filteredReminders;
     private final FilteredList<Task> filteredCalendarTasks;
     private final ProductivityList productivityList;
-
+    private final SummaryList summaryList;
     /**
      * Initializes a ModelManager with the given readOnlyJelphaBot and userPrefs.
      */
@@ -45,6 +47,7 @@ public class ModelManager implements Model {
         filteredReminders = new FilteredList<>(this.readOnlyJelphaBot.getReminderList());
         filteredCalendarTasks = new FilteredList<>(this.readOnlyJelphaBot.getTaskList());
         productivityList = new ProductivityList();
+        summaryList = new SummaryList();
     }
 
     public ModelManager() {
@@ -174,6 +177,18 @@ public class ModelManager implements Model {
     @Override
     public ProductivityList getProductivityList() {
         return productivityList;
+    }
+
+    // =========== Summary List
+    @Override
+    public void setSummary(Summary summary) {
+        requireAllNonNull(summary);
+        summaryList.setSummary(summary);
+    }
+
+    @Override
+    public SummaryList getSummaryList() {
+        return summaryList;
     }
 
     // =========== Filtered Task List Accessors
