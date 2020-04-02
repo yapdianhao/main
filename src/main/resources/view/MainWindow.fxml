@@ -42,6 +42,23 @@
                     <tabs>
                         <Tab>
                             <content>
+                                <VBox fx:id="summaryPanel" minWidth="340" prefWidth="340.0" styleClass="pane-with-border">
+                                    <padding>
+                                        <Insets bottom="10" left="10" right="10" top="10" />
+                                    </padding>
+                                    <StackPane fx:id="summaryPanelPlaceholder" VBox.vgrow="ALWAYS" />
+                                </VBox>
+                            </content>
+                            <graphic>
+                                <Label graphicTextGap="0.0" text="Summary">
+                                    <graphic>
+                                        <Label styleClass="bold-letter" text="S" />
+                                    </graphic>
+                                </Label>
+                            </graphic>
+                        </Tab>
+                        <Tab>
+                            <content>
                                 <VBox fx:id="taskList" minWidth="340" prefWidth="340.0" styleClass="pane-with-border">
                                     <padding>
                                         <Insets bottom="10" left="10" right="10" top="10" />
@@ -108,23 +125,6 @@
                                 </Label>
                             </graphic>
                         </Tab>
-                      <Tab>
-                            <content>
-                                <VBox fx:id="summaryPanel" minWidth="340" prefWidth="340.0" styleClass="pane-with-border">
-                                    <padding>
-                                        <Insets bottom="10" left="10" right="10" top="10" />
-                                    </padding>
-                                    <StackPane fx:id="summaryPanelPlaceholder" VBox.vgrow="ALWAYS" />
-                                </VBox>
-                        </content>
-                          <graphic>
-                              <Label graphicTextGap="0.0" text="ummary">
-                                  <graphic>
-                                      <Label styleClass="bold-letter" text="S" />
-                                  </graphic>
-                              </Label>
-                          </graphic>
-                      </Tab>
                     </tabs>
                 </TabPane>
 
