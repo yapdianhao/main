@@ -1,5 +1,6 @@
 package seedu.jelphabot.model.task;
 
+import javafx.beans.binding.Bindings;
 import javafx.collections.ObservableList;
 
 /**
@@ -7,6 +8,6 @@ import javafx.collections.ObservableList;
  */
 public class PinnedTaskList extends SubGroupTaskList {
     public PinnedTaskList(ObservableList<Task> taskList) {
-        super("Pinned", taskList);
+        super("Pinned", taskList, Bindings.createIntegerBinding(() -> 1));
     }
 }

@@ -1,6 +1,8 @@
 package seedu.jelphabot.model.task;
 
 import javafx.beans.binding.Bindings;
+import javafx.beans.binding.IntegerBinding;
+import javafx.beans.binding.NumberBinding;
 import javafx.collections.ObservableList;
 
 /**
@@ -9,10 +11,14 @@ import javafx.collections.ObservableList;
 public class SubGroupTaskList {
     private final String groupName;
     private final ObservableList<Task> taskList;
+    private final IntegerBinding size;
+    private final NumberBinding startingIndex;
 
-    SubGroupTaskList(String groupName, ObservableList<Task> taskList) {
+    SubGroupTaskList(String groupName, ObservableList<Task> taskList, NumberBinding startingIndex) {
         this.groupName = groupName;
         this.taskList = taskList;
+        this.size = Bindings.size(taskList);
+        this.startingIndex = startingIndex;
     }
 
     public ObservableList<Task> getList() {
@@ -28,6 +34,10 @@ public class SubGroupTaskList {
     }
 
     public int size() {
-        return Bindings.size(taskList).getValue();
+        return size.intValue();
+    }
+
+    public NumberBinding sizeBinding() {
+        return size;
     }
 }

@@ -1,5 +1,6 @@
 package seedu.jelphabot.model.task;
 
+import static seedu.jelphabot.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.jelphabot.commons.util.DateUtil.getDueSomedayPredicate;
 import static seedu.jelphabot.commons.util.DateUtil.getDueThisWeekPredicate;
 import static seedu.jelphabot.commons.util.DateUtil.getDueTodayPredicate;
@@ -8,7 +9,6 @@ import static seedu.jelphabot.commons.util.DateUtil.getOverduePredicate;
 import java.util.Iterator;
 import java.util.function.Predicate;
 
-import javafx.beans.binding.Bindings;
 import javafx.beans.binding.NumberBinding;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -33,17 +33,30 @@ public class GroupedByDateTaskList implements GroupedTaskList {
     private final NumberBinding sizeBinding;
 
     public GroupedByDateTaskList(ObservableList<Task> taskList, PinnedTaskList pinnedTasks) {
+        requireAllNonNull(taskList);
         dueDateTaskLists.add(pinnedTasks);
-        dueDateTaskLists.add(new SubGroupTaskList("Overdue", taskList.filtered(isOverdue).filtered(isIncomplete)));
-        dueDateTaskLists.add(new SubGroupTaskList("Due Today", taskList.filtered(isDueToday)));
-        dueDateTaskLists.add(new SubGroupTaskList("Due This Week", taskList.filtered(isDueThisWeek)));
-        dueDateTaskLists.add(new SubGroupTaskList("Due Someday", taskList.filtered(isDueSomeday)));
+        NumberBinding tempSize = pinnedTasks.sizeBinding();
 
-        NumberBinding tempSize = Bindings.createIntegerBinding(() -> 0);
-        for (SubGroupTaskList subList : dueDateTaskLists) {
-            tempSize = tempSize.add(Bindings.size(subList.getList()));
-        }
-        sizeBinding = tempSize;
+        SubGroupTaskList overdueTaskList =
+            new SubGroupTaskList("Overdue", taskList.filtered(isOverdue.and(isIncomplete)), tempSize);
+        dueDateTaskLists.add(overdueTaskList);
+        tempSize = tempSize.add(overdueTaskList.sizeBinding());
+
+        SubGroupTaskList dueTodayTaskList =
+            new SubGroupTaskList("Due Today", taskList.filtered(isDueToday), tempSize);
+        dueDateTaskLists.add(dueTodayTaskList);
+        tempSize = tempSize.add(dueTodayTaskList.sizeBinding());
+
+        SubGroupTaskList dueThisWeekTaskList =
+            new SubGroupTaskList("Due This Week", taskList.filtered(isDueThisWeek), tempSize);
+        dueDateTaskLists.add(dueThisWeekTaskList);
+        tempSize = tempSize.add(dueThisWeekTaskList.sizeBinding());
+
+        SubGroupTaskList dueSomedayTaskList =
+            new SubGroupTaskList("Due Someday", taskList.filtered(isDueSomeday), tempSize);
+        dueDateTaskLists.add(dueSomedayTaskList);
+        tempSize = tempSize.add(dueSomedayTaskList.sizeBinding());
+        this.sizeBinding = tempSize;
     }
 
     @Override
@@ -68,7 +81,6 @@ public class GroupedByDateTaskList implements GroupedTaskList {
 
     @Override
     public Task get(int id) {
-        assert id < size();
         for (SubGroupTaskList sublist : dueDateTaskLists) {
             if (id < sublist.size()) {
                 return sublist.get(id);

@@ -18,7 +18,7 @@ public class ListCommand extends Command {
     public static final String DATE_GROUPING = "date";
     public static final String MODULE_GROUPING = "module";
 
-    public static final String MESSAGE_SUCCESS = "Listed all tasks by ";
+    public static final String MESSAGE_SUCCESS = "Listed all tasks by "; //TODO typo
     public static final String MESSAGE_SWITCH_PANEL_ACKNOWLEDGEMENT = "Switched to Task List panel";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Switches to Task List panel and lists all tasks.\n"

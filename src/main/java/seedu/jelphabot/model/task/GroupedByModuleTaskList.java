@@ -28,9 +28,10 @@ public class GroupedByModuleTaskList implements GroupedTaskList {
         moduleCodeTaskLists.add(pinnedTasks);
         NumberBinding tempSize = Bindings.createIntegerBinding(pinnedTasks::size);
         for (ModuleCode code : getUniqueModuleSet(taskList)) {
-            ObservableList<Task> moduleCodeSubList = taskList.filtered(hasModuleCode(code));
-            moduleCodeTaskLists.add(new SubGroupTaskList(code.toString(), moduleCodeSubList));
-            tempSize = tempSize.add(Bindings.size(moduleCodeSubList));
+            SubGroupTaskList moduleCodeSubList =
+                new SubGroupTaskList(code.toString(), taskList.filtered(hasModuleCode(code)), tempSize);
+            moduleCodeTaskLists.add(moduleCodeSubList);
+            tempSize = tempSize.add(moduleCodeSubList.size());
         }
         this.sizeBinding = tempSize;
     }
