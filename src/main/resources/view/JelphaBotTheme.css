@@ -1,6 +1,6 @@
 .background {
     -fx-background-color: derive(#86C1B9, 20%);
-    background-color: #fff6b0; /* Used in the default.html file */
+    background-color: #FEE9DC; /* Used in the default.html file */
 }
 
 .label-bright {
@@ -160,7 +160,7 @@
 
 .status-bar-with-border {
     -fx-background-color: derive(#fee9dc, 30%);
-    -fx-border-color: derive(#fee9dc, 25%);
+    -fx-border-color: derive(#383838, 25%);
     -fx-border-width: 1px;
 }
 
@@ -208,18 +208,19 @@
  */
 .button {
     -fx-padding: 5 22 5 22;
-    -fx-border-color: #e2e2e2;
+    -fx-border-color: #383838;
     -fx-border-width: 2;
     -fx-background-radius: 0;
-    -fx-background-color: #fee9dc;
+    -fx-background-color: #FEE9DC;
     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
     -fx-font-size: 11pt;
-    -fx-text-fill: #d8d8d8;
+    -fx-text-fill: #383838;
     -fx-background-insets: 0 0 0 0, 0, 1, 2;
 }
 
 .button:hover {
     -fx-background-color: #3a3a3a;
+    -fx-text-fill: #FEE9DC;
 }
 
 .button:pressed, .button:default:hover:pressed {
@@ -327,7 +328,7 @@
 }
 
 #resultDisplay .content {
-    -fx-background-color: transparent, #383838, transparent, #383838;
+    -fx-background-color: transparent, #FEE9DC, transparent, #FEE9DC;
     -fx-background-radius: 0;
 }
 

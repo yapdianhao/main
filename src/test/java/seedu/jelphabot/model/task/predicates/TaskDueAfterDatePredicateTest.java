@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.function.Predicate;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.jelphabot.model.task.DateTime;
@@ -17,7 +19,7 @@ class TaskDueAfterDatePredicateTest {
     void and() {
         TaskDueAfterDatePredicate condition1 = new TaskDueAfterDatePredicate(new DateTime("Apr-30-2020 00 01"));
         TaskDueAfterDatePredicate condition2 = new TaskDueAfterDatePredicate(new DateTime("May-2-2020 00 01"));
-        FilterTaskByDatePredicate predicate = condition1.and(condition2);
+        Predicate<Task> predicate = condition1.and(condition2);
         Task taskAfterDate = new TaskBuilder().withDateTime("May-1-2020 00 01").build();
         assertFalse(predicate.test(taskAfterDate));
     }

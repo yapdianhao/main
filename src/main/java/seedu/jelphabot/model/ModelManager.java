@@ -17,7 +17,10 @@ import seedu.jelphabot.model.productivity.ProductivityList;
 import seedu.jelphabot.model.reminder.Reminder;
 import seedu.jelphabot.model.summary.Summary;
 import seedu.jelphabot.model.summary.SummaryList;
+import seedu.jelphabot.model.task.GroupedTaskList;
+import seedu.jelphabot.model.task.PinnedTaskList;
 import seedu.jelphabot.model.task.Task;
+import seedu.jelphabot.model.task.ViewTaskList;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -32,6 +35,9 @@ public class ModelManager implements Model {
     private final FilteredList<Task> filteredCalendarTasks;
     private final ProductivityList productivityList;
     private final SummaryList summaryList;
+
+    private GroupedTaskList lastShownList;
+
     /**
      * Initializes a ModelManager with the given readOnlyJelphaBot and userPrefs.
      */
@@ -48,6 +54,7 @@ public class ModelManager implements Model {
         filteredCalendarTasks = new FilteredList<>(this.readOnlyJelphaBot.getTaskList());
         productivityList = new ProductivityList();
         summaryList = new SummaryList();
+        lastShownList = getGroupedTaskList(GroupedTaskList.Category.DATE);
     }
 
     public ModelManager() {
@@ -151,6 +158,8 @@ public class ModelManager implements Model {
         readOnlyJelphaBot.addReminder(reminder);
     }
 
+
+
     @Override
     public void setTask(Task target, Task editedTask) {
         requireAllNonNull(target, editedTask);
@@ -199,6 +208,26 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Task> getFilteredTaskList() {
         return filteredTasks;
+    }
+
+    @Override
+    public GroupedTaskList getGroupedTaskList(GroupedTaskList.Category category) {
+        if (lastShownList != null && lastShownList.getCategory() == category) {
+            return lastShownList;
+        } else {
+            lastShownList = GroupedTaskList.makeGroupedTaskList(getFilteredTaskList(), category, getPinnedTaskList());
+            return lastShownList;
+        }
+    }
+
+    @Override
+    public PinnedTaskList getPinnedTaskList() {
+        return new PinnedTaskList(filteredTasks);
+    }
+
+    @Override
+    public ViewTaskList getLastShownList() {
+        return lastShownList;
     }
 
     public ObservableList<Reminder> getFilteredReminderList() {

@@ -22,7 +22,7 @@ import seedu.jelphabot.model.calendar.CalendarDate;
 import seedu.jelphabot.model.productivity.Productivity;
 import seedu.jelphabot.model.productivity.ProductivityList;
 import seedu.jelphabot.model.task.GroupedTaskList;
-import seedu.jelphabot.model.task.GroupedTaskList.Grouping;
+import seedu.jelphabot.model.task.GroupedTaskList.Category;
 
 /**
  * The Main Window. Provides the basic application layout containing a menu bar
@@ -145,10 +145,10 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        GroupedTaskList sortedTasks = logic.getGroupedTaskList(Grouping.MODULE);
+        GroupedTaskList groupedTasks = logic.getGroupedTaskList(Category.DATE);
         taskListPanel = new GroupedTaskListPanel(
-            logic.getFilteredTaskList(),
-            sortedTasks
+            logic.getPinnedTaskList(),
+            groupedTasks
         );
         taskListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
 
@@ -261,10 +261,10 @@ public class MainWindow extends UiPart<Stage> {
      * Switches view to Task List panel.
      */
     @FXML
-    private void handleTaskList(Grouping sublistGrouping) {
-        mainWindowTabPane.getSelectionModel().select(1);
-        GroupedTaskList groupedTasks = logic.getGroupedTaskList(sublistGrouping);
-        taskListPanel = new GroupedTaskListPanel(logic.getFilteredTaskList(), groupedTasks);
+    private void handleTaskList(GroupedTaskList.Category sublistCategory) {
+        mainWindowTabPane.getSelectionModel().select(0);
+        GroupedTaskList groupedTasks = logic.getGroupedTaskList(sublistCategory);
+        taskListPanel = new GroupedTaskListPanel(logic.getPinnedTaskList(), groupedTasks);
         taskListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
 
     }
@@ -305,10 +305,10 @@ public class MainWindow extends UiPart<Stage> {
                 handleSummary();
                 break;
             case TASK_LIST_DATE:
-                handleTaskList(Grouping.DATE);
+                handleTaskList(GroupedTaskList.Category.DATE);
                 break;
             case TASK_LIST_MODULE:
-                handleTaskList(Grouping.MODULE);
+                handleTaskList(Category.MODULE);
                 break;
             default:
                 // do nothing

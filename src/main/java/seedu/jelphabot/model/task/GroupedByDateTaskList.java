@@ -5,13 +5,15 @@ import static seedu.jelphabot.commons.util.DateUtil.getDueThisWeekPredicate;
 import static seedu.jelphabot.commons.util.DateUtil.getDueTodayPredicate;
 import static seedu.jelphabot.commons.util.DateUtil.getOverduePredicate;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.function.Predicate;
 
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.NumberBinding;
 import javafx.collections.ObservableList;
 import seedu.jelphabot.commons.core.index.Index;
-import seedu.jelphabot.model.task.predicates.FilterTaskByDatePredicate;
 import seedu.jelphabot.model.task.predicates.TaskIsIncompletePredicate;
 
 /**
@@ -22,37 +24,59 @@ import seedu.jelphabot.model.task.predicates.TaskIsIncompletePredicate;
  */
 public class GroupedByDateTaskList implements GroupedTaskList {
 
-    private static final FilterTaskByDatePredicate isOverdue = getOverduePredicate();
-    private static final FilterTaskByDatePredicate isDueToday = getDueTodayPredicate();
-    private static final FilterTaskByDatePredicate isDueThisWeek = getDueThisWeekPredicate();
-    private static final FilterTaskByDatePredicate isDueSomeday = getDueSomedayPredicate();
+    private static final Predicate<Task> isOverdue = getOverduePredicate();
+    private static final Predicate<Task> isDueToday = getDueTodayPredicate();
+    private static final Predicate<Task> isDueThisWeek = getDueThisWeekPredicate();
+    private static final Predicate<Task> isDueSomeday = getDueSomedayPredicate();
     private static final Predicate<Task> isIncomplete = new TaskIsIncompletePredicate();
 
-    private final ObservableList<Task> taskList;
-    private final ObservableList<Task> overdueTaskList;
-    private final ObservableList<Task> dueTodayTaskList;
-    private final ObservableList<Task> dueThisWeekTaskList;
-    private final ObservableList<Task> dueSomedayTaskList;
+    private final List<SubGroupTaskList> dueDateTaskLists = new ArrayList<>();
+    private final NumberBinding sizeBinding;
 
-    public GroupedByDateTaskList(ObservableList<Task> taskList) {
-        this.taskList = taskList;
-        overdueTaskList = taskList.filtered(isOverdue).filtered(isIncomplete);
-        dueTodayTaskList = taskList.filtered(isDueToday);
-        dueThisWeekTaskList = taskList.filtered(isDueThisWeek);
-        dueSomedayTaskList = taskList.filtered(isDueSomeday);
+    public GroupedByDateTaskList(ObservableList<Task> taskList, PinnedTaskList pinnedTasks) {
+        dueDateTaskLists.add(pinnedTasks);
+        dueDateTaskLists.add(new SubGroupTaskList("Overdue", taskList.filtered(isOverdue).filtered(isIncomplete)));
+        dueDateTaskLists.add(new SubGroupTaskList("Due Today", taskList.filtered(isDueToday)));
+        dueDateTaskLists.add(new SubGroupTaskList("Due This Week", taskList.filtered(isDueThisWeek)));
+        dueDateTaskLists.add(new SubGroupTaskList("Due Someday", taskList.filtered(isDueSomeday)));
+
+        NumberBinding tempSize = Bindings.createIntegerBinding(() -> 0);
+        for (SubGroupTaskList subList : dueDateTaskLists) {
+            tempSize = tempSize.add(Bindings.size(subList.getList()));
+        }
+        sizeBinding = tempSize;
     }
 
     @Override
-    public Task getTaskById(Index id) {
+    public Category getCategory() {
+        return Category.DATE;
+    }
+
+    @Override
+    public int size() {
+        return sizeBinding.intValue();
+    }
+
+    @Override
+    public Iterator<SubGroupTaskList> iterator() {
+        return dueDateTaskLists.iterator();
+    }
+
+    @Override
+    public Task get(int id) {
+        assert id < size();
+        for (SubGroupTaskList sublist : dueDateTaskLists) {
+            if (id < sublist.size()) {
+                return sublist.get(id);
+            } else {
+                id -= sublist.size();
+            }
+        }
         return null;
     }
 
-    public Iterator<String> getGroupNames() {
-        return List.of("Overdue", "Due Today", "Due This Week", "Due Later").iterator();
-    }
-
     @Override
-    public Iterator<ObservableList<Task>> iterator() {
-        return List.of(overdueTaskList, dueTodayTaskList, dueThisWeekTaskList, dueSomedayTaskList).iterator();
+    public Task get(Index index) {
+        return get(index.getZeroBased());
     }
 }

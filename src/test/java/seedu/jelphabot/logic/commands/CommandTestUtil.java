@@ -49,6 +49,7 @@ public class CommandTestUtil {
     public static final String VALID_BOOK_REPORT_REMINDER_INDEX = "2";
     public static final String VALID_BOOK_REPORT_REMINDER_HOUR = "2";
     public static final String VALID_BOOK_REPORT_REMINDER_DAY = "2";
+    public static final String VALID_ASSIGNMENT_REMINDER_INDEX = "3";
 
     public static final String DESCRIPTION_DESC_ASSIGNMENT = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_ASSIGNMENT;
     public static final String DESCRIPTION_DESC_TUTORIAL = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_TUTORIAL;
@@ -75,6 +76,8 @@ public class CommandTestUtil {
     public static final String INVALID_REMINDER_DAY = "-1";
     //reminder hour > 24
     public static final String INVALID_REMINDER_HOUR = "30";
+
+    public static final String NEGATIVE_INDEX = "-1";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

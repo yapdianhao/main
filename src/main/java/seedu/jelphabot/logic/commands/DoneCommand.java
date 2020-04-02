@@ -3,7 +3,6 @@ package seedu.jelphabot.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.jelphabot.model.Model.PREDICATE_SHOW_ALL_TASKS;
 
-import java.util.List;
 import java.util.Set;
 
 import seedu.jelphabot.commons.core.Messages;
@@ -20,6 +19,7 @@ import seedu.jelphabot.model.task.Priority;
 import seedu.jelphabot.model.task.Status;
 import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.model.task.TimeSpent;
+import seedu.jelphabot.model.task.ViewTaskList;
 
 /**
  * Marks the specified as done by updating it's status to COMPLETE.
@@ -49,7 +49,7 @@ public class DoneCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Task> lastShownList = model.getFilteredTaskList();
+        ViewTaskList lastShownList = model.getLastShownList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);

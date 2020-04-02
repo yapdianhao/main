@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_ASSESSMENT_REMINDER_DAY;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_ASSESSMENT_REMINDER_HOUR;
-import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_ASSESSMENT_REMINDER_INDEX;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_ASSIGNMENT_REMINDER_INDEX;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_BOOK_REPORT_REMINDER_DAY;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_BOOK_REPORT_REMINDER_HOUR;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_BOOK_REPORT_REMINDER_INDEX;
@@ -73,9 +73,8 @@ public class ReminderTest {
                                           .build();
         //assertNotEquals(BOOK_REPORT_REMINDER, editedBookReminder);
 
-        // different module code -> returns false
         editedBookReminder = new ReminderBuilder(BOOK_REPORT_REMINDER)
-                                 .withIndex(VALID_ASSESSMENT_REMINDER_INDEX)
+                                 .withIndex(VALID_ASSIGNMENT_REMINDER_INDEX)
                                  .build();
         assertNotEquals(BOOK_REPORT_REMINDER, editedBookReminder);
 

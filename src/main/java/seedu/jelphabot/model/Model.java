@@ -11,7 +11,10 @@ import seedu.jelphabot.model.productivity.ProductivityList;
 import seedu.jelphabot.model.reminder.Reminder;
 import seedu.jelphabot.model.summary.Summary;
 import seedu.jelphabot.model.summary.SummaryList;
+import seedu.jelphabot.model.task.GroupedTaskList;
+import seedu.jelphabot.model.task.PinnedTaskList;
 import seedu.jelphabot.model.task.Task;
+import seedu.jelphabot.model.task.ViewTaskList;
 
 /**
  * The API of the Model component.
@@ -112,6 +115,12 @@ public interface Model {
 
     /** Returns an unmodifiable view of the filtered task list */
     ObservableList<Task> getFilteredTaskList();
+
+    GroupedTaskList getGroupedTaskList(GroupedTaskList.Category category);
+
+    PinnedTaskList getPinnedTaskList();
+
+    ViewTaskList getLastShownList();
 
     ObservableList<Reminder> getFilteredReminderList();
 

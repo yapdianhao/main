@@ -1,20 +1,19 @@
 package seedu.jelphabot.ui;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.logging.Logger;
 
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.IntegerBinding;
 import javafx.beans.binding.NumberBinding;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.jelphabot.commons.core.LogsCenter;
 import seedu.jelphabot.model.task.GroupedTaskList;
-import seedu.jelphabot.model.task.Task;
+import seedu.jelphabot.model.task.PinnedTaskList;
+import seedu.jelphabot.model.task.SubGroupTaskList;
 
 /**
  * Panel containing the list of tasks.
@@ -30,20 +29,18 @@ public class GroupedTaskListPanel extends UiPart<Region> {
 
     @javafx.fxml.FXML
     private ListView<SubgroupTaskListPanel> taskListGroups;
+
     private NumberBinding latestSize = STARTING_INDEX;
 
-    public GroupedTaskListPanel(ObservableList<Task> pinnedTaskList, GroupedTaskList groupedTaskList) {
+    public GroupedTaskListPanel(PinnedTaskList pinnedTaskList, GroupedTaskList groupedTaskList) {
         super(FXML);
 
-        Iterator<String> groupNames = groupedTaskList.getGroupNames();
         ArrayList<SubgroupTaskListPanel> groupedPanels = new ArrayList<>();
-
-        // Set pinned items
-        groupedPanels.add(new SubgroupTaskListPanel("Pinned", pinnedTaskList, latestSize));
-        latestSize = latestSize.add(Bindings.size(pinnedTaskList));
-        for (ObservableList<Task> taskList : groupedTaskList) {
-            groupedPanels.add(new SubgroupTaskListPanel(groupNames.next(), taskList, latestSize));
-            latestSize = latestSize.add(Bindings.size(taskList));
+        for (SubGroupTaskList subGroup : groupedTaskList) {
+            if (subGroup.size() > 0) {
+                groupedPanels.add(new SubgroupTaskListPanel(subGroup, latestSize));
+            }
+            latestSize = latestSize.add(Bindings.size(subGroup.getList()));
         }
         taskListGroups.setCellFactory(viewCell -> new GroupedTaskListPanel.GroupedTaskListViewCell());
         taskListGroups.setItems(FXCollections.observableArrayList(groupedPanels));

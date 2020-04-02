@@ -4,6 +4,7 @@ import static seedu.jelphabot.commons.util.DateUtil.dateToLocalDate;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.function.Predicate;
 
 import seedu.jelphabot.model.task.DateTime;
 import seedu.jelphabot.model.task.Task;
@@ -11,7 +12,7 @@ import seedu.jelphabot.model.task.Task;
 /**
  * Tests that a {@code Task} is completed within the specified Date
  */
-public class TaskCompletedWithinDayPredicate implements FilterTaskByDatePredicate {
+public class TaskCompletedWithinDayPredicate implements Predicate<Task> {
     private final LocalDate date;
 
     // default constructor sets the date to the instant the constructor is called
