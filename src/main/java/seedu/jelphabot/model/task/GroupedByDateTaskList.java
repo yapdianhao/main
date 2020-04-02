@@ -53,6 +53,11 @@ public class GroupedByDateTaskList implements GroupedTaskList {
     }
 
     @Override
+    public ObservableList<SubGroupTaskList> getList() {
+        return null;
+    }
+
+    @Override
     public int size() {
         return sizeBinding.intValue();
     }

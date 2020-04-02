@@ -2,7 +2,6 @@ package seedu.jelphabot.model.task;
 
 import static seedu.jelphabot.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -12,7 +11,6 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.binding.NumberBinding;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.ObservableSet;
 import seedu.jelphabot.commons.core.index.Index;
 
 /**
@@ -22,17 +20,14 @@ import seedu.jelphabot.commons.core.index.Index;
  * <p>
  */
 public class GroupedByModuleTaskList implements GroupedTaskList {
-    private final List<SubGroupTaskList> moduleCodeTaskLists = new ArrayList<>();
-    private final ObservableSet<ModuleCode> moduleCodes = FXCollections.observableSet();
+    private final ObservableList<SubGroupTaskList> moduleCodeTaskLists = FXCollections.observableArrayList();
     private final NumberBinding sizeBinding;
 
     public GroupedByModuleTaskList(ObservableList<Task> taskList, PinnedTaskList pinnedTasks) {
         requireAllNonNull(taskList);
-        moduleCodes.addAll(getUniqueModuleSet(taskList));
-
         moduleCodeTaskLists.add(pinnedTasks);
         NumberBinding tempSize = Bindings.createIntegerBinding(pinnedTasks::size);
-        for (ModuleCode code : moduleCodes) {
+        for (ModuleCode code : getUniqueModuleSet(taskList)) {
             ObservableList<Task> moduleCodeSubList = taskList.filtered(hasModuleCode(code));
             moduleCodeTaskLists.add(new SubGroupTaskList(code.toString(), moduleCodeSubList));
             tempSize = tempSize.add(Bindings.size(moduleCodeSubList));
@@ -64,6 +59,11 @@ public class GroupedByModuleTaskList implements GroupedTaskList {
     @Override
     public Category getCategory() {
         return Category.MODULE;
+    }
+
+    @Override
+    public ObservableList<SubGroupTaskList> getList() {
+        return moduleCodeTaskLists;
     }
 
     @Override
