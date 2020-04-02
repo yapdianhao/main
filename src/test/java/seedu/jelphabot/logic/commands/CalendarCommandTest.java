@@ -86,7 +86,7 @@ public class CalendarCommandTest {
     }
 
     @Test
-    public void equals_for_yearMonthConstructor_and_predicateConstructor() {
+    public void equals_for_bothConstructors() {
 
         TaskDueWithinDayPredicate firstPredicate = new TaskDueWithinDayPredicate();
         LocalDate date = LocalDate.now().plusMonths(1).plusDays(1);

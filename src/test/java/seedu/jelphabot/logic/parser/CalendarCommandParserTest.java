@@ -1,7 +1,7 @@
 package seedu.jelphabot.logic.parser;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.jelphabot.testutil.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDate;
 import java.time.YearMonth;
