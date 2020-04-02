@@ -22,7 +22,7 @@ public class DeleteReminderCommand extends Command {
                                                    + "Parameters: INDEX (must be a positive integer)\n"
                                                    + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_REMINDER_SUCCESS = "Deleted Reminder for %1$s";
+    public static final String MESSAGE_DELETE_REMINDER_SUCCESS = "Deleted Reminder for task %1$s";
 
     public static final String MESSAGE_DELETE_REMINDER_FAILURE = "Reminder not found!";
 
@@ -46,8 +46,7 @@ public class DeleteReminderCommand extends Command {
             throw new CommandException(MESSAGE_DELETE_REMINDER_FAILURE);
         } else {
             model.deleteReminder(toDelete);
-            return new CommandResult(String.format(MESSAGE_DELETE_REMINDER_SUCCESS,
-                "task " + this.targetIndex.getOneBased()));
+            return new CommandResult(String.format(MESSAGE_DELETE_REMINDER_SUCCESS, this.targetIndex.getOneBased()));
         }
     }
 
