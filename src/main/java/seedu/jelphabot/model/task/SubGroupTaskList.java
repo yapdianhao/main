@@ -12,13 +12,13 @@ public class SubGroupTaskList {
     private final String groupName;
     private final ObservableList<Task> taskList;
     private final IntegerBinding size;
-    private final NumberBinding startingIndex;
+    private final NumberBinding startIndex;
 
-    SubGroupTaskList(String groupName, ObservableList<Task> taskList, NumberBinding startingIndex) {
+    SubGroupTaskList(String groupName, ObservableList<Task> taskList, NumberBinding startIndex) {
         this.groupName = groupName;
         this.taskList = taskList;
         this.size = Bindings.size(taskList);
-        this.startingIndex = startingIndex;
+        this.startIndex = startIndex;
     }
 
     public ObservableList<Task> getList() {
@@ -39,5 +39,9 @@ public class SubGroupTaskList {
 
     public NumberBinding sizeBinding() {
         return size;
+    }
+
+    public NumberBinding startIndexBinding() {
+        return startIndex;
     }
 }

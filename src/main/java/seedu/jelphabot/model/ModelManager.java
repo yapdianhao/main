@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.beans.binding.Bindings;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.jelphabot.commons.core.GuiSettings;
@@ -204,7 +205,7 @@ public class ModelManager implements Model {
 
     @Override
     public PinnedTaskList getPinnedTaskList() {
-        return new PinnedTaskList(filteredTasks);
+        return new PinnedTaskList(filteredTasks, Bindings.createIntegerBinding(() -> 0));
     }
 
     @Override

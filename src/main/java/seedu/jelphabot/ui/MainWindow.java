@@ -38,8 +38,6 @@ public class MainWindow extends UiPart<Stage> {
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
-
-
     private Stage primaryStage;
     private Logic logic;
 
@@ -145,11 +143,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        GroupedTaskList groupedTasks = logic.getGroupedTaskList(Category.DATE);
-        taskListPanel = new GroupedTaskListPanel(
-            logic.getPinnedTaskList(),
-            groupedTasks
-        );
+        taskListPanel = new GroupedTaskListPanel(logic.getGroupedTaskList(Category.DATE));
         taskListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
 
         //update getFilteredCalendarTaskList
@@ -161,7 +155,8 @@ public class MainWindow extends UiPart<Stage> {
         calendarPanelPlaceholder.getChildren().add(calendarPanel.getRoot());
 
         summaryPanel = new SummaryPanel(logic.getFilteredByIncompleteDueTodayTaskList(),
-            logic.getFilteredByCompletedTodayTaskList(), mainWindowTabPane);
+            logic.getFilteredByCompletedTodayTaskList(), mainWindowTabPane
+        );
         summaryPanelPlaceholder.getChildren().add(summaryPanel.getRoot());
 
         ProductivityList productivityList = logic.getProductivityList();
@@ -264,7 +259,7 @@ public class MainWindow extends UiPart<Stage> {
     private void handleTaskList(GroupedTaskList.Category sublistCategory) {
         mainWindowTabPane.getSelectionModel().select(0);
         GroupedTaskList groupedTasks = logic.getGroupedTaskList(sublistCategory);
-        taskListPanel = new GroupedTaskListPanel(logic.getPinnedTaskList(), groupedTasks);
+        taskListPanel = new GroupedTaskListPanel(groupedTasks);
         taskListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
 
     }
