@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Scene?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.Scene?>
 <?import javafx.stage.Stage?>
 <?import java.net.URL?>
+
 <fx:root minHeight="600" minWidth="450" onCloseRequest="#handleExit" title="JelphaBot" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <icons>
         <Image url="@/images/address_book_32.png" />
@@ -31,7 +40,7 @@
                 </MenuBar>
                 <TabPane fx:id="mainWindowTabPane" maxHeight="-Infinity" minHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
                     <tabs>
-                        <Tab text="Task List">
+                        <Tab>
                             <content>
                                 <VBox fx:id="taskList" minWidth="340" prefWidth="340.0" styleClass="pane-with-border">
                                     <padding>
@@ -40,13 +49,19 @@
                                     <StackPane fx:id="taskListPanelPlaceholder" VBox.vgrow="ALWAYS" />
                                 </VBox>
                             </content>
+                            <graphic>
+                                <Label graphicTextGap="0.0" text="ask List">
+                                    <graphic>
+                                        <Label styleClass="bold-letter" text="T" />
+                                    </graphic>
+                                </Label>
+                            </graphic>
                         </Tab>
-                        <Tab text="Calendar">
+                        <Tab>
                             <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <SplitPane fx:id="calendarPane" dividerPositions="0.53" prefHeight="376.0"
-                                         prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <SplitPane fx:id="calendarPane" dividerPositions="0.53" prefHeight="376.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                 <items>
                                   <AnchorPane minHeight="0.0" minWidth="0.0">
                                        <children>
@@ -68,8 +83,15 @@
                               </SplitPane>
                            </children></AnchorPane>
                             </content>
+                            <graphic>
+                                <Label graphicTextGap="0.0" text="alendar">
+                                    <graphic>
+                                        <Label styleClass="bold-letter" text="C" />
+                                    </graphic>
+                                </Label>
+                            </graphic>
                         </Tab>
-                        <Tab text="Productivity">
+                        <Tab>
                             <content>
                                 <VBox fx:id="productivityPanel" minWidth="340" prefWidth="340.0" styleClass="pane-with-border">
                                     <padding>
@@ -78,8 +100,15 @@
                                     <StackPane fx:id="productivityPanelPlaceholder" VBox.vgrow="ALWAYS" />
                                 </VBox>
                             </content>
+                            <graphic>
+                                <Label graphicTextGap="0.0" text="roductivity">
+                                    <graphic>
+                                        <Label styleClass="bold-letter" text="P" />
+                                    </graphic>
+                                </Label>
+                            </graphic>
                         </Tab>
-                      <Tab text="Summary">
+                      <Tab>
                             <content>
                                 <VBox fx:id="summaryPanel" minWidth="340" prefWidth="340.0" styleClass="pane-with-border">
                                     <padding>
@@ -87,8 +116,14 @@
                                     </padding>
                                     <StackPane fx:id="summaryPanelPlaceholder" VBox.vgrow="ALWAYS" />
                                 </VBox>
-
                         </content>
+                          <graphic>
+                              <Label graphicTextGap="0.0" text="ummary">
+                                  <graphic>
+                                      <Label styleClass="bold-letter" text="S" />
+                                  </graphic>
+                              </Label>
+                          </graphic>
                       </Tab>
                     </tabs>
                 </TabPane>
