@@ -18,3 +18,7 @@
 .tooltip-text {
     -fx-text-fill: white;
 }
+
+.bold-letter {
+    -fx-font-weight: bold;
+}

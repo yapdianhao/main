@@ -24,7 +24,7 @@ import seedu.jelphabot.model.task.TimeSpent;
 // no test for status and TimeSpent needed because they are not user-dependent
 public class JsonAdaptedTaskTest {
     private static final String INVALID_DESCRIPTION = "∫3L L1M";
-    // private static final Priority INVALID_PRIORITY = Priority.toPriority("INVALID");
+    // private static final String INVALID_PRIORITY = "INVALID";
     private static final String INVALID_MODULE_CODE = "2103T";
     private static final String INVALID_TAG = "#rabbit!!";
     private static final String INVALID_DATETIME = "03-19/1999 00:00";

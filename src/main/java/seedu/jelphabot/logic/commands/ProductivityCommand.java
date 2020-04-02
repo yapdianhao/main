@@ -8,7 +8,8 @@ import seedu.jelphabot.model.Model;
 public class ProductivityCommand extends Command {
 
     public static final String COMMAND_WORD = "productivity";
-    public static final String COMMAND_SHORTCUT = ":p";
+    public static final String COMMAND_SHORTCUT_UPPER = ":P";
+    public static final String COMMAND_SHORTCUT_LOWER = ":p";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows productivity panel.\n"
                                                    + "Example: " + COMMAND_WORD;

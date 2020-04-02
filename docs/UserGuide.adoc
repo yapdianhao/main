@@ -393,7 +393,7 @@ or its shortcut `:p` to manually switch to the producivity tab.
 The productivity panel will then show you your productivity for the day. +
 
 Format: `productivity` +
-Shortcut: `:p`
+Shortcut: `:P`
 
 [.text-center]
 .Example of expected result after running `productivity`
@@ -446,7 +446,7 @@ or its shortcut `:c` to manually switch to the calendar tab.
 The calendar panel will then show you your schedule for the current month with today's date highlighted. +
 
 Format: `calendar` +
-Shorcut: `:c`
+Shorcut: `:C`
 
 [.text-center]
 .Example of expected result after running `calendar`
@@ -516,7 +516,7 @@ The tasks listed in Morning Call and Night Debrief are displayed in under the Su
 The Summary tab can be viewed by entering the command `summary` or its shortcut `:s`
 
 Format: `summary`
-Shorcut: `:s`
+Shorcut: `:S`
 
 [.text-center]
 .Expected result after running `summary`

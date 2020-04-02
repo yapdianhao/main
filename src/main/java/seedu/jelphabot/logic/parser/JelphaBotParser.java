@@ -71,6 +71,8 @@ public class JelphaBotParser {
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
+        case ListCommand.COMMAND_SHORTCUT: // fallthrough
+        case ListCommand.COMMAND_SHORTCUT_TWO: // fallthrough
         case ListCommand.COMMAND_WORD:
             return new ListCommandParser().parse(arguments);
 
@@ -93,15 +95,18 @@ public class JelphaBotParser {
             return new DoneCommandParser().parse(arguments);
 
         case CalendarCommand.COMMAND_WORD: // fallthrough
-        case CalendarCommand.COMMAND_SHORTCUT:
+        case CalendarCommand.COMMAND_SHORTCUT_UPPER: // fallthrough
+        case CalendarCommand.COMMAND_SHORTCUT_LOWER:
             return new CalendarCommandParser().parse(arguments);
 
         case SummaryCommand.COMMAND_WORD: // fallthrough
-        case SummaryCommand.COMMAND_SHORTCUT:
+        case SummaryCommand.COMMAND_SHORTCUT_UPPER: // fallthrough
+        case SummaryCommand.COMMAND_SHORTCUT_LOWER:
             return new SummaryCommand();
 
         case ProductivityCommand.COMMAND_WORD: // fallthrough
-        case ProductivityCommand.COMMAND_SHORTCUT:
+        case ProductivityCommand.COMMAND_SHORTCUT_UPPER: // fallthrough
+        case ProductivityCommand.COMMAND_SHORTCUT_LOWER:
             return new ProductivityCommand();
 
         case StartTimerCommand.COMMAND_WORD:
