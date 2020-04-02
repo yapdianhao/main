@@ -36,7 +36,7 @@ Upon running JelphaBot, you will see various components on it's main display scr
 
 [.text-center]
 .Brief overview of the app
-image::MainUi.png[width="790"]
+image::MainUi.png[width="600"]
 
 The function of each component is as follows:
 
@@ -88,7 +88,7 @@ The GUI should appear in a few seconds. You should see a list of tasks as shown 
 +
 [.text-center]
 .Expected result after running `JelphaBot`
-image::Ui.png[width="790"]
+image::Ui.png[width="600"]
 +
 If you do not see this, you can follow the instructons here (link to Troubleshooting) to reset Jelphabot
 . Type the command in the command box and press kbd:[Enter] to execute it. +
@@ -395,10 +395,18 @@ Format: `delrem INDEX`
 * The index refers to the index number shown in the displayed task list.
 * The index *must be a positive integer* 1, 2, 3, ....
 
+[.text-center]
+.Example of expected result after running `delrem 1`
+image::ug_figures/delReminder.png[width="600"]
 
-==== Reminder popup notification `[coming in v2.0]`
+==== Reminder popup notification
 
-After the
+Whenever you boot JelphaBot, if there is any tasks that will be reminded, JelphaBot will show
+a list of tasks that will expire soon, and tasks that have expired but not done.
+
+[.text-center]
+.Example of expected result after tasks are being reminded.
+image::ug_figures/reminderpopup.png[width="600"]
 
 === Productivity Tracking (Jel)
 
@@ -413,7 +421,7 @@ Shortcut: `:P`
 
 [.text-center]
 .Example of expected result after running `productivity`
-image::ug_figures/productivityTab.png[width="790"]
+image::ug_figures/productivityTab.png[width="600"]
 
 // end::productivitytracker[]
 
@@ -424,7 +432,7 @@ Format: `start INDEX`
 
 [.text-center]
 .Example of expected result after running `start 1`
-image::ug_figures/start.png[width="790"]
+image::ug_figures/start.png[width="600"]
 
 ****
 * Starts the timer for the task at the specified `INDEX` if timer was not running.
@@ -440,7 +448,7 @@ Format: `stop INDEX`
 
 [.text-center]
 .Expected result after running `stop`
-image::ug_figures/stop.png[width="790"]
+image::ug_figures/stop.png[width="600"]
 
 ****
 * Stops the timer for the task at the specified `INDEX` if timer was running.
@@ -466,7 +474,7 @@ Shorcut: `:C`
 
 [.text-center]
 .Example of expected result after running `calendar`
-image::CalendarUi.png[width="790"]
+image::CalendarUi.png[width="600"]
 
 ==== Change month and year view of Calendar : `calendar`
 Displays the tasks due on specified date, while highlighting that day on the calendar.
@@ -483,7 +491,7 @@ Examples:
 
 [.text-center]
 .Example of expected result after running `calendar Apr-2020`
-image::CalendarView.png[width="790"]
+image::CalendarView.png[width="600"]
 
 Displays month of April in the year 2020 in the calendar panel on the right.
 
@@ -503,7 +511,7 @@ Examples:
 
 [.text-center]
 .Example of expected result after running `calendar Mar-1-2020`
-image::CalendarDate.png[width="790"]
+image::CalendarDate.png[width="600"]
 
 Highlights 1st of March in the calendar panel on the right and displays the corresponding tasks due on the left.
 
@@ -518,7 +526,7 @@ Examples:
 
 [.text-center]
 .Example of expected result after running `calendar today`
-image::CalendarToday.png[width="790"]
+image::CalendarToday.png[width="600"]
 
 Displays month of March in the year 2020 in the calendar panel on the right, with today's date highlighted and displays the corresponding tasks due today on the left.
 
@@ -536,7 +544,7 @@ Shorcut: `:S`
 
 [.text-center]
 .Expected result after running `summary`
-image::SummaryView.png[width="790"]
+image::SummaryView.png[width="600"]
 
 Displays the two dropdown tabs that show the tasks that are Due Today, and Completed Today.
 
@@ -544,7 +552,7 @@ Once a task under the Due Today tab is marked as done, it will appear under the 
 
 [.text-center]
 .Expected result after running `done 5`, which marks the task for ACC1101 Tutorial 4 as completed
-image::SummaryViewAfterTaskComplete.png[width="790"]
+image::SummaryViewAfterTaskComplete.png[width="600"]
 
 
 
