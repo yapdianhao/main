@@ -16,6 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.stage.Stage?>
 
+<?import javafx.scene.text.Text?>
 <fx:root minHeight="600" minWidth="450" onCloseRequest="#handleExit" title="JelphaBot" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <icons>
         <Image url="@/images/address_book_32.png" />
@@ -49,13 +50,13 @@
                                     <StackPane fx:id="taskListPanelPlaceholder" VBox.vgrow="ALWAYS" />
                                 </VBox>
                             </content>
-                     <graphic>
-                        <Label graphicTextGap="0.0" text="ask List">
-                             <graphic>
-                                 <Label text="T" styleClass="first-letter"/>
-                             </graphic>
-                        </Label>
-                     </graphic>
+                            <graphic>
+                                <Label graphicTextGap="0.0" text="ask List">
+                                    <graphic>
+                                        <Label styleClass="bold-letter" text="T" />
+                                    </graphic>
+                                </Label>
+                            </graphic>
                         </Tab>
                         <Tab>
                             <content>
@@ -86,7 +87,7 @@
                             <graphic>
                                 <Label graphicTextGap="0.0" text="alendar">
                                     <graphic>
-                                        <Label text="C" styleClass="first-letter"/>
+                                        <Label styleClass="bold-letter" text="C" />
                                     </graphic>
                                 </Label>
                             </graphic>
@@ -103,7 +104,7 @@
                             <graphic>
                                 <Label graphicTextGap="0.0" text="roductivity">
                                     <graphic>
-                                        <Label text="P" styleClass="first-letter"/>
+                                        <Label styleClass="bold-letter" text="P" />
                                     </graphic>
                                 </Label>
                             </graphic>
@@ -120,7 +121,7 @@
                           <graphic>
                               <Label graphicTextGap="0.0" text="ummary">
                                   <graphic>
-                                      <Label text="S" styleClass="first-letter"/>
+                                      <Label styleClass="bold-letter" text="S" />
                                   </graphic>
                               </Label>
                           </graphic>
