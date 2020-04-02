@@ -18,6 +18,7 @@ import seedu.jelphabot.commons.core.index.Index;
 import seedu.jelphabot.model.Model;
 import seedu.jelphabot.model.ModelManager;
 import seedu.jelphabot.model.UserPrefs;
+import seedu.jelphabot.model.task.GroupedTaskList;
 import seedu.jelphabot.model.task.Task;
 
 public class DoneCommandTest {
@@ -75,26 +76,29 @@ public class DoneCommandTest {
         assertCommandFailure(doneCommand, model, Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
 
-    @Test
+    @Test // Test against Category.MODULE as tasks that are overdue and completed are not shown.
     public void execute_taskAlreadyCompletedUnfilteredList_failure() {
-        Task firstTask = model.getLastShownList().get(INDEX_FIRST_TASK.getZeroBased());
+        Task firstTask = model.getGroupedTaskList(GroupedTaskList.Category.MODULE).get(INDEX_FIRST_TASK.getZeroBased());
         Task doneTask = createDoneTask(firstTask);
         DoneCommand doneCommand = new DoneCommand(INDEX_FIRST_TASK);
         Model newModel = new ModelManager(model.getJelphaBot(), new UserPrefs());
+        newModel.getGroupedTaskList(GroupedTaskList.Category.MODULE);
         newModel.setTask(firstTask, doneTask);
 
         assertCommandFailure(doneCommand, newModel, DoneCommand.MESSAGE_TASK_ALREADY_MARKED_COMPLETE);
 
     }
 
-    @Test
+    @Test // Test against Category.MODULE as tasks that are overdue and completed are not shown.
     public void execute_taskAlreadyCompletedFilteredList_failure() {
         showTaskAtIndex(model, INDEX_FIRST_TASK);
 
-        Task taskInList = model.getJelphaBot().getTaskList().get(INDEX_FIRST_TASK.getZeroBased());
+        Task taskInList =
+            model.getGroupedTaskList(GroupedTaskList.Category.MODULE).get(INDEX_FIRST_TASK.getZeroBased());
         Task doneTask = createDoneTask(taskInList);
         DoneCommand doneCommand = new DoneCommand(INDEX_FIRST_TASK);
         Model newModel = new ModelManager(model.getJelphaBot(), new UserPrefs());
+        newModel.getGroupedTaskList(GroupedTaskList.Category.MODULE);
         newModel.setTask(taskInList, doneTask);
 
         assertCommandFailure(doneCommand, newModel, DoneCommand.MESSAGE_TASK_ALREADY_MARKED_COMPLETE);
