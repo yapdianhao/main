@@ -15,6 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.jelphabot.model.JelphaBot;
+import seedu.jelphabot.model.reminder.Reminder;
 import seedu.jelphabot.model.task.Task;
 
 /**
@@ -78,6 +79,9 @@ public class TypicalTasks {
         JelphaBot ab = new JelphaBot();
         for (Task task : getTypicalTasks()) {
             ab.addTask(task);
+        }
+        for (Reminder reminder : TypicalReminders.getTypicalReminders()) {
+            ab.addReminder(reminder);
         }
         return ab;
     }
