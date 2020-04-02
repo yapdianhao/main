@@ -8,16 +8,17 @@
       <VBox prefHeight="33.0" prefWidth="363.0">
          <children>
             <Label alignment="CENTER" text="Welcome to JelphaBot!" />
-            <Label text="\\$breakline" />
+            <Label fx:id="breakline" text="\$breakline" />
          </children></VBox>
       <VBox prefHeight="200.0" prefWidth="363.0">
          <children>
             <Label text="Here are your tasks that are due today!" />
-            <Label text="Label" />
+            <Label fx:id="tasksDueToday" text="\$tasksDueToday" />
          </children></VBox>
       <VBox prefHeight="200.0" prefWidth="100.0">
          <children>
             <Label text="Here are your tasks that you have completed today!" />
+             <Label fx:id="tasksCompletedToday" text="\$tasksCompletedToday" />
          </children></VBox>
    </children>
 </VBox>
