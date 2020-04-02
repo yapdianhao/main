@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.logging.Logger;
 
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.IntegerBinding;
+import javafx.beans.binding.NumberBinding;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ListCell;
@@ -21,11 +24,13 @@ public class GroupedTaskListPanel extends UiPart<Region> {
 
     private static final String FXML = "GroupedTaskListPanel.fxml";
     private static final int PREF_CELL_HEIGHT = 100;
+    private static final IntegerBinding STARTING_INDEX = Bindings.createIntegerBinding(() -> 1);
 
     private final Logger logger = LogsCenter.getLogger(TaskListPanel.class);
 
     @javafx.fxml.FXML
     private ListView<SubgroupTaskListPanel> taskListGroups;
+    private NumberBinding latestSize = STARTING_INDEX;
 
     public GroupedTaskListPanel(ObservableList<Task> pinnedTaskList, GroupedTaskList groupedTaskList) {
         super(FXML);
@@ -34,10 +39,11 @@ public class GroupedTaskListPanel extends UiPart<Region> {
         ArrayList<SubgroupTaskListPanel> groupedPanels = new ArrayList<>();
 
         // Set pinned items
-        groupedPanels.add(new SubgroupTaskListPanel("Pinned", pinnedTaskList, 0));
+        groupedPanels.add(new SubgroupTaskListPanel("Pinned", pinnedTaskList, latestSize));
+        latestSize = latestSize.add(Bindings.size(pinnedTaskList));
         for (ObservableList<Task> taskList : groupedTaskList) {
-            // TODO display index dynamcally
-            groupedPanels.add(new SubgroupTaskListPanel(groupNames.next(), taskList, 0));
+            groupedPanels.add(new SubgroupTaskListPanel(groupNames.next(), taskList, latestSize));
+            latestSize = latestSize.add(Bindings.size(taskList));
         }
         taskListGroups.setCellFactory(viewCell -> new GroupedTaskListPanel.GroupedTaskListViewCell());
         taskListGroups.setItems(FXCollections.observableArrayList(groupedPanels));

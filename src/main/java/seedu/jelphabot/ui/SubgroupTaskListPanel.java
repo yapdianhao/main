@@ -3,6 +3,7 @@ package seedu.jelphabot.ui;
 import java.util.logging.Logger;
 
 import javafx.beans.binding.Bindings;
+import javafx.beans.binding.NumberBinding;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
@@ -30,10 +31,10 @@ public class SubgroupTaskListPanel extends UiPart<Region> {
     private ListView<Task> groupingList;
 
     // TODO display index dynamcally
-    private int startIndex;
+    private NumberBinding startIndex;
 
     // TODO do not display if list is empty
-    public SubgroupTaskListPanel(String title, ObservableList<Task> tasks, int startIndex) {
+    public SubgroupTaskListPanel(String title, ObservableList<Task> tasks, NumberBinding startIndex) {
         super(FXML);
         this.startIndex = startIndex;
 
@@ -55,7 +56,7 @@ public class SubgroupTaskListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new TaskCard(task, getIndex() + 1).getRoot());
+                setGraphic(new TaskCard(task, startIndex.add(getIndex())).getRoot());
             }
         }
     }
