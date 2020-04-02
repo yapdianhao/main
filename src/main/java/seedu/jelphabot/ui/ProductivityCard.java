@@ -33,6 +33,9 @@ public class ProductivityCard extends UiPart<Region> {
 
     public ProductivityCard(Productivity productivity) {
         super(FXML);
+
+        assert productivity != null : "productivity is null";
+
         this.productivity = productivity;
         String[] completionProductivity = productivity.getTasksCompleted().toStringArray();
         tasksCompleted.setText("   " + completionProductivity[0]);
