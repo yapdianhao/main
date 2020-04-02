@@ -99,7 +99,7 @@ public class CalendarPanel extends UiPart<Region> {
      */
     public void show() {
         logger.fine("Showing calendar panel of application.");
-        mainWindowTabPane.getSelectionModel().select(1);
+        mainWindowTabPane.getSelectionModel().select(2);
     }
 
     /**

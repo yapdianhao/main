@@ -262,7 +262,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void handleTaskList(Grouping sublistGrouping) {
-        mainWindowTabPane.getSelectionModel().select(0);
+        mainWindowTabPane.getSelectionModel().select(1);
         GroupedTaskList groupedTasks = logic.getGroupedTaskList(sublistGrouping);
         taskListPanel = new GroupedTaskListPanel(logic.getFilteredTaskList(), groupedTasks);
         taskListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());

@@ -51,7 +51,7 @@ public class SummaryPanel extends UiPart<Region> {
      */
     public void show() {
         logger.info("Showing summary panel of application");
-        mainWindowTabPane.getSelectionModel().select(3);
+        mainWindowTabPane.getSelectionModel().select(0);
     }
 
     /**

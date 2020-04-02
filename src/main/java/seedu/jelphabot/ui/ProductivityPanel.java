@@ -52,7 +52,7 @@ public class ProductivityPanel extends UiPart<Region> {
      */
     public void show() {
         logger.fine("Showing productivity panel of application.");
-        mainWindowTabPane.getSelectionModel().select(2);
+        mainWindowTabPane.getSelectionModel().select(3);
     }
 
     /**

@@ -50,7 +50,7 @@
                                 </VBox>
                             </content>
                             <graphic>
-                                <Label graphicTextGap="0.0" text="Summary">
+                                <Label graphicTextGap="0.0" text="ummary">
                                     <graphic>
                                         <Label styleClass="bold-letter" text="S" />
                                     </graphic>
