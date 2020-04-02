@@ -49,6 +49,7 @@ public class CommandTestUtil {
     public static final String VALID_BOOK_REPORT_REMINDER_INDEX = "2";
     public static final String VALID_BOOK_REPORT_REMINDER_HOUR = "2";
     public static final String VALID_BOOK_REPORT_REMINDER_DAY = "2";
+    public static final String VALID_ASSIGNMENT_REMINDER_INDEX = "3";
 
     public static final String DESCRIPTION_DESC_ASSIGNMENT = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_ASSIGNMENT;
     public static final String DESCRIPTION_DESC_TUTORIAL = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_TUTORIAL;

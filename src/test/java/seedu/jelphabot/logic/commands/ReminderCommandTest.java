@@ -3,7 +3,7 @@ package seedu.jelphabot.logic.commands;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.jelphabot.testutil.Assert.assertThrows;
-import static seedu.jelphabot.testutil.TypicalIndexes.INDEX_FIRST_TASK;
+import static seedu.jelphabot.testutil.TypicalIndexes.INDEX_THIRD_TASK;
 import static seedu.jelphabot.testutil.TypicalTasks.getTypicalJelphaBot;
 
 import org.junit.jupiter.api.Test;
@@ -27,10 +27,10 @@ public class ReminderCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Reminder reminder = new ReminderBuilder().build();
-        ReminderCommand reminderCommand = new ReminderCommand(INDEX_FIRST_TASK, reminder);
+        Reminder reminder = new ReminderBuilder().withIndex("2").build();
+        ReminderCommand reminderCommand = new ReminderCommand(INDEX_THIRD_TASK, reminder);
 
-        String expectedMessage = String.format(ReminderCommand.MESSAGE_SUCCESS, INDEX_FIRST_TASK.getOneBased());
+        String expectedMessage = String.format(ReminderCommand.MESSAGE_SUCCESS, INDEX_THIRD_TASK.getOneBased());
 
         ModelManager expectedModel = new ModelManager(model.getJelphaBot(), new UserPrefs());
         expectedModel.addReminder(reminder);
