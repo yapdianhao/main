@@ -25,11 +25,11 @@ import seedu.jelphabot.model.task.GroupedTaskList;
 import seedu.jelphabot.model.task.PinnedTaskList;
 import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.model.task.UniqueTaskList;
+import seedu.jelphabot.model.task.predicates.ReminderPredicate;
 import seedu.jelphabot.model.task.predicates.TaskCompletedWithinDayPredicate;
 import seedu.jelphabot.model.task.predicates.TaskIsCompletedPredicate;
 import seedu.jelphabot.model.task.predicates.TaskIsIncompletePredicate;
 import seedu.jelphabot.storage.Storage;
-import seedu.jelphabot.model.task.predicates.ReminderPredicate;
 
 /**
  * The main LogicManager of the app.
