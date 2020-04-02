@@ -2,7 +2,6 @@ package seedu.jelphabot.ui;
 
 import java.util.logging.Logger;
 
-import javafx.beans.binding.Bindings;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
@@ -10,6 +9,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.Region;
 import seedu.jelphabot.commons.core.LogsCenter;
+import seedu.jelphabot.model.summary.Summary;
 import seedu.jelphabot.model.task.Task;
 
 /**
@@ -22,28 +22,39 @@ public class SummaryPanel extends UiPart<Region> {
     private static final int PREF_CELL_HEIGHT = 210;
     private final Logger logger = LogsCenter.getLogger(SummaryPanel.class);
 
+    private ObservableList<Task> dueTodayTaskList;
+
+    private ObservableList<Task> completedTodayTaskList;
+
     @FXML
     private TabPane mainWindowTabPane;
 
     @FXML
-    private ListView<Task> dueTodayTaskListView;
+    private ListView<Task> summaryPanelListView;
 
-    @FXML
-    private ListView<Task> completedTodayTaskListView;
+    // @FXML
+    // private ListView<Task> dueTodayTaskListView;
+    //
+    // @FXML
+    // private ListView<Task> completedTodayTaskListView;
 
     public SummaryPanel(ObservableList<Task> dueTodayTaskList,
         ObservableList<Task> completedTodayTaskList, TabPane tabPane) {
         super(FXML);
         logger.info("Initialising summary panel stage");
+        this.dueTodayTaskList = dueTodayTaskList;
+        this.completedTodayTaskList = completedTodayTaskList;
         this.mainWindowTabPane = tabPane;
-        dueTodayTaskListView.setItems(dueTodayTaskList);
-        dueTodayTaskListView.setCellFactory(ListView -> new SummaryTaskListViewCell());
-        dueTodayTaskListView.prefHeightProperty().bind(Bindings.size(dueTodayTaskList).multiply(PREF_CELL_HEIGHT));
-
-        completedTodayTaskListView.setItems(completedTodayTaskList);
-        completedTodayTaskListView.setCellFactory(ListView -> new SummaryTaskListViewCell());
-        completedTodayTaskListView.prefHeightProperty()
-            .bind(Bindings.size(completedTodayTaskList).multiply(PREF_CELL_HEIGHT));
+        // dueTodayTaskListView.setItems(dueTodayTaskList);
+        // dueTodayTaskListView.setCellFactory(ListView -> new SummaryTaskListViewCell());
+        // dueTodayTaskListView.prefHeightProperty().bind(Bindings.size(dueTodayTaskList).multiply(PREF_CELL_HEIGHT));
+        //
+        // completedTodayTaskListView.setItems(completedTodayTaskList);
+        // completedTodayTaskListView.setCellFactory(ListView -> new SummaryTaskListViewCell());
+        // completedTodayTaskListView.prefHeightProperty()
+        //     .bind(Bindings.size(completedTodayTaskList).multiply(PREF_CELL_HEIGHT));
+        //summaryPanelListView.setItems()
+        summaryPanelListView.setCellFactory(listView -> new SummaryTaskListViewCell());
     }
 
     /**
@@ -68,13 +79,14 @@ public class SummaryPanel extends UiPart<Region> {
  */
 class SummaryTaskListViewCell extends ListCell<Task> {
     @Override
-    protected void updateItem(Task task, boolean empty) {
-        super.updateItem(task, empty);
+    protected void updateItem(Summary summary, boolean empty) {
+        super.updateItem(summary, empty);
 
         if (empty || task == null) {
             setGraphic(null);
             setText(null);
         } else {
+            setGraphic(new SummaryCard())
             setGraphic(new TaskCard(task, getIndex() + 1).getRoot());
         }
     }

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox prefWidth="363.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox prefHeight="33.0" prefWidth="363.0">
+         <children>
+            <Label alignment="CENTER" text="Welcome to JelphaBot!" />
+            <Label text="\\$breakline" />
+         </children></VBox>
+      <VBox prefHeight="200.0" prefWidth="363.0">
+         <children>
+            <Label text="Here are your tasks that are due today!" />
+            <Label text="Label" />
+         </children></VBox>
+      <VBox prefHeight="200.0" prefWidth="100.0">
+         <children>
+            <Label text="Here are your tasks that you have completed today!" />
+         </children></VBox>
+   </children>
+</VBox>
