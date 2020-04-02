@@ -2,6 +2,7 @@ package seedu.jelphabot.ui;
 
 import java.util.Comparator;
 
+import javafx.beans.binding.NumberBinding;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -44,14 +45,50 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label dateTime;
 
+    public TaskCard(Task task, NumberBinding displayedIndex) {
+        super(FXML);
+        this.task = task;
+        setId(displayedIndex);
+        populateTaskElements(task);
+    }
+
     public TaskCard(Task task, int displayedIndex) {
         super(FXML);
         this.task = task;
+        setId(displayedIndex);
+        populateTaskElements(task);
+    }
 
-        // Populate base elements
-        id.setText(displayedIndex + ". ");
+    private void setId(NumberBinding displayedIndex) {
+        id.textProperty().bind(displayedIndex.asString("%d. "));
+    }
+
+    private void setId(int displayedIndex) {
+        id.setText(String.format("%d. ", displayedIndex));
+    }
+
+    /**
+     * Populates TaskCard with data from a model.
+     * @param task the task containing model data for this TaskCard
+     */
+    private void populateTaskElements(Task task) {
         description.setText(task.getDescription().fullDescription);
-        // Set priority settings
+        moduleCode.setText(task.getModuleCode().value);
+        applyPriorityMarkdown(task);
+        status.setText(task.getStatus().name());
+        timeSpent.setText("(SPENT: " + task.getTimeSpent().toString() + ")");
+        dateTime.setText(task.getDateTime().getDisplayValue());
+        task.getTags().stream()
+            .sorted(Comparator.comparing(tag -> tag.tagName))
+            .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+
+    }
+
+    /**
+     * Applies markdown to TaskCard based on Task priority
+     * @param task the task containing model data for this TaskCard.
+     */
+    private void applyPriorityMarkdown(Task task) {
         if (task.getPriority().equals(Priority.HIGH)) {
             description.setId("highPriority");
             moduleCode.setId("highPriority");
@@ -62,13 +99,6 @@ public class TaskCard extends UiPart<Region> {
             description.setId("normalPriority");
             moduleCode.setId("normalPriority");
         }
-        moduleCode.setText(task.getModuleCode().value);
-        status.setText(task.getStatus().name());
-        timeSpent.setText("(SPENT: " + task.getTimeSpent().toString() + ")");
-        dateTime.setText(task.getDateTime().getDisplayValue());
-        task.getTags().stream()
-            .sorted(Comparator.comparing(tag -> tag.tagName))
-            .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
     @Override

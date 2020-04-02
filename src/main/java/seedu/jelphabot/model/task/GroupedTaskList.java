@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.function.Function;
 
 import javafx.collections.ObservableList;
+import seedu.jelphabot.commons.core.index.Index;
 
 /**
  * Interface representing a TaskList which is split into sub-groups by predefined groups.
@@ -15,6 +16,8 @@ public interface GroupedTaskList extends Iterable<ObservableList<Task>> {
     static GroupedTaskList makeGroupedTaskList(ObservableList<Task> tasks, Grouping group) {
         return group.construct(tasks);
     }
+
+    Task getTaskById(Index id);
 
     Iterator<String> getGroupNames();
 

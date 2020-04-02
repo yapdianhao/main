@@ -71,6 +71,8 @@ public class JelphaBotParser {
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
+        case ListCommand.COMMAND_SHORTCUT: // fallthrough
+        case ListCommand.COMMAND_SHORTCUT_TWO: // fallthrough
         case ListCommand.COMMAND_WORD:
             return new ListCommandParser().parse(arguments);
 

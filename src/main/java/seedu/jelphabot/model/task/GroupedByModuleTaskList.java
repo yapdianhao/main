@@ -11,6 +11,7 @@ import java.util.function.Predicate;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableSet;
+import seedu.jelphabot.commons.core.index.Index;
 
 /**
  * A container for ObservableList&lt;Task&gt; that splits the TaskList into groups.
@@ -50,6 +51,11 @@ public class GroupedByModuleTaskList implements GroupedTaskList {
     @Override
     public Iterator<ObservableList<Task>> iterator() {
         return moduleCodeTaskList.iterator();
+    }
+
+    @Override
+    public Task getTaskById(Index id) {
+        return null;
     }
 
     @Override
