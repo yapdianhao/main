@@ -305,6 +305,7 @@ public class MainWindow extends UiPart<Stage> {
             case TASK_LIST_MODULE:
                 handleTaskList(Category.MODULE);
                 break;
+            case STAY_ON_CURRENT:
             default:
                 // do nothing
                 break;

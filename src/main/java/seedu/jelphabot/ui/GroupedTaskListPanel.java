@@ -24,16 +24,21 @@ public class GroupedTaskListPanel extends UiPart<Region> {
     @javafx.fxml.FXML
     private ListView<SubgroupTaskListPanel> taskListGroups;
 
+    private final GroupedTaskList groupedTaskList;
 
     public GroupedTaskListPanel(GroupedTaskList groupedTaskList) {
         super(FXML);
-
+        this.groupedTaskList = groupedTaskList;
         ArrayList<SubgroupTaskListPanel> groupedPanels = new ArrayList<>();
         for (SubGroupTaskList subGroup : groupedTaskList) {
             groupedPanels.add(new SubgroupTaskListPanel(subGroup));
         }
         taskListGroups.setCellFactory(viewCell -> new GroupedTaskListPanel.GroupedTaskListViewCell());
         taskListGroups.setItems(FXCollections.observableArrayList(groupedPanels));
+    }
+
+    public GroupedTaskList.Category getCategory() {
+        return groupedTaskList.getCategory();
     }
 
     /**
