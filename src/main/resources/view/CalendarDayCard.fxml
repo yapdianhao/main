@@ -3,7 +3,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.shape.Circle?>
-<StackPane xmlns:fx="http://javafx.com/fxml/1" fx:id="calendarGridDay" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/11">
+
+<StackPane fx:id="calendarGridDay" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <Circle fx:id="circleDay" fill="#ffffff00" radius="14.0" stroke="#ffffff00" strokeType="INSIDE" />
         <Label fx:id="calendarDay" alignment="CENTER" contentDisplay="CENTER" text="\$day" textAlignment="CENTER" />

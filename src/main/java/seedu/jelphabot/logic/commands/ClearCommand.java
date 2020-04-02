@@ -20,7 +20,7 @@ public class ClearCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.setJelphaBot(new JelphaBot());
-        model.setProductivity(new Productivity(model.getFilteredTaskList()));
+        model.setProductivity(new Productivity(model.getFilteredTaskList(), true, true, true));
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
