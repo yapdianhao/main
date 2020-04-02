@@ -44,16 +44,7 @@ public class SummaryPanel extends UiPart<Region> {
         this.dueTodayTaskList = dueTodayTaskList;
         this.completedTodayTaskList = completedTodayTaskList;
         this.mainWindowTabPane = tabPane;
-        summaryPanelListView.setItems();
-        // dueTodayTaskListView.setItems(dueTodayTaskList);
-        // dueTodayTaskListView.setCellFactory(ListView -> new SummaryTaskListViewCell());
-        // dueTodayTaskListView.prefHeightProperty().bind(Bindings.size(dueTodayTaskList).multiply(PREF_CELL_HEIGHT));
-        //
-        // completedTodayTaskListView.setItems(completedTodayTaskList);
-        // completedTodayTaskListView.setCellFactory(ListView -> new SummaryTaskListViewCell());
-        // completedTodayTaskListView.prefHeightProperty()
-        //     .bind(Bindings.size(completedTodayTaskList).multiply(PREF_CELL_HEIGHT));
-        //summaryPanelListView.setItems()
+        summaryPanelListView.setItems(summaryList);
         summaryPanelListView.setCellFactory(listView -> new SummaryTaskListViewCell());
     }
 
@@ -87,7 +78,6 @@ class SummaryTaskListViewCell extends ListCell<Summary> {
             setText(null);
         } else {
             setGraphic(new SummaryCard(summary).getRoot());
-            //setGraphic(new TaskCard(task, getIndex() + 1).getRoot());
         }
     }
 }

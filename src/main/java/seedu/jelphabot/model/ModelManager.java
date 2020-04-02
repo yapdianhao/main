@@ -151,8 +151,6 @@ public class ModelManager implements Model {
         readOnlyJelphaBot.addReminder(reminder);
     }
 
-
-
     @Override
     public void setTask(Task target, Task editedTask) {
         requireAllNonNull(target, editedTask);
