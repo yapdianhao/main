@@ -21,6 +21,8 @@ import seedu.jelphabot.logic.parser.exceptions.ParseException;
 import seedu.jelphabot.model.calendar.CalendarDate;
 import seedu.jelphabot.model.productivity.Productivity;
 import seedu.jelphabot.model.productivity.ProductivityList;
+import seedu.jelphabot.model.summary.Summary;
+import seedu.jelphabot.model.summary.SummaryList;
 import seedu.jelphabot.model.task.GroupedTaskList;
 import seedu.jelphabot.model.task.GroupedTaskList.Category;
 
@@ -33,7 +35,7 @@ public class MainWindow extends UiPart<Stage> {
     private static final String FXML = "MainWindow.fxml";
     private static CalendarPanel calendarPanel;
     private static boolean firstStart = true;
-    private static final String WELCOME_STRING = "Welcome to JelphaBot! Here are the tasks that you have due today!\n"
+    private static final String WELCOME_STRING = "Welcome to JelphaBot!\n"
                                                      + "To go back to the list of your tasks, type list!";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
@@ -160,12 +162,13 @@ public class MainWindow extends UiPart<Stage> {
         calendarPanel = new CalendarPanel(CalendarDate.getCurrent(), mainWindowTabPane);
         calendarPanelPlaceholder.getChildren().add(calendarPanel.getRoot());
 
-        summaryPanel = new SummaryPanel(logic.getFilteredByIncompleteDueTodayTaskList(),
-            logic.getFilteredByCompletedTodayTaskList(), mainWindowTabPane);
+        SummaryList summaryList = logic.getSummaryList();
+        summaryList.addSummary(new Summary(logic.getFilteredTaskList()));
+        summaryPanel = new SummaryPanel(summaryList.asUnmodifiableObservableList(), mainWindowTabPane);
         summaryPanelPlaceholder.getChildren().add(summaryPanel.getRoot());
 
         ProductivityList productivityList = logic.getProductivityList();
-        productivityList.addProductivity(new Productivity(logic.getFilteredTaskList(), true, true, true));
+        productivityList.addProductivity(new Productivity(logic.getFilteredTaskList()));
         productivityPanel = new ProductivityPanel(productivityList.asUnmodifiableObservableList(), mainWindowTabPane);
         productivityPanelPlaceholder.getChildren().add(productivityPanel.getRoot());
 
@@ -250,7 +253,6 @@ public class MainWindow extends UiPart<Stage> {
         if (!summaryPanel.isShowing()) {
             summaryPanel.show();
         }
-
         if (firstStart) {
             resultDisplay.setFeedbackToUser(WELCOME_STRING);
             firstStart = false;
@@ -262,7 +264,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void handleTaskList(GroupedTaskList.Category sublistCategory) {
-        mainWindowTabPane.getSelectionModel().select(0);
+        mainWindowTabPane.getSelectionModel().select(1);
         GroupedTaskList groupedTasks = logic.getGroupedTaskList(sublistCategory);
         taskListPanel = new GroupedTaskListPanel(logic.getPinnedTaskList(), groupedTasks);
         taskListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());

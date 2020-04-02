@@ -9,6 +9,8 @@ import seedu.jelphabot.commons.core.GuiSettings;
 import seedu.jelphabot.model.productivity.Productivity;
 import seedu.jelphabot.model.productivity.ProductivityList;
 import seedu.jelphabot.model.reminder.Reminder;
+import seedu.jelphabot.model.summary.Summary;
+import seedu.jelphabot.model.summary.SummaryList;
 import seedu.jelphabot.model.task.GroupedTaskList;
 import seedu.jelphabot.model.task.PinnedTaskList;
 import seedu.jelphabot.model.task.Task;
@@ -106,6 +108,11 @@ public interface Model {
      */
     void setProductivity(Productivity productivity);
 
+    /**
+     * Replaces the existing summary with {@code summary}.
+     */
+    void setSummary(Summary summary);
+
     /** Returns an unmodifiable view of the filtered task list */
     ObservableList<Task> getFilteredTaskList();
 
@@ -136,6 +143,11 @@ public interface Model {
      */
     ProductivityList getProductivityList();
 
+    /**
+     * Returns an unmodifiable view of the user's summary.
+     * @return
+     */
+    SummaryList getSummaryList();
     /**
      * Updates the filter of the filtered task list to filter by the given {@code predicate}.
      *

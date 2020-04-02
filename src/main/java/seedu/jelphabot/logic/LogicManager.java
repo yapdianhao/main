@@ -21,11 +21,12 @@ import seedu.jelphabot.model.Model;
 import seedu.jelphabot.model.ReadOnlyJelphaBot;
 import seedu.jelphabot.model.productivity.ProductivityList;
 import seedu.jelphabot.model.reminder.Reminder;
+import seedu.jelphabot.model.summary.SummaryList;
 import seedu.jelphabot.model.task.GroupedTaskList;
 import seedu.jelphabot.model.task.PinnedTaskList;
+import seedu.jelphabot.model.task.ReminderPredicate;
 import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.model.task.UniqueTaskList;
-import seedu.jelphabot.model.task.predicates.ReminderPredicate;
 import seedu.jelphabot.model.task.predicates.TaskCompletedWithinDayPredicate;
 import seedu.jelphabot.model.task.predicates.TaskIsCompletedPredicate;
 import seedu.jelphabot.model.task.predicates.TaskIsIncompletePredicate;
@@ -111,6 +112,7 @@ public class LogicManager implements Logic {
     }
 
     // makeshift implementation to ensure that build still runs as per normal
+    // TODO: implement this method in a way that does not require the creation of another UniqueTaskList
     @Override
     public ObservableList<Task> getFilteredByIncompleteTaskList() {
         ObservableList<Task> filteredTasks = model.getFilteredTaskList();
@@ -140,6 +142,10 @@ public class LogicManager implements Logic {
         return model.getProductivityList();
     }
 
+    @Override
+    public SummaryList getSummaryList() {
+        return model.getSummaryList();
+    }
     @Override
     public Path getJelphaBotFilePath() {
         return model.getJelphaBotFilePath();

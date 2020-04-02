@@ -95,7 +95,7 @@
 }
 
 .list-cell:filled:selected {
-    -fx-background-color: #b19cd9;
+    -fx-background-color: #ffe1de;
 }
 
 .list-cell:filled:selected #cardPane {
@@ -108,6 +108,7 @@
 }
 
 .cell_big_label {
+    /*-fx-background-color: #86C1B9;*/
     -fx-font-family: "Segoe UI Semibold";
     -fx-font-size: 17px;
     -fx-text-fill: #010504;
@@ -308,18 +309,22 @@
 
 #commandTypeLabel {
     -fx-font-size: 11px;
-    -fx-text-fill: #7a0602;
+    -fx-text-fill: #F70D1A;
 }
 
 #commandTextField {
     -fx-background-color: transparent #383838 transparent #383838;
     -fx-background-insets: 0;
-    -fx-border-color: #383838 #383838 #383838 #383838;
+    -fx-border-color: #383838 #383838 #ffffff #383838;
     -fx-border-insets: 0;
     -fx-border-width: 1;
     -fx-font-family: "Segoe UI Light";
     -fx-font-size: 13pt;
     -fx-text-fill: black;
+}
+
+#filterField, #personListPanel, #personWebpage {
+    -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
 }
 
 #resultDisplay .content {

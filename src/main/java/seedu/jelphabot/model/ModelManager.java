@@ -15,6 +15,8 @@ import seedu.jelphabot.commons.core.LogsCenter;
 import seedu.jelphabot.model.productivity.Productivity;
 import seedu.jelphabot.model.productivity.ProductivityList;
 import seedu.jelphabot.model.reminder.Reminder;
+import seedu.jelphabot.model.summary.Summary;
+import seedu.jelphabot.model.summary.SummaryList;
 import seedu.jelphabot.model.task.GroupedTaskList;
 import seedu.jelphabot.model.task.PinnedTaskList;
 import seedu.jelphabot.model.task.Task;
@@ -32,6 +34,7 @@ public class ModelManager implements Model {
     private final FilteredList<Reminder> filteredReminders;
     private final FilteredList<Task> filteredCalendarTasks;
     private final ProductivityList productivityList;
+    private final SummaryList summaryList;
 
     private GroupedTaskList lastShownList;
 
@@ -50,6 +53,7 @@ public class ModelManager implements Model {
         filteredReminders = new FilteredList<>(this.readOnlyJelphaBot.getReminderList());
         filteredCalendarTasks = new FilteredList<>(this.readOnlyJelphaBot.getTaskList());
         productivityList = new ProductivityList();
+        summaryList = new SummaryList();
         lastShownList = getGroupedTaskList(GroupedTaskList.Category.DATE);
     }
 
@@ -161,7 +165,9 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedTask);
         readOnlyJelphaBot.setTask(target, editedTask);
     }
+
     /*
+    @Override
     public void setReminder(Reminder target, Reminder newReminder) {
         requireAllNonNull(target, newReminder);
         readOnlyJelphaBot.setReminder(target, newReminder);
@@ -178,6 +184,18 @@ public class ModelManager implements Model {
     @Override
     public ProductivityList getProductivityList() {
         return productivityList;
+    }
+
+    // =========== Summary List
+    @Override
+    public void setSummary(Summary summary) {
+        requireAllNonNull(summary);
+        summaryList.setSummary(summary);
+    }
+
+    @Override
+    public SummaryList getSummaryList() {
+        return summaryList;
     }
 
     // =========== Filtered Task List Accessors

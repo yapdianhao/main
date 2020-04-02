@@ -301,8 +301,8 @@ In order to stop timing a task, the user enters `stop INDEX` command
 image::StopSequenceDiagram.png[]
 
 Upon successful execution of the command, the productivity tab removes the task being timed under the Running Timers header.
-If the timed task is due today or in the next 6 days, the time spent on the timed task will be added to either the Due today: label
-or the Due in the next 6 days: label under the Time Spent on Tasks header.
+If the timed task is due today or in the next 7 days, the time spent on the timed task will be added to either the Due today: label
+or the Due in the next 7 days: label under the Time Spent on Tasks header.
 
 [NOTE]
 If the user attempts to start timer for a task marked as completed or stop a task that does not have a running timer,
