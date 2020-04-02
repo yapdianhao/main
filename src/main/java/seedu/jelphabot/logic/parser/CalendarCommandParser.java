@@ -31,6 +31,7 @@ public class CalendarCommandParser implements Parser<CalendarCommand> {
             .appendOptional(DateTimeFormatter.ofPattern("MMM-uuuu"))
             .appendOptional(DateTimeFormatter.ofPattern("MMM/uuuu"))
             .appendOptional(DateTimeFormatter.ofPattern("uuuu/MMM"))
+            .appendOptional(DateTimeFormatter.ofPattern("uuuu-MMM"))
             .appendOptional(DateTimeFormatter.ofPattern("uuuu-MM"))
             .appendOptional(DateTimeFormatter.ofPattern("uuuu/MM"))
             .appendOptional(DateTimeFormatter.ofPattern("uu-MM"))
