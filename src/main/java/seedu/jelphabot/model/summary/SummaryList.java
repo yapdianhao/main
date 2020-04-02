@@ -25,6 +25,7 @@ public class SummaryList implements Iterable<Summary> {
     }
 
     public void setSummary(Summary summary) {
+        requireNonNull(summary);
         internalList.clear();
         internalList.add(summary);
     }
