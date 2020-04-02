@@ -43,8 +43,17 @@ public class CommandResult {
      * The application should switch to the Task List tab
      * @return Sets the "switch to window" flag to Task List.
      */
-    public CommandResult isShowTaskList() {
-        this.toSwitch = SwitchTab.TASK_LIST;
+    public CommandResult isShowDateTaskList() {
+        this.toSwitch = SwitchTab.TASK_LIST_DATE;
+        return this;
+    }
+
+    /**
+     * The application should switch to the Task List tab
+     * @return Sets the "switch to window" flag to Task List.
+     */
+    public CommandResult isShowModuleTaskList() {
+        this.toSwitch = SwitchTab.TASK_LIST_MODULE;
         return this;
     }
 
@@ -121,7 +130,8 @@ public class CommandResult {
         CALENDAR,
         PRODUCTIVITY,
         SUMMARY,
-        TASK_LIST,
+        TASK_LIST_DATE,
+        TASK_LIST_MODULE,
         STAY_ON_CURRENT
     }
 
