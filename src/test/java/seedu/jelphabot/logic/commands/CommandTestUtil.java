@@ -19,6 +19,7 @@ import seedu.jelphabot.commons.core.index.Index;
 import seedu.jelphabot.logic.commands.exceptions.CommandException;
 import seedu.jelphabot.model.JelphaBot;
 import seedu.jelphabot.model.Model;
+import seedu.jelphabot.model.task.GroupedTaskList;
 import seedu.jelphabot.model.task.Status;
 import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.model.task.predicates.DescriptionContainsKeywordsPredicate;
@@ -153,7 +154,21 @@ public class CommandTestUtil {
     public static void showTaskAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredTaskList().size());
 
-        Task task = model.getFilteredTaskList().get(targetIndex.getZeroBased());
+        Task task = model.getLastShownList().get(targetIndex.getZeroBased());
+        final String[] splitName = task.getDescription().fullDescription.split("\\s+");
+        model.updateFilteredTaskList(new DescriptionContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+
+        assertEquals(1, model.getFilteredTaskList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the task at the given
+     * {@code targetIndex} in the {@code model}'s address book.
+     */
+    public static void showTaskAtIndex(Model model, Index targetIndex, GroupedTaskList.Category category) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredTaskList().size());
+
+        Task task = model.getGroupedTaskList(category).get(targetIndex.getZeroBased());
         final String[] splitName = task.getDescription().fullDescription.split("\\s+");
         model.updateFilteredTaskList(new DescriptionContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
