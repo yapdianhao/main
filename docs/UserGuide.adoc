@@ -366,7 +366,8 @@ Valid `SORTING_ORDER` values include `date`, `module`, and `priority`.
 ==== Adding reminder : `reminder`
 Adds a reminder to your specified task and reminds you of the task if the current time is within the time-frame specified
 by you. +
-Format: `reminder INDEX rd/DAYS rh/HOURS`
+
+Format: `reminder INDEX days/DAYS hours/HOURS`
 
 * Adds a reminder to the task which is at the specified `INDEX`.
 * The index refers to the index number shown in the displayed task list.
@@ -377,12 +378,27 @@ Format: `reminder INDEX rd/DAYS rh/HOURS`
 ****
 * You can only specify `DAYS` to be in the range 0 - 7 inclusive.
 * You can only specify `HOURS` to be in the range 0 - 24 inclusive.
+* Every Task can only have one reminder.
 * Tasks that are completed cannot have a reminder.
-* Tasks can only have one reminder.
+* Tasks that are reminded but are not completed after the deadline will still be reminded for.
+* Whenever a task is deleted, the corresponding reminder will also be removed.
 ****
 
-==== Removing reminder `[coming in v2.0]`
+==== Removing reminder : `delrem`
+
+Should you choose to stop a task to be reminded or after it is completed, you can enter the
+`delrem` command to remove the reminder of that particular task. +
+
+Format: `delrem INDEX`
+
+* Removes a reminder associated to the task at the specified `INDEX`.
+* The index refers to the index number shown in the displayed task list.
+* The index *must be a positive integer* 1, 2, 3, ....
+
+
 ==== Reminder popup notification `[coming in v2.0]`
+
+After the
 
 === Productivity Tracking (Jel)
 
