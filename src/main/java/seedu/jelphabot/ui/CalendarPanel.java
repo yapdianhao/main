@@ -35,8 +35,6 @@ public class CalendarPanel extends UiPart<Region> {
 
     public CalendarPanel(CalendarDate calendarDate, TabPane mainWindowTabPane) {
         super(FXML);
-
-        assert calendarDate != null && mainWindowTabPane != null : "calendar date or tab pane is null";
         logger.info("Initialising calendar panel stage");
         this.mainWindowTabPane = mainWindowTabPane;
         this.calendarDate = calendarDate;

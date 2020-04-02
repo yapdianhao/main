@@ -50,7 +50,7 @@ public class StopTimerCommand extends Command {
         taskToStop.stopTimer();
         model.setTask(dummy, taskToStop);
         model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
-        model.setProductivity(new Productivity(model.getFilteredTaskList(), false, false, true));
+        model.setProductivity(new Productivity(model.getFilteredTaskList()));
         return new CommandResult(String.format(MESSAGE_SUCCESS, targetIndex.getOneBased(),
             taskToStop.getModuleCode().toString(), taskToStop.getDescription().toString(),
             taskToStop.getTimeSpent().toString()));

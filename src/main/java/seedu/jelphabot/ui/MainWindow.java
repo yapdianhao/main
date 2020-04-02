@@ -168,7 +168,7 @@ public class MainWindow extends UiPart<Stage> {
         summaryPanelPlaceholder.getChildren().add(summaryPanel.getRoot());
 
         ProductivityList productivityList = logic.getProductivityList();
-        productivityList.addProductivity(new Productivity(logic.getFilteredTaskList(), true, true, true));
+        productivityList.addProductivity(new Productivity(logic.getFilteredTaskList()));
         productivityPanel = new ProductivityPanel(productivityList.asUnmodifiableObservableList(), mainWindowTabPane);
         productivityPanelPlaceholder.getChildren().add(productivityPanel.getRoot());
 

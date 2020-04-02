@@ -12,7 +12,7 @@
 #
 ## These files are text and should be normalized (Convert crlf => lf)
 #
-text eol=lf
+text eol = lf
 
 # source code
 *.php text
