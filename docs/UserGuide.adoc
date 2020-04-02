@@ -36,7 +36,7 @@ Upon running JelphaBot, you will see various components on it's main display scr
 
 [.text-center]
 .Brief overview of the app
-image::MainUi.png[width="790"]
+image::MainUi.png[width="600"]
 
 The function of each component is as follows:
 
@@ -45,7 +45,7 @@ The function of each component is as follows:
 3. *Results Display*: This is where the results of your commands are displayed as JelphaBot interacts with you!
 4. *Command Box*: This is where you key in your own respective commands.
 
-As seen above, JelphaBot has four tabs, namely Summary, Task List, Calendar and Productivity.
+As seen above, JelphaBot has four tabs, Task List, Calendar, Productivity and Notes.
 You can switch between tabs anytime by pressing kbd:[Ctrl] + kbd:[Tab] on your keyboard to move to the tab on the right.
 If you are already on the rightmost tab, it wraps around to the leftmost tab.
 
@@ -88,7 +88,7 @@ The GUI should appear in a few seconds. You should see a list of tasks as shown 
 +
 [.text-center]
 .Expected result after running `JelphaBot`
-image::MainUi.png[width="790"]
+image::Ui.png[width="600"]
 +
 If you do not see this, you can follow the instructons here (link to Troubleshooting) to reset Jelphabot
 . Type the command in the command box and press kbd:[Enter] to execute it. +
@@ -106,9 +106,6 @@ A full list of commands is available here (link to command list)
 [[Features]]
 
 == Features
-In this section, you can find details about the commands that JelphaBot supports.
-These details include the command function, format and example usage. The features would be depicted
-in the order of the tabs shown on the main User Interface as seen above for your ease of navigation!
 
 === Common commands
 
@@ -132,49 +129,10 @@ Format: `exit`
 * Exiting the application before stopping any running timer wil cause all recorded time since the timer was started to be lost.
 ****
 
-=== Morning call/Night debrief (Eden)
-This section will be the first thing you will see after entering JelphaBot!
-
-Morning Call Displays the tasks that are due today, and Night Debrief displays the tasks that have been completed within the day.
-
-The tasks listed in Morning Call and Night Debrief are displayed in under the Summary tab as separate sections under "Due Today" and "Completed Today" respectively.
-
-==== Viewing the summary tab: `summary`
-
-Apart from the function to switch tabs by pressing kbd:[Ctrl] + kbd:[tab] on your keyboard, you can enter the `summary` command
-or its shortcut `:s` to manually switch to the summary tab.
-The summary panel will then display a summary of your tasks due and completed today. +
-
-Format: `summary` +
-Shortcut: `:S`
-
-[.text-center]
-.Example of expected result after running `summary`
-image::summaryTab.png[width="790"]
-
-Displays the two dropdown tabs that show the tasks that are Due Today, and Completed Today.
-
-Once a task under the Due Today tab is marked as done, it will appear under the Completed Today tab.
-
-[.text-center]
-.Expected result after running `done 5`, which marks the task for ACC1101 Tutorial 4 as completed
-image::SummaryViewAfterTaskComplete.png[width="790"]
-
 === Managing Tasks (Yao Jie)
 
-JelphaBot allows you to track and manage your tasks comprehensively as well!
+JelphaBot allows you to track and manage your tasks.
 You can view and sort all your tasks from the Task List page.
-
-Apart from the function to switch tabs by pressing kbd:[Ctrl] + kbd:[tab] on your keyboard, you can enter the `list` command
-or its shortcut `:t` to manually switch to the task list tab.
-The task list panel will then display your all tasks, sorted in various sections. +
-
-Format: `list` +
-Shortcut: `:T`
-
-[.text-center]
-.Example of expected result after running `list`
-image::TaskListTab.png[width="790"]
 
 ====
 *Command Format for Task list commands*
@@ -255,16 +213,13 @@ Group your tasks into the following categories:
 * Pinned +
 (Pinned tasks will always be displayed at the top. To read more about pinning tasks, go <<#pin, here>>)
 * Overdue  +
-(Shows tasks which are incomplete and past their due date)
+(Shows tasks which are uncompleted and past their due date)
 * Due Today +
 (Shows tasks due by the end of the day)
 * Due This week +
 (Shows tasks due by the end of the week, defined as before the next upcoming Monday)
 * Due Sometime +
 (Shows all other tasks that do not fit into prior categories)
-
-[TIP]
-Tasks which are due and completed will not be shown, as we assume you no longer need them.
 
 ===== Group tasks by Date : `list module`
 Groups tasks based on their defined module code. Modules will be presented in alphabetical order.
@@ -379,7 +334,7 @@ image::ug_figures/clear.png[width="600"]
 
 
 // tag::pin[]
-==== Pin Important tasks  : `pin` (Coming in V1.4)
+==== Pin Important tasks  : `pin`
 
 You can pin important tasks to the top of the task list with the `pin` command. +
 Pinned tasks will always be displayed in the Pinned Tasks group in the task list. +
@@ -406,76 +361,62 @@ Format: `sort SORTING_ORDER`
 
 Valid `SORTING_ORDER` values include `date`, `module`, and `priority`.
 
+=
+=== Set Reminders and Notifications (Dian Hao)
 
-=== Calendar (Amanda)
-JelphaBot also comes with a built in calendar view that allows you to view your overarching tasks due on a monthly basis.
-You would also be able to navigate to specific dates to view your tasks due for that day of the month!
+==== Adding reminder : `reminder`
+Adds a reminder to your specified task and reminds you of the task if the current time is within the time-frame specified
+by you. +
 
-==== View calender : `calendar`
-Apart from the function to switch tabs by pressing kbd:[Ctrl] + kbd:[tab] on your keyboard, you can enter the `calendar` command
-or its shortcut `:c` to manually switch to the calendar tab.
-The calendar panel will then show you your schedule for the current month with today's date highlighted. +
+Format: `reminder INDEX days/DAYS hours/HOURS`
 
-Format: `calendar` +
-Shortcut: `:C`
-
-[.text-center]
-.Example of expected result after running `calendar`
-image::CalendarTab.png[width="790"]
-
-==== Change month and year view of Calendar : `calendar`
-Displays the tasks due on specified date, while highlighting that day on the calendar.
-The task list panel on the left will display the tasks due today. +
-Format: `calendar MONTHYEAR`
-
-****
-* For MONTHYEAR format, it should be MMM-YYYY, but it also allows some other formats shown when you type in the command word.
-****
-
-Examples:
-
-* `calendar May-2020`
+* Adds a reminder to the task which is at the specified `INDEX`.
+* The index refers to the index number shown in the displayed task list.
+* The index *must be a positive integer* 1, 2, 3, ....
+* `DAYS` refers to the number of days before the due date of the task when you want to be reminded of it.
+* `HOURS` refers to the number of hours before the due date of the task when you want to be reminded of it.
 
 [.text-center]
-.Example of expected result after running `calendar May-2020`
-image::CalendarView.png[width="790"]
+.Example of expected result after running `reminder 1 days/1 hours/1`
+image::ug_figures/addReminder.png[width="600"]
 
-Displays month of May in the year 2020 in the calendar panel on the right.
-
-==== Show tasks due on specific date : `calendar`
-Displays the tasks due on specified date, while highlighting that day on the calendar +
-Format: `calendar DATE`
 
 ****
-* The date specified *must be for the month and year of the shown Ui* for that corresponding date to be highlighted
-* For DATE formats, we recommend the format to be MMM-dd-YYYY, but it also allows some other formats shown when you type in the command word.
+* You can only specify `DAYS` to be in the range 0 - 7 inclusive.
+* You can only specify `HOURS` to be in the range 0 - 24 inclusive.
+* Every Task can only have one reminder.
+* Tasks that are completed cannot have a reminder.
+* Tasks that are reminded but are not completed after the deadline will still be reminded for.
 ****
 
-Examples:
+==== Removing reminder : `delrem`
 
-* `calendar Apr-1-2020`
-* `calendar Apr/1/2020` +
+Should you choose to stop a task to be reminded or after it is completed, you can enter the
+`delrem` command to remove the reminder of that particular task. +
 
-[.text-center]
-.Example of expected result after running `calendar Apr-1-2020`
-image::CalendarDate.png[width="790"]
+Format: `delrem INDEX`
 
-Highlights 1st of March in the calendar panel on the right and displays the corresponding tasks due on the left.
-
-==== Navigate directly to today's date on Calendar : `calendar`
-Immediately displays the calendar view for this month and highlights today's date.
-The task list panel on the left will display the tasks due today as well. +
-Format: `calendar today`
-
-Examples:
-
-* `calendar today` +
+* Removes a reminder associated to the task at the specified `INDEX`.
+* The index refers to the index number shown in the displayed task list.
+* The index *must be a positive integer* 1, 2, 3, ....
 
 [.text-center]
-.Example of expected result after running `calendar today`
-image::CalendarToday.png[width="790"]
+.Example of expected result after running `delrem 1`
+image::ug_figures/delReminder.png[width="600"]
 
-Displays month of April in the year 2020 in the calendar panel on the right, with today's date highlighted and displays the corresponding tasks due today on the left.
+****
+* Whenever a task is deleted, the corresponding reminder will also be removed.
+****
+
+
+==== Reminder popup notification
+
+Whenever you boot JelphaBot, if there is any tasks that will be reminded, JelphaBot will show
+a list of tasks that will expire soon, and tasks that have expired but not done.
+
+[.text-center]
+.Example of expected result after tasks are being reminded.
+image::ug_figures/reminderpopup.png[width="600"]
 
 
 === Productivity Tracking (Jel)
@@ -491,7 +432,7 @@ Shortcut: `:P`
 
 [.text-center]
 .Example of expected result after running `productivity`
-image::ProductivityTab.png[width="790"]
+image::ug_figures/productivityTab.png[width="600"]
 
 // end::productivitytracker[]
 
@@ -502,7 +443,7 @@ Format: `start INDEX`
 
 [.text-center]
 .Example of expected result after running `start 1`
-image::ug_figures/start.png[width="790"]
+image::ug_figures/start.png[width="600"]
 
 ****
 * Starts the timer for the task at the specified `INDEX` if timer was not running.
@@ -518,7 +459,7 @@ Format: `stop INDEX`
 
 [.text-center]
 .Expected result after running `stop`
-image::ug_figures/stop.png[width="790"]
+image::ug_figures/stop.png[width="600"]
 
 ****
 * Stops the timer for the task at the specified `INDEX` if timer was running.
@@ -533,42 +474,99 @@ JelphaBot automatically tracks the user's productivity in a day and outputs the 
 achievements and task completion rate. +
 There is no need to manually ask for compliments or criticism.
 
-=== Set Reminders and Notifications (Dian Hao)
+=== Calendar (Amanda)
+==== View calender : `calendar`
+Apart from the function to switch tabs by pressing kbd:[Ctrl] + kbd:[tab] on your keyboard, you can enter the `calendar` command
+or its shortcut `:c` to manually switch to the calendar tab.
+The calendar panel will then show you your schedule for the current month with today's date highlighted. +
 
-==== Adding reminder : `reminder`
-Adds a reminder to your specified task and reminds you of the task if the current time is within the time-frame specified
-by you. +
+Format: `calendar` +
+Shorcut: `:C`
 
-Format: `reminder INDEX days/DAYS hours/HOURS`
+[.text-center]
+.Example of expected result after running `calendar`
+image::CalendarUi.png[width="600"]
 
-* Adds a reminder to the task which is at the specified `INDEX`.
-* The index refers to the index number shown in the displayed task list.
-* The index *must be a positive integer* 1, 2, 3, ....
-* `DAYS` refers to the number of days before the due date of the task when you want to be reminded of it.
-* `HOURS` refers to the number of hours before the due date of the task when you want to be reminded of it.
+==== Change month and year view of Calendar : `calendar`
+Displays the tasks due on specified date, while highlighting that day on the calendar.
+The task list panel on the left will display the tasks due today. +
+Format: `calendar MONTHYEAR`
 
 ****
-* You can only specify `DAYS` to be in the range 0 - 7 inclusive.
-* You can only specify `HOURS` to be in the range 0 - 24 inclusive.
-* Every Task can only have one reminder.
-* Tasks that are completed cannot have a reminder.
-* Tasks that are reminded but are not completed after the deadline will still be reminded for.
-* Whenever a task is deleted, the corresponding reminder will also be removed.
+* For MONTHYEAR format, it should be MMM-YYYY, but it also allows some other formats shown when you type in the command word.
 ****
 
-==== Removing reminder : `delrem`
+Examples:
 
-Should you choose to stop a task to be reminded or after it is completed, you can enter the
-`delrem` command to remove the reminder of that particular task. +
+* `calendar Apr-2020`
 
-Format: `delrem INDEX`
+[.text-center]
+.Example of expected result after running `calendar Apr-2020`
+image::CalendarView.png[width="600"]
 
-* Removes a reminder associated to the task at the specified `INDEX`.
-* The index refers to the index number shown in the displayed task list.
-* The index *must be a positive integer* 1, 2, 3, ....
+Displays month of April in the year 2020 in the calendar panel on the right.
+
+==== Show tasks due on specific date : `calendar`
+Displays the tasks due on specified date, while highlighting that day on the calendar +
+Format: `calendar DATE`
+
+****
+* The date specified *must be for the month and year of the shown Ui* for that corresponding date to be highlighted
+* For DATE formats, we recommend the format to be MMM-dd-YYYY, but it also allows some other formats shown when you type in the command word.
+****
+
+Examples:
+
+* `calendar Mar-1-2020`
+* `calendar Mar/1/2020` +
+
+[.text-center]
+.Example of expected result after running `calendar Mar-1-2020`
+image::CalendarDate.png[width="600"]
+
+Highlights 1st of March in the calendar panel on the right and displays the corresponding tasks due on the left.
+
+==== Navigate directly to today's date on Calendar : `calendar`
+Immediately displays the calendar view for this month and highlights today's date.
+The task list panel on the left will display the tasks due today as well. +
+Format: `calendar today`
+
+Examples:
+
+* `calendar today` +
+
+[.text-center]
+.Example of expected result after running `calendar today`
+image::CalendarToday.png[width="600"]
+
+Displays month of March in the year 2020 in the calendar panel on the right, with today's date highlighted and displays the corresponding tasks due today on the left.
+
+=== Morning call/Night debrief (Eden)
+Morning Call Displays the tasks that are due today, and Night Debrief displays the tasks that have been completed within the day.
+
+The tasks listed in Morning Call and Night Debrief are displayed in under the Summary tab as separate sections under "Due Today" and "Completed Today" respectively.
+
+==== Viewing the summary tab: `summary`
+
+The Summary tab can be viewed by entering the command `summary` or its shortcut `:s`
+
+Format: `summary`
+Shorcut: `:S`
+
+[.text-center]
+.Expected result after running `summary`
+image::SummaryView.png[width="600"]
+
+Displays the two dropdown tabs that show the tasks that are Due Today, and Completed Today.
+
+Once a task under the Due Today tab is marked as done, it will appear under the Completed Today tab.
+
+[.text-center]
+.Expected result after running `done 5`, which marks the task for ACC1101 Tutorial 4 as completed
+image::SummaryViewAfterTaskComplete.png[width="600"]
 
 
-==== Reminder popup notification `[coming in v2.0]`
+
 
 
 === Colour-code modules and font style for prioritised tasks `[coming in v2.0]`
