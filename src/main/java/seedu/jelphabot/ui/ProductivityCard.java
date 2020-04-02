@@ -33,12 +33,14 @@ public class ProductivityCard extends UiPart<Region> {
 
     public ProductivityCard(Productivity productivity) {
         super(FXML);
+
+        assert productivity != null : "productivity is null";
+
         this.productivity = productivity;
-        String[] tmp = productivity.getTasksCompleted().toStringArray();
-        String[] completion = tmp[0].split("\n");
-        tasksCompleted.setText("   " + completion[0]);
-        remark.setText(completion[1]);
-        overdueStatus.setText(tmp[1]);
+        String[] completionProductivity = productivity.getTasksCompleted().toStringArray();
+        tasksCompleted.setText("   " + completionProductivity[0]);
+        remark.setText(completionProductivity[1]);
+        overdueStatus.setText(completionProductivity[2]);
         runningTimers.setText(productivity.getRunningTimers().toString());
         timeSpentToday.setText(productivity.getTimeSpentToday().toString());
         tasksCompletionProgress.setProgress(productivity.getTasksCompleted().getPercentage());
