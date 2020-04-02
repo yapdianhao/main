@@ -3,6 +3,7 @@ package seedu.jelphabot.ui;
 import java.util.logging.Logger;
 
 import javafx.beans.binding.Bindings;
+import javafx.beans.binding.NumberBinding;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
@@ -10,6 +11,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.Region;
 import seedu.jelphabot.commons.core.LogsCenter;
+import seedu.jelphabot.model.task.SubGroupTaskList;
 import seedu.jelphabot.model.task.Task;
 
 /**
@@ -17,29 +19,39 @@ import seedu.jelphabot.model.task.Task;
  * Tasks are further sorted into pinned, dueToday, dueThisWeek, dueSomeday
  */
 public class SubgroupTaskListPanel extends UiPart<Region> {
+
     private static final String FXML = "SubgroupTaskListPanel.fxml";
     private static final int PREF_CELL_HEIGHT = 100;
 
     private final Logger logger = LogsCenter.getLogger(TaskListPanel.class);
 
     @FXML
-    private TitledPane grouping;
+    private TitledPane category;
 
     @FXML
     private ListView<Task> groupingList;
 
-    // TODO display index dynamcally
-    private int startIndex;
+    private NumberBinding startIndex;
 
     // TODO do not display if list is empty
-    public SubgroupTaskListPanel(String title, ObservableList<Task> tasks, int startIndex) {
+    public SubgroupTaskListPanel(String title, ObservableList<Task> tasks, NumberBinding startIndex) {
         super(FXML);
         this.startIndex = startIndex;
 
-        grouping.setText(title);
+        category.setText(title);
         groupingList.setCellFactory(viewCell -> new SubgroupTaskListViewCell());
         groupingList.prefHeightProperty().bind(Bindings.size(tasks).multiply(PREF_CELL_HEIGHT));
         groupingList.setItems(tasks);
+    }
+
+    public SubgroupTaskListPanel(SubGroupTaskList subGroupTaskList, NumberBinding startIndex) {
+        super(FXML);
+        this.startIndex = startIndex;
+
+        category.setText(subGroupTaskList.getGroupName());
+        groupingList.setCellFactory(viewCell -> new SubgroupTaskListViewCell());
+        groupingList.prefHeightProperty().bind(Bindings.size(subGroupTaskList.getList()).multiply(PREF_CELL_HEIGHT));
+        groupingList.setItems(subGroupTaskList.getList());
     }
 
     /**
@@ -54,7 +66,7 @@ public class SubgroupTaskListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new TaskCard(task, getIndex() + 1).getRoot());
+                setGraphic(new TaskCard(task, startIndex.add(getIndex())).getRoot());
             }
         }
     }

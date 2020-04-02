@@ -13,14 +13,17 @@ import seedu.jelphabot.model.reminder.Reminder;
 public class TypicalReminders {
 
     public static final Reminder ASSESSMENT_REMINDER =
-        new ReminderBuilder().withIndex("1")
+        new ReminderBuilder().withIndex("0")
             .withReminderDay("1")
             .withReminderHour("1").build();
 
     public static final Reminder BOOK_REPORT_REMINDER =
-        new ReminderBuilder().withIndex("2")
+        new ReminderBuilder().withIndex("1")
             .withReminderDay("2")
             .withReminderHour("2").build();
+
+    public static final Reminder ASSIGNMENT_REMINDER =
+        new ReminderBuilder().withIndex("2").withReminderDay("3").withReminderHour("3").build();
 
     private TypicalReminders() {
     }
@@ -37,7 +40,7 @@ public class TypicalReminders {
     }
 
     public static List<Reminder> getTypicalReminders() {
-        return new ArrayList<>(Arrays.asList(ASSESSMENT_REMINDER, BOOK_REPORT_REMINDER));
+        return new ArrayList<>(Arrays.asList(ASSESSMENT_REMINDER));
     }
 
 }

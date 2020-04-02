@@ -11,7 +11,8 @@ import seedu.jelphabot.logic.parser.exceptions.ParseException;
 import seedu.jelphabot.model.ReadOnlyJelphaBot;
 import seedu.jelphabot.model.productivity.ProductivityList;
 import seedu.jelphabot.model.task.GroupedTaskList;
-import seedu.jelphabot.model.task.GroupedTaskList.Grouping;
+import seedu.jelphabot.model.task.GroupedTaskList.Category;
+import seedu.jelphabot.model.task.PinnedTaskList;
 import seedu.jelphabot.model.task.Task;
 
 /**
@@ -63,7 +64,7 @@ public interface Logic {
     /**
      * Returns a wrapper for categorised tasks in the task list.
      */
-    GroupedTaskList getGroupedTaskList(Grouping grouping);
+    GroupedTaskList getGroupedTaskList(Category category);
 
     /**
      * Returns an unmodifiable view of the incomplete tasks that are due today in
@@ -75,7 +76,7 @@ public interface Logic {
      * Returns an unmodifiable view of the incomplete tasks that are due soon,
      * as specified by the user.
      */
-    public ObservableList<Task> getFilteredByReminder();
+    ObservableList<Task> getFilteredByReminder();
     /**
      * Returns an unmodifiable view of the user's productivity.
      */
@@ -109,4 +110,6 @@ public interface Logic {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredCalendarTaskList(Predicate<Task> predicate);
+
+    PinnedTaskList getPinnedTaskList();
 }

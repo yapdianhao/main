@@ -41,6 +41,7 @@ import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.testutil.TaskBuilder;
 
 public class AddCommandParserTest {
+
     private AddCommandParser parser = new AddCommandParser();
 
     @Test

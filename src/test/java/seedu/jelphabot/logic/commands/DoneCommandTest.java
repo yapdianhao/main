@@ -8,6 +8,7 @@ import static seedu.jelphabot.logic.commands.CommandTestUtil.showTaskAtIndex;
 import static seedu.jelphabot.logic.commands.DoneCommand.createDoneTask;
 import static seedu.jelphabot.testutil.TypicalIndexes.INDEX_FIRST_TASK;
 import static seedu.jelphabot.testutil.TypicalIndexes.INDEX_SECOND_TASK;
+import static seedu.jelphabot.testutil.TypicalIndexes.INDEX_THIRD_TASK;
 import static seedu.jelphabot.testutil.TypicalTasks.getTypicalJelphaBot;
 
 import org.junit.jupiter.api.Test;
@@ -20,11 +21,12 @@ import seedu.jelphabot.model.UserPrefs;
 import seedu.jelphabot.model.task.Task;
 
 public class DoneCommandTest {
+
     private Model model = new ModelManager(getTypicalJelphaBot(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Task taskToMarkDone = model.getFilteredTaskList().get(INDEX_FIRST_TASK.getZeroBased());
+        Task taskToMarkDone = model.getLastShownList().get(INDEX_FIRST_TASK.getZeroBased());
         DoneCommand doneCommand = new DoneCommand(INDEX_FIRST_TASK);
         Task doneTask = createDoneTask(taskToMarkDone);
 
@@ -38,7 +40,7 @@ public class DoneCommandTest {
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredTaskList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(model.getLastShownList().size() + 1);
         DoneCommand doneCommand = new DoneCommand(outOfBoundIndex);
 
         assertCommandFailure(doneCommand, model, Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
@@ -48,7 +50,7 @@ public class DoneCommandTest {
     public void execute_validIndexFilteredList_success() {
         showTaskAtIndex(model, INDEX_FIRST_TASK);
 
-        Task taskToMarkDone = model.getFilteredTaskList().get(INDEX_FIRST_TASK.getZeroBased());
+        Task taskToMarkDone = model.getLastShownList().get(INDEX_FIRST_TASK.getZeroBased());
         DoneCommand doneCommand = new DoneCommand(INDEX_FIRST_TASK);
         Task doneTask = createDoneTask(taskToMarkDone);
 
@@ -64,7 +66,7 @@ public class DoneCommandTest {
     public void execute_invalidIndexFilteredList_throwsCommandException() {
         showTaskAtIndex(model, INDEX_FIRST_TASK);
 
-        Index outOfBoundIndex = INDEX_SECOND_TASK;
+        Index outOfBoundIndex = INDEX_THIRD_TASK;
         // ensures that outOfBoundIndex is still in bounds of the task list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getJelphaBot().getTaskList().size());
 
@@ -75,7 +77,7 @@ public class DoneCommandTest {
 
     @Test
     public void execute_taskAlreadyCompletedUnfilteredList_failure() {
-        Task firstTask = model.getFilteredTaskList().get(INDEX_FIRST_TASK.getZeroBased());
+        Task firstTask = model.getLastShownList().get(INDEX_FIRST_TASK.getZeroBased());
         Task doneTask = createDoneTask(firstTask);
         DoneCommand doneCommand = new DoneCommand(INDEX_FIRST_TASK);
         Model newModel = new ModelManager(model.getJelphaBot(), new UserPrefs());

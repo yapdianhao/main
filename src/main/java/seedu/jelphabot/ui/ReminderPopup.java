@@ -1,18 +1,20 @@
 package seedu.jelphabot.ui;
 
 //import java.util.List;
+
 import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.layout.StackPane;
-//import javafx.stage.Popup;
 import javafx.stage.Stage;
 import seedu.jelphabot.commons.core.GuiSettings;
 import seedu.jelphabot.commons.core.LogsCenter;
 import seedu.jelphabot.logic.Logic;
 import seedu.jelphabot.model.task.Task;
+
+//import javafx.stage.Popup;
 
 /**
  * Reminders shown in app startup. Will show when tasks are about to expire,
@@ -58,10 +60,10 @@ public class ReminderPopup extends UiPart<Stage> {
         // get the list of Incomplete tasks
         //ObservableList<Task> taskList = logic.getFilteredByReminder();
         for (Task task : logic.getFilteredByReminder()) {
-            logger.info("added reminder");
+            //logger.info("added reminder");
             taskList.add(task);
         }
-        logger.info("taskList size " + taskList.size());
+        //logger.info("taskList size " + taskList.size());
         taskListPanel = new TaskListPanel(taskList);
         taskListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
 
@@ -81,7 +83,7 @@ public class ReminderPopup extends UiPart<Stage> {
      */
     void show() {
         logger.info("Showing reminderStage");
-        logger.info("reminded size: " + taskList.size());
+        //logger.info("reminded size: " + taskList.size());
         if (taskList.size() == 0) {
             return;
         } else {

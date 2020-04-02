@@ -2,11 +2,13 @@ package seedu.jelphabot.ui;
 
 import java.util.Comparator;
 
+import javafx.beans.binding.NumberBinding;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.jelphabot.model.task.Priority;
 import seedu.jelphabot.model.task.Task;
 
 /**
@@ -39,35 +41,64 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label timeSpent;
     @FXML
-    private Label priority;
-    @FXML
     private FlowPane tags;
     @FXML
     private Label dateTime;
 
+    public TaskCard(Task task, NumberBinding displayedIndex) {
+        super(FXML);
+        this.task = task;
+        setId(displayedIndex);
+        populateTaskElements(task);
+    }
+
     public TaskCard(Task task, int displayedIndex) {
         super(FXML);
         this.task = task;
-        populateChildElements(task, displayedIndex);
+        setId(displayedIndex);
+        populateTaskElements(task);
+    }
+
+    private void setId(NumberBinding displayedIndex) {
+        id.textProperty().bind(displayedIndex.asString("%d. "));
+    }
+
+    private void setId(int displayedIndex) {
+        id.setText(String.format("%d. ", displayedIndex));
     }
 
     /**
-     * Populates the child elements in the taskCard
-     *
-     * @param task           the task to populate.
-     * @param displayedIndex the indicated index.
+     * Populates TaskCard with data from a model.
+     * @param task the task containing model data for this TaskCard
      */
-    private void populateChildElements(Task task, int displayedIndex) {
-        id.setText(displayedIndex + ". ");
+    private void populateTaskElements(Task task) {
         description.setText(task.getDescription().fullDescription);
         moduleCode.setText(task.getModuleCode().value);
+        applyPriorityMarkdown(task);
         status.setText(task.getStatus().name());
         timeSpent.setText("(SPENT: " + task.getTimeSpent().toString() + ")");
-        //TODO add in task PRIORITY
         dateTime.setText(task.getDateTime().getDisplayValue());
         task.getTags().stream()
             .sorted(Comparator.comparing(tag -> tag.tagName))
             .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+
+    }
+
+    /**
+     * Applies markdown to TaskCard based on Task priority
+     * @param task the task containing model data for this TaskCard.
+     */
+    private void applyPriorityMarkdown(Task task) {
+        if (task.getPriority().equals(Priority.HIGH)) {
+            description.setId("highPriority");
+            moduleCode.setId("highPriority");
+        } else if (task.getPriority() == Priority.LOW) {
+            description.setId("lowPriority");
+            moduleCode.setId("lowPriority");
+        } else {
+            description.setId("normalPriority");
+            moduleCode.setId("normalPriority");
+        }
     }
 
     @Override

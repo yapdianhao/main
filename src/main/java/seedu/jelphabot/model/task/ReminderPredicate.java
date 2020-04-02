@@ -30,14 +30,11 @@ public class ReminderPredicate extends TaskIsIncompletePredicate {
 
     @Override
     public boolean test(Task task) {
-        logger.info("At reminder predicate");
         int reminderKey = taskList.indexOf(task);
-        logger.info("reminderKey " + reminderKey);
         Reminder correspondingReminder = null;
         for (Reminder reminder : reminderList) {
-            logger.info("reminder index: " + reminder.getIndex().getZeroBased());
+            //logger.info("reminder index: " + reminder.getIndex().getZeroBased());
             if (reminder.getIndex().getZeroBased() == reminderKey) {
-                logger.info("" + true);
                 correspondingReminder = reminder;
                 break;
             }
@@ -45,7 +42,6 @@ public class ReminderPredicate extends TaskIsIncompletePredicate {
         if (correspondingReminder == null) {
             return false;
         } else {
-            logger.info("hey " + (super.test(task) && shouldBeReminded(task, correspondingReminder)));
             return shouldBeReminded(task, correspondingReminder);
         }
     }
@@ -58,17 +54,17 @@ public class ReminderPredicate extends TaskIsIncompletePredicate {
      */
     public boolean shouldBeReminded(Task task, Reminder reminder) {
         LocalDateTime taskDateTime = task.getDateTime().getDateTime();
-        logger.info("" + taskDateTime);
-        logger.info("shouldBeReminded " + taskDateTime.minusDays(reminder.getDaysToRemind().getReminderDay())
-                                              .isAfter(currDateTime));
-        logger.info("shouldBeReminded1 " + taskDateTime
-                                               .minusHours(reminder.getHoursToRemind()
-                                                               .getReminderHour())
-                                               .isAfter(currDateTime));
-        logger.info("shouldBeReminded2 " + taskDateTime
-                                               .minusDays(reminder.getDaysToRemind()
-                                                              .getReminderDay())
-                                               .isBefore(currDateTime));
+        //logger.info("" + taskDateTime);
+        //logger.info("shouldBeReminded " + taskDateTime.minusDays(reminder.getDaysToRemind().getReminderDay())
+        //                                     .isAfter(currDateTime));
+        //logger.info("shouldBeReminded1 " + taskDateTime
+        //                                       .minusHours(reminder.getHoursToRemind()
+        //                                                       .getReminderHour())
+        //                                      .isAfter(currDateTime));
+        //logger.info("shouldBeReminded2 " + taskDateTime
+        //                                       .minusDays(reminder.getDaysToRemind()
+        //                                                      .getReminderDay())
+        //                                       .isBefore(currDateTime));
         if (taskDateTime.isBefore(currDateTime)) {
             return true;
         }
@@ -76,9 +72,7 @@ public class ReminderPredicate extends TaskIsIncompletePredicate {
                 .isAfter(currDateTime)) {
             return true;
         } else if (taskDateTime.minusDays(reminder.getDaysToRemind().getReminderDay()).isBefore(currDateTime)) {
-            if (taskDateTime.minusHours(reminder.getHoursToRemind().getReminderHour()).isAfter(currDateTime)) {
-                return true;
-            }
+            return taskDateTime.minusHours(reminder.getHoursToRemind().getReminderHour()).isAfter(currDateTime);
         }
         return false;
     }

@@ -22,6 +22,7 @@ import seedu.jelphabot.model.calendar.CalendarDate;
 import seedu.jelphabot.model.productivity.Productivity;
 import seedu.jelphabot.model.productivity.ProductivityList;
 import seedu.jelphabot.model.task.GroupedTaskList;
+import seedu.jelphabot.model.task.GroupedTaskList.Category;
 
 /**
  * The Main Window. Provides the basic application layout containing a menu bar
@@ -144,10 +145,10 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        GroupedTaskList sortedTasks = logic.getGroupedTaskList(GroupedTaskList.Grouping.MODULE);
+        GroupedTaskList groupedTasks = logic.getGroupedTaskList(Category.DATE);
         taskListPanel = new GroupedTaskListPanel(
-            logic.getFilteredTaskList(),
-            sortedTasks
+            logic.getPinnedTaskList(),
+            groupedTasks
         );
         taskListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
 
@@ -260,8 +261,12 @@ public class MainWindow extends UiPart<Stage> {
      * Switches view to Task List panel.
      */
     @FXML
-    private void handleTaskList() {
+    private void handleTaskList(GroupedTaskList.Category sublistCategory) {
         mainWindowTabPane.getSelectionModel().select(0);
+        GroupedTaskList groupedTasks = logic.getGroupedTaskList(sublistCategory);
+        taskListPanel = new GroupedTaskListPanel(logic.getPinnedTaskList(), groupedTasks);
+        taskListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
+
     }
 
     public GroupedTaskListPanel getTaskListPanel() {
@@ -299,14 +304,15 @@ public class MainWindow extends UiPart<Stage> {
             case SUMMARY:
                 handleSummary();
                 break;
-            case TASK_LIST:
-                handleTaskList();
+            case TASK_LIST_DATE:
+                handleTaskList(GroupedTaskList.Category.DATE);
                 break;
-            case STAY_ON_CURRENT:
-                // do nothing
+            case TASK_LIST_MODULE:
+                handleTaskList(Category.MODULE);
                 break;
             default:
-                throw new IllegalStateException("Unexpected value: " + commandResult.getTabSwitch());
+                // do nothing
+                break;
             }
 
             return commandResult;

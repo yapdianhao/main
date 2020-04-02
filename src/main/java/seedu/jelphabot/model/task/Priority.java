@@ -19,7 +19,7 @@ public enum Priority {
      * @return The boolean representing whether the priority provided is valid.
      */
     public static boolean isValidPriority(String test) {
-        switch(test.toLowerCase()) {
+        switch (test.toLowerCase()) {
         case "high":
         case "medium":
         case "low":
@@ -39,13 +39,13 @@ public enum Priority {
      */
     public static Priority toPriority(String test) {
         switch (test.toLowerCase()) {
-        case "high":
+        case "high": // fallthrough
         case "1":
             return Priority.HIGH;
-        case "medium":
+        case "medium": // fallthrough
         case "0":
             return Priority.MEDIUM;
-        case "low":
+        case "low": // fallthrough
         case "-1":
             return Priority.LOW;
         default:
