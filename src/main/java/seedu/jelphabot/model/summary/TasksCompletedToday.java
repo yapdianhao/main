@@ -24,7 +24,7 @@ public class TasksCompletedToday {
         for (Task task: tasksCompletedToday) {
             String moduleCodeString = task.getModuleCode().toString();
             String descriptionString = task.getDescription().toString();
-            String toAppend = String.format("[ ] (%s) %s\n", moduleCodeString, descriptionString);
+            String toAppend = String.format("[X] (%s) %s\n", moduleCodeString, descriptionString);
             sb.append(toAppend);
         }
 

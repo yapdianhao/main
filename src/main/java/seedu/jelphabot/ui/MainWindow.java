@@ -21,6 +21,8 @@ import seedu.jelphabot.logic.parser.exceptions.ParseException;
 import seedu.jelphabot.model.calendar.CalendarDate;
 import seedu.jelphabot.model.productivity.Productivity;
 import seedu.jelphabot.model.productivity.ProductivityList;
+import seedu.jelphabot.model.summary.Summary;
+import seedu.jelphabot.model.summary.SummaryList;
 import seedu.jelphabot.model.task.GroupedTaskList;
 import seedu.jelphabot.model.task.GroupedTaskList.Category;
 
@@ -160,8 +162,9 @@ public class MainWindow extends UiPart<Stage> {
         calendarPanel = new CalendarPanel(CalendarDate.getCurrent(), mainWindowTabPane);
         calendarPanelPlaceholder.getChildren().add(calendarPanel.getRoot());
 
-        summaryPanel = new SummaryPanel(logic.getFilteredByIncompleteDueTodayTaskList(),
-            logic.getFilteredByCompletedTodayTaskList(), mainWindowTabPane);
+        SummaryList summaryList = logic.getSummaryList();
+        summaryList.addSummary(new Summary(logic.getFilteredTaskList()));
+        summaryPanel = new SummaryPanel(summaryList.asUnmodifiableObservableList(), mainWindowTabPane);
         summaryPanelPlaceholder.getChildren().add(summaryPanel.getRoot());
 
         ProductivityList productivityList = logic.getProductivityList();
@@ -250,7 +253,6 @@ public class MainWindow extends UiPart<Stage> {
         if (!summaryPanel.isShowing()) {
             summaryPanel.show();
         }
-
         if (firstStart) {
             resultDisplay.setFeedbackToUser(WELCOME_STRING);
             firstStart = false;

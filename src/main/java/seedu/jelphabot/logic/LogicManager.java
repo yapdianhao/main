@@ -143,6 +143,10 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public SummaryList getSummaryList() {
+        return model.getSummaryList();
+    }
+    @Override
     public Path getJelphaBotFilePath() {
         return model.getJelphaBotFilePath();
     }

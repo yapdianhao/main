@@ -5,12 +5,11 @@
 
 <VBox xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox maxHeight="-Infinity" minHeight="85" prefWidth="195.0" prefHeight="140.0">
+      <VBox maxHeight="-Infinity" prefHeight="140.0" prefWidth="195.0">
          <children>
-            <Label prefHeight="24.0" prefWidth="155.0" styleClass="cell_big_label" alignment="CENTER"
-                   text="Welcome to JelphaBot!">
+            <Label prefHeight="24.0" prefWidth="155.0" styleClass="cell_big_label" text="Welcome to JelphaBot!">
                 <minWidth>
-                    <Region fx:constant="USE_PREF_SIZE"/>
+                    <Region fx:constant="USE_PREF_SIZE" />
                 </minWidth>
             </Label>
             <Label fx:id="breakline" text="\$breakline" />
