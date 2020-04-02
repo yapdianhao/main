@@ -41,7 +41,10 @@ public class CommandResultTest {
         assertFalse(commandResult.equals(new CommandResult("feedback").isShowCalendar()));
 
         // different task list value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback").isShowTaskList()));
+        assertFalse(commandResult.equals(new CommandResult("feedback").isShowDateTaskList()));
+
+        // different task list value -> returns false
+        assertFalse(commandResult.equals(new CommandResult("feedback").isShowModuleTaskList()));
 
         // different summary value -> returns false
         assertFalse(commandResult.equals(new CommandResult("feedback").isShowSummary()));
@@ -73,6 +76,6 @@ public class CommandResultTest {
         assertNotEquals(commandResult.hashCode(), new CommandResult("feedback").isShowSummary().hashCode());
 
         // different task list value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback").isShowTaskList().hashCode());
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback").isShowDateTaskList().hashCode());
     }
 }
