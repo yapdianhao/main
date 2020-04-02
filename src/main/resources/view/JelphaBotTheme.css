@@ -95,11 +95,11 @@
 }
 
 .list-cell:filled:selected {
-    -fx-background-color: #ffe1de;
+    -fx-background-color: #9feef7;
 }
 
 .list-cell:filled:selected #cardPane {
-    -fx-border-color: #ffe1de;
+    -fx-border-color: #9feef7;
     -fx-border-width: 1;
 }
 
@@ -208,10 +208,10 @@
  */
 .button {
     -fx-padding: 5 22 5 22;
-    -fx-border-color: #e2e2e2;
+    -fx-border-color: #1d1d1d;
     -fx-border-width: 2;
     -fx-background-radius: 0;
-    -fx-background-color: #fee9dc;
+    -fx-background-color: #383838;
     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
     -fx-font-size: 11pt;
     -fx-text-fill: #d8d8d8;
@@ -219,12 +219,12 @@
 }
 
 .button:hover {
-    -fx-background-color: #3a3a3a;
+    -fx-background-color: #9feef7;
 }
 
 .button:pressed, .button:default:hover:pressed {
-    -fx-background-color: white;
-    -fx-text-fill: #1d1d1d;
+    -fx-background-color: #9feef7;
+    -fx-text-fill: black;
 }
 
 .button:focused {
@@ -237,8 +237,8 @@
 
 .button:disabled, .button:default:disabled {
     -fx-opacity: 0.4;
-    -fx-background-color: #1d1d1d;
-    -fx-text-fill: white;
+    -fx-background-color: #fee9dc;
+    -fx-text-fill: black;
 }
 
 .button:default {
@@ -308,26 +308,22 @@
 
 #commandTypeLabel {
     -fx-font-size: 11px;
-    -fx-text-fill: #F70D1A;
+    -fx-text-fill: #c91e00;
 }
 
 #commandTextField {
-    -fx-background-color: transparent #383838 transparent #383838;
+    -fx-background-color: #383838 #383838 #383838 #383838;
     -fx-background-insets: 0;
-    -fx-border-color: #383838 #383838 #ffffff #383838;
+    -fx-border-color: #1d1d0d #1d1d0d #1d1d0d #1d1d0d;
     -fx-border-insets: 0;
     -fx-border-width: 1;
     -fx-font-family: "Segoe UI Light";
     -fx-font-size: 13pt;
-    -fx-text-fill: black;
-}
-
-#filterField, #personListPanel, #personWebpage {
-    -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
+    -fx-text-fill: white;
 }
 
 #resultDisplay .content {
-    -fx-background-color: transparent, #383838, transparent, #383838;
+    -fx-background-color: transparent, #fee9dc, transparent, #fee9dc;
     -fx-background-radius: 0;
 }
 
@@ -356,7 +352,7 @@
 
 #tagsOptional {
     -fx-text-fill: white;
-    -fx-background-color: #545454;
+    -fx-background-color: #fee9dc;
     -fx-padding: 1 3 1 3;
     -fx-border-radius: 2;
     -fx-background-radius: 2;
