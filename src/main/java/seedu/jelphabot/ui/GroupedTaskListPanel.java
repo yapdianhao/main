@@ -1,9 +1,7 @@
 package seedu.jelphabot.ui;
 
-import java.util.ArrayList;
 import java.util.logging.Logger;
 
-import javafx.collections.FXCollections;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
@@ -22,19 +20,15 @@ public class GroupedTaskListPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(TaskListPanel.class);
 
     @javafx.fxml.FXML
-    private ListView<SubgroupTaskListPanel> taskListGroups;
+    private ListView<SubGroupTaskList> taskListGroups;
 
     private final GroupedTaskList groupedTaskList;
 
     public GroupedTaskListPanel(GroupedTaskList groupedTaskList) {
         super(FXML);
         this.groupedTaskList = groupedTaskList;
-        ArrayList<SubgroupTaskListPanel> groupedPanels = new ArrayList<>();
-        for (SubGroupTaskList subGroup : groupedTaskList.getList()) {
-            groupedPanels.add(new SubgroupTaskListPanel(subGroup));
-        }
         taskListGroups.setCellFactory(viewCell -> new GroupedTaskListPanel.GroupedTaskListViewCell());
-        taskListGroups.setItems(FXCollections.observableArrayList(groupedPanels));
+        taskListGroups.setItems(groupedTaskList.getList());
     }
 
     public GroupedTaskList.Category getCategory() {
@@ -44,16 +38,16 @@ public class GroupedTaskListPanel extends UiPart<Region> {
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Task} using a {@code GroupedTaskCard}.
      */
-    class GroupedTaskListViewCell extends ListCell<SubgroupTaskListPanel> {
+    class GroupedTaskListViewCell extends ListCell<SubGroupTaskList> {
         @Override
-        protected void updateItem(SubgroupTaskListPanel task, boolean empty) {
+        protected void updateItem(SubGroupTaskList task, boolean empty) {
             super.updateItem(task, empty);
 
             if (empty || task == null) {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(task.getRoot());
+                setGraphic(new SubgroupTaskListPanel(task).getRoot());
             }
         }
     }

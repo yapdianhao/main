@@ -9,6 +9,7 @@ import java.util.function.Predicate;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.NumberBinding;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import seedu.jelphabot.commons.core.index.Index;
 
@@ -30,7 +31,7 @@ public class GroupedByModuleTaskList implements GroupedTaskList {
             SubGroupTaskList moduleCodeSubList =
                 new SubGroupTaskList(code.toString(), taskList.filtered(hasModuleCode(code)), tempSize);
             moduleCodeTaskLists.add(moduleCodeSubList);
-            // moduleCodeSubList.addListener(deleteOnEmptyList(moduleCodeSubList));
+            moduleCodeSubList.addListener(makeDeleteOnEmptyListener(moduleCodeSubList));
             tempSize = tempSize.add(moduleCodeSubList.size());
         }
         this.sizeBinding = tempSize;
@@ -44,13 +45,17 @@ public class GroupedByModuleTaskList implements GroupedTaskList {
         return moduleSet;
     }
 
-    // private ListChangeListener<Task> deleteOnEmptyList(SubGroupTaskList moduleCodeSubList) {
-    //     return change -> {
-    //         if (moduleCodeSubList.isEmpty()) {
-    //             GroupedByModuleTaskList.this.moduleCodeTaskLists.remove(moduleCodeSubList);
-    //         }
-    //     };
-    // }
+    /**
+     * @param moduleCodeSubList the SubGroupTaskList to be removed
+     * @return a listener which removes the respective SubGroupTaskList when the inner ObservableList is empty.
+     */
+    private ListChangeListener<Task> makeDeleteOnEmptyListener(SubGroupTaskList moduleCodeSubList) {
+        return change -> {
+            if (moduleCodeSubList.isEmpty()) {
+                GroupedByModuleTaskList.this.moduleCodeTaskLists.remove(moduleCodeSubList);
+            }
+        };
+    }
 
     /**
      * @param moduleCode The ModuleCode to be tested
