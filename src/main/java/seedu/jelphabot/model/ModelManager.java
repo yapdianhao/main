@@ -15,7 +15,10 @@ import seedu.jelphabot.commons.core.LogsCenter;
 import seedu.jelphabot.model.productivity.Productivity;
 import seedu.jelphabot.model.productivity.ProductivityList;
 import seedu.jelphabot.model.reminder.Reminder;
+import seedu.jelphabot.model.task.GroupedTaskList;
+import seedu.jelphabot.model.task.PinnedTaskList;
 import seedu.jelphabot.model.task.Task;
+import seedu.jelphabot.model.task.ViewTaskList;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -29,6 +32,8 @@ public class ModelManager implements Model {
     private final FilteredList<Reminder> filteredReminders;
     private final FilteredList<Task> filteredCalendarTasks;
     private final ProductivityList productivityList;
+
+    private GroupedTaskList lastShownList = null;
 
     /**
      * Initializes a ModelManager with the given readOnlyJelphaBot and userPrefs.
@@ -186,6 +191,26 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Task> getFilteredTaskList() {
         return filteredTasks;
+    }
+
+    @Override
+    public GroupedTaskList getGroupedTaskList(GroupedTaskList.Category category) {
+        if (lastShownList != null && lastShownList.getCategory() == category) {
+            return lastShownList;
+        } else {
+            lastShownList = GroupedTaskList.makeGroupedTaskList(getFilteredTaskList(), category, getPinnedTaskList());
+            return lastShownList;
+        }
+    }
+
+    @Override
+    public PinnedTaskList getPinnedTaskList() {
+        return new PinnedTaskList(filteredTasks);
+    }
+
+    @Override
+    public ViewTaskList getLastShownList() {
+        return lastShownList;
     }
 
     public ObservableList<Reminder> getFilteredReminderList() {

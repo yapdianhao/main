@@ -1,10 +1,8 @@
 package seedu.jelphabot.model.task;
 
-import java.util.Iterator;
-import java.util.function.Function;
+import java.util.function.BiFunction;
 
 import javafx.collections.ObservableList;
-import seedu.jelphabot.commons.core.index.Index;
 
 /**
  * Interface representing a TaskList which is split into sub-groups by predefined groups.
@@ -12,33 +10,32 @@ import seedu.jelphabot.commons.core.index.Index;
  * each containing a unique filter over the full task list.
  * Classes which extend GroupedTaskList are expected to provide a getter method for each grouping defined.
  */
-public interface GroupedTaskList extends Iterable<ObservableList<Task>> {
-    static GroupedTaskList makeGroupedTaskList(ObservableList<Task> tasks, Grouping group) {
-        return group.construct(tasks);
+public interface GroupedTaskList extends Iterable<SubGroupTaskList>, ViewTaskList {
+    static GroupedTaskList makeGroupedTaskList(ObservableList<Task> tasks, Category category,
+        PinnedTaskList pinnedTasks) {
+        return category.construct(tasks, pinnedTasks);
     }
 
-    Task getTaskById(Index id);
-
-    Iterator<String> getGroupNames();
+    Category getCategory();
 
     /**
      * GroupedTaskList.Groupings define a set of fixed enum mappings from the commandArgument to the corresponding
      * constructor.
      */
-    enum Grouping {
+    enum Category {
         DATE("date", GroupedByDateTaskList::new),
         MODULE("module", GroupedByModuleTaskList::new);
 
         public final String commandArgument;
-        private final Function<ObservableList<Task>, GroupedTaskList> constructor;
+        private final BiFunction<ObservableList<Task>, PinnedTaskList, GroupedTaskList> constructor;
 
-        Grouping(String commandArgument, Function<ObservableList<Task>, GroupedTaskList> groupedTaskListConstructor) {
+        Category(String commandArgument, BiFunction<ObservableList<Task>, PinnedTaskList, GroupedTaskList> groupedTaskListConstructor) {
             this.commandArgument = commandArgument;
             this.constructor = groupedTaskListConstructor;
         }
 
-        private GroupedTaskList construct(ObservableList<Task> tasks) {
-            return constructor.apply(tasks);
+        private GroupedTaskList construct(ObservableList<Task> tasks, PinnedTaskList pinnedTasks) {
+            return constructor.apply(tasks, pinnedTasks);
         }
     }
 }
