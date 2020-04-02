@@ -88,7 +88,7 @@ The GUI should appear in a few seconds. You should see a list of tasks as shown 
 +
 [.text-center]
 .Expected result after running `JelphaBot`
-image::Ui.png[width="790"]
+image::MainUi.png[width="790"]
 +
 If you do not see this, you can follow the instructons here (link to Troubleshooting) to reset Jelphabot
 . Type the command in the command box and press kbd:[Enter] to execute it. +
@@ -129,10 +129,47 @@ Format: `exit`
 * Exiting the application before stopping any running timer wil cause all recorded time since the timer was started to be lost.
 ****
 
+=== Morning call/Night debrief (Eden)
+Morning Call Displays the tasks that are due today, and Night Debrief displays the tasks that have been completed within the day.
+
+The tasks listed in Morning Call and Night Debrief are displayed in under the Summary tab as separate sections under "Due Today" and "Completed Today" respectively.
+
+==== Viewing the summary tab: `summary`
+
+Apart from the function to switch tabs by pressing kbd:[Ctrl] + kbd:[tab] on your keyboard, you can enter the `productivity` command
+or its shortcut `:s` to manually switch to the summary tab.
+The summary panel will then display a summary of your tasks due and completed today. +
+
+Format: `summary` +
+Shortcut: `:S`
+
+[.text-center]
+.Example of expected result after running `summary`
+image::summaryTab.png[width="790"]
+
+Displays the two dropdown tabs that show the tasks that are Due Today, and Completed Today.
+
+Once a task under the Due Today tab is marked as done, it will appear under the Completed Today tab.
+
+[.text-center]
+.Expected result after running `done 5`, which marks the task for ACC1101 Tutorial 4 as completed
+image::SummaryViewAfterTaskComplete.png[width="790"]
+
 === Managing Tasks (Yao Jie)
 
 JelphaBot allows you to track and manage your tasks.
 You can view and sort all your tasks from the Task List page.
+
+Apart from the function to switch tabs by pressing kbd:[Ctrl] + kbd:[tab] on your keyboard, you can enter the `productivity` command
+or its shortcut `:t` to manually switch to the task list tab.
+The task list panel will then display your all tasks, sorted in various sections. +
+
+Format: `list` +
+Shortcut: `:T`
+
+[.text-center]
+.Example of expected result after running `list`
+image::TaskListTab.png[width="790"]
 
 ====
 *Command Format for Task list commands*
@@ -361,101 +398,9 @@ Format: `sort SORTING_ORDER`
 
 Valid `SORTING_ORDER` values include `date`, `module`, and `priority`.
 
-=== Set Reminders and Notifications (Dian Hao)
-
-==== Adding reminder : `reminder`
-Adds a reminder to your specified task and reminds you of the task if the current time is within the time-frame specified
-by you. +
-
-Format: `reminder INDEX days/DAYS hours/HOURS`
-
-* Adds a reminder to the task which is at the specified `INDEX`.
-* The index refers to the index number shown in the displayed task list.
-* The index *must be a positive integer* 1, 2, 3, ....
-* `DAYS` refers to the number of days before the due date of the task when you want to be reminded of it.
-* `HOURS` refers to the number of hours before the due date of the task when you want to be reminded of it.
-
-****
-* You can only specify `DAYS` to be in the range 0 - 7 inclusive.
-* You can only specify `HOURS` to be in the range 0 - 24 inclusive.
-* Every Task can only have one reminder.
-* Tasks that are completed cannot have a reminder.
-* Tasks that are reminded but are not completed after the deadline will still be reminded for.
-* Whenever a task is deleted, the corresponding reminder will also be removed.
-****
-
-==== Removing reminder : `delrem`
-
-Should you choose to stop a task to be reminded or after it is completed, you can enter the
-`delrem` command to remove the reminder of that particular task. +
-
-Format: `delrem INDEX`
-
-* Removes a reminder associated to the task at the specified `INDEX`.
-* The index refers to the index number shown in the displayed task list.
-* The index *must be a positive integer* 1, 2, 3, ....
-
-
-==== Reminder popup notification `[coming in v2.0]`
-
-After the
-
-=== Productivity Tracking (Jel)
-
-// tag::productivitytracker[]
-==== Track productivity : `productivity`
-Apart from the function to switch tabs by pressing kbd:[Ctrl] + kbd:[tab] on your keyboard, you can enter the `productivity` command
-or its shortcut `:p` to manually switch to the producivity tab.
-The productivity panel will then show you your productivity for the day. +
-
-Format: `productivity` +
-Shortcut: `:P`
-
-[.text-center]
-.Example of expected result after running `productivity`
-image::ug_figures/productivityTab.png[width="790"]
-
-// end::productivitytracker[]
-
-==== Starting timer for a task : `start`
-
-Starts timer running for a task. +
-Format: `start INDEX`
-
-[.text-center]
-.Example of expected result after running `start 1`
-image::ug_figures/start.png[width="790"]
-
-****
-* Starts the timer for the task at the specified `INDEX` if timer was not running.
-* The index refers to the index number shown in the displayed task list.
-* The index *must be a positive integer* 1, 2, 3, ...
-* The task to be timed cannot be a completed task.
-****
-
-==== Stopping timer for a task : `stop`
-
-Stops running timer for a task. +
-Format: `stop INDEX`
-
-[.text-center]
-.Expected result after running `stop`
-image::ug_figures/stop.png[width="790"]
-
-****
-* Stops the timer for the task at the specified `INDEX` if timer was running.
-* The index refers to the index number shown in the displayed task list.
-* The index *must be a positive integer* 1, 2, 3, ...
-* The task has to have a running timer.
-****
-
-==== Receiving encouragement and criticism
-
-JelphaBot automatically tracks the user's productivity in a day and outputs the appropriate response to the user's
-achievements and task completion rate. +
-There is no need to manually ask for compliments or criticism.
 
 === Calendar (Amanda)
+
 ==== View calender : `calendar`
 Apart from the function to switch tabs by pressing kbd:[Ctrl] + kbd:[tab] on your keyboard, you can enter the `calendar` command
 or its shortcut `:c` to manually switch to the calendar tab.
@@ -522,32 +467,98 @@ image::CalendarToday.png[width="790"]
 
 Displays month of March in the year 2020 in the calendar panel on the right, with today's date highlighted and displays the corresponding tasks due today on the left.
 
-=== Morning call/Night debrief (Eden)
-Morning Call Displays the tasks that are due today, and Night Debrief displays the tasks that have been completed within the day.
 
-The tasks listed in Morning Call and Night Debrief are displayed in under the Summary tab as separate sections under "Due Today" and "Completed Today" respectively.
+=== Productivity Tracking (Jel)
 
-==== Viewing the summary tab: `summary`
+// tag::productivitytracker[]
+==== Track productivity : `productivity`
+Apart from the function to switch tabs by pressing kbd:[Ctrl] + kbd:[tab] on your keyboard, you can enter the `productivity` command
+or its shortcut `:p` to manually switch to the producivity tab.
+The productivity panel will then show you your productivity for the day. +
 
-The Summary tab can be viewed by entering the command `summary` or its shortcut `:s`
-
-Format: `summary`
-Shorcut: `:S`
-
-[.text-center]
-.Expected result after running `summary`
-image::SummaryView.png[width="790"]
-
-Displays the two dropdown tabs that show the tasks that are Due Today, and Completed Today.
-
-Once a task under the Due Today tab is marked as done, it will appear under the Completed Today tab.
+Format: `productivity` +
+Shortcut: `:P`
 
 [.text-center]
-.Expected result after running `done 5`, which marks the task for ACC1101 Tutorial 4 as completed
-image::SummaryViewAfterTaskComplete.png[width="790"]
+.Example of expected result after running `productivity`
+image::ug_figures/productivityTab.png[width="790"]
+
+// end::productivitytracker[]
+
+==== Starting timer for a task : `start`
+
+Starts timer running for a task. +
+Format: `start INDEX`
+
+[.text-center]
+.Example of expected result after running `start 1`
+image::ug_figures/start.png[width="790"]
+
+****
+* Starts the timer for the task at the specified `INDEX` if timer was not running.
+* The index refers to the index number shown in the displayed task list.
+* The index *must be a positive integer* 1, 2, 3, ...
+* The task to be timed cannot be a completed task.
+****
+
+==== Stopping timer for a task : `stop`
+
+Stops running timer for a task. +
+Format: `stop INDEX`
+
+[.text-center]
+.Expected result after running `stop`
+image::ug_figures/stop.png[width="790"]
+
+****
+* Stops the timer for the task at the specified `INDEX` if timer was running.
+* The index refers to the index number shown in the displayed task list.
+* The index *must be a positive integer* 1, 2, 3, ...
+* The task has to have a running timer.
+****
+
+==== Receiving encouragement and criticism
+
+JelphaBot automatically tracks the user's productivity in a day and outputs the appropriate response to the user's
+achievements and task completion rate. +
+There is no need to manually ask for compliments or criticism.
+
+=== Set Reminders and Notifications (Dian Hao)
+
+==== Adding reminder : `reminder`
+Adds a reminder to your specified task and reminds you of the task if the current time is within the time-frame specified
+by you. +
+
+Format: `reminder INDEX days/DAYS hours/HOURS`
+
+* Adds a reminder to the task which is at the specified `INDEX`.
+* The index refers to the index number shown in the displayed task list.
+* The index *must be a positive integer* 1, 2, 3, ....
+* `DAYS` refers to the number of days before the due date of the task when you want to be reminded of it.
+* `HOURS` refers to the number of hours before the due date of the task when you want to be reminded of it.
+
+****
+* You can only specify `DAYS` to be in the range 0 - 7 inclusive.
+* You can only specify `HOURS` to be in the range 0 - 24 inclusive.
+* Every Task can only have one reminder.
+* Tasks that are completed cannot have a reminder.
+* Tasks that are reminded but are not completed after the deadline will still be reminded for.
+* Whenever a task is deleted, the corresponding reminder will also be removed.
+****
+
+==== Removing reminder : `delrem`
+
+Should you choose to stop a task to be reminded or after it is completed, you can enter the
+`delrem` command to remove the reminder of that particular task. +
+
+Format: `delrem INDEX`
+
+* Removes a reminder associated to the task at the specified `INDEX`.
+* The index refers to the index number shown in the displayed task list.
+* The index *must be a positive integer* 1, 2, 3, ....
 
 
-
+==== Reminder popup notification `[coming in v2.0]`
 
 
 === Colour-code modules and font style for prioritised tasks `[coming in v2.0]`
