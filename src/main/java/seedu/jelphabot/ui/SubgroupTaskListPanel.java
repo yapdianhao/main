@@ -11,6 +11,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.Region;
 import seedu.jelphabot.commons.core.LogsCenter;
+import seedu.jelphabot.model.task.SubGroupTaskList;
 import seedu.jelphabot.model.task.Task;
 
 /**
@@ -25,7 +26,7 @@ public class SubgroupTaskListPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(TaskListPanel.class);
 
     @FXML
-    private TitledPane grouping;
+    private TitledPane category;
 
     @FXML
     private ListView<Task> groupingList;
@@ -37,10 +38,20 @@ public class SubgroupTaskListPanel extends UiPart<Region> {
         super(FXML);
         this.startIndex = startIndex;
 
-        grouping.setText(title);
+        category.setText(title);
         groupingList.setCellFactory(viewCell -> new SubgroupTaskListViewCell());
         groupingList.prefHeightProperty().bind(Bindings.size(tasks).multiply(PREF_CELL_HEIGHT));
         groupingList.setItems(tasks);
+    }
+
+    public SubgroupTaskListPanel(SubGroupTaskList subGroupTaskList, NumberBinding startIndex) {
+        super(FXML);
+        this.startIndex = startIndex;
+
+        category.setText(subGroupTaskList.getGroupName());
+        groupingList.setCellFactory(viewCell -> new SubgroupTaskListViewCell());
+        groupingList.prefHeightProperty().bind(Bindings.size(subGroupTaskList.getList()).multiply(PREF_CELL_HEIGHT));
+        groupingList.setItems(subGroupTaskList.getList());
     }
 
     /**
