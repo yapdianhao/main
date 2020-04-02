@@ -14,7 +14,6 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.binding.NumberBinding;
 import javafx.collections.ObservableList;
 import seedu.jelphabot.commons.core.index.Index;
-import seedu.jelphabot.model.task.predicates.FilterTaskByDatePredicate;
 import seedu.jelphabot.model.task.predicates.TaskIsIncompletePredicate;
 
 /**
@@ -25,10 +24,10 @@ import seedu.jelphabot.model.task.predicates.TaskIsIncompletePredicate;
  */
 public class GroupedByDateTaskList implements GroupedTaskList {
 
-    private static final FilterTaskByDatePredicate isOverdue = getOverduePredicate();
-    private static final FilterTaskByDatePredicate isDueToday = getDueTodayPredicate();
-    private static final FilterTaskByDatePredicate isDueThisWeek = getDueThisWeekPredicate();
-    private static final FilterTaskByDatePredicate isDueSomeday = getDueSomedayPredicate();
+    private static final Predicate<Task> isOverdue = getOverduePredicate();
+    private static final Predicate<Task> isDueToday = getDueTodayPredicate();
+    private static final Predicate<Task> isDueThisWeek = getDueThisWeekPredicate();
+    private static final Predicate<Task> isDueSomeday = getDueSomedayPredicate();
     private static final Predicate<Task> isIncomplete = new TaskIsIncompletePredicate();
 
     private final List<SubGroupTaskList> dueDateTaskLists = new ArrayList<>();

@@ -2,6 +2,7 @@ package seedu.jelphabot.model.task.predicates;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.function.Predicate;
 
 import seedu.jelphabot.model.task.DateTime;
 import seedu.jelphabot.model.task.Task;
@@ -9,7 +10,7 @@ import seedu.jelphabot.model.task.Task;
 /**
  * Tests that a {@code Task}'s {@code DateTime} falls before the given Date.
  */
-public class TaskDueBeforeDatePredicate implements FilterTaskByDatePredicate {
+public class TaskDueBeforeDatePredicate implements Predicate<Task> {
 
     private final LocalDateTime date;
 
@@ -29,21 +30,6 @@ public class TaskDueBeforeDatePredicate implements FilterTaskByDatePredicate {
      */
     public TaskDueBeforeDatePredicate(DateTime dateTime) {
         this.date = dateTime.getDateTime();
-    }
-
-    /**
-     * Composes two FilterTaskByDatePredicate to get a predicate that is the combination of the two.
-     *
-     * @param other another predicate that allows tasks to be filtered by date
-     * @return a FilterTaskByDatePredicate that combines both predicates
-     */
-    public FilterTaskByDatePredicate and(FilterTaskByDatePredicate other) {
-        return new FilterTaskByDatePredicate() {
-            @Override
-            public boolean test(Task task) {
-                return TaskDueBeforeDatePredicate.this.test(task) && other.test(task);
-            }
-        };
     }
 
     @Override
