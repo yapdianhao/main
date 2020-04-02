@@ -361,6 +361,7 @@ Format: `sort SORTING_ORDER`
 
 Valid `SORTING_ORDER` values include `date`, `module`, and `priority`.
 
+=
 === Set Reminders and Notifications (Dian Hao)
 
 ==== Adding reminder : `reminder`
@@ -375,13 +376,17 @@ Format: `reminder INDEX days/DAYS hours/HOURS`
 * `DAYS` refers to the number of days before the due date of the task when you want to be reminded of it.
 * `HOURS` refers to the number of hours before the due date of the task when you want to be reminded of it.
 
+[.text-center]
+.Example of expected result after running `reminder 1 days/1 hours/1`
+image::ug_figures/addReminder.png[width="600"]
+
+
 ****
 * You can only specify `DAYS` to be in the range 0 - 7 inclusive.
 * You can only specify `HOURS` to be in the range 0 - 24 inclusive.
 * Every Task can only have one reminder.
 * Tasks that are completed cannot have a reminder.
 * Tasks that are reminded but are not completed after the deadline will still be reminded for.
-* Whenever a task is deleted, the corresponding reminder will also be removed.
 ****
 
 ==== Removing reminder : `delrem`
@@ -399,6 +404,11 @@ Format: `delrem INDEX`
 .Example of expected result after running `delrem 1`
 image::ug_figures/delReminder.png[width="600"]
 
+****
+* Whenever a task is deleted, the corresponding reminder will also be removed.
+****
+
+
 ==== Reminder popup notification
 
 Whenever you boot JelphaBot, if there is any tasks that will be reminded, JelphaBot will show
@@ -407,6 +417,7 @@ a list of tasks that will expire soon, and tasks that have expired but not done.
 [.text-center]
 .Example of expected result after tasks are being reminded.
 image::ug_figures/reminderpopup.png[width="600"]
+
 
 === Productivity Tracking (Jel)
 
