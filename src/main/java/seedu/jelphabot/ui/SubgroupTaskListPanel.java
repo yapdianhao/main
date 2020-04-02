@@ -30,7 +30,6 @@ public class SubgroupTaskListPanel extends UiPart<Region> {
     @FXML
     private ListView<Task> groupingList;
 
-    // TODO display index dynamcally
     private NumberBinding startIndex;
 
     // TODO do not display if list is empty
