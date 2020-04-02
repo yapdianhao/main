@@ -22,7 +22,3 @@
 .bold-letter {
     -fx-font-weight: bold;
 }
-
-.label + .label {
-    -fx-font-weight: normal;
-}
