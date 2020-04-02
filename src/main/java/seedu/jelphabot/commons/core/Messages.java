@@ -20,6 +20,7 @@ public class Messages {
                                                                       + "[MMM-uuuu], E.g. Jan-2020\n"
                                                                       + "[MMM/uuuu], E.g. Jan/2020\n"
                                                                       + "[uuuu/MMM], E.g. 2020/Jan\n"
+                                                                      + "[uuuu-MMM], E.g. 2020-Jan\n"
                                                                       + "[uuuu-MM], E.g. 2020-01\n"
                                                                       + "[uuuu/MM], E.g. 2020/01\n"
                                                                       + "[uu-MM], E.g. 20-01\n"
