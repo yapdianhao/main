@@ -4,14 +4,13 @@ import static java.util.Objects.requireNonNull;
 import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_REMIND_DAY;
 import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_REMIND_HOUR;
 
-import java.util.List;
-
 import seedu.jelphabot.commons.core.Messages;
 import seedu.jelphabot.commons.core.index.Index;
 import seedu.jelphabot.logic.commands.exceptions.CommandException;
 import seedu.jelphabot.model.Model;
 import seedu.jelphabot.model.reminder.Reminder;
 import seedu.jelphabot.model.task.Task;
+import seedu.jelphabot.model.task.ViewTaskList;
 
 /**
  * Displays to the user a list of tasks that will due in a week.
@@ -46,7 +45,7 @@ public class ReminderCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Task> lastShownList = model.getFilteredTaskList();
+        ViewTaskList lastShownList = model.getLastShownList();
         if (model.hasReminder(reminder)) {
             //model.setReminder(reminder, reminder);
             throw new CommandException(MESSAGE_DUPLICATE_REMINDER);

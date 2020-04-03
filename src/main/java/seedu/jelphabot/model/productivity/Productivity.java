@@ -19,9 +19,19 @@ public class Productivity {
     private RunningTimers runningTimers;
     private TimeSpentToday timeSpentToday;
 
-    public Productivity(ObservableList<Task> taskList) {
+    // booleans to decide which sub-productivity needs to be re-rendered.
+    private boolean hasNewOrEditedTasks;
+    private boolean hasNewTimer;
+    private boolean hasChangeInTimeSpent;
+
+    public Productivity(ObservableList<Task> taskList, boolean hasNewOrEditedTasks, boolean hasNewTimer,
+        boolean hasChangeInTimeSpent) {
         requireNonNull(taskList);
         this.taskList = taskList;
+        this.hasNewOrEditedTasks = hasNewOrEditedTasks;
+        this.hasNewTimer = hasNewTimer;
+        this.hasChangeInTimeSpent = hasChangeInTimeSpent;
+
         createProductivites();
     }
 
@@ -37,15 +47,36 @@ public class Productivity {
         return timeSpentToday;
     }
 
+    public boolean hasNewOrEditedTasks() {
+        return hasNewOrEditedTasks;
+    }
+
+    public boolean hasNewTimer() {
+        return hasNewTimer;
+    }
+
+    public boolean hasChangeInTimeSpent() {
+        return hasChangeInTimeSpent;
+    }
+
     /**
      * Creates the respective productivity objects.
      */
     private void createProductivites() {
         ObservableList<Task> tasksDueToday = taskList.filtered(new TaskDueWithinDayPredicate());
         ObservableList<Task> tasksDueThisWeek = taskList.filtered(getDueThisWeekPredicate());
-        this.tasksCompleted = new TasksCompleted(tasksDueToday, tasksDueThisWeek,
-            taskList.filtered(getOverduePredicate()));
-        this.runningTimers = new RunningTimers(taskList);
-        this.timeSpentToday = new TimeSpentToday(tasksDueToday, tasksDueThisWeek);
+
+        if (tasksCompleted == null || hasNewOrEditedTasks) {
+            this.tasksCompleted = new TasksCompleted(tasksDueToday, tasksDueThisWeek,
+                taskList.filtered(getOverduePredicate()));
+        }
+
+        if (runningTimers == null || hasNewTimer) {
+            this.runningTimers = new RunningTimers(taskList);
+        }
+
+        if (timeSpentToday == null || hasChangeInTimeSpent) {
+            this.timeSpentToday = new TimeSpentToday(tasksDueToday, tasksDueThisWeek);
+        }
     }
 }
