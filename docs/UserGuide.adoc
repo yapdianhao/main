@@ -159,7 +159,7 @@ Displays the two dropdown tabs that show the tasks that are Due Today, and Compl
 Once a task under the Due Today tab is marked as done, it will appear under the Completed Today tab.
 
 [.text-center]
-.Expected result after running `done 5`, which marks the task for ACC1101 Tutorial 4 as completed
+.Expected view of the Summary tab after completing the task, ACC1101 Tutorial 4
 image::SummaryViewAfterTaskComplete.png[width="600"]
 
 === Managing Tasks (Yao Jie)
@@ -212,8 +212,8 @@ You can add a task to your task list. +
 Format: `d/DESCRIPTION dt/DATETIME m/MODULE_CODE [p/PRIORITY] [t/TAG]...`
 
 [.text-center]
-.Example of an expected result after running `add`
-image::ug_figures/add.png[width="600"]
+.Example of an expected result after running `add d/Assignment 1 dt/Jan-01-2020 23 59 m/CS1231 t/graded`
+image::addCommand.png[width="600"]
 
 ****
 * For dt/DATETIME inputs, please use the format MMM-dd-YYYY HH mm. +
@@ -232,8 +232,8 @@ If the priority field is not specified, the default priority used is Normal Prio
 
 Examples:
 
-* `add add d/Assignment 1 dt/Jan-01-2020 23 59 m/CS3230 p/1`
-* `add add d/Project TP dt/Jan-01-2020 23 59 m/CS2103T p/1 t/pair work`
+* `add d/Assignment 1 dt/Jan-01-2020 23 59 m/CS3230 p/1`
+* `add d/Project TP dt/Jan-01-2020 23 59 m/CS2103T p/1 t/pair work`
 // end::add[]
 
 // tag::list[]
@@ -243,14 +243,12 @@ You can list all tasks in your task list. Optional arguments can be added to dic
 Format: `list [SORTING_ORDER]`
 
 ****
-* If no `SORTING_ORDER` is provided, tasks will be grouped by date by default.
+* If no `SORTING_ORDER` is provided, tasks will be grouped by date by default, similar to the task list's tab default page as mentioned in the start of this section.
 * Valid `SORTING_ORDER` values are `date` (groups tasks by date) and `module` (Groups tasks by module code)
 ****
-[.text-center]
-.Example of an expected result after running `list`
-image::ug_figures/list.png[width="600"]
 
 ===== Group tasks by Date : `list date`
+This is also the default interface for the task list tab.
 
 Group your tasks into the following categories:
 
@@ -268,10 +266,17 @@ Group your tasks into the following categories:
 [TIP]
 Tasks which are due and completed will not be shown, as we assume you no longer need them.
 
-===== Group tasks by Date : `list module`
-Groups tasks based on their defined module code. Modules will be presented in alphabetical order.
+[.text-center]
+.Example of an expected result after running `list module`
+image::listByDate.png[width="600"]
+
+===== Group tasks by Module : `list module`
+Groups tasks based on their defined module code.
 
 // end::list[]
+[.text-center]
+.Example of an expected result after running `list module`
+image::listByModule.png[width="600"]
 
 ==== Locating tasks by name: `find`
 
@@ -280,7 +285,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 [.text-center]
 .Example of an expected result after running `find tutorial`
-image::ug_figures/find.png[width="600"]
+image::findCommand.png[width="600"]
 
 ****
 * The search is case insensitive. e.g `hans` will match `Hans`
@@ -306,8 +311,8 @@ Format: `edit INDEX [d/DESCRIPTION] [dt/DATETIME] [m/MODULE_CODE] [p/PRIORITY (-
 [t/TAG]...`
 
 [.text-center]
-.Example of an expected result after running `edit`
-image::ug_figures/edit.png[width="600"]
+.Example of an expected result after running `edit 1 m/CS2105 d/Tutorial 2`
+image::editCommand.png[width="600"]
 
 
 ****
@@ -330,12 +335,12 @@ Edits the date and time of the 2nd task to be `Jan-2-2020 23 59` and clears all 
 
 ==== Completing a task : `done`
 
-Marks a task in your task list as done. +
+Marks a task in your task list as done and then removes the task from the task list display. +
 Format: `done INDEX`
 
 [.text-center]
-.Example of an expected result after running `done`
-image::images/ug_figures/done.png[width="600]
+.Example of an expected result after running `done 1`
+image::doneCommand.png[width="600"]
 
 ****
 * Marks the task at the specified `INDEX` as done.
@@ -350,8 +355,8 @@ Delete a task from your task list. +
 Format: `delete INDEX`
 
 [.text-center]
-.Example of an expected result after running `delete`
-image::images/ug_figures/delete.png[width="600"]
+.Example of an expected result after running `delete 1`
+image::deleteCommand.png[width="600"]
 
 ****
 * Deletes the task at the specified `INDEX`.
@@ -378,7 +383,7 @@ Format: `clear`
 
 [.text-center]
 .Example of an expected result after running `clear`
-image::ug_figures/clear.png[width="600"]
+image::clearCommand.png[width="600"]
 
 ****
 * All reminders will be cleared together with the tasks.
@@ -398,11 +403,19 @@ Trying to `pin` a task that is already pinned will unpin it.
 ==== Show all completed tasks : `show-completed` (Eden)
 You can display all the tasks in your task list that have been completed.
 
+[.text-center]
+.Example of an expected result after running `show-completed`
+image::showCompletedCommand.png[width="600"]
+
 // end::showcompleted[]
 
 // tag::showincomplete[]
 ==== Show all incomplete tasks: `show-incomplete` (Eden)
 You can display all the tasks in your task list that are currently incomplete.
+
+[.text-center]
+.Example of an expected result after running `show-incomplete`
+image::showIncompleteCommand.png[width="600"]
 
 // end::showincomplete[]
 
@@ -467,7 +480,7 @@ Examples:
 .Example of expected result after running `calendar Apr-1-2020`
 image::CalendarDate.png[width="600"]
 
-Highlights 1st of March in the calendar panel on the right and displays the corresponding tasks due on the left.
+Highlights 1st of April in the calendar panel on the right and displays the corresponding tasks due on the left.
 
 ==== Navigate directly to today's date on Calendar : `calendar`
 Immediately displays the calendar view for this month and highlights today's date.
@@ -486,6 +499,8 @@ Displays month of April in the year 2020 in the calendar panel on the right, wit
 
 
 === Productivity Tracking (Jel)
+JelphaBot also comes with a productivity tracking that allows you track the progress of your tasks in that week.
+You would be able to see the progress bar as you complete more tasks!
 
 // tag::productivitytracker[]
 ==== Track productivity : `productivity`
@@ -509,7 +524,7 @@ Format: `start INDEX`
 
 [.text-center]
 .Example of expected result after running `start 1`
-image::ug_figures/start.png[width="600"]
+image::startCommand.png[width="600"]
 
 ****
 * Each task can only have 1 running timer.
@@ -525,8 +540,8 @@ You can stop a running timer for a task. +
 Format: `stop INDEX`
 
 [.text-center]
-.Expected result after running `stop`
-image::ug_figures/stop.png[width="600"]
+.Expected result after running `stop 1`
+image::stopCommand.png[width="600"]
 
 ****
 * The task has to have a running timer.
@@ -548,20 +563,17 @@ by you. +
 
 Format: `reminder INDEX days/DAYS hours/HOURS`
 
-****
-* Adds a reminder to the task which is at the specified `INDEX`.
-* The index refers to the index number shown in the displayed task list.
-* The index *must be a positive integer* 1, 2, 3, ....
-* `DAYS` refers to the number of days before the due date of the task when you want to be reminded of it.
-* `HOURS` refers to the number of hours before the due date of the task when you want to be reminded of it.
-****
-
 [.text-center]
 .Example of expected result after running `reminder 1 days/1 hours/1`
 image::ug_figures/addReminder.png[width="600"]
 
 
 ****
+* Adds a reminder to the task which is at the specified `INDEX`.
+* The index refers to the index number shown in the displayed task list.
+* The index *must be a positive integer* 1, 2, 3, ....
+* `DAYS` refers to the number of days before the due date of the task when you want to be reminded of it.
+* `HOURS` refers to the number of hours before the due date of the task when you want to be reminded of it.
 * You can only specify `DAYS` to be in the range 0 - 7 inclusive.
 * You can only specify `HOURS` to be in the range 0 - 24 inclusive.
 * Every Task can only have one reminder.
@@ -576,24 +588,22 @@ Should you choose to stop a task to be reminded or after it is completed, you ca
 
 Format: `delrem INDEX`
 
-****
-* Removes a reminder associated to the task at the specified `INDEX`.
-* The index refers to the index number shown in the displayed task list.
-* The index *must be a positive integer* 1, 2, 3, ....
-****
 
 [.text-center]
 .Example of expected result after running `delrem 1`
 image::ug_figures/delReminder.png[width="600"]
 
 ****
+* Removes a reminder associated to the task at the specified `INDEX`.
+* The index refers to the index number shown in the displayed task list.
+* The index *must be a positive integer* 1, 2, 3, ....
 * Whenever a task is deleted, the corresponding reminder will also be removed.
 ****
 
 
 ==== Reminder popup notification
 
-Whenever you boot JelphaBot, if there is any tasks that have to be reminded, JelphaBot will show
+Whenever you boot JelphaBot the next session after you added your reminders, if there is any task that have to be reminded, JelphaBot will show
 a list of tasks that will expire soon, and tasks that have expired but have not been completed.
 
 [.text-center]
@@ -615,8 +625,10 @@ image::ug_figures/reminderpopup.png[width="600"]
 
 * *Help* : `help`
 * *Add* `[d/DESCRIPTION] [dt/DATETIME] [m/MODULE_CODE] [p/PRIORITY] [t/TAG]…` +
-e.g. `add add d/Project TP dt/Jan-01-2020 23 59 m/CS2103T p/1 t/pair work`
+e.g. `add d/Project TP dt/Jan-01-2020 23 59 m/CS2103T p/1 t/pair work`
 * *List* : `list`
+* *List by Date* : `list date`
+* *List by Modules* : `list module`
 * *Find* : `find KEYWORD [MORE_KEYWORDS]` +
 e.g. `find Tutorial Assignment`
 * *Edit* : `edit INDEX [d/DESCRIPTION] [dt/DATETIME] [m/MODULE_CODE] [p/PRIORITY] [t/TAG]...` +
@@ -629,7 +641,7 @@ e.g. `delete 3`
 * *Exit* : `exit`
 * *Show Completed Tasks*: `show-completed`
 * *Show Incomplete Tasks*: `show-incomplete`
-* *Reminder* : `reminder INDEX rh/HOURS` +
+* *Reminder* : `reminder INDEX days/DAYS hours/HOURS` +
 e.g. `reminder 2 days/1 hours/1`
 * *Delete Reminder* : `delrem INDEX` +
 e.g. `delrem 2`
@@ -640,5 +652,5 @@ e.g. `start 1` or `stop 1`
 * *Calendar Date* : `calendar DATE` +
 e.g. `calendar Jan-1-2020`
 * *Change Calendar View* : `calendar MONTHYEAR` +
-e.g. `changeCalendar Apr-2020`
+e.g. `calendar Apr-2020`
 * *Today's Calendar View* : `calendar today`
