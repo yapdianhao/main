@@ -80,7 +80,7 @@ To update a diagram __.
 
 Given below is a quick overview of each component.
 
-`Main` has two classes called link:{repoURL}src/main/java/seedu/jelphabot/Main.java[`Main`] and link:{repoURL}/src/main/java/seedu/jelphabot/MainApp.java[`MainApp`]. It is responsible for,
+`Main` has two classes called link:{repoURL}src/main/java/seedu/JelphaBot/Main.java[`Main`] and link:{repoURL}/src/main/java/seedu/JelphaBot/MainApp.java[`MainApp`]. It is responsible for,
 
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup method where necessary.
@@ -125,13 +125,13 @@ This includes input fields where commands are entered as well as translations of
 .Class Diagram of the UI Component
 image::UiClassDiagram2.png[]
 
-*API* : link:{repoURL}/src/main/java/seedu/jelphabot/ui/Ui.java[`Ui.java`]
+*API* : link:{repoURL}/src/main/java/seedu/JelphaBot/ui/Ui.java[`Ui.java`]
 
 // TODO include yall class names in here
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `CalendarDayCard`, `ResultDisplay`, `TaskListPanel`, `StatusBarFooter` etc.
 All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
-The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the link:{repoURL}/src/main/java/seedu/jelphabot/ui/MainWindow.java[`MainWindow`] is specified in link:{repoURL}/src/main/resources/view/MainWindow.fxml[`MainWindow.fxml`]
+The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the link:{repoURL}/src/main/java/seedu/JelphaBot/ui/MainWindow.java[`MainWindow`] is specified in link:{repoURL}/src/main/resources/view/MainWindow.fxml[`MainWindow.fxml`]
 
 The `UI` component,
 
@@ -147,7 +147,7 @@ The Logic component handles the business logic after a command is executed.
 image::LogicClassDiagram.png[]
 
 *API* :
-link:{repoURL}/src/main/java/seedu/jelphabot/logic/Logic.java[`Logic.java`]
+link:{repoURL}/src/main/java/seedu/JelphaBot/logic/Logic.java[`Logic.java`]
 
 .  `Logic` uses the `JelphaBotParser` class to parse the user command.
 .  This results in a `Command` object which is executed by the `LogicManager`.
@@ -169,7 +169,7 @@ The Model component provides an internal data representation of all tasks stored
 .Structure of the Model Component
 image::ModelClassDiagram.png[]
 
-*API* : link:{repoURL}/src/main/java/seedu/jelphabot/model/Model.java[`Model.java`]
+*API* : link:{repoURL}/src/main/java/seedu/JelphaBot/model/Model.java[`Model.java`]
 
 The `Model`,
 
@@ -191,7 +191,7 @@ The Storage component manages storing and retrieving of data onto local files in
 .Structure of the Storage Component
 image::Storage.png[]
 
-*API* : link:{repoURL}/src/main/java/seedu/jelphabot/storage/Storage.java[`Storage.java`]
+*API* : link:{repoURL}/src/main/java/seedu/JelphaBot/storage/Storage.java[`Storage.java`]
 
 The `Storage` component,
 
@@ -201,7 +201,7 @@ The `Storage` component,
 [[Design-Commons]]
 === Common classes
 
-Classes used by multiple components are in the `seedu.jelphabot.commons` package.
+Classes used by multiple components are in the `seedu.JelphaBot.commons` package.
 This includes classes which implement utility functions which can be used by all other components.
 
 == Implementation
@@ -287,7 +287,7 @@ This feature offers two main functions:
 
 ====  Implementation
 
-**Function 1: Starts timer for a specified task**
+**Function 1: Starts timer for a specified task** +
 In order to start timing a task, the user enters `start INDEX` command
 (e.g. start 1)
 
@@ -295,7 +295,7 @@ image::StartSequenceDiagram.png[]
 
 Upon successful execution of the command, the productivity tab displays the task being timed under the Running Timers header.
 
-**Function 2: Stops timer for a specified task**
+**Function 2: Stops timer for a specified task** +
 In order to stop timing a task, the user enters `stop INDEX` command
 (e.g. stop 1)
 
@@ -310,6 +310,34 @@ If the user attempts to start timer for a task marked as completed or stop a tas
 the command fails its execution so that it does not execute that start or stop operation to start or stop the timer for that task.
 
 ==== Design Considerations
+
+=== Reminder feature
+JelphaBot has a reminder feature that reminds users whenever they have tasks that are about to overdue.
+This feature offers two main functions:
+
+** Adds a reminder to a task.
+** Delete a reminder that is associated to a task.
+
+==== Implementation
+**Function 1: Creates a reminder for a specified task** +
+To add a reminder to a certain task, the user enters the `reminder INDEX days/DAYS hours/HOURS` command.
+(e.g, reminder 2 days/2 hours/1)
+
+image::addReminderSequenceDiagram.png[]
+
+Upon successful execution of the command, the user adds a reminder associated to the task at `INDEX`. Upon exiting JelphaBot,
+the reminder will be saved. By the next time the users starts JelphaBot, it will remind the user should the task's due date fall
+within the period set by the user from the current date.
+
+**Function 2: Deletes a reminder for a specified task** +
+To delete a reminder associated to a certain task,
+
+[NOTE]
+If the user attempts to add a reminder to tasks that have reminders, the command will fail to execute. The user also need not
+to set reminders to tasks that are complete. However, if tasks that has reminders are not completed, JelphaBot will
+still warn the user.
+
+
 
 // tag::morningcallnightdebrief[]
 
@@ -747,10 +775,10 @@ Use case ends.
 *Extensions*
 
 [none]
-* 1a. Jelphabot detects the task does not have a running timer.
+* 1a. JelphaBot detects the task does not have a running timer.
 [none]
 +
-** 1a1. Jelphabot displays to user that the task does not have a running timer.
+** 1a1. JelphaBot displays to user that the task does not have a running timer.
 +
 Use case ends.
 
