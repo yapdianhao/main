@@ -3,8 +3,6 @@ package seedu.jelphabot.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.jelphabot.model.Model.PREDICATE_SHOW_ALL_TASKS;
 
-import java.util.List;
-
 import seedu.jelphabot.commons.core.Messages;
 import seedu.jelphabot.commons.core.index.Index;
 import seedu.jelphabot.logic.commands.exceptions.CommandException;
