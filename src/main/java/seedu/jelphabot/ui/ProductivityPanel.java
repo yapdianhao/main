@@ -10,6 +10,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.layout.Region;
 import seedu.jelphabot.commons.core.LogsCenter;
 import seedu.jelphabot.model.productivity.Productivity;
+import seedu.jelphabot.model.task.TimeSpent;
 
 /**
  * The Productivity Panel. Provides the basic application layout of productivity of tasks.
@@ -63,7 +64,7 @@ public class ProductivityPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Task} using a {@code TaskCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Productivity} using a {@code ProductivityCard}.
      */
     class ProductivityListViewCell extends ListCell<Productivity> {
         @Override

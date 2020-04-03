@@ -37,6 +37,7 @@ public class Productivity {
         return timeSpentToday;
     }
 
+
     /**
      * Creates the respective productivity objects.
      */
