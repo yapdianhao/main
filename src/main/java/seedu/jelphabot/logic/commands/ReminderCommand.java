@@ -4,8 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_REMIND_DAY;
 import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_REMIND_HOUR;
 
-import java.util.List;
-
 import seedu.jelphabot.commons.core.Messages;
 import seedu.jelphabot.commons.core.index.Index;
 import seedu.jelphabot.logic.commands.exceptions.CommandException;
