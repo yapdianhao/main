@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.model.task.predicates.TaskDueWithinDayPredicate;
 
+// TODO: if time spent is , don't show in card.
 /**
  * Represents the overall productivity of the user.
  */

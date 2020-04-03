@@ -15,9 +15,9 @@ public class TimeSpentToday {
     private ObservableList<Task> tasksDueToday;
     private ObservableList<Task> tasksDueThisWeek;
 
-    public TimeSpentToday(ObservableList<Task> tasksDueToday, ObservableList<Task> tasksDueThisWeek) {
-        requireAllNonNull(tasksDueToday, tasksDueThisWeek);
-        this.tasksDueToday = tasksDueToday;
+    public TimeSpentToday(ObservableList<Task> tasksList, ObservableList<Task> tasksDueThisWeek) {
+        requireAllNonNull(tasksList, tasksDueThisWeek);
+        this.tasksDueToday = tasksList;
         this.tasksDueThisWeek = tasksDueThisWeek;
     }
 
