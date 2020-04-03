@@ -323,9 +323,7 @@ This feature offers two main functions:
 To add a reminder to a certain task, the user enters the `reminder INDEX days/DAYS hours/HOURS` command.
 (e.g, reminder 2 days/2 hours/1)
 
-image::addReminderSequenceDiagram.png[]
-
-The
+image::AddReminderSequenceDiagram.png[]
 
 Upon successful execution of the command, the user adds a reminder associated to the task at `INDEX`. Upon exiting JelphaBot,
 the reminder will be saved. By the next time the users starts JelphaBot, it will remind the user should the task's due date fall
@@ -335,7 +333,7 @@ within the period set by the user from the current date.
 To delete a reminder associated to a certain task, the user enters the `delrem INDEX` command.
 (e.g. delrem 2)
 
-image::deleteReminderSequenceDiagram.png[]
+image::DeleteReminderSequenceDiagram.png[]
 
 Upon successful execution of the command, the reminder of the task at `INDEX` is removed.
 
