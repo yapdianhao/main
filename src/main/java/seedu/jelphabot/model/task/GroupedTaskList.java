@@ -10,7 +10,7 @@ import javafx.collections.ObservableList;
  * each containing a unique filter over the full task list.
  * Classes which extend GroupedTaskList are expected to provide a getter method for each grouping defined.
  */
-public interface GroupedTaskList extends Iterable<SubGroupTaskList>, ViewTaskList {
+public interface GroupedTaskList extends ViewTaskList {
     static GroupedTaskList makeGroupedTaskList(ObservableList<Task> tasks, Category category,
         PinnedTaskList pinnedTasks) {
         return category.construct(tasks, pinnedTasks);
@@ -18,7 +18,7 @@ public interface GroupedTaskList extends Iterable<SubGroupTaskList>, ViewTaskLis
 
     Category getCategory();
 
-    ObservableList<SubGroupTaskList> getList();
+    ObservableList<SubgroupTaskList> getList();
 
     /**
      * GroupedTaskList.Groupings define a set of fixed enum mappings from the commandArgument to the corresponding
