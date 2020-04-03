@@ -246,9 +246,6 @@ Format: `list [SORTING_ORDER]`
 * If no `SORTING_ORDER` is provided, tasks will be grouped by date by default, similar to the task list's tab default page as mentioned in the start of this section.
 * Valid `SORTING_ORDER` values are `date` (groups tasks by date) and `module` (Groups tasks by module code)
 ****
-[.text-center]
-.Example of an expected result after running `list`
-image::ug_figures/list.png[width="600"]
 
 ===== Group tasks by Date : `list date`
 This is also the default interface for the task list tab.
@@ -268,6 +265,10 @@ Group your tasks into the following categories:
 
 [TIP]
 Tasks which are due and completed will not be shown, as we assume you no longer need them.
+
+[.text-center]
+.Example of an expected result after running `list module`
+image::listByDate.png[width="600"]
 
 ===== Group tasks by Module : `list module`
 Groups tasks based on their defined module code.
