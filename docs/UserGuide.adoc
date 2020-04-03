@@ -383,7 +383,7 @@ Format: `clear`
 
 [.text-center]
 .Example of an expected result after running `clear`
-image::ug_figures/clear.png[width="600"]
+image::clearCommand.png[width="600"]
 
 ****
 * All reminders will be cleared together with the tasks.
@@ -480,7 +480,7 @@ Examples:
 .Example of expected result after running `calendar Apr-1-2020`
 image::CalendarDate.png[width="600"]
 
-Highlights 1st of March in the calendar panel on the right and displays the corresponding tasks due on the left.
+Highlights 1st of April in the calendar panel on the right and displays the corresponding tasks due on the left.
 
 ==== Navigate directly to today's date on Calendar : `calendar`
 Immediately displays the calendar view for this month and highlights today's date.
