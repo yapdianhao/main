@@ -189,7 +189,7 @@ image:BetterModelClassDiagram.png[]
 The Storage component manages storing and retrieving of data onto local files in .json format.
 
 .Structure of the Storage Component
-image::StorageClassDiagram.png[]
+image::Storage.png[]
 
 *API* : link:{repoURL}/src/main/java/seedu/jelphabot/storage/Storage.java[`Storage.java`]
 
