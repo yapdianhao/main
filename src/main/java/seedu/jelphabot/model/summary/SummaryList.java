@@ -12,6 +12,7 @@ import javafx.collections.ObservableList;
  * Only allows set and add list operations.
  */
 public class SummaryList implements Iterable<Summary> {
+
     private final ObservableList<Summary> internalList = FXCollections.observableArrayList();
     private final ObservableList<Summary> internalUnmodifiableList =
         FXCollections.unmodifiableObservableList(internalList);
