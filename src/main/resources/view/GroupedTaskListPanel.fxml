@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.layout.VBox?>
-<VBox xmlns:fx="http://javafx.com/fxml/1" maxWidth="1.7976931348623157E308" minWidth="500.0" xmlns="http://javafx.com/javafx/11">
-   <children>
-      <ScrollPane id="groupedTaskListPanel" fx:id="groupedTaskListPanel" fitToWidth="true" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity">
-         <content>
-            <ListView id="taskListGroups" fx:id="taskListGroups" maxWidth="1.7976931348623157E308" minWidth="500.0" />
-         </content>
-      </ScrollPane>
-   </children>
-</VBox>
+
+
+<ScrollPane id="groupedTaskListPanel" fx:id="groupedTaskListPanel" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minViewportHeight="400.0" minViewportWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <content>
+      <ListView id="taskListGroups" fx:id="taskListGroups" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="400.0" minWidth="600.0" />
+   </content>
+</ScrollPane>
