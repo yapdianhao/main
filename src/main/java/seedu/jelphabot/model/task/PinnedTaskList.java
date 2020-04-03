@@ -6,7 +6,7 @@ import javafx.collections.ObservableList;
 /**
  * Wrapper class for a ObservableList of pinned Tasks.
  */
-public class PinnedTaskList extends SubGroupTaskList {
+public class PinnedTaskList extends SubgroupTaskList {
     public PinnedTaskList(ObservableList<Task> taskList, NumberBinding startIndex) {
         super("Pinned", taskList, startIndex);
     }
