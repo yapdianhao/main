@@ -563,20 +563,17 @@ by you. +
 
 Format: `reminder INDEX days/DAYS hours/HOURS`
 
-****
-* Adds a reminder to the task which is at the specified `INDEX`.
-* The index refers to the index number shown in the displayed task list.
-* The index *must be a positive integer* 1, 2, 3, ....
-* `DAYS` refers to the number of days before the due date of the task when you want to be reminded of it.
-* `HOURS` refers to the number of hours before the due date of the task when you want to be reminded of it.
-****
-
 [.text-center]
 .Example of expected result after running `reminder 1 days/1 hours/1`
 image::ug_figures/addReminder.png[width="600"]
 
 
 ****
+* Adds a reminder to the task which is at the specified `INDEX`.
+* The index refers to the index number shown in the displayed task list.
+* The index *must be a positive integer* 1, 2, 3, ....
+* `DAYS` refers to the number of days before the due date of the task when you want to be reminded of it.
+* `HOURS` refers to the number of hours before the due date of the task when you want to be reminded of it.
 * You can only specify `DAYS` to be in the range 0 - 7 inclusive.
 * You can only specify `HOURS` to be in the range 0 - 24 inclusive.
 * Every Task can only have one reminder.
@@ -591,24 +588,22 @@ Should you choose to stop a task to be reminded or after it is completed, you ca
 
 Format: `delrem INDEX`
 
-****
-* Removes a reminder associated to the task at the specified `INDEX`.
-* The index refers to the index number shown in the displayed task list.
-* The index *must be a positive integer* 1, 2, 3, ....
-****
 
 [.text-center]
 .Example of expected result after running `delrem 1`
 image::ug_figures/delReminder.png[width="600"]
 
 ****
+* Removes a reminder associated to the task at the specified `INDEX`.
+* The index refers to the index number shown in the displayed task list.
+* The index *must be a positive integer* 1, 2, 3, ....
 * Whenever a task is deleted, the corresponding reminder will also be removed.
 ****
 
 
 ==== Reminder popup notification
 
-Whenever you boot JelphaBot, if there is any tasks that have to be reminded, JelphaBot will show
+Whenever you boot JelphaBot the next session after you added your reminders, if there is any task that have to be reminded, JelphaBot will show
 a list of tasks that will expire soon, and tasks that have expired but have not been completed.
 
 [.text-center]
