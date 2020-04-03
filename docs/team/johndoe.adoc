@@ -5,7 +5,7 @@
 
 == PROJECT: AddressBook - Level 3
 
----
+'''
 
 == Overview
 
@@ -63,6 +63,6 @@ include::../DeveloperGuide.adoc[tag=undoredo]
 
 == PROJECT: PowerPointLabs
 
----
+'''
 
 _{Optionally, you may include other projects in your portfolio.}_
