@@ -144,11 +144,11 @@ The tasks listed in Morning Call and Night Debrief are displayed in under the Su
 ==== Viewing the summary tab: `summary`
 
 Apart from the function to switch tabs by pressing kbd:[Ctrl] + kbd:[tab] on your keyboard, you can enter the `summary` command
-or its shortcut `:s` to manually switch to the summary tab.
+or its shortcuts `:S` or `:s` to manually switch to the summary tab.
 The summary panel will then display a summary of your tasks due and completed today. +
 
 Format: `summary` +
-Shortcut: `:S`
+Shortcut: `:S` or `:s`
 
 [.text-center]
 .Example of expected result after running `summary`
@@ -168,11 +168,11 @@ JelphaBot allows you to track and manage your tasks comprehensively as well!
 You can view and sort all your tasks from the Task List page.
 
 Apart from the function to switch tabs by pressing kbd:[Ctrl] + kbd:[tab] on your keyboard, you can enter the `list` command
-or its shortcut `:t` to manually switch to the task list tab.
+or its shortcuts `:T` or `:t` to manually switch to the task list tab.
 The task list panel will then display your all tasks, sorted in various sections. +
 
 Format: `list` +
-Shortcut: `:T`
+Shortcut: `:T` or `:t`
 
 [.text-center]
 .Example of expected result after running `list`
@@ -209,7 +209,7 @@ You can also tag tasks with additional information. To read more about tags, go 
 // tag::add[]
 ==== Adding a task: `add`
 
-Add a task to your task list. +
+You can add a task to your task list. +
 Format: `d/DESCRIPTION dt/DATETIME m/MODULE_CODE [p/PRIORITY] [t/TAG]...`
 
 [.text-center]
@@ -240,7 +240,7 @@ Examples:
 // tag::list[]
 ==== Listing all tasks : `list`
 
-List all tasks in your task list. Optional arguments can be added to dictate sorting order for your tasks. +
+You can list all tasks in your task list. Optional arguments can be added to dictate sorting order for your tasks. +
 Format: `list [SORTING_ORDER]`
 
 ****
@@ -252,6 +252,7 @@ Format: `list [SORTING_ORDER]`
 image::ug_figures/list.png[width="600"]
 
 ===== Group tasks by Date : `list date`
+
 Group your tasks into the following categories:
 
 * Pinned +
@@ -275,7 +276,7 @@ Groups tasks based on their defined module code. Modules will be presented in al
 
 ==== Locating tasks by name: `find`
 
-Finds tasks in your task list whose description contain any of the given keywords. +
+You can find tasks in your task list with description containing any of the given keywords. +
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 [.text-center]
@@ -300,8 +301,7 @@ Returns any task having descriptions of `Tutorial`, `Project`, or `MidTerm`
 // tag::edit[]
 ==== Editing a task : `edit`
 
-Edit an existing task in your task list.
-. +
+You can edit an existing task in your task list. +
 Format: `edit INDEX [d/DESCRIPTION] [dt/DATETIME] [m/MODULE_CODE] [p/PRIORITY (-1, 0, or 1)]
 [t/TAG]...`
 
@@ -357,6 +357,7 @@ image::images/ug_figures/delete.png[width="600"]
 * Deletes the task at the specified `INDEX`.
 * The index refers to the index number shown in the displayed task list.
 * The index *must be a positive integer* 1, 2, 3, ...
+* Deleting a task deletes any reminders for it too.
 ****
 
 Examples:
@@ -372,13 +373,16 @@ Deletes the 1st task in the results of the `find` command.
 
 ==== Clearing all task entries : `clear`
 
-Clears all entries from your task list. +
+You can clear all tasks from your task list. +
 Format: `clear`
 
 [.text-center]
 .Example of an expected result after running `clear`
 image::ug_figures/clear.png[width="600"]
 
+****
+* All reminders will be cleared together with the tasks.
+****
 
 // tag::pin[]
 ==== Pin Important tasks  : `pin` (Coming in V1.4)
@@ -410,16 +414,16 @@ Valid `SORTING_ORDER` values include `date`, `module`, and `priority`.
 
 
 === Calendar (Amanda)
-JelphaBot also comes with a built in calendar view that allows you to view your overarching tasks due on a monthly basis.
+JelphaBot also comes with a built-in calendar view that allows you to view your overarching tasks due on a monthly basis.
 You would also be able to navigate to specific dates to view your tasks due for that day of the month!
 
 ==== View calender : `calendar`
 Apart from the function to switch tabs by pressing kbd:[Ctrl] + kbd:[tab] on your keyboard, you can enter the `calendar` command
-or its shortcut `:c` to manually switch to the calendar tab.
+or its shortcuts `:C` or `:c` to manually switch to the calendar tab.
 The calendar panel will then show you your schedule for the current month with today's date highlighted. +
 
 Format: `calendar` +
-Shorcut: `:C`
+Shorcut: `:C` or `:c`
 
 [.text-center]
 .Example of expected result after running `calendar`
@@ -485,11 +489,11 @@ Displays month of April in the year 2020 in the calendar panel on the right, wit
 // tag::productivitytracker[]
 ==== Track productivity : `productivity`
 Apart from the function to switch tabs by pressing kbd:[Ctrl] + kbd:[tab] on your keyboard, you can enter the `productivity` command
-or its shortcut `:p` to manually switch to the producivity tab.
+or its shortcuts `:P` or `:p` to manually switch to the productivity tab.
 The productivity panel will then show you your productivity for the day. +
 
 Format: `productivity` +
-Shortcut: `:P`
+Shortcut: `:P` or `:p`
 
 [.text-center]
 .Example of expected result after running `productivity`
@@ -499,7 +503,7 @@ image::ProductivityTab.png[width="600"]
 
 ==== Starting timer for a task : `start`
 
-Starts timer running for a task. +
+You can start a timer running for a task. +
 Format: `start INDEX`
 
 [.text-center]
@@ -507,7 +511,8 @@ Format: `start INDEX`
 image::ug_figures/start.png[width="600"]
 
 ****
-* Starts the timer for the task at the specified `INDEX` if timer was not running.
+* Each task can only have 1 running timer.
+* Starts the timer for the task at the specified `INDEX` if timer was not already running.
 * The index refers to the index number shown in the displayed task list.
 * The index *must be a positive integer* 1, 2, 3, ...
 * The task to be timed cannot be a completed task.
@@ -515,7 +520,7 @@ image::ug_figures/start.png[width="600"]
 
 ==== Stopping timer for a task : `stop`
 
-Stops running timer for a task. +
+You can stop a running timer for a task. +
 Format: `stop INDEX`
 
 [.text-center]
@@ -523,30 +528,32 @@ Format: `stop INDEX`
 image::ug_figures/stop.png[width="600"]
 
 ****
+* The task has to have a running timer.
 * Stops the timer for the task at the specified `INDEX` if timer was running.
 * The index refers to the index number shown in the displayed task list.
 * The index *must be a positive integer* 1, 2, 3, ...
-* The task has to have a running timer.
 ****
 
 ==== Receiving encouragement and criticism
 
 JelphaBot automatically tracks the user's productivity in a day and outputs the appropriate response to the user's
 achievements and task completion rate. +
-There is no need to manually ask for compliments or criticism.
+There is no need to manually request for compliments or criticism.
 
 === Set Reminders and Notifications (Dian Hao)
 ==== Adding reminder : `reminder`
-Adds a reminder to your specified task and reminds you of the task if the current time is within the time-frame specified
+You can add a reminder to your specified task to remind yourself of the task if the current time is within the time-frame specified
 by you. +
 
 Format: `reminder INDEX days/DAYS hours/HOURS`
 
+****
 * Adds a reminder to the task which is at the specified `INDEX`.
 * The index refers to the index number shown in the displayed task list.
 * The index *must be a positive integer* 1, 2, 3, ....
 * `DAYS` refers to the number of days before the due date of the task when you want to be reminded of it.
 * `HOURS` refers to the number of hours before the due date of the task when you want to be reminded of it.
+****
 
 [.text-center]
 .Example of expected result after running `reminder 1 days/1 hours/1`
@@ -568,9 +575,11 @@ Should you choose to stop a task to be reminded or after it is completed, you ca
 
 Format: `delrem INDEX`
 
+****
 * Removes a reminder associated to the task at the specified `INDEX`.
 * The index refers to the index number shown in the displayed task list.
 * The index *must be a positive integer* 1, 2, 3, ....
+****
 
 [.text-center]
 .Example of expected result after running `delrem 1`
@@ -583,23 +592,23 @@ image::ug_figures/delReminder.png[width="600"]
 
 ==== Reminder popup notification
 
-Whenever you boot JelphaBot, if there is any tasks that will be reminded, JelphaBot will show
-a list of tasks that will expire soon, and tasks that have expired but not done.
+Whenever you boot JelphaBot, if there is any tasks that have to be reminded, JelphaBot will show
+a list of tasks that will expire soon, and tasks that have expired but have not been completed.
 
 [.text-center]
 .Example of expected result after tasks are being reminded.
 image::ug_figures/reminderpopup.png[width="600"]
 
-=== Colour-code modules and font style for prioritised tasks `[coming in v2.0]`
+=== Colour-code module codes `[coming in v2.0]`
 
 == FAQ
 
-*Q*: How do I transfer my data to another Computer? +
+*Q1*: How do I transfer my data to another Computer? +
 *A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
 
 
-Q2: Saving the data
-A: JelphaBot automatically saves your data whenever you make a change. There is no need to save manually.
+*Q2*: How do I save my data? +
+*A*: JelphaBot automatically saves your data whenever you make a change. There is no need to save manually.
 
 == Command Summary
 
