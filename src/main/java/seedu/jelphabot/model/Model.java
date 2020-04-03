@@ -1,5 +1,9 @@
 package seedu.jelphabot.model;
 
+import java.nio.file.Path;
+import java.util.List;
+import java.util.function.Predicate;
+
 import javafx.collections.ObservableList;
 import seedu.jelphabot.commons.core.GuiSettings;
 import seedu.jelphabot.model.productivity.Productivity;
@@ -12,16 +16,14 @@ import seedu.jelphabot.model.task.tasklist.GroupedTaskList;
 import seedu.jelphabot.model.task.tasklist.PinnedTaskList;
 import seedu.jelphabot.model.task.tasklist.ViewTaskList;
 
-import java.nio.file.Path;
-import java.util.List;
-import java.util.function.Predicate;
-
 /**
  * The API of the Model component.
  */
 // TODO check the file paths here for saving as jelphabot.json
 public interface Model {
-    /** {@code Predicate} that always evaluate to true */
+    /**
+     * {@code Predicate} that always evaluate to true
+     */
     Predicate<Task> PREDICATE_SHOW_ALL_TASKS = unused -> true;
 
     /**
@@ -61,7 +63,9 @@ public interface Model {
 
     Path getRemindersFilePath();
 
-    /** Returns the JelphaBot */
+    /**
+     * Returns the JelphaBot
+     */
     ReadOnlyJelphaBot getJelphaBot();
 
     /**
@@ -84,6 +88,7 @@ public interface Model {
 
     /**
      * Deletes the given reminder.
+     *
      * @param reminder
      */
     void deleteReminder(Reminder reminder);
@@ -113,7 +118,9 @@ public interface Model {
      */
     void setSummary(Summary summary);
 
-    /** Returns an unmodifiable view of the filtered task list */
+    /**
+     * Returns an unmodifiable view of the filtered task list
+     */
     ObservableList<Task> getFilteredTaskList();
 
     GroupedTaskList getGroupedTaskList(GroupedTaskList.Category category);
@@ -124,7 +131,9 @@ public interface Model {
 
     ObservableList<Reminder> getFilteredReminderList();
 
-    /** Returns an unmodifiable view of the filtered task list in the Calendar*/
+    /**
+     * Returns an unmodifiable view of the filtered task list in the Calendar
+     */
     ObservableList<Task> getFilteredCalendarTaskList();
 
     List<Task> getTaskListFromJelphaBot();
@@ -145,9 +154,11 @@ public interface Model {
 
     /**
      * Returns an unmodifiable view of the user's summary.
+     *
      * @return
      */
     SummaryList getSummaryList();
+
     /**
      * Updates the filter of the filtered task list to filter by the given {@code predicate}.
      *

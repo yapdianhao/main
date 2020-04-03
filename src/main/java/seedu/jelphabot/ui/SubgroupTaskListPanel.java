@@ -1,5 +1,7 @@
 package seedu.jelphabot.ui;
 
+import java.util.logging.Logger;
+
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.NumberBinding;
 import javafx.fxml.FXML;
@@ -10,8 +12,6 @@ import javafx.scene.layout.Region;
 import seedu.jelphabot.commons.core.LogsCenter;
 import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.model.task.tasklist.SubgroupTaskList;
-
-import java.util.logging.Logger;
 
 /**
  * Panel containing one grouped list of tasks.
