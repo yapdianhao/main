@@ -28,7 +28,8 @@ public class ShowIncompleteCommandTest {
     // @Test
     // public void execute_listIsFilteredByPredicate_showsIncompleteTasks() {
     //     showTasksWithSpecifiedStatus(model, Status.INCOMPLETE);
-    //     assertCommandSuccess(new ShowIncompleteCommand(), model, ShowIncompleteCommand.MESSAGE_SUCCESS, expectedModel);
+    //     assertCommandSuccess(new ShowIncompleteCommand(), model,
+    //     ShowIncompleteCommand.MESSAGE_SUCCESS, expectedModel);
     // }
 
 }
