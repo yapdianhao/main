@@ -22,7 +22,8 @@ public class StartTimerCommand extends Command {
                                                    + "Parameters: INDEX (must be a positive integer)\n" + "Example: "
                                                    + COMMAND_WORD + " 1";
     public static final String MESSAGE_SUCCESS = "Started timer for task %d. %s %s.";
-    public static final String MESSAGE_TASK_ALREADY_TIMED = "This task has already been marked as done and cannot be timed.";
+    public static final String MESSAGE_TASK_ALREADY_TIMED = "This task has already been marked as done and cannot be "
+                                                                + "timed.";
     public static final String MESSAGE_TIMER_ALREADY_STARTED = "Timer for this task has already been started.";
 
     private Index targetIndex;

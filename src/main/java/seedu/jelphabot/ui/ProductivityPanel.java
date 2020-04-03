@@ -10,7 +10,6 @@ import javafx.scene.control.TabPane;
 import javafx.scene.layout.Region;
 import seedu.jelphabot.commons.core.LogsCenter;
 import seedu.jelphabot.model.productivity.Productivity;
-import seedu.jelphabot.model.task.TimeSpent;
 
 /**
  * The Productivity Panel. Provides the basic application layout of productivity of tasks.
@@ -76,7 +75,9 @@ public class ProductivityPanel extends UiPart<Region> {
                 setText(null);
             } else {
                 setGraphic(new ProductivityCard(productivity).getRoot());
-                // if (productivity.getRunningTimers() == null || productivity.getTasksCompleted() == null || productivity.getTimeSpentToday() == null) {
+                // TODO: manage multiple cards.. or not lol lazy sia
+                // if (productivity.getRunningTimers() == null || productivity.getTasksCompleted() == null ||
+                // productivity.getTimeSpentToday() == null) {
                 //     setGraphic(new TimersCard(productivity.getRunningTimers()).getRoot());
                 //     setGraphic(new TimeSpentCard(productivity.getTimeSpentToday()).getRoot());
                 //     setGraphic(new TaskCompletionCard(productivity.getTasksCompleted()).getRoot());
