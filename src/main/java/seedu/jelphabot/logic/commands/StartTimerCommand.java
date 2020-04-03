@@ -12,6 +12,7 @@ import seedu.jelphabot.model.Model;
 import seedu.jelphabot.model.productivity.Productivity;
 import seedu.jelphabot.model.task.Status;
 import seedu.jelphabot.model.task.Task;
+import seedu.jelphabot.model.task.ViewTaskList;
 
 /**
  * Starts a timer for a task.
@@ -36,7 +37,7 @@ public class StartTimerCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Task> lastShownList = model.getFilteredTaskList();
+        ViewTaskList lastShownList = model.getLastShownList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
