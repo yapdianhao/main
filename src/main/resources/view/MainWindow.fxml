@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.Scene?>
-<?import javafx.stage.Stage?>
 <?import java.net.URL?>
-<fx:root xmlns:fx="http://javafx.com/fxml/1" minHeight="600" minWidth="450" onCloseRequest="#handleExit" title="JelphaBot" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11">
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Scene?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.stage.Stage?>
+
+<fx:root minHeight="600" minWidth="450" onCloseRequest="#handleExit" title="JelphaBot" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <icons>
         <Image url="@/images/address_book_32.png" />
     </icons>
@@ -18,8 +27,8 @@
                 <URL value="@Extensions.css" />
             </stylesheets>
 
-            <VBox maxHeight="1.7976931348623157E308">
-                <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
+            <VBox maxHeight="1.7976931348623157E308" minHeight="-Infinity">
+                <MenuBar fx:id="menuBar" maxHeight="-Infinity" VBox.vgrow="NEVER">
                     <Menu mnemonicParsing="false" text="File">
                         <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
                     </Menu>
@@ -29,7 +38,7 @@
                         </items>
                     </Menu>
                 </MenuBar>
-                <TabPane fx:id="mainWindowTabPane" maxHeight="-Infinity" minHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
+                <TabPane fx:id="mainWindowTabPane" maxHeight="1.7976931348623157E308" minHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
                     <tabs>
                         <Tab>
                             <content>
@@ -37,7 +46,7 @@
                                     <padding>
                                         <Insets bottom="10" left="10" right="10" top="10" />
                                     </padding>
-                                    <StackPane fx:id="summaryPanelPlaceholder" VBox.vgrow="ALWAYS" />
+                                    <StackPane fx:id="summaryPanelPlaceholder" maxHeight="1.7976931348623157E308" minHeight="-Infinity" VBox.vgrow="ALWAYS" />
                                 </VBox>
                             </content>
                             <graphic>
@@ -127,7 +136,7 @@
                     </padding>
                 </StackPane>
 
-                <StackPane fx:id="commandBoxPlaceholder" styleClass="stack-pane" VBox.vgrow="NEVER">
+                <StackPane fx:id="commandBoxPlaceholder" minHeight="-Infinity" prefHeight="35.0" prefWidth="600.0" styleClass="stack-pane" VBox.vgrow="NEVER">
                     <padding>
                         <Insets bottom="5" left="10" right="10" top="5" />
                     </padding>
