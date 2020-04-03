@@ -342,6 +342,8 @@ If the user attempts to add a reminder to tasks that have reminders, the command
 to set reminders to tasks that are complete. However, if tasks that has reminders are not completed, JelphaBot will
 still warn the user.
 
+==== Design Considerations
+
 
 
 // tag::morningcallnightdebrief[]
