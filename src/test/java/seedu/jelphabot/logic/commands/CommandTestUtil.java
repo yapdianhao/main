@@ -181,6 +181,7 @@ public class CommandTestUtil {
      */
     public static void showTasksWithSpecifiedStatus(Model model, Status status) {
         requireNonNull(model);
+        //ViewTaskList taskList = model.getLastShownList();
         List<Task> taskList = model.getFilteredTaskList();
         List<Task> tasksWithPredicate = new ArrayList<>();
         for (Task t: taskList) {
