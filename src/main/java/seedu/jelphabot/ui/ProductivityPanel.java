@@ -75,23 +75,24 @@ public class ProductivityPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                System.out.println("here1");
-                if (productivity.getRunningTimers() == null || productivity.getTasksCompleted() == null || productivity.getTimeSpentToday() == null) {
-                    System.out.println("here2");
-                    setGraphic(new ProductivityCard(productivity).getRoot());
-                } else {
-                    if (productivity.hasNewTimer()) {
-                        setGraphic(new TimersCard(productivity.getRunningTimers()).getRoot());
-                    }
-
-                    if (productivity.hasChangeInTimeSpent()) {
-                        setGraphic(new TimeSpentCard(productivity.getTimeSpentToday()).getRoot());
-                    }
-
-                    if (productivity.hasNewOrEditedTasks()) {
-                        setGraphic(new TaskCompletionCard(productivity.getTasksCompleted()).getRoot());
-                    }
-                }
+                setGraphic(new ProductivityCard(productivity).getRoot());
+                // if (productivity.getRunningTimers() == null || productivity.getTasksCompleted() == null || productivity.getTimeSpentToday() == null) {
+                //     setGraphic(new TimersCard(productivity.getRunningTimers()).getRoot());
+                //     setGraphic(new TimeSpentCard(productivity.getTimeSpentToday()).getRoot());
+                //     setGraphic(new TaskCompletionCard(productivity.getTasksCompleted()).getRoot());
+                // } else {
+                //     if (productivity.hasNewTimer()) {
+                //         setGraphic(new TimersCard(productivity.getRunningTimers()).getRoot());
+                //     }
+                //
+                //     if (productivity.hasChangeInTimeSpent()) {
+                //         setGraphic(new TimeSpentCard(productivity.getTimeSpentToday()).getRoot());
+                //     }
+                //
+                //     if (productivity.hasNewOrEditedTasks()) {
+                //         setGraphic(new TaskCompletionCard(productivity.getTasksCompleted()).getRoot());
+                //     }
+                // }
             }
         }
     }
