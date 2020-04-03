@@ -29,9 +29,9 @@
                         </items>
                     </Menu>
                 </MenuBar>
-            <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" VBox.vgrow="ALWAYS">
+            <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="SOMETIMES">
                <children>
-                      <TabPane fx:id="mainWindowTabPane" maxHeight="Infinity" maxWidth="1.7976931348623157E308" minHeight="400" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="Infinity" VBox.vgrow="ALWAYS">
+                      <TabPane fx:id="mainWindowTabPane" maxHeight="Infinity" maxWidth="1.7976931348623157E308" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="Infinity" VBox.vgrow="ALWAYS">
                           <tabs>
                               <Tab fx:id="summaryTab">
                                   <content>
