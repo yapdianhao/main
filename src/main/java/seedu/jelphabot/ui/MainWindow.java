@@ -23,8 +23,8 @@ import seedu.jelphabot.model.productivity.Productivity;
 import seedu.jelphabot.model.productivity.ProductivityList;
 import seedu.jelphabot.model.summary.Summary;
 import seedu.jelphabot.model.summary.SummaryList;
-import seedu.jelphabot.model.task.GroupedTaskList;
-import seedu.jelphabot.model.task.GroupedTaskList.Category;
+import seedu.jelphabot.model.task.tasklist.GroupedTaskList;
+import seedu.jelphabot.model.task.tasklist.GroupedTaskList.Category;
 
 /**
  * The Main Window. Provides the basic application layout containing a menu bar

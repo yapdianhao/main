@@ -1,7 +1,5 @@
 package seedu.jelphabot.logic.commands;
 
-import static java.util.Objects.requireNonNull;
-
 import seedu.jelphabot.commons.core.Messages;
 import seedu.jelphabot.commons.core.index.Index;
 import seedu.jelphabot.logic.commands.exceptions.CommandException;
@@ -9,7 +7,9 @@ import seedu.jelphabot.model.Model;
 import seedu.jelphabot.model.productivity.Productivity;
 import seedu.jelphabot.model.summary.Summary;
 import seedu.jelphabot.model.task.Task;
-import seedu.jelphabot.model.task.ViewTaskList;
+import seedu.jelphabot.model.task.tasklist.ViewTaskList;
+
+import static java.util.Objects.requireNonNull;
 
 /**
  * Deletes a task identified using it's displayed index from the address book.

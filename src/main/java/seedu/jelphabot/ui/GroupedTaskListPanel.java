@@ -9,8 +9,8 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.jelphabot.commons.core.LogsCenter;
-import seedu.jelphabot.model.task.GroupedTaskList;
-import seedu.jelphabot.model.task.SubgroupTaskList;
+import seedu.jelphabot.model.task.tasklist.GroupedTaskList;
+import seedu.jelphabot.model.task.tasklist.SubgroupTaskList;
 
 /**
  * Panel containing the list of tasks.

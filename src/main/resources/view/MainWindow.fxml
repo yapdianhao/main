@@ -7,7 +7,7 @@
 <?import javafx.scene.Scene?>
 <?import javafx.stage.Stage?>
 <?import java.net.URL?>
-<fx:root xmlns:fx="http://javafx.com/fxml/1" minHeight="600.0" minWidth="600.0" onCloseRequest="#handleExit" title="JelphaBot" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11">
+<fx:root xmlns:fx="http://javafx.com/fxml/1" minHeight="600.0" minWidth="600.0" onCloseRequest="#handleExit" title="JelphaBot" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11.0.1">
     <icons>
         <Image url="@/images/address_book_32.png" />
     </icons>
@@ -121,7 +121,7 @@
 
                 <!--        <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />-->
 
-                <StackPane fx:id="resultDisplayPlaceholder" maxHeight="500.0" minHeight="200.0" styleClass="pane-with-border" VBox.vgrow="NEVER">
+                <StackPane fx:id="resultDisplayPlaceholder" maxHeight="300.0" minHeight="150.0" styleClass="pane-with-border" VBox.vgrow="NEVER">
                     <padding>
                         <Insets bottom="5" left="10" right="10" top="5" />
                     </padding>

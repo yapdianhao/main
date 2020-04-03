@@ -19,7 +19,7 @@ import seedu.jelphabot.model.task.Priority;
 import seedu.jelphabot.model.task.Status;
 import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.model.task.TimeSpent;
-import seedu.jelphabot.model.task.ViewTaskList;
+import seedu.jelphabot.model.task.tasklist.ViewTaskList;
 
 /**
  * Marks the specified as done by updating it's status to COMPLETE.

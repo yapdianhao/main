@@ -1,19 +1,8 @@
 package seedu.jelphabot.logic.commands;
 
-import static java.util.Objects.requireNonNull;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static seedu.jelphabot.testutil.Assert.assertThrows;
-
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Predicate;
-
-import org.junit.jupiter.api.Test;
-
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import org.junit.jupiter.api.Test;
 import seedu.jelphabot.commons.core.GuiSettings;
 import seedu.jelphabot.logic.commands.exceptions.CommandException;
 import seedu.jelphabot.model.JelphaBot;
@@ -25,11 +14,21 @@ import seedu.jelphabot.model.productivity.ProductivityList;
 import seedu.jelphabot.model.reminder.Reminder;
 import seedu.jelphabot.model.summary.Summary;
 import seedu.jelphabot.model.summary.SummaryList;
-import seedu.jelphabot.model.task.GroupedTaskList;
-import seedu.jelphabot.model.task.PinnedTaskList;
 import seedu.jelphabot.model.task.Task;
-import seedu.jelphabot.model.task.ViewTaskList;
+import seedu.jelphabot.model.task.tasklist.GroupedTaskList;
+import seedu.jelphabot.model.task.tasklist.PinnedTaskList;
+import seedu.jelphabot.model.task.tasklist.ViewTaskList;
 import seedu.jelphabot.testutil.TaskBuilder;
+
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Predicate;
+
+import static java.util.Objects.requireNonNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static seedu.jelphabot.testutil.Assert.assertThrows;
 
 public class AddCommandTest {
 

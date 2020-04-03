@@ -1,9 +1,5 @@
 package seedu.jelphabot.model;
 
-import java.nio.file.Path;
-import java.util.List;
-import java.util.function.Predicate;
-
 import javafx.collections.ObservableList;
 import seedu.jelphabot.commons.core.GuiSettings;
 import seedu.jelphabot.model.productivity.Productivity;
@@ -11,10 +7,14 @@ import seedu.jelphabot.model.productivity.ProductivityList;
 import seedu.jelphabot.model.reminder.Reminder;
 import seedu.jelphabot.model.summary.Summary;
 import seedu.jelphabot.model.summary.SummaryList;
-import seedu.jelphabot.model.task.GroupedTaskList;
-import seedu.jelphabot.model.task.PinnedTaskList;
 import seedu.jelphabot.model.task.Task;
-import seedu.jelphabot.model.task.ViewTaskList;
+import seedu.jelphabot.model.task.tasklist.GroupedTaskList;
+import seedu.jelphabot.model.task.tasklist.PinnedTaskList;
+import seedu.jelphabot.model.task.tasklist.ViewTaskList;
+
+import java.nio.file.Path;
+import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * The API of the Model component.
