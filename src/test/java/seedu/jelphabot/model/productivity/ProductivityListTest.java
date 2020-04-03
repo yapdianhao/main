@@ -1,8 +1,8 @@
 package seedu.jelphabot.model.productivity;
 
-import org.junit.jupiter.api.Test;
-
 import static seedu.jelphabot.testutil.Assert.assertThrows;
+
+import org.junit.jupiter.api.Test;
 
 class ProductivityListTest {
 

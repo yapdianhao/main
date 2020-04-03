@@ -192,7 +192,7 @@ e.g. `[t/TAG]...` can be used as `t/project`, `t/project t/graded` etc.
 * Parameters can be in any order e.g. if the command specifies `d/DESCRIPTION p/PRIORITY`, `p/PRIORITY d/DESCRIPTION` is also acceptable.
 ====
 
-==== Reading the task list
+==== Reading the Task List
 
 The task list is formatted so that you can distinguish urgent tasks at first glance. The start of every task is labelled
 with a module code so that you can visually categorize them. Tasks are tagged according to their importance:
@@ -206,10 +206,10 @@ Go <<#add, here>> to read more about adding tasks with priority and <<#edit, her
 
 // tag::add[]
 [[add]]
-==== Adding a task: `add`
+==== Adding a Task: `add`
 
 You can add a task to your task list. +
-Format: `d/DESCRIPTION dt/DATETIME m/MODULE_CODE [p/PRIORITY] [t/TAG]...`
+Format: `add d/DESCRIPTION dt/DATETIME m/MODULE_CODE [p/PRIORITY] [t/TAG]...`
 
 [.text-center]
 .Example of an expected result after running `add d/Assignment 1 dt/Jan-01-2020 23 59 m/CS1231 t/graded`
@@ -237,7 +237,7 @@ Examples:
 // end::add[]
 
 // tag::list[]
-==== Listing all tasks : `list`
+==== Listing all Tasks : `list`
 
 You can list all tasks in your task list. Optional arguments can be added to dictate sorting order for your tasks. +
 Format: `list [SORTING_ORDER]`
@@ -247,7 +247,7 @@ Format: `list [SORTING_ORDER]`
 * Valid `SORTING_ORDER` values are `date` (groups tasks by date) and `module` (Groups tasks by module code)
 ****
 
-===== Group tasks by Date : `list date`
+===== Group Tasks by Date : `list date`
 This is also the default interface for the task list tab.
 
 Group your tasks into the following categories:
@@ -270,7 +270,7 @@ Tasks which are due and completed will not be shown, as we assume you no longer 
 .Example of an expected result after running `list module`
 image::listByDate.png[width="600"]
 
-===== Group tasks by Module : `list module`
+===== Group Tasks by Module : `list module`
 Groups tasks based on their defined module code.
 
 // end::list[]
@@ -278,7 +278,7 @@ Groups tasks based on their defined module code.
 .Example of an expected result after running `list module`
 image::listByModule.png[width="600"]
 
-==== Locating tasks by name: `find`
+==== Locating Tasks by name: `find`
 
 You can find tasks in your task list with description containing any of the given keywords. +
 Format: `find KEYWORD [MORE_KEYWORDS]`
@@ -304,7 +304,7 @@ Returns any task having descriptions of `Tutorial`, `Project`, or `MidTerm`
 
 // tag::edit[]
 [[edit]]
-==== Editing a task : `edit`
+==== Editing a Task : `edit`
 
 You can edit an existing task in your task list. +
 Format: `edit INDEX [d/DESCRIPTION] [dt/DATETIME] [m/MODULE_CODE] [p/PRIORITY (-1, 0, or 1)]
@@ -333,7 +333,7 @@ Edits the moduleCode of the 1st task to be `cs2105` and description to `Tutorial
 Edits the date and time of the 2nd task to be `Jan-2-2020 23 59` and clears all existing tags.
 // end::edit[]
 
-==== Completing a task : `done`
+==== Completing a Task : `done`
 
 Marks a task in your task list as done and then removes the task from the task list display. +
 Format: `done INDEX`
@@ -349,7 +349,7 @@ image::doneCommand.png[width="600"]
 ****
 
 // tag::delete[]
-==== Deleting a task : `delete`
+==== Deleting a Task : `delete`
 
 Delete a task from your task list. +
 Format: `delete INDEX`
@@ -376,7 +376,7 @@ Deletes the 1st task in the results of the `find` command.
 
 // end::delete[]
 
-==== Clearing all task entries : `clear`
+==== Clearing all Tasks : `clear`
 
 You can clear all tasks from your task list. +
 Format: `clear`
@@ -391,7 +391,7 @@ image::clearCommand.png[width="600"]
 
 // tag::pin[]
 [[pin]]
-==== Pin Important tasks  : `pin` (Coming in V1.4)
+==== Pin Important Tasks  : `pin` (Coming in V1.4)
 
 You can pin important tasks to the top of the task list with the `pin` command. +
 Pinned tasks will always be displayed in the Pinned Tasks group in the task list. +
@@ -400,7 +400,7 @@ Trying to `pin` a task that is already pinned will unpin it.
 // end::pin[]
 
 // tag::showcompleted[]
-==== Show all completed tasks : `show-completed` (Eden)
+==== Show all completed Tasks : `show-completed` (Eden)
 You can display all the tasks in your task list that have been completed.
 
 [.text-center]
@@ -410,7 +410,7 @@ image::showCompletedCommand.png[width="600"]
 // end::showcompleted[]
 
 // tag::showincomplete[]
-==== Show all incomplete tasks: `show-incomplete` (Eden)
+==== Show all incomplete Tasks: `show-incomplete` (Eden)
 You can display all the tasks in your task list that are currently incomplete.
 
 [.text-center]
@@ -419,7 +419,7 @@ image::showIncompleteCommand.png[width="600"]
 
 // end::showincomplete[]
 
-==== Sort tasks : `sort`  [coming in v2.0]
+==== Sort Tasks : `sort`  [coming in v2.0]
 
 You can change how tasks are sorted with the `sort` command.
 Format: `sort SORTING_ORDER`
@@ -532,6 +532,7 @@ image::startCommand.png[width="600"]
 * The index refers to the index number shown in the displayed task list.
 * The index *must be a positive integer* 1, 2, 3, ...
 * The task to be timed cannot be a completed task.
+* New timer entry under "Running Timer(s)" in the productivity tab will be added if execution is successful.
 ****
 
 ==== Stopping timer for a task : `stop`
@@ -548,6 +549,8 @@ image::stopCommand.png[width="600"]
 * Stops the timer for the task at the specified `INDEX` if timer was running.
 * The index refers to the index number shown in the displayed task list.
 * The index *must be a positive integer* 1, 2, 3, ...
+* Timer entry under "Running Timer(s)" in the productivity tab will be removed if execution is successful.
+* If task timed is due today or in next 6 days, time spent on timed task will be added to the respected time spent sections in the productivity tab.
 ****
 
 ==== Receiving encouragement and criticism
