@@ -10,7 +10,7 @@ import seedu.jelphabot.logic.commands.exceptions.CommandException;
 import seedu.jelphabot.model.Model;
 import seedu.jelphabot.model.reminder.Reminder;
 import seedu.jelphabot.model.task.Task;
-import seedu.jelphabot.model.task.ViewTaskList;
+import seedu.jelphabot.model.task.tasklist.ViewTaskList;
 
 /**
  * Displays to the user a list of tasks that will due in a week.
@@ -18,7 +18,8 @@ import seedu.jelphabot.model.task.ViewTaskList;
 public class ReminderCommand extends Command {
 
     public static final String MESSAGE_DUPLICATE_REMINDER = "This task already has a reminder!"
-        + " Please delete the current reminder with delrem [INDEX] first!";
+                                                                + " Please delete the current reminder with delrem "
+                                                                + "[INDEX] first!";
     public static final String MESSAGE_TASK_ALREADY_MARKED_COMPLETE = "The specified task has already "
                                                                           + "been marked as complete!";
     public static final String MESSAGE_SUCCESS = "Added reminder for task %d!";

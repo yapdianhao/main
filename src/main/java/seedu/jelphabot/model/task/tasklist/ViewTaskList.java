@@ -11,4 +11,3 @@ public interface ViewTaskList {
     Task get(Index index);
     int size();
 }
-c
