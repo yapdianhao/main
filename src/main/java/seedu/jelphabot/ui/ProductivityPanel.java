@@ -63,7 +63,7 @@ public class ProductivityPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Task} using a {@code TaskCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Productivity} using a {@code ProductivityCard}.
      */
     class ProductivityListViewCell extends ListCell<Productivity> {
         @Override
