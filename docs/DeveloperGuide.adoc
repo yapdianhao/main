@@ -123,7 +123,7 @@ The Ui Component handles interactions between the user and the application.
 This includes input fields where commands are entered as well as translations of data in the Model Component to a visual representation in the interface.
 
 .Class Diagram of the UI Component
-image::UiClassDiagram.png[]
+image::UiClassDiagram2.png[]
 
 *API* : link:{repoURL}/src/main/java/seedu/jelphabot/ui/Ui.java[`Ui.java`]
 
@@ -275,7 +275,8 @@ In order to display the task list for specific input dates, the user enters the 
 
 **-insert sequence diagram-**
 
-Upon the completion of the execution of the command, the tasks due on 1st January 2020 would be displayed to the user on the task list panel to the left.
+Upon the completion of the execution of the command, the tasks due on 1st January 2020 would be displayed to the user on the task list panel to the left. +
+
 === Productivity feature
 JelphaBot has a productivity feature which provides an overarching view of user's overall productivity.
 
