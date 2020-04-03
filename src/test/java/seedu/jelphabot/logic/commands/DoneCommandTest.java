@@ -18,8 +18,8 @@ import seedu.jelphabot.commons.core.index.Index;
 import seedu.jelphabot.model.Model;
 import seedu.jelphabot.model.ModelManager;
 import seedu.jelphabot.model.UserPrefs;
-import seedu.jelphabot.model.task.GroupedTaskList;
 import seedu.jelphabot.model.task.Task;
+import seedu.jelphabot.model.task.tasklist.GroupedTaskList;
 
 public class DoneCommandTest {
 

@@ -1,8 +1,9 @@
-package seedu.jelphabot.model.task;
+package seedu.jelphabot.model.task.tasklist;
 
 import java.util.function.BiFunction;
 
 import javafx.collections.ObservableList;
+import seedu.jelphabot.model.task.Task;
 
 /**
  * Interface representing a TaskList which is split into sub-groups by predefined groups.

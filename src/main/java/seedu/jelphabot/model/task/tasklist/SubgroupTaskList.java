@@ -1,10 +1,11 @@
-package seedu.jelphabot.model.task;
+package seedu.jelphabot.model.task.tasklist;
 
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.IntegerBinding;
 import javafx.beans.binding.NumberBinding;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import seedu.jelphabot.model.task.Task;
 
 /**
  * Wrapper class for a ObservableList Tasks.

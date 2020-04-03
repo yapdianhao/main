@@ -9,8 +9,8 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.jelphabot.commons.core.LogsCenter;
-import seedu.jelphabot.model.task.GroupedTaskList;
-import seedu.jelphabot.model.task.SubgroupTaskList;
+import seedu.jelphabot.model.task.tasklist.GroupedTaskList;
+import seedu.jelphabot.model.task.tasklist.SubgroupTaskList;
 
 /**
  * Panel containing the list of tasks.
@@ -32,7 +32,7 @@ public class GroupedTaskListPanel extends UiPart<Region> {
         super(FXML);
         this.groupedTaskList = groupedTaskList;
         this.subLists = groupedTaskList.getList();
-        taskListGroups.setCellFactory(viewCell -> new GroupedTaskListPanel.GroupedTaskListViewCell());
+        taskListGroups.setCellFactory(viewCell -> new GroupedTaskListViewCell());
         taskListGroups.setItems(subLists);
         subLists.addListener((ListChangeListener<? super SubgroupTaskList>) change -> {
             while (change.next()) {
@@ -55,7 +55,7 @@ public class GroupedTaskListPanel extends UiPart<Region> {
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Task} using a {@code GroupedTaskCard}.
      */
-    class GroupedTaskListViewCell extends ListCell<SubgroupTaskList> {
+    static class GroupedTaskListViewCell extends ListCell<SubgroupTaskList> {
         @Override
         protected void updateItem(SubgroupTaskList task, boolean empty) {
             super.updateItem(task, empty);

@@ -26,7 +26,7 @@ public class ReminderBuilder {
 
     /**
      * Initializes the ReminderBuilder with the data of {@code reminderToCopy}.
-     * @param toCopy
+     * @param reminderToCopy
      */
     public ReminderBuilder(Reminder reminderToCopy) {
         index = reminderToCopy.getIndex();

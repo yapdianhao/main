@@ -1,4 +1,4 @@
-package seedu.jelphabot.model.task;
+package seedu.jelphabot.model.task.tasklist;
 
 import static seedu.jelphabot.commons.util.CollectionUtil.requireAllNonNull;
 
@@ -12,6 +12,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import seedu.jelphabot.commons.core.index.Index;
+import seedu.jelphabot.model.task.ModuleCode;
+import seedu.jelphabot.model.task.Task;
 
 /**
  * A container for ObservableList&lt;Task&gt; that splits the TaskList into groups.
