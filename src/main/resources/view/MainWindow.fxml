@@ -1,103 +1,95 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.Scene?>
-<?import javafx.stage.Stage?>
 <?import java.net.URL?>
-<fx:root xmlns:fx="http://javafx.com/fxml/1" minHeight="600.0" minWidth="600.0" onCloseRequest="#handleExit"
-         title="JelphaBot" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11">
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Scene?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.stage.Stage?>
+
+<fx:root minHeight="600.0" minWidth="600.0" onCloseRequest="#handleExit" title="JelphaBot" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <icons>
-        <Image url="@/images/address_book_32.png"/>
+        <Image url="@/images/address_book_32.png" />
     </icons>
     <scene>
         <Scene>
             <stylesheets>
-                <URL value="@JelphaBotTheme.css"/>
-                <URL value="@Extensions.css"/>
+                <URL value="@JelphaBotTheme.css" />
+                <URL value="@Extensions.css" />
             </stylesheets>
 
-            <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity">
+            <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="545.0" prefWidth="650.0">
                 <MenuBar fx:id="menuBar" maxHeight="-Infinity" VBox.vgrow="NEVER">
                     <Menu mnemonicParsing="false" text="File">
-                        <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit"/>
+                        <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
                     </Menu>
                     <Menu mnemonicParsing="false" text="Help">
                         <items>
-                            <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help"/>
+                            <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
                         </items>
                     </Menu>
                 </MenuBar>
                 <!--            <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="SOMETIMES">-->
                 <!--               <children>-->
-                <TabPane fx:id="mainWindowTabPane" maxHeight="-Infinity" minHeight="400.0" prefWidth="600.0"
-                         tabClosingPolicy="UNAVAILABLE">
-                    <tabs>
+                <TabPane fx:id="mainWindowTabPane" maxHeight="-Infinity" minHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
+                <tabs>
                         <Tab fx:id="summaryTab">
                             <content>
-                                <VBox fx:id="summaryPanel" maxHeight="1.7976931348623157E308" minHeight="-Infinity"
-                                      minWidth="340" prefWidth="340.0" styleClass="pane-with-border"
-                                      VBox.vgrow="ALWAYS">
+                                <VBox fx:id="summaryPanel" maxHeight="1.7976931348623157E308" minHeight="-Infinity" minWidth="340" prefWidth="340.0" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
                                     <padding>
-                                        <Insets bottom="10" left="10" right="10" top="10"/>
+                                        <Insets bottom="10" left="10" right="10" top="10" />
                                     </padding>
-                                    <StackPane fx:id="summaryPanelPlaceholder" maxHeight="1.7976931348623157E308"
-                                               VBox.vgrow="ALWAYS"/>
+                                    <StackPane fx:id="summaryPanelPlaceholder" maxHeight="1.7976931348623157E308" VBox.vgrow="ALWAYS" />
                                 </VBox>
                             </content>
                             <graphic>
                                 <Label graphicTextGap="0.0" maxHeight="1.7976931348623157E308" text="ummary">
                                     <graphic>
-                                        <Label styleClass="bold-letter" text="S"/>
+                                        <Label styleClass="bold-letter" text="S" />
                                     </graphic>
                                 </Label>
                             </graphic>
                         </Tab>
                         <Tab fx:id="taskListTab">
                             <content>
-                                <StackPane fx:id="taskListPanelPlaceholder" maxHeight="1.7976931348623157E308"
-                                           maxWidth="1.7976931348623157E308" style="-fx-background-color: MAROON;"/>
+                                <StackPane fx:id="taskListPanelPlaceholder" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: MAROON;" />
                             </content>
                             <graphic>
                                 <Label graphicTextGap="0.0" maxHeight="1.7976931348623157E308" text="ask List">
                                     <graphic>
-                                        <Label styleClass="bold-letter" text="T"/>
+                                        <Label styleClass="bold-letter" text="T" />
                                     </graphic>
                                 </Label>
                             </graphic>
                         </Tab>
                         <Tab>
                             <content>
-                                <AnchorPane maxHeight="1.7976931348623157E308" minHeight="0.0" minWidth="0.0"
-                                            prefHeight="180.0" prefWidth="200.0">
+                                <AnchorPane maxHeight="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                     <children>
-                                        <SplitPane fx:id="calendarPane" dividerPositions="0.5"
-                                                   maxHeight="1.7976931348623157E308" prefWidth="600.0"
-                                                   AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-                                                   AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                        <SplitPane fx:id="calendarPane" dividerPositions="0.47"
+                                                   maxHeight="1.7976931348623157E308" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                             <items>
                                                 <AnchorPane minHeight="0.0" minWidth="0.0">
                                                     <children>
-                                                        <VBox fx:id="calendarTaskList" styleClass="pane-with-border"
-                                                              AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-                                                              AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                            <StackPane fx:id="calendarTaskListPanelPlaceholder"
-                                                                       prefHeight="372.0" prefWidth="172.0"
-                                                                       VBox.vgrow="ALWAYS"/>
+                                                        <VBox fx:id="calendarTaskList" styleClass="pane-with-border" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                            <StackPane fx:id="calendarTaskListPanelPlaceholder" prefHeight="372.0" prefWidth="172.0" VBox.vgrow="ALWAYS" />
                                                         </VBox>
                                                     </children>
                                                 </AnchorPane>
                                                 <AnchorPane minHeight="0.0" minWidth="0.0">
                                                     <children>
-                                                        <VBox fx:id="calendarView" AnchorPane.bottomAnchor="0.0"
-                                                              AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                                                              AnchorPane.topAnchor="0.0">
+                                                        <VBox fx:id="calendarView" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                             <children>
-                                                                <StackPane fx:id="calendarPanelPlaceholder"
-                                                                           prefHeight="374.0" prefWidth="415.0"
-                                                                           VBox.vgrow="ALWAYS"/>
+                                                                <StackPane fx:id="calendarPanelPlaceholder" prefHeight="374.0" prefWidth="415.0" VBox.vgrow="ALWAYS" />
                                                             </children>
                                                         </VBox>
                                                     </children>
@@ -110,26 +102,24 @@
                             <graphic>
                                 <Label graphicTextGap="0.0" maxHeight="1.7976931348623157E308" text="alendar">
                                     <graphic>
-                                        <Label styleClass="bold-letter" text="C"/>
+                                        <Label styleClass="bold-letter" text="C" />
                                     </graphic>
                                 </Label>
                             </graphic>
                         </Tab>
                         <Tab>
                             <content>
-                                <VBox fx:id="productivityPanel" maxHeight="1.7976931348623157E308" minWidth="340"
-                                      prefWidth="340.0" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
+                                <VBox fx:id="productivityPanel" maxHeight="1.7976931348623157E308" minWidth="340" prefWidth="340.0" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
                                     <padding>
-                                        <Insets bottom="10" left="10" right="10" top="10"/>
+                                        <Insets bottom="10" left="10" right="10" top="10" />
                                     </padding>
-                                    <StackPane fx:id="productivityPanelPlaceholder" maxHeight="1.7976931348623157E308"
-                                               VBox.vgrow="ALWAYS"/>
+                                    <StackPane fx:id="productivityPanelPlaceholder" maxHeight="1.7976931348623157E308" VBox.vgrow="ALWAYS" />
                                 </VBox>
                             </content>
                             <graphic>
                                 <Label graphicTextGap="0.0" text="roductivity">
                                     <graphic>
-                                        <Label styleClass="bold-letter" text="P"/>
+                                        <Label styleClass="bold-letter" text="P" />
                                     </graphic>
                                 </Label>
                             </graphic>
@@ -141,16 +131,15 @@
 
                 <!--        <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />-->
 
-                <StackPane fx:id="resultDisplayPlaceholder" maxHeight="1.7976931348623157E308" minHeight="100"
-                           styleClass="pane-with-border" VBox.vgrow="NEVER">
+                <StackPane fx:id="resultDisplayPlaceholder" maxHeight="1.7976931348623157E308" minHeight="100" styleClass="pane-with-border" VBox.vgrow="NEVER">
                     <padding>
-                        <Insets bottom="5" left="10" right="10" top="5"/>
+                        <Insets bottom="5" left="10" right="10" top="5" />
                     </padding>
                 </StackPane>
 
                 <StackPane fx:id="commandBoxPlaceholder" styleClass="stack-pane" VBox.vgrow="NEVER">
                     <padding>
-                        <Insets bottom="5" left="10" right="10" top="5"/>
+                        <Insets bottom="5" left="10" right="10" top="5" />
                     </padding>
                 </StackPane>
 
