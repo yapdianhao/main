@@ -22,6 +22,7 @@ public class TasksCompleted {
     public TasksCompleted(ObservableList<Task> tasksDueToday, ObservableList<Task> tasksDueThisWeek,
         ObservableList<Task> overdueTasks) {
         requireAllNonNull(tasksDueToday, tasksDueThisWeek, overdueTasks);
+
         this.tasksDueToday = tasksDueToday;
         this.tasksDueThisWeek = tasksDueThisWeek;
         this.overdueTasks = overdueTasks;
@@ -58,6 +59,7 @@ public class TasksCompleted {
                 message = "Wow! It must feel great to have accomplished so little today!";
             }
         } else {
+            this.percentage = 1;
             message = "There are no tasks to complete today!";
         }
 
@@ -80,15 +82,19 @@ public class TasksCompleted {
             response.append("are ").append(" no overdue tasks that are incomplete.");
         }
 
-        if (n > 3) {
-            response.append("\n").append(MESSAGE_CRITICISM);
-        } else if (n > 0) {
-            response.append("\n").append(MESSAGE_ENCOURAGEMENT);
-        } else {
-            response.append("\n").append(MESSAGE_COMPLIMENT);
-        }
-
         return response.toString();
+    }
+
+    public String getRemark() {
+        int n = overdueTasks.filtered(new TaskIsIncompletePredicate()).size();
+
+        if (n > 3) {
+            return MESSAGE_CRITICISM;
+        } else if (n > 0) {
+            return MESSAGE_ENCOURAGEMENT;
+        } else {
+            return MESSAGE_COMPLIMENT;
+        }
     }
 
     public double getPercentage() {
@@ -96,6 +102,6 @@ public class TasksCompleted {
     }
 
     public String[] toStringArray() {
-        return new String[] {getCompletionStatus(), getOverdueStatus()};
+        return new String[] {getCompletionStatus(), getRemark(), getOverdueStatus()};
     }
 }

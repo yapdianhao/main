@@ -30,11 +30,10 @@ public class TaskCompletionCard extends UiPart<Region> {
         super(FXML);
         this.tasksCompleted = tasksCompleted;
 
-        String[] tmp = tasksCompleted.toStringArray();
-        String[] completion = tmp[0].split("\n");
-        completed.setText("   " + completion[0]);
-        remark.setText(completion[1]);
-        overdueStatus.setText(tmp[1]);
+        String[] completionProductivity = tasksCompleted.toStringArray();
+        completed.setText("   " + completionProductivity[0]);
+        remark.setText(completionProductivity[1]);
+        overdueStatus.setText(completionProductivity[2]);
         tasksCompletionProgress.setProgress(tasksCompleted.getPercentage());
     }
 
