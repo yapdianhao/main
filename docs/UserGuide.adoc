@@ -202,9 +202,8 @@ with a module code so that you can visually categorize them. Tasks are tagged ac
 The start of every task will be labelled with a module code so that you can visually categorize them. +
 Go <<#add, here>> to read more about adding tasks with priority and <<#edit, here>> for editing task priority.
 
-You can also tag tasks with additional information. To read more about tags, go <<#Tags, here>>
-
 // tag::add[]
+[[add]]
 ==== Adding a task: `add`
 
 Add a task to your task list. +
@@ -226,7 +225,7 @@ image::ug_figures/add.png[width="600"]
 ****
 
 [TIP]
-A task can have any number of tags (including 0) +
+A task can have any number of tags (including 0)! +
 If the priority field is not specified, the default priority used is Normal Priority.
 
 Examples:
@@ -252,7 +251,7 @@ image::ug_figures/list.png[width="600"]
 ===== Group tasks by Date : `list date`
 Group your tasks into the following categories:
 
-* Pinned +
+* Pinned (Coming in V1.4) +
 (Pinned tasks will always be displayed at the top. To read more about pinning tasks, go <<#pin, here>>)
 * Overdue  +
 (Shows tasks which are incomplete and past their due date)
@@ -296,6 +295,7 @@ Returns `Assignment 1` and `assignment task`
 Returns any task having descriptions of `Tutorial`, `Project`, or `MidTerm`
 
 // tag::edit[]
+[[edit]]
 ==== Editing a task : `edit`
 
 Edit an existing task in your task list.
@@ -379,6 +379,7 @@ image::ug_figures/clear.png[width="600"]
 
 
 // tag::pin[]
+[[pin]]
 ==== Pin Important tasks  : `pin` (Coming in V1.4)
 
 You can pin important tasks to the top of the task list with the `pin` command. +
@@ -388,13 +389,13 @@ Trying to `pin` a task that is already pinned will unpin it.
 // end::pin[]
 
 // tag::showcompleted[]
-==== Show all completed tasks : `show-completed`
+==== Show all completed tasks : `show-completed` (Eden)
 You can display all the tasks in your task list that have been completed.
 
 // end::showcompleted[]
 
 // tag::showincomplete[]
-==== Show all incomplete tasks: `show-incomplete`
+==== Show all incomplete tasks: `show-incomplete` (Eden)
 You can display all the tasks in your task list that are currently incomplete.
 
 // end::showincomplete[]
@@ -592,12 +593,12 @@ image::ug_figures/reminderpopup.png[width="600"]
 
 == FAQ
 
-*Q*: How do I transfer my data to another Computer? +
+*Q1*: How do I transfer my data to another Computer? +
 *A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
 
 
-Q2: Saving the data
-A: JelphaBot automatically saves your data whenever you make a change. There is no need to save manually.
+*Q2*: Saving the data +
+*A*: JelphaBot automatically saves your data whenever you make a change. There is no need to save manually.
 
 == Command Summary
 
