@@ -47,6 +47,18 @@ public class Productivity {
         return timeSpentToday;
     }
 
+    public boolean hasNewOrEditedTasks() {
+        return hasNewOrEditedTasks;
+    }
+
+    public boolean hasNewTimer() {
+        return hasNewTimer;
+    }
+
+    public boolean hasChangeInTimeSpent() {
+        return hasChangeInTimeSpent;
+    }
+
     /**
      * Creates the respective productivity objects.
      */

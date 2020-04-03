@@ -26,7 +26,7 @@ public class TasksCompleted {
         this.tasksDueToday = tasksDueToday;
         this.tasksDueThisWeek = tasksDueThisWeek;
         this.overdueTasks = overdueTasks;
-        this.percentage = 0;
+        this.percentage = 1;
     }
 
     public String getCompletionStatus() {
@@ -45,7 +45,7 @@ public class TasksCompleted {
             }
         }
 
-        String message = "";
+        String message = "There are no tasks to complete today!";
 
         if (size > 0) {
             double percentage = completed / size;
@@ -58,9 +58,6 @@ public class TasksCompleted {
             } else {
                 message = "Wow! It must feel great to have accomplished so little today!";
             }
-        } else {
-            this.percentage = 1;
-            message = "There are no tasks to complete today!";
         }
 
         return String.format("%.0f out of %.0f tasks done.\n%s", completed,
