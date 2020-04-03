@@ -75,25 +75,6 @@ public class ProductivityPanel extends UiPart<Region> {
                 setText(null);
             } else {
                 setGraphic(new ProductivityCard(productivity).getRoot());
-                // TODO: manage multiple cards.. or not lol lazy sia
-                // if (productivity.getRunningTimers() == null || productivity.getTasksCompleted() == null ||
-                // productivity.getTimeSpentToday() == null) {
-                //     setGraphic(new TimersCard(productivity.getRunningTimers()).getRoot());
-                //     setGraphic(new TimeSpentCard(productivity.getTimeSpentToday()).getRoot());
-                //     setGraphic(new TaskCompletionCard(productivity.getTasksCompleted()).getRoot());
-                // } else {
-                //     if (productivity.hasNewTimer()) {
-                //         setGraphic(new TimersCard(productivity.getRunningTimers()).getRoot());
-                //     }
-                //
-                //     if (productivity.hasChangeInTimeSpent()) {
-                //         setGraphic(new TimeSpentCard(productivity.getTimeSpentToday()).getRoot());
-                //     }
-                //
-                //     if (productivity.hasNewOrEditedTasks()) {
-                //         setGraphic(new TaskCompletionCard(productivity.getTasksCompleted()).getRoot());
-                //     }
-                // }
             }
         }
     }

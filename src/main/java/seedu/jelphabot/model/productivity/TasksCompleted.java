@@ -14,6 +14,7 @@ import seedu.jelphabot.model.task.predicates.TaskIsIncompletePredicate;
  * Highlights overdue tasks if any, and mentions number of tasks completed.
  */
 public class TasksCompleted {
+
     private ObservableList<Task> tasksDueToday;
     private ObservableList<Task> tasksDueThisWeek;
     private ObservableList<Task> overdueTasks;

@@ -12,6 +12,7 @@ import seedu.jelphabot.model.task.TimeSpent;
  * Represents the user's productivity for the day
  */
 public class TimeSpentToday {
+
     private ObservableList<Task> tasksDueToday;
     private ObservableList<Task> tasksDueThisWeek;
 
