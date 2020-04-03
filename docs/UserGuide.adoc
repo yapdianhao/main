@@ -628,8 +628,10 @@ e.g. `delete 3`
 * *Exit* : `exit`
 * *Show Completed Tasks*: `show-completed`
 * *Show Incomplete Tasks*: `show-incomplete`
-* *Reminder* : `reminder INDEX rd/DAYS rh/HOURS` +
-e.g. `reminder 2 rd/1 rh/1`
+* *Reminder* : `reminder INDEX rh/HOURS` +
+e.g. `reminder 2 days/1 hours/1`
+* *Delete Reminder* : `delrem INDEX` +
+e.g. `delrem 2`
 * *Productivity* : `productivity`
 * *Timer* : `start INDEX` or `stop INDEX` +
 e.g. `start 1` or `stop 1`
