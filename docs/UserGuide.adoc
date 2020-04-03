@@ -340,7 +340,7 @@ Format: `done INDEX`
 
 [.text-center]
 .Example of an expected result after running `done 1`
-image::doneCommand.png[width="600]
+image::doneCommand.png[width="600"]
 
 ****
 * Marks the task at the specified `INDEX` as done.
