@@ -2,8 +2,6 @@ package seedu.jelphabot.model.task.tasklist;
 
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.IntegerBinding;
-import javafx.beans.binding.NumberBinding;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import seedu.jelphabot.model.task.Task;
 
@@ -12,19 +10,19 @@ import seedu.jelphabot.model.task.Task;
  */
 public class SubgroupTaskList {
     private final String groupName;
-    private final ObservableList<Task> taskList;
+    private final ObservableList<Task> tasks;
     private final IntegerBinding size;
-    private final NumberBinding startIndex;
+    private final IntegerBinding startIndex;
 
-    SubgroupTaskList(String groupName, ObservableList<Task> taskList, NumberBinding startIndex) {
+    SubgroupTaskList(String groupName, ObservableList<Task> tasks, IntegerBinding startIndex) {
         this.groupName = groupName;
-        this.taskList = taskList;
-        this.size = Bindings.size(taskList);
+        this.tasks = tasks;
+        this.size = Bindings.size(tasks);
         this.startIndex = startIndex;
     }
 
     public ObservableList<Task> getList() {
-        return taskList;
+        return tasks;
     }
 
     public String getGroupName() {
@@ -32,26 +30,31 @@ public class SubgroupTaskList {
     }
 
     public Task get(int index) {
-        return taskList.get(index);
+        return tasks.get(index);
     }
 
     public int size() {
         return size.intValue();
     }
 
-    public boolean isEmpty() {
-        return taskList.isEmpty();
+    public void clear() {
+        tasks.clear();
     }
 
-    public NumberBinding sizeBinding() {
+    public boolean isEmpty() {
+        return tasks.isEmpty();
+    }
+
+    public IntegerBinding sizeBinding() {
         return size;
     }
 
-    public NumberBinding startIndexBinding() {
+    public IntegerBinding startIndexBinding() {
         return startIndex;
     }
 
-    public void addListener(ListChangeListener<Task> deleteOnEmptyList) {
-        taskList.addListener(deleteOnEmptyList);
+    public IntegerBinding subsequentElementStartIndex() {
+        return (IntegerBinding) startIndex.add(size);
     }
+
 }

@@ -1,5 +1,7 @@
 package seedu.jelphabot.ui;
 
+import java.time.LocalDate;
+import java.time.YearMonth;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -288,6 +290,8 @@ public class MainWindow extends UiPart<Stage> {
                 handleHelp();
             } else if (commandResult.isExit()) {
                 handleExit();
+            } else if (commandResult.isCalendarCommand()) {
+                updateCalendarPanel(commandResult);
             }
 
             switch (commandResult.getTabSwitch()) {
@@ -317,6 +321,49 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Invalid command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
+        }
+    }
+
+    /**
+     * Updates the view of the calendar panel in the calendar tab.
+     * @param commandResult Represents the results of a calendar command causing this update.
+     */
+    private void updateCalendarPanel(CommandResult commandResult) {
+        LocalDate date = commandResult.getDate();
+        YearMonth yearMonth = commandResult.getYearMonth();
+        if (date != null && yearMonth == null) {
+            if (date.getMonthValue() == calendarPanel.getCalendarMonth()) {
+                if (calendarPanel.isTodayHighlighted()) {
+                    calendarPanel.getHighlightedDay().removeHighlightedToday();
+                } else {
+                    calendarPanel.getHighlightedDay().removeHighlightedDay();
+                }
+
+                int dayIndex = date.getDayOfMonth();
+                if (date.equals(DateUtil.getDateToday())) {
+                    CalendarPanel.getDayCard(dayIndex).highlightToday();
+                } else {
+                    CalendarPanel.getDayCard(dayIndex).highlightDay();
+                }
+                calendarPanel.setHighlightedDay(dayIndex);
+            }
+        } else if (date == null && yearMonth != null) {
+            LocalDate firstDayOfMonth = yearMonth.atDay(1);
+            CalendarDate newDate = new CalendarDate(firstDayOfMonth);
+            calendarPanel.changeMonthYearLabel(yearMonth);
+            calendarPanel.fillGridPane(newDate);
+            calendarPanel.getHighlightedDay().removeHighlightedDay();
+            CalendarPanel.getDayCard(1).highlightDay();
+            calendarPanel.setHighlightedDay(1);
+        } else {
+            LocalDate today = DateUtil.getDateToday();
+            CalendarDate todayDate = new CalendarDate(today);
+            YearMonth todayYearMonth = YearMonth.now();
+            calendarPanel.changeMonthYearLabel(todayYearMonth);
+            calendarPanel.fillGridPane(todayDate);
+            calendarPanel.getHighlightedDay().removeHighlightedDay();
+            CalendarPanel.getDayCard(today.getDayOfMonth()).highlightToday();
+            calendarPanel.setHighlightedDay(today.getDayOfMonth());
         }
     }
 

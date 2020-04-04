@@ -5,6 +5,7 @@ import static seedu.jelphabot.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -49,6 +50,10 @@ public class UniqueModuleCodeList implements Iterable<ModuleCode> {
         return null;
     }
 
+    /**
+     * Replaces the contents of this list with {@code replacement}.
+     * {@code replacement} must not contain duplicate ModuleCodes.
+     */
     public void setModuleCodes(UniqueModuleCodeList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
@@ -58,7 +63,7 @@ public class UniqueModuleCodeList implements Iterable<ModuleCode> {
      * Replaces the contents of this list with {@code tasks}.
      * {@code tasks} must not contain duplicate tasks.
      */
-    public void setModuleCodes(ObservableList<Task> tasks) {
+    public void setModuleCodes(List<Task> tasks) {
         requireAllNonNull(tasks);
         HashSet<ModuleCode> replacement = new HashSet<>();
         for (Task task : tasks) {

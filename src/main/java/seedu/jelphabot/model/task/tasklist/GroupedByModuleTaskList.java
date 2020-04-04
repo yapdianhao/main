@@ -1,17 +1,17 @@
 package seedu.jelphabot.model.task.tasklist;
 
-import static seedu.jelphabot.commons.util.CollectionUtil.requireAllNonNull;
+import static java.util.Objects.requireNonNull;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 
-import javafx.beans.binding.Bindings;
-import javafx.beans.binding.NumberBinding;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import seedu.jelphabot.commons.core.index.Index;
+import javafx.collections.ObservableSet;
+import javafx.collections.SetChangeListener;
 import seedu.jelphabot.model.task.ModuleCode;
 import seedu.jelphabot.model.task.Task;
 
@@ -21,42 +21,31 @@ import seedu.jelphabot.model.task.Task;
  * Separation is done over @code{ObservableList} through use of filters.
  * <p>
  */
-public class GroupedByModuleTaskList implements GroupedTaskList {
-    private final ObservableList<SubgroupTaskList> moduleCodeTaskLists = FXCollections.observableArrayList();
-    private final NumberBinding sizeBinding;
+public class GroupedByModuleTaskList extends GroupedTaskList {
+    private final ObservableSet<ModuleCode> moduleCodes = FXCollections.observableSet();
 
-    public GroupedByModuleTaskList(ObservableList<Task> taskList, PinnedTaskList pinnedTasks) {
-        requireAllNonNull(taskList);
-        moduleCodeTaskLists.add(pinnedTasks);
-        NumberBinding tempSize = Bindings.createIntegerBinding(pinnedTasks::size);
-        for (ModuleCode code : getUniqueModuleSet(taskList)) {
-            SubgroupTaskList moduleCodeSubList =
-                new SubgroupTaskList(code.toString(), taskList.filtered(hasModuleCode(code)), tempSize);
-            moduleCodeTaskLists.add(moduleCodeSubList);
-            moduleCodeSubList.addListener(makeDeleteOnEmptyListener(moduleCodeSubList));
-            tempSize = tempSize.add(moduleCodeSubList.sizeBinding());
+    public GroupedByModuleTaskList(ObservableList<Task> tasks, PinnedTaskList pinnedTaskList) {
+        super(pinnedTaskList, tasks);
+        this.moduleCodes.addAll(getUniqueModuleSet(tasks));
+        for (ModuleCode code : moduleCodes) {
+            addSublist(code);
         }
-        this.sizeBinding = tempSize;
+        this.moduleCodes.addListener(new ModuleCodeChangeListener());
+        this.tasks.addListener(new TaskListChangeListener());
     }
 
-    private static HashSet<ModuleCode> getUniqueModuleSet(List<Task> taskList) {
-        HashSet<ModuleCode> moduleSet = new HashSet<>();
+    protected GroupedByModuleTaskList(PinnedTaskList pinnedTaskList) {
+        super(pinnedTaskList, FXCollections.observableArrayList());
+        this.moduleCodes.addListener(new ModuleCodeChangeListener());
+        this.tasks.addListener(new TaskListChangeListener());
+    }
+
+    private static Set<ModuleCode> getUniqueModuleSet(List<Task> taskList) {
+        Set<ModuleCode> moduleSet = new HashSet<>();
         for (Task task : taskList) {
             moduleSet.add(task.getModuleCode());
         }
         return moduleSet;
-    }
-
-    /**
-     * @param moduleCodeSubList the SubgroupTaskList to be removed
-     * @return a listener which removes the respective SubgroupTaskList when the inner ObservableList is empty.
-     */
-    private ListChangeListener<Task> makeDeleteOnEmptyListener(SubgroupTaskList moduleCodeSubList) {
-        return change -> {
-            if (moduleCodeSubList.isEmpty()) {
-                GroupedByModuleTaskList.this.moduleCodeTaskLists.remove(moduleCodeSubList);
-            }
-        };
     }
 
     /**
@@ -67,42 +56,93 @@ public class GroupedByModuleTaskList implements GroupedTaskList {
         return task -> task.getModuleCode().equals(moduleCode);
     }
 
-    // @Override
-    // public Iterator<SubgroupTaskList> iterator() {
-    //     return moduleCodeTaskLists.iterator();
-    // }
-
     @Override
     public Category getCategory() {
         return Category.MODULE;
     }
 
-    @Override
-    public ObservableList<SubgroupTaskList> getList() {
-        return moduleCodeTaskLists;
+    /**
+     * Adds a new sublist with the given ModuleCode as header.
+     * The sublist must not already exist in the list.
+     *
+     * @param moduleCode the value of the sublist header.
+     */
+    private void addSublist(ModuleCode moduleCode) {
+        subgroupTaskLists.add(
+            new SubgroupTaskList(moduleCode.toString(), this.tasks.filtered(hasModuleCode(moduleCode)),
+                subsequentElementStartIndex()
+            ));
     }
 
-    @Override
-    public int size() {
-        return sizeBinding.intValue();
+    /**
+     * Returns true if the list contains a sublist with the same module code as the given argument.
+     */
+    public boolean containsSublist(ModuleCode moduleCode) {
+        requireNonNull(moduleCode);
+        return subgroupTaskLists.stream().anyMatch(sublist -> sublist.getGroupName().equals(moduleCode.toString()));
     }
 
+    /* === Methods used for testing. Application classes should not call these methods as Tasks are intended
+    to be modified through UniqueTaskList. === */
     @Override
-    public Task get(int id) {
-        assert id < size();
-        for (SubgroupTaskList sublist : moduleCodeTaskLists) {
-            if (id < sublist.size()) {
-                return sublist.get(id);
-            } else {
-                id -= sublist.size();
+    protected void setTasks(List<Task> taskList) {
+        this.tasks.setAll(taskList);
+
+        moduleCodes.clear();
+        moduleCodes.addAll(getUniqueModuleSet(tasks));
+        for (ModuleCode code : moduleCodes) {
+            addSublist(code);
+        }
+    }
+    // === End of Methods used for testing ===
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                   || (other instanceof GroupedByModuleTaskList // instanceof handles nulls
+                           && tasks.equals(((GroupedByModuleTaskList) other).tasks));
+    }
+
+    /**
+     * A Listener that handles the updating of moduleCodes when the underlying list of Tasks is updated.
+     */
+    private class TaskListChangeListener implements ListChangeListener<Task> {
+        @Override
+        public void onChanged(Change<? extends Task> change) {
+            while (change.next()) {
+                if (change.wasAdded()) {
+                    for (Task task : change.getAddedSubList()) {
+                        moduleCodes.add(task.getModuleCode());
+                    }
+                }
+                if (change.wasRemoved()) {
+                    for (Task task : change.getRemoved()) {
+                        if (tasks.stream().noneMatch(toCheck -> toCheck.getModuleCode() == task.getModuleCode())) {
+                            moduleCodes.remove(task.getModuleCode());
+                        }
+                    }
+                }
             }
         }
-        return null;
     }
 
-    @Override
-    public Task get(Index index) {
-        return get(index.getZeroBased());
+    /**
+     * A Listener that handles the updating of SubgroupTaskList when the underlying set of ModuleCodes is updated.
+     */
+    private class ModuleCodeChangeListener
+        implements SetChangeListener<ModuleCode> {
+        @Override
+        public void onChanged(Change<? extends ModuleCode> change) {
+            if (change.wasAdded()) {
+                ModuleCode addedCode = change.getElementAdded();
+                if (!containsSublist(addedCode)) {
+                    addSublist(addedCode);
+                }
+            }
+            if (change.wasRemoved()) {
+                ModuleCode removedCode = change.getElementRemoved();
+                subgroupTaskLists.removeIf(sublist -> sublist.getGroupName().equals(removedCode.toString()));
+            }
+        }
     }
 }
-

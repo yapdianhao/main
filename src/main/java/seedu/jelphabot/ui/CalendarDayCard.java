@@ -23,6 +23,9 @@ public class CalendarDayCard extends UiPart<Region> {
     @FXML
     private Circle circleDay;
 
+    @FXML
+    private Circle dotTasks;
+
     public CalendarDayCard(CalendarDate calendarDate) {
         super(FXML);
         this.calendarDate = calendarDate;

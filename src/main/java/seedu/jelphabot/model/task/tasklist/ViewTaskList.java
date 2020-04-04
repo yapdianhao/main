@@ -6,8 +6,12 @@ import seedu.jelphabot.model.task.Task;
 /**
  * Represents a wrapper class for a list of tasks that are displayed in Ui.
  */
-public interface ViewTaskList {
+public interface ViewTaskList extends Iterable<Task> {
     Task get(int id);
+
     Task get(Index index);
+
     int size();
+
+    boolean isEmpty();
 }
