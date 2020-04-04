@@ -133,7 +133,7 @@ The Ui Component handles interactions between the user and the application.
 This includes input fields where commands are entered as well as translations of data in the Model Component to a visual representation in the interface.
 
 .Class Diagram of the UI Component
-image::UiClassDiagram2.png[]
+image::UiClassDiagram.png[]
 
 *API* : link:{repoURL}/src/main/java/seedu/JelphaBot/ui/Ui.java[`Ui.java`]
 
@@ -306,14 +306,15 @@ If the user tries to switch to a sublist type which is already set, the command 
 === Calendar feature
 JelphaBot has a calendar feature which provides an overarching view of their schedules and to allow users to view their tasks due.
 
-This feature offers two main functions:
+This feature offers 3 main functions:
 
-** Display calendar view in a selected month.
-** Display a list of tasks due for a selected date
+** Display calendar view in a selected month and year
+** Display a list of tasks due for a selected date in the month
+** Display today's date on calendar view with the corresponding tasks due listed
 
 ====  Implementation
 
-**Function 1: Display calendar view in a selected month**
+**Function 1: Display calendar view in a selected month and year**
 
 In order to change the calendar view for another month and/or year, the user enters the `calendar MONTHYEAR` command +
 (e.g. `calendar Apr-2020`)
@@ -322,7 +323,7 @@ In order to change the calendar view for another month and/or year, the user ent
 
 Upon the completion of the execution of the command, the calendar view would display the month view for April 2020 instead.
 
-**Function 2: Display a list of tgit asks due for a selected date**
+**Function 2: Display a list of tasks due for a selected date in the month**
 
 In order to display the task list for specific input dates, the user enters the `calendar DATE` command +
 (e.g. calendar jan-1-2020)
@@ -330,6 +331,11 @@ In order to display the task list for specific input dates, the user enters the 
 **-insert sequence diagram-**
 
 Upon the completion of the execution of the command, the tasks due on 1st January 2020 would be displayed to the user on the task list panel to the left. +
+
+**Function 3: Display today's date on calendar view with the corresponding tasks due listed**
+
+**-insert sequence diagram-**
+
 
 === Productivity feature
 JelphaBot has a productivity feature which provides an overarching view of user's overall productivity.
