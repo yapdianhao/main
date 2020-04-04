@@ -22,18 +22,17 @@ public class RunningTimers {
     public String toString() {
         StringBuilder result = new StringBuilder("Timer is currently running for:\n");
         int n = taskList.size();
-        int idx = -1;
+        boolean hasTimers = false;
 
-        for (int i = 0; i < n; i++) {
-            Task task = taskList.get(i);
-            if (task.isBeingTimed()) {
-                idx = i;
-                result.append(String.format("Task %d: %s %s, DateTime: %s\n", (idx + 1), task.getModuleCode(),
-                    task.getDescription(), task.getDateTime()));
+        for (Task t : taskList) {
+            if (t.isBeingTimed()) {
+                hasTimers = true;
+                result.append(String.format("Task: %s %s, Deadline: %s\n", t.getModuleCode(),
+                    t.getDescription(), t.getDateTime()));
             }
         }
 
-        if (idx == -1) {
+        if (!hasTimers) {
             return MESSAGE_NO_TIMERS;
         } else {
             return result.toString();
