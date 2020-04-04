@@ -3,7 +3,6 @@ package seedu.jelphabot.ui;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -31,25 +30,18 @@ public class GroupedTaskListPanel extends UiPart<Region> {
     public GroupedTaskListPanel(GroupedTaskList groupedTaskList) {
         super(FXML);
         this.groupedTaskList = groupedTaskList;
-        this.subLists = groupedTaskList.getList();
+        this.subLists = groupedTaskList.getSublists();
         taskListGroups.setCellFactory(viewCell -> new GroupedTaskListViewCell());
         taskListGroups.setItems(subLists);
-        subLists.addListener((ListChangeListener<? super SubgroupTaskList>) change -> {
-            while (change.next()) {
-                if (change.wasRemoved()) {
-                    refresh();
-                }
-            }
-        });
+        logger.log(Level.INFO,
+            String.format("Initialized %s panel with %d categories and %d tasks.", groupedTaskList.getCategory(),
+                groupedTaskList.getSublists().size(), groupedTaskList.size()
+            )
+        );
     }
 
     public GroupedTaskList.Category getCategory() {
         return groupedTaskList.getCategory();
-    }
-
-    private void refresh() {
-        taskListGroups.setItems(subLists);
-        logger.log(Level.INFO, "GroupedTaskListPanel Refreshed");
     }
 
     /**
