@@ -415,7 +415,7 @@ JelphaBot has a Summary feature which provides an overview of the tasks due with
 
 This feature comes in the form of a welcome screen, which comprises of two sections for the tasks due within the day and the tasks completed within the day respectively.
 
-The screen only shows certain details of the task, namely the
+The screen only shows certain details of the task, namely the M
 
 ==== Implementation
 
