@@ -290,7 +290,7 @@ public class MainWindow extends UiPart<Stage> {
                 handleHelp();
             } else if (commandResult.isExit()) {
                 handleExit();
-            } else if (commandResult.isCalendarResult()) {
+            } else if (commandResult.isCalendarCommand()) {
                 updateCalendarPanel(commandResult);
             }
 
@@ -353,7 +353,7 @@ public class MainWindow extends UiPart<Stage> {
             calendarPanel.changeMonthYearLabel(yearMonth);
             calendarPanel.fillGridPane(newDate);
             calendarPanel.getHighlightedDay().removeHighlightedDay();
-            CalendarPanel.getDayCard(1).highlightToday();
+            CalendarPanel.getDayCard(1).highlightDay();
             calendarPanel.setHighlightedDay(1);
         } else {
             LocalDate today = DateUtil.getDateToday();

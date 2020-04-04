@@ -51,9 +51,15 @@ public class CalendarPanel extends UiPart<Region> {
     public void fillGridPane(CalendarDate firstDay) {
         calendarGrid.getChildren().clear();
         int weekIndex = firstDay.getDayOfWeek() - 1;
-        int lengthPrevMonth = firstDay.getLengthPrevMonth();
-        int day = lengthPrevMonth - weekIndex + 1;
-        CalendarDate currDate = firstDay.createPrevMonthDate(day);
+        CalendarDate currDate = null;
+        if (weekIndex != 0) {
+            int lengthPrevMonth = firstDay.getLengthPrevMonth();
+            int day = lengthPrevMonth - weekIndex + 1;
+            currDate = firstDay.createPrevMonthDate(day);
+        } else {
+            currDate = firstDay;
+        }
+
         dayCardsInMonth = new ArrayList<>();
 
         for (int row = 0; row < 6; row++) {
