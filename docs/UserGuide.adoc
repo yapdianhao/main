@@ -625,7 +625,7 @@ image::ug_figures/reminderpopup.png[width="600"]
 == FAQ
 
 *Q1*: How do I transfer my data to another Computer? +
-*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
+*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous JelphaBot folder.
 
 
 *Q2*: How do I save my data? +
