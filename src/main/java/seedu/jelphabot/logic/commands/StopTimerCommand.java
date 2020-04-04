@@ -21,7 +21,7 @@ public class StopTimerCommand extends Command {
                                                    + "Parameters: INDEX (must be a positive integer)\n" + "Example: "
                                                    + COMMAND_WORD + " 1";
     public static final String MESSAGE_SUCCESS = "Stopped timer for task %d. %s %s.\n"
-                                                     + "Time spent on this task: %s.";
+                                                     + "Total time spent on this task: %s.";
     public static final String MESSAGE_NO_TIMER_TO_STOP = "No timers were started.";
 
     private Index targetIndex;

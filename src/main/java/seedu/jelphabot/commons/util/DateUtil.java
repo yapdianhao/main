@@ -77,7 +77,7 @@ public class DateUtil {
      * @return a predicate which filters tasks with a due date the same day as the instant the method was called.
      */
     public static Predicate<Task> getDueTodayPredicate() {
-        return new TaskDueAfterDatePredicate(getDateToday()).and(new TaskDueBeforeDatePredicate(getDateTomorrow()));
+        return new TaskDueAfterDatePredicate().and(new TaskDueBeforeDatePredicate(getDateTomorrow()));
     }
 
     /**

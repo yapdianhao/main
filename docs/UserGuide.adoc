@@ -520,8 +520,10 @@ Shortcut: `:P` or `:p`
 .Example of expected result after running `productivity`
 image::ProductivityTab.png[width="600"]
 
-// end::productivitytracker[]
-
+****
+* When there are running timers, the DateTime field of the task displays the due date of the task.
+* The progress bar and the text following it only shows tasks that are due on the day JelphaBot is running.
+****
 ==== Starting timer for a task : `start`
 
 You can start a timer running for a task. +
@@ -557,7 +559,7 @@ image::stopCommand.png[width="600"]
 * Timer entry under "Running Timer(s)" in the productivity tab will be removed if execution is successful.
 * If task timed is due today or in next 6 days, time spent on timed task will be added to the respected time spent sections in the productivity tab.
 ****
-
+// end::productivitytracker[]
 ==== Receiving encouragement and criticism
 
 JelphaBot automatically tracks the user's productivity in a day and outputs the appropriate response to the user's
@@ -623,7 +625,7 @@ image::ug_figures/reminderpopup.png[width="600"]
 == FAQ
 
 *Q1*: How do I transfer my data to another Computer? +
-*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
+*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous JelphaBot folder.
 
 
 *Q2*: How do I save my data? +
