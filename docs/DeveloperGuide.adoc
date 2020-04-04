@@ -428,18 +428,24 @@ still warn the user.
 
 // tag::morningcallnightdebrief[]
 
-=== Morning Call / Night Debrief feature
+=== Summary feature
 
-JelphaBot has a Morning Call and Night Debrief feature which provides an overview of the tasks to be completed
-for the day (Morning Call), and all tasks that have been complete within the day (Night Debrief).
+JelphaBot has a Summary feature which provides an overview of the tasks due within the day as well as all tasks that have been complete within the day.
 
-Both come in the form of a separate window that opens upon app startup for Morning Call, and app exit for Night Debrief.
+This feature comes in the form of a welcome screen, which comprises of two sections for the tasks due within the day and the tasks completed within the day respectively.
+
+For each task shown only details such as the Module Code and the Description are shown.
+
+Once the user marks a task due within the day as complete, it will automatically appear under the tasks completed within the day.
+
+[NOTE]
+If the user marks a task as completed, and immediately deletes the task from the tasklist, it will not appear in the summary screen.
 
 ==== Implementation
 
 To view the respective tasks, the user enters the `summary` command.
 
-.Sequence of execution of the `summary` command
+.Sequence diagram of execution of the `summary` command
 
 image::SummarySequenceDiagram.png[]
 // end::morningcallnightdebrief[]
