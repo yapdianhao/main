@@ -30,12 +30,12 @@ public class GroupedTaskListPanel extends UiPart<Region> {
     public GroupedTaskListPanel(GroupedTaskList groupedTaskList) {
         super(FXML);
         this.groupedTaskList = groupedTaskList;
-        this.subLists = groupedTaskList.getLists();
+        this.subLists = groupedTaskList.getSublists();
         taskListGroups.setCellFactory(viewCell -> new GroupedTaskListViewCell());
         taskListGroups.setItems(subLists);
         logger.log(Level.INFO,
             String.format("Initialized %s panel with %d categories and %d tasks.", groupedTaskList.getCategory(),
-                groupedTaskList.getLists().size(), groupedTaskList.size()
+                groupedTaskList.getSublists().size(), groupedTaskList.size()
             )
         );
     }

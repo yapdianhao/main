@@ -41,6 +41,7 @@ public class GroupedByModuleTaskList implements GroupedTaskList {
 
     public GroupedByModuleTaskList(ObservableList<Task> tasks, PinnedTaskList pinnedTaskList) {
         requireAllNonNull(tasks);
+        requireNonNull(pinnedTaskList);
         this.pinnedTaskList = pinnedTaskList;
         this.tasks = tasks;
         this.moduleCodes.addAll(getUniqueModuleSet(tasks));
@@ -67,28 +68,6 @@ public class GroupedByModuleTaskList implements GroupedTaskList {
     }
 
     /**
-     * Sets the inner moduleCodeTaskLists according to the contents of taskList.
-     * Since taskList is retrieved from UniqueTaskList, it is assumed that there are no duplicate tasks.
-     *
-     * @param taskList the updated list of tasks.
-     */
-    protected void setTasks(List<Task> taskList) {
-        this.tasks.setAll(taskList);
-
-        moduleCodes.clear();
-        moduleCodes.addAll(getUniqueModuleSet(tasks));
-        for (ModuleCode code : moduleCodes) {
-            addSublist(code);
-        }
-    }
-
-    protected void setTasks(GroupedByModuleTaskList replacement) {
-        requireNonNull(replacement);
-        moduleCodeTaskLists.setAll(replacement.getLists());
-        setTasks(replacement.tasks);
-    }
-
-    /**
      * @param moduleCode The ModuleCode to be tested
      * @return a predicate which tests Tasks for the parameter module code.
      */
@@ -102,7 +81,7 @@ public class GroupedByModuleTaskList implements GroupedTaskList {
     }
 
     @Override
-    public ObservableList<SubgroupTaskList> getLists() {
+    public ObservableList<SubgroupTaskList> getSublists() {
         return moduleCodeTaskLists;
     }
 
@@ -113,20 +92,6 @@ public class GroupedByModuleTaskList implements GroupedTaskList {
 
     public boolean isEmpty() {
         return tasks.isEmpty();
-    }
-
-    /**
-     * Adds a task to the list.
-     * The task must not already exist in the list.
-     */
-    protected void add(Task toAdd) {
-        requireNonNull(toAdd);
-        if (contains(toAdd)) {
-            throw new DuplicateTaskException();
-        }
-        ModuleCode moduleCode = toAdd.getModuleCode();
-        moduleCodes.add(moduleCode);
-        tasks.add(toAdd);
     }
 
     /**
@@ -160,6 +125,53 @@ public class GroupedByModuleTaskList implements GroupedTaskList {
         return moduleCodeTaskLists.stream().anyMatch(sublist -> sublist.getGroupName().equals(moduleCode.toString()));
     }
 
+    /* === Methods used for testing. Application classes should not call these methods as Tasks are intended
+        to be modified through UniqueTaskList. === */
+
+    /**
+     * Adds a task to the list.
+     * The task must not already exist in the list.
+     */
+    protected void add(Task toAdd) {
+        requireNonNull(toAdd);
+        if (contains(toAdd)) {
+            throw new DuplicateTaskException();
+        }
+        tasks.add(toAdd);
+    }
+
+    /**
+     * Replaces the task {@code target} in the list with {@code editedTask}.
+     * {@code target} must exist in the list.
+     * The task identity of {@code editedTask} must not be the same as another existing task in the list.
+     */
+    protected void setTask(Task target, Task editedTask) {
+        requireAllNonNull(target, editedTask);
+
+        int index = tasks.indexOf(target);
+        if (index == -1) {
+            throw new TaskNotFoundException();
+        }
+
+        if (!target.isSameTask(editedTask) && contains(editedTask)) {
+            throw new DuplicateTaskException();
+        }
+
+        tasks.set(index, editedTask);
+    }
+
+    /**
+     * Removes the equivalent task from the list.
+     * The task must exist in the list.
+     */
+    protected void remove(Task target) {
+        requireNonNull(target);
+        if (!contains(target)) {
+            throw new TaskNotFoundException();
+        }
+        tasks.remove(target);
+    }
+
     /**
      * Removes all tasks from the list.
      */
@@ -168,6 +180,29 @@ public class GroupedByModuleTaskList implements GroupedTaskList {
         this.tasks.clear();
         this.moduleCodeTaskLists.clear();
     }
+
+    /**
+     * Sets the inner moduleCodeTaskLists according to the contents of taskList.
+     * Since taskList is retrieved from UniqueTaskList, it is assumed that there are no duplicate tasks.
+     *
+     * @param taskList the updated list of tasks.
+     */
+    protected void setTasks(List<Task> taskList) {
+        this.tasks.setAll(taskList);
+
+        moduleCodes.clear();
+        moduleCodes.addAll(getUniqueModuleSet(tasks));
+        for (ModuleCode code : moduleCodes) {
+            addSublist(code);
+        }
+    }
+
+    protected void setTasks(GroupedByModuleTaskList replacement) {
+        requireNonNull(replacement);
+        moduleCodeTaskLists.setAll(replacement.getSublists());
+        setTasks(replacement.tasks);
+    }
+    // === End of Methods used for testing ===
 
     @Override
     public Iterator<Task> iterator() {
