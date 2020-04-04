@@ -25,6 +25,7 @@ import seedu.jelphabot.model.task.predicates.DescriptionContainsKeywordsPredicat
 import seedu.jelphabot.model.task.predicates.TaskIsCompletedPredicate;
 import seedu.jelphabot.model.task.predicates.TaskIsIncompletePredicate;
 import seedu.jelphabot.model.task.tasklist.GroupedTaskList;
+import seedu.jelphabot.model.task.tasklist.ViewTaskList;
 import seedu.jelphabot.testutil.EditTaskDescriptorBuilder;
 
 /**
@@ -181,14 +182,20 @@ public class CommandTestUtil {
      */
     public static void showTasksWithSpecifiedStatus(Model model, Status status) {
         requireNonNull(model);
-        //ViewTaskList taskList = model.getLastShownList();
-        List<Task> taskList = model.getFilteredTaskList();
+        ViewTaskList taskList = model.getLastShownList();
+        //List<Task> taskList = model.getFilteredTaskList();
         List<Task> tasksWithPredicate = new ArrayList<>();
-        for (Task t: taskList) {
+        for (int i = 0; i < taskList.size(); i++) {
+            Task t = taskList.get(i);
             if (t.getStatus() == status) {
                 tasksWithPredicate.add(t);
             }
         }
+        // for (Task t: taskList) {
+        //     if (t.getStatus() == status) {
+        //         tasksWithPredicate.add(t);
+        //     }
+        // }
 
         Predicate<Task> predicate;
 
