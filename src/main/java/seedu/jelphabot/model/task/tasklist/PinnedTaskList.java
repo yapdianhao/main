@@ -11,4 +11,5 @@ public class PinnedTaskList extends SubgroupTaskList {
     public PinnedTaskList(ObservableList<Task> taskList, NumberBinding startIndex) {
         super("Pinned", taskList, startIndex);
     }
+
 }
