@@ -67,7 +67,8 @@ public class CalendarCommand extends Command {
             model.updateFilteredCalendarTaskList(predicate);
             LocalDate date = predicate.getDate();
             return new CommandResult(
-                String.format(Messages.MESSAGE_TASKS_LISTED_OVERVIEW, model.getFilteredCalendarTaskList().size()), date, null);
+                String.format(Messages.MESSAGE_TASKS_LISTED_OVERVIEW,
+                    model.getFilteredCalendarTaskList().size()), date, null);
         } else if (predicate == null) { //switch calendar view
             //TODO tasklist should update to display first day of the month
             return new CommandResult(String.format(MESSAGE_SWITCH_CALENDAR_VIEW_ACKNOWLEDGEMENT,
