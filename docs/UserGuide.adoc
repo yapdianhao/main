@@ -134,12 +134,12 @@ Format: `exit`
 * Exiting the application before stopping any running timer wil cause all recorded time since the timer was started to be lost.
 ****
 
-=== Morning call/Night debrief (Eden)
+=== Summary (Eden)
 This section will be the first thing you will see after entering JelphaBot!
 
-Morning Call Displays the tasks that are due today, and Night Debrief displays the tasks that have been completed within the day.
+This section gives you a minimalistic overview of the day, namely with tasks that you have due within the day, and tasks that you have completed within the day!
 
-The tasks listed in Morning Call and Night Debrief are displayed in under the Summary tab as separate sections under "Due Today" and "Completed Today" respectively.
+Tasks displayed will only have it's module code as well as it's description for simplicity's sake!
 
 ==== Viewing the summary tab: `summary`
 
@@ -226,6 +226,10 @@ image::addCommand.png[width="600"]
 * Values that p/PRIORITY can take are -1, 0 or 1.
 ****
 
+[IMPORTANT]
+Format of the month in DATETIME (MMM) input has to have the first letter in upper-case. +
+E.g `Mar` instead of `mar` when specifying the month of March.
+
 [TIP]
 A task can have any number of tags (including 0)! +
 If the priority field is not specified, the default priority used is Normal Priority.
@@ -262,9 +266,6 @@ Group your tasks into the following categories:
 (Shows tasks due by the end of the week, defined as before the next upcoming Monday)
 * Due Sometime +
 (Shows all other tasks that do not fit into prior categories)
-
-[TIP]
-Tasks which are due and completed will not be shown, as we assume you no longer need them.
 
 [.text-center]
 .Example of an expected result after running `list module`
@@ -449,7 +450,7 @@ The task list panel on the left will display the tasks due today. +
 Format: `calendar MONTHYEAR`
 
 ****
-* For MONTHYEAR format, it should be MMM-YYYY, but it also allows some other formats shown when you type in the command word.
+* For MONTHYEAR format, it should be MMM-YYYY, but it also allows some other formats shown when your format is invalid.
 ****
 
 Examples:
@@ -461,6 +462,10 @@ Examples:
 image::CalendarView.png[width="600"]
 
 Displays month of May in the year 2020 in the calendar panel on the right.
+
+[IMPORTANT]
+Format of the month in MONTHYEAR (MMM) input has to have the first letter in upper-case. +
+E.g `Mar` instead of `mar` when specifying the month of March.
 
 ==== Show tasks due on specific date : `calendar`
 Displays the tasks due on specified date, while highlighting that day on the calendar +

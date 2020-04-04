@@ -123,7 +123,7 @@ image::LogicClassDiagram.png[]
 The _Sequence Diagram_ below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
 .Component interactions for `delete 1` command
-image::ArchitectureSequenceDiagram.png[]
+image::interaction.png[]
 
 The sections below give more details of each component.
 
@@ -133,7 +133,7 @@ The Ui Component handles interactions between the user and the application.
 This includes input fields where commands are entered as well as translations of data in the Model Component to a visual representation in the interface.
 
 .Class Diagram of the UI Component
-image::UiClassDiagram2.png[]
+image::UiClassDiagram.png[]
 
 *API* : link:{repoURL}/src/main/java/seedu/JelphaBot/ui/Ui.java[`Ui.java`]
 
@@ -274,22 +274,22 @@ If the user tries to switch to a sublist type which is already set, the command 
 
 ===== Aspect 1: `ListCommand` swaps to a different `ViewTaskList`
 
-* **Alternative 1 (current choice):** Initializes each grouped list as each `ListCommand` is called and stores the latest list as `Model.lastShownList`.
+* *Current solution*: Initializes each grouped list as each `ListCommand` is called and stores the latest list as `Model.lastShownList`.
 **  Pros: Easy to implement. Scalable when more groupings are added.
 **  Cons: Consecutive 'list' operations are expensive as the list is reinitalized each time.
 **  Cons: It is hard to keep track of the exact type of list in `lastShownList`, which may lead to unexpected behavior.
-* **Alternative 2:** Keep instances of all `GroupedTaskList` objects and update them as underlying Task List changes.
+* **Alternative 1:** Keep instances of all `GroupedTaskList` objects and update them as underlying Task List changes.
 **  Pros: Consecutive `ListCommand` executions are less expensive.
 **  Cons: All other commands that update the underlying list now have additional checks as each grouped list is updated.
 
 ===== Aspect 2: `get()` Task from `ViewTaskList` and iterate between Tasks.
 
-* Current solution: Implement `get()` and `Iterator<Task>` in `ViewTaskList`. (Not Done Yet)
+* *Current solution*: Implement `get()` and `Iterator<Task>` in `ViewTaskList`. (Not Done Yet)
 
 ===== Aspect 3: Remove empty Categories in `GroupByDateTaskList`
 
 * *Current Solution*: UI displays problems from a `FilteredList<SubgroupTaskList>` and use `setPredicate` to hide empty categories without removing them.
-**  Rationale: because these categories are meant to be reused when applicable tasks are added back to the list.
+**  Rationale: These categories are meant to be reused when applicable tasks are added back to the list.
 **  Pros: Provides good protection over unexpected changes on the displayed problem list.
 **  Cons: Additional load on the UI as the Filtering happens constantly.
 * *Alternative 1*: Let UI displays problems in an `ObservableList<Task>` and update the list directly.
@@ -306,23 +306,25 @@ If the user tries to switch to a sublist type which is already set, the command 
 === Calendar feature
 JelphaBot has a calendar feature which provides an overarching view of their schedules and to allow users to view their tasks due.
 
-This feature offers two main functions:
+This feature offers 3 main functions:
 
-** Display calendar view in a selected month.
-** Display a list of tasks due for a selected date
+** Display calendar view in a selected month and year
+** Display a list of tasks due for a selected date in the month
+** Display today's date on calendar view with the corresponding tasks due listed
 
 ====  Implementation
 
-**Function 1: Display calendar view in a selected month**
+**Function 1: Display calendar view in a selected month and year**
 
 In order to change the calendar view for another month and/or year, the user enters the `calendar MONTHYEAR` command +
 (e.g. `calendar Apr-2020`)
 
-**-insert sequence diagram-**
+.Sequence diagram after running `calendar Apr-2020`
+image::CalendarViewSequenceDiagram.png[]
 
 Upon the completion of the execution of the command, the calendar view would display the month view for April 2020 instead.
 
-**Function 2: Display a list of tgit asks due for a selected date**
+**Function 2: Display a list of tasks due for a selected date in the month**
 
 In order to display the task list for specific input dates, the user enters the `calendar DATE` command +
 (e.g. calendar jan-1-2020)
@@ -330,6 +332,11 @@ In order to display the task list for specific input dates, the user enters the 
 **-insert sequence diagram-**
 
 Upon the completion of the execution of the command, the tasks due on 1st January 2020 would be displayed to the user on the task list panel to the left. +
+
+**Function 3: Display today's date on calendar view with the corresponding tasks due listed**
+
+**-insert sequence diagram-**
+
 
 === Productivity feature
 JelphaBot has a productivity feature which provides an overarching view of user's overall productivity.
@@ -364,6 +371,25 @@ If the user attempts to start timer for a task marked as completed or stop a tas
 the command fails its execution so that it does not execute that start or stop operation to start or stop the timer for that task.
 
 ==== Design Considerations
+
+===== Aspect 1: Rendering sub-parts of productivity panel
+* *Current solution*: Render each sub-part (i.e. task completion rate, time spent and running timers) only when that part needs to
+be updated. All 3 parts are rendered on to the same card.
+** Rationale: No need to rerender all 3 parts when changes are made to only one part.
+** Pros: Easy to implement and reduces waste of computational power.
+** Cons: As all parts are displayed on the same card, if there happens to be problem in other parts of the card, all parts will be affected.
+* *Alternative 1*: Abstract each part to a separate card and render all cards onto the same panel.
+** Pros: Allows other parts to be rendered even when there is error on one part. Additionally, it is easier to identify bugs when there is
+an error in displaying.
+
+===== Aspect 2: Allowing tasks to be added, deleted and edited while timer is running
+* *Current solution*: Adding and deleting task is allowed. However, tasks cannot be edited.
+** Rationale: Adding and deleting tasks does not affect the task being timed.
+** Pros: Other functionality are still available for use. Thus, user's experience is not affected
+** Cons: User is unable to edit changes in the task being timed.
+* *Alternative 1*: Allow users to edit task while timer is running.
+** Pros: User is able to use all features without restriction.
+** Cons: Difficult to implement as the Task model requires a new Task to replace the old Task when edit command is executed.
 
 === Reminder feature
 JelphaBot has a reminder feature that reminds users whenever they have tasks that are about to overdue.
@@ -402,18 +428,24 @@ still warn the user.
 
 // tag::morningcallnightdebrief[]
 
-=== Morning Call / Night Debrief feature
+=== Summary feature
 
-JelphaBot has a Morning Call and Night Debrief feature which provides an overview of the tasks to be completed
-for the day (Morning Call), and all tasks that have been complete within the day (Night Debrief).
+JelphaBot has a Summary feature which provides an overview of the tasks due within the day as well as all tasks that have been complete within the day.
 
-Both come in the form of a separate window that opens upon app startup for Morning Call, and app exit for Night Debrief.
+This feature comes in the form of a welcome screen, which comprises of two sections for the tasks due within the day and the tasks completed within the day respectively.
+
+For each task shown only details such as the Module Code and the Description are shown.
+
+Once the user marks a task due within the day as complete, it will automatically appear under the tasks completed within the day.
+
+[NOTE]
+If the user marks a task as completed, and immediately deletes the task from the tasklist, it will not appear in the summary screen.
 
 ==== Implementation
 
 To view the respective tasks, the user enters the `summary` command.
 
-.Sequence of execution of the `summary` command
+.Sequence diagram of execution of the `summary` command
 
 image::SummarySequenceDiagram.png[]
 // end::morningcallnightdebrief[]
