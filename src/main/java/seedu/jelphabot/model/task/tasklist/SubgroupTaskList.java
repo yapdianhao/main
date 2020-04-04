@@ -2,7 +2,6 @@ package seedu.jelphabot.model.task.tasklist;
 
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.IntegerBinding;
-import javafx.beans.binding.NumberBinding;
 import javafx.collections.ObservableList;
 import seedu.jelphabot.model.task.Task;
 
@@ -13,9 +12,9 @@ public class SubgroupTaskList {
     private final String groupName;
     private final ObservableList<Task> tasks;
     private final IntegerBinding size;
-    private final NumberBinding startIndex;
+    private final IntegerBinding startIndex;
 
-    SubgroupTaskList(String groupName, ObservableList<Task> tasks, NumberBinding startIndex) {
+    SubgroupTaskList(String groupName, ObservableList<Task> tasks, IntegerBinding startIndex) {
         this.groupName = groupName;
         this.tasks = tasks;
         this.size = Bindings.size(tasks);
@@ -46,12 +45,16 @@ public class SubgroupTaskList {
         return tasks.isEmpty();
     }
 
-    public NumberBinding sizeBinding() {
+    public IntegerBinding sizeBinding() {
         return size;
     }
 
-    public NumberBinding startIndexBinding() {
+    public IntegerBinding startIndexBinding() {
         return startIndex;
+    }
+
+    public IntegerBinding subsequentElementStartIndex() {
+        return (IntegerBinding) startIndex.add(size);
     }
 
 }

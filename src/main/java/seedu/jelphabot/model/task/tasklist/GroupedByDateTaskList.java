@@ -11,7 +11,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.function.Predicate;
 
-import javafx.beans.binding.NumberBinding;
+import javafx.beans.binding.IntegerBinding;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.jelphabot.commons.core.index.Index;
@@ -33,32 +33,32 @@ public class GroupedByDateTaskList implements GroupedTaskList {
     // private static final Predicate<Task> isIncomplete = new TaskIsIncompletePredicate();
 
     private final ObservableList<SubgroupTaskList> dueDateTaskLists = FXCollections.observableArrayList();
-    private final NumberBinding sizeBinding;
+    private final IntegerBinding sizeBinding;
 
     public GroupedByDateTaskList(ObservableList<Task> taskList, PinnedTaskList pinnedTasks) {
         requireAllNonNull(taskList);
         dueDateTaskLists.add(pinnedTasks);
-        NumberBinding tempSize = pinnedTasks.sizeBinding();
+        IntegerBinding tempSize = pinnedTasks.sizeBinding();
 
         SubgroupTaskList overdueTaskList =
             new SubgroupTaskList("Overdue", taskList.filtered(isOverdue), tempSize);
         dueDateTaskLists.add(overdueTaskList);
-        tempSize = tempSize.add(overdueTaskList.sizeBinding());
+        tempSize = (IntegerBinding) tempSize.add(overdueTaskList.sizeBinding());
 
         SubgroupTaskList dueTodayTaskList =
             new SubgroupTaskList("Due Today", taskList.filtered(isDueToday), tempSize);
         dueDateTaskLists.add(dueTodayTaskList);
-        tempSize = tempSize.add(dueTodayTaskList.sizeBinding());
+        tempSize = (IntegerBinding) tempSize.add(dueTodayTaskList.sizeBinding());
 
         SubgroupTaskList dueThisWeekTaskList =
             new SubgroupTaskList("Due This Week", taskList.filtered(isDueThisWeek), tempSize);
         dueDateTaskLists.add(dueThisWeekTaskList);
-        tempSize = tempSize.add(dueThisWeekTaskList.sizeBinding());
+        tempSize = (IntegerBinding) tempSize.add(dueThisWeekTaskList.sizeBinding());
 
         SubgroupTaskList dueSomedayTaskList =
             new SubgroupTaskList("Due Someday", taskList.filtered(isDueSomeday), tempSize);
         dueDateTaskLists.add(dueSomedayTaskList);
-        tempSize = tempSize.add(dueSomedayTaskList.sizeBinding());
+        tempSize = (IntegerBinding) tempSize.add(dueSomedayTaskList.sizeBinding());
         this.sizeBinding = tempSize;
     }
 

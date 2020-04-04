@@ -11,6 +11,7 @@ import java.util.Set;
 import java.util.function.Predicate;
 
 import javafx.beans.binding.Bindings;
+import javafx.beans.binding.IntegerBinding;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -133,9 +134,13 @@ public class GroupedByModuleTaskList implements GroupedTaskList {
      * The task must not already exist in the list.
      */
     private void addSublist(ModuleCode moduleCode) {
+        IntegerBinding latestBinding = moduleCodeTaskLists.isEmpty()
+                                           ? Bindings.createIntegerBinding(() -> 0)
+                                           : moduleCodeTaskLists.get(moduleCodeTaskLists.size() - 1)
+                                                 .subsequentElementStartIndex();
         moduleCodeTaskLists.add(
             new SubgroupTaskList(moduleCode.toString(), this.tasks.filtered(hasModuleCode(moduleCode)),
-                Bindings.createIntegerBinding(this::size)
+                latestBinding
             ));
     }
 
