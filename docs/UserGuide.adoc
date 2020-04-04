@@ -449,7 +449,7 @@ The task list panel on the left will display the tasks due today. +
 Format: `calendar MONTHYEAR`
 
 ****
-* For MONTHYEAR format, it should be MMM-YYYY, but it also allows some other formats shown when you type in the command word.
+* For MONTHYEAR format, it should be MMM-YYYY, but it also allows some other formats shown when your format is invalid.
 ****
 
 Examples:
@@ -461,6 +461,10 @@ Examples:
 image::CalendarView.png[width="600"]
 
 Displays month of May in the year 2020 in the calendar panel on the right.
+
+[IMPORTANT]
+Format of the month in MONTHYEAR (MMM) input has to have the first letter in upper-case. +
+E.g `Mar` instead of `mar` when specifying the month of March.
 
 ==== Show tasks due on specific date : `calendar`
 Displays the tasks due on specified date, while highlighting that day on the calendar +
