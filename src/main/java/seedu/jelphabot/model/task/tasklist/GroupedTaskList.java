@@ -19,7 +19,7 @@ public interface GroupedTaskList extends ViewTaskList {
 
     Category getCategory();
 
-    ObservableList<SubgroupTaskList> getList();
+    ObservableList<SubgroupTaskList> getLists();
 
     /**
      * GroupedTaskList.Groupings define a set of fixed enum mappings from the commandArgument to the corresponding

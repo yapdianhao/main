@@ -3,6 +3,7 @@ package seedu.jelphabot.model.task.tasklist;
 import static seedu.jelphabot.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -76,7 +77,7 @@ public class GroupedByModuleTaskList implements GroupedTaskList {
     }
 
     @Override
-    public ObservableList<SubgroupTaskList> getList() {
+    public ObservableList<SubgroupTaskList> getLists() {
         return moduleCodeTaskLists;
     }
 
@@ -86,12 +87,67 @@ public class GroupedByModuleTaskList implements GroupedTaskList {
     }
 
     @Override
+    public boolean isEmpty() {
+        return false;
+    }
+
+    @Override
+    public boolean contains(Object o) {
+        return false;
+    }
+
+    @Override
     public Iterator<Task> iterator() {
         List<Task> tasks = new ArrayList<>();
         for (SubgroupTaskList sublist : moduleCodeTaskLists) {
             tasks.addAll(sublist.getList());
         }
         return tasks.iterator();
+    }
+
+    @Override
+    public Object[] toArray() {
+        return new Object[0];
+    }
+
+    @Override
+    public <T> T[] toArray(T[] a) {
+        return null;
+    }
+
+    @Override
+    public boolean add(Task task) {
+        return false;
+    }
+
+    @Override
+    public boolean remove(Object o) {
+        return false;
+    }
+
+    @Override
+    public boolean containsAll(Collection<?> c) {
+        return false;
+    }
+
+    @Override
+    public boolean addAll(Collection<? extends Task> c) {
+        return false;
+    }
+
+    @Override
+    public boolean removeAll(Collection<?> c) {
+        return false;
+    }
+
+    @Override
+    public boolean retainAll(Collection<?> c) {
+        return false;
+    }
+
+    @Override
+    public void clear() {
+        moduleCodeTaskLists.clear();
     }
 
     @Override

@@ -7,6 +7,7 @@ import static seedu.jelphabot.commons.util.DateUtil.getDueTodayPredicate;
 import static seedu.jelphabot.commons.util.DateUtil.getOverduePredicate;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.function.Predicate;
@@ -68,7 +69,7 @@ public class GroupedByDateTaskList implements GroupedTaskList {
     }
 
     @Override
-    public ObservableList<SubgroupTaskList> getList() {
+    public ObservableList<SubgroupTaskList> getLists() {
         return dueDateTaskLists;
     }
 
@@ -78,12 +79,67 @@ public class GroupedByDateTaskList implements GroupedTaskList {
     }
 
     @Override
+    public boolean isEmpty() {
+        return false;
+    }
+
+    @Override
+    public boolean contains(Object o) {
+        return false;
+    }
+
+    @Override
     public Iterator<Task> iterator() {
         List<Task> tasks = new ArrayList<>();
         for (SubgroupTaskList sublist : dueDateTaskLists) {
             tasks.addAll(sublist.getList());
         }
         return tasks.iterator();
+    }
+
+    @Override
+    public Object[] toArray() {
+        return new Object[0];
+    }
+
+    @Override
+    public <T> T[] toArray(T[] a) {
+        return null;
+    }
+
+    @Override
+    public boolean add(Task task) {
+        return false;
+    }
+
+    @Override
+    public boolean remove(Object o) {
+        return false;
+    }
+
+    @Override
+    public boolean containsAll(Collection<?> c) {
+        return false;
+    }
+
+    @Override
+    public boolean addAll(Collection<? extends Task> c) {
+        return false;
+    }
+
+    @Override
+    public boolean removeAll(Collection<?> c) {
+        return false;
+    }
+
+    @Override
+    public boolean retainAll(Collection<?> c) {
+        return false;
+    }
+
+    @Override
+    public void clear() {
+
     }
 
     @Override

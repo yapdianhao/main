@@ -31,7 +31,7 @@ public class GroupedTaskListPanel extends UiPart<Region> {
     public GroupedTaskListPanel(GroupedTaskList groupedTaskList) {
         super(FXML);
         this.groupedTaskList = groupedTaskList;
-        this.subLists = groupedTaskList.getList();
+        this.subLists = groupedTaskList.getLists();
         taskListGroups.setCellFactory(viewCell -> new GroupedTaskListViewCell());
         taskListGroups.setItems(subLists);
         subLists.addListener((ListChangeListener<? super SubgroupTaskList>) change -> {
