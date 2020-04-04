@@ -86,10 +86,6 @@ public class CalendarPanel extends UiPart<Region> {
         monthYear.setText(calendarDate.getMonthName() + ", " + calendarDate.getYear());
     }
 
-    public String getMonthYear() {
-        return monthYear.getText();
-    }
-
     public int getCalendarMonth() {
         return calendarDate.getMonth();
     }

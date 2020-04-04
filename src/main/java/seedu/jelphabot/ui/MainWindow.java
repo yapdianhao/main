@@ -348,19 +348,23 @@ public class MainWindow extends UiPart<Stage> {
                 calendarPanel.setHighlightedDay(dayIndex);
             }
         } else if (date == null && yearMonth != null) {
-            CalendarDate newDate = new CalendarDate(yearMonth.atDay(1));
+            LocalDate firstDayOfMonth = yearMonth.atDay(1);
+            CalendarDate newDate = new CalendarDate(firstDayOfMonth);
             calendarPanel.changeMonthYearLabel(yearMonth);
             calendarPanel.fillGridPane(newDate);
-        } else {
-            CalendarDate newDate = new CalendarDate(yearMonth.atDay(1));
-            calendarPanel.changeMonthYearLabel(yearMonth);
-            calendarPanel.fillGridPane(newDate);
-
             calendarPanel.getHighlightedDay().removeHighlightedDay();
-            CalendarPanel.getDayCard(DateUtil.getDateToday().getDayOfMonth()).highlightToday();
-            calendarPanel.setHighlightedDay(DateUtil.getDateToday().getDayOfMonth());
+            CalendarPanel.getDayCard(1).highlightToday();
+            calendarPanel.setHighlightedDay(1);
+        } else {
+            LocalDate today = DateUtil.getDateToday();
+            CalendarDate todayDate = new CalendarDate(today);
+            YearMonth todayYearMonth = YearMonth.now();
+            calendarPanel.changeMonthYearLabel(todayYearMonth);
+            calendarPanel.fillGridPane(todayDate);
+            calendarPanel.getHighlightedDay().removeHighlightedDay();
+            CalendarPanel.getDayCard(today.getDayOfMonth()).highlightToday();
+            calendarPanel.setHighlightedDay(today.getDayOfMonth());
         }
-
     }
 
 }
