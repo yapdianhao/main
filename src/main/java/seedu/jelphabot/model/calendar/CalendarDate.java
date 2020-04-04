@@ -9,9 +9,10 @@ import seedu.jelphabot.commons.util.DateUtil;
  */
 public class CalendarDate {
 
-    private final LocalDate date;
     private static final String[] months = {"January", "February", "March", "April", "May", "June",
         "July", "August", "September", "October", "November", "December"};
+
+    private final LocalDate date;
 
     public CalendarDate(LocalDate date) {
         this.date = date;
