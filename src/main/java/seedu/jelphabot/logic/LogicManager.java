@@ -24,7 +24,6 @@ import seedu.jelphabot.model.reminder.Reminder;
 import seedu.jelphabot.model.summary.SummaryList;
 import seedu.jelphabot.model.task.ReminderPredicate;
 import seedu.jelphabot.model.task.Task;
-import seedu.jelphabot.model.task.UniqueTaskList;
 import seedu.jelphabot.model.task.predicates.TaskCompletedWithinDayPredicate;
 import seedu.jelphabot.model.task.predicates.TaskIsCompletedPredicate;
 import seedu.jelphabot.model.task.predicates.TaskIsIncompletePredicate;
@@ -96,18 +95,13 @@ public class LogicManager implements Logic {
         return new FilteredList<>(filteredTasks, pred);
     }
 
-    // TODO: implement this method in a way that does not require the creation of another UniqueTaskList
     public ObservableList<Task> getFilteredByReminder() {
         //logger.info("reached filtered by reminder");
-        UniqueTaskList uniqueTaskList = new UniqueTaskList();
         List<Task> taskList = model.getTaskListFromJelphaBot();
         List<Reminder> reminderList = model.getReminderListFromJelphaBot();
-        ObservableList<Task> filteredTasks = model.getFilteredTaskList();
         ReminderPredicate reminderPredicate = new ReminderPredicate(taskList, reminderList);
-        FilteredList<Task> filteredList = new FilteredList<>(filteredTasks, reminderPredicate);
-        uniqueTaskList.setTasks(filteredList);
         //logger.info("" + filteredList.size());
-        return uniqueTaskList.asUnmodifiableObservableList();
+        return model.getFilteredTaskList().filtered(reminderPredicate);
     }
 
     @Override
@@ -143,6 +137,7 @@ public class LogicManager implements Logic {
     public SummaryList getSummaryList() {
         return model.getSummaryList();
     }
+
     @Override
     public Path getJelphaBotFilePath() {
         return model.getJelphaBotFilePath();
