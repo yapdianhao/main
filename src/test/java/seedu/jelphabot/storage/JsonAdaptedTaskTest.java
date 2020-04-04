@@ -83,12 +83,12 @@ public class JsonAdaptedTaskTest {
     @Test
     public void toModelType_nullModuleCode_throwsIllegalValueException() {
         JsonAdaptedTask task = new JsonAdaptedTask(
-                VALID_DESCRIPTION,
-                VALID_STATUS,
-                VALID_DATETIME,
-                null,
-                VALID_PRIORITY,
-                VALID_TAGS, VALID_TIME_SPENT
+            VALID_DESCRIPTION,
+            VALID_STATUS,
+            VALID_DATETIME,
+            null,
+            VALID_PRIORITY,
+            VALID_TAGS, VALID_TIME_SPENT
         );
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, ModuleCode.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, task::toModelType);
@@ -139,3 +139,5 @@ public class JsonAdaptedTaskTest {
         assertThrows(IllegalValueException.class, task::toModelType);
     }
 }
+
+

@@ -82,8 +82,6 @@ public class LogicManager implements Logic {
         return model.getFilteredCalendarTaskList();
     }
 
-    // makeshift implementation to ensure that build still runs as per normal
-    // TODO: implement this method in a way that does not require the creation of another UniqueTaskList
     @Override
     public ObservableList<Task> getFilteredByCompleteTaskList() {
         ObservableList<Task> filteredTasks = model.getFilteredTaskList();
@@ -98,6 +96,7 @@ public class LogicManager implements Logic {
         return new FilteredList<>(filteredTasks, pred);
     }
 
+    // TODO: implement this method in a way that does not require the creation of another UniqueTaskList
     public ObservableList<Task> getFilteredByReminder() {
         //logger.info("reached filtered by reminder");
         UniqueTaskList uniqueTaskList = new UniqueTaskList();
@@ -111,8 +110,6 @@ public class LogicManager implements Logic {
         return uniqueTaskList.asUnmodifiableObservableList();
     }
 
-    // makeshift implementation to ensure that build still runs as per normal
-    // TODO: implement this method in a way that does not require the creation of another UniqueTaskList
     @Override
     public ObservableList<Task> getFilteredByIncompleteTaskList() {
         ObservableList<Task> filteredTasks = model.getFilteredTaskList();
