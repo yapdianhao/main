@@ -226,6 +226,10 @@ image::addCommand.png[width="600"]
 * Values that p/PRIORITY can take are -1, 0 or 1.
 ****
 
+[IMPORTANT]
+Format of the month in DATETIME (MMM) input has to have the first letter in upper-case. +
+E.g `Mar` instead of `mar` when specifying the month of March.
+
 [TIP]
 A task can have any number of tags (including 0)! +
 If the priority field is not specified, the default priority used is Normal Priority.
