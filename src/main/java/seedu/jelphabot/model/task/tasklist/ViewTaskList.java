@@ -12,4 +12,6 @@ public interface ViewTaskList extends Iterable<Task> {
     Task get(Index index);
 
     int size();
+
+    boolean isEmpty();
 }
