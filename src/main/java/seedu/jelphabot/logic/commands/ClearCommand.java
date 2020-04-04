@@ -21,7 +21,7 @@ public class ClearCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.setJelphaBot(new JelphaBot());
-        model.setProductivity(new Productivity(model.getFilteredTaskList()));
+        model.setProductivity(new Productivity(model.getFilteredTaskList(), true, true, true));
         model.setSummary(new Summary(model.getFilteredTaskList()));
         return new CommandResult(MESSAGE_SUCCESS);
     }

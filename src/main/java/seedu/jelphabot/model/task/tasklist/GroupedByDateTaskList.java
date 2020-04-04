@@ -1,4 +1,4 @@
-package seedu.jelphabot.model.task;
+package seedu.jelphabot.model.task.tasklist;
 
 import static seedu.jelphabot.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.jelphabot.commons.util.DateUtil.getDueSomedayPredicate;
@@ -12,6 +12,7 @@ import javafx.beans.binding.NumberBinding;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.jelphabot.commons.core.index.Index;
+import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.model.task.predicates.TaskIsIncompletePredicate;
 
 /**

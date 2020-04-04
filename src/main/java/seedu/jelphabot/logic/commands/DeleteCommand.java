@@ -9,7 +9,7 @@ import seedu.jelphabot.model.Model;
 import seedu.jelphabot.model.productivity.Productivity;
 import seedu.jelphabot.model.summary.Summary;
 import seedu.jelphabot.model.task.Task;
-import seedu.jelphabot.model.task.ViewTaskList;
+import seedu.jelphabot.model.task.tasklist.ViewTaskList;
 
 /**
  * Deletes a task identified using it's displayed index from the address book.
@@ -45,7 +45,7 @@ public class DeleteCommand extends Command {
 
         Task taskToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteTask(taskToDelete);
-        model.setProductivity(new Productivity(model.getFilteredTaskList()));
+        model.setProductivity(new Productivity(model.getFilteredTaskList(), true, true, true));
         model.setSummary(new Summary(model.getFilteredTaskList()));
 
         if (taskToDelete.isBeingTimed()) {

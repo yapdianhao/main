@@ -4,14 +4,13 @@ import static java.util.Objects.requireNonNull;
 import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_REMIND_DAY;
 import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_REMIND_HOUR;
 
-import java.util.List;
-
 import seedu.jelphabot.commons.core.Messages;
 import seedu.jelphabot.commons.core.index.Index;
 import seedu.jelphabot.logic.commands.exceptions.CommandException;
 import seedu.jelphabot.model.Model;
 import seedu.jelphabot.model.reminder.Reminder;
 import seedu.jelphabot.model.task.Task;
+import seedu.jelphabot.model.task.tasklist.ViewTaskList;
 
 /**
  * Displays to the user a list of tasks that will due in a week.
@@ -19,7 +18,8 @@ import seedu.jelphabot.model.task.Task;
 public class ReminderCommand extends Command {
 
     public static final String MESSAGE_DUPLICATE_REMINDER = "This task already has a reminder!"
-        + " Please delete the current reminder with delrem [INDEX] first!";
+                                                                + " Please delete the current reminder with delrem "
+                                                                + "[INDEX] first!";
     public static final String MESSAGE_TASK_ALREADY_MARKED_COMPLETE = "The specified task has already "
                                                                           + "been marked as complete!";
     public static final String MESSAGE_SUCCESS = "Added reminder for task %d!";
@@ -46,7 +46,7 @@ public class ReminderCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Task> lastShownList = model.getFilteredTaskList();
+        ViewTaskList lastShownList = model.getLastShownList();
         if (model.hasReminder(reminder)) {
             //model.setReminder(reminder, reminder);
             throw new CommandException(MESSAGE_DUPLICATE_REMINDER);

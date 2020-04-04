@@ -10,6 +10,7 @@ import seedu.jelphabot.model.task.Task;
  * Represents the timer that is currently running for the user's task.
  */
 public class RunningTimers {
+
     private ObservableList<Task> taskList;
 
     public RunningTimers(ObservableList<Task> taskList) {

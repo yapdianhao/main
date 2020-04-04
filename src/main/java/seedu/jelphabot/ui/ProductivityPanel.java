@@ -63,9 +63,9 @@ public class ProductivityPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Task} using a {@code TaskCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Productivity} using a {@code ProductivityCard}.
      */
-    class ProductivityListViewCell extends ListCell<Productivity> {
+    static class ProductivityListViewCell extends ListCell<Productivity> {
         @Override
         protected void updateItem(Productivity productivity, boolean empty) {
             super.updateItem(productivity, empty);

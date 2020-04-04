@@ -46,7 +46,7 @@ public class Reminder {
 
     /**
      * Returns true is both reminder refers to the same task.
-     * @param otherReminder
+     * @param other Reminder
      * @return boolean
      */
     public boolean isSameReminder(Object other) {

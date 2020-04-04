@@ -20,7 +20,7 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task list."
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task list.\n"
             + "Parameters: \n"
             + "    " + PREFIX_DESCRIPTION + "DESCRIPTION\n"
             + "    " + PREFIX_DATETIME + "DATETIME in format MMM-dd-YYYY HH mm\n"
@@ -53,7 +53,7 @@ public class AddCommand extends Command {
         }
 
         model.addTask(toAdd);
-        model.setProductivity(new Productivity(model.getFilteredTaskList()));
+        model.setProductivity(new Productivity(model.getFilteredTaskList(), true, false, false));
         model.setSummary(new Summary(model.getFilteredTaskList()));
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }

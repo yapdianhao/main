@@ -9,7 +9,7 @@ import seedu.jelphabot.logic.commands.exceptions.CommandException;
 import seedu.jelphabot.model.Model;
 import seedu.jelphabot.model.productivity.Productivity;
 import seedu.jelphabot.model.task.Task;
-import seedu.jelphabot.model.task.ViewTaskList;
+import seedu.jelphabot.model.task.tasklist.ViewTaskList;
 
 /**
  * Starts a timer for a task.
@@ -49,7 +49,7 @@ public class StopTimerCommand extends Command {
         taskToStop.stopTimer();
         model.setTask(dummy, taskToStop);
         model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
-        model.setProductivity(new Productivity(model.getFilteredTaskList()));
+        model.setProductivity(new Productivity(model.getFilteredTaskList(), false, false, true));
         return new CommandResult(String.format(MESSAGE_SUCCESS, targetIndex.getOneBased(),
             taskToStop.getModuleCode().toString(), taskToStop.getDescription().toString(),
             taskToStop.getTimeSpent().toString()));
