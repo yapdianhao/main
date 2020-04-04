@@ -306,36 +306,36 @@ If the user tries to switch to a sublist type which is already set, the command 
 === Calendar feature
 JelphaBot has a calendar feature which provides an overarching view of their schedules and to allow users to view their tasks due.
 
-This feature offers 3 main functions:
+This feature offers two main functions:
 
-** Display calendar view in a selected month and year
-** Display a list of tasks due for a selected date in the month
-** Display today's date on calendar view with the corresponding tasks due listed
+** Displays an overview tasks in calendar for a selected month and year
+** Displays a list of tasks due for a specified date
 
 ====  Implementation
 
-**Function 1: Display calendar view in a selected month and year**
+**Function 1: Displays an overview tasks in calendar for a selected month and year**
 
-In order to change the calendar view for another month and/or year, the user enters the `calendar MONTHYEAR` command +
-(e.g. `calendar Apr-2020`)
+There are 2 commands that users can issue to perform function 1:
+
+1. `calendar today`: Displays calendar for the current month with today's date highlighted, and its corresponding tasks listed. +
+2. `calendar MONTHYEAR`: Displays calendar for the month and year specified, with the first day of the month highlighted, and its corresponding tasks listed.
+
+The following sequence diagram shows you how the `calendar MONTHYEAR` (e.g. `calendar Apr-2020`) command works.
 
 .Sequence diagram after running `calendar Apr-2020`
 image::CalendarViewSequenceDiagram.png[]
 
-Upon the completion of the execution of the command, the calendar view would display the month view for April 2020 instead.
+Upon the completion of the execution of the command, the calendar  for April 2020 would be displayed, with the tasks due on 1st April 2020 listed.
 
 **Function 2: Display a list of tasks due for a selected date in the month**
 
 In order to display the task list for specific input dates, the user enters the `calendar DATE` command +
 (e.g. calendar jan-1-2020)
 
-**-insert sequence diagram-**
-
 Upon the completion of the execution of the command, the tasks due on 1st January 2020 would be displayed to the user on the task list panel to the left. +
 
-**Function 3: Display today's date on calendar view with the corresponding tasks due listed**
 
-**-insert sequence diagram-**
+==== Design Considerations
 
 
 === Productivity feature
