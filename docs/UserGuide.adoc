@@ -134,12 +134,12 @@ Format: `exit`
 * Exiting the application before stopping any running timer wil cause all recorded time since the timer was started to be lost.
 ****
 
-=== Morning call/Night debrief (Eden)
+=== Summary (Eden)
 This section will be the first thing you will see after entering JelphaBot!
 
-Morning Call Displays the tasks that are due today, and Night Debrief displays the tasks that have been completed within the day.
+This section gives you a minimalistic overview of the day, namely with tasks that you have due within the day, and tasks that you have completed within the day!
 
-The tasks listed in Morning Call and Night Debrief are displayed in under the Summary tab as separate sections under "Due Today" and "Completed Today" respectively.
+Tasks displayed will only have it's module code as well as it's description for simplicity's sake!
 
 ==== Viewing the summary tab: `summary`
 
