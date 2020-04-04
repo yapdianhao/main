@@ -319,7 +319,8 @@ This feature offers 3 main functions:
 In order to change the calendar view for another month and/or year, the user enters the `calendar MONTHYEAR` command +
 (e.g. `calendar Apr-2020`)
 
-**-insert sequence diagram-**
+.Sequence diagram after running `calendar Apr-2020`
+image::CalendarViewSequenceDiagram.png[]
 
 Upon the completion of the execution of the command, the calendar view would display the month view for April 2020 instead.
 
