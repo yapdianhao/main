@@ -73,11 +73,11 @@ public class TasksCompleted {
         StringBuilder response = new StringBuilder("There ");
 
         if (n > 1) {
-            response.append("are ").append(n).append(" overdue tasks that are incomplete.");
+            response.append("are").append(n).append(" overdue tasks that are incomplete.");
         } else if (n == 1) {
-            response.append("is ").append(n).append(" overdue task that is incomplete.");
+            response.append("is").append(n).append(" an overdue task that is incomplete.");
         } else {
-            response.append("are ").append(" no overdue tasks that are incomplete.");
+            response.append("are").append(" no overdue tasks that are incomplete.");
         }
 
         return response.toString();
