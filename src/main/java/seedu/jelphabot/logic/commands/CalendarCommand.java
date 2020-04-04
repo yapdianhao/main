@@ -6,9 +6,7 @@ import java.time.LocalDate;
 import java.time.YearMonth;
 
 import seedu.jelphabot.commons.core.Messages;
-import seedu.jelphabot.commons.util.DateUtil;
 import seedu.jelphabot.model.Model;
-import seedu.jelphabot.model.calendar.CalendarDate;
 import seedu.jelphabot.model.task.predicates.TaskDueWithinDayPredicate;
 import seedu.jelphabot.ui.CalendarPanel;
 import seedu.jelphabot.ui.MainWindow;
@@ -67,44 +65,19 @@ public class CalendarCommand extends Command {
         } else if (yearMonth == null) { //switch task list for specific dates
             requireNonNull(model);
             model.updateFilteredCalendarTaskList(predicate);
-
             LocalDate date = predicate.getDate();
-            if (date.getMonthValue() == calendarPanel.getCalendarMonth()) {
-                if (calendarPanel.isTodayHighlighted()) {
-                    calendarPanel.getHighlightedDay().removeHighlightedToday();
-                } else {
-                    calendarPanel.getHighlightedDay().removeHighlightedDay();
-                }
-
-                int dayIndex = date.getDayOfMonth();
-                if (date.equals(DateUtil.getDateToday())) {
-                    CalendarPanel.getDayCard(dayIndex).highlightToday();
-                } else {
-                    CalendarPanel.getDayCard(dayIndex).highlightDay();
-                }
-                calendarPanel.setHighlightedDay(dayIndex);
-            }
             return new CommandResult(
-                String.format(Messages.MESSAGE_TASKS_LISTED_OVERVIEW, model.getFilteredCalendarTaskList().size()));
+                String.format(Messages.MESSAGE_TASKS_LISTED_OVERVIEW,
+                    model.getFilteredCalendarTaskList().size()), date, null);
         } else if (predicate == null) { //switch calendar view
-            CalendarDate newDate = new CalendarDate(yearMonth.atDay(1));
-            calendarPanel.changeMonthYearLabel(yearMonth);
-            calendarPanel.fillGridPane(newDate);
+            //TODO tasklist should update to display first day of the month
             return new CommandResult(String.format(MESSAGE_SWITCH_CALENDAR_VIEW_ACKNOWLEDGEMENT,
-                calendarPanel.getMonthYear()
-            ));
+                calendarPanel.getMonthYear()), null, yearMonth);
         } else { //switch calendar view and task list for today
-            CalendarDate newDate = new CalendarDate(yearMonth.atDay(1));
-            calendarPanel.changeMonthYearLabel(yearMonth);
-            calendarPanel.fillGridPane(newDate);
             requireNonNull(model);
             model.updateFilteredCalendarTaskList(predicate);
-            calendarPanel.getHighlightedDay().removeHighlightedDay();
-            CalendarPanel.getDayCard(DateUtil.getDateToday().getDayOfMonth()).highlightToday();
-            calendarPanel.setHighlightedDay(DateUtil.getDateToday().getDayOfMonth());
             return new CommandResult(String.format(MESSAGE_SWITCH_CALENDAR_TODAY_ACKNOWLEDGEMENT,
-                calendarPanel.getMonthYear()
-            ));
+                calendarPanel.getMonthYear()), null, null);
         }
     }
 

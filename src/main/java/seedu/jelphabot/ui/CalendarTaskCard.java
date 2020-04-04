@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.jelphabot.model.task.Priority;
 import seedu.jelphabot.model.task.Task;
 
 /**
@@ -57,15 +58,33 @@ public class CalendarTaskCard extends UiPart<Region> {
      * @param displayedIndex the indicated index.
      */
     private void populateChildElements(Task task, int displayedIndex) {
-        id.setText(displayedIndex + ". ");
+        // id.setText(displayedIndex + ". ");
         description.setText(task.getDescription().fullDescription);
         moduleCode.setText(task.getModuleCode().value);
+        applyPriorityMarkdown(task);
         status.setText(task.getStatus().name());
         timeSpent.setText("(time spent: " + task.getTimeSpent().toString() + ")");
-        //TODO add in task PRIORITY
+        // dateTime.setText(task.getDateTime().getDisplayValue());
         task.getTags().stream()
             .sorted(Comparator.comparing(tag -> tag.tagName))
             .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+    }
+
+    /**
+     * Applies markdown to TaskCard based on Task priority
+     * @param task the task containing model data for this TaskCard.
+     */
+    private void applyPriorityMarkdown(Task task) {
+        if (task.getPriority().equals(Priority.HIGH)) {
+            description.setId("highPriority");
+            moduleCode.setId("highPriority");
+        } else if (task.getPriority() == Priority.LOW) {
+            description.setId("lowPriority");
+            moduleCode.setId("lowPriority");
+        } else {
+            description.setId("normalPriority");
+            moduleCode.setId("normalPriority");
+        }
     }
 
     @Override
