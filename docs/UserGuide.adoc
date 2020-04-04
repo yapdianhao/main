@@ -263,9 +263,6 @@ Group your tasks into the following categories:
 * Due Sometime +
 (Shows all other tasks that do not fit into prior categories)
 
-[TIP]
-Tasks which are due and completed will not be shown, as we assume you no longer need them.
-
 [.text-center]
 .Example of an expected result after running `list module`
 image::listByDate.png[width="600"]
