@@ -23,7 +23,7 @@ public class CommandResult {
      */
     private final boolean exit;
 
-    private boolean calendarResult;
+    private boolean calendarCommand;
     private LocalDate date;
     private YearMonth yearMonth;
     private SwitchTab toSwitch = SwitchTab.STAY_ON_CURRENT;
@@ -49,7 +49,7 @@ public class CommandResult {
         this(feedbackToUser, false, false);
         this.date = date;
         this.yearMonth = yearMonth;
-        this.calendarResult = true;
+        this.calendarCommand = true;
     }
 
     /**
@@ -82,8 +82,8 @@ public class CommandResult {
         return yearMonth;
     }
 
-    public boolean isCalendarResult() {
-        return calendarResult;
+    public boolean isCalendarCommand() {
+        return calendarCommand;
     }
 
     public boolean isShowHelp() {

@@ -290,7 +290,7 @@ public class MainWindow extends UiPart<Stage> {
                 handleHelp();
             } else if (commandResult.isExit()) {
                 handleExit();
-            } else if (commandResult.isCalendarResult()) {
+            } else if (commandResult.isCalendarCommand()) {
                 updateCalendarPanel(commandResult);
             }
 
