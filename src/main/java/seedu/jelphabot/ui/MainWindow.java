@@ -352,15 +352,16 @@ public class MainWindow extends UiPart<Stage> {
             calendarPanel.changeMonthYearLabel(yearMonth);
             calendarPanel.fillGridPane(newDate);
         } else {
-            CalendarDate newDate = new CalendarDate(yearMonth.atDay(1));
-            calendarPanel.changeMonthYearLabel(yearMonth);
-            calendarPanel.fillGridPane(newDate);
+            LocalDate today = DateUtil.getDateToday();
+            CalendarDate todayDate = new CalendarDate(today);
+            YearMonth todayYearMonth = YearMonth.now();
+            calendarPanel.changeMonthYearLabel(todayYearMonth);
+            calendarPanel.fillGridPane(todayDate);
 
             calendarPanel.getHighlightedDay().removeHighlightedDay();
-            CalendarPanel.getDayCard(DateUtil.getDateToday().getDayOfMonth()).highlightToday();
-            calendarPanel.setHighlightedDay(DateUtil.getDateToday().getDayOfMonth());
+            CalendarPanel.getDayCard(today.getDayOfMonth()).highlightToday();
+            calendarPanel.setHighlightedDay(today.getDayOfMonth());
         }
-
     }
 
 }
