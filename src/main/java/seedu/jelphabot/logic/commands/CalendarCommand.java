@@ -75,8 +75,8 @@ public class CalendarCommand extends Command {
                 String.format(Messages.MESSAGE_TASKS_LISTED_OVERVIEW,
                     model.getFilteredCalendarTaskList().size()), date, null);
         } else if (isMonth) { //(predicate == null) { //switch calendar view
-            //TODO tasklist should update to display first day of the month
-
+            requireNonNull(model);
+            model.updateFilteredCalendarTaskList(predicate);
             return new CommandResult(String.format(MESSAGE_SWITCH_CALENDAR_VIEW_ACKNOWLEDGEMENT,
                 CalendarDate.getMonthNameOf(yearMonth.getMonthValue()), yearMonth.getYear()), null, yearMonth);
         } else { //switch calendar view and task list for today
