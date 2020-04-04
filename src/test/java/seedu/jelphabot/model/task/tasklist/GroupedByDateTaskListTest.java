@@ -4,27 +4,15 @@ import org.junit.jupiter.api.Test;
 
 class GroupedByDateTaskListTest {
 
-    @Test
-    void getCategory() {
+    private final GroupedByDateTaskList dateTaskList =
+        makeEmptyModuleTaskList();
+
+    private static GroupedByDateTaskList makeEmptyModuleTaskList() {
+        return new GroupedByDateTaskList(new PinnedTaskListTest.PinnedTaskListStub());
     }
 
     @Test
-    void getList() {
-    }
-
-    @Test
-    void size() {
-    }
-
-    @Test
-    void iterator() {
-    }
-
-    @Test
-    void get() {
-    }
-
-    @Test
-    void testGet() {
+    public void iterator_emptySublistsHidden() {
+        // do nothing
     }
 }
