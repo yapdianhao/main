@@ -2,7 +2,9 @@ package seedu.jelphabot.model.task.tasklist;
 
 import static seedu.jelphabot.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -14,6 +16,7 @@ import javafx.collections.ObservableList;
 import seedu.jelphabot.commons.core.index.Index;
 import seedu.jelphabot.model.task.ModuleCode;
 import seedu.jelphabot.model.task.Task;
+import seedu.jelphabot.model.task.exceptions.TaskNotFoundException;
 
 /**
  * A container for ObservableList&lt;Task&gt; that splits the TaskList into groups.
@@ -67,11 +70,6 @@ public class GroupedByModuleTaskList implements GroupedTaskList {
         return task -> task.getModuleCode().equals(moduleCode);
     }
 
-    // @Override
-    // public Iterator<SubgroupTaskList> iterator() {
-    //     return moduleCodeTaskLists.iterator();
-    // }
-
     @Override
     public Category getCategory() {
         return Category.MODULE;
@@ -88,7 +86,16 @@ public class GroupedByModuleTaskList implements GroupedTaskList {
     }
 
     @Override
-    public Task get(int id) {
+    public Iterator<Task> iterator() {
+        List<Task> tasks = new ArrayList<>();
+        for (SubgroupTaskList sublist : moduleCodeTaskLists) {
+            tasks.addAll(sublist.getList());
+        }
+        return tasks.iterator();
+    }
+
+    @Override
+    public Task get(int id) throws TaskNotFoundException {
         assert id < size();
         for (SubgroupTaskList sublist : moduleCodeTaskLists) {
             if (id < sublist.size()) {
@@ -97,7 +104,7 @@ public class GroupedByModuleTaskList implements GroupedTaskList {
                 id -= sublist.size();
             }
         }
-        return null;
+        throw new TaskNotFoundException();
     }
 
     @Override

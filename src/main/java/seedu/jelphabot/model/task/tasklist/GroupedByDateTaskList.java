@@ -6,6 +6,9 @@ import static seedu.jelphabot.commons.util.DateUtil.getDueThisWeekPredicate;
 import static seedu.jelphabot.commons.util.DateUtil.getDueTodayPredicate;
 import static seedu.jelphabot.commons.util.DateUtil.getOverduePredicate;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.beans.binding.NumberBinding;
@@ -13,7 +16,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.jelphabot.commons.core.index.Index;
 import seedu.jelphabot.model.task.Task;
-import seedu.jelphabot.model.task.predicates.TaskIsIncompletePredicate;
+import seedu.jelphabot.model.task.exceptions.TaskNotFoundException;
 
 /**
  * A container for ObservableList&lt;Task&gt; that splits the TaskList into groups.
@@ -27,7 +30,7 @@ public class GroupedByDateTaskList implements GroupedTaskList {
     private static final Predicate<Task> isDueToday = getDueTodayPredicate();
     private static final Predicate<Task> isDueThisWeek = getDueThisWeekPredicate();
     private static final Predicate<Task> isDueSomeday = getDueSomedayPredicate();
-    private static final Predicate<Task> isIncomplete = new TaskIsIncompletePredicate();
+    // private static final Predicate<Task> isIncomplete = new TaskIsIncompletePredicate();
 
     private final ObservableList<SubgroupTaskList> dueDateTaskLists = FXCollections.observableArrayList();
     private final NumberBinding sizeBinding;
@@ -38,7 +41,7 @@ public class GroupedByDateTaskList implements GroupedTaskList {
         NumberBinding tempSize = pinnedTasks.sizeBinding();
 
         SubgroupTaskList overdueTaskList =
-            new SubgroupTaskList("Overdue", taskList.filtered(isOverdue.and(isIncomplete)), tempSize);
+            new SubgroupTaskList("Overdue", taskList.filtered(isOverdue), tempSize);
         dueDateTaskLists.add(overdueTaskList);
         tempSize = tempSize.add(overdueTaskList.sizeBinding());
 
@@ -74,13 +77,17 @@ public class GroupedByDateTaskList implements GroupedTaskList {
         return sizeBinding.intValue();
     }
 
-    // @Override
-    // public Iterator<SubgroupTaskList> iterator() {
-    //     return dueDateTaskLists.iterator();
-    // }
+    @Override
+    public Iterator<Task> iterator() {
+        List<Task> tasks = new ArrayList<>();
+        for (SubgroupTaskList sublist : dueDateTaskLists) {
+            tasks.addAll(sublist.getList());
+        }
+        return tasks.iterator();
+    }
 
     @Override
-    public Task get(int id) {
+    public Task get(int id) throws TaskNotFoundException {
         for (SubgroupTaskList sublist : dueDateTaskLists) {
             if (id < sublist.size()) {
                 return sublist.get(id);
@@ -88,7 +95,7 @@ public class GroupedByDateTaskList implements GroupedTaskList {
                 id -= sublist.size();
             }
         }
-        return null;
+        throw new TaskNotFoundException();
     }
 
     @Override
