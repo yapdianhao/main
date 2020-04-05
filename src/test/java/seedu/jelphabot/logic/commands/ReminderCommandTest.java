@@ -82,6 +82,15 @@ public class ReminderCommandTest {
     }
 
     @Test
+    public void execute_addReminderSuccess() {
+        ReminderCommand reminderCommand = new ReminderCommand(INDEX_THIRD_TASK, ASSIGNMENT_REMINDER);
+        Model expectedModel = new ModelManager(model.getJelphaBot(), new UserPrefs());
+        expectedModel.addReminder(ASSIGNMENT_REMINDER);
+        assertCommandSuccess(reminderCommand, model,
+            String.format(ReminderCommand.MESSAGE_SUCCESS, INDEX_THIRD_TASK.getOneBased()), expectedModel);
+    }
+
+    @Test
     public void equals() {
 
         ReminderCommand firstReminderCommand = new ReminderCommand(INDEX_FIRST_TASK, ASSIGNMENT_REMINDER);
@@ -94,6 +103,8 @@ public class ReminderCommandTest {
         assertFalse(firstReminderCommand.equals(1));
 
         assertFalse(firstReminderCommand.equals("1"));
+
+        assertFalse(firstReminderCommand.equals('1'));
 
         assertFalse(firstReminderCommandCopy.equals(true));
 
