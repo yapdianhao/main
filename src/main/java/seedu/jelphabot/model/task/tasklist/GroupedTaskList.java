@@ -31,7 +31,7 @@ public abstract class GroupedTaskList implements ViewTaskList {
      */
     protected final ObservableList<Task> tasks;
 
-    protected final ObservableList<SubgroupTaskList> subgroupTaskLists = FXCollections.observableArrayList();
+    protected final ObservableList<SubgroupTaskList> subLists = FXCollections.observableArrayList();
 
     protected GroupedTaskList(PinnedTaskList pinnedTaskList,
         ObservableList<Task> tasks) {
@@ -51,7 +51,7 @@ public abstract class GroupedTaskList implements ViewTaskList {
     @Override
     public Task get(int id) throws TaskNotFoundException {
         assert id < size();
-        for (SubgroupTaskList sublist : subgroupTaskLists) {
+        for (SubgroupTaskList sublist : subLists) {
             if (id < sublist.size()) {
                 return sublist.get(id);
             } else {
@@ -66,9 +66,7 @@ public abstract class GroupedTaskList implements ViewTaskList {
         return get(index.getZeroBased());
     }
 
-    /**
-     * Returns true if the list contains an equivalent task as the given argument.
-     */
+    @Override
     public boolean contains(Task toCheck) {
         requireNonNull(toCheck);
         return tasks.stream().anyMatch(toCheck::isSameTask);
@@ -87,24 +85,24 @@ public abstract class GroupedTaskList implements ViewTaskList {
     @Override
     public Iterator<Task> iterator() {
         List<Task> tasks = new ArrayList<>();
-        for (SubgroupTaskList sublist : subgroupTaskLists) {
+        for (SubgroupTaskList sublist : subLists) {
             tasks.addAll(sublist.getList());
         }
         return tasks.iterator();
     }
 
     public ObservableList<SubgroupTaskList> getSublists() {
-        return subgroupTaskLists;
+        return subLists;
     }
 
     /**
      * Gets an IntegerBinding for the next Sublist in this GroupedTaskList.
      */
     protected IntegerBinding subsequentElementStartIndex() {
-        if (subgroupTaskLists.isEmpty()) {
+        if (subLists.isEmpty()) {
             return Bindings.createIntegerBinding(() -> 0);
         } else {
-            SubgroupTaskList lastSublist = subgroupTaskLists.get(subgroupTaskLists.size() - 1);
+            SubgroupTaskList lastSublist = subLists.get(subLists.size() - 1);
             return (IntegerBinding) lastSublist.startIndexBinding().add(lastSublist.sizeBinding());
         }
     }
@@ -162,7 +160,7 @@ public abstract class GroupedTaskList implements ViewTaskList {
     protected void clear() {
         this.pinnedTaskList.clear();
         this.tasks.clear();
-        this.subgroupTaskLists.clear();
+        this.subLists.clear();
     }
 
     /**
@@ -175,7 +173,7 @@ public abstract class GroupedTaskList implements ViewTaskList {
 
     protected void setTasks(GroupedTaskList replacement) {
         requireNonNull(replacement);
-        subgroupTaskLists.setAll(replacement.getSublists());
+        subLists.setAll(replacement.getSublists());
         setTasks(replacement.tasks);
     }
     // === End of Methods used for testing ===
