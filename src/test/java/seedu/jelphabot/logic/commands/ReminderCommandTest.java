@@ -8,6 +8,7 @@ import static seedu.jelphabot.testutil.Assert.assertThrows;
 import static seedu.jelphabot.testutil.TypicalIndexes.INDEX_FIRST_TASK;
 import static seedu.jelphabot.testutil.TypicalIndexes.INDEX_SECOND_TASK;
 import static seedu.jelphabot.testutil.TypicalIndexes.INDEX_THIRD_TASK;
+import static seedu.jelphabot.testutil.TypicalReminders.ASSESSMENT_REMINDER;
 import static seedu.jelphabot.testutil.TypicalReminders.ASSIGNMENT_REMINDER;
 import static seedu.jelphabot.testutil.TypicalReminders.BOOK_REPORT_REMINDER;
 import static seedu.jelphabot.testutil.TypicalTasks.getTypicalJelphaBot;
@@ -63,6 +64,21 @@ public class ReminderCommandTest {
         //expectedModel.getGroupedTaskList(GroupedTaskList.Category.MODULE);
         //expectedModel.addReminder(reminder);
         assertCommandFailure(reminderCommand, expectedModel, ReminderCommand.MESSAGE_TASK_ALREADY_MARKED_COMPLETE);
+    }
+
+    @Test
+    public void execute_taskAlreadyCompletedFilteredList_failure() {
+        Reminder reminder = new ReminderBuilder().withIndex("" + INDEX_SECOND_TASK.getZeroBased()).build();
+        ReminderCommand reminderCommand = new ReminderCommand(INDEX_SECOND_TASK, reminder);
+        Model expectedModel = new ModelManager(model.getJelphaBot(), new UserPrefs());
+        assertCommandFailure(reminderCommand, expectedModel, ReminderCommand.MESSAGE_TASK_ALREADY_MARKED_COMPLETE);
+    }
+
+    @Test
+    public void execute_taskDuplicateUnfilteredList_failure() {
+        ReminderCommand reminderCommand = new ReminderCommand(INDEX_FIRST_TASK, ASSESSMENT_REMINDER);
+        Model expectedModel = new ModelManager(model.getJelphaBot(), new UserPrefs());
+        assertCommandFailure(reminderCommand, expectedModel, ReminderCommand.MESSAGE_DUPLICATE_REMINDER);
     }
 
     @Test
