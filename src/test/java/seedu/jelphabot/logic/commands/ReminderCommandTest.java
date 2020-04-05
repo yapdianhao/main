@@ -53,6 +53,18 @@ public class ReminderCommandTest {
         assertCommandFailure(reminderCommand, model, Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
 
+
+    @Test
+    public void execute_taskAlreadyCompletedUnfilteredList_failure() {
+        //Task task = model.getGroupedTaskList(GroupedTaskList.Category.MODULE).get(INDEX_FIRST_TASK.getZeroBased());
+        Reminder reminder = new ReminderBuilder().withIndex("" + INDEX_SECOND_TASK.getZeroBased()).build();
+        ReminderCommand reminderCommand = new ReminderCommand(INDEX_SECOND_TASK, reminder);
+        Model expectedModel = new ModelManager(model.getJelphaBot(), new UserPrefs());
+        //expectedModel.getGroupedTaskList(GroupedTaskList.Category.MODULE);
+        //expectedModel.addReminder(reminder);
+        assertCommandFailure(reminderCommand, expectedModel, ReminderCommand.MESSAGE_TASK_ALREADY_MARKED_COMPLETE);
+    }
+
     @Test
     public void equals() {
 
