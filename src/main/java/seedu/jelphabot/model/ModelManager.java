@@ -211,16 +211,14 @@ public class ModelManager implements Model {
 
     @Override
     public GroupedTaskList getGroupedTaskList(GroupedTaskList.Category category) {
-        if (lastShownList != null && lastShownList.getCategory() == category) {
-            return lastShownList;
-        } else {
+        if (lastShownList == null || lastShownList.getCategory() != category) {
             lastShownList = GroupedTaskList.makeGroupedTaskList(
                 getFilteredTaskList(),
                 category,
                 getPinnedTaskList()
             );
-            return lastShownList;
         }
+        return lastShownList;
     }
 
     @Override
