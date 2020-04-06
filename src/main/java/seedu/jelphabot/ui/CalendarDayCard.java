@@ -42,6 +42,10 @@ public class CalendarDayCard extends UiPart<Region> {
     }
 
     private void setDotVisible() {
+        dotTasks.setFill(Paint.valueOf("#20B2AA"));
+    }
+
+    private void setDotVisibleUrgent() {
         dotTasks.setFill(Paint.valueOf("#FF0000"));
     }
 
@@ -53,10 +57,12 @@ public class CalendarDayCard extends UiPart<Region> {
         ObservableList<Task> allTasks = MainWindow.getLogic().getFilteredTaskList();
         TaskDueWithinDayPredicate predicate = new TaskDueWithinDayPredicate(calendarDate.getDate());
         tasks = allTasks.filtered(predicate);
-        if (tasks.size() > 0) {
-            setDotVisible();
-        } else {
+        if (tasks.size() == 0) {
             setDotInVisible();
+        } else if (tasks.size() > 3) {
+            setDotVisibleUrgent();
+        } else {
+            setDotVisible();
         }
     }
 
