@@ -152,7 +152,7 @@ Shortcut: `:S` or `:s`
 
 [.text-center]
 .Example of expected result after running `summary`
-image::summaryTab.png[width="600"]
+image::ug_figures/summaryTab.png[width="600"]
 
 Displays the two dropdown tabs that show the tasks that are Due Today, and Completed Today.
 
@@ -160,7 +160,7 @@ Once a task under the Due Today tab is marked as done, it will appear under the 
 
 [.text-center]
 .Expected view of the Summary tab after completing the task, ACC1101 Tutorial 4
-image::SummaryViewAfterTaskComplete.png[width="600"]
+image::ug_figures/SummaryViewAfterTaskComplete.png[width="600"]
 
 === Managing Tasks (Yao Jie)
 
@@ -213,7 +213,7 @@ Format: `add d/DESCRIPTION dt/DATETIME m/MODULE_CODE [p/PRIORITY] [t/TAG]...`
 
 [.text-center]
 .Example of an expected result after running `add d/Assignment 1 dt/Jan-01-2020 23 59 m/CS1231 t/graded`
-image::addCommand.png[width="600"]
+image::ug_figures/addCommand.png[width="600"]
 
 ****
 * For dt/DATETIME inputs, please use the format MMM-dd-YYYY HH mm. +
@@ -271,7 +271,7 @@ Group your tasks into the following categories:
 
 [.text-center]
 .Example of an expected result after running `list module`
-image::listByDate.png[width="600"]
+image::ug_figures/listByDate.png[width="600"]
 
 ===== Group Tasks by Module : `list module`
 
@@ -280,7 +280,7 @@ Format: `list module`
 
 [.text-center]
 .Example of an expected result after running `list module`
-image::listByModule.png[width="600"]
+image::ug_figures/listByModule.png[width="600"]
 // end::list[]
 
 ==== Locating Tasks by name: `find`
@@ -290,7 +290,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 [.text-center]
 .Example of an expected result after running `find tutorial`
-image::findCommand.png[width="600"]
+image::ug_figures/findCommand.png[width="600"]
 
 ****
 * The search is case insensitive. e.g `tut` will match `Tut`
@@ -317,7 +317,7 @@ Format: `edit INDEX [d/DESCRIPTION] [dt/DATETIME] [m/MODULE_CODE] [p/PRIORITY (-
 
 [.text-center]
 .Example of an expected result after running `edit 1 m/CS2105 d/Tutorial 2`
-image::editCommand.png[width="600"]
+image::ug_figures/editCommand.png[width="600"]
 
 
 ****
@@ -345,7 +345,7 @@ Format: `done INDEX`
 
 [.text-center]
 .Example of an expected result after running `done 1`
-image::doneCommand.png[width="600"]
+image::ug_figures/doneCommand.png[width="600"]
 
 ****
 * Marks the task at the specified `INDEX` as done.
@@ -361,7 +361,7 @@ Format: `delete INDEX`
 
 [.text-center]
 .Example of an expected result after running `delete 1`
-image::deleteCommand.png[width="600"]
+image::ug_figures/deleteCommand.png[width="600"]
 
 ****
 * Deletes the task at the specified `INDEX`.
@@ -388,7 +388,7 @@ Format: `clear`
 
 [.text-center]
 .Example of an expected result after running `clear`
-image::clearCommand.png[width="600"]
+image::ug_figures/clearCommand.png[width="600"]
 
 ****
 * All reminders will be cleared together with the tasks.
@@ -410,7 +410,7 @@ You can display all the tasks in your task list that have been completed.
 
 [.text-center]
 .Example of an expected result after running `show-completed`
-image::showCompletedCommand.png[width="600"]
+image::ug_figures/showCompletedCommand.png[width="600"]
 
 // end::showcompleted[]
 
@@ -420,7 +420,7 @@ You can display all the tasks in your task list that are currently incomplete.
 
 [.text-center]
 .Example of an expected result after running `show-incomplete`
-image::showIncompleteCommand.png[width="600"]
+image::ug_figures/showIncompleteCommand.png[width="600"]
 
 // end::showincomplete[]
 
@@ -446,7 +446,7 @@ Shorcut: `:C` or `:c`
 
 [.text-center]
 .Example of expected result after running `calendar`
-image::CalendarTab.png[width="600"]
+image::ug_figures/CalendarTab.png[width="600"]
 
 ==== Change month and year view of Calendar : `calendar`
 Displays the tasks due on specified date, while highlighting that day on the calendar.
@@ -521,7 +521,7 @@ Shortcut: `:P` or `:p`
 
 [.text-center]
 .Example of expected result after running `productivity`
-image::ProductivityTab.png[width="600"]
+image::ug_figures/ProductivityTab.png[width="600"]
 
 ****
 // TODO: add exclamation
@@ -534,7 +534,7 @@ Format: `start INDEX`
 
 [.text-center]
 .Example of expected result after running `start 1`
-image::startCommand.png[width="600"]
+image::ug_figures/startCommand.png[width="600"]
 
 ****
 * Each task can only have 1 running timer.
@@ -552,7 +552,7 @@ Format: `stop INDEX`
 
 [.text-center]
 .Expected result after running `stop 1`
-image::stopCommand.png[width="600"]
+image::ug_figures/stopCommand.png[width="600"]
 
 ****
 * The task has to have a running timer.
