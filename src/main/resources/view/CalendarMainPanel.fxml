@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="calendarTabPanel" maxHeight="1.7976931348623157E308"
+<AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="calendarMainPanel" maxHeight="1.7976931348623157E308"
             minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
     <children>
         <SplitPane fx:id="calendarPane" dividerPositions="0.47" maxHeight="1.7976931348623157E308" prefWidth="600.0"

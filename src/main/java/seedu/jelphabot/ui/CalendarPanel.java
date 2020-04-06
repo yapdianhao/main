@@ -108,20 +108,20 @@ public class CalendarPanel extends UiPart<Region> {
         return calendarDate.getMonth();
     }
 
-    /**
-     * Switches to display the calendar panel tab.
-     */
-    public void show() {
-        logger.fine("Showing calendar panel of application.");
-        mainWindowTabPane.getSelectionModel().select(2);
-    }
-
-    /**
-     * Returns true if the calendar panel is currently being shown.
-     */
-    public boolean isShowing() {
-        return mainWindowTabPane.isPressed();
-    }
+    // /**
+    //  * Switches to display the calendar panel tab.
+    //  */
+    // public void show() {
+    //     logger.fine("Showing calendar panel of application.");
+    //     mainWindowTabPane.getSelectionModel().select(2);
+    // }
+    //
+    // /**
+    //  * Returns true if the calendar panel is currently being shown.
+    //  */
+    // public boolean isShowing() {
+    //     return mainWindowTabPane.isPressed();
+    // }
 
     public static CalendarDayCard getDayCard(int dayIndex) {
         return CalendarPanel.dayCardsInMonth.get(dayIndex - 1);
