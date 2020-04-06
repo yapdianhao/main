@@ -717,9 +717,9 @@ Use case resumes from step 2.
 === Use case: UC4 - Edit Task Details
 *MSS*
 
-1.  User requests to edit a task by specifying the task index and the field(s) they want to edit
+1.  User requests to edit a task by specifying the task index and the field(s) they want to edit.
 
-2.  JelphaBot edits the specified task in the task list with the specified details
+2.  JelphaBot edits the specified task in the task list with the specified details.
 +
 Use case ends.
 
@@ -747,27 +747,27 @@ Use case resumes from step 2
 +
 Use case resumes from step 2.
 
-=== Use case: UC5 - Find Task(s) by Keyword(s)
+//=== Use case: UC5 - Find Task(s) by Keyword(s)
+//*MSS*
+//
+//1. User requests to find task(s) by entering specified keyword(s).
+//2. JelphaBot shows a list of task(s) that contain the specified keyword(s).
+//+
+//Use case ends.
+//
+//*Extensions*
+//
+//[none]
+//* 1a1. None of the tasks in the task list contain the specified keywords.
+//[none]
+//+
+//** Use case ends.
+
+=== Use case: UC5 - Delete Task
 *MSS*
 
-1. User requests to find task(s) by entering specified keyword(s)
-2. JelphaBot shows a list of task(s) that contain the specified keyword(s)
-+
-Use case ends.
-
-*Extensions*
-
-[none]
-* 1a1. None of the tasks in the task list contain the specified keywords.
-[none]
-+
-** Use case ends.
-
-=== Use case: UC6 - Delete Task
-*MSS*
-
-1.  User requests to delete a specific task in the list by specified index
-2.  JelphaBot deletes the task
+1.  User requests to delete a specific task in the list by specified index.
+2.  JelphaBot deletes the task.
 +
 Use case ends.
 
@@ -790,15 +790,7 @@ Use case ends.
 +
 Use case resumes from step 2
 
-=== Use case: UC7 - Clear all Tasks
-*MSS*
-
-1.  User enters command to clear all tasks.
-2.  JelphaBot removes all listed tasks and returns an empty list.
-+
-Use case ends.
-
-=== Use case: UC8 - Add Reminders
+=== Use case: UC6 - Add Reminder
 *MSS*
 
 1. User enters reminder for tasks that want to be reminded for.
@@ -809,76 +801,140 @@ Use case ends.
 *Extensions*
 
 [none]
-* 1a. JelphaBot detects that the task the reminder is associated to does not exist.
+* 1a. The list is empty.
 [none]
 +
-** 1a1. User enters new task index to be reminded.
+** 1a1. JelphaBot displays to user that the task list is empty.
++
+Use case ends.
+
+[none]
+* 1b. JelphaBot detects that the task the reminder is associated to does not exist.
+[none]
++
+** 1b1 JelphaBot detects error and displays the correct input format to be expected.
+** 1b2. User enters new task index to be add reminder to.
 ** Steps 1a1-1a2 are repeated until the command entered is correct.
 +
 Use case resumes from step 2
 
 [none]
-* 1b. JelphaBot detects an error in the entered command.
+* 1c. JelphaBot detects an error in the entered command.
 +
 [none]
-** 1b1. JelphaBot detects error and displays the correct input format to be expected.
+** 1c1. JelphaBot detects error and displays the correct input format to be expected.
 +
-1b2. User enters new command.
+1c2. User enters new command.
 [none]
-** Steps 1b1-1b2 are repeated until the command entered is correct.
+** Steps 1c1-1c2 are repeated until the command entered is correct.
 +
 Use case resumes from step 2.
 
-=== Use Case: UC9 - Start timer
+=== Use case: UC7 - Delete Reminder
+*MSS*
+
+1.  User requests to delete a reminder for a task in the list by specified index.
+2.  JelphaBot deletes the reminder.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. The list is empty.
+[none]
++
+** 1a1. JelphaBot displays to user that there are no reminders.
++
+Use case ends.
+
+* 1b. JelphaBot detects that the specified task does not exist.
++
+[none]
+** 1b1. JelphaBot detects error and displays the correct input format to be expected.
+** 1b2. User enters new task index to be marked as done.
+** Steps 1b1-1b2 are repeated until the command entered is correct.
++
+Use case resumes from step 2
+
+[none]
+* 1c. JelphaBot detects an error in the entered command.
++
+[none]
+** 1c1. JelphaBot detects error and displays the correct input format to be expected.
++
+1c2. User enters new command.
+[none]
+** Steps 1c1-1c2 are repeated until the command entered is correct.
++
+Use case resumes from step 2.
+
+=== Use Case: UC8 - Start Timer
 *MSS*
 
 1. User enters command to start timer for task to be timed.
-2. JelphaBot tracks the time taken.
+2. JelphaBot displays successful execution to user.
 +
 Use case ends.
 
 *Extensions*
 
 [none]
-* 1a. JelphaBot detects the task has been mark as completed.
+* 1a. The list is empty.
 [none]
 +
-** 1a1. JelphaBot displays to user that the task has been marked as completed.
+** 1a1. JelphaBot displays to user that the task list is empty.
 +
 Use case ends.
 
-* 1b. JelphaBot detects that the specified task does not exist.
+[none]
+* 1b. JelphaBot detects the task has been mark as completed.
+[none]
++
+** 1b1. JelphaBot displays to user that the task has been marked as completed.
++
+Use case ends.
+
+* 1c. JelphaBot detects that the specified task does not exist.
 +
 [none]
-** 1b1. JelphaBot detects error and displays the correct input format to be expected.
-** 1b2. User enters new task index to start timing.
-** Steps 1b1-1b2 are repeated until the command entered is correct.
+** 1c1. JelphaBot detects error and displays the correct input format to be expected.
+** 1c2. User enters new task index to start timing.
+** Steps 1c1-1c2 are repeated until the command entered is correct.
 +
 Use case resumes from step 2.
 
-=== Use Case: UC10 - Stop timer
+=== Use Case: UC9 - Stop Timer
 *MSS*
 
 1. User enters command to stop timer for task being.
-2. JelphaBot stores time spent on the task.
+2. JelphaBot returns total time spent on that task and stores the information.
 +
 Use case ends.
 
 *Extensions*
 
 [none]
-* 1a. JelphaBot detects the task does not have a running timer.
+* 1a. The list is empty.
 [none]
 +
-** 1a1. JelphaBot displays to user that the task does not have a running timer.
+** 1a1. JelphaBot displays to user that the task list is empty.
 +
 Use case ends.
 
-* 1b. JelphaBot detects that the specified task does not exist.
+[none]
+* 1b. JelphaBot detects the task does not have a running timer.
+[none]
++
+** 1b1. JelphaBot displays to user that the task does not have a running timer.
++
+Use case ends.
+
+* 1c. JelphaBot detects that the specified task does not exist.
 +
 [none]
-** 1b1. JelphaBot detects error and displays the correct input format to be expected.
-** 1b2. User enters new task index to stop timing.
+** 1c1. JelphaBot detects error and displays the correct input format to be expected.
+** 1c2. User enters new task index to stop timing.
 ** Steps 1b1-1b2 are repeated until the command entered is correct.
 +
 Use case resumes from step 2.
@@ -903,7 +959,7 @@ Windows, Linux, Unix, OS-X
 A type of user interface that allows for interaction between the user and electronic devices through graphical icons
 
 [[command-line-interface]] CLI (Command Line Interface)::
-??
+A type of user interface that allows for interaction between the user and electronic devices in the form of lines of text.
 
 //[appendix]
 //== Product Survey
