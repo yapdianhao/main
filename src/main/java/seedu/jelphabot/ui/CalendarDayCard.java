@@ -33,7 +33,7 @@ public class CalendarDayCard extends UiPart<Region> {
     public CalendarDayCard(CalendarDate calendarDate) {
         super(FXML);
         this.calendarDate = calendarDate;
-        // updateTasks();
+        updateTasks();
         calendarDay.setText(String.valueOf(calendarDate.getDay()));
     }
 
