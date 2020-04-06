@@ -19,7 +19,7 @@ import seedu.jelphabot.model.task.tasklist.ViewTaskList;
 /**
  * The API of the Model component.
  */
-// TODO check the file paths here for saving as jelphabot.json
+
 public interface Model {
     /**
      * {@code Predicate} that always evaluate to true
@@ -69,7 +69,7 @@ public interface Model {
     ReadOnlyJelphaBot getJelphaBot();
 
     /**
-     * Replaces address book data with the data in {@code jelphaBot}.
+     * Replaces jelphaBot data with the data in {@code jelphaBot}.
      */
     void setJelphaBot(ReadOnlyJelphaBot jelphaBot);
 

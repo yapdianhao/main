@@ -14,6 +14,9 @@ public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
 
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Clears all tasks in the list permanently.\n"
+                                                   + "Example: " + COMMAND_WORD;
+
     public static final String MESSAGE_SUCCESS = "JelphaBot has been cleared!";
 
 
