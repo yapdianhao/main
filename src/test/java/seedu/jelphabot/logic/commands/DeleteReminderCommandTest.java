@@ -1,11 +1,13 @@
 package seedu.jelphabot.logic.commands;
 
+import static seedu.jelphabot.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.jelphabot.testutil.TypicalIndexes.INDEX_FIRST_TASK;
 import static seedu.jelphabot.testutil.TypicalTasks.getTypicalJelphaBot;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.jelphabot.commons.core.index.Index;
 import seedu.jelphabot.model.Model;
 import seedu.jelphabot.model.ModelManager;
 import seedu.jelphabot.model.UserPrefs;
@@ -24,5 +26,13 @@ public class DeleteReminderCommandTest {
         ModelManager expectedModel = new ModelManager(model.getJelphaBot(), new UserPrefs());
         expectedModel.deleteReminder(reminderToDelete);
         assertCommandSuccess(deleteReminderCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_invalidIndexUnfilteredReminder_throwsCommandException() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredReminderList().size() + 1);
+        DeleteReminderCommand deleteReminderCommand = new DeleteReminderCommand(outOfBoundIndex);
+
+        assertCommandFailure(deleteReminderCommand, model, DeleteReminderCommand.MESSAGE_DELETE_REMINDER_FAILURE);
     }
 }
