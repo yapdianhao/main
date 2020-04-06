@@ -2,10 +2,7 @@ package seedu.jelphabot.model.calendar;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.jelphabot.commons.util.DateUtil;
-
 import java.time.LocalDate;
-import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
