@@ -48,7 +48,7 @@ and explains the design considerations of these implementations.
 === Notation used in this Guide
 [width="70%",cols="^15%,85%"]
 |===
-a| `code` | Command that can be typed
+a| `code` | A Java method or class
 ifdef::env-github[]
 | :bulb: | Tips and tricks that might be useful
 | :information_source: | Additional information that is good to know
@@ -56,9 +56,9 @@ ifdef::env-github[]
 endif::[]
 ifndef::env-github[]
 a| [.java]#name# | Reference to the codebase (such as component, class and method names)
-a| icon:lightbulb-o[role="icon-tip", size="2x"] | Tips and tricks that might be useful
-a| icon:info-circle[role="icon-note", size="2x"] | Additional information that is good to know
-a| icon:exclamation-circle[role="icon-important", size="2x"] | Important pointers to take note
+a| icon:lightbulb-o[role="icon-tip",size="2x"] | Tips and tricks that might be useful
+a| icon:info-circle[role="icon-note",size="2x"] | Additional information that is good to know
+a| icon:exclamation-circle[role="icon-important",size="2x"] | Important pointers to take note
 endif::[]
 |===
 
@@ -721,7 +721,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |`*` |student |track my habits| know if I have strayed from my goal.
 |=======================================================================
 
-_{More to be added}_
+//_{More to be added}_
 
 [appendix]
 
@@ -761,7 +761,8 @@ Use case ends.
 *Extensions*
 
 [none]
-* 1a. JelphaBot detects an error in the entered command.
+* 1a.
+JelphaBot detects an error in the entered command.
 +
 [none]
 ** 1a1. JelphaBot detects error and displays the correct input format to be expected.
@@ -770,11 +771,21 @@ Use case ends.
 +
 Use case resumes from step 2.
 
+[none]
+* 1a.
+User specifies a category grouping for the list.
++
+[none]
+** 1a1. JelphaBot will switch to a list that matches the given category.
++
+Use case resumes from step 2.
+
 === Use case: UC3 - Mark Task as Done
+
 *MSS*
 
-1.  User specifies to mark a task as done by specifying the task index.
-2.  JelphaBot updates the task status and displays the updated task to the user.
+1. User specifies to mark a task as done by specifying the task index.
+2. JelphaBot updates the task status and displays the updated task to the user.
 +
 Use case ends.
 
@@ -1110,7 +1121,6 @@ _{ more test cases ... }_
 _{ more test cases ... }_
 
 === Saving data
-// TODO add a sample log message for when this ahppens
 . Missing data files
 
 .. Open the `/data/` folder and delete all .json files in that folder.
