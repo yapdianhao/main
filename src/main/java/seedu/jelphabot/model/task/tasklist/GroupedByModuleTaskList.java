@@ -26,7 +26,7 @@ public class GroupedByModuleTaskList extends GroupedTaskList {
     private final ObservableSet<ModuleCode> moduleCodes = FXCollections.observableSet();
 
     public GroupedByModuleTaskList(ObservableList<Task> tasks, PinnedTaskList pinnedTaskList) {
-        super(pinnedTaskList, tasks);
+        super(tasks, pinnedTaskList);
         this.moduleCodes.addAll(getUniqueModuleSet(tasks));
         for (ModuleCode code : moduleCodes) {
             addSublist(code);
@@ -36,7 +36,7 @@ public class GroupedByModuleTaskList extends GroupedTaskList {
     }
 
     protected GroupedByModuleTaskList(PinnedTaskList pinnedTaskList) {
-        super(pinnedTaskList, FXCollections.observableArrayList());
+        super(FXCollections.observableArrayList(), pinnedTaskList);
         this.moduleCodes.addListener(new ModuleCodeChangeListener());
         this.tasks.addListener(new TaskListChangeListener());
     }

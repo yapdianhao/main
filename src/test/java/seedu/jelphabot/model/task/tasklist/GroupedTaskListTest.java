@@ -174,7 +174,7 @@ public class GroupedTaskListTest {
 
     private static class GroupedTaskListStub extends GroupedTaskList {
         protected GroupedTaskListStub() {
-            super(new PinnedTaskListTest.PinnedTaskListStub(), FXCollections.observableArrayList());
+            super(FXCollections.observableArrayList(), new PinnedTaskListTest.PinnedTaskListStub());
         }
 
         @Override

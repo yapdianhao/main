@@ -48,7 +48,7 @@ and explains the design considerations of these implementations.
 === Notation used in this Guide
 [width="70%",cols="^15%,85%"]
 |===
-a| `code` | Command that can be typed
+a| `code` | A Java method or class
 ifdef::env-github[]
 | :bulb: | Tips and tricks that might be useful
 | :information_source: | Additional information that is good to know
@@ -56,9 +56,9 @@ ifdef::env-github[]
 endif::[]
 ifndef::env-github[]
 a| [.java]#name# | Reference to the codebase (such as component, class and method names)
-a| icon:lightbulb-o[role="icon-tip", size="2x"] | Tips and tricks that might be useful
-a| icon:info-circle[role="icon-note", size="2x"] | Additional information that is good to know
-a| icon:exclamation-circle[role="icon-important", size="2x"] | Important pointers to take note
+a| icon:lightbulb-o[role="icon-tip",size="2x"] | Tips and tricks that might be useful
+a| icon:info-circle[role="icon-note",size="2x"] | Additional information that is good to know
+a| icon:exclamation-circle[role="icon-important",size="2x"] | Important pointers to take note
 endif::[]
 |===
 
@@ -220,7 +220,7 @@ This section describes some noteworthy details on how certain features are imple
 === Tab System
 Users may find it complicated to handle the many features that JelphaBot offers. They might also be overwhelmed if all the information of their tasks were to be displayed together in one screen.
 
-As such, we have decided to implement a tab system for ROR to organise the available commands into their respective features. JelphaBot provides 4 different tabs for the users,
+As such, we have decided to implement a tab system for JelphaBot to organise the available commands into their respective features. JelphaBot provides 4 different tabs for the users,
 each displaying a different set of panels that are relevant to the feature.
 
 * *Summary Tab* - <<Summary feature, overall view>> of the day's tasks in the task list.
@@ -237,23 +237,23 @@ To use the different features, we have also implemented commands for users to sw
 [[ChangingTabs]]
 ===== Switching between Tabs in Main Window
 
-The tabs of the application are defined using a [.java]#Tab# enum and the current mode of the application is stored as a private attribute [.java]#mode# in [.java]#LogicManager#. Users can switch between modes in JelphaBot using the lower case names of each tab as commands. For instance, `calendar. When the tab of the application is changed, we need to update the:
+The tabs of the application are defined using a [.java]#SwitchTab# enum and the current tab of the application is stored as a private attribute [.java]#mode# in [.java]#LogicManager#. Users can switch between tabs in JelphaBot using the lower case names of each tab as commands (e.g. `calendar`). When the tab of the application is changed, we need to update the:
 
-* [.java]#Logic# component so that the [.java]#tab# attribute in [.java]#LogicManager# reflects the new current tab, since this is used to check if a command can be executed,
+* [.java]#MainWindow# component so that the [.java]#SwitchTab# attribute in [.java]#MainWindow# reflects the new current tab, since this is used to check if a command can be executed,
 * [.java]#UI# component so that the panels display the information that is relevant to the tab.
 
 [IMPORTANT]
 `task list` is not a valid command to switch to the Task List tab. Use `list` instead.
 
-For all these commands, these updates are done using a new [.java]#toTab# attribute added to the [.java]#CommandResult# object. As an example, the figure below shows the sequence diagram for when a user executes the `:p` command:
+For all these commands, updates are done by updating the [.java]#SwitchTab# attribute added in the [.java]#CommandResult# object. As an example, the figure below shows the sequence diagram for when a user executes the `:p` command:
 
 .Component interactions for `:p` command
-image::productivityTabSequenceDiagram.png[width="800"]
+// TODO: insert diagram
 
-Upon execution of the `:p` command, [.java]#ProductivityCommand#generateCommandResult()# will generate a [.java]#CommandResult# whose [.java]#toTab# attribute is set to [.java]#PRODUCTIVITY# and return it to the [.java]#LogicManager#. Now, the updates can be done for the respective components:
+Upon execution of the `:p` command, [.java]#ProductivityCommand#generateCommandResult()# will generate a [.java]#CommandResult# whose [.java]#SwitchTab# attribute is set to [.java]#PRODUCTIVITY# and return it to the [.java]#LogicManager#. Now, the updates can be done for the respective components:
 
-* [.java]#Logic# component: [.java]#LogicManager# calls [.java]#CommandResult#newModeStatus()# to retrieve the mode to be changed to and updates the current mode stored in its [.java]#mode# attribute by calling [.java]#LogicManager#changeMode()#. The [.java]#CommandResult# is passed to [.java]#MainWindow# in UI.
-* [.java]#UI# component: [.java]#MainWindow# calls [.java]#CommandResult#newModeStatus()# to retrieve the mode to be changed to and updates the display panels by calling [.java]#MainWindow#handleChangeMode()#.
+* [.java]#UI# component: [.java]#MainWindow# calls [.java]#MainWindow#executeCommand()#, to retrieve the tab to be changed to and updates the current tab stored in its [.java]#SwitchTab# attribute by calling [.java]#CommandResult#isShow{XXX}()# where XXX is the tab to switch to.
+The display panel is updated by calling [.java]#MainWindow#handle{XXX} where XXX is the tab to switch to.
 
 [NOTE]
 For commands that do not involve a change in mode, [.java]#CommandResult#newModeStatus()# will return [.java]#null# and no updates to the current mode or display will be done.
@@ -347,21 +347,21 @@ Scalable when more groupings are added.
 ** Pros: Consecutive `ListCommand` executions are less expensive.
 ** Cons: All other commands that update the underlying `UniqueTaskList` will result in multiple update calls to `ViewTaskList`.
 
-===== Aspect 3: Hide empty Categories in `GroupByDateTaskList`
+//===== Aspect 3: Hide empty Categories in `GroupByDateTaskList`
+//
+//* *Current Solution*: UI displays problems from a `FilteredList<SubgroupTaskList>` and use `filtered()` to hide empty categories without removing them.
+//** Rationale: These categories are meant to be reused when applicable tasks are added back to the list.
+//** Pros: The list categories do not have to be reinitalized as tasks are removed or added.
+//** Cons: Additional load on the UI as the Filtering happens constantly.
+//However, since there is a cap on five categories (so five `FilteredList` lists), it is unlikely to be significant.
+//** Cons: Inconsistent with the way filtering is done in `GroupByModuleTaskList`, which reduces control abstraction in `GroupedTaskList`.
+//* **Alternative 1:** Remove categories which are no longer used, and reinitialize them again when needed.
+//** Pros: Consecutive changes to the underlying Task List are less expensive if less lists are currently active.
+//** Pros: Enforce consistency with `GroupByModuleTaskList` which might allow some methods to be abstracted to parent class.
+//** Cons: Empty `SubgroupTaskList` members have to be hidden manually which requires complex logic in `SubgroupTaskListPanel`.
+//** Cons: Additional listeners have to be added (one for each category) to reinitialize empty categories.
 
-* *Current Solution*: UI displays problems from a `FilteredList<SubgroupTaskList>` and use `filtered()` to hide empty categories without removing them.
-** Rationale: These categories are meant to be reused when applicable tasks are added back to the list.
-** Pros: The list categories do not have to be reinitalized as tasks are removed or added.
-** Cons: Additional load on the UI as the Filtering happens constantly.
-However, since there is a cap on five categories (so five `FilteredList` lists), it is unlikely to be significant.
-** Cons: Inconsistent with the way filtering is done in `GroupByModuleTaskList`, which reduces control abstraction in `GroupedTaskList`.
-* **Alternative 1:** Remove categories which are no longer used, and reinitialize them again when needed.
-** Pros: Consecutive changes to the underlying Task List are less expensive if less lists are currently active.
-** Pros: Enforce consistency with `GroupByModuleTaskList` which might allow some methods to be abstracted to parent class.
-** Cons: Empty `SubgroupTaskList` members have to be hidden manually which requires complex logic in `SubgroupTaskListPanel`.
-** Cons: Additional listeners have to be added (one for each category) to reinitialize empty categories.
-
-===== Aspect 4: Remove empty Categories in `GroupByModuleTaskList`
+===== Aspect 3: Remove empty Categories in `GroupByModuleTaskList`
 
 * *Current Solution*: UI displays problems from a `FilteredList<SubgroupTaskList>` and uses a `ListChangeListener<Task>` to maintain a set of unique module codes when the underlying task list is changed.
 The `ObservableSet<ModuleCode>` has a further `SetChangeListener<ModuleCode>` bound to it to remove categories that no longer contain any Tasks.
@@ -721,7 +721,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |`*` |student |track my habits| know if I have strayed from my goal.
 |=======================================================================
 
-_{More to be added}_
+//_{More to be added}_
 
 [appendix]
 
@@ -761,7 +761,8 @@ Use case ends.
 *Extensions*
 
 [none]
-* 1a. JelphaBot detects an error in the entered command.
+* 1a.
+JelphaBot detects an error in the entered command.
 +
 [none]
 ** 1a1. JelphaBot detects error and displays the correct input format to be expected.
@@ -770,11 +771,21 @@ Use case ends.
 +
 Use case resumes from step 2.
 
+[none]
+* 1a.
+User specifies a category grouping for the list.
++
+[none]
+** 1a1. JelphaBot will switch to a list that matches the given category.
++
+Use case resumes from step 2.
+
 === Use case: UC3 - Mark Task as Done
+
 *MSS*
 
-1.  User specifies to mark a task as done by specifying the task index.
-2.  JelphaBot updates the task status and displays the updated task to the user.
+1. User specifies to mark a task as done by specifying the task index.
+2. JelphaBot updates the task status and displays the updated task to the user.
 +
 Use case ends.
 
@@ -1076,7 +1087,8 @@ A type of user interface that allows for interaction between the user and electr
 Given below are instructions to test the app manually.
 
 [NOTE]
-These instructions only provide a starting point for testers to work on; testers are expected to do more _exploratory_ testing.
+These instructions only provide a starting point for testers to work on; testers are expected to do more _exploratory_ testing. +
+For this section, `markdown` will be used to denote commands that can be entered into JelphaBot.
 
 === Launch and Shutdown
 
@@ -1092,7 +1104,57 @@ These instructions only provide a starting point for testers to work on; testers
 .. Re-launch the app by double-clicking the jar file. +
    Expected: The most recent window size and location is retained.
 
-_{ more test cases ... }_
+=== Adding a task
+
+. Adding a new task to a cleared list
+.. Prerequisites: Clear the list with the `clear` command.
+.. For all test cases that successfully add a task, the respective totals for each category should increment as new tasks are added.
+.. Test case: `add d/test dt/Apr-06-2020 23 59 m/CS2103t` +
+    Expected: A new task is added with the description "test", and a module code of "CS2103T".
+.. Test case: `add d/test2 dt/Apr-06-2020 23 59 p/1 m/CS2103t` +
+    Expected: A new task is added with the description "test2", a module code of "CS2103T", and both the module code and descripton should be bolded.
+.. Test case: `add d/test3 dt/Apr-06-2020 23 59 p/-1 m/CS2103t` +
+    Expected: A new task is added with the description "test3", a module code of "CS2103T", and both the module code and descripton should be in italics.
+. Adding a task with incomplete parameters
+.. Test case: `add d/aa` +
+Expected: No task is added. Error details shown in the status message. Status bar remains the same. +
+.. Other incorrect add commands to try: other parameters are missing. +
+Expected: Similar to previous.
+. Adding a task with incorrect parameters
+.. Test case: `add d/aa dt/Joon-06-2020 23 59 p/-1 m/CS2103t` +
+Expected: No task is added. Error message with correct format of date command. Status bar remains the same. +
+.. Other incorrect add commands to try: other parameters are wrongly formatted. +
+Eg. non-alphanumeric characters in description or tag, invalid priority, module codes not complying to NUS format (2-3 Alphabets, 4 numbers, one optional letter) +
+Expected: Similar to previous.
+
+=== Editing a task
+
+. Editing a task that was previously added
+.. Prerequisites: Execute the `add` commands in the previous section.
+
+=== Completing a task
+
+. Setting an existing task to Complete.
+.. Prerequisites: Execute the `add` commands in the previous section.
+
+=== Changing the list category
+
+. Displaying tasks by a different category
+.. Prerequisites: Execute the `add` commands above.
+.. Test case: +
+``
+list module +
+add d/test dt/Apr-06-2020 23 59 m/3230
+`` +
+Expected: A new module category should appear with a category title of "CS3230".
+.. Test case: +
+``
+list date +
+add d/test dt/TOMORROW 23 59 m/3230``, where `TOMORROW` refers to the date of the next day. +
+Expected: A new task should appear under the category header "Due This Week".
+.. Test case: `list invalid` +
+Expected: List display does not change. Error details shown in the status message. Status bar remains the same.
+
 
 === Deleting a task
 
@@ -1103,14 +1165,13 @@ _{ more test cases ... }_
    Expected: First task is deleted from the list. Details of the deleted task shown in the status message. Timestamp in the status bar is updated.
 .. Test case: `delete 0` +
    Expected: No task is deleted. Error details shown in the status message. Status bar remains the same.
-.. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
+.. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) +
    Expected: Similar to previous.
 
 // TODO add more
 _{ more test cases ... }_
 
 === Saving data
-// TODO add a sample log message for when this ahppens
 . Missing data files
 
 .. Open the `/data/` folder and delete all .json files in that folder.

@@ -71,9 +71,9 @@ public class JelphaBotParser {
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
-        case ListCommand.COMMAND_WORD:
+        case ListCommand.COMMAND_WORD: // fallthrough
         case ListCommand.COMMAND_SHORTCUT: // fallthrough
-        case ListCommand.COMMAND_SHORTCUT_TWO: // fallthrough
+        case ListCommand.COMMAND_SHORTCUT_TWO:
             return new ListCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
@@ -82,8 +82,8 @@ public class JelphaBotParser {
         case HelpCommand.COMMAND_WORD:
             return getCommand(arguments, new HelpCommand(), HelpCommand.MESSAGE_USAGE);
 
-        case ReminderCommand.COMMAND_WORD:
-        case ReminderCommand.COMMAND_WORD_UPPER:
+        case ReminderCommand.COMMAND_WORD: // fallthrough
+        case ReminderCommand.COMMAND_WORD_UPPER: // fallthrough
         case ReminderCommand.COMMAND_WORD_LOWER:
             return new ReminderCommandParser().parse(arguments);
 
