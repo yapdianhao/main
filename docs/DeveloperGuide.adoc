@@ -313,6 +313,7 @@ image::ViewTaskListGetSequenceDiagram.png[]
 
 As the index passed as an argument to `lastShownList.get()` is a cumulative index, the implementation of ` get()` in `ViewTaskList` has to iterate through each `SubgroupTaskList` stored within.
 
+// TODO explain how panel is updated?
 //** Pros: Provides good protection over unexpected changes on the displayed Task List.
 //* *Alternative 1*: Let UI displays problems in an `ObservableList<Task>` and update the list directly.
 //** Pros: This implementation is more straightforward as the logic updates the displayed list directly and all changes are reflected immediately.
@@ -377,10 +378,12 @@ This second listener directly removes unused categories from `GroupedByModuleTas
 Logic is further abstracted to a higher level and the new class is instanced together with the list that affects it.
 ** Cons: Implementation is challenging and prone to bugs.
 Due to the time of writing this Deveoper guide, the release is nearing V1.4 and time is spent fixing bugs for release instead.
-This could be a proposed feature in the future.
+** This could be a proposed update in the future.
+// TODO sample diagram?
 // end::taskgroups[]
 
 === Calendar feature
+
 JelphaBot has a calendar feature which provides an overarching view of their schedules and to allow users to view their tasks due.
 
 This feature offers two main functions:
