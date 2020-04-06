@@ -45,9 +45,9 @@ public class CalendarCommandTest {
         // same object -> returns true
         assertTrue(calendarFirstCommand.equals(calendarFirstCommand));
 
-        // // same values -> returns true
-        // CalendarCommand calendarFirstCommandCopy = new CalendarCommand(firstPredicate);
-        // assertTrue(calendarFirstCommand.equals(calendarFirstCommandCopy));
+        // same values -> returns true
+        CalendarCommand calendarFirstCommandCopy = new CalendarCommand(firstPredicate);
+        assertTrue(calendarFirstCommand.equals(calendarFirstCommandCopy));
 
         // different types -> returns false
         assertFalse(calendarFirstCommand.equals(1));
@@ -71,9 +71,9 @@ public class CalendarCommandTest {
         // same object -> returns true
         assertTrue(calendarFirstCommand.equals(calendarFirstCommand));
 
-        // // same values -> returns true
-        // CalendarCommand calendarFirstCommandCopy = new CalendarCommand(first);
-        // assertTrue(calendarFirstCommand.equals(calendarFirstCommandCopy));
+        // same values -> returns true
+        CalendarCommand calendarFirstCommandCopy = new CalendarCommand(first);
+        assertTrue(calendarFirstCommand.equals(calendarFirstCommandCopy));
 
         // different types -> returns false
         assertFalse(calendarFirstCommand.equals(1));
@@ -81,8 +81,8 @@ public class CalendarCommandTest {
         // null -> returns false
         assertFalse(calendarFirstCommand.equals(null));
 
-        // // different commands -> returns false
-        // assertFalse(calendarFirstCommand.equals(calendarSecondCommand));
+        // different commands -> returns false
+        assertFalse(calendarFirstCommand.equals(calendarSecondCommand));
     }
 
     @Test

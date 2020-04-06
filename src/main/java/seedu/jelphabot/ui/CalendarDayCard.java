@@ -33,7 +33,7 @@ public class CalendarDayCard extends UiPart<Region> {
     public CalendarDayCard(CalendarDate calendarDate) {
         super(FXML);
         this.calendarDate = calendarDate;
-        updateTasks();
+        // updateTasks();
         calendarDay.setText(String.valueOf(calendarDate.getDay()));
     }
 
@@ -50,7 +50,7 @@ public class CalendarDayCard extends UiPart<Region> {
     }
 
     public void updateTasks() {
-        ObservableList<Task> allTasks = MainWindow.getLogic().getFilteredCalendarTaskList();
+        ObservableList<Task> allTasks = MainWindow.getLogic().getFilteredTaskList();
         TaskDueWithinDayPredicate predicate = new TaskDueWithinDayPredicate(calendarDate.getDate());
         tasks = allTasks.filtered(predicate);
         if (tasks.size() > 0) {

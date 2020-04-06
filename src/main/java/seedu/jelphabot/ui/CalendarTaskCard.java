@@ -75,15 +75,14 @@ public class CalendarTaskCard extends UiPart<Region> {
      * @param task the task containing model data for this TaskCard.
      */
     private void applyPriorityMarkdown(Task task) {
+        description.getStyleClass().add("description");
+        moduleCode.getStyleClass().add("description");
         if (task.getPriority().equals(Priority.HIGH)) {
             description.setId("highPriority");
             moduleCode.setId("highPriority");
         } else if (task.getPriority() == Priority.LOW) {
             description.setId("lowPriority");
             moduleCode.setId("lowPriority");
-        } else {
-            description.setId("normalPriority");
-            moduleCode.setId("normalPriority");
         }
     }
 
