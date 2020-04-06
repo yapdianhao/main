@@ -123,7 +123,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setJelphaBotFilePath(Path addressBookFilePath) {
+        public void setJelphaBotFilePath(Path jelphaBotFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 

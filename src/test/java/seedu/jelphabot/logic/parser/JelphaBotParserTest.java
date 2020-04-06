@@ -13,6 +13,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.jelphabot.logic.commands.AddCommand;
+import seedu.jelphabot.logic.commands.CalendarCommand;
 import seedu.jelphabot.logic.commands.ClearCommand;
 import seedu.jelphabot.logic.commands.DeleteCommand;
 import seedu.jelphabot.logic.commands.DoneCommand;
@@ -22,6 +23,8 @@ import seedu.jelphabot.logic.commands.ExitCommand;
 import seedu.jelphabot.logic.commands.FindCommand;
 import seedu.jelphabot.logic.commands.HelpCommand;
 import seedu.jelphabot.logic.commands.ListCommand;
+import seedu.jelphabot.logic.commands.ProductivityCommand;
+import seedu.jelphabot.logic.commands.SummaryCommand;
 import seedu.jelphabot.logic.parser.exceptions.ParseException;
 import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.model.task.predicates.DescriptionContainsKeywordsPredicate;
@@ -43,7 +46,8 @@ public class JelphaBotParserTest {
     @Test
     public void parseCommand_clear() throws Exception {
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, ClearCommand.MESSAGE_USAGE), ()
+            -> parser.parseCommand(ClearCommand.COMMAND_WORD + " 3"));
     }
 
     @Test
@@ -66,7 +70,8 @@ public class JelphaBotParserTest {
     @Test
     public void parseCommand_exit() throws Exception {
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD) instanceof ExitCommand);
-        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, ExitCommand.MESSAGE_USAGE), ()
+            -> parser.parseCommand(ExitCommand.COMMAND_WORD + " 3"));
     }
 
     @Test
@@ -81,12 +86,15 @@ public class JelphaBotParserTest {
     @Test
     public void parseCommand_help() throws Exception {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
-        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
+            -> parser.parseCommand(HelpCommand.COMMAND_WORD + " 3"));
     }
 
     @Test
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " date") instanceof ListCommand);
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " module") instanceof ListCommand);
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE), ()
             -> parser.parseCommand(ListCommand.COMMAND_WORD + " 3"));
     }
@@ -96,6 +104,37 @@ public class JelphaBotParserTest {
         DoneCommand command = (DoneCommand) parser.parseCommand(
             DoneCommand.COMMAND_WORD + " " + INDEX_FIRST_TASK.getOneBased());
         assertEquals(new DoneCommand(INDEX_FIRST_TASK), command);
+    }
+
+    @Test
+    public void parseCommand_summary() throws Exception {
+        assertTrue(parser.parseCommand(SummaryCommand.COMMAND_WORD) instanceof SummaryCommand);
+        assertTrue(parser.parseCommand(SummaryCommand.COMMAND_SHORTCUT_LOWER) instanceof SummaryCommand);
+        assertTrue(parser.parseCommand(SummaryCommand.COMMAND_SHORTCUT_UPPER) instanceof SummaryCommand);
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+            SummaryCommand.MESSAGE_USAGE), () -> parser.parseCommand(SummaryCommand.COMMAND_WORD + " 3"));
+    }
+
+    @Test
+    public void parseCommand_calendar() throws Exception {
+        assertTrue(parser.parseCommand(CalendarCommand.COMMAND_WORD) instanceof CalendarCommand);
+        assertTrue(parser.parseCommand(CalendarCommand.COMMAND_SHORTCUT_LOWER) instanceof CalendarCommand);
+        assertTrue(parser.parseCommand(CalendarCommand.COMMAND_SHORTCUT_UPPER) instanceof CalendarCommand);
+        assertTrue(parser.parseCommand(CalendarCommand.COMMAND_WORD + " May-2020") instanceof CalendarCommand);
+        assertTrue(parser.parseCommand(CalendarCommand.COMMAND_WORD + " Apr-1-2020") instanceof CalendarCommand);
+        // TODO: fix this test
+        // assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+        //     CalendarCommand.MESSAGE_USAGE), ()
+        //         -> parser.parseCommand(CalendarCommand.COMMAND_WORD + " apr"));
+    }
+
+    @Test
+    public void parseCommand_productivity() throws Exception {
+        assertTrue(parser.parseCommand(ProductivityCommand.COMMAND_WORD) instanceof ProductivityCommand);
+        assertTrue(parser.parseCommand(ProductivityCommand.COMMAND_SHORTCUT_LOWER) instanceof ProductivityCommand);
+        assertTrue(parser.parseCommand(ProductivityCommand.COMMAND_SHORTCUT_UPPER) instanceof ProductivityCommand);
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+            ProductivityCommand.MESSAGE_USAGE), () -> parser.parseCommand(ProductivityCommand.COMMAND_WORD + " 3"));
     }
 
     @Test

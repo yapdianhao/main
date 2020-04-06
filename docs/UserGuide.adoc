@@ -46,17 +46,18 @@ As seen from above, JelphaBot has four tabs; Summary, Task List, Calendar and Pr
 You can switch between tabs anytime by pressing kbd:[Ctrl] + kbd:[Tab] on your keyboard to move to the tab on the right.
 If you are already on the rightmost tab, it wraps around to the leftmost tab.
 
+// TODO: add a walkthrough for users? like a mini demo with steps.
 Interested? Jump to the <<Quick Start>> to get started.
 Enjoy!
 
-=== Purpose of this document
-
-=== Using the User Guide
-This User Guide is filled with information to help you set up and make the best out of you very own customizable JelphaBot!
+=== Using this User Guide
+==== Purpose of this Guide
+This User Guide is filled with information to help you set up and make the best out of you very own JelphaBot!
 You will be able to learn more about the commands that are available for you, together with examples of how they are used.
 These commands are also consolidated under <<Command Summary>> for your convenience.
 
-To aid in your understanding throughout this User Guide, you may find it useful to refer to the table below for the different symbols and
+==== Notation used in this Guide
+To aid in your understanding throughout this User Guide, you may find below the different symbols and
 formatting used throughout this guide.
 
 [width="100%",cols="40%,<60%,options="header",]
@@ -91,8 +92,7 @@ The GUI should appear in a few seconds. You should see a list of tasks as shown 
 .Expected result after running `JelphaBot`
 image::MainUi.png[width="600"]
 +
-// TODO: add link for troubleshooting
-If you do not see this, please try deleting JelphaBot and re-downloading JelphaBot.
+If you do not see this, please try deleting JelphaBot and its accompanying files and folders and repeat steps 2 to 4.
 . Type a command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 . Some example commands you can try:
@@ -109,14 +109,14 @@ A full list of commands is available in <<Command Summary>>
 
 == Features
 In this section, you can find details about the commands that JelphaBot supports.
-These details include the function of the command, its format, and example usage. The features would be depicted
+These include the function of the command, its format, and example usages. The features will be depicted
 in the order of the tabs shown on the main User Interface as seen above for your ease of navigation!
 
 === Common commands
 
 ==== Viewing help : `help`
 
-If you can't recall the command you need, the `help` command opens a help popup window which links to this user guide. +
+If you can't recall the command you need, you can enter the `help` command in any panel. A help window which links to this user guide will pop up. +
 Format: `help`
 
 [.text-center]
@@ -126,20 +126,20 @@ image::ug_figures/help.png[width="600]
 
 ==== Exiting the program : `exit`
 
-You can exit the program anytime by entering the `exit` command directly from any page. +
+You can exit the program anytime by entering the `exit` command directly from any panel. +
 Format: `exit`
 // no image needed
 // TODO: add exclamation mark
+
 ****
-* Exiting the application before stopping any running timer wil cause all recorded time since the timer was started to be lost.
+icon:exclamation-circle[role="icon-important", size="2x"] Exiting the application before stopping any running timer wil cause all recorded time since the timer was started to be lost.
 ****
 
 === Summary (Eden)
-This section will be the first thing you will see after entering JelphaBot!
+This tab will be the first panel you see after entering JelphaBot!
 
-This section gives you a minimalistic overview of the day, namely with tasks that you have due within the day, and tasks that you have completed within the day!
-
-Tasks displayed will only have it's module code as well as it's description for simplicity's sake!
+This section gives you a minimalistic overview of the day, namely tasks that you have due within the day, and tasks that you have completed within the day!
+Tasks displayed will only have it's module code as well as their description for simplicity!
 
 ==== Viewing the summary tab: `summary`
 
@@ -152,7 +152,7 @@ Shortcut: `:S` or `:s`
 
 [.text-center]
 .Example of expected result after running `summary`
-image::summaryTab.png[width="600"]
+image::ug_figures/summaryTab.png[width="600"]
 
 Displays the two dropdown tabs that show the tasks that are Due Today, and Completed Today.
 
@@ -160,7 +160,7 @@ Once a task under the Due Today tab is marked as done, it will appear under the 
 
 [.text-center]
 .Expected view of the Summary tab after completing the task, ACC1101 Tutorial 4
-image::SummaryViewAfterTaskComplete.png[width="600"]
+image::ug_figures/SummaryViewAfterTaskComplete.png[width="600"]
 
 === Managing Tasks (Yao Jie)
 
@@ -169,7 +169,7 @@ You can view and sort all your tasks from the Task List page.
 
 Apart from the function to switch tabs by pressing kbd:[Ctrl] + kbd:[tab] on your keyboard, you can enter the `list` command
 or its shortcuts `:T` or `:t` to manually switch to the task list tab.
-The task list panel will then display your all tasks, sorted in various sections. +
+The task list panel will then display all your tasks sorted into various sections. +
 
 Format: `list` +
 Shortcut: `:T` or `:t`
@@ -213,7 +213,7 @@ Format: `add d/DESCRIPTION dt/DATETIME m/MODULE_CODE [p/PRIORITY] [t/TAG]...`
 
 [.text-center]
 .Example of an expected result after running `add d/Assignment 1 dt/Jan-01-2020 23 59 m/CS1231 t/graded`
-image::addCommand.png[width="600"]
+image::ug_figures/addCommand.png[width="600"]
 
 ****
 * For dt/DATETIME inputs, please use the format MMM-dd-YYYY HH mm. +
@@ -252,7 +252,9 @@ Format: `list [SORTING_ORDER]`
 ****
 
 ===== Group Tasks by Date : `list date`
-This is also the default interface for the task list tab.
+
+You can groups tasks based on their due date. This is also the default interface for the task list tab. +
+Format: `list date`
 
 Group your tasks into the following categories:
 
@@ -269,15 +271,17 @@ Group your tasks into the following categories:
 
 [.text-center]
 .Example of an expected result after running `list module`
-image::listByDate.png[width="600"]
+image::ug_figures/listByDate.png[width="600"]
 
 ===== Group Tasks by Module : `list module`
-Groups tasks based on their defined module code.
 
-// end::list[]
+You can groups tasks based on their module code. +
+Format: `list module`
+
 [.text-center]
 .Example of an expected result after running `list module`
-image::listByModule.png[width="600"]
+image::ug_figures/listByModule.png[width="600"]
+// end::list[]
 
 ==== Locating Tasks by name: `find`
 
@@ -286,14 +290,14 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 [.text-center]
 .Example of an expected result after running `find tutorial`
-image::findCommand.png[width="600"]
+image::ug_figures/findCommand.png[width="600"]
 
 ****
-* The search is case insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* The search is case insensitive. e.g `tut` will match `Tut`
+* The order of the keywords does not matter. e.g. `project Work` will match `Work project`
 * Only the description is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Tasks matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Only full words will be matched e.g. `Tut` will not match `Tutorial`
+* Tasks matching at least one keyword will be returned (i.e. `OR` search). e.g. `Project Work` will return `Project Group`, `Work meeting`
 ****
 
 Examples:
@@ -313,7 +317,7 @@ Format: `edit INDEX [d/DESCRIPTION] [dt/DATETIME] [m/MODULE_CODE] [p/PRIORITY (-
 
 [.text-center]
 .Example of an expected result after running `edit 1 m/CS2105 d/Tutorial 2`
-image::editCommand.png[width="600"]
+image::ug_figures/editCommand.png[width="600"]
 
 
 ****
@@ -341,7 +345,7 @@ Format: `done INDEX`
 
 [.text-center]
 .Example of an expected result after running `done 1`
-image::doneCommand.png[width="600"]
+image::ug_figures/doneCommand.png[width="600"]
 
 ****
 * Marks the task at the specified `INDEX` as done.
@@ -357,7 +361,7 @@ Format: `delete INDEX`
 
 [.text-center]
 .Example of an expected result after running `delete 1`
-image::deleteCommand.png[width="600"]
+image::ug_figures/deleteCommand.png[width="600"]
 
 ****
 * Deletes the task at the specified `INDEX`.
@@ -384,7 +388,7 @@ Format: `clear`
 
 [.text-center]
 .Example of an expected result after running `clear`
-image::clearCommand.png[width="600"]
+image::ug_figures/clearCommand.png[width="600"]
 
 ****
 * All reminders will be cleared together with the tasks.
@@ -406,7 +410,7 @@ You can display all the tasks in your task list that have been completed.
 
 [.text-center]
 .Example of an expected result after running `show-completed`
-image::showCompletedCommand.png[width="600"]
+image::ug_figures/showCompletedCommand.png[width="600"]
 
 // end::showcompleted[]
 
@@ -416,7 +420,7 @@ You can display all the tasks in your task list that are currently incomplete.
 
 [.text-center]
 .Example of an expected result after running `show-incomplete`
-image::showIncompleteCommand.png[width="600"]
+image::ug_figures/showIncompleteCommand.png[width="600"]
 
 // end::showincomplete[]
 
@@ -442,7 +446,7 @@ Shorcut: `:C` or `:c`
 
 [.text-center]
 .Example of expected result after running `calendar`
-image::CalendarTab.png[width="600"]
+image::ug_figures/CalendarTab.png[width="600"]
 
 ==== Change month and year view of Calendar : `calendar`
 Displays the tasks due on specified date, while highlighting that day on the calendar.
@@ -502,7 +506,6 @@ image::CalendarToday.png[width="600"]
 
 Displays month of April in the year 2020 in the calendar panel on the right, with today's date highlighted and displays the corresponding tasks due today on the left.
 
-
 === Productivity Tracking (Jel)
 JelphaBot also comes with a productivity tracking that allows you track the progress of your tasks in that week.
 You would be able to see the progress bar as you complete more tasks!
@@ -518,10 +521,10 @@ Shortcut: `:P` or `:p`
 
 [.text-center]
 .Example of expected result after running `productivity`
-image::ProductivityTab.png[width="600"]
+image::ug_figures/ProductivityTab.png[width="600"]
 
 ****
-* When there are running timers, the DateTime field of the task displays the due date of the task.
+// TODO: add exclamation
 * The progress bar and the text following it only shows tasks that are due on the day JelphaBot is running.
 ****
 ==== Starting timer for a task : `start`
@@ -531,7 +534,7 @@ Format: `start INDEX`
 
 [.text-center]
 .Example of expected result after running `start 1`
-image::startCommand.png[width="600"]
+image::ug_figures/startCommand.png[width="600"]
 
 ****
 * Each task can only have 1 running timer.
@@ -549,7 +552,7 @@ Format: `stop INDEX`
 
 [.text-center]
 .Expected result after running `stop 1`
-image::stopCommand.png[width="600"]
+image::ug_figures/stopCommand.png[width="600"]
 
 ****
 * The task has to have a running timer.

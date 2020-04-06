@@ -217,8 +217,48 @@ This includes classes which implement utility functions which can be used by all
 
 This section describes some noteworthy details on how certain features are implemented.
 
-=== Swap between different Tabs in `MainWindow`
-TODO
+=== Tab System
+Users may find it complicated to handle the many features that JelphaBot offers. They might also be overwhelmed if all the information of their tasks were to be displayed together in one screen.
+
+As such, we have decided to implement a tab system for ROR to organise the available commands into their respective features. JelphaBot provides 4 different tabs for the users,
+each displaying a different set of panels that are relevant to the feature.
+
+* *Summary Tab* - <<Summary feature, overall view>> of the day's tasks in the task list.
+* *Task List Tab* - <<Task Grouping feature in Task List tab, view all tasks>> in the task list.
+* *Calendar Tab* - <<Calendar feature, visualisation>> of tasks in a specific day or month.
+* *Productivity Tab* - <<Productivity feature, overarching view>> of overall productivity such as task completion rate.
+
+To use the different features, we have also implemented commands for users to switch between the 4 tabs.
+
+[[ChangeTab]]
+// tag::changetab[]
+==== Current Implementation
+
+[[ChangingTabs]]
+===== Changing tabs in general
+
+The tabs of the application are defined using a [.java]#Tab# enum and the current mode of the application is stored as a private attribute [.java]#mode# in [.java]#LogicManager#. Users can switch between modes in JelphaBot using the lower case names of each tab as commands. For instance, `calendar. When the tab of the application is changed, we need to update the:
+
+* [.java]#Logic# component so that the [.java]#tab# attribute in [.java]#LogicManager# reflects the new current tab, since this is used to check if a command can be executed,
+* [.java]#UI# component so that the panels display the information that is relevant to the tab.
+
+[IMPORTANT]
+`task list` is not a valid command to switch to the Task List tab. Use `list` instead.
+
+For all these commands, these updates are done using a new [.java]#toTab# attribute added to the [.java]#CommandResult# object. As an example, the figure below shows the sequence diagram for when a user executes the `:p` command:
+
+.Component interactions for `:p` command
+image::productivityTabSequenceDiagram.png[width="800"]
+
+Upon execution of the `:p` command, [.java]#ProductivityCommand#generateCommandResult()# will generate a [.java]#CommandResult# whose [.java]#toTab# attribute is set to [.java]#PRODUCTIVITY# and return it to the [.java]#LogicManager#. Now, the updates can be done for the respective components:
+
+* [.java]#Logic# component: [.java]#LogicManager# calls [.java]#CommandResult#newModeStatus()# to retrieve the mode to be changed to and updates the current mode stored in its [.java]#mode# attribute by calling [.java]#LogicManager#changeMode()#. The [.java]#CommandResult# is passed to [.java]#MainWindow# in UI.
+* [.java]#UI# component: [.java]#MainWindow# calls [.java]#CommandResult#newModeStatus()# to retrieve the mode to be changed to and updates the display panels by calling [.java]#MainWindow#handleChangeMode()#.
+
+[NOTE]
+For commands that do not involve a change in mode, [.java]#CommandResult#newModeStatus()# will return [.java]#null# and no updates to the current mode or display will be done.
+// end::changetab[]
+// TODO: complete this section
 
 // tag::taskgroups[]
 === Task Grouping feature in Task List tab
@@ -359,12 +399,11 @@ In order to display the task list for specific input dates, the user enters the 
 
 Upon the completion of the execution of the command, the tasks due on 1st January 2020 would be displayed to the user on the task list panel to the left. +
 
-
 ==== Design Considerations
-
+// TODO: amanda
 
 === Productivity feature
-JelphaBot has a productivity feature which provides an overarching view of user's overall productivity.
+JelphaBot has a productivity panel of this feature which provides an overarching view of user's overall productivity.
 
 This feature offers two main functions:
 
@@ -377,6 +416,7 @@ This feature offers two main functions:
 In order to start timing a task, the user enters `start INDEX` command
 (e.g. start 1)
 
+.Sequence Diagram after running `start 1`
 image::StartSequenceDiagram.png[]
 
 Upon successful execution of the command, the productivity tab displays the task being timed under the Running Timers header.
@@ -385,6 +425,7 @@ Upon successful execution of the command, the productivity tab displays the task
 In order to stop timing a task, the user enters `stop INDEX` command
 (e.g. stop 1)
 
+.Sequence Diagram after running `stop 1`
 image::StopSequenceDiagram.png[]
 
 Upon successful execution of the command, the productivity tab removes the task being timed under the Running Timers header.
@@ -428,6 +469,7 @@ This feature offers two main functions:
 To add a reminder to a certain task, the user enters the `reminder INDEX days/DAYS hours/HOURS` command.
 (e.g, reminder 2 days/2 hours/1)
 
+.Sequence Diagram after running `reminder 2 days/2 hours/1`
 image::AddReminderSequenceDiagram.png[]
 
 Upon successful execution of the command, the user adds a reminder associated to the task at `INDEX`. Upon exiting JelphaBot,
@@ -438,6 +480,7 @@ within the period set by the user from the current date.
 To delete a reminder associated to a certain task, the user enters the `delrem INDEX` command.
 (e.g. delrem 2)
 
+.Sequence Diagram after running `delrem 2`
 image::DeleteReminderSequenceDiagram.png[]
 
 Upon successful execution of the command, the reminder of the task at `INDEX` is removed.
@@ -448,7 +491,7 @@ to set reminders to tasks that are complete. However, if tasks that has reminder
 still warn the user.
 
 ==== Design Considerations
-
+// TODO: dianhao
 
 
 // tag::morningcallnightdebrief[]
@@ -743,9 +786,9 @@ Use case resumes from step 2.
 === Use case: UC4 - Edit Task Details
 *MSS*
 
-1.  User requests to edit a task by specifying the task index and the field(s) they want to edit
+1.  User requests to edit a task by specifying the task index and the field(s) they want to edit.
 
-2.  JelphaBot edits the specified task in the task list with the specified details
+2.  JelphaBot edits the specified task in the task list with the specified details.
 +
 Use case ends.
 
@@ -773,27 +816,27 @@ Use case resumes from step 2
 +
 Use case resumes from step 2.
 
-=== Use case: UC5 - Find Task(s) by Keyword(s)
+//=== Use case: UC5 - Find Task(s) by Keyword(s)
+//*MSS*
+//
+//1. User requests to find task(s) by entering specified keyword(s).
+//2. JelphaBot shows a list of task(s) that contain the specified keyword(s).
+//+
+//Use case ends.
+//
+//*Extensions*
+//
+//[none]
+//* 1a1. None of the tasks in the task list contain the specified keywords.
+//[none]
+//+
+//** Use case ends.
+
+=== Use case: UC5 - Delete Task
 *MSS*
 
-1. User requests to find task(s) by entering specified keyword(s)
-2. JelphaBot shows a list of task(s) that contain the specified keyword(s)
-+
-Use case ends.
-
-*Extensions*
-
-[none]
-* 1a1. None of the tasks in the task list contain the specified keywords.
-[none]
-+
-** Use case ends.
-
-=== Use case: UC6 - Delete Task
-*MSS*
-
-1.  User requests to delete a specific task in the list by specified index
-2.  JelphaBot deletes the task
+1.  User requests to delete a specific task in the list by specified index.
+2.  JelphaBot deletes the task.
 +
 Use case ends.
 
@@ -816,15 +859,15 @@ Use case ends.
 +
 Use case resumes from step 2
 
-=== Use case: UC7 - Clear all Tasks
-*MSS*
+//=== Use case: UC7 - Clear all Tasks
+//*MSS*
+//
+//1.  User enters command to clear all tasks.
+//2.  JelphaBot removes all listed tasks and returns an empty list.
+//+
+//Use case ends.
 
-1.  User enters command to clear all tasks.
-2.  JelphaBot removes all listed tasks and returns an empty list.
-+
-Use case ends.
-
-=== Use case: UC8 - Add Reminders
+=== Use case: UC6 - Add Reminder
 *MSS*
 
 1. User enters reminder for tasks that want to be reminded for.
@@ -835,76 +878,140 @@ Use case ends.
 *Extensions*
 
 [none]
-* 1a. JelphaBot detects that the task the reminder is associated to does not exist.
+* 1a. The list is empty.
 [none]
 +
-** 1a1. User enters new task index to be reminded.
+** 1a1. JelphaBot displays to user that the task list is empty.
++
+Use case ends.
+
+[none]
+* 1b. JelphaBot detects that the task the reminder is associated to does not exist.
+[none]
++
+** 1b1 JelphaBot detects error and displays the correct input format to be expected.
+** 1b2. User enters new task index to be add reminder to.
 ** Steps 1a1-1a2 are repeated until the command entered is correct.
 +
 Use case resumes from step 2
 
 [none]
-* 1b. JelphaBot detects an error in the entered command.
+* 1c. JelphaBot detects an error in the entered command.
 +
 [none]
-** 1b1. JelphaBot detects error and displays the correct input format to be expected.
+** 1c1. JelphaBot detects error and displays the correct input format to be expected.
 +
-1b2. User enters new command.
+1c2. User enters new command.
 [none]
-** Steps 1b1-1b2 are repeated until the command entered is correct.
+** Steps 1c1-1c2 are repeated until the command entered is correct.
 +
 Use case resumes from step 2.
 
-=== Use Case: UC9 - Start timer
+=== Use case: UC7 - Delete Reminder
+*MSS*
+
+1.  User requests to delete a reminder for a task in the list by specified index.
+2.  JelphaBot deletes the reminder.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. The list is empty.
+[none]
++
+** 1a1. JelphaBot displays to user that there are no reminders.
++
+Use case ends.
+
+* 1b. JelphaBot detects that the specified task does not exist.
++
+[none]
+** 1b1. JelphaBot detects error and displays the correct input format to be expected.
+** 1b2. User enters new task index to be marked as done.
+** Steps 1b1-1b2 are repeated until the command entered is correct.
++
+Use case resumes from step 2
+
+[none]
+* 1c. JelphaBot detects an error in the entered command.
++
+[none]
+** 1c1. JelphaBot detects error and displays the correct input format to be expected.
++
+1c2. User enters new command.
+[none]
+** Steps 1c1-1c2 are repeated until the command entered is correct.
++
+Use case resumes from step 2.
+
+=== Use Case: UC8 - Start Timer
 *MSS*
 
 1. User enters command to start timer for task to be timed.
-2. JelphaBot tracks the time taken.
+2. JelphaBot displays successful execution to user.
 +
 Use case ends.
 
 *Extensions*
 
 [none]
-* 1a. JelphaBot detects the task has been mark as completed.
+* 1a. The list is empty.
 [none]
 +
-** 1a1. JelphaBot displays to user that the task has been marked as completed.
+** 1a1. JelphaBot displays to user that the task list is empty.
 +
 Use case ends.
 
-* 1b. JelphaBot detects that the specified task does not exist.
+[none]
+* 1b. JelphaBot detects the task has been mark as completed.
+[none]
++
+** 1b1. JelphaBot displays to user that the task has been marked as completed.
++
+Use case ends.
+
+* 1c. JelphaBot detects that the specified task does not exist.
 +
 [none]
-** 1b1. JelphaBot detects error and displays the correct input format to be expected.
-** 1b2. User enters new task index to start timing.
-** Steps 1b1-1b2 are repeated until the command entered is correct.
+** 1c1. JelphaBot detects error and displays the correct input format to be expected.
+** 1c2. User enters new task index to start timing.
+** Steps 1c1-1c2 are repeated until the command entered is correct.
 +
 Use case resumes from step 2.
 
-=== Use Case: UC10 - Stop timer
+=== Use Case: UC9 - Stop Timer
 *MSS*
 
 1. User enters command to stop timer for task being.
-2. JelphaBot stores time spent on the task.
+2. JelphaBot returns total time spent on that task and stores the information.
 +
 Use case ends.
 
 *Extensions*
 
 [none]
-* 1a. JelphaBot detects the task does not have a running timer.
+* 1a. The list is empty.
 [none]
 +
-** 1a1. JelphaBot displays to user that the task does not have a running timer.
+** 1a1. JelphaBot displays to user that the task list is empty.
 +
 Use case ends.
 
-* 1b. JelphaBot detects that the specified task does not exist.
+[none]
+* 1b. JelphaBot detects the task does not have a running timer.
+[none]
++
+** 1b1. JelphaBot displays to user that the task does not have a running timer.
++
+Use case ends.
+
+* 1c. JelphaBot detects that the specified task does not exist.
 +
 [none]
-** 1b1. JelphaBot detects error and displays the correct input format to be expected.
-** 1b2. User enters new task index to stop timing.
+** 1c1. JelphaBot detects error and displays the correct input format to be expected.
+** 1c2. User enters new task index to stop timing.
 ** Steps 1b1-1b2 are repeated until the command entered is correct.
 +
 Use case resumes from step 2.
@@ -929,7 +1036,7 @@ Windows, Linux, Unix, OS-X
 A type of user interface that allows for interaction between the user and electronic devices through graphical icons
 
 [[command-line-interface]] CLI (Command Line Interface)::
-??
+A type of user interface that allows for interaction between the user and electronic devices in the form of lines of text.
 
 //[appendix]
 //== Product Survey
