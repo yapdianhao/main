@@ -28,9 +28,9 @@ public class CalendarCommand extends Command {
     public static final String MESSAGE_SWITCH_PANEL_ACKNOWLEDGEMENT = "Switched to calendar panel.";
 
     public static final String MESSAGE_SWITCH_CALENDAR_VIEW_ACKNOWLEDGEMENT = "Switched calendar panel to : %s, %s";
-    public static final String MESSAGE_SWITCH_CALENDAR_TODAY_ACKNOWLEDGEMENT = "Switched calendar panel back to : %s, %s. "
-                                                                                   + "Displaying all your tasks that are "
-                                                                                   + "due today!";
+    public static final String MESSAGE_SWITCH_CALENDAR_TODAY_ACKNOWLEDGEMENT = "Switched calendar panel back to : "
+                                                                                   + "%s, %s. Displaying all your tasks"
+                                                                                   + " that are due today!";
 
     private final TaskDueWithinDayPredicate predicate;
     private final YearMonth yearMonth;

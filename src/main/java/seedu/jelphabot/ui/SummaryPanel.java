@@ -12,7 +12,7 @@ import seedu.jelphabot.commons.core.LogsCenter;
 import seedu.jelphabot.model.summary.Summary;
 
 /**
- * The Summary Panel. Provides the basic application layout of the summary of tasks due today,
+ * The Summary Panel. Provides the basic application layout of the summary of tasks due today.
  */
 public class SummaryPanel extends UiPart<Region> {
 
@@ -36,7 +36,7 @@ public class SummaryPanel extends UiPart<Region> {
     }
 
     /**
-     * Swtiches to the summary panel
+     * Switches to the summary panel.
      */
     public void show() {
         logger.info("Showing summary panel of application");
@@ -44,7 +44,7 @@ public class SummaryPanel extends UiPart<Region> {
     }
 
     /**
-     * Returns true if the summary panel is currently being shown
+     * Returns true if the summary panel is currently being shown.
      * @return
      */
     public boolean isShowing() {

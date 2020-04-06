@@ -7,7 +7,6 @@ import static seedu.jelphabot.logic.parser.CommandParserTestUtil.assertParseSucc
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 

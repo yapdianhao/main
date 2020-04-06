@@ -1,10 +1,8 @@
 package seedu.jelphabot.model.calendar;
 
 import java.time.LocalDate;
-import java.util.Calendar;
 
 import seedu.jelphabot.commons.util.DateUtil;
-import seedu.jelphabot.model.task.DateTime;
 
 /**
  * Class representing a date without time, mainly for the calendar UI.

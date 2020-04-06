@@ -13,7 +13,7 @@ import seedu.jelphabot.commons.core.LogsCenter;
 import seedu.jelphabot.model.calendar.CalendarDate;
 
 /**
- * UI component for calendar view to be displayed.
+ * Panel containing the calendar view to be displayed.
  */
 public class CalendarPanel extends UiPart<Region> {
 

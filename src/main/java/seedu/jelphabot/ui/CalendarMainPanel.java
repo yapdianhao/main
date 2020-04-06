@@ -1,9 +1,14 @@
 package seedu.jelphabot.ui;
 
+import java.time.LocalDate;
+import java.time.YearMonth;
+import java.util.logging.Logger;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
+
 import seedu.jelphabot.commons.core.LogsCenter;
 import seedu.jelphabot.commons.util.DateUtil;
 import seedu.jelphabot.logic.Logic;
@@ -11,10 +16,10 @@ import seedu.jelphabot.logic.commands.CommandResult;
 import seedu.jelphabot.model.calendar.CalendarDate;
 import seedu.jelphabot.model.task.predicates.TaskDueWithinDayPredicate;
 
-import java.time.LocalDate;
-import java.time.YearMonth;
-import java.util.logging.Logger;
-
+/**
+ * The Calendar Main Panel. Provides the basic application layout containing the calendar task list and the
+ * calendar panel.
+ */
 public class CalendarMainPanel extends UiPart<Region> {
 
     private static final String FXML = "CalendarMainPanel.fxml";
@@ -44,6 +49,10 @@ public class CalendarMainPanel extends UiPart<Region> {
         initialiseCalendarMainPanel();
     }
 
+    /**
+     * Initialises and sets up the calendar main panel with the calendar task list, as well as the
+     * calendar panel.
+     */
     private void initialiseCalendarMainPanel() {
         calendarTaskListPanel = new CalendarTaskListPanel(logic.getFilteredCalendarTaskList());
         logic.updateFilteredCalendarTaskList(new TaskDueWithinDayPredicate(DateUtil.getDateToday()));
@@ -104,7 +113,6 @@ public class CalendarMainPanel extends UiPart<Region> {
             CalendarPanel.getDayCard(1).highlightDay();
             calendarPanel.setHighlightedDay(1);
         } else { //change today
-            logger.info("it runs!!!!!!!!!!!!!!!!!!!!!!");
             LocalDate today = DateUtil.getDateToday();
             LocalDate firstDay = today.withDayOfMonth(1);
             CalendarDate firstDayDate = new CalendarDate(firstDay);
