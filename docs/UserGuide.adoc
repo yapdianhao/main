@@ -78,6 +78,7 @@ a| icon:lightbulb-o[role="icon-tip", size="2x"] | Tips and tricks that might be 
 a| icon:info-circle[role="icon-note", size="2x"] | Additional information that is good to know
 a| icon:exclamation-circle[role="icon-important", size="2x"] | Important pointers to take note of
 endif::[]
+// TODO: add link format
 |=======================================================================
 
 == Quick Start
@@ -627,19 +628,31 @@ image::ug_figures/reminderpopup.png[width="600"]
 
 == FAQ
 
-*Q1*: How do I transfer my data to another Computer? +
+*Q1*: Is JelphaBot free? +
+*A*: Yes, JelphaBot is completely free to use!
+
+*Q2*: How do I transfer my data to another Computer? +
 *A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous JelphaBot folder.
 
-
-*Q2*: How do I save my data? +
+*Q3*: How do I save my data? +
 *A*: JelphaBot automatically saves your data whenever you make a change. There is no need to save manually.
+
+*Q4*: Can I add multiple tasks using a command line? +
+*A*: Sorry, we currently do not support this feature. We will consider this in v2.0.
+
+*Q5*: How do I add tasks with no deadline or description? +
+A : Sorry, we currently do not support task entries with no deadline or descriptions. We will consider this in v2.0.
+
+*Q6*: Do I need an Internet connection to use JelphaBot? +
+A: No, you don’t. JelphaBot works completely offline.
 
 == Command Summary
 
 * *Help* : `help`
+* *Summary*: `summary` or `:s` or `:S`
 * *Add* `[d/DESCRIPTION] [dt/DATETIME] [m/MODULE_CODE] [p/PRIORITY] [t/TAG]…` +
 e.g. `add d/Project TP dt/Jan-01-2020 23 59 m/CS2103T p/1 t/pair work`
-* *List* : `list`
+* *List* : `list` or `:t` or `:T`
 * *List by Date* : `list date`
 * *List by Modules* : `list module`
 * *Find* : `find KEYWORD [MORE_KEYWORDS]` +
@@ -658,10 +671,10 @@ e.g. `delete 3`
 e.g. `reminder 2 days/1 hours/1`
 * *Delete Reminder* : `delrem INDEX` +
 e.g. `delrem 2`
-* *Productivity* : `productivity`
+* *Productivity* : `productivity` or `:p` or `:P`
 * *Timer* : `start INDEX` or `stop INDEX` +
 e.g. `start 1` or `stop 1`
-* *Calendar* : `calendar`
+* *Calendar* : `calendar` or `:c` or `:C`
 * *Calendar Date* : `calendar DATE` +
 e.g. `calendar Jan-1-2020`
 * *Change Calendar View* : `calendar MONTHYEAR` +
