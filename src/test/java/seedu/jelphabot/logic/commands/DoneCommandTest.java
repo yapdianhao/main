@@ -86,7 +86,6 @@ public class DoneCommandTest {
         newModel.setTask(firstTask, doneTask);
 
         assertCommandFailure(doneCommand, newModel, DoneCommand.MESSAGE_TASK_ALREADY_MARKED_COMPLETE);
-
     }
 
     @Test // Test against Category.MODULE as tasks that are overdue and completed are not shown.

@@ -53,7 +53,7 @@ public class GroupedByModuleTaskList extends GroupedTaskList {
      * @param moduleCode The ModuleCode to be tested
      * @return a predicate which tests Tasks for the parameter module code.
      */
-    private Predicate<Task> hasModuleCode(ModuleCode moduleCode) {
+    private Predicate<Task> withModuleCode(ModuleCode moduleCode) {
         return task -> task.getModuleCode().equals(moduleCode);
     }
 
@@ -69,8 +69,8 @@ public class GroupedByModuleTaskList extends GroupedTaskList {
      * @param moduleCode the value of the sublist header.
      */
     private void addSublist(ModuleCode moduleCode) {
-        subgroupTaskLists.add(
-            new SubgroupTaskList(moduleCode.toString(), this.tasks.filtered(hasModuleCode(moduleCode)),
+        subLists.add(
+            new SubgroupTaskList(moduleCode.toString(), this.tasks.filtered(withModuleCode(moduleCode)),
                 subsequentElementStartIndex()
             ));
     }
@@ -80,12 +80,12 @@ public class GroupedByModuleTaskList extends GroupedTaskList {
      */
     public boolean containsSublist(ModuleCode moduleCode) {
         requireNonNull(moduleCode);
-        return subgroupTaskLists.stream().anyMatch(sublist -> sublist.getGroupName().equals(moduleCode.toString()));
+        return subLists.stream().anyMatch(sublist -> sublist.getGroupName().equals(moduleCode.toString()));
     }
 
     @Override
     public ObservableList<SubgroupTaskList> getSublists() {
-        return subgroupTaskLists.sorted(Comparator.comparing(SubgroupTaskList::getGroupName));
+        return subLists.sorted(Comparator.comparing(SubgroupTaskList::getGroupName));
     }
 
     /* === Methods used for testing. Application classes should not call these methods as Tasks are intended
@@ -147,7 +147,7 @@ public class GroupedByModuleTaskList extends GroupedTaskList {
             }
             if (change.wasRemoved()) {
                 ModuleCode removedCode = change.getElementRemoved();
-                subgroupTaskLists.removeIf(sublist -> sublist.getGroupName().equals(removedCode.toString()));
+                subLists.removeIf(sublist -> sublist.getGroupName().equals(removedCode.toString()));
             }
         }
     }

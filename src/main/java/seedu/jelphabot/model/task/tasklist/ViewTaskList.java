@@ -14,4 +14,9 @@ public interface ViewTaskList extends Iterable<Task> {
     int size();
 
     boolean isEmpty();
+
+    /**
+     * Returns true if the list contains an equivalent task as the given argument.
+     */
+    boolean contains(Task task);
 }
