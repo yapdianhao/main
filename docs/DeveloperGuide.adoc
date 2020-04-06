@@ -282,63 +282,88 @@ Each `GroupedTaskList` implements the following operations on top of those in `V
 * A public method for instantiating a `GroupedTaskList` called `getGroupedList` with the return from `getFilteredTaskList()` as argument.
 * An iterator method which iterates through a list of `SubgroupTaskList`.
 
-Users can modify the `GroupTaskList` being displayed in the main panel by calling a `ListCommand`.
-Currently, the supported groupings for JelphaBot are group by date (`GroupedTaskList.Category.DATE` and `GroupedByDateTaskList`)
-and group by module (`GroupedTaskList.Category.MODULE` and `GroupedByModuleTaskList`).
+Users can modify the `GroupTaskList` being displayed in the main panel by executing a `ListCommand`.
+The operation for retrieving the corresponding `GroupedTaskLists` are exposed in the `Model` interface as `Model#getGroupedTaskList(Category category)`. +
+Currently, the supported groupings for JelphaBot are group by date (`GroupedTaskList.Category.DATE` and `GroupedByDateTaskList`) and group by module (`GroupedTaskList.Category.MODULE` and `GroupedByModuleTaskList`).
 
-The operation for retrieving the corresponding GroupedTaskLists are exposed in the `Model` interface as `Model#getGroupedTaskList(Category category)`. +
 The following diagram shows the sequence flow of a `ListCommand` which modifies the currently shown Task List:
 
+[[activity-swapping-groupedtasklist]]
 .Activity Diagram showing the tab switch for ListCommand
 image::ListCommandActivityDiagram.png[]
 
-As `GroupedTaskList` has more than one underlying `ObservableList<Task>`, tasks cannot be retrieved the usual way.
-Thus, the `get()` function defined in the `ViewTaskList` interface must be implemented and used instead. +
-The following diagram shows the process of retrieving a `Task` from `ViewTaskList`:
-
-.Activity Diagram for `ViewTaskList.get()`
-image::GetTaskActivityDiagram.png[]
-
-
 Given below is an example usage scenario and how the task category mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `MainWindow` will be initialized with `GroupedTaskListPanel` as a container for GroupedTaskList model objects.
+*Step 1.* The user launches the application for the first time.
+The `MainWindow` will be initialized with `GroupedTaskListPanel` as a container for GroupedTaskList model objects.
 The panel is populated with sublists defined in `GroupedByDateTaskList`.
 
-Step 2. The user executes `list model` to switch to category tasks by module code instead. `GroupedTaskListPanel` is repopulated with sublists defined in `GroupedByModuleTaskList`.
+*Step 2.* The user executes `list model` to switch to category tasks by module code instead. `GroupedTaskListPanel` is repopulated with sublists defined in `GroupedByModuleTaskList`.
 
 [NOTE]
-If the user tries to switch to a sublist type which is already set, the command fails its execution so that it does not execute the relatively expensive filter operations to make new sublists.
+If the user tries to switch to a `Cateory` which is already set, the command does not reinitialize the `GroupedTaskList` to prevent redundant filtering operations.
 
+As `GroupedTaskList` has more than one underlying `ObservableList<Task>`, tasks cannot be retrieved the usual way.
+Thus, the `get()` function defined in the `ViewTaskList` interface must be implemented and used instead. +
+The following diagram shows the process of retrieving a `Task` from `ViewTaskList` when it is an instance of `GroupedTaskList`:
+
+[[sequence-viewtasklist-get]]
+.Sequence Diagram for `ViewTaskList.get()`
+image::ViewTaskListGetSequenceDiagram.png[]
+
+As the index passed as an argument to `lastShownList.get()` is a cumulative index, the implementation of ` get()` in `ViewTaskList` has to iterate through each `SubgroupTaskList` stored within.
+
+//** Pros: Provides good protection over unexpected changes on the displayed Task List.
+//* *Alternative 1*: Let UI displays problems in an `ObservableList<Task>` and update the list directly.
+//** Pros: This implementation is more straightforward as the logic updates the displayed list directly and all changes are reflected immediately.
+//** Cons: `ObservableList` is able to be modified by the containing panel class.
 ==== Design Considerations
 
 ===== Aspect 1: `ListCommand` swaps to a different `ViewTaskList`
 
+Refer <<activity-swapping-groupedtasklist, here>> for the diagram describing this process.
+
 * *Current solution*: Initializes each grouped list as each `ListCommand` is called and stores the latest list as `Model.lastShownList`.
-**  Pros: Easy to implement. Scalable when more groupings are added.
-**  Cons: Consecutive 'list' operations are expensive as the list is reinitalized each time.
-**  Cons: It is hard to keep track of the exact type of list in `lastShownList`, which may lead to unexpected behavior.
+** Pros: Easy to implement.
+Scalable when more groupings are added.
+** Cons: Consecutive 'list' operations are expensive as the list is reinitalized each time.
+** Cons: It is hard to keep track of the exact type of list in `lastShownList`, which may lead to unexpected behavior.
 * **Alternative 1:** Keep instances of all `GroupedTaskList` objects and update them as underlying Task List changes.
-**  Pros: Consecutive `ListCommand` executions are less expensive.
-**  Cons: All other commands that update the underlying list now have additional checks as each grouped list is updated.
+** Pros: Consecutive `ListCommand` executions are less expensive.
+** Cons: All other commands that update the underlying list now have additional checks as each grouped list is updated.
 
 ===== Aspect 2: `get()` Task from `ViewTaskList` and iterate between Tasks.
 
-* *Current solution*: Implement `get()` and `Iterator<Task>` in `ViewTaskList`. (Not Done Yet)
+Refer <<activity-swapping-groupedtasklist, here>> for the diagram describing this process.
 
-===== Aspect 3: Remove empty Categories in `GroupByDateTaskList`
+* *Current solution*: Implement `get()` and `Iterator<Task>` in `ViewTaskList`.
+** Pros: Easy to implement.
+Scalable when more groupings are added.
+** Cons: Consecutive 'list' operations are expensive as the list is reinitalized each time.
+** Cons: It is hard to keep track of the exact type of list in `lastShownList`, which may lead to unexpected behavior.
+*** As a workaround, only operations defined in the `ViewTaskList` interface should be used.
+* **Alternative 1:** Keep instances of all `GroupedTaskList` objects and update them as underlying Task List changes.
+** Pros: Consecutive `ListCommand` executions are less expensive.
+** Cons: All other commands that update the underlying `UniqueTaskList` will result in multiple update calls to `ViewTaskList`.
+
+===== Aspect 3: Hide empty Categories in `GroupByDateTaskList`
 
 * *Current Solution*: UI displays problems from a `FilteredList<SubgroupTaskList>` and use `setPredicate` to hide empty categories without removing them.
-**  Rationale: These categories are meant to be reused when applicable tasks are added back to the list.
-**  Pros: Provides good protection over unexpected changes on the displayed problem list.
-**  Cons: Additional load on the UI as the Filtering happens constantly.
-* *Alternative 1*: Let UI displays problems in an `ObservableList<Task>` and update the list directly.
-**  Pros: This implementation is more straightforward as the logic updates the displayed list directly and all changes are reflected immediately.
-**  Cons: `ObservableList` is able to be modified by the containing panel class. Empty `SubgroupTaskList` members have to be hidden manually which requires complex logic.
-
+** Rationale: These categories are meant to be reused when applicable tasks are added back to the list.
+** Pros: The list categories do not have to be reinitalized as tasks are removed or added.
+** Cons: Additional load on the UI as the Filtering happens constantly.
+However, since there is a cap on five categories (so five `FilteredList` lists), it is unlikely to be significant.
+** Cons: Inconsistent with the way filtering is done in `GroupByModuleTaskList`, which reduces control abstraction in `GroupedTaskList`.
+* **Alternative 1:** Remove categories which are no longer used, and reinitialize them again when needed.
+** Pros: Consecutive changes to the underlying Task List are less expensive if less lists are currently active.
+** Pros: Enforce consistency with `GroupByModuleTaskList` which might allow some methods to be abstracted to parent class.
+** Cons: Empty `SubgroupTaskList` members have to be hidden manually which requires complex logic in `SubgroupTaskListPanel`.
+** Cons: Additional listeners have to be added (one for each category) to reinitialize empty categories.
 
 ===== Aspect 4: Remove empty Categories in `GroupByModuleTaskList`
 
+* *Current Solution*: UI displays problems from a `FilteredList<SubgroupTaskList>` and use `setPredicate` to hide empty categories without removing them.
+listeners n sets alternative: uniquemodulecodetasklist
 * section does not exist as i have not solved this issue.
 
 // end::taskgroups[]
