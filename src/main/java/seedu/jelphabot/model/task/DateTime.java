@@ -39,12 +39,22 @@ public class DateTime {
     /**
      * Constructs an {@code DateTime}.
      *
-     * @param dateTime A valid datetime.
+     * @param dateTime A string which parses to a valid datetime.
      */
     public DateTime(String dateTime) {
         requireNonNull(dateTime);
         checkArgument(isValidDateTime(dateTime), MESSAGE_CONSTRAINTS);
-        value = LocalDateTime.parse(dateTime, ACCEPTED_INPUT_FORMATTER);
+        this.value = LocalDateTime.parse(dateTime, ACCEPTED_INPUT_FORMATTER);
+    }
+
+    /**
+     * Constructs an {@code DateTime}.
+     *
+     * @param dateTime A LocalDateTime object.
+     */
+    public DateTime(LocalDateTime dateTime) {
+        requireNonNull(dateTime);
+        this.value = dateTime;
     }
 
     /**

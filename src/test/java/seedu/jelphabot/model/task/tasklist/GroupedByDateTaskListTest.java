@@ -1,18 +1,11 @@
 package seedu.jelphabot.model.task.tasklist;
 
-import org.junit.jupiter.api.Test;
-
 class GroupedByDateTaskListTest {
 
     private final GroupedByDateTaskList dateTaskList =
-        makeEmptyModuleTaskList();
+        makeEmptyDateTaskList();
 
-    private static GroupedByDateTaskList makeEmptyModuleTaskList() {
+    private static GroupedByDateTaskList makeEmptyDateTaskList() {
         return new GroupedByDateTaskList(new PinnedTaskListTest.PinnedTaskListStub());
-    }
-
-    @Test
-    public void iterator_emptySublistsHidden() {
-        // do nothing
     }
 }

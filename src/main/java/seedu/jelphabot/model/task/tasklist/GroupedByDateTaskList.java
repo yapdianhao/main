@@ -26,15 +26,17 @@ public class GroupedByDateTaskList extends GroupedTaskList {
     private static final Predicate<Task> isDueSomeday = getDueSomedayPredicate();
 
     public GroupedByDateTaskList(ObservableList<Task> tasks, PinnedTaskList pinnedTaskList) {
-        super(pinnedTaskList, tasks);
-        addSublist("Overdue", isOverdue);
+        super(tasks, pinnedTaskList);
         addSublist("Due Today", isDueToday);
         addSublist("Due This Week", isDueThisWeek);
         addSublist("Due Someday", isDueSomeday);
+        addSublist("Overdue", isOverdue);
+        // subLists.removeIf(SubgroupTaskList::isEmpty);
+        // tasks.addListener(new TaskListChangeListener());
     }
 
     protected GroupedByDateTaskList(PinnedTaskList pinnedTaskList) {
-        super(pinnedTaskList, FXCollections.observableArrayList());
+        super(FXCollections.observableArrayList(), pinnedTaskList);
     }
 
     @Override
@@ -47,13 +49,13 @@ public class GroupedByDateTaskList extends GroupedTaskList {
      * The sublist must not already exist in the list.
      */
     private void addSublist(String title, Predicate<Task> predicate) {
-        subLists.add(
+        this.subLists.add(
             new SubgroupTaskList(title, tasks.filtered(predicate), subsequentElementStartIndex()));
     }
 
     @Override
     public ObservableList<SubgroupTaskList> getSublists() {
-        return subLists.filtered(subgroupTaskList -> !subgroupTaskList.isEmpty());
+        return subLists;
     }
 
     /* === Methods used for testing. Application classes should not call these methods as Tasks are intended
@@ -66,6 +68,7 @@ public class GroupedByDateTaskList extends GroupedTaskList {
         addSublist("Due Today", isDueToday);
         addSublist("Due This Week", isDueThisWeek);
         addSublist("Due Someday", isDueSomeday);
+        // subLists.removeIf(SubgroupTaskList::isEmpty);
     }
     // === End of Methods used for testing ===
 
@@ -75,7 +78,14 @@ public class GroupedByDateTaskList extends GroupedTaskList {
     // private class TaskListChangeListener implements ListChangeListener<Task> {
     //     @Override
     //     public void onChanged(Change<? extends Task> change) {
-    //         // do nothing
+    //         while (change.next()) {
+    //             subLists.clear();
+    //             addSublist("Overdue", isOverdue);
+    //             addSublist("Due Today", isDueToday);
+    //             addSublist("Due This Week", isDueThisWeek);
+    //             addSublist("Due Someday", isDueSomeday);
+    //             subLists.removeIf(SubgroupTaskList::isEmpty);
+    //         }
     //     }
     // }
 }
