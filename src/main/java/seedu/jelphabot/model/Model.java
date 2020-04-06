@@ -59,7 +59,7 @@ public interface Model {
     /**
      * Sets the user prefs' address book file path.
      */
-    void setJelphaBotFilePath(Path addressBookFilePath);
+    void setJelphaBotFilePath(Path jelphaBotFilePath);
 
     Path getRemindersFilePath();
 
@@ -69,9 +69,9 @@ public interface Model {
     ReadOnlyJelphaBot getJelphaBot();
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces address book data with the data in {@code jelphaBot}.
      */
-    void setJelphaBot(ReadOnlyJelphaBot addressBook);
+    void setJelphaBot(ReadOnlyJelphaBot jelphaBot);
 
     /**
      * Returns true if a task with the same identity as {@code task} exists in the address book.
