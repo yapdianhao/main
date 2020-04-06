@@ -69,7 +69,7 @@
                         </Tab>
                         <Tab>
                             <content>
-                                <StackPane fx:id="calendarMainPanelPlaceholder" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: MAROON;" />
+                                <StackPane fx:id="calendarMainPanelPlaceholder" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
                             </content>
                             <graphic>
                                 <Label graphicTextGap="0.0" maxHeight="1.7976931348623157E308" text="alendar">

@@ -1,7 +1,5 @@
 package seedu.jelphabot.ui;
 
-import java.time.LocalDate;
-import java.time.YearMonth;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -15,17 +13,14 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.jelphabot.commons.core.GuiSettings;
 import seedu.jelphabot.commons.core.LogsCenter;
-import seedu.jelphabot.commons.util.DateUtil;
 import seedu.jelphabot.logic.Logic;
 import seedu.jelphabot.logic.commands.CommandResult;
 import seedu.jelphabot.logic.commands.exceptions.CommandException;
 import seedu.jelphabot.logic.parser.exceptions.ParseException;
-import seedu.jelphabot.model.calendar.CalendarDate;
 import seedu.jelphabot.model.productivity.Productivity;
 import seedu.jelphabot.model.productivity.ProductivityList;
 import seedu.jelphabot.model.summary.Summary;
 import seedu.jelphabot.model.summary.SummaryList;
-import seedu.jelphabot.model.task.predicates.TaskDueWithinDayPredicate;
 import seedu.jelphabot.model.task.tasklist.GroupedTaskList;
 import seedu.jelphabot.model.task.tasklist.GroupedTaskList.Category;
 
@@ -150,13 +145,6 @@ public class MainWindow extends UiPart<Stage> {
 
         calendarMainPanel = new CalendarMainPanel(mainWindowTabPane, logic);
         calendarMainPanelPlaceholder.getChildren().add(calendarMainPanel.getRoot());
-
-        // calendarTaskListPanel = new CalendarTaskListPanel(logic.getFilteredCalendarTaskList());
-        // logic.updateFilteredCalendarTaskList(new TaskDueWithinDayPredicate(DateUtil.getDateToday()));
-        // calendarTaskListPanelPlaceholder.getChildren().add(calendarTaskListPanel.getRoot());
-        //
-        // calendarPanel = new CalendarPanel(CalendarDate.getCurrent(), mainWindowTabPane);
-        // calendarPanelPlaceholder.getChildren().add(calendarPanel.getRoot());
 
         SummaryList summaryList = logic.getSummaryList();
         summaryList.addSummary(new Summary(logic.getFilteredTaskList()));

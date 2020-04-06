@@ -79,7 +79,7 @@ public class CalendarMainPanel extends UiPart<Region> {
     public void updateCalendarPanel(CommandResult commandResult) {
         LocalDate date = commandResult.getDate();
         YearMonth yearMonth = commandResult.getYearMonth();
-        if (date != null && yearMonth == null) {
+        if (date != null && yearMonth == null) { //change date
             if (date.getMonthValue() == calendarPanel.getCalendarMonth()) {
                 if (calendarPanel.isTodayHighlighted()) {
                     calendarPanel.getHighlightedDay().removeHighlightedToday();
@@ -95,7 +95,7 @@ public class CalendarMainPanel extends UiPart<Region> {
                 }
                 calendarPanel.setHighlightedDay(dayIndex);
             }
-        } else if (date == null && yearMonth != null) {
+        } else if (date == null && yearMonth != null) { //change month view
             LocalDate firstDayOfMonth = yearMonth.atDay(1);
             CalendarDate newDate = new CalendarDate(firstDayOfMonth);
             calendarPanel.changeMonthYearLabel(yearMonth);
@@ -103,7 +103,8 @@ public class CalendarMainPanel extends UiPart<Region> {
             calendarPanel.getHighlightedDay().removeHighlightedDay();
             CalendarPanel.getDayCard(1).highlightDay();
             calendarPanel.setHighlightedDay(1);
-        } else {
+        } else { //change today
+            logger.info("it runs!!!!!!!!!!!!!!!!!!!!!!");
             LocalDate today = DateUtil.getDateToday();
             LocalDate firstDay = today.withDayOfMonth(1);
             CalendarDate firstDayDate = new CalendarDate(firstDay);

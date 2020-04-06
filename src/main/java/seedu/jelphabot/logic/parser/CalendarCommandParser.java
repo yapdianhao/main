@@ -58,7 +58,7 @@ public class CalendarCommandParser implements Parser<CalendarCommand> {
             return new CalendarCommand(new TaskDueWithinDayPredicate(date));
         } else if (input.equals("today")) {
             YearMonth yearMonth = YearMonth.now();
-            return new CalendarCommand(new TaskDueWithinDayPredicate(DateUtil.getDateToday()));
+            return new CalendarCommand(new TaskDueWithinDayPredicate(DateUtil.getDateToday()), true);
         } else {
             //case for switching month view
             if (!isValidYearMonth(input)) {
