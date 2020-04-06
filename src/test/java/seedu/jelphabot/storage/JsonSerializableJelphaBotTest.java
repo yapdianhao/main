@@ -24,9 +24,9 @@ public class JsonSerializableJelphaBotTest {
     public void toModelType_typicalTasksFile_success() throws Exception {
         JsonSerializableJelphaBot dataFromFile = JsonUtil.readJsonFile(TYPICAL_TASKS_FILE,
                 JsonSerializableJelphaBot.class).get();
-        JelphaBot addressBookFromFile = dataFromFile.toModelType();
+        JelphaBot jelphaBotFromFile = dataFromFile.toModelType();
         JelphaBot typicalTasksJelphaBot = TypicalTasks.getTypicalJelphaBot();
-        assertEquals(addressBookFromFile, typicalTasksJelphaBot);
+        assertEquals(jelphaBotFromFile, typicalTasksJelphaBot);
     }
 
     @Test
