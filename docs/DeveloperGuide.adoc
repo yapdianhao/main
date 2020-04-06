@@ -249,8 +249,7 @@ and group by module (`GroupedTaskList.Category.MODULE` and `GroupedByModuleTaskL
 The operation for retrieving the corresponding GroupedTaskLists are exposed in the `Model` interface as `Model#getGroupedTaskList(Category category)`. +
 The following diagram shows the sequence flow of a `ListCommand` which modifies the currently shown Task List:
 
-//TODO CHANGE TO SEQUENCE DIAGRAM, with listener
-.Activity (Will change to sequence) Diagram for ListCommand
+.Activity Diagram showing the tab switch for ListCommand
 image::ListCommandActivityDiagram.png[]
 
 As `GroupedTaskList` has more than one underlying `ObservableList<Task>`, tasks cannot be retrieved the usual way.

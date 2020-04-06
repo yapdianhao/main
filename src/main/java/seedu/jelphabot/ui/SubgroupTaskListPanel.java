@@ -3,6 +3,7 @@ package seedu.jelphabot.ui;
 import java.util.logging.Logger;
 
 import javafx.beans.binding.Bindings;
+import javafx.beans.binding.IntegerBinding;
 import javafx.beans.binding.NumberBinding;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
@@ -36,10 +37,14 @@ public class SubgroupTaskListPanel extends UiPart<Region> {
     public SubgroupTaskListPanel(SubgroupTaskList subGroupTaskList) {
         super(FXML);
         this.subGroupTaskList = subGroupTaskList;
-        category.setText(subGroupTaskList.getGroupName());
+        setCategoryTitle(subGroupTaskList.getGroupName(), subGroupTaskList.sizeBinding());
         groupingList.setCellFactory(viewCell -> new SubgroupTaskListViewCell());
         groupingList.prefHeightProperty().bind(subGroupTaskList.sizeBinding().multiply(PREF_CELL_HEIGHT));
         groupingList.setItems(subGroupTaskList.getList());
+    }
+
+    public void setCategoryTitle(String groupName, IntegerBinding totalSize) {
+        category.textProperty().bind(totalSize.asString(groupName + " [%d]"));
     }
 
     /**
