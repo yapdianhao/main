@@ -41,10 +41,11 @@ public class MainWindow extends UiPart<Stage> {
     private static final String WELCOME_STRING = "Welcome to JelphaBot!\n"
                                                      + "To go back to the list of your tasks, type list!";
 
+    private static Logic logic;
+
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     private Stage primaryStage;
-    private static Logic logic;
 
     // Independent Ui parts residing in this Ui container
     private GroupedTaskListPanel taskListPanel;

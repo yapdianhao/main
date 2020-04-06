@@ -86,6 +86,9 @@ public class CalendarPanel extends UiPart<Region> {
         logger.info("length of dayCardsInMonth " + dayCardsInMonth.size());
     }
 
+    /**
+     * Updates the tasks in all the calendar day cards in the calendar panel.
+     */
     public void updateDayCards() {
         for (CalendarDayCard day: allDayCards) {
             day.updateTasks();

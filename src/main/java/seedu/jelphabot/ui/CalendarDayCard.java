@@ -19,7 +19,7 @@ public class CalendarDayCard extends UiPart<Region> {
     private static final String FXML = "CalendarDayCard.fxml";
 
     private CalendarDate calendarDate;
-    public ObservableList<Task> tasks;
+    private ObservableList<Task> tasks;
 
     @FXML
     private Label calendarDay;
@@ -53,6 +53,9 @@ public class CalendarDayCard extends UiPart<Region> {
         dotTasks.setFill(Color.TRANSPARENT);
     }
 
+    /**
+     * Updates the tasks due on the calendar date belonging to a calendar day card.
+     */
     public void updateTasks() {
         ObservableList<Task> allTasks = MainWindow.getLogic().getFilteredTaskList();
         TaskDueWithinDayPredicate predicate = new TaskDueWithinDayPredicate(calendarDate.getDate());
