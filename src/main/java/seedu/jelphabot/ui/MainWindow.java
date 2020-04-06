@@ -25,6 +25,7 @@ import seedu.jelphabot.model.productivity.Productivity;
 import seedu.jelphabot.model.productivity.ProductivityList;
 import seedu.jelphabot.model.summary.Summary;
 import seedu.jelphabot.model.summary.SummaryList;
+import seedu.jelphabot.model.task.predicates.TaskDueWithinDayPredicate;
 import seedu.jelphabot.model.task.tasklist.GroupedTaskList;
 import seedu.jelphabot.model.task.tasklist.GroupedTaskList.Category;
 
@@ -43,7 +44,7 @@ public class MainWindow extends UiPart<Stage> {
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     private Stage primaryStage;
-    private Logic logic;
+    private static Logic logic;
 
     // Independent Ui parts residing in this Ui container
     private GroupedTaskListPanel taskListPanel;
@@ -104,6 +105,10 @@ public class MainWindow extends UiPart<Stage> {
         return primaryStage;
     }
 
+    public static Logic getLogic() {
+        return logic;
+    }
+
     public static CalendarPanel getCalendarPanel() {
         return calendarPanel;
     }
@@ -152,7 +157,7 @@ public class MainWindow extends UiPart<Stage> {
 
         //update getFilteredCalendarTaskList
         calendarTaskListPanel = new CalendarTaskListPanel(logic.getFilteredCalendarTaskList());
-        logic.updateFilteredCalendarTaskList(DateUtil.getDueTodayPredicate());
+        logic.updateFilteredCalendarTaskList(new TaskDueWithinDayPredicate(DateUtil.getDateToday()));
         calendarTaskListPanelPlaceholder.getChildren().add(calendarTaskListPanel.getRoot());
 
         calendarPanel = new CalendarPanel(CalendarDate.getCurrent(), mainWindowTabPane);
@@ -283,6 +288,7 @@ public class MainWindow extends UiPart<Stage> {
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
             CommandResult commandResult = logic.execute(commandText);
+            // calendarPanel.updateDayCards();
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
@@ -357,10 +363,11 @@ public class MainWindow extends UiPart<Stage> {
             calendarPanel.setHighlightedDay(1);
         } else {
             LocalDate today = DateUtil.getDateToday();
-            CalendarDate todayDate = new CalendarDate(today);
+            LocalDate firstDay = today.withDayOfMonth(1);
+            CalendarDate firstDayDate = new CalendarDate(firstDay);
             YearMonth todayYearMonth = YearMonth.now();
             calendarPanel.changeMonthYearLabel(todayYearMonth);
-            calendarPanel.fillGridPane(todayDate);
+            calendarPanel.fillGridPane(firstDayDate);
             calendarPanel.getHighlightedDay().removeHighlightedDay();
             CalendarPanel.getDayCard(today.getDayOfMonth()).highlightToday();
             calendarPanel.setHighlightedDay(today.getDayOfMonth());

@@ -11,7 +11,7 @@
       <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity">
          <children>
               <Label fx:id="calendarDay" alignment="CENTER" contentDisplay="CENTER" text="\$day" textAlignment="CENTER" />
-            <Circle fx:id="dotTasks" fill="#ffffff00" radius="4.0" stroke="#ffffff00" strokeType="INSIDE" />
+            <Circle fx:id="dotTasks" fill="#ffffff00" radius="2.5" stroke="#ffffff00" strokeType="INSIDE" />
          </children>
       </VBox>
     </children>

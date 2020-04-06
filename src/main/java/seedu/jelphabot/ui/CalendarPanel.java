@@ -19,6 +19,7 @@ public class CalendarPanel extends UiPart<Region> {
 
     private static final String FXML = "CalendarPanel.fxml";
     private static ArrayList<CalendarDayCard> dayCardsInMonth;
+    private static ArrayList<CalendarDayCard> allDayCards = new ArrayList<>();
     private final Logger logger = LogsCenter.getLogger(CalendarPanel.class);
 
     private CalendarDate calendarDate;
@@ -65,6 +66,7 @@ public class CalendarPanel extends UiPart<Region> {
         for (int row = 0; row < 6; row++) {
             for (int col = 0; col < 7; col++) {
                 CalendarDayCard calendarDayCard = new CalendarDayCard(currDate);
+                allDayCards.add(calendarDayCard);
                 if (currDate.isSameMonth(firstDay.getMonth())) {
                     calendarDayCard.setSameMonth();
                     dayCardsInMonth.add(calendarDayCard);
@@ -81,6 +83,12 @@ public class CalendarPanel extends UiPart<Region> {
             }
         }
         logger.info("length of dayCardsInMonth " + dayCardsInMonth.size());
+    }
+
+    public void updateDayCards() {
+        for (CalendarDayCard day: allDayCards) {
+            day.updateTasks();
+        }
     }
 
     /**
