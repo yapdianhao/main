@@ -220,7 +220,7 @@ This section describes some noteworthy details on how certain features are imple
 === Tab System
 Users may find it complicated to handle the many features that JelphaBot offers. They might also be overwhelmed if all the information of their tasks were to be displayed together in one screen.
 
-As such, we have decided to implement a tab system for ROR to organise the available commands into their respective features. JelphaBot provides 4 different tabs for the users,
+As such, we have decided to implement a tab system for JelphaBot to organise the available commands into their respective features. JelphaBot provides 4 different tabs for the users,
 each displaying a different set of panels that are relevant to the feature.
 
 * *Summary Tab* - <<Summary feature, overall view>> of the day's tasks in the task list.
@@ -237,23 +237,23 @@ To use the different features, we have also implemented commands for users to sw
 [[ChangingTabs]]
 ===== Switching between Tabs in Main Window
 
-The tabs of the application are defined using a [.java]#Tab# enum and the current mode of the application is stored as a private attribute [.java]#mode# in [.java]#LogicManager#. Users can switch between modes in JelphaBot using the lower case names of each tab as commands. For instance, `calendar. When the tab of the application is changed, we need to update the:
+The tabs of the application are defined using a [.java]#SwitchTab# enum and the current tab of the application is stored as a private attribute [.java]#mode# in [.java]#LogicManager#. Users can switch between tabs in JelphaBot using the lower case names of each tab as commands (e.g. `calendar`). When the tab of the application is changed, we need to update the:
 
-* [.java]#Logic# component so that the [.java]#tab# attribute in [.java]#LogicManager# reflects the new current tab, since this is used to check if a command can be executed,
+* [.java]#MainWindow# component so that the [.java]#SwitchTab# attribute in [.java]#MainWindow# reflects the new current tab, since this is used to check if a command can be executed,
 * [.java]#UI# component so that the panels display the information that is relevant to the tab.
 
 [IMPORTANT]
 `task list` is not a valid command to switch to the Task List tab. Use `list` instead.
 
-For all these commands, these updates are done using a new [.java]#toTab# attribute added to the [.java]#CommandResult# object. As an example, the figure below shows the sequence diagram for when a user executes the `:p` command:
+For all these commands, updates are done by updating the [.java]#SwitchTab# attribute added in the [.java]#CommandResult# object. As an example, the figure below shows the sequence diagram for when a user executes the `:p` command:
 
 .Component interactions for `:p` command
-image::productivityTabSequenceDiagram.png[width="800"]
+// TODO: insert diagram
 
-Upon execution of the `:p` command, [.java]#ProductivityCommand#generateCommandResult()# will generate a [.java]#CommandResult# whose [.java]#toTab# attribute is set to [.java]#PRODUCTIVITY# and return it to the [.java]#LogicManager#. Now, the updates can be done for the respective components:
+Upon execution of the `:p` command, [.java]#ProductivityCommand#generateCommandResult()# will generate a [.java]#CommandResult# whose [.java]#SwitchTab# attribute is set to [.java]#PRODUCTIVITY# and return it to the [.java]#LogicManager#. Now, the updates can be done for the respective components:
 
-* [.java]#Logic# component: [.java]#LogicManager# calls [.java]#CommandResult#newModeStatus()# to retrieve the mode to be changed to and updates the current mode stored in its [.java]#mode# attribute by calling [.java]#LogicManager#changeMode()#. The [.java]#CommandResult# is passed to [.java]#MainWindow# in UI.
-* [.java]#UI# component: [.java]#MainWindow# calls [.java]#CommandResult#newModeStatus()# to retrieve the mode to be changed to and updates the display panels by calling [.java]#MainWindow#handleChangeMode()#.
+* [.java]#UI# component: [.java]#MainWindow# calls [.java]#MainWindow#executeCommand()#, to retrieve the tab to be changed to and updates the current tab stored in its [.java]#SwitchTab# attribute by calling [.java]#CommandResult#isShow{XXX}()# where XXX is the tab to switch to.
+The display panel is updated by calling [.java]#MainWindow#handle{XXX} where XXX is the tab to switch to.
 
 [NOTE]
 For commands that do not involve a change in mode, [.java]#CommandResult#newModeStatus()# will return [.java]#null# and no updates to the current mode or display will be done.
