@@ -370,20 +370,17 @@
     -fx-background-color: derive(cornsilk, 20%);
 }
 
-#highPriority {
-    -fx-font-size: 14pt;
+.description {
+    -fx-font-size: 12pt;
     -fx-font-family: "Segoe UI";
+}
+
+#highPriority {
     -fx-font-weight: bold;
 }
 
-#normalPriority {
-    -fx-font-size: 14pt;
-    -fx-font-family: "Segoe UI";
+#lowPriority {
+    -fx-font-style: italic;
+    -fx-text-fill: #313136;;
 }
 
-#lowPriority {
-    -fx-font-size: 14pt;
-    -fx-font-family: "Segoe UI Light";
-    -fx-font-style: italic;
-    -fx-text-fill: #313136;
-}
