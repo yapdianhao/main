@@ -347,21 +347,21 @@ Scalable when more groupings are added.
 ** Pros: Consecutive `ListCommand` executions are less expensive.
 ** Cons: All other commands that update the underlying `UniqueTaskList` will result in multiple update calls to `ViewTaskList`.
 
-===== Aspect 3: Hide empty Categories in `GroupByDateTaskList`
+//===== Aspect 3: Hide empty Categories in `GroupByDateTaskList`
+//
+//* *Current Solution*: UI displays problems from a `FilteredList<SubgroupTaskList>` and use `filtered()` to hide empty categories without removing them.
+//** Rationale: These categories are meant to be reused when applicable tasks are added back to the list.
+//** Pros: The list categories do not have to be reinitalized as tasks are removed or added.
+//** Cons: Additional load on the UI as the Filtering happens constantly.
+//However, since there is a cap on five categories (so five `FilteredList` lists), it is unlikely to be significant.
+//** Cons: Inconsistent with the way filtering is done in `GroupByModuleTaskList`, which reduces control abstraction in `GroupedTaskList`.
+//* **Alternative 1:** Remove categories which are no longer used, and reinitialize them again when needed.
+//** Pros: Consecutive changes to the underlying Task List are less expensive if less lists are currently active.
+//** Pros: Enforce consistency with `GroupByModuleTaskList` which might allow some methods to be abstracted to parent class.
+//** Cons: Empty `SubgroupTaskList` members have to be hidden manually which requires complex logic in `SubgroupTaskListPanel`.
+//** Cons: Additional listeners have to be added (one for each category) to reinitialize empty categories.
 
-* *Current Solution*: UI displays problems from a `FilteredList<SubgroupTaskList>` and use `filtered()` to hide empty categories without removing them.
-** Rationale: These categories are meant to be reused when applicable tasks are added back to the list.
-** Pros: The list categories do not have to be reinitalized as tasks are removed or added.
-** Cons: Additional load on the UI as the Filtering happens constantly.
-However, since there is a cap on five categories (so five `FilteredList` lists), it is unlikely to be significant.
-** Cons: Inconsistent with the way filtering is done in `GroupByModuleTaskList`, which reduces control abstraction in `GroupedTaskList`.
-* **Alternative 1:** Remove categories which are no longer used, and reinitialize them again when needed.
-** Pros: Consecutive changes to the underlying Task List are less expensive if less lists are currently active.
-** Pros: Enforce consistency with `GroupByModuleTaskList` which might allow some methods to be abstracted to parent class.
-** Cons: Empty `SubgroupTaskList` members have to be hidden manually which requires complex logic in `SubgroupTaskListPanel`.
-** Cons: Additional listeners have to be added (one for each category) to reinitialize empty categories.
-
-===== Aspect 4: Remove empty Categories in `GroupByModuleTaskList`
+===== Aspect 3: Remove empty Categories in `GroupByModuleTaskList`
 
 * *Current Solution*: UI displays problems from a `FilteredList<SubgroupTaskList>` and uses a `ListChangeListener<Task>` to maintain a set of unique module codes when the underlying task list is changed.
 The `ObservableSet<ModuleCode>` has a further `SetChangeListener<ModuleCode>` bound to it to remove categories that no longer contain any Tasks.

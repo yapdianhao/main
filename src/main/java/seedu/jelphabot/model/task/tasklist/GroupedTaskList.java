@@ -30,11 +30,9 @@ public abstract class GroupedTaskList implements ViewTaskList {
      * underlying task list
      */
     protected final ObservableList<Task> tasks;
-
     protected final ObservableList<SubgroupTaskList> subLists = FXCollections.observableArrayList();
 
-    protected GroupedTaskList(PinnedTaskList pinnedTaskList,
-        ObservableList<Task> tasks) {
+    protected GroupedTaskList(ObservableList<Task> tasks, PinnedTaskList pinnedTaskList) {
         requireAllNonNull(tasks);
         requireNonNull(pinnedTaskList);
         this.tasks = tasks;
@@ -179,7 +177,7 @@ public abstract class GroupedTaskList implements ViewTaskList {
     // === End of Methods used for testing ===
 
     /**
-     * GroupedTaskList.Groupings define a set of fixed enum mappings from the commandArgument to the corresponding
+     * Category defines a set of fixed enum mappings from the commandArgument to the corresponding
      * constructor.
      */
     public enum Category {
