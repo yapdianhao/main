@@ -23,6 +23,7 @@ public class DeleteReminderCommandParserTest {
     @Test
     public void parse_validArgs_returnDeleteReminderCommand() {
         assertParseSuccess(parser, "1", new DeleteReminderCommand(INDEX_FIRST_TASK));
+        assertParseSuccess(parser, "   1", new DeleteReminderCommand(INDEX_FIRST_TASK));
     }
 
     @Test
