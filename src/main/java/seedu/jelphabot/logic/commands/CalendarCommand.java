@@ -65,14 +65,14 @@ public class CalendarCommand extends Command {
     public CommandResult execute(Model model) {
         if (predicate == null && yearMonth == null) {
             return new CommandResult(MESSAGE_SWITCH_PANEL_ACKNOWLEDGEMENT, false, false).isShowCalendar();
-        } else if (isDate) { //(yearMonth == null) { //switch task list for specific dates
+        } else if (isDate) { //switch task list for specific dates
             requireNonNull(model);
             model.updateFilteredCalendarTaskList(predicate);
             LocalDate date = predicate.getDate();
             return new CommandResult(
                 String.format(Messages.MESSAGE_TASKS_LISTED_OVERVIEW,
                     model.getFilteredCalendarTaskList().size()), date, null);
-        } else if (isMonth) { //(predicate == null) { //switch calendar view
+        } else if (isMonth) { //switch calendar view
             requireNonNull(model);
             model.updateFilteredCalendarTaskList(predicate);
             return new CommandResult(String.format(MESSAGE_SWITCH_CALENDAR_VIEW_ACKNOWLEDGEMENT,
@@ -89,6 +89,9 @@ public class CalendarCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
+                   || (other instanceof CalendarCommand // instanceof handles nulls
+                           && predicate.equals(((CalendarCommand) other).predicate)
+                           && yearMonth == null && ((CalendarCommand) other).yearMonth == null)
                    || (other instanceof CalendarCommand // instanceof handles nulls
                            && predicate.equals(((CalendarCommand) other).predicate)
                            && yearMonth.equals(((CalendarCommand) other).yearMonth)); // state check

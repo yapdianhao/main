@@ -4,6 +4,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
+
 <StackPane xmlns:fx="http://javafx.com/fxml/1" fx:id="calendarGridDay" maxHeight="-Infinity" maxWidth="-Infinity"
            minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/11">
     <children>
@@ -12,7 +13,7 @@
             <children>
                 <Label fx:id="calendarDay" alignment="CENTER" contentDisplay="CENTER" text="\$day"
                        textAlignment="CENTER"/>
-                <Circle fx:id="dotTasks" fill="#ffffff00" radius="4.0" stroke="#ffffff00" strokeType="INSIDE"/>
+                <Circle fx:id="dotTasks" fill="#ffffff00" radius="2.5" stroke="#ffffff00" strokeType="INSIDE"/>
             </children>
         </VBox>
     </children>
