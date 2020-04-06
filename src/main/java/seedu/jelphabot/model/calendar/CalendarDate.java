@@ -9,9 +9,10 @@ import seedu.jelphabot.commons.util.DateUtil;
  */
 public class CalendarDate {
 
-    private final LocalDate date;
-    private final String[] months = {"January", "February", "March", "April", "May", "June",
+    private static final String[] months = {"January", "February", "March", "April", "May", "June",
         "July", "August", "September", "October", "November", "December"};
+
+    private final LocalDate date;
 
     public CalendarDate(LocalDate date) {
         this.date = date;
@@ -43,6 +44,10 @@ public class CalendarDate {
 
     public String getMonthName() {
         return months[getMonth() - 1];
+    }
+
+    public static String getMonthNameOf(int monthValue) {
+        return months[monthValue - 1];
     }
 
     public int getDayOfWeek() {

@@ -27,6 +27,14 @@ is still used for improved design and user experience.
 
 JelphaBot is based on the AddressBook-Level3 (AB3) project created by SE-EDU initiative at https://se-education.org
 
+=== Purpose of this Document
+The following section describes the software architecture and design decisions behind the implementation of JelphaBot.
+This guide is intended for developers who wish to maintain, modify or understand the software development behind our application.
+The guide is divided into various sections. First, it explores the overarching architecture of the software before exploring each individual component,
+as well as the individual implementations of each distinct feature.
+
+The guide is designed to be read as-needed, new developers can choose to start from the overarching view before narrowing down to the specific implementation they require.
+
 This Developer Guide consists of the following sections:
 
 * <<Setting Up, Setting Up>> - Assists new developers in cloning and initializing a copy of JelphaBot.
@@ -37,7 +45,7 @@ and explains the design considerations of these implementations.
 * <<Testing, Testing>> - A guide for developers to set up and run test code.
 * <<Dev Ops, Dev Ops>> - A guide for developers to build, test and release JelphaBot.
 
-=== How to Use this Guide
+=== Notation used in this Guide
 [width="70%",cols="^15%,85%"]
 |===
 a| `code` | Command that can be typed
@@ -54,14 +62,17 @@ a| icon:exclamation-circle[role="icon-important", size="2x"] | Important pointer
 endif::[]
 |===
 
-== Setting up
+== Setting Up
 
 Refer to the guide <<SettingUp#, here>>.
 
 == Design
 
-The following section describes the software architecture and software design decisions for the implementation of JelphaBot.
-JelphaBot is a desktop app built in Java based on the AddressBook-Level3 project created by the SE-EDU initiative.
+JelphaBot is a desktop app built in Java based on the AddressBook-Level3 project created by the SE-EDU initiative,
+and inherits its architectural design. The software is split into various components, each with its own package.
+Each component is in charge of a single aspect of the software.
+
+[TIP]
 The data in JelphaBot is stored as .json files in the `data` subdirectory.
 
 [[Design-Architecture]]
@@ -73,14 +84,13 @@ image::ArchitectureDiagram2.png[]
 
 The *_Architecture Diagram_* given above explains the high-level design of the App. Given below is a quick overview of each component.
 
-// TODO: let devs know how to update drawio
 [TIP]
 The `.drawio` files used to create diagrams in this document can be found in the link:{repoURL}/docs/diagrams/[diagrams] folder.
-To update a diagram __.
+To update a diagram, import the `.drawio` file to the webapp link:{https://draw.io}[here].
 
 Given below is a quick overview of each component.
 
-`Main` has two classes called link:{repoURL}src/main/java/seedu/jelphabot/Main.java[`Main`] and link:{repoURL}/src/main/java/seedu/jelphabot/MainApp.java[`MainApp`]. It is responsible for,
+`Main` has two classes called link:{repoURL}src/main/java/seedu/JelphaBot/Main.java[`Main`] and link:{repoURL}/src/main/java/seedu/JelphaBot/MainApp.java[`MainApp`]. It is responsible for,
 
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup method where necessary.
@@ -113,7 +123,7 @@ image::LogicClassDiagram.png[]
 The _Sequence Diagram_ below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
 .Component interactions for `delete 1` command
-image::ArchitectureSequenceDiagram.png[]
+image::interaction.png[]
 
 The sections below give more details of each component.
 
@@ -125,13 +135,12 @@ This includes input fields where commands are entered as well as translations of
 .Class Diagram of the UI Component
 image::UiClassDiagram.png[]
 
-*API* : link:{repoURL}/src/main/java/seedu/jelphabot/ui/Ui.java[`Ui.java`]
+*API* : link:{repoURL}/src/main/java/seedu/JelphaBot/ui/Ui.java[`Ui.java`]
 
-// TODO include yall class names in here
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `CalendarDayCard`, `ResultDisplay`, `TaskListPanel`, `StatusBarFooter` etc.
 All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
-The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the link:{repoURL}/src/main/java/seedu/jelphabot/ui/MainWindow.java[`MainWindow`] is specified in link:{repoURL}/src/main/resources/view/MainWindow.fxml[`MainWindow.fxml`]
+The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the link:{repoURL}/src/main/java/seedu/JelphaBot/ui/MainWindow.java[`MainWindow`] is specified in link:{repoURL}/src/main/resources/view/MainWindow.fxml[`MainWindow.fxml`]
 
 The `UI` component,
 
@@ -147,7 +156,7 @@ The Logic component handles the business logic after a command is executed.
 image::LogicClassDiagram.png[]
 
 *API* :
-link:{repoURL}/src/main/java/seedu/jelphabot/logic/Logic.java[`Logic.java`]
+link:{repoURL}/src/main/java/seedu/JelphaBot/logic/Logic.java[`Logic.java`]
 
 .  `Logic` uses the `JelphaBotParser` class to parse the user command.
 .  This results in a `Command` object which is executed by the `LogicManager`.
@@ -169,7 +178,7 @@ The Model component provides an internal data representation of all tasks stored
 .Structure of the Model Component
 image::ModelClassDiagram.png[]
 
-*API* : link:{repoURL}/src/main/java/seedu/jelphabot/model/Model.java[`Model.java`]
+*API* : link:{repoURL}/src/main/java/seedu/JelphaBot/model/Model.java[`Model.java`]
 
 The `Model`,
 
@@ -189,9 +198,9 @@ image:BetterModelClassDiagram.png[]
 The Storage component manages storing and retrieving of data onto local files in .json format.
 
 .Structure of the Storage Component
-image::StorageClassDiagram.png[]
+image::Storage.png[]
 
-*API* : link:{repoURL}/src/main/java/seedu/jelphabot/storage/Storage.java[`Storage.java`]
+*API* : link:{repoURL}/src/main/java/seedu/JelphaBot/storage/Storage.java[`Storage.java`]
 
 The `Storage` component,
 
@@ -201,83 +210,215 @@ The `Storage` component,
 [[Design-Commons]]
 === Common classes
 
-Classes used by multiple components are in the `seedu.jelphabot.commons` package.
+Classes used by multiple components are in the `seedu.JelphaBot.commons` package.
 This includes classes which implement utility functions which can be used by all other components.
 
 == Implementation
 
 This section describes some noteworthy details on how certain features are implemented.
 
+=== Tab System
+Users may find it complicated to handle the many features that JelphaBot offers. They might also be overwhelmed if all the information of their tasks were to be displayed together in one screen.
+
+As such, we have decided to implement a tab system for JelphaBot to organise the available commands into their respective features. JelphaBot provides 4 different tabs for the users,
+each displaying a different set of panels that are relevant to the feature.
+
+* *Summary Tab* - <<Summary feature, overall view>> of the day's tasks in the task list.
+* *Task List Tab* - <<Task Grouping feature in Task List tab, view all tasks>> in the task list.
+* *Calendar Tab* - <<Calendar feature, visualisation>> of tasks in a specific day or month.
+* *Productivity Tab* - <<Productivity feature, overarching view>> of overall productivity such as task completion rate.
+
+To use the different features, we have also implemented commands for users to switch between the 4 tabs.
+
+[[ChangeTab]]
+// tag::changetab[]
+==== Current Implementation
+
+[[ChangingTabs]]
+===== Switching between Tabs in Main Window
+
+The tabs of the application are defined using a [.java]#SwitchTab# enum and the current tab of the application is stored as a private attribute [.java]#mode# in [.java]#LogicManager#. Users can switch between tabs in JelphaBot using the lower case names of each tab as commands (e.g. `calendar`). When the tab of the application is changed, we need to update the:
+
+* [.java]#MainWindow# component so that the [.java]#SwitchTab# attribute in [.java]#MainWindow# reflects the new current tab, since this is used to check if a command can be executed,
+* [.java]#UI# component so that the panels display the information that is relevant to the tab.
+
+[IMPORTANT]
+`task list` is not a valid command to switch to the Task List tab. Use `list` instead.
+
+For all these commands, updates are done by updating the [.java]#SwitchTab# attribute added in the [.java]#CommandResult# object. As an example, the figure below shows the sequence diagram for when a user executes the `:p` command:
+
+.Component interactions for `:p` command
+// TODO: insert diagram
+
+Upon execution of the `:p` command, [.java]#ProductivityCommand#generateCommandResult()# will generate a [.java]#CommandResult# whose [.java]#SwitchTab# attribute is set to [.java]#PRODUCTIVITY# and return it to the [.java]#LogicManager#. Now, the updates can be done for the respective components:
+
+* [.java]#UI# component: [.java]#MainWindow# calls [.java]#MainWindow#executeCommand()#, to retrieve the tab to be changed to and updates the current tab stored in its [.java]#SwitchTab# attribute by calling [.java]#CommandResult#isShow{XXX}()# where XXX is the tab to switch to.
+The display panel is updated by calling [.java]#MainWindow#handle{XXX} where XXX is the tab to switch to.
+
+[NOTE]
+For commands that do not involve a change in mode, [.java]#CommandResult#newModeStatus()# will return [.java]#null# and no updates to the current mode or display will be done.
+// end::changetab[]
+// TODO: complete this section
+
 // tag::taskgroups[]
 === Task Grouping feature in Task List tab
 ==== Implementation
 
-The task category mechanism is facilitated by the `GroupedTaskList` interface.
-Each 'GroupedTaskList' is a container for `ObservableList<Task>` objects, each containing a unique filter over the full task list.
+The task category mechanism is facilitated by the `ViewTaskList` interface, which serves as a wrapper for any list of tasks. +
+The ViewTaskList interface supports methods that facilitate getting and iterating through the tasks contained within the list.
+This is to accommodate a common access for Tasks in `GroupedTaskList`, which contains multiple sub-lists. +
+The diagram below describes the class structure.
 
-Each `GroupedTaskList` implements the following operations:
+.Class Diagram for Task List classes
+image::TaskListClassDiagram.png[]
 
-* A enum that maps strings to current valid groupings. +
-(For use with ListCommand)
-* A public method for instantiating the GroupedTaskList called getGroupedList with the unfiltered TaskList as argument.
-* Getter methods for each group defined in the extended class.
+Grouping tasks into sub-lists is done through the `GroupedTaskList` class. +
+Each `GroupedTaskList` is a container for `ObservableList<Task>` objects, each containing a unique filter over the full task list.
 
-When users modify the displayed category with the corresponding `list` command, a different GroupedTaskList is displayed in the main panel. +
-Currently, the intended groupings for JelphaBot are groupings by date (via the 'list date') and groupings by module (via the 'list module' command).
+Each `GroupedTaskList` implements the following operations on top of those in `ViewTaskList`:
 
-The operation for retrieving the corresponding GroupedTaskLists are exposed in the `Model` interface as `Model#getGroupedByDateList()` and `Model#getGroupedByModuleList()`.
+* A enum class which describes the valid `Category` groupings, and the corresponding methods of getting these groupings from a `String`. +
+* An `ObservableList` of `SubgroupTaskList` that represents the sub-groupings of each corresponding `Category`.
+* A public method for instantiating a `GroupedTaskList` called `getGroupedList` with the return from `getFilteredTaskList()` as argument.
+* An iterator method which iterates through a list of `SubgroupTaskList`.
+
+Users can modify the `GroupTaskList` being displayed in the main panel by executing a `ListCommand`.
+The operation for retrieving the corresponding `GroupedTaskLists` are exposed in the `Model` interface as `Model#getGroupedTaskList(Category category)`. +
+Currently, the supported groupings for JelphaBot are group by date (`GroupedTaskList.Category.DATE` and `GroupedByDateTaskList`) and group by module (`GroupedTaskList.Category.MODULE` and `GroupedByModuleTaskList`).
+
+The following diagram shows the sequence flow of a `ListCommand` which modifies the currently shown Task List:
+
+[[activity-swapping-groupedtasklist]]
+.Activity Diagram showing the tab switch for ListCommand
+image::ListCommandActivityDiagram.png[]
 
 Given below is an example usage scenario and how the task category mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `MainWindow` will be initialized with `GroupedTaskListPanel` as a container for GroupedTaskList model objects. The panel is populated with sublists defined in `GroupedByDateTaskList`.
+*Step 1.* The user launches the application for the first time.
+The `MainWindow` will be initialized with `GroupedTaskListPanel` as a container for GroupedTaskList model objects.
+The panel is populated with sublists defined in `GroupedByDateTaskList`.
 
-Step 2. The user executes `list model` to switch to category tasks by module code instead. `GroupedTaskListPanel` is repopulated with sublists defined in `GroupedByModuleTaskList`.
+*Step 2.* The user executes `list model` to switch to category tasks by module code instead. `GroupedTaskListPanel` is repopulated with sublists defined in `GroupedByModuleTaskList`.
 
 [NOTE]
-If the user tries to switch to a sublist type which is already set, the command fails its execution so that it does not execute the relatively expensive filter operations to make new sublists.
+If the user tries to switch to a `Cateory` which is already set, the command does not reinitialize the `GroupedTaskList` to prevent redundant filtering operations.
 
+As `GroupedTaskList` has more than one underlying `ObservableList<Task>`, tasks cannot be retrieved the usual way.
+Thus, the `get()` function defined in the `ViewTaskList` interface must be implemented and used instead. +
+The following diagram shows the process of retrieving a `Task` from `ViewTaskList` when it is an instance of `GroupedTaskList`:
+
+[[sequence-viewtasklist-get]]
+.Sequence Diagram for `ViewTaskList.get()`
+image::ViewTaskListGetSequenceDiagram.png[]
+
+As the index passed as an argument to `lastShownList.get()` is a cumulative index, the implementation of ` get()` in `ViewTaskList` has to iterate through each `SubgroupTaskList` stored within.
+
+// TODO explain how panel is updated?
+//** Pros: Provides good protection over unexpected changes on the displayed Task List.
+//* *Alternative 1*: Let UI displays problems in an `ObservableList<Task>` and update the list directly.
+//** Pros: This implementation is more straightforward as the logic updates the displayed list directly and all changes are reflected immediately.
+//** Cons: `ObservableList` is able to be modified by the containing panel class.
 ==== Design Considerations
 
-===== Aspect: How to swap between groupings
+===== Aspect 1: `ListCommand` swaps to a different `ViewTaskList`
 
-* **Alternative 1 (current choice):** Initializes each grouped list as a different `list` command is called.
-** Pros: Easy to implement. Scalable when more groupings are added.
+Refer <<activity-swapping-groupedtasklist, here>> for the diagram describing this process.
+
+* *Current solution*: Initializes each grouped list as each `ListCommand` is called and stores the latest list as `Model.lastShownList`.
+** Pros: Easy to implement.
+Scalable when more groupings are added.
 ** Cons: Consecutive 'list' operations are expensive as the list is reinitalized each time.
-* **Alternative 2:** Keep instances of all GroupedList objects and update them as underlying TaskList changes.
-** Pros: Consecutive `list` operations are less expensive.
+** Cons: It is hard to keep track of the exact type of list in `lastShownList`, which may lead to unexpected behavior.
+* **Alternative 1:** Keep instances of all `GroupedTaskList` objects and update them as underlying Task List changes.
+** Pros: Consecutive `ListCommand` executions are less expensive.
 ** Cons: All other commands that update the underlying list now have additional checks as each grouped list is updated.
 
+===== Aspect 2: `get()` Task from `ViewTaskList` and iterate between Tasks.
+
+Refer <<activity-swapping-groupedtasklist, here>> for the diagram describing this process.
+
+* *Current solution*: Implement `get()` and `Iterator<Task>` in `ViewTaskList`.
+** Pros: Easy to implement.
+Scalable when more groupings are added.
+** Cons: Consecutive 'list' operations are expensive as the list is reinitalized each time.
+** Cons: It is hard to keep track of the exact type of list in `lastShownList`, which may lead to unexpected behavior.
+*** As a workaround, only operations defined in the `ViewTaskList` interface should be used.
+* **Alternative 1:** Keep instances of all `GroupedTaskList` objects and update them as underlying Task List changes.
+** Pros: Consecutive `ListCommand` executions are less expensive.
+** Cons: All other commands that update the underlying `UniqueTaskList` will result in multiple update calls to `ViewTaskList`.
+
+===== Aspect 3: Hide empty Categories in `GroupByDateTaskList`
+
+* *Current Solution*: UI displays problems from a `FilteredList<SubgroupTaskList>` and use `filtered()` to hide empty categories without removing them.
+** Rationale: These categories are meant to be reused when applicable tasks are added back to the list.
+** Pros: The list categories do not have to be reinitalized as tasks are removed or added.
+** Cons: Additional load on the UI as the Filtering happens constantly.
+However, since there is a cap on five categories (so five `FilteredList` lists), it is unlikely to be significant.
+** Cons: Inconsistent with the way filtering is done in `GroupByModuleTaskList`, which reduces control abstraction in `GroupedTaskList`.
+* **Alternative 1:** Remove categories which are no longer used, and reinitialize them again when needed.
+** Pros: Consecutive changes to the underlying Task List are less expensive if less lists are currently active.
+** Pros: Enforce consistency with `GroupByModuleTaskList` which might allow some methods to be abstracted to parent class.
+** Cons: Empty `SubgroupTaskList` members have to be hidden manually which requires complex logic in `SubgroupTaskListPanel`.
+** Cons: Additional listeners have to be added (one for each category) to reinitialize empty categories.
+
+===== Aspect 4: Remove empty Categories in `GroupByModuleTaskList`
+
+* *Current Solution*: UI displays problems from a `FilteredList<SubgroupTaskList>` and uses a `ListChangeListener<Task>` to maintain a set of unique module codes when the underlying task list is changed.
+The `ObservableSet<ModuleCode>` has a further `SetChangeListener<ModuleCode>` bound to it to remove categories that no longer contain any Tasks.
+This second listener directly removes unused categories from `GroupedByModuleTaskList`.
+** Pros: Consecutive changes to the underlying Task List are automatically reflected with a change in `SubgroupTaskList` categories.
+** Pros: The delegation of responsibilities between each `Listener` allows Single Responsibility Principle to be mantained.
+** Cons: Dependency between the two `Listener` classes has to be mantained.
+* **Alternative 1:** Hide categories which are no longer used by adding a filter to the tasklist returned.
+** Pros: Easy to implement and understand.
+** Pros: Enforce consistency with `GroupByDateTaskList` which might allow some methods to be abstracted to parent class.
+** Cons: Not practical: as more Module Codes are added to the Task List, it might cause more and more hidden categories to be created which are expensive to filter through.
+* **Alternative 2:** Abstract mantainence of the set of unique module codes to a `UniqueModuleCodeSet` class instanced in `UniqueTaskList`.
+** Pros: Easy to understand.
+Logic is further abstracted to a higher level and the new class is instanced together with the list that affects it.
+** Cons: Implementation is challenging and prone to bugs.
+Due to the time of writing this Deveoper guide, the release is nearing V1.4 and time is spent fixing bugs for release instead.
+** This could be a proposed update in the future.
+// TODO sample diagram?
 // end::taskgroups[]
 
 === Calendar feature
+
 JelphaBot has a calendar feature which provides an overarching view of their schedules and to allow users to view their tasks due.
 
 This feature offers two main functions:
 
-** Display calendar view in a selected month.
-** Display a list of tasks due for a selected date
+** Displays an overview tasks in calendar for a selected month and year
+** Displays a list of tasks due for a specified date
 
 ====  Implementation
 
-**Function 1: Display calendar view in a selected month**
+**Function 1: Displays an overview tasks in calendar for a selected month and year**
 
-In order to change the calendar view for another month and/or year, the user enters the `calendar MONTHYEAR` command +
-(e.g. `calendar Apr-2020`)
+There are 2 commands that users can issue to perform function 1:
 
-**-insert sequence diagram-**
+1. `calendar today`: Displays calendar for the current month with today's date highlighted, and its corresponding tasks listed. +
+2. `calendar MONTHYEAR`: Displays calendar for the month and year specified, with the first day of the month highlighted, and its corresponding tasks listed.
 
-Upon the completion of the execution of the command, the calendar view would display the month view for April 2020 instead.
+The following sequence diagram shows you how the `calendar MONTHYEAR` (e.g. `calendar Apr-2020`) command works.
 
-**Function 2: Display a list of tgit asks due for a selected date**
+.Sequence diagram after running `calendar Apr-2020`
+image::CalendarViewSequenceDiagram.png[]
+
+Upon the completion of the execution of the command, the calendar  for April 2020 would be displayed, with the tasks due on 1st April 2020 listed.
+
+**Function 2: Display a list of tasks due for a selected date in the month**
 
 In order to display the task list for specific input dates, the user enters the `calendar DATE` command +
 (e.g. calendar jan-1-2020)
 
-**-insert sequence diagram-**
+Upon the completion of the execution of the command, the tasks due on 1st January 2020 would be displayed to the user on the task list panel to the left. +
 
-Upon the completion of the execution of the command, the tasks due on 1st January 2020 would be displayed to the user on the task list panel to the left.
+==== Design Considerations
+// TODO: amanda
+
 === Productivity feature
-JelphaBot has a productivity feature which provides an overarching view of user's overall productivity.
+JelphaBot has a productivity panel of this feature which provides an overarching view of user's overall productivity.
 
 This feature offers two main functions:
 
@@ -286,23 +427,25 @@ This feature offers two main functions:
 
 ====  Implementation
 
-**Function 1: Starts timer for a specified task**
+**Function 1: Starts timer for a specified task** +
 In order to start timing a task, the user enters `start INDEX` command
 (e.g. start 1)
 
+.Sequence Diagram after running `start 1`
 image::StartSequenceDiagram.png[]
 
 Upon successful execution of the command, the productivity tab displays the task being timed under the Running Timers header.
 
-**Function 2: Stops timer for a specified task**
+**Function 2: Stops timer for a specified task** +
 In order to stop timing a task, the user enters `stop INDEX` command
 (e.g. stop 1)
 
+.Sequence Diagram after running `stop 1`
 image::StopSequenceDiagram.png[]
 
 Upon successful execution of the command, the productivity tab removes the task being timed under the Running Timers header.
-If the timed task is due today or in the next 7 days, the time spent on the timed task will be added to either the Due today: label
-or the Due in the next 7 days: label under the Time Spent on Tasks header.
+If the timed task is due today or in the next 6 days, the time spent on the timed task will be added to either the Due today: label
+or the Due in the next 6 days: label under the Time Spent on Tasks header.
 
 [NOTE]
 If the user attempts to start timer for a task marked as completed or stop a task that does not have a running timer,
@@ -310,20 +453,82 @@ the command fails its execution so that it does not execute that start or stop o
 
 ==== Design Considerations
 
+===== Aspect 1: Rendering sub-parts of productivity panel
+* *Current solution*: Render each sub-part (i.e. task completion rate, time spent and running timers) only when that part needs to
+be updated. All 3 parts are rendered on to the same card.
+** Rationale: No need to rerender all 3 parts when changes are made to only one part.
+** Pros: Easy to implement and reduces waste of computational power.
+** Cons: As all parts are displayed on the same card, if there happens to be problem in other parts of the card, all parts will be affected.
+* *Alternative 1*: Abstract each part to a separate card and render all cards onto the same panel.
+** Pros: Allows other parts to be rendered even when there is error on one part. Additionally, it is easier to identify bugs when there is
+an error in displaying.
+
+===== Aspect 2: Allowing tasks to be added, deleted and edited while timer is running
+* *Current solution*: Adding and deleting task is allowed. However, tasks cannot be edited.
+** Rationale: Adding and deleting tasks does not affect the task being timed.
+** Pros: Other functionality are still available for use. Thus, user's experience is not affected
+** Cons: User is unable to edit changes in the task being timed.
+* *Alternative 1*: Allow users to edit task while timer is running.
+** Pros: User is able to use all features without restriction.
+** Cons: Difficult to implement as the Task model requires a new Task to replace the old Task when edit command is executed.
+
+=== Reminder feature
+JelphaBot has a reminder feature that reminds users whenever they have tasks that are about to overdue.
+This feature offers two main functions:
+
+** Adds a reminder to a task.
+** Delete a reminder that is associated to a task.
+
+==== Implementation
+**Function 1: Creates a reminder for a specified task** +
+To add a reminder to a certain task, the user enters the `reminder INDEX days/DAYS hours/HOURS` command.
+(e.g, reminder 2 days/2 hours/1)
+
+.Sequence Diagram after running `reminder 2 days/2 hours/1`
+image::AddReminderSequenceDiagram.png[]
+
+Upon successful execution of the command, the user adds a reminder associated to the task at `INDEX`. Upon exiting JelphaBot,
+the reminder will be saved. By the next time the users starts JelphaBot, it will remind the user should the task's due date fall
+within the period set by the user from the current date.
+
+**Function 2: Deletes a reminder for a specified task** +
+To delete a reminder associated to a certain task, the user enters the `delrem INDEX` command.
+(e.g. delrem 2)
+
+.Sequence Diagram after running `delrem 2`
+image::DeleteReminderSequenceDiagram.png[]
+
+Upon successful execution of the command, the reminder of the task at `INDEX` is removed.
+
+[NOTE]
+If the user attempts to add a reminder to tasks that have reminders, the command will fail to execute. The user also need not
+to set reminders to tasks that are complete. However, if tasks that has reminders are not completed, JelphaBot will
+still warn the user.
+
+==== Design Considerations
+// TODO: dianhao
+
+
 // tag::morningcallnightdebrief[]
 
-=== Morning Call / Night Debrief feature
+=== Summary feature
 
-JelphaBot has a Morning Call and Night Debrief feature which provides an overview of the tasks to be completed
-for the day (Morning Call), and all tasks that have been complete within the day (Night Debrief).
+JelphaBot has a Summary feature which provides an overview of the tasks due within the day as well as all tasks that have been complete within the day.
 
-Both come in the form of a separate window that opens upon app startup for Morning Call, and app exit for Night Debrief.
+This feature comes in the form of a welcome screen, which comprises of two sections for the tasks due within the day and the tasks completed within the day respectively.
+
+For each task shown only details such as the Module Code and the Description are shown.
+
+Once the user marks a task due within the day as complete, it will automatically appear under the tasks completed within the day.
+
+[NOTE]
+If the user marks a task as completed, and immediately deletes the task from the tasklist, it will not appear in the summary screen.
 
 ==== Implementation
 
 To view the respective tasks, the user enters the `summary` command.
 
-.Sequence of execution of the `summary` command
+.Sequence diagram of execution of the `summary` command
 
 image::SummarySequenceDiagram.png[]
 // end::morningcallnightdebrief[]
@@ -332,39 +537,39 @@ image::SummarySequenceDiagram.png[]
 === [Proposed] Undo/Redo feature
 ==== Proposed Implementation
 
-The undo/redo mechanism is facilitated by `VersionedAddressBook`.
-It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`.
+The undo/redo mechanism is facilitated by `VersionedJelphaBot`.
+It extends `JelphaBot` with an undo/redo history, stored internally as an `jelphaBotStateList` and `currentStatePointer`.
 Additionally, it implements the following operations:
 
-* `VersionedAddressBook#commit()` -- Saves the current JelphaBot state in its history.
-* `VersionedAddressBook#undo()` -- Restores the previous JelphaBot state from its history.
-* `VersionedAddressBook#redo()` -- Restores a previously undone JelphaBot state from its history.
+* `VersionedJelphaBot#commit()` -- Saves the current JelphaBot state in its history.
+* `VersionedJelphaBot#undo()` -- Restores the previous JelphaBot state from its history.
+* `VersionedJelphaBot#redo()` -- Restores a previously undone JelphaBot state from its history.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+These operations are exposed in the `Model` interface as `Model#commitJelphaBot()`, `Model#undoJelphaBot()` and `Model#redoJelphaBot()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial JelphaBot state, and the `currentStatePointer` pointing to that single JelphaBot state.
+Step 1. The user launches the application for the first time. The `VersionedJelphaBot` will be initialized with the initial JelphaBot state, and the `currentStatePointer` pointing to that single JelphaBot state.
 
 image::UndoRedoState0.png[]
 
-Step 2. The user executes `delete 5` command to delete the 5th task in JelphaBot. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of JelphaBot after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted JelphaBot state.
+Step 2. The user executes `delete 5` command to delete the 5th task in JelphaBot. The `delete` command calls `Model#commitJelphaBot()`, causing the modified state of JelphaBot after the `delete 5` command executes to be saved in the `jelphaBotStateList`, and the `currentStatePointer` is shifted to the newly inserted JelphaBot state.
 
 image::UndoRedoState1.png[]
 
-Step 3. The user executes `add n/David ...` to add a new task. The `add` command also calls `Model#commitAddressBook()`, causing another modified JelphaBot state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/David ...` to add a new task. The `add` command also calls `Model#commitJelphaBot()`, causing another modified JelphaBot state to be saved into the `jelphaBotStateList`.
 
 image::UndoRedoState2.png[]
 
 [NOTE]
-If a command fails its execution, it will not call `Model#commitAddressBook()`, so JelphaBot state will not be saved into the `addressBookStateList`.
+If a command fails its execution, it will not call `Model#commitJelphaBot()`, so JelphaBot state will not be saved into the `jelphaBotStateList`.
 
-Step 4. The user now decides that adding the task was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous JelphaBot state, and restores JelphaBot to that state.
+Step 4. The user now decides that adding the task was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoJelphaBot()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous JelphaBot state, and restores JelphaBot to that state.
 
 image::UndoRedoState3.png[]
 
 [NOTE]
-If the `currentStatePointer` is at index 0, pointing to the initial JelphaBot state, then there are no previous JelphaBot states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
+If the `currentStatePointer` is at index 0, pointing to the initial JelphaBot state, then there are no previous JelphaBot states to restore. The `undo` command uses `Model#canUndoJelphaBot()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
 
 The following sequence diagram shows how the undo operation works:
 
@@ -372,16 +577,16 @@ image::UndoSequenceDiagram.png[]
 
 NOTE: The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
-The `redo` command does the opposite -- it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores JelphaBot to that state.
+The `redo` command does the opposite -- it calls `Model#redoJelphaBot()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores JelphaBot to that state.
 
 [NOTE]
-If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest JelphaBot state, then there are no undone JelphaBot states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+If the `currentStatePointer` is at index `jelphaBotStateList.size() - 1`, pointing to the latest JelphaBot state, then there are no undone JelphaBot states to restore. The `redo` command uses `Model#canRedoJelphaBot()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify JelphaBot, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list`. Commands that do not modify JelphaBot, such as `list`, will usually not call `Model#commitJelphaBot()`, `Model#undoJelphaBot()` or `Model#redoJelphaBot()`. Thus, the `jelphaBotStateList` remains unchanged.
 
 image::UndoRedoState4.png[]
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all JelphaBot states after the `currentStatePointer` will be purged. We designed it this way because it no longer makes sense to redo the `add n/David ...` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitJelphaBot()`. Since the `currentStatePointer` is not pointing at the end of the `jelphaBotStateList`, all JelphaBot states after the `currentStatePointer` will be purged. We designed it this way because it no longer makes sense to redo the `add n/David ...` command. This is the behavior that most modern desktop applications follow.
 
 image::UndoRedoState5.png[]
 
@@ -596,9 +801,9 @@ Use case resumes from step 2.
 === Use case: UC4 - Edit Task Details
 *MSS*
 
-1.  User requests to edit a task by specifying the task index and the field(s) they want to edit
+1.  User requests to edit a task by specifying the task index and the field(s) they want to edit.
 
-2.  JelphaBot edits the specified task in the task list with the specified details
+2.  JelphaBot edits the specified task in the task list with the specified details.
 +
 Use case ends.
 
@@ -626,27 +831,27 @@ Use case resumes from step 2
 +
 Use case resumes from step 2.
 
-=== Use case: UC5 - Find Task(s) by Keyword(s)
+//=== Use case: UC5 - Find Task(s) by Keyword(s)
+//*MSS*
+//
+//1. User requests to find task(s) by entering specified keyword(s).
+//2. JelphaBot shows a list of task(s) that contain the specified keyword(s).
+//+
+//Use case ends.
+//
+//*Extensions*
+//
+//[none]
+//* 1a1. None of the tasks in the task list contain the specified keywords.
+//[none]
+//+
+//** Use case ends.
+
+=== Use case: UC5 - Delete Task
 *MSS*
 
-1. User requests to find task(s) by entering specified keyword(s)
-2. JelphaBot shows a list of task(s) that contain the specified keyword(s)
-+
-Use case ends.
-
-*Extensions*
-
-[none]
-* 1a1. None of the tasks in the task list contain the specified keywords.
-[none]
-+
-** Use case ends.
-
-=== Use case: UC6 - Delete Task
-*MSS*
-
-1.  User requests to delete a specific task in the list by specified index
-2.  JelphaBot deletes the task
+1.  User requests to delete a specific task in the list by specified index.
+2.  JelphaBot deletes the task.
 +
 Use case ends.
 
@@ -669,15 +874,15 @@ Use case ends.
 +
 Use case resumes from step 2
 
-=== Use case: UC7 - Clear all Tasks
-*MSS*
+//=== Use case: UC7 - Clear all Tasks
+//*MSS*
+//
+//1.  User enters command to clear all tasks.
+//2.  JelphaBot removes all listed tasks and returns an empty list.
+//+
+//Use case ends.
 
-1.  User enters command to clear all tasks.
-2.  JelphaBot removes all listed tasks and returns an empty list.
-+
-Use case ends.
-
-=== Use case: UC8 - Add Reminders
+=== Use case: UC6 - Add Reminder
 *MSS*
 
 1. User enters reminder for tasks that want to be reminded for.
@@ -688,76 +893,140 @@ Use case ends.
 *Extensions*
 
 [none]
-* 1a. JelphaBot detects that the task the reminder is associated to does not exist.
+* 1a. The list is empty.
 [none]
 +
-** 1a1. User enters new task index to be reminded.
+** 1a1. JelphaBot displays to user that the task list is empty.
++
+Use case ends.
+
+[none]
+* 1b. JelphaBot detects that the task the reminder is associated to does not exist.
+[none]
++
+** 1b1 JelphaBot detects error and displays the correct input format to be expected.
+** 1b2. User enters new task index to be add reminder to.
 ** Steps 1a1-1a2 are repeated until the command entered is correct.
 +
 Use case resumes from step 2
 
 [none]
-* 1b. JelphaBot detects an error in the entered command.
+* 1c. JelphaBot detects an error in the entered command.
 +
 [none]
-** 1b1. JelphaBot detects error and displays the correct input format to be expected.
+** 1c1. JelphaBot detects error and displays the correct input format to be expected.
 +
-1b2. User enters new command.
+1c2. User enters new command.
 [none]
-** Steps 1b1-1b2 are repeated until the command entered is correct.
+** Steps 1c1-1c2 are repeated until the command entered is correct.
 +
 Use case resumes from step 2.
 
-=== Use Case: UC9 - Start timer
+=== Use case: UC7 - Delete Reminder
+*MSS*
+
+1.  User requests to delete a reminder for a task in the list by specified index.
+2.  JelphaBot deletes the reminder.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. The list is empty.
+[none]
++
+** 1a1. JelphaBot displays to user that there are no reminders.
++
+Use case ends.
+
+* 1b. JelphaBot detects that the specified task does not exist.
++
+[none]
+** 1b1. JelphaBot detects error and displays the correct input format to be expected.
+** 1b2. User enters new task index to be marked as done.
+** Steps 1b1-1b2 are repeated until the command entered is correct.
++
+Use case resumes from step 2
+
+[none]
+* 1c. JelphaBot detects an error in the entered command.
++
+[none]
+** 1c1. JelphaBot detects error and displays the correct input format to be expected.
++
+1c2. User enters new command.
+[none]
+** Steps 1c1-1c2 are repeated until the command entered is correct.
++
+Use case resumes from step 2.
+
+=== Use Case: UC8 - Start Timer
 *MSS*
 
 1. User enters command to start timer for task to be timed.
-2. JelphaBot tracks the time taken.
+2. JelphaBot displays successful execution to user.
 +
 Use case ends.
 
 *Extensions*
 
 [none]
-* 1a. JelphaBot detects the task has been mark as completed.
+* 1a. The list is empty.
 [none]
 +
-** 1a1. JelphaBot displays to user that the task has been marked as completed.
+** 1a1. JelphaBot displays to user that the task list is empty.
 +
 Use case ends.
 
-* 1b. JelphaBot detects that the specified task does not exist.
+[none]
+* 1b. JelphaBot detects the task has been mark as completed.
+[none]
++
+** 1b1. JelphaBot displays to user that the task has been marked as completed.
++
+Use case ends.
+
+* 1c. JelphaBot detects that the specified task does not exist.
 +
 [none]
-** 1b1. JelphaBot detects error and displays the correct input format to be expected.
-** 1b2. User enters new task index to start timing.
-** Steps 1b1-1b2 are repeated until the command entered is correct.
+** 1c1. JelphaBot detects error and displays the correct input format to be expected.
+** 1c2. User enters new task index to start timing.
+** Steps 1c1-1c2 are repeated until the command entered is correct.
 +
 Use case resumes from step 2.
 
-=== Use Case: UC10 - Stop timer
+=== Use Case: UC9 - Stop Timer
 *MSS*
 
 1. User enters command to stop timer for task being.
-2. JelphaBot stores time spent on the task.
+2. JelphaBot returns total time spent on that task and stores the information.
 +
 Use case ends.
 
 *Extensions*
 
 [none]
-* 1a. Jelphabot detects the task does not have a running timer.
+* 1a. The list is empty.
 [none]
 +
-** 1a1. Jelphabot displays to user that the task does not have a running timer.
+** 1a1. JelphaBot displays to user that the task list is empty.
 +
 Use case ends.
 
-* 1b. JelphaBot detects that the specified task does not exist.
+[none]
+* 1b. JelphaBot detects the task does not have a running timer.
+[none]
++
+** 1b1. JelphaBot displays to user that the task does not have a running timer.
++
+Use case ends.
+
+* 1c. JelphaBot detects that the specified task does not exist.
 +
 [none]
-** 1b1. JelphaBot detects error and displays the correct input format to be expected.
-** 1b2. User enters new task index to stop timing.
+** 1c1. JelphaBot detects error and displays the correct input format to be expected.
+** 1c2. User enters new task index to stop timing.
 ** Steps 1b1-1b2 are repeated until the command entered is correct.
 +
 Use case resumes from step 2.
@@ -782,7 +1051,7 @@ Windows, Linux, Unix, OS-X
 A type of user interface that allows for interaction between the user and electronic devices through graphical icons
 
 [[command-line-interface]] CLI (Command Line Interface)::
-??
+A type of user interface that allows for interaction between the user and electronic devices in the form of lines of text.
 
 //[appendix]
 //== Product Survey
@@ -831,7 +1100,7 @@ _{ more test cases ... }_
 
 .. Prerequisites: List all tasks using the `list` command. Multiple tasks in the list.
 .. Test case: `delete 1` +
-   Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   Expected: First task is deleted from the list. Details of the deleted task shown in the status message. Timestamp in the status bar is updated.
 .. Test case: `delete 0` +
    Expected: No task is deleted. Error details shown in the status message. Status bar remains the same.
 .. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +

@@ -29,6 +29,7 @@ public class ProductivityList implements Iterable<Productivity> {
      * Clears the list and adds {@code productivity} into the list.
      */
     public void setProductivity(Productivity productivity) {
+        requireNonNull(productivity);
         internalList.clear();
         internalList.add(productivity);
     }

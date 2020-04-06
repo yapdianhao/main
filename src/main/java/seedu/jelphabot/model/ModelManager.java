@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.beans.binding.Bindings;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.jelphabot.commons.core.GuiSettings;
@@ -15,10 +16,12 @@ import seedu.jelphabot.commons.core.LogsCenter;
 import seedu.jelphabot.model.productivity.Productivity;
 import seedu.jelphabot.model.productivity.ProductivityList;
 import seedu.jelphabot.model.reminder.Reminder;
-import seedu.jelphabot.model.task.GroupedTaskList;
-import seedu.jelphabot.model.task.PinnedTaskList;
+import seedu.jelphabot.model.summary.Summary;
+import seedu.jelphabot.model.summary.SummaryList;
 import seedu.jelphabot.model.task.Task;
-import seedu.jelphabot.model.task.ViewTaskList;
+import seedu.jelphabot.model.task.tasklist.GroupedTaskList;
+import seedu.jelphabot.model.task.tasklist.PinnedTaskList;
+import seedu.jelphabot.model.task.tasklist.ViewTaskList;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -32,6 +35,7 @@ public class ModelManager implements Model {
     private final FilteredList<Reminder> filteredReminders;
     private final FilteredList<Task> filteredCalendarTasks;
     private final ProductivityList productivityList;
+    private final SummaryList summaryList;
 
     private GroupedTaskList lastShownList;
 
@@ -50,6 +54,7 @@ public class ModelManager implements Model {
         filteredReminders = new FilteredList<>(this.readOnlyJelphaBot.getReminderList());
         filteredCalendarTasks = new FilteredList<>(this.readOnlyJelphaBot.getTaskList());
         productivityList = new ProductivityList();
+        summaryList = new SummaryList();
         lastShownList = getGroupedTaskList(GroupedTaskList.Category.DATE);
     }
 
@@ -154,14 +159,14 @@ public class ModelManager implements Model {
         readOnlyJelphaBot.addReminder(reminder);
     }
 
-
-
     @Override
     public void setTask(Task target, Task editedTask) {
         requireAllNonNull(target, editedTask);
         readOnlyJelphaBot.setTask(target, editedTask);
     }
+
     /*
+    @Override
     public void setReminder(Reminder target, Reminder newReminder) {
         requireAllNonNull(target, newReminder);
         readOnlyJelphaBot.setReminder(target, newReminder);
@@ -180,6 +185,18 @@ public class ModelManager implements Model {
         return productivityList;
     }
 
+    // =========== Summary List
+    @Override
+    public void setSummary(Summary summary) {
+        requireAllNonNull(summary);
+        summaryList.setSummary(summary);
+    }
+
+    @Override
+    public SummaryList getSummaryList() {
+        return summaryList;
+    }
+
     // =========== Filtered Task List Accessors
     // =============================================================
 
@@ -194,17 +211,20 @@ public class ModelManager implements Model {
 
     @Override
     public GroupedTaskList getGroupedTaskList(GroupedTaskList.Category category) {
-        if (lastShownList != null && lastShownList.getCategory() == category) {
-            return lastShownList;
-        } else {
-            lastShownList = GroupedTaskList.makeGroupedTaskList(getFilteredTaskList(), category, getPinnedTaskList());
-            return lastShownList;
+        if (lastShownList == null || lastShownList.getCategory() != category) {
+            lastShownList = GroupedTaskList.makeGroupedTaskList(
+                getFilteredTaskList(),
+                category,
+                getPinnedTaskList()
+            );
         }
+        return lastShownList;
     }
 
     @Override
     public PinnedTaskList getPinnedTaskList() {
-        return new PinnedTaskList(filteredTasks);
+        // TODO implement pinned tasks
+        return new PinnedTaskList(filteredTasks.filtered(task -> false), Bindings.createIntegerBinding(() -> 0));
     }
 
     @Override

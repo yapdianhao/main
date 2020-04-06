@@ -1,5 +1,6 @@
 package seedu.jelphabot.ui;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
@@ -7,6 +8,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import seedu.jelphabot.model.calendar.CalendarDate;
+import seedu.jelphabot.model.task.Task;
+import seedu.jelphabot.model.task.predicates.TaskDueWithinDayPredicate;
 
 /**
  * UI component that displays the day on the calendar.
@@ -16,6 +19,7 @@ public class CalendarDayCard extends UiPart<Region> {
     private static final String FXML = "CalendarDayCard.fxml";
 
     private CalendarDate calendarDate;
+    private ObservableList<Task> tasks;
 
     @FXML
     private Label calendarDay;
@@ -23,14 +27,46 @@ public class CalendarDayCard extends UiPart<Region> {
     @FXML
     private Circle circleDay;
 
+    @FXML
+    private Circle dotTasks;
+
     public CalendarDayCard(CalendarDate calendarDate) {
         super(FXML);
         this.calendarDate = calendarDate;
+        updateTasks();
         calendarDay.setText(String.valueOf(calendarDate.getDay()));
     }
 
     public CalendarDate getDate() {
         return calendarDate;
+    }
+
+    private void setDotVisible() {
+        dotTasks.setFill(Paint.valueOf("#20B2AA"));
+    }
+
+    private void setDotVisibleUrgent() {
+        dotTasks.setFill(Paint.valueOf("#FF0000"));
+    }
+
+    private void setDotInVisible() {
+        dotTasks.setFill(Color.TRANSPARENT);
+    }
+
+    /**
+     * Updates the tasks due on the calendar date belonging to a calendar day card.
+     */
+    public void updateTasks() {
+        ObservableList<Task> allTasks = MainWindow.getLogic().getFilteredTaskList();
+        TaskDueWithinDayPredicate predicate = new TaskDueWithinDayPredicate(calendarDate.getDate());
+        tasks = allTasks.filtered(predicate);
+        if (tasks.size() == 0) {
+            setDotInVisible();
+        } else if (tasks.size() > 3) {
+            setDotVisibleUrgent();
+        } else {
+            setDotVisible();
+        }
     }
 
     /**

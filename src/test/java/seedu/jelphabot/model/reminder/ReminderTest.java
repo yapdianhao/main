@@ -25,16 +25,16 @@ public class ReminderTest {
 
         assertFalse(ASSESSMENT_REMINDER.isSameReminder(null));
 
-        // different reminder day -> returns False
+        // different reminder day -> returns True if index same
         Reminder editedAssessmentReminder = new ReminderBuilder(ASSESSMENT_REMINDER)
                                                 .withReminderDay(VALID_BOOK_REPORT_REMINDER_DAY)
                                                 .build();
-        assertFalse(ASSESSMENT_REMINDER.isSameReminder(editedAssessmentReminder));
+        assertTrue(ASSESSMENT_REMINDER.isSameReminder(editedAssessmentReminder));
 
-        // different reminder hour  -> returns false
+        // different reminder hour  -> returns true
         editedAssessmentReminder = new ReminderBuilder(ASSESSMENT_REMINDER)
                                        .withReminderHour(VALID_BOOK_REPORT_REMINDER_HOUR).build();
-        assertFalse(ASSESSMENT_REMINDER.isSameReminder(editedAssessmentReminder));
+        assertTrue(ASSESSMENT_REMINDER.isSameReminder(editedAssessmentReminder));
 
         // different index -> returns false
         editedAssessmentReminder = new ReminderBuilder(ASSESSMENT_REMINDER)

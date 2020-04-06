@@ -1,19 +1,15 @@
 package seedu.jelphabot.ui;
 
-import java.util.ArrayList;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javafx.beans.binding.Bindings;
-import javafx.beans.binding.IntegerBinding;
-import javafx.beans.binding.NumberBinding;
-import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.jelphabot.commons.core.LogsCenter;
-import seedu.jelphabot.model.task.GroupedTaskList;
-import seedu.jelphabot.model.task.PinnedTaskList;
-import seedu.jelphabot.model.task.SubGroupTaskList;
+import seedu.jelphabot.model.task.tasklist.GroupedTaskList;
+import seedu.jelphabot.model.task.tasklist.SubgroupTaskList;
 
 /**
  * Panel containing the list of tasks.
@@ -22,43 +18,45 @@ import seedu.jelphabot.model.task.SubGroupTaskList;
 public class GroupedTaskListPanel extends UiPart<Region> {
 
     private static final String FXML = "GroupedTaskListPanel.fxml";
-    private static final int PREF_CELL_HEIGHT = 100;
-    private static final IntegerBinding STARTING_INDEX = Bindings.createIntegerBinding(() -> 1);
 
     private final Logger logger = LogsCenter.getLogger(TaskListPanel.class);
 
+    private final ObservableList<SubgroupTaskList> subLists;
+
+    private final GroupedTaskList groupedTaskList;
     @javafx.fxml.FXML
-    private ListView<SubgroupTaskListPanel> taskListGroups;
+    private ListView<SubgroupTaskList> taskListGroups;
 
-    private NumberBinding latestSize = STARTING_INDEX;
-
-    public GroupedTaskListPanel(PinnedTaskList pinnedTaskList, GroupedTaskList groupedTaskList) {
+    public GroupedTaskListPanel(GroupedTaskList groupedTaskList) {
         super(FXML);
+        this.groupedTaskList = groupedTaskList;
+        this.subLists = groupedTaskList.getSublists();
+        taskListGroups.setCellFactory(viewCell -> new GroupedTaskListViewCell());
+        taskListGroups.setItems(subLists);
+        logger.log(Level.INFO,
+            String.format("Initialized %s panel with %d categories and %d tasks.", groupedTaskList.getCategory(),
+                groupedTaskList.getSublists().size(), groupedTaskList.size()
+            )
+        );
+    }
 
-        ArrayList<SubgroupTaskListPanel> groupedPanels = new ArrayList<>();
-        for (SubGroupTaskList subGroup : groupedTaskList) {
-            if (subGroup.size() > 0) {
-                groupedPanels.add(new SubgroupTaskListPanel(subGroup, latestSize));
-            }
-            latestSize = latestSize.add(Bindings.size(subGroup.getList()));
-        }
-        taskListGroups.setCellFactory(viewCell -> new GroupedTaskListPanel.GroupedTaskListViewCell());
-        taskListGroups.setItems(FXCollections.observableArrayList(groupedPanels));
+    public GroupedTaskList.Category getCategory() {
+        return groupedTaskList.getCategory();
     }
 
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Task} using a {@code GroupedTaskCard}.
      */
-    class GroupedTaskListViewCell extends ListCell<SubgroupTaskListPanel> {
+    static class GroupedTaskListViewCell extends ListCell<SubgroupTaskList> {
         @Override
-        protected void updateItem(SubgroupTaskListPanel task, boolean empty) {
+        protected void updateItem(SubgroupTaskList task, boolean empty) {
             super.updateItem(task, empty);
 
             if (empty || task == null) {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(task.getRoot());
+                setGraphic(new SubgroupTaskListPanel(task).getRoot());
             }
         }
     }

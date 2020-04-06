@@ -3,16 +3,16 @@ package seedu.jelphabot.ui;
 import java.util.logging.Logger;
 
 import javafx.beans.binding.Bindings;
+import javafx.beans.binding.IntegerBinding;
 import javafx.beans.binding.NumberBinding;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.Region;
 import seedu.jelphabot.commons.core.LogsCenter;
-import seedu.jelphabot.model.task.SubGroupTaskList;
 import seedu.jelphabot.model.task.Task;
+import seedu.jelphabot.model.task.tasklist.SubgroupTaskList;
 
 /**
  * Panel containing one grouped list of tasks.
@@ -22,6 +22,7 @@ public class SubgroupTaskListPanel extends UiPart<Region> {
 
     private static final String FXML = "SubgroupTaskListPanel.fxml";
     private static final int PREF_CELL_HEIGHT = 100;
+    private static final NumberBinding START_INDEX = Bindings.createIntegerBinding(() -> 1);
 
     private final Logger logger = LogsCenter.getLogger(TaskListPanel.class);
 
@@ -31,27 +32,19 @@ public class SubgroupTaskListPanel extends UiPart<Region> {
     @FXML
     private ListView<Task> groupingList;
 
-    private NumberBinding startIndex;
+    private SubgroupTaskList subGroupTaskList;
 
-    // TODO do not display if list is empty
-    public SubgroupTaskListPanel(String title, ObservableList<Task> tasks, NumberBinding startIndex) {
+    public SubgroupTaskListPanel(SubgroupTaskList subGroupTaskList) {
         super(FXML);
-        this.startIndex = startIndex;
-
-        category.setText(title);
+        this.subGroupTaskList = subGroupTaskList;
+        setCategoryTitle(subGroupTaskList.getGroupName(), subGroupTaskList.sizeBinding());
         groupingList.setCellFactory(viewCell -> new SubgroupTaskListViewCell());
-        groupingList.prefHeightProperty().bind(Bindings.size(tasks).multiply(PREF_CELL_HEIGHT));
-        groupingList.setItems(tasks);
+        groupingList.prefHeightProperty().bind(subGroupTaskList.sizeBinding().multiply(PREF_CELL_HEIGHT));
+        groupingList.setItems(subGroupTaskList.getList());
     }
 
-    public SubgroupTaskListPanel(SubGroupTaskList subGroupTaskList, NumberBinding startIndex) {
-        super(FXML);
-        this.startIndex = startIndex;
-
-        category.setText(subGroupTaskList.getGroupName());
-        groupingList.setCellFactory(viewCell -> new SubgroupTaskListViewCell());
-        groupingList.prefHeightProperty().bind(Bindings.size(subGroupTaskList.getList()).multiply(PREF_CELL_HEIGHT));
-        groupingList.setItems(subGroupTaskList.getList());
+    public void setCategoryTitle(String groupName, IntegerBinding totalSize) {
+        category.textProperty().bind(totalSize.asString(groupName + " [%d]"));
     }
 
     /**
@@ -66,7 +59,10 @@ public class SubgroupTaskListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new TaskCard(task, startIndex.add(getIndex())).getRoot());
+                setGraphic(new TaskCard(
+                    task,
+                    START_INDEX.add(subGroupTaskList.startIndexBinding()).add(getIndex())
+                ).getRoot());
             }
         }
     }

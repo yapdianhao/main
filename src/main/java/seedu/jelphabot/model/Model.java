@@ -9,17 +9,21 @@ import seedu.jelphabot.commons.core.GuiSettings;
 import seedu.jelphabot.model.productivity.Productivity;
 import seedu.jelphabot.model.productivity.ProductivityList;
 import seedu.jelphabot.model.reminder.Reminder;
-import seedu.jelphabot.model.task.GroupedTaskList;
-import seedu.jelphabot.model.task.PinnedTaskList;
+import seedu.jelphabot.model.summary.Summary;
+import seedu.jelphabot.model.summary.SummaryList;
 import seedu.jelphabot.model.task.Task;
-import seedu.jelphabot.model.task.ViewTaskList;
+import seedu.jelphabot.model.task.tasklist.GroupedTaskList;
+import seedu.jelphabot.model.task.tasklist.PinnedTaskList;
+import seedu.jelphabot.model.task.tasklist.ViewTaskList;
 
 /**
  * The API of the Model component.
  */
-// TODO check the file paths here for saving as jelphabot.json
+
 public interface Model {
-    /** {@code Predicate} that always evaluate to true */
+    /**
+     * {@code Predicate} that always evaluate to true
+     */
     Predicate<Task> PREDICATE_SHOW_ALL_TASKS = unused -> true;
 
     /**
@@ -55,17 +59,19 @@ public interface Model {
     /**
      * Sets the user prefs' address book file path.
      */
-    void setJelphaBotFilePath(Path addressBookFilePath);
+    void setJelphaBotFilePath(Path jelphaBotFilePath);
 
     Path getRemindersFilePath();
 
-    /** Returns the JelphaBot */
+    /**
+     * Returns the JelphaBot
+     */
     ReadOnlyJelphaBot getJelphaBot();
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces jelphaBot data with the data in {@code jelphaBot}.
      */
-    void setJelphaBot(ReadOnlyJelphaBot addressBook);
+    void setJelphaBot(ReadOnlyJelphaBot jelphaBot);
 
     /**
      * Returns true if a task with the same identity as {@code task} exists in the address book.
@@ -82,6 +88,7 @@ public interface Model {
 
     /**
      * Deletes the given reminder.
+     *
      * @param reminder
      */
     void deleteReminder(Reminder reminder);
@@ -106,7 +113,14 @@ public interface Model {
      */
     void setProductivity(Productivity productivity);
 
-    /** Returns an unmodifiable view of the filtered task list */
+    /**
+     * Replaces the existing summary with {@code summary}.
+     */
+    void setSummary(Summary summary);
+
+    /**
+     * Returns an unmodifiable view of the filtered task list
+     */
     ObservableList<Task> getFilteredTaskList();
 
     GroupedTaskList getGroupedTaskList(GroupedTaskList.Category category);
@@ -117,7 +131,9 @@ public interface Model {
 
     ObservableList<Reminder> getFilteredReminderList();
 
-    /** Returns an unmodifiable view of the filtered task list in the Calendar*/
+    /**
+     * Returns an unmodifiable view of the filtered task list in the Calendar
+     */
     ObservableList<Task> getFilteredCalendarTaskList();
 
     List<Task> getTaskListFromJelphaBot();
@@ -135,6 +151,13 @@ public interface Model {
      * Returns an unmodifiable view of the user's productivity.
      */
     ProductivityList getProductivityList();
+
+    /**
+     * Returns an unmodifiable view of the user's summary.
+     *
+     * @return
+     */
+    SummaryList getSummaryList();
 
     /**
      * Updates the filter of the filtered task list to filter by the given {@code predicate}.

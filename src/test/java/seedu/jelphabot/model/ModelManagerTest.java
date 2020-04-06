@@ -101,13 +101,13 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        JelphaBot addressBook = new JelphaBotBuilder().withTask(ASSESSMENT).withTask(BOOK_REPORT).build();
+        JelphaBot jelphaBot = new JelphaBotBuilder().withTask(ASSESSMENT).withTask(BOOK_REPORT).build();
         JelphaBot differentJelphaBot = new JelphaBot();
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
-        modelManager = new ModelManager(addressBook, userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs);
+        modelManager = new ModelManager(jelphaBot, userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(jelphaBot, userPrefs);
         assertEquals(modelManager, modelManagerCopy);
 
         // same object -> returns true
@@ -119,13 +119,13 @@ public class ModelManagerTest {
         // different types -> returns false
         assertNotEquals(5, modelManager);
 
-        // different addressBook -> returns false
+        // different jelphaBot -> returns false
         assertNotEquals(modelManager, new ModelManager(differentJelphaBot, userPrefs));
 
         // different filteredList -> returns false
         String[] keywords = ASSESSMENT.getDescription().fullDescription.split("\\s+");
         modelManager.updateFilteredTaskList(new DescriptionContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertNotEquals(modelManager, new ModelManager(addressBook, userPrefs));
+        assertNotEquals(modelManager, new ModelManager(jelphaBot, userPrefs));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
@@ -133,6 +133,6 @@ public class ModelManagerTest {
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setJelphaBotFilePath(Paths.get("differentFilePath"));
-        assertNotEquals(modelManager, new ModelManager(addressBook, differentUserPrefs));
+        assertNotEquals(modelManager, new ModelManager(jelphaBot, differentUserPrefs));
     }
 }

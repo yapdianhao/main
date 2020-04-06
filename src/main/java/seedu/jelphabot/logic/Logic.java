@@ -10,10 +10,11 @@ import seedu.jelphabot.logic.commands.exceptions.CommandException;
 import seedu.jelphabot.logic.parser.exceptions.ParseException;
 import seedu.jelphabot.model.ReadOnlyJelphaBot;
 import seedu.jelphabot.model.productivity.ProductivityList;
-import seedu.jelphabot.model.task.GroupedTaskList;
-import seedu.jelphabot.model.task.GroupedTaskList.Category;
-import seedu.jelphabot.model.task.PinnedTaskList;
+import seedu.jelphabot.model.summary.SummaryList;
 import seedu.jelphabot.model.task.Task;
+import seedu.jelphabot.model.task.tasklist.GroupedTaskList;
+import seedu.jelphabot.model.task.tasklist.GroupedTaskList.Category;
+import seedu.jelphabot.model.task.tasklist.PinnedTaskList;
 
 /**
  * API of the Logic component
@@ -82,6 +83,10 @@ public interface Logic {
      */
     ProductivityList getProductivityList();
 
+    /**
+     * Returns an unmodifiable view of the user's summary.
+     */
+    SummaryList getSummaryList();
     /**
      * Returns the user prefs' address book file path.
      */

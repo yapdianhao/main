@@ -1,5 +1,7 @@
 package seedu.jelphabot.ui;
 
+import java.time.LocalDate;
+import java.time.YearMonth;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -21,8 +23,11 @@ import seedu.jelphabot.logic.parser.exceptions.ParseException;
 import seedu.jelphabot.model.calendar.CalendarDate;
 import seedu.jelphabot.model.productivity.Productivity;
 import seedu.jelphabot.model.productivity.ProductivityList;
-import seedu.jelphabot.model.task.GroupedTaskList;
-import seedu.jelphabot.model.task.GroupedTaskList.Category;
+import seedu.jelphabot.model.summary.Summary;
+import seedu.jelphabot.model.summary.SummaryList;
+import seedu.jelphabot.model.task.predicates.TaskDueWithinDayPredicate;
+import seedu.jelphabot.model.task.tasklist.GroupedTaskList;
+import seedu.jelphabot.model.task.tasklist.GroupedTaskList.Category;
 
 /**
  * The Main Window. Provides the basic application layout containing a menu bar
@@ -33,15 +38,14 @@ public class MainWindow extends UiPart<Stage> {
     private static final String FXML = "MainWindow.fxml";
     private static CalendarPanel calendarPanel;
     private static boolean firstStart = true;
-    private static final String WELCOME_STRING = "Welcome to JelphaBot! Here are the tasks that you have due today!\n"
+    private static final String WELCOME_STRING = "Welcome to JelphaBot!\n"
                                                      + "To go back to the list of your tasks, type list!";
+
+    private static Logic logic;
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
-
-
     private Stage primaryStage;
-    private Logic logic;
 
     // Independent Ui parts residing in this Ui container
     private GroupedTaskListPanel taskListPanel;
@@ -102,6 +106,10 @@ public class MainWindow extends UiPart<Stage> {
         return primaryStage;
     }
 
+    public static Logic getLogic() {
+        return logic;
+    }
+
     public static CalendarPanel getCalendarPanel() {
         return calendarPanel;
     }
@@ -145,27 +153,24 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        GroupedTaskList groupedTasks = logic.getGroupedTaskList(Category.DATE);
-        taskListPanel = new GroupedTaskListPanel(
-            logic.getPinnedTaskList(),
-            groupedTasks
-        );
+        taskListPanel = new GroupedTaskListPanel(logic.getGroupedTaskList(Category.DATE));
         taskListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
 
         //update getFilteredCalendarTaskList
         calendarTaskListPanel = new CalendarTaskListPanel(logic.getFilteredCalendarTaskList());
-        logic.updateFilteredCalendarTaskList(DateUtil.getDueTodayPredicate());
+        logic.updateFilteredCalendarTaskList(new TaskDueWithinDayPredicate(DateUtil.getDateToday()));
         calendarTaskListPanelPlaceholder.getChildren().add(calendarTaskListPanel.getRoot());
 
         calendarPanel = new CalendarPanel(CalendarDate.getCurrent(), mainWindowTabPane);
         calendarPanelPlaceholder.getChildren().add(calendarPanel.getRoot());
 
-        summaryPanel = new SummaryPanel(logic.getFilteredByIncompleteDueTodayTaskList(),
-            logic.getFilteredByCompletedTodayTaskList(), mainWindowTabPane);
+        SummaryList summaryList = logic.getSummaryList();
+        summaryList.addSummary(new Summary(logic.getFilteredTaskList()));
+        summaryPanel = new SummaryPanel(summaryList.asUnmodifiableObservableList(), mainWindowTabPane);
         summaryPanelPlaceholder.getChildren().add(summaryPanel.getRoot());
 
         ProductivityList productivityList = logic.getProductivityList();
-        productivityList.addProductivity(new Productivity(logic.getFilteredTaskList()));
+        productivityList.addProductivity(new Productivity(logic.getFilteredTaskList(), true, true, true));
         productivityPanel = new ProductivityPanel(productivityList.asUnmodifiableObservableList(), mainWindowTabPane);
         productivityPanelPlaceholder.getChildren().add(productivityPanel.getRoot());
 
@@ -229,7 +234,6 @@ public class MainWindow extends UiPart<Stage> {
         if (!productivityPanel.isShowing()) {
             productivityPanel.show();
         }
-        // TODO: add case when alr on panel.
     }
 
     /**
@@ -250,7 +254,6 @@ public class MainWindow extends UiPart<Stage> {
         if (!summaryPanel.isShowing()) {
             summaryPanel.show();
         }
-
         if (firstStart) {
             resultDisplay.setFeedbackToUser(WELCOME_STRING);
             firstStart = false;
@@ -262,9 +265,9 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void handleTaskList(GroupedTaskList.Category sublistCategory) {
-        mainWindowTabPane.getSelectionModel().select(0);
+        mainWindowTabPane.getSelectionModel().select(1);
         GroupedTaskList groupedTasks = logic.getGroupedTaskList(sublistCategory);
-        taskListPanel = new GroupedTaskListPanel(logic.getPinnedTaskList(), groupedTasks);
+        taskListPanel = new GroupedTaskListPanel(groupedTasks);
         taskListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
 
     }
@@ -285,6 +288,7 @@ public class MainWindow extends UiPart<Stage> {
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
             CommandResult commandResult = logic.execute(commandText);
+            calendarPanel.updateDayCards();
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
@@ -292,6 +296,8 @@ public class MainWindow extends UiPart<Stage> {
                 handleHelp();
             } else if (commandResult.isExit()) {
                 handleExit();
+            } else if (commandResult.isCalendarCommand()) {
+                updateCalendarPanel(commandResult);
             }
 
             switch (commandResult.getTabSwitch()) {
@@ -310,6 +316,7 @@ public class MainWindow extends UiPart<Stage> {
             case TASK_LIST_MODULE:
                 handleTaskList(Category.MODULE);
                 break;
+            case STAY_ON_CURRENT:
             default:
                 // do nothing
                 break;
@@ -320,6 +327,50 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Invalid command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
+        }
+    }
+
+    /**
+     * Updates the view of the calendar panel in the calendar tab.
+     * @param commandResult Represents the results of a calendar command causing this update.
+     */
+    private void updateCalendarPanel(CommandResult commandResult) {
+        LocalDate date = commandResult.getDate();
+        YearMonth yearMonth = commandResult.getYearMonth();
+        if (date != null && yearMonth == null) {
+            if (date.getMonthValue() == calendarPanel.getCalendarMonth()) {
+                if (calendarPanel.isTodayHighlighted()) {
+                    calendarPanel.getHighlightedDay().removeHighlightedToday();
+                } else {
+                    calendarPanel.getHighlightedDay().removeHighlightedDay();
+                }
+
+                int dayIndex = date.getDayOfMonth();
+                if (date.equals(DateUtil.getDateToday())) {
+                    CalendarPanel.getDayCard(dayIndex).highlightToday();
+                } else {
+                    CalendarPanel.getDayCard(dayIndex).highlightDay();
+                }
+                calendarPanel.setHighlightedDay(dayIndex);
+            }
+        } else if (date == null && yearMonth != null) {
+            LocalDate firstDayOfMonth = yearMonth.atDay(1);
+            CalendarDate newDate = new CalendarDate(firstDayOfMonth);
+            calendarPanel.changeMonthYearLabel(yearMonth);
+            calendarPanel.fillGridPane(newDate);
+            calendarPanel.getHighlightedDay().removeHighlightedDay();
+            CalendarPanel.getDayCard(1).highlightDay();
+            calendarPanel.setHighlightedDay(1);
+        } else {
+            LocalDate today = DateUtil.getDateToday();
+            LocalDate firstDay = today.withDayOfMonth(1);
+            CalendarDate firstDayDate = new CalendarDate(firstDay);
+            YearMonth todayYearMonth = YearMonth.now();
+            calendarPanel.changeMonthYearLabel(todayYearMonth);
+            calendarPanel.fillGridPane(firstDayDate);
+            calendarPanel.getHighlightedDay().removeHighlightedDay();
+            CalendarPanel.getDayCard(today.getDayOfMonth()).highlightToday();
+            calendarPanel.setHighlightedDay(today.getDayOfMonth());
         }
     }
 

@@ -12,12 +12,13 @@ import seedu.jelphabot.model.task.TimeSpent;
  * Represents the user's productivity for the day
  */
 public class TimeSpentToday {
+
     private ObservableList<Task> tasksDueToday;
     private ObservableList<Task> tasksDueThisWeek;
 
-    public TimeSpentToday(ObservableList<Task> tasksDueToday, ObservableList<Task> tasksDueThisWeek) {
-        requireAllNonNull(tasksDueToday, tasksDueThisWeek);
-        this.tasksDueToday = tasksDueToday;
+    public TimeSpentToday(ObservableList<Task> tasksList, ObservableList<Task> tasksDueThisWeek) {
+        requireAllNonNull(tasksList, tasksDueThisWeek);
+        this.tasksDueToday = tasksList;
         this.tasksDueThisWeek = tasksDueThisWeek;
     }
 
@@ -31,7 +32,7 @@ public class TimeSpentToday {
 
     @Override
     public String toString() {
-        return String.format("Tasks due today: %s.\nTasks due in next 7 days: %s.", getTimeSpent(tasksDueToday),
+        return String.format("Tasks due today: %s.\nTasks due in next 6 days: %s.", getTimeSpent(tasksDueToday),
             getTimeSpent(tasksDueThisWeek));
     }
 }

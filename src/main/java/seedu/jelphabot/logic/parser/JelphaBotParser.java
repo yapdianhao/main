@@ -66,30 +66,32 @@ public class JelphaBotParser {
             return new DeleteReminderCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
+            return getCommand(arguments, new ClearCommand(), ClearCommand.MESSAGE_USAGE);
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
+        case ListCommand.COMMAND_WORD: // fallthrough
         case ListCommand.COMMAND_SHORTCUT: // fallthrough
-        case ListCommand.COMMAND_SHORTCUT_TWO: // fallthrough
-        case ListCommand.COMMAND_WORD:
+        case ListCommand.COMMAND_SHORTCUT_TWO:
             return new ListCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
+            return getCommand(arguments, new ExitCommand(), ExitCommand.MESSAGE_USAGE);
 
         case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
+            return getCommand(arguments, new HelpCommand(), HelpCommand.MESSAGE_USAGE);
 
-        case ReminderCommand.COMMAND_WORD:
+        case ReminderCommand.COMMAND_WORD: // fallthrough
+        case ReminderCommand.COMMAND_WORD_UPPER: // fallthrough
+        case ReminderCommand.COMMAND_WORD_LOWER:
             return new ReminderCommandParser().parse(arguments);
 
         case ShowCompletedCommand.COMMAND_WORD:
-            return new ShowCompletedCommand();
+            return getCommand(arguments, new ShowCompletedCommand(), ShowCompletedCommand.MESSAGE_USAGE);
 
         case ShowIncompleteCommand.COMMAND_WORD:
-            return new ShowIncompleteCommand();
+            return getCommand(arguments, new ShowIncompleteCommand(), ShowIncompleteCommand.MESSAGE_USAGE);
 
         case DoneCommand.COMMAND_WORD:
             return new DoneCommandParser().parse(arguments);
@@ -102,12 +104,12 @@ public class JelphaBotParser {
         case SummaryCommand.COMMAND_WORD: // fallthrough
         case SummaryCommand.COMMAND_SHORTCUT_UPPER: // fallthrough
         case SummaryCommand.COMMAND_SHORTCUT_LOWER:
-            return new SummaryCommand();
+            return getCommand(arguments, new SummaryCommand(), SummaryCommand.MESSAGE_USAGE);
 
         case ProductivityCommand.COMMAND_WORD: // fallthrough
         case ProductivityCommand.COMMAND_SHORTCUT_UPPER: // fallthrough
         case ProductivityCommand.COMMAND_SHORTCUT_LOWER:
-            return new ProductivityCommand();
+            return getCommand(arguments, new ProductivityCommand(), ProductivityCommand.MESSAGE_USAGE);
 
         case StartTimerCommand.COMMAND_WORD:
             return new StartTimerCommandParser().parse(arguments);
@@ -118,6 +120,14 @@ public class JelphaBotParser {
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
+    }
+
+    // TODO: rename method
+    private static Command getCommand(String arguments, Command command, String message) throws ParseException {
+        if (arguments.length() > 0) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, message));
+        }
+        return command;
     }
 
 }

@@ -18,7 +18,7 @@ public class ListCommand extends Command {
     public static final String DATE_GROUPING = "date";
     public static final String MODULE_GROUPING = "module";
 
-    public static final String MESSAGE_SUCCESS = "Listed all tasks by ";
+    public static final String MESSAGE_SUCCESS = "Listed all tasks by %s.";
     public static final String MESSAGE_SWITCH_PANEL_ACKNOWLEDGEMENT = "Switched to Task List panel";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Switches to Task List panel and lists all tasks.\n"
@@ -45,9 +45,9 @@ public class ListCommand extends Command {
         model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
         switch (grouping) {
         case "module":
-            return new CommandResult(MESSAGE_SUCCESS).isShowModuleTaskList();
+            return new CommandResult(String.format(MESSAGE_SUCCESS, grouping)).isShowModuleTaskList();
         case "date":
-            return new CommandResult(MESSAGE_SUCCESS).isShowDateTaskList();
+            return new CommandResult(String.format(MESSAGE_SUCCESS, grouping)).isShowDateTaskList();
         case "none":
         default:
             return new CommandResult(MESSAGE_SWITCH_PANEL_ACKNOWLEDGEMENT).isShowDateTaskList();

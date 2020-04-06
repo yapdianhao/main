@@ -24,6 +24,8 @@ import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.model.task.predicates.DescriptionContainsKeywordsPredicate;
 import seedu.jelphabot.model.task.predicates.TaskIsCompletedPredicate;
 import seedu.jelphabot.model.task.predicates.TaskIsIncompletePredicate;
+import seedu.jelphabot.model.task.tasklist.GroupedTaskList;
+import seedu.jelphabot.model.task.tasklist.ViewTaskList;
 import seedu.jelphabot.testutil.EditTaskDescriptorBuilder;
 
 /**
@@ -153,7 +155,21 @@ public class CommandTestUtil {
     public static void showTaskAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredTaskList().size());
 
-        Task task = model.getFilteredTaskList().get(targetIndex.getZeroBased());
+        Task task = model.getLastShownList().get(targetIndex.getZeroBased());
+        final String[] splitName = task.getDescription().fullDescription.split("\\s+");
+        model.updateFilteredTaskList(new DescriptionContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+
+        assertEquals(1, model.getFilteredTaskList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the task at the given
+     * {@code targetIndex} in the {@code model}'s address book.
+     */
+    public static void showTaskAtIndex(Model model, Index targetIndex, GroupedTaskList.Category category) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredTaskList().size());
+
+        Task task = model.getGroupedTaskList(category).get(targetIndex.getZeroBased());
         final String[] splitName = task.getDescription().fullDescription.split("\\s+");
         model.updateFilteredTaskList(new DescriptionContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
@@ -166,13 +182,20 @@ public class CommandTestUtil {
      */
     public static void showTasksWithSpecifiedStatus(Model model, Status status) {
         requireNonNull(model);
-        List<Task> taskList = model.getFilteredTaskList();
+        ViewTaskList taskList = model.getLastShownList();
+        //List<Task> taskList = model.getFilteredTaskList();
         List<Task> tasksWithPredicate = new ArrayList<>();
-        for (Task t: taskList) {
+        for (int i = 0; i < taskList.size(); i++) {
+            Task t = taskList.get(i);
             if (t.getStatus() == status) {
                 tasksWithPredicate.add(t);
             }
         }
+        // for (Task t: taskList) {
+        //     if (t.getStatus() == status) {
+        //         tasksWithPredicate.add(t);
+        //     }
+        // }
 
         Predicate<Task> predicate;
 

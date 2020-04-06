@@ -2,7 +2,6 @@ package seedu.jelphabot.ui;
 
 import java.util.logging.Logger;
 
-import javafx.beans.binding.Bindings;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
@@ -10,7 +9,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.Region;
 import seedu.jelphabot.commons.core.LogsCenter;
-import seedu.jelphabot.model.task.Task;
+import seedu.jelphabot.model.summary.Summary;
 
 /**
  * The Summary Panel. Provides the basic application layout of the summary of tasks due today,
@@ -26,24 +25,14 @@ public class SummaryPanel extends UiPart<Region> {
     private TabPane mainWindowTabPane;
 
     @FXML
-    private ListView<Task> dueTodayTaskListView;
+    private ListView<Summary> summaryPanelListView;
 
-    @FXML
-    private ListView<Task> completedTodayTaskListView;
-
-    public SummaryPanel(ObservableList<Task> dueTodayTaskList,
-        ObservableList<Task> completedTodayTaskList, TabPane tabPane) {
+    public SummaryPanel(ObservableList<Summary> summaryList, TabPane tabPane) {
         super(FXML);
         logger.info("Initialising summary panel stage");
         this.mainWindowTabPane = tabPane;
-        dueTodayTaskListView.setItems(dueTodayTaskList);
-        dueTodayTaskListView.setCellFactory(ListView -> new SummaryTaskListViewCell());
-        dueTodayTaskListView.prefHeightProperty().bind(Bindings.size(dueTodayTaskList).multiply(PREF_CELL_HEIGHT));
-
-        completedTodayTaskListView.setItems(completedTodayTaskList);
-        completedTodayTaskListView.setCellFactory(ListView -> new SummaryTaskListViewCell());
-        completedTodayTaskListView.prefHeightProperty()
-            .bind(Bindings.size(completedTodayTaskList).multiply(PREF_CELL_HEIGHT));
+        summaryPanelListView.setItems(summaryList);
+        summaryPanelListView.setCellFactory(listView -> new SummaryTaskListViewCell());
     }
 
     /**
@@ -51,7 +40,7 @@ public class SummaryPanel extends UiPart<Region> {
      */
     public void show() {
         logger.info("Showing summary panel of application");
-        mainWindowTabPane.getSelectionModel().select(3);
+        mainWindowTabPane.getSelectionModel().select(0);
     }
 
     /**
@@ -66,16 +55,16 @@ public class SummaryPanel extends UiPart<Region> {
 /**
  * Custom {@code ListCell} that displays the graphics of a {@code Task} using a {@code TaskCard}.
  */
-class SummaryTaskListViewCell extends ListCell<Task> {
+class SummaryTaskListViewCell extends ListCell<Summary> {
     @Override
-    protected void updateItem(Task task, boolean empty) {
-        super.updateItem(task, empty);
+    protected void updateItem(Summary summary, boolean empty) {
+        super.updateItem(summary, empty);
 
-        if (empty || task == null) {
+        if (empty || summary == null) {
             setGraphic(null);
             setText(null);
         } else {
-            setGraphic(new TaskCard(task, getIndex() + 1).getRoot());
+            setGraphic(new SummaryCard(summary).getRoot());
         }
     }
 }

@@ -14,6 +14,7 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/se-edu/addressbook-level3/tree/master
 
+[[Documentation]]
 == Introduction
 
 We use asciidoc for writing documentation.

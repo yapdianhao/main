@@ -21,14 +21,14 @@ import seedu.jelphabot.model.Model;
 import seedu.jelphabot.model.ReadOnlyJelphaBot;
 import seedu.jelphabot.model.productivity.ProductivityList;
 import seedu.jelphabot.model.reminder.Reminder;
-import seedu.jelphabot.model.task.GroupedTaskList;
-import seedu.jelphabot.model.task.PinnedTaskList;
+import seedu.jelphabot.model.summary.SummaryList;
 import seedu.jelphabot.model.task.ReminderPredicate;
 import seedu.jelphabot.model.task.Task;
-import seedu.jelphabot.model.task.UniqueTaskList;
 import seedu.jelphabot.model.task.predicates.TaskCompletedWithinDayPredicate;
 import seedu.jelphabot.model.task.predicates.TaskIsCompletedPredicate;
 import seedu.jelphabot.model.task.predicates.TaskIsIncompletePredicate;
+import seedu.jelphabot.model.task.tasklist.GroupedTaskList;
+import seedu.jelphabot.model.task.tasklist.PinnedTaskList;
 import seedu.jelphabot.storage.Storage;
 
 /**
@@ -81,8 +81,6 @@ public class LogicManager implements Logic {
         return model.getFilteredCalendarTaskList();
     }
 
-    // makeshift implementation to ensure that build still runs as per normal
-    // TODO: implement this method in a way that does not require the creation of another UniqueTaskList
     @Override
     public ObservableList<Task> getFilteredByCompleteTaskList() {
         ObservableList<Task> filteredTasks = model.getFilteredTaskList();
@@ -99,18 +97,13 @@ public class LogicManager implements Logic {
 
     public ObservableList<Task> getFilteredByReminder() {
         //logger.info("reached filtered by reminder");
-        UniqueTaskList uniqueTaskList = new UniqueTaskList();
         List<Task> taskList = model.getTaskListFromJelphaBot();
         List<Reminder> reminderList = model.getReminderListFromJelphaBot();
-        ObservableList<Task> filteredTasks = model.getFilteredTaskList();
         ReminderPredicate reminderPredicate = new ReminderPredicate(taskList, reminderList);
-        FilteredList<Task> filteredList = new FilteredList<>(filteredTasks, reminderPredicate);
-        uniqueTaskList.setTasks(filteredList);
         //logger.info("" + filteredList.size());
-        return uniqueTaskList.asUnmodifiableObservableList();
+        return model.getFilteredTaskList().filtered(reminderPredicate);
     }
 
-    // makeshift implementation to ensure that build still runs as per normal
     @Override
     public ObservableList<Task> getFilteredByIncompleteTaskList() {
         ObservableList<Task> filteredTasks = model.getFilteredTaskList();
@@ -138,6 +131,11 @@ public class LogicManager implements Logic {
     @Override
     public ProductivityList getProductivityList() {
         return model.getProductivityList();
+    }
+
+    @Override
+    public SummaryList getSummaryList() {
+        return model.getSummaryList();
     }
 
     @Override

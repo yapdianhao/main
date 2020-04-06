@@ -3,8 +3,6 @@ package seedu.jelphabot.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.jelphabot.model.Model.PREDICATE_SHOW_ALL_TASKS;
 
-import java.util.List;
-
 import seedu.jelphabot.commons.core.Messages;
 import seedu.jelphabot.commons.core.index.Index;
 import seedu.jelphabot.logic.commands.exceptions.CommandException;
@@ -12,6 +10,7 @@ import seedu.jelphabot.model.Model;
 import seedu.jelphabot.model.productivity.Productivity;
 import seedu.jelphabot.model.task.Status;
 import seedu.jelphabot.model.task.Task;
+import seedu.jelphabot.model.task.tasklist.ViewTaskList;
 
 /**
  * Starts a timer for a task.
@@ -23,7 +22,8 @@ public class StartTimerCommand extends Command {
                                                    + "Parameters: INDEX (must be a positive integer)\n" + "Example: "
                                                    + COMMAND_WORD + " 1";
     public static final String MESSAGE_SUCCESS = "Started timer for task %d. %s %s.";
-    public static final String MESSAGE_TASK_ALREADY_TIMED = "Task has already been marked as done and cannot be timed.";
+    public static final String MESSAGE_TASK_ALREADY_TIMED = "This task has already been marked as done and cannot be "
+                                                                + "timed.";
     public static final String MESSAGE_TIMER_ALREADY_STARTED = "Timer for this task has already been started.";
 
     private Index targetIndex;
@@ -36,7 +36,7 @@ public class StartTimerCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Task> lastShownList = model.getFilteredTaskList();
+        ViewTaskList lastShownList = model.getLastShownList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
@@ -54,7 +54,7 @@ public class StartTimerCommand extends Command {
         taskToTime.startTimer();
         model.setTask(dummy, taskToTime);
         model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
-        model.setProductivity(new Productivity(model.getFilteredTaskList()));
+        model.setProductivity(new Productivity(model.getFilteredTaskList(), false, true, false));
         return new CommandResult(String.format(MESSAGE_SUCCESS, targetIndex.getOneBased(),
             taskToTime.getModuleCode().toString(), taskToTime.getDescription().toString()));
     }

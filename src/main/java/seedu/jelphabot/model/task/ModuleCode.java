@@ -7,17 +7,20 @@ import static seedu.jelphabot.commons.util.AppUtil.checkArgument;
  * Represents a Task's module code in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidModuleCode(String)}
  */
-public class ModuleCode {
+public class ModuleCode implements Comparable<ModuleCode> {
 
     public static final String MESSAGE_CONSTRAINTS = "Module Code should be of the format [faculty][code][variant] "
-            + "and adhere to the following constraints:\n"
-            + "1. The faculty should only contain alphabetical characters.\n"
-            + "2. This is followed by a reference code, and optionally a variant tag.\n"
-            + "    - The reference code must be 4 digits long.\n"
-            + "    - The variant tag is an optional alphabetical character.\n";
-    private static final String FACULTY_REGEX = "^[A-Za-z]{2,3}";
+                                                         + "and adhere to the following constraints:\n"
+                                                         + "1. The faculty should only contain alphabetical "
+                                                         + "characters.\n"
+                                                         + "2. This is followed by a reference code, and optionally a"
+                                                         + " variant tag.\n"
+                                                         + "    - The reference code must be 4 digits long.\n"
+                                                         + "    - The variant tag is an optional alphabetical "
+                                                         + "character.\n";
+    private static final String FACULTY_REGEX = "^[A-Z]{2,3}";
     private static final String REFERENCE_CODE = "\\d{4}";
-    private static final String VARIANT_TAG = "[A-Za-z]?$";
+    private static final String VARIANT_TAG = "[A-Z]?$";
     public static final String VALIDATION_REGEX = FACULTY_REGEX + REFERENCE_CODE + VARIANT_TAG;
 
     public final String value;
@@ -29,6 +32,7 @@ public class ModuleCode {
      */
     public ModuleCode(String moduleCode) {
         requireNonNull(moduleCode);
+        moduleCode = moduleCode.toUpperCase();
         checkArgument(isValidModuleCode(moduleCode), MESSAGE_CONSTRAINTS);
         value = moduleCode;
     }
@@ -48,8 +52,8 @@ public class ModuleCode {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof ModuleCode // instanceof handles nulls
-                && value.equals(((ModuleCode) other).value)); // state check
+                   || (other instanceof ModuleCode // instanceof handles nulls
+                           && value.equals(((ModuleCode) other).value)); // state check
     }
 
     @Override
@@ -57,4 +61,8 @@ public class ModuleCode {
         return value.hashCode();
     }
 
+    @Override
+    public int compareTo(ModuleCode o) {
+        return this.toString().compareTo(o.toString());
+    }
 }

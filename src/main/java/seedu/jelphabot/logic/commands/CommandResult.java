@@ -2,6 +2,8 @@ package seedu.jelphabot.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
+import java.time.YearMonth;
 import java.util.Objects;
 
 /**
@@ -20,6 +22,10 @@ public class CommandResult {
      * The application should exit.
      */
     private final boolean exit;
+
+    private boolean calendarCommand;
+    private LocalDate date;
+    private YearMonth yearMonth;
     private SwitchTab toSwitch = SwitchTab.STAY_ON_CURRENT;
 
     /**
@@ -37,6 +43,13 @@ public class CommandResult {
      */
     public CommandResult(String feedbackToUser) {
         this(feedbackToUser, false, false);
+    }
+
+    public CommandResult(String feedbackToUser, LocalDate date, YearMonth yearMonth) {
+        this(feedbackToUser, false, false);
+        this.date = date;
+        this.yearMonth = yearMonth;
+        this.calendarCommand = true;
     }
 
     /**
@@ -59,6 +72,18 @@ public class CommandResult {
 
     public String getFeedbackToUser() {
         return feedbackToUser;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public YearMonth getYearMonth() {
+        return yearMonth;
+    }
+
+    public boolean isCalendarCommand() {
+        return calendarCommand;
     }
 
     public boolean isShowHelp() {

@@ -46,7 +46,7 @@ public class Reminder {
 
     /**
      * Returns true is both reminder refers to the same task.
-     * @param otherReminder
+     * @param other Reminder
      * @return boolean
      */
     public boolean isSameReminder(Object other) {
@@ -59,9 +59,7 @@ public class Reminder {
         }
 
         Reminder otherReminder = (Reminder) other;
-        return otherReminder.getIndex().equals(getIndex())
-                   && otherReminder.getDaysToRemind().equals(getDaysToRemind())
-                   && otherReminder.getHoursToRemind().equals(getHoursToRemind());
+        return otherReminder.getIndex().equals(getIndex());
     }
 
 }
