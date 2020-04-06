@@ -94,8 +94,7 @@ public class CalendarCommand extends Command {
                            && yearMonth == null && ((CalendarCommand) other).yearMonth == null)
                    || (other instanceof CalendarCommand // instanceof handles nulls
                            && predicate.equals(((CalendarCommand) other).predicate)
-                           && yearMonth.equals(((CalendarCommand) other).yearMonth));
-                           // && yearMonth.equals(((CalendarCommand) other).yearMonth)); // state check
+                           && yearMonth.equals(((CalendarCommand) other).yearMonth)); // state check
     }
 
 }

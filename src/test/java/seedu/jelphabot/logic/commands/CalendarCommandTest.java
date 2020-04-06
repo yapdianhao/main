@@ -1,19 +1,23 @@
 package seedu.jelphabot.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
+import static seedu.jelphabot.commons.core.Messages.MESSAGE_TASKS_LISTED_OVERVIEW;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.jelphabot.testutil.TypicalTasks.getTypicalJelphaBot;
+import static seedu.jelphabot.testutil.TypicalTasks.*;
+import static seedu.jelphabot.testutil.TypicalTasks.FINALS;
 
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.jelphabot.commons.core.Messages;
 import seedu.jelphabot.model.Model;
 import seedu.jelphabot.model.ModelManager;
 import seedu.jelphabot.model.UserPrefs;
+import seedu.jelphabot.model.task.predicates.DescriptionContainsKeywordsPredicate;
 import seedu.jelphabot.model.task.predicates.TaskDueWithinDayPredicate;
 
 /**
@@ -113,5 +117,16 @@ public class CalendarCommandTest {
 
         // different commands -> returns false
         assertFalse(calendarFirstCommand.equals(calendarSecondCommand));
+    }
+
+    @Test
+    public void execute_calendarDate_TodayTasksFound() {
+        String expectedMessage = String.format(Messages.MESSAGE_TASKS_LISTED_OVERVIEW,
+            model.getFilteredCalendarTaskList().size());
+        TaskDueWithinDayPredicate predicate = new TaskDueWithinDayPredicate(CLASS.getDateTime().getDate());
+        CalendarCommand command = new CalendarCommand(predicate);
+        expectedModel.updateFilteredCalendarTaskList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(ASSESSMENT, BOOK_REPORT, CLASS, DATE, ERRAND, FINALS, GROUP_WORK), model.getFilteredCalendarTaskList());
     }
 }
