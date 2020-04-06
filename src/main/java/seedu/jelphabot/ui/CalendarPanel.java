@@ -19,7 +19,7 @@ public class CalendarPanel extends UiPart<Region> {
 
     private static final String FXML = "CalendarPanel.fxml";
     private static ArrayList<CalendarDayCard> dayCardsInMonth;
-    private static ArrayList<CalendarDayCard> allDayCards = new ArrayList<>();
+    private static ArrayList<CalendarDayCard> allDayCards;
     private final Logger logger = LogsCenter.getLogger(CalendarPanel.class);
 
     private CalendarDate calendarDate;
@@ -62,6 +62,7 @@ public class CalendarPanel extends UiPart<Region> {
         }
 
         dayCardsInMonth = new ArrayList<>();
+        allDayCards = new ArrayList<>();
 
         for (int row = 0; row < 6; row++) {
             for (int col = 0; col < 7; col++) {

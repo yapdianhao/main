@@ -93,12 +93,12 @@ public class JsonJelphaBotStorageTest {
     }
 
     /**
-     * Saves {@code addressBook} at the specified {@code filePath}.
+     * Saves {@code jelphaBot} at the specified {@code filePath}.
      */
-    private void saveJelphaBot(ReadOnlyJelphaBot addressBook, String filePath) {
+    private void saveJelphaBot(ReadOnlyJelphaBot jelphaBot, String filePath) {
         try {
             new JsonJelphaBotStorage(Paths.get(filePath), testFolder.resolve("reminder.json"))
-                    .saveJelphaBot(addressBook, addToTestDataPathIfNotNull(filePath));
+                    .saveJelphaBot(jelphaBot, addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }

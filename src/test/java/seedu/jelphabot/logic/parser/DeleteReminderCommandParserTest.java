@@ -14,8 +14,16 @@ public class DeleteReminderCommandParserTest {
     private DeleteReminderCommandParser parser = new DeleteReminderCommandParser();
 
     @Test
+    public void parse_emptyArg_throwsParseException() {
+        assertParseFailure(
+            parser, "  ",
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteReminderCommand.MESSAGE_USAGE));
+    }
+
+    @Test
     public void parse_validArgs_returnDeleteReminderCommand() {
         assertParseSuccess(parser, "1", new DeleteReminderCommand(INDEX_FIRST_TASK));
+        assertParseSuccess(parser, "   1", new DeleteReminderCommand(INDEX_FIRST_TASK));
     }
 
     @Test

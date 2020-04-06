@@ -47,13 +47,13 @@ public class GroupedByDateTaskList extends GroupedTaskList {
      * The sublist must not already exist in the list.
      */
     private void addSublist(String title, Predicate<Task> predicate) {
-        subgroupTaskLists.add(
+        subLists.add(
             new SubgroupTaskList(title, tasks.filtered(predicate), subsequentElementStartIndex()));
     }
 
     @Override
     public ObservableList<SubgroupTaskList> getSublists() {
-        return subgroupTaskLists.filtered(subgroupTaskList -> !subgroupTaskList.isEmpty());
+        return subLists.filtered(subgroupTaskList -> !subgroupTaskList.isEmpty());
     }
 
     /* === Methods used for testing. Application classes should not call these methods as Tasks are intended
@@ -61,7 +61,7 @@ public class GroupedByDateTaskList extends GroupedTaskList {
     @Override
     protected void setTasks(List<Task> taskList) {
         this.tasks.setAll(taskList);
-        this.subgroupTaskLists.clear();
+        this.subLists.clear();
         addSublist("Overdue", isOverdue);
         addSublist("Due Today", isDueToday);
         addSublist("Due This Week", isDueThisWeek);

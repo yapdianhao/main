@@ -52,9 +52,4 @@ public class SubgroupTaskList {
     public IntegerBinding startIndexBinding() {
         return startIndex;
     }
-
-    public IntegerBinding subsequentElementStartIndex() {
-        return (IntegerBinding) startIndex.add(size);
-    }
-
 }

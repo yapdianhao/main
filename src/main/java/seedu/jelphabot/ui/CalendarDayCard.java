@@ -50,9 +50,9 @@ public class CalendarDayCard extends UiPart<Region> {
     }
 
     public void updateTasks() {
-        tasks = MainWindow.getLogic().getFilteredCalendarTaskList();
+        ObservableList<Task> allTasks = MainWindow.getLogic().getFilteredCalendarTaskList();
         TaskDueWithinDayPredicate predicate = new TaskDueWithinDayPredicate(calendarDate.getDate());
-        // MainWindow.getLogic().countFilteredCalendarTaskList(predicate);
+        tasks = allTasks.filtered(predicate);
         if (tasks.size() > 0) {
             setDotVisible();
         } else {

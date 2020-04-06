@@ -43,10 +43,10 @@ public class LogicManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonJelphaBotStorage addressBookStorage = new JsonJelphaBotStorage(
+        JsonJelphaBotStorage jelphaBotStorage = new JsonJelphaBotStorage(
             temporaryFolder.resolve("jelphaBot.json"), temporaryFolder.resolve("reminder.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(jelphaBotStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -71,12 +71,12 @@ public class LogicManagerTest {
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
         // Setup LogicManager with JsonJelphaBotIoExceptionThrowingStub
-        JsonJelphaBotStorage addressBookStorage = new JsonJelphaBotIoExceptionThrowingStub(
+        JsonJelphaBotStorage jelphaBotStorage = new JsonJelphaBotIoExceptionThrowingStub(
             temporaryFolder.resolve("ioExceptionJelphaBot.json"),
             temporaryFolder.resolve("ioExceptionReminder.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(
             temporaryFolder.resolve("ioExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(jelphaBotStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
 
         // Execute add command
