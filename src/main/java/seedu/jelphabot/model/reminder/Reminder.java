@@ -59,9 +59,7 @@ public class Reminder {
         }
 
         Reminder otherReminder = (Reminder) other;
-        return otherReminder.getIndex().equals(getIndex())
-                   && otherReminder.getDaysToRemind().equals(getDaysToRemind())
-                   && otherReminder.getHoursToRemind().equals(getHoursToRemind());
+        return otherReminder.getIndex().equals(getIndex());
     }
 
 }
