@@ -112,12 +112,34 @@ In this section, you can find details about the commands that JelphaBot supports
 These include the function of the command, its format, and example usages. The features will be depicted
 in the order of the tabs shown on the main User Interface as seen above for your ease of navigation!
 
+=== Common commands
+
+==== Viewing help : `help`
+
+If you can't recall the command you need, you can enter the `help` command in any panel. A help window which links to this user guide will pop up. +
+Format: `help`
+
+[.text-center]
+.Expected result after running `help`
+image::ug_figures/help.png[width="600]
+
+
+==== Exiting the program : `exit`
+
+You can exit the program anytime by entering the `exit` command directly from any panel. +
+Format: `exit`
+// no image needed
+// TODO: add exclamation mark
+
+****
+icon:exclamation-circle[role="icon-important", size="2x"] Exiting the application before stopping any running timer wil cause all recorded time since the timer was started to be lost.
+****
+
 === Summary (Eden)
-This section will be the first thing you will see after entering JelphaBot!
+This tab will be the first panel you see after entering JelphaBot!
 
-This section gives you a minimalistic overview of the day, namely with tasks that you have due within the day, and tasks that you have completed within the day!
-
-Tasks displayed will only have it's module code as well as it's description for simplicity's sake!
+This section gives you a minimalistic overview of the day, namely tasks that you have due within the day, and tasks that you have completed within the day!
+Tasks displayed will only have it's module code as well as their description for simplicity!
 
 ==== Viewing the summary tab: `summary`
 
@@ -142,12 +164,12 @@ image::SummaryViewAfterTaskComplete.png[width="600"]
 
 === Managing Tasks (Yao Jie)
 
-JelphaBot allows you to track and manage your tasks comprehensively.
+JelphaBot allows you to track and manage your tasks comprehensively as well!
 You can view and sort all your tasks from the Task List page.
 
 Apart from the function to switch tabs by pressing kbd:[Ctrl] + kbd:[tab] on your keyboard, you can enter the `list` command
 or its shortcuts `:T` or `:t` to manually switch to the task list tab.
-The task list panel will then display your all tasks, sorted in various sections. +
+The task list panel will then display all your tasks sorted into various sections. +
 
 Format: `list` +
 Shortcut: `:T` or `:t`
@@ -155,6 +177,68 @@ Shortcut: `:T` or `:t`
 [.text-center]
 .Example of expected result after running `list`
 image::TaskListTab.png[width="600"]
+
+====
+*Command Format for Task list commands*
+
+These command formats are applicable for the following commands: +
+`add`, `edit`, `find`.
+
+* Parts of the command in `UPPER_CASE` represent command parameters that have to be supplied by you. +
+e.g. in `add d/DESCRIPTION`, `DESCRIPTION` represents a field where you can provide the appropriate description, such as `add d/Assignment 1`.
+* Parameters in square brackets are optional e.g `d/DESCRIPTION [p/PRIORITY]` can be used as `d/Assignment 1 p/0` or as `d/Assignment 1`.
+* Parameters with a trailing `…`​can be used as many times as you want, or can also be omitted. +
+e.g. `[t/TAG]...` can be used as `t/project`, `t/project t/graded` etc.
+* Parameters can be in any order e.g. if the command specifies `d/DESCRIPTION p/PRIORITY`, `p/PRIORITY d/DESCRIPTION` is also acceptable.
+====
+
+==== Reading the Task List
+
+The task list is formatted so that you can distinguish urgent tasks at first glance. The start of every task is labelled
+with a module code so that you can visually categorize them. Tasks are tagged according to their importance:
+
+* Default priority
+* *High Priority* tasks will be *bolded* to denote important tasks.
+* _Low priority_ tasks will be _italicized_ to denote optional tasks.
+
+The start of every task will be labelled with a module code so that you can visually categorize them. +
+Go <<#add, here>> to read more about adding tasks with priority and <<#edit, here>> for editing task priority.
+
+// tag::add[]
+[[add]]
+==== Adding a Task: `add`
+
+You can add a task to your task list. +
+Format: `add d/DESCRIPTION dt/DATETIME m/MODULE_CODE [p/PRIORITY] [t/TAG]...`
+
+[.text-center]
+.Example of an expected result after running `add d/Assignment 1 dt/Jan-01-2020 23 59 m/CS1231 t/graded`
+image::addCommand.png[width="600"]
+
+****
+* For dt/DATETIME inputs, please use the format MMM-dd-YYYY HH mm. +
+** MMM: the corresponding month in 3 letters.
+** dd:  the corresponding day in 2 numbers.
+** YYYY: the corresponding year (AD) as 4 numbers.
+** HH: the hour the task is due, in 24-hour format.
+** mm: the minute the task is due.
+
+* Values that p/PRIORITY can take are -1, 0 or 1.
+****
+
+[IMPORTANT]
+Format of the month in DATETIME (MMM) input has to have the first letter in upper-case. +
+E.g `Mar` instead of `mar` when specifying the month of March.
+
+[TIP]
+A task can have any number of tags (including 0)! +
+If the priority field is not specified, the default priority used is Normal Priority.
+
+Examples:
+
+* `add d/Assignment 1 dt/Jan-01-2020 23 59 m/CS3230 p/1`
+* `add d/Project TP dt/Jan-01-2020 23 59 m/CS2103T p/1 t/pair work`
+// end::add[]
 
 // tag::list[]
 ==== Listing all Tasks : `list`
@@ -168,7 +252,9 @@ Format: `list [SORTING_ORDER]`
 ****
 
 ===== Group Tasks by Date : `list date`
-This is also the default interface for the task list tab.
+
+You can groups tasks based on their due date. This is also the default interface for the task list tab. +
+Format: `list date`
 
 Group your tasks into the following categories:
 
@@ -188,12 +274,125 @@ Group your tasks into the following categories:
 image::listByDate.png[width="600"]
 
 ===== Group Tasks by Module : `list module`
-Groups tasks based on their defined module code.
 
-// end::list[]
+You can groups tasks based on their module code. +
+Format: `list module`
+
 [.text-center]
 .Example of an expected result after running `list module`
 image::listByModule.png[width="600"]
+// end::list[]
+
+==== Locating Tasks by name: `find`
+
+You can find tasks in your task list with description containing any of the given keywords. +
+Format: `find KEYWORD [MORE_KEYWORDS]`
+
+[.text-center]
+.Example of an expected result after running `find tutorial`
+image::findCommand.png[width="600"]
+
+****
+* The search is case insensitive. e.g `tut` will match `Tut`
+* The order of the keywords does not matter. e.g. `project Work` will match `Work project`
+* Only the description is searched.
+* Only full words will be matched e.g. `Tut` will not match `Tutorial`
+* Tasks matching at least one keyword will be returned (i.e. `OR` search). e.g. `Project Work` will return `Project Group`, `Work meeting`
+****
+
+Examples:
+
+* `find assignment` +
+Returns `Assignment 1` and `assignment task`
+* `find Tutorial Project MidTerm` +
+Returns any task having descriptions of `Tutorial`, `Project`, or `MidTerm`
+
+// tag::edit[]
+[[edit]]
+==== Editing a Task : `edit`
+
+You can edit an existing task in your task list. +
+Format: `edit INDEX [d/DESCRIPTION] [dt/DATETIME] [m/MODULE_CODE] [p/PRIORITY (-1, 0, or 1)]
+[t/TAG]...`
+
+[.text-center]
+.Example of an expected result after running `edit 1 m/CS2105 d/Tutorial 2`
+image::editCommand.png[width="600"]
+
+
+****
+* Edits the task at the specified `INDEX`, which is the index number shown in the displayed task list.
+* The index *must be a positive integer* 1, 2, 3, ...
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the task will be removed i.e adding of tags is not cumulative.
+* You can remove all the task's tags by typing `t/` without specifying any tags after it.
+* The task to edit cannot have a running timer.
+****
+
+Examples:
+
+* `edit 1 m/CS2105 d/Tutorial 2` +
+Edits the moduleCode of the 1st task to be `cs2105` and description to `Tutorial 2` respectively.
+* `edit 2 dt/Jan-2-2020 23 59 t/` +
+Edits the date and time of the 2nd task to be `Jan-2-2020 23 59` and clears all existing tags.
+// end::edit[]
+
+==== Completing a Task : `done`
+
+Marks a task in your task list as done and then removes the task from the task list display. +
+Format: `done INDEX`
+
+[.text-center]
+.Example of an expected result after running `done 1`
+image::doneCommand.png[width="600"]
+
+****
+* Marks the task at the specified `INDEX` as done.
+* The index refers to the index number shown in the displayed task list.
+* The index *must be a positive integer* 1, 2, 3, ...
+****
+
+// tag::delete[]
+==== Deleting a Task : `delete`
+
+Delete a task from your task list. +
+Format: `delete INDEX`
+
+[.text-center]
+.Example of an expected result after running `delete 1`
+image::deleteCommand.png[width="600"]
+
+****
+* Deletes the task at the specified `INDEX`.
+* The index refers to the index number shown in the displayed task list.
+* The index *must be a positive integer* 1, 2, 3, ...
+* Deleting a task deletes any reminders for it too.
+****
+
+Examples:
+
+* `list` +
+`delete 2` +
+Deletes the 2nd task in the task list.
+* `find Betsy` +
+`delete 1` +
+Deletes the 1st task in the results of the `find` command.
+
+// end::delete[]
+
+==== Clearing all Tasks : `clear`
+
+You can clear all tasks from your task list. +
+Format: `clear`
+
+[.text-center]
+.Example of an expected result after running `clear`
+image::clearCommand.png[width="600"]
+
+****
+* All reminders will be cleared together with the tasks.
+****
 
 // tag::pin[]
 [[pin]]
@@ -307,7 +506,6 @@ image::CalendarToday.png[width="600"]
 
 Displays month of April in the year 2020 in the calendar panel on the right, with today's date highlighted and displays the corresponding tasks due today on the left.
 
-
 === Productivity Tracking (Jel)
 JelphaBot also comes with a productivity tracking that allows you track the progress of your tasks in that week.
 You would be able to see the progress bar as you complete more tasks!
@@ -326,7 +524,7 @@ Shortcut: `:P` or `:p`
 image::ProductivityTab.png[width="600"]
 
 ****
-* When there are running timers, the DateTime field of the task displays the due date of the task.
+// TODO: add exclamation
 * The progress bar and the text following it only shows tasks that are due on the day JelphaBot is running.
 ****
 ==== Starting timer for a task : `start`
