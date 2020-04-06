@@ -217,8 +217,48 @@ This includes classes which implement utility functions which can be used by all
 
 This section describes some noteworthy details on how certain features are implemented.
 
-=== Swap between different Tabs in `MainWindow`
-TODO
+=== Tab System
+Users may find it complicated to handle the many features that JelphaBot offers. They might also be overwhelmed if all the information of their tasks were to be displayed together in one screen.
+
+As such, we have decided to implement a tab system for ROR to organise the available commands into their respective features. JelphaBot provides 4 different tabs for the users,
+each displaying a different set of panels that are relevant to the feature.
+
+* *Summary Tab* - <<Summary feature, overall view>> of the day's tasks in the task list.
+* *Task List Tab* - <<Task Grouping feature in Task List tab, view all tasks>> in the task list.
+* *Calendar Tab* - <<Calendar feature, visualisation>> of tasks in a specific day or month.
+* *Productivity Tab* - <<Productivity feature, overarching view>> of overall productivity such as task completion rate.
+
+To use the different features, we have also implemented commands for users to switch between the 4 tabs.
+
+[[ChangeTab]]
+// tag::changetab[]
+==== Current Implementation
+
+[[ChangingTabs]]
+===== Changing tabs in general
+
+The tabs of the application are defined using a [.java]#Tab# enum and the current mode of the application is stored as a private attribute [.java]#mode# in [.java]#LogicManager#. Users can switch between modes in JelphaBot using the lower case names of each tab as commands. For instance, `calendar. When the tab of the application is changed, we need to update the:
+
+* [.java]#Logic# component so that the [.java]#tab# attribute in [.java]#LogicManager# reflects the new current tab, since this is used to check if a command can be executed,
+* [.java]#UI# component so that the panels display the information that is relevant to the tab.
+
+[IMPORTANT]
+`task list` is not a valid command to switch to the Task List tab. Use `list` instead.
+
+For all these commands, these updates are done using a new [.java]#toTab# attribute added to the [.java]#CommandResult# object. As an example, the figure below shows the sequence diagram for when a user executes the `:p` command:
+
+.Component interactions for `:p` command
+image::productivityTabSequenceDiagram.png[width="800"]
+
+Upon execution of the `:p` command, [.java]#ProductivityCommand#generateCommandResult()# will generate a [.java]#CommandResult# whose [.java]#toTab# attribute is set to [.java]#PRODUCTIVITY# and return it to the [.java]#LogicManager#. Now, the updates can be done for the respective components:
+
+* [.java]#Logic# component: [.java]#LogicManager# calls [.java]#CommandResult#newModeStatus()# to retrieve the mode to be changed to and updates the current mode stored in its [.java]#mode# attribute by calling [.java]#LogicManager#changeMode()#. The [.java]#CommandResult# is passed to [.java]#MainWindow# in UI.
+* [.java]#UI# component: [.java]#MainWindow# calls [.java]#CommandResult#newModeStatus()# to retrieve the mode to be changed to and updates the display panels by calling [.java]#MainWindow#handleChangeMode()#.
+
+[NOTE]
+For commands that do not involve a change in mode, [.java]#CommandResult#newModeStatus()# will return [.java]#null# and no updates to the current mode or display will be done.
+// end::changetab[]
+// TODO: complete this section
 
 // tag::taskgroups[]
 === Task Grouping feature in Task List tab
@@ -262,7 +302,8 @@ image::GetTaskActivityDiagram.png[]
 
 Given below is an example usage scenario and how the task category mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `MainWindow` will be initialized with `GroupedTaskListPanel` as a container for GroupedTaskList model objects. The panel is populated with sublists defined in `GroupedByDateTaskList`.
+Step 1. The user launches the application for the first time. The `MainWindow` will be initialized with `GroupedTaskListPanel` as a container for GroupedTaskList model objects.
+The panel is populated with sublists defined in `GroupedByDateTaskList`.
 
 Step 2. The user executes `list model` to switch to category tasks by module code instead. `GroupedTaskListPanel` is repopulated with sublists defined in `GroupedByModuleTaskList`.
 
@@ -333,12 +374,11 @@ In order to display the task list for specific input dates, the user enters the 
 
 Upon the completion of the execution of the command, the tasks due on 1st January 2020 would be displayed to the user on the task list panel to the left. +
 
-
 ==== Design Considerations
-
+// TODO: amanda
 
 === Productivity feature
-JelphaBot has a productivity feature which provides an overarching view of user's overall productivity.
+JelphaBot has a productivity panel of this feature which provides an overarching view of user's overall productivity.
 
 This feature offers two main functions:
 
@@ -351,6 +391,7 @@ This feature offers two main functions:
 In order to start timing a task, the user enters `start INDEX` command
 (e.g. start 1)
 
+.Sequence Diagram after running `start 1`
 image::StartSequenceDiagram.png[]
 
 Upon successful execution of the command, the productivity tab displays the task being timed under the Running Timers header.
@@ -359,6 +400,7 @@ Upon successful execution of the command, the productivity tab displays the task
 In order to stop timing a task, the user enters `stop INDEX` command
 (e.g. stop 1)
 
+.Sequence Diagram after running `stop 1`
 image::StopSequenceDiagram.png[]
 
 Upon successful execution of the command, the productivity tab removes the task being timed under the Running Timers header.
@@ -402,6 +444,7 @@ This feature offers two main functions:
 To add a reminder to a certain task, the user enters the `reminder INDEX days/DAYS hours/HOURS` command.
 (e.g, reminder 2 days/2 hours/1)
 
+.Sequence Diagram after running `reminder 2 days/2 hours/1`
 image::AddReminderSequenceDiagram.png[]
 
 Upon successful execution of the command, the user adds a reminder associated to the task at `INDEX`. Upon exiting JelphaBot,
@@ -412,6 +455,7 @@ within the period set by the user from the current date.
 To delete a reminder associated to a certain task, the user enters the `delrem INDEX` command.
 (e.g. delrem 2)
 
+.Sequence Diagram after running `delrem 2`
 image::DeleteReminderSequenceDiagram.png[]
 
 Upon successful execution of the command, the reminder of the task at `INDEX` is removed.
@@ -422,7 +466,7 @@ to set reminders to tasks that are complete. However, if tasks that has reminder
 still warn the user.
 
 ==== Design Considerations
-
+// TODO: dianhao
 
 
 // tag::morningcallnightdebrief[]
@@ -789,6 +833,14 @@ Use case ends.
 ** Steps 1b1-1b2 are repeated until the command entered is correct.
 +
 Use case resumes from step 2
+
+//=== Use case: UC7 - Clear all Tasks
+//*MSS*
+//
+//1.  User enters command to clear all tasks.
+//2.  JelphaBot removes all listed tasks and returns an empty list.
+//+
+//Use case ends.
 
 === Use case: UC6 - Add Reminder
 *MSS*
