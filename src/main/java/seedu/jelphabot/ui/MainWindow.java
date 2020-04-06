@@ -228,7 +228,6 @@ public class MainWindow extends UiPart<Stage> {
         if (!productivityPanel.isShowing()) {
             productivityPanel.show();
         }
-        // TODO: add case when alr on panel.
     }
 
     /**
