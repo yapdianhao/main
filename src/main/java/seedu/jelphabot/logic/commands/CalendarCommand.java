@@ -35,7 +35,7 @@ public class CalendarCommand extends Command {
     private final TaskDueWithinDayPredicate predicate;
     private final YearMonth yearMonth;
 
-    private boolean isDate;
+    private boolean isToday;
     private boolean isMonth;
 
     public CalendarCommand() {
@@ -46,7 +46,6 @@ public class CalendarCommand extends Command {
     public CalendarCommand(TaskDueWithinDayPredicate predicate) {
         this.predicate = predicate;
         yearMonth = null;
-        isDate = true;
     }
 
     public CalendarCommand(YearMonth yearMonth) {
@@ -56,33 +55,34 @@ public class CalendarCommand extends Command {
         isMonth = true;
     }
 
-    public CalendarCommand(TaskDueWithinDayPredicate predicate, YearMonth yearMonth) {
+    public CalendarCommand(TaskDueWithinDayPredicate predicate, boolean today) {
         this.predicate = predicate;
-        this.yearMonth = yearMonth;
+        this.isToday = today;
+        yearMonth = null;
     }
 
     @Override
     public CommandResult execute(Model model) {
         if (predicate == null && yearMonth == null) {
             return new CommandResult(MESSAGE_SWITCH_PANEL_ACKNOWLEDGEMENT, false, false).isShowCalendar();
-        } else if (isDate) { //switch task list for specific dates
+        } else if (isToday) { //switch calendar view and task list for today
+            requireNonNull(model);
+            model.updateFilteredCalendarTaskList(predicate);
+            LocalDate date = predicate.getDate();
+            return new CommandResult(String.format(MESSAGE_SWITCH_CALENDAR_TODAY_ACKNOWLEDGEMENT,
+                CalendarDate.getMonthNameOf(date.getMonthValue()), date.getYear()), null, null);
+        } else if (isMonth) { //switch calendar view
+            requireNonNull(model);
+            model.updateFilteredCalendarTaskList(predicate);
+            return new CommandResult(String.format(MESSAGE_SWITCH_CALENDAR_VIEW_ACKNOWLEDGEMENT,
+                CalendarDate.getMonthNameOf(yearMonth.getMonthValue()), yearMonth.getYear()), null, yearMonth);
+        } else { //switch task list for specific dates
             requireNonNull(model);
             model.updateFilteredCalendarTaskList(predicate);
             LocalDate date = predicate.getDate();
             return new CommandResult(
                 String.format(Messages.MESSAGE_TASKS_LISTED_OVERVIEW,
                     model.getFilteredCalendarTaskList().size()), date, null);
-        } else if (isMonth) { //switch calendar view
-            requireNonNull(model);
-            model.updateFilteredCalendarTaskList(predicate);
-            return new CommandResult(String.format(MESSAGE_SWITCH_CALENDAR_VIEW_ACKNOWLEDGEMENT,
-                CalendarDate.getMonthNameOf(yearMonth.getMonthValue()), yearMonth.getYear()), null, yearMonth);
-        } else { //switch calendar view and task list for today
-            requireNonNull(model);
-            model.updateFilteredCalendarTaskList(predicate);
-            LocalDate date = predicate.getDate();
-            return new CommandResult(String.format(MESSAGE_SWITCH_CALENDAR_TODAY_ACKNOWLEDGEMENT,
-                CalendarDate.getMonthNameOf(date.getMonthValue()), date.getYear()), null, null);
         }
     }
 

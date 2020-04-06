@@ -42,7 +42,6 @@ public class CalendarCommandTest {
         assertCommandSuccess(new CalendarCommand(), model, expectedCommandResult, expectedModel);
     }
 
-    //TODO fix null pointer error next week for commented out tests
     @Test
     public void equals_for_predicateConstructor() {
         TaskDueWithinDayPredicate firstPredicate = new TaskDueWithinDayPredicate();
@@ -96,23 +95,20 @@ public class CalendarCommandTest {
     }
 
     @Test
-    public void equals_for_bothConstructors() {
+    public void equals_for_todayConstructors() {
 
         TaskDueWithinDayPredicate firstPredicate = new TaskDueWithinDayPredicate();
         LocalDate date = LocalDate.now().plusMonths(1).plusDays(1);
         TaskDueWithinDayPredicate secondPredicate = new TaskDueWithinDayPredicate(date);
 
-        YearMonth first = YearMonth.now();
-        YearMonth second = YearMonth.parse("Mar-2020", DateTimeFormatter.ofPattern("MMM-uuuu"));
-
-        CalendarCommand calendarFirstCommand = new CalendarCommand(firstPredicate, first);
-        CalendarCommand calendarSecondCommand = new CalendarCommand(secondPredicate, second);
+        CalendarCommand calendarFirstCommand = new CalendarCommand(firstPredicate, true);
+        CalendarCommand calendarSecondCommand = new CalendarCommand(secondPredicate, false);
 
         // same object -> returns true
         assertTrue(calendarFirstCommand.equals(calendarFirstCommand));
 
         // same values -> returns true
-        CalendarCommand calendarFirstCommandCopy = new CalendarCommand(firstPredicate, first);
+        CalendarCommand calendarFirstCommandCopy = new CalendarCommand(firstPredicate, true);
         assertTrue(calendarFirstCommand.equals(calendarFirstCommandCopy));
 
         // different types -> returns false
