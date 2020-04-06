@@ -35,8 +35,7 @@ public class TaskDueWithinDayPredicate implements Predicate<Task> {
     @Override
     public boolean test(Task task) {
         LocalDate taskDate = task.getDateTime().getDate();
-        return taskDate.isBefore(date.plusDays(1))
-                   && taskDate.isAfter(date.minusDays(1));
+        return taskDate.isEqual(date);
     }
 
     @Override
