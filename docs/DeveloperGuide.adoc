@@ -242,6 +242,7 @@ The tabs of the application are defined using a [.java]#SwitchTab# enum and the 
 * [.java]#MainWindow# component so that the [.java]#SwitchTab# attribute in [.java]#MainWindow# reflects the new current tab, since this is used to check if a command can be executed,
 * [.java]#UI# component so that the panels display the information that is relevant to the tab.
 
+
 [IMPORTANT]
 `task list` is not a valid command to switch to the Task List tab. Use `list` instead.
 
@@ -392,6 +393,11 @@ This feature offers two main functions:
 ** Displays a list of tasks due for a specified date
 
 ====  Implementation
+
+The diagram below describes the class structure of the calendar class structure.
+
+.Class Diagram for Calendar classes
+image::CalendarUiClassDiagram.png[]
 
 **Function 1: Displays an overview of tasks in calendar for a selected month and year**
 

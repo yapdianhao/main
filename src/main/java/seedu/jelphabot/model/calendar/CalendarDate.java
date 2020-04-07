@@ -18,7 +18,7 @@ public class CalendarDate {
         this.date = date;
     }
 
-    public static CalendarDate getCurrent() {
+    public static CalendarDate getCurrentDate() {
         return new CalendarDate(DateUtil.getDateToday());
     }
 
