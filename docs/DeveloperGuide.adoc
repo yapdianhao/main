@@ -415,6 +415,8 @@ image::CalendarViewSequenceDiagram.png[]
 
 Upon the completion of the execution of the command, the calendar  for April 2020 would be displayed, with the tasks due on 1st April 2020 listed.
 
+//todo add implementation shit of filling grids and screenshots
+
 **Function 2: Display a list of tasks due for a selected date in the month**
 
 In order to display the task list for specific input dates, the user enters the `calendar DATE` command +
@@ -422,8 +424,13 @@ In order to display the task list for specific input dates, the user enters the 
 
 Upon the completion of the execution of the command, the tasks due on 1st January 2020 would be displayed to the user on the task list panel to the left. +
 
+//todo add screenshots of selected dates and the red and blue dots of tasks
+
 ==== Design Considerations
 // TODO: amanda
+//for the lil dots can say i use filtered instead of like hashmap or tasks etc
+//fill the grid pane ting can say instead of return new calendarPanel i jus clear and refill gridpane)
+
 
 === Productivity feature
 JelphaBot has a productivity panel of this feature which provides an overarching view of user's overall productivity.
