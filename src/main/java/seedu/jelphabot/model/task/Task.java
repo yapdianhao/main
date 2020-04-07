@@ -17,6 +17,7 @@ import seedu.jelphabot.model.tag.Tag;
  */
 public class Task {
 
+    private static final String DEFAULT_DONE_TIME = "Jan-1-2000 00 00";
     // Identity fields
     private final Description description;
     private final ModuleCode moduleCode;
@@ -42,7 +43,7 @@ public class Task {
         this.description = description;
         this.status = status;
         this.dateTime = dateTime;
-        this.doneTime = LocalDateTime.MAX;
+        this.doneTime = LocalDateTime.parse(DEFAULT_DONE_TIME, DateTime.STANDARD_FORMATTER);
         this.moduleCode = moduleCode;
         this.priority = priority;
         this.tags.addAll(tags);
@@ -166,6 +167,7 @@ public class Task {
         }
 
         Task otherTask = (Task) other;
+
         return otherTask.getDescription().equals(getDescription())
                    && otherTask.getStatus().equals(getStatus())
                    && otherTask.getDateTime().equals(getDateTime())

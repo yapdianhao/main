@@ -59,7 +59,9 @@ public class DoneCommand extends Command {
         Task taskToMarkDone = lastShownList.get(index.getZeroBased());
         Task doneTask = createDoneTask(taskToMarkDone);
 
-        if (taskToMarkDone.equals(doneTask)) {
+        boolean tasksSame = taskToMarkDone.equals(doneTask);
+
+        if (tasksSame) {
             throw new CommandException(MESSAGE_TASK_ALREADY_MARKED_COMPLETE);
         }
 
@@ -83,7 +85,8 @@ public class DoneCommand extends Command {
         Set<Tag> tags = task.getTags();
         DateTime dateTime = task.getDateTime();
         Status status = Status.COMPLETE;
-        LocalDateTime doneTime = LocalDateTime.now();
+        String doneTimeString = LocalDateTime.now().format(DateTime.STANDARD_FORMATTER);
+        LocalDateTime doneTime = LocalDateTime.parse(doneTimeString, DateTime.STANDARD_FORMATTER);
         Priority priority = task.getPriority();
         TimeSpent timeSpent = task.getTimeSpent();
 
