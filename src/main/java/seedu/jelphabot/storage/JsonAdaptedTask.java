@@ -110,6 +110,12 @@ class JsonAdaptedTask {
         }
         final DateTime modelDateTime = new DateTime(dateTime);
 
+        if (doneTime == null) {
+            throw new IllegalValueException(
+                String.format(MISSING_FIELD_MESSAGE_FORMAT, LocalDateTime.class.getSimpleName()));
+        }
+        final LocalDateTime modelDoneTime = LocalDateTime.parse(this.doneTime);
+
         if (priority == null) {
             throw new IllegalValueException(
                 String.format(MISSING_FIELD_MESSAGE_FORMAT, Priority.class.getSimpleName()));
@@ -125,12 +131,11 @@ class JsonAdaptedTask {
         final Set<Tag> modelTags = new HashSet<>(taskTags);
 
         if (status == Status.COMPLETE) {
-            LocalDateTime doneTime = LocalDateTime.parse(this.doneTime);
             return new Task(
                 modelDescription,
                 status,
                 modelDateTime,
-                doneTime,
+                modelDoneTime,
                 modelModuleCode,
                 modelPriority,
                 modelTags,

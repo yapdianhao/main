@@ -52,7 +52,7 @@ public class Task {
 
     public Task(Description description, Status status, DateTime dateTime, LocalDateTime doneTime, ModuleCode moduleCode, Priority priority,
         Set<Tag> tags, TimeSpent timeSpent) {
-        requireAllNonNull(description, status, dateTime, moduleCode, tags, timeSpent);
+        requireAllNonNull(description, status, dateTime, doneTime, moduleCode, tags, timeSpent);
         this.description = description;
         this.status = status;
         this.dateTime = dateTime;

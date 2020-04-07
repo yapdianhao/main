@@ -6,6 +6,7 @@ import static seedu.jelphabot.testutil.Assert.assertThrows;
 import static seedu.jelphabot.testutil.TypicalTasks.BOOK_REPORT;
 
 import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,10 +29,12 @@ public class JsonAdaptedTaskTest {
     private static final String INVALID_MODULE_CODE = "2103T";
     private static final String INVALID_TAG = "#rabbit!!";
     private static final String INVALID_DATETIME = "03-19/1999 00:00";
+    private static final String INVALID_DONETIME = "01/22-1999 00:00";
 
     private static final String VALID_DESCRIPTION = BOOK_REPORT.getDescription().toString();
     private static final String VALID_MODULE_CODE = BOOK_REPORT.getModuleCode().toString();
     private static final String VALID_DATETIME = BOOK_REPORT.getDateTime().toString();
+    private static final String VALID_DONETIME = BOOK_REPORT.getDoneTime().toString();
     private static final Priority VALID_PRIORITY = BOOK_REPORT.getPriority();
     private static final Status VALID_STATUS = BOOK_REPORT.getStatus();
     private static final List<JsonAdaptedTag> VALID_TAGS = BOOK_REPORT.getTags().stream()
@@ -48,7 +51,7 @@ public class JsonAdaptedTaskTest {
     @Test
     public void toModelType_invalidDescription_throwsIllegalValueException() {
         JsonAdaptedTask task =
-            new JsonAdaptedTask(INVALID_DESCRIPTION, VALID_STATUS, VALID_DATETIME, VALID_MODULE_CODE,
+            new JsonAdaptedTask(INVALID_DESCRIPTION, VALID_STATUS, VALID_DATETIME, VALID_DONETIME, VALID_MODULE_CODE,
                 VALID_PRIORITY, VALID_TAGS, VALID_TIME_SPENT
             );
         String expectedMessage = Description.MESSAGE_CONSTRAINTS;
@@ -61,6 +64,7 @@ public class JsonAdaptedTaskTest {
             null,
             VALID_STATUS,
             VALID_DATETIME,
+            VALID_DONETIME,
             VALID_MODULE_CODE,
             VALID_PRIORITY,
             VALID_TAGS,
@@ -73,7 +77,7 @@ public class JsonAdaptedTaskTest {
     @Test
     public void toModelType_invalidModuleCode_throwsIllegalValueException() {
         JsonAdaptedTask task =
-            new JsonAdaptedTask(VALID_DESCRIPTION, VALID_STATUS, VALID_DATETIME, INVALID_MODULE_CODE, VALID_PRIORITY,
+            new JsonAdaptedTask(VALID_DESCRIPTION, VALID_STATUS, VALID_DATETIME, VALID_DONETIME, INVALID_MODULE_CODE, VALID_PRIORITY,
                 VALID_TAGS, VALID_TIME_SPENT
             );
         String expectedMessage = ModuleCode.MESSAGE_CONSTRAINTS;
@@ -86,6 +90,7 @@ public class JsonAdaptedTaskTest {
             VALID_DESCRIPTION,
             VALID_STATUS,
             VALID_DATETIME,
+            VALID_DONETIME,
             null,
             VALID_PRIORITY,
             VALID_TAGS, VALID_TIME_SPENT
@@ -97,7 +102,7 @@ public class JsonAdaptedTaskTest {
     @Test
     public void toModelType_invalidDateTime_throwsIllegalValueException() {
         JsonAdaptedTask task =
-            new JsonAdaptedTask(VALID_DESCRIPTION, VALID_STATUS, INVALID_DATETIME, VALID_MODULE_CODE, VALID_PRIORITY,
+            new JsonAdaptedTask(VALID_DESCRIPTION, VALID_STATUS, INVALID_DATETIME, VALID_DONETIME, VALID_MODULE_CODE, VALID_PRIORITY,
                 VALID_TAGS, VALID_TIME_SPENT
             );
         String expectedMessage = DateTime.MESSAGE_CONSTRAINTS;
@@ -110,6 +115,7 @@ public class JsonAdaptedTaskTest {
             VALID_DESCRIPTION,
             VALID_STATUS,
             null,
+            VALID_DONETIME,
             VALID_MODULE_CODE,
             VALID_PRIORITY,
             VALID_TAGS, VALID_TIME_SPENT
@@ -133,10 +139,26 @@ public class JsonAdaptedTaskTest {
         List<JsonAdaptedTag> invalidTags = new ArrayList<>(VALID_TAGS);
         invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
         JsonAdaptedTask task =
-            new JsonAdaptedTask(VALID_DESCRIPTION, VALID_STATUS, VALID_DATETIME, VALID_MODULE_CODE, VALID_PRIORITY,
+            new JsonAdaptedTask(VALID_DESCRIPTION, VALID_STATUS, VALID_DATETIME, VALID_DONETIME, VALID_MODULE_CODE, VALID_PRIORITY,
                 invalidTags, VALID_TIME_SPENT
             );
         assertThrows(IllegalValueException.class, task::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullDoneTime_throwsNullPointerException() {
+        JsonAdaptedTask task = new JsonAdaptedTask(
+            VALID_DESCRIPTION,
+            VALID_STATUS,
+            VALID_DATETIME,
+            null,
+            VALID_MODULE_CODE,
+            VALID_PRIORITY,
+            VALID_TAGS,
+            VALID_TIME_SPENT
+        );
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, LocalDateTime.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, task::toModelType);
     }
 }
 
