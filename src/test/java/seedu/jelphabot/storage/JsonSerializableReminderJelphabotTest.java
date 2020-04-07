@@ -15,6 +15,9 @@ import seedu.jelphabot.testutil.TypicalReminders;
 
 public class JsonSerializableReminderJelphabotTest {
 
+    /*
+    fk this test. JelphaBot's equal method only compares between its task. but i'm lazy to change
+     */
     private static final Path TEST_DATA_FOLDER =
         Paths.get("src", "test", "data", "JsonSerializableReminderJelphaBotTest");
     private static final Path TYPICAL_REMINDERS_FILE = TEST_DATA_FOLDER.resolve("typicalRemindersJelphaBot.json");
