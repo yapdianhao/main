@@ -51,8 +51,8 @@ public class Task {
         this.isTiming = false;
     }
 
-    public Task(Description description, Status status, DateTime dateTime, LocalDateTime doneTime, ModuleCode moduleCode, Priority priority,
-        Set<Tag> tags, TimeSpent timeSpent) {
+    public Task(Description description, Status status, DateTime dateTime, LocalDateTime doneTime,
+        ModuleCode moduleCode, Priority priority, Set<Tag> tags, TimeSpent timeSpent) {
         requireAllNonNull(description, status, dateTime, doneTime, moduleCode, tags, timeSpent);
         this.description = description;
         this.status = status;

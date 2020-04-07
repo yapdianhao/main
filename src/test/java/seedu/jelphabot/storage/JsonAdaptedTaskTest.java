@@ -77,8 +77,8 @@ public class JsonAdaptedTaskTest {
     @Test
     public void toModelType_invalidModuleCode_throwsIllegalValueException() {
         JsonAdaptedTask task =
-            new JsonAdaptedTask(VALID_DESCRIPTION, VALID_STATUS, VALID_DATETIME, VALID_DONETIME, INVALID_MODULE_CODE, VALID_PRIORITY,
-                VALID_TAGS, VALID_TIME_SPENT
+            new JsonAdaptedTask(VALID_DESCRIPTION, VALID_STATUS, VALID_DATETIME, VALID_DONETIME,
+                INVALID_MODULE_CODE, VALID_PRIORITY, VALID_TAGS, VALID_TIME_SPENT
             );
         String expectedMessage = ModuleCode.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, task::toModelType);
@@ -102,8 +102,8 @@ public class JsonAdaptedTaskTest {
     @Test
     public void toModelType_invalidDateTime_throwsIllegalValueException() {
         JsonAdaptedTask task =
-            new JsonAdaptedTask(VALID_DESCRIPTION, VALID_STATUS, INVALID_DATETIME, VALID_DONETIME, VALID_MODULE_CODE, VALID_PRIORITY,
-                VALID_TAGS, VALID_TIME_SPENT
+            new JsonAdaptedTask(VALID_DESCRIPTION, VALID_STATUS, INVALID_DATETIME, VALID_DONETIME,
+                VALID_MODULE_CODE, VALID_PRIORITY, VALID_TAGS, VALID_TIME_SPENT
             );
         String expectedMessage = DateTime.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, task::toModelType);
@@ -139,8 +139,8 @@ public class JsonAdaptedTaskTest {
         List<JsonAdaptedTag> invalidTags = new ArrayList<>(VALID_TAGS);
         invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
         JsonAdaptedTask task =
-            new JsonAdaptedTask(VALID_DESCRIPTION, VALID_STATUS, VALID_DATETIME, VALID_DONETIME, VALID_MODULE_CODE, VALID_PRIORITY,
-                invalidTags, VALID_TIME_SPENT
+            new JsonAdaptedTask(VALID_DESCRIPTION, VALID_STATUS, VALID_DATETIME, VALID_DONETIME,
+                VALID_MODULE_CODE, VALID_PRIORITY, invalidTags, VALID_TIME_SPENT
             );
         assertThrows(IllegalValueException.class, task::toModelType);
     }
