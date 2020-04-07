@@ -37,17 +37,33 @@ public class Task {
      * Every field must be present and not null.
      */
     public Task(Description description, Status status, DateTime dateTime, ModuleCode moduleCode, Priority priority,
-                Set<Tag> tags, TimeSpent timeSpent) {
+        Set<Tag> tags, TimeSpent timeSpent) {
         requireAllNonNull(description, status, dateTime, moduleCode, tags, timeSpent);
         this.description = description;
         this.status = status;
         this.dateTime = dateTime;
+        this.doneTime = LocalDateTime.MAX;
         this.moduleCode = moduleCode;
         this.priority = priority;
         this.tags.addAll(tags);
         this.timeSpent = timeSpent;
         this.isTiming = false;
     }
+
+    public Task(Description description, Status status, DateTime dateTime, LocalDateTime doneTime, ModuleCode moduleCode, Priority priority,
+        Set<Tag> tags, TimeSpent timeSpent) {
+        requireAllNonNull(description, status, dateTime, moduleCode, tags, timeSpent);
+        this.description = description;
+        this.status = status;
+        this.dateTime = dateTime;
+        this.doneTime = doneTime;
+        this.moduleCode = moduleCode;
+        this.priority = priority;
+        this.tags.addAll(tags);
+        this.timeSpent = timeSpent;
+        this.isTiming = false;
+    }
+
 
     public Description getDescription() {
         return description;
