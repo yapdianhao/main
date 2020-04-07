@@ -388,12 +388,14 @@ JelphaBot has a calendar feature which provides an overarching view of their sch
 
 This feature offers two main functions:
 
-** Displays an overview tasks in calendar for a selected month and year
+** Displays an overview of tasks in calendar for a selected month and year
 ** Displays a list of tasks due for a specified date
 
 ====  Implementation
 
-**Function 1: Displays an overview tasks in calendar for a selected month and year**
+**Function 1: Displays an overview of tasks in calendar for a selected month and year**
+
+This function mainly aids in navigating the calendar view. +
 
 There are 2 commands that users can issue to perform function 1:
 
