@@ -1042,6 +1042,28 @@ Use case ends.
 +
 Use case resumes from step 2.
 
+=== Use case: UC10 - Navigate to a different date on calendar
+
+*MSS*
+
+1. User specifies date to jump to a specific month and year.
+2. JelphaBot displays updated calendar view with the corresponding tasks due on specified date.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. JelphaBot detects an error in the entered command.
++
+[none]
+** 1a1. JelphaBot detects error in specified date and displays the correct input format to be expected.
+** 1a2. User enters new command.
+** Steps 1a1-1a2 are repeated until the command entered is correct.
++
+Use case resumes from step 2.
+
+
 [appendix]
 == Non Functional Requirements
 
