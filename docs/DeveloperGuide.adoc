@@ -394,6 +394,10 @@ This feature offers two main functions:
 
 ====  Implementation
 
+The implementation of the main calendar panel is facilitated by the `CalendarMainPanel` class, which serves as the main
+container for this feature. This main container consists of a `SplitPane` comprising of a `CalendarPanel` on the right,
+which displays the calendar view in a month, and a `CalendarTaskListPanel` on the left to display specific tasks.
+
 The diagram below describes the class structure of the calendar class structure.
 
 .Class Diagram for Calendar classes
@@ -425,6 +429,9 @@ In order to display the task list for specific input dates, the user enters the 
 Upon the completion of the execution of the command, the tasks due on 1st January 2020 would be displayed to the user on the task list panel to the left. +
 
 //todo add screenshots of selected dates and the red and blue dots of tasks
+
+
+
 
 ==== Design Considerations
 // TODO: amanda
