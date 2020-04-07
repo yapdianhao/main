@@ -407,6 +407,12 @@ You can display all the tasks in your task list that have been completed.
 .Example of an expected result after running `show-completed`
 image::ug_figures/showCompletedCommand.png[width="600"]
 
+If you do not have any tasks that are complete in your tasklist, the displayed list will be empty and a message will be shown telling you that you currently do not have any completed tasks!
+
+[.text-center]
+.Example of an expected result after running `show-completed`, if the tasklist does not have any completed tasks
+image::ug_figures/showCompletedCommandNoCompleted.png[width="600"]
+
 // end::showcompleted[]
 
 // tag::showincomplete[]
@@ -417,6 +423,12 @@ You can display all the tasks in your task list that are currently incomplete.
 [.text-center]
 .Example of an expected result after running `show-incomplete`
 image::ug_figures/showIncompleteCommand.png[width="600"]
+
+If you do not have any tasks that are incomplete in your tasklist, the displayed list will be empty and a message will be shown telling you that you currently do not have any incomplete tasks!
+
+[.text-center]
+.Example of an expected result after running `show-incomplete`, if the tasklist does not have any incomplete tasks
+image::ug_figures/showCompletedCommandNoCompleted.png[width="600"]
 
 // end::showincomplete[]
 

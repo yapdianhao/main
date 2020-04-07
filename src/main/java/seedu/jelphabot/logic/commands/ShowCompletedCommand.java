@@ -26,7 +26,7 @@ public class ShowCompletedCommand extends Command {
         model.updateFilteredTaskList(COMPLETED_PREDICATE);
         StringBuilder sb = new StringBuilder(MESSAGE_SUCCESS);
         if (model.getFilteredTaskList().size() == 0) {
-            sb.append("\nYou do not have any tasks that are complete");
+            sb.append("\nYou do not have any tasks that are complete!");
         }
         return new CommandResult(sb.toString()).isShowDateTaskList();
     }

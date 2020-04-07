@@ -27,7 +27,7 @@ public class ShowIncompleteCommand extends Command {
         model.updateFilteredTaskList(INCOMPLETE_PREDICATE);
         StringBuilder sb = new StringBuilder(MESSAGE_SUCCESS);
         if (model.getFilteredTaskList().size() == 0) {
-            sb.append("You do not have any tasks that are incomplete!");
+            sb.append("\nYou do not have any tasks that are incomplete!");
         }
         return new CommandResult(sb.toString()).isShowDateTaskList();
     }
