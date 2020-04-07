@@ -114,7 +114,7 @@ class JsonAdaptedTask {
             throw new IllegalValueException(
                 String.format(MISSING_FIELD_MESSAGE_FORMAT, LocalDateTime.class.getSimpleName()));
         }
-        final LocalDateTime modelDoneTime = LocalDateTime.parse(this.doneTime);
+        final LocalDateTime modelDoneTime = LocalDateTime.parse(doneTime);
 
         if (priority == null) {
             throw new IllegalValueException(

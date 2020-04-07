@@ -114,10 +114,6 @@ public class Task {
         return this.timeSpent;
     }
 
-    public void setDoneTime() {
-        this.doneTime = LocalDateTime.now();
-    }
-
     public void setDoneTime(DateTime datetime) {
         this.doneTime = datetime.getDateTime();
     }
@@ -173,6 +169,7 @@ public class Task {
         return otherTask.getDescription().equals(getDescription())
                    && otherTask.getStatus().equals(getStatus())
                    && otherTask.getDateTime().equals(getDateTime())
+                   && otherTask.getDoneTime().equals(getDoneTime())
                    && otherTask.getModuleCode().equals(getModuleCode())
                    && otherTask.getPriority().equals(getPriority())
                    && otherTask.getTags().equals(getTags());
@@ -181,7 +178,7 @@ public class Task {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(description, dateTime, moduleCode, tags);
+        return Objects.hash(description, dateTime, doneTime, moduleCode, tags);
     }
 
     @Override
