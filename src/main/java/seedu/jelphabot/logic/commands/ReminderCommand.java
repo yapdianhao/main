@@ -55,7 +55,8 @@ public class ReminderCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
         Task taskMarkedWithReminder = lastShownList.get(index.getZeroBased());
-        Task taskToCompare = DoneCommand.createDoneTask(taskMarkedWithReminder);
+        String taskMarkedWithReminderDoneTimeString = taskMarkedWithReminder.getDoneTime().toString();
+        Task taskToCompare = DoneCommand.createDoneTask(taskMarkedWithReminder, taskMarkedWithReminderDoneTimeString);
         if (taskMarkedWithReminder.equals(taskToCompare)) {
             throw new CommandException(MESSAGE_TASK_ALREADY_MARKED_COMPLETE);
         }

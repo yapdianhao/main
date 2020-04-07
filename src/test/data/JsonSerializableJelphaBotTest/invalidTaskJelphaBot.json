@@ -2,6 +2,7 @@
   "tasks" : [ {
     "status" : "INCOMPLETE",
     "dateTime" : "Not a DateTime",
+    "doneTime" : "Not a valid DoneTime",
     "priority" : "LOW",
     "tagged" : [ "friends" ],
     "timeSpent" : {

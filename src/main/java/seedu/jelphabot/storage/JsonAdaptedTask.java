@@ -1,5 +1,6 @@
 package seedu.jelphabot.storage;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -29,6 +30,7 @@ class JsonAdaptedTask {
     private final String description;
     private final Status status;
     private final String dateTime;
+    private final String doneTime;
     private final String moduleCode;
     private final Priority priority;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
@@ -42,6 +44,7 @@ class JsonAdaptedTask {
         @JsonProperty("desc") String description,
         @JsonProperty("status") Status status,
         @JsonProperty("dateTime") String dateTime,
+        @JsonProperty("doneTime") String doneTime,
         @JsonProperty("module") String moduleCode,
         @JsonProperty("priority") Priority priority,
         @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
@@ -49,6 +52,7 @@ class JsonAdaptedTask {
         this.description = description;
         this.status = status;
         this.dateTime = dateTime;
+        this.doneTime = doneTime;
         this.moduleCode = moduleCode;
         this.priority = priority;
         if (tagged != null) {
@@ -64,6 +68,7 @@ class JsonAdaptedTask {
         this.description = source.getDescription().fullDescription;
         this.status = source.getStatus();
         this.dateTime = source.getDateTime().toString();
+        this.doneTime = source.getDoneTime().toString();
         this.moduleCode = source.getModuleCode().value;
         this.priority = source.getPriority();
         tagged.addAll(source.getTags().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()));
@@ -105,6 +110,12 @@ class JsonAdaptedTask {
         }
         final DateTime modelDateTime = new DateTime(dateTime);
 
+        if (doneTime == null) {
+            throw new IllegalValueException(
+                String.format(MISSING_FIELD_MESSAGE_FORMAT, LocalDateTime.class.getSimpleName()));
+        }
+        final LocalDateTime modelDoneTime = LocalDateTime.parse(doneTime);
+
         if (priority == null) {
             throw new IllegalValueException(
                 String.format(MISSING_FIELD_MESSAGE_FORMAT, Priority.class.getSimpleName()));
@@ -119,15 +130,30 @@ class JsonAdaptedTask {
 
         final Set<Tag> modelTags = new HashSet<>(taskTags);
 
-        return new Task(
+        if (status == Status.COMPLETE) {
+            return new Task(
                 modelDescription,
                 status,
                 modelDateTime,
+                modelDoneTime,
                 modelModuleCode,
                 modelPriority,
                 modelTags,
                 timeSpent
+            );
+        }
+
+        return new Task(
+            modelDescription,
+            status,
+            modelDateTime,
+            modelModuleCode,
+            modelPriority,
+            modelTags,
+            timeSpent
         );
+
+
     }
 
 }

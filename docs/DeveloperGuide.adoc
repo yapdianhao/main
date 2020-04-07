@@ -191,7 +191,7 @@ The `Model`,
 [NOTE]
 As a more OOP model, we can store a `Tag` list in `JelphaBot`, which `Task` can reference. This would allow `JelphaBot` to only require one `Tag` object per unique `Tag`, instead of each `Task` needing their own `Tag` object. An example of how such a model may look like is given below. +
  +
-image:BetterModelClassDiagram.png[]
+image:ModelMoreOOP.png[]
 
 [[Design-Storage]]
 === Storage component
