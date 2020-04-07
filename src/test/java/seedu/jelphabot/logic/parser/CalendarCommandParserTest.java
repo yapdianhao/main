@@ -2,6 +2,7 @@ package seedu.jelphabot.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.jelphabot.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import java.time.LocalDate;
 import java.time.YearMonth;
@@ -9,11 +10,34 @@ import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.jelphabot.commons.util.DateUtil;
+import seedu.jelphabot.logic.commands.CalendarCommand;
+import seedu.jelphabot.model.task.predicates.TaskDueWithinDayPredicate;
+
 public class CalendarCommandParserTest {
 
     private CalendarCommandParser parser = new CalendarCommandParser();
 
-    //input parse test
+    @Test
+    public void parse_date_returnsCalendarCommand() {
+        LocalDate date = LocalDate.parse("1-Mar-2020", DateTimeFormatter.ofPattern("d-MMM-uuuu"));
+        CalendarCommand expectedCalendarCommand = new CalendarCommand(new TaskDueWithinDayPredicate(date));
+        assertParseSuccess(parser, "1-Mar-2020", expectedCalendarCommand);
+    }
+
+    @Test
+    public void parse_yearMonth_returnsCalendarCommand() {
+        YearMonth yearMonth = YearMonth.parse("Mar-2020", DateTimeFormatter.ofPattern("MMM-uuuu"));
+        CalendarCommand expectedCalendarCommand = new CalendarCommand(yearMonth);
+        assertParseSuccess(parser, "Mar-2020", expectedCalendarCommand);
+    }
+
+    @Test
+    public void parse_today_returnsCalendarCommand() {
+        LocalDate date = DateUtil.getDateToday();
+        CalendarCommand expectedCalendarCommand = new CalendarCommand(new TaskDueWithinDayPredicate(date), true);
+        assertParseSuccess(parser, "today", expectedCalendarCommand);
+    }
 
     @Test
     public void isValidDate_invalidDate_returnsFalse() {

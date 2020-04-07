@@ -14,7 +14,7 @@ import seedu.jelphabot.commons.core.GuiSettings;
 public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
-    private Path addressBookFilePath = Paths.get("data" , "jelphabot.json");
+    private Path jelphaBotFilePath = Paths.get("data" , "jelphabot.json");
     private Path remindersFilePath = Paths.get("data", "reminder.json");
 
     /**
@@ -55,16 +55,16 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     }
 
     public Path getJelphaBotFilePath() {
-        return addressBookFilePath;
+        return jelphaBotFilePath;
     }
 
     public Path getRemindersFilePath() {
         return remindersFilePath;
     }
 
-    public void setJelphaBotFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        this.addressBookFilePath = addressBookFilePath;
+    public void setJelphaBotFilePath(Path jelphaBotFilePath) {
+        requireNonNull(jelphaBotFilePath);
+        this.jelphaBotFilePath = jelphaBotFilePath;
     }
 
     public void setJelphaBotReminderFilePath(Path remindersFilePath) {
@@ -84,19 +84,19 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         UserPrefs o = (UserPrefs) other;
 
         return guiSettings.equals(o.guiSettings)
-                && addressBookFilePath.equals(o.addressBookFilePath);
+                && jelphaBotFilePath.equals(o.jelphaBotFilePath);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(guiSettings, addressBookFilePath);
+        return Objects.hash(guiSettings, jelphaBotFilePath);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Gui Settings : " + guiSettings);
-        sb.append("\nLocal data file location : " + addressBookFilePath);
+        sb.append("\nLocal data file location : " + jelphaBotFilePath);
         return sb.toString();
     }
 

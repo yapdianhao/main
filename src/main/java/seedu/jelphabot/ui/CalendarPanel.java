@@ -13,12 +13,13 @@ import seedu.jelphabot.commons.core.LogsCenter;
 import seedu.jelphabot.model.calendar.CalendarDate;
 
 /**
- * UI component for calendar view to be displayed.
+ * Panel containing the calendar view to be displayed.
  */
 public class CalendarPanel extends UiPart<Region> {
 
     private static final String FXML = "CalendarPanel.fxml";
     private static ArrayList<CalendarDayCard> dayCardsInMonth;
+    private static ArrayList<CalendarDayCard> allDayCards;
     private final Logger logger = LogsCenter.getLogger(CalendarPanel.class);
 
     private CalendarDate calendarDate;
@@ -61,10 +62,12 @@ public class CalendarPanel extends UiPart<Region> {
         }
 
         dayCardsInMonth = new ArrayList<>();
+        allDayCards = new ArrayList<>();
 
         for (int row = 0; row < 6; row++) {
             for (int col = 0; col < 7; col++) {
                 CalendarDayCard calendarDayCard = new CalendarDayCard(currDate);
+                allDayCards.add(calendarDayCard);
                 if (currDate.isSameMonth(firstDay.getMonth())) {
                     calendarDayCard.setSameMonth();
                     dayCardsInMonth.add(calendarDayCard);
@@ -84,6 +87,15 @@ public class CalendarPanel extends UiPart<Region> {
     }
 
     /**
+     * Updates the tasks in all the calendar day cards in the calendar panel.
+     */
+    public void updateDayCards() {
+        for (CalendarDayCard day: allDayCards) {
+            day.updateTasks();
+        }
+    }
+
+    /**
      * Updatest the MonthYear Label of the Calendar Panel with the inputted parameter.
      * @param yearMonth Specifies the year and month of the calendar to be set to.
      */
@@ -94,21 +106,6 @@ public class CalendarPanel extends UiPart<Region> {
 
     public int getCalendarMonth() {
         return calendarDate.getMonth();
-    }
-
-    /**
-     * Switches to display the calendar panel tab.
-     */
-    public void show() {
-        logger.fine("Showing calendar panel of application.");
-        mainWindowTabPane.getSelectionModel().select(2);
-    }
-
-    /**
-     * Returns true if the calendar panel is currently being shown.
-     */
-    public boolean isShowing() {
-        return mainWindowTabPane.isPressed();
     }
 
     public static CalendarDayCard getDayCard(int dayIndex) {

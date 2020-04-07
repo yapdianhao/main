@@ -59,10 +59,11 @@ public class TasksCompleted {
             } else {
                 message = "Wow! It must feel great to have accomplished so little today!";
             }
+            return String.format("%.0f out of %.0f tasks done.\n%s", completed,
+                size, message);
+        } else {
+            return String.format("No tasks due today!\n%s", message);
         }
-
-        return String.format("%.0f out of %.0f tasks done.\n%s", completed,
-            size, message);
     }
 
     /**

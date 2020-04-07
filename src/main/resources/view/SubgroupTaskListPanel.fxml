@@ -8,6 +8,6 @@
       <ListView fx:id="groupingList" maxWidth="1.7976931348623157E308" stylesheets="@JelphaBotTheme.css" />
    </content>
    <font>
-      <Font size="20.0" />
+      <Font size="16.0"/>
    </font>
 </TitledPane>
