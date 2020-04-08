@@ -407,6 +407,13 @@ with the dates filled up by `CalendarDayCards` by CalendarPanel#fillGridPane() w
 Today's date would also be highlighted, with `CalendarTaskListPanel` set to display the tasks due today by running
 Logic#getFilteredCalendarTaskList() and then Logic#updateFilteredCalendarTaskList() with a predicate to filter by today's date.
 
+The following diagram depicts how each individual day cell of the calendar will look like:
+
+image::CalendarDayCards.png[]
+
+After every execution of command, MainWindow#updateTasksInCalendarDayCards() will be run such that any commands that updates
+the JelphaBot task list (e.g `DoneCommand`, `DeleteCommand`, `EditCommand`) would be updated by the dot indicators in the calendar.
+
 **Function 1: Displays an overview of tasks in calendar for a selected month and year**
 
 This function mainly aids in navigating the calendar view. +
@@ -428,8 +435,6 @@ NOTE: Only a date belonging in the current displayed month on the `CalendarPanel
 processing the `calendar DATE` command. A date that falls in other month and years would just display its
 corresponding tasks due on the `CalendarTaskListPanel`.
 
-//Upon the completion of the execution of the command, the tasks due on 1st January 2020 would be displayed to the user on the task list panel to the left. +
-
 The following example sequence diagram shows you how the `calendar MONTHYEAR` (e.g. `calendar Apr-2020`) command works.
 
 .Sequence diagram after running `calendar Apr-2020`
@@ -444,11 +449,7 @@ This updates the `CalendarPanel` display with the respective `MONTHYEAR` view, a
 
 NOTE: The implementation of the other two calendar commands (`calendar DATE` and `calendar today`) are largely similar and run in the same process.
 The only exception is regarding the `calendar DATE` command which fulfills **Function 2** listed above, where the `GridPane` in CalendarPanel` is not
-altered by running CalendarPanel#fillGridPane() like the other two commands fulfilling **Function 1**.
-
-//todo add screenshots of selected dates and the red and blue dots of tasks and say MainWindow#updateTasksInCalendarDayCards() method after every execution of command
-
-
+altered by running CalendarPanel#fillGridPane() unlike the other two commands fulfilling **Function 1**. Only `CalendarTaskListPanel` is updated.
 
 ==== Design Considerations
 // TODO: amanda
