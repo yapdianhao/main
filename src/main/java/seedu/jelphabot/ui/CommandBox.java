@@ -1,12 +1,18 @@
 package seedu.jelphabot.ui;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ListIterator;
+
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Region;
 import seedu.jelphabot.logic.commands.CommandResult;
 import seedu.jelphabot.logic.commands.exceptions.CommandException;
 import seedu.jelphabot.logic.parser.exceptions.ParseException;
+
 
 /**
  * The UI component that is responsible for receiving user command inputs.
@@ -16,7 +22,11 @@ public class CommandBox extends UiPart<Region> {
     public static final String ERROR_STYLE_CLASS = "error";
     private static final String FXML = "CommandBox.fxml";
 
+    private static List<String> commandsHistory = new ArrayList<>();
+
     private final CommandExecutor commandExecutor;
+
+    private ListIterator<String> command;
 
     @FXML
     private TextField commandTextField;
@@ -24,8 +34,18 @@ public class CommandBox extends UiPart<Region> {
     public CommandBox(CommandExecutor commandExecutor) {
         super(FXML);
         this.commandExecutor = commandExecutor;
+
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
+
+        // Replicates behaviour of CLI when UP or DOWN key is pressed
+        commandTextField.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.UP) {
+                commandTextField.setText(getPrevCommand());
+            } else if (event.getCode() == KeyCode.DOWN) {
+                commandTextField.setText(getNextCommand());
+            }
+        });
     }
 
     /**
@@ -34,6 +54,7 @@ public class CommandBox extends UiPart<Region> {
     @FXML
     private void handleCommandEntered() {
         try {
+            commandsHistory.add(commandTextField.getText());
             commandExecutor.execute(commandTextField.getText());
             commandTextField.setText("");
         } catch (CommandException | ParseException e) {
@@ -59,6 +80,32 @@ public class CommandBox extends UiPart<Region> {
         }
 
         styleClass.add(ERROR_STYLE_CLASS);
+    }
+
+    /**
+     * Returns the user's previous command in String form.
+     */
+    private String getPrevCommand() {
+        if (command == null) {
+            command = commandsHistory.listIterator(commandsHistory.size());
+        }
+        if (command.hasPrevious()) {
+            return command.previous();
+        }
+        return "";
+    }
+
+    /**
+     * Returns the user's next command in String form.
+     */
+    private String getNextCommand() {
+        if (command == null) {
+            command = commandsHistory.listIterator(commandsHistory.size());
+        }
+        if (command.hasNext()) {
+            return command.next();
+        }
+        return "";
     }
 
     /**

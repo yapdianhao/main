@@ -111,6 +111,9 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 . Refer to <<Features, this section>> for details of each command.
 A full list of commands is available <<Command Summary, here>>.
 
+[TIP]
+You can use the kbd:[UP] and kbd:[DOWN] keys to view your last entered commands!
+
 [[Features]]
 == Features
 
