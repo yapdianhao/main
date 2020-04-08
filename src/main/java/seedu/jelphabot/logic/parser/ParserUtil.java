@@ -121,11 +121,12 @@ public class ParserUtil {
     public static ReminderDay parseReminderDay(String reminderDay) throws ParseException {
         requireNonNull(reminderDay);
         String trimmedReminderDay = reminderDay.trim();
-        int convertedReminderDay = Integer.parseInt(trimmedReminderDay);
-        if (!ReminderDay.isValidReminderDay(convertedReminderDay)) {
+        //int convertedReminderDay = Integer.parseInt(trimmedReminderDay);
+        if (!ReminderDay.isValidReminderDay(trimmedReminderDay)) {
             throw new ParseException(ReminderDay.MESSAGE_CONSTRAINTS);
         }
-        return new ReminderDay(convertedReminderDay);
+        //int convertedReminderDay = Integer.parseInt(trimmedReminderDay);
+        return new ReminderDay(trimmedReminderDay);
     }
 
     /**
@@ -137,11 +138,11 @@ public class ParserUtil {
     public static ReminderHour parseReminderHour(String reminderHour) throws ParseException {
         requireNonNull(reminderHour);
         String trimmedReminderHour = reminderHour.trim();
-        int convertedReminderHour = Integer.parseInt(trimmedReminderHour);
-        if (!ReminderHour.isValidReminderHour(convertedReminderHour)) {
+        //int convertedReminderHour = Integer.parseInt(trimmedReminderHour);
+        if (!ReminderHour.isValidReminderHour(trimmedReminderHour)) {
             throw new ParseException(ReminderHour.MESSAGE_CONSTRAINTS);
         }
-        return new ReminderHour(convertedReminderHour);
+        return new ReminderHour(trimmedReminderHour);
     }
 
     /**

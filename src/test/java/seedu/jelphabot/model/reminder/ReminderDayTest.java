@@ -11,10 +11,11 @@ public class ReminderDayTest {
     public void isValidReminderDay() {
 
         // invalid ReminderDay
-        assertFalse(ReminderDay.isValidReminderDay(-1)); // negative days
-        assertFalse(ReminderDay.isValidReminderDay(8)); // too far a reminder
+        assertFalse(ReminderDay.isValidReminderDay("-1")); // negative days
+        assertFalse(ReminderDay.isValidReminderDay("8")); // too far a reminder
+        assertFalse(ReminderDay.isValidReminderDay("not valid"));
 
         // valid ReminderDay
-        assertTrue(ReminderDay.isValidReminderDay(1)); // valid day
+        assertTrue(ReminderDay.isValidReminderDay("1")); // valid day
     }
 }
