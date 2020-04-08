@@ -417,6 +417,7 @@ Upon the completion of the execution of the command, the tasks due on 1st Januar
 ==== Design Considerations
 // TODO: amanda
 
+// tag::productivity[]
 === Productivity feature
 JelphaBot has a productivity panel of this feature which provides an overarching view of user's overall productivity.
 
@@ -471,6 +472,7 @@ an error in displaying.
 * *Alternative 1*: Allow users to edit task while timer is running.
 ** Pros: User is able to use all features without restriction.
 ** Cons: Difficult to implement as the Task model requires a new Task to replace the old Task when edit command is executed.
+// end::productivity[]
 
 === Reminder feature
 JelphaBot has a reminder feature that reminds users whenever they have tasks that are about to overdue.
@@ -972,6 +974,7 @@ Use case resumes from step 2
 +
 Use case resumes from step 2.
 
+// tag::timerUseCase[]
 === Use Case: UC8 - Start Timer
 *MSS*
 
@@ -1042,6 +1045,8 @@ Use case ends.
 +
 Use case resumes from step 2.
 
+// end::timerUseCase[]
+
 [appendix]
 == Non Functional Requirements
 
@@ -1052,6 +1057,8 @@ Use case resumes from step 2.
 _{More to be added}_
 
 [appendix]
+
+// tag::glossary[]
 == Glossary
 
 [[mainstream-os]] Mainstream OS::
@@ -1063,6 +1070,8 @@ A type of user interface that allows for interaction between the user and electr
 
 [[command-line-interface]] CLI (Command Line Interface)::
 A type of user interface that allows for interaction between the user and electronic devices in the form of lines of text.
+
+// end::glossary[]
 
 //[appendix]
 //== Product Survey
@@ -1104,11 +1113,11 @@ For this section, `markdown` will be used to denote commands that can be entered
 .. Re-launch the app by double-clicking the jar file. +
    Expected: The most recent window size and location is retained.
 
-=== Adding a task
+=== Adding a Task
 
 . Adding a new task to a cleared list
 .. Prerequisites: Clear the list with the `clear` command.
-.. For all test cases that successfully add a task, the respective totals for each category should increment as new tasks are added.
+.. For all test cases that successfully add a task, the respective total for each category should increment as new tasks are added.
 .. Test case: `add d/test dt/Apr-06-2020 23 59 m/CS2103t` +
     Expected: A new task is added with the description "test", and a module code of "CS2103T".
 .. Test case: `add d/test2 dt/Apr-06-2020 23 59 p/1 m/CS2103t` +
@@ -1127,12 +1136,12 @@ Expected: No task is added. Error message with correct format of date command. S
 Eg. non-alphanumeric characters in description or tag, invalid priority, module codes not complying to NUS format (2-3 Alphabets, 4 numbers, one optional letter) +
 Expected: Similar to previous.
 
-=== Editing a task
+=== Editing a Task
 
 . Editing a task that was previously added
 .. Prerequisites: Execute the `add` commands in the previous section.
 
-=== Completing a task
+=== Completing a Task
 
 . Setting an existing task to Complete.
 .. Prerequisites: Execute the `add` commands in the previous section.
@@ -1156,7 +1165,7 @@ Expected: A new task should appear under the category header "Due This Week".
 Expected: List display does not change. Error details shown in the status message. Status bar remains the same.
 
 
-=== Deleting a task
+=== Deleting a Task
 
 . Deleting a task while all tasks are listed
 
@@ -1168,8 +1177,39 @@ Expected: List display does not change. Error details shown in the status messag
 .. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) +
    Expected: Similar to previous.
 
-// TODO add more
-_{ more test cases ... }_
+=== Changing Tabs
+
+. Summary
+
+.. In Summary tab, switch to Summary with `:s`, `:S` or `summary`. +
+    Expected: Tab is not changed. Error message is shown in Results Display.
+
+.. In any other tab, switch to Summary with `:s`, `:S` or `summary`. +
+    Expected: Success message is shown in the Results Display.
+
+. Task List
+
+.. In Task List tab, switch to Task List with `:t`, `:T` or `list`. +
+    Expected: Tab is not changed. Error message is shown in Results Display.
+
+.. In any other tab, switch to Task List with `:t`, `:T` or `list`. +
+    Expected: Success message is shown in the Results Display.
+
+. Calendar
+
+.. In Calendar tab, switch to Calendar with `:c`, `:C` or `calendar`. +
+    Expected: Tab is not changed. Error message is shown in Results Display.
+
+.. In any other tab, switch to Calendar with `:c`, `:C` or `calendar`. +
+    Expected: Success message is shown in the Results Display.
+
+. Productivity
+
+.. In Productivity tab, switch to Productivity with `:p`, `:P` or `productivity`. +
+    Expected: Tab is not changed. Error message is shown in Results Display.
+
+.. In any other tab, switch to Productivity with `:p`, `:P` or `productivity`. +
+    Expected: Success message is shown in the Results Display.
 
 === Saving data
 . Missing data files
@@ -1185,3 +1225,5 @@ _{ more test cases ... }_
 .. Launch JelphaBot by double-clicking the jar file. +
    Expected Outcome: JelphaBot starts up with sample data in the GUI.
     Sample data should be configured such that there are dates due within the current day and week.
+
+// TODO add more
