@@ -1136,6 +1136,8 @@ Expected: No task is added. Error message with correct format of date command. S
 Eg. non-alphanumeric characters in description or tag, invalid priority, module codes not complying to NUS format (2-3 Alphabets, 4 numbers, one optional letter) +
 Expected: Similar to previous.
 
+_{ more test cases }_
+
 === Editing a Task
 
 . Editing a task that was previously added
@@ -1171,11 +1173,13 @@ Expected: List display does not change. Error details shown in the status messag
 
 .. Prerequisites: List all tasks using the `list` command. Multiple tasks in the list.
 .. Test case: `delete 1` +
-   Expected: First task is deleted from the list. Details of the deleted task shown in the status message. Timestamp in the status bar is updated.
+   Expected: First task is deleted from the list. Details of the deleted task are shown in the results message.
 .. Test case: `delete 0` +
-   Expected: No task is deleted. Error details shown in the status message. Status bar remains the same.
+   Expected: No task is deleted. Error details are shown in the results message.
 .. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) +
    Expected: Similar to previous.
+
+_{ more test cases }_
 
 === Changing Tabs
 
@@ -1211,7 +1215,44 @@ Expected: List display does not change. Error details shown in the status messag
 .. In any other tab, switch to Productivity with `:p`, `:P` or `productivity`. +
     Expected: Success message is shown in the Results Display.
 
-=== Saving data
+=== Productivity Feature
+
+. Marking a task that was previously added as complete
+
+.. Prerequisites: Execute the `add` commands in the <<Adding a Task>>.
+.. Test case: `done 1` +
+    Expected: First task from the list is marked completed. Details of the marked task is shown in the results message. +
+    If task completed is due today, progress bar in productivity tab is updated and displayed total number of completed tasks is updated.
+.. Test case: `done 0` +
+    Expected: No task is marked. Error details shown in the results message.
+.. Other incorrect done commands to try: `done`, `done x` (where x is larger than the list size) +
+    Expected: Similar to previous.
+
+. Start timer for a task that was previously added
+
+.. Prerequisites: Execute the `add` commands in the <<Adding a Task>>. Task must not be marked as completed.
+.. Test case: `start 1` +
+Expected: Starts timing first task from the list. Details of the timing task is shown in the results message. +
+Task being timed is displayed under Running Timer(s) in productivity tab.
+.. Test case: `start 0` +
+Expected: No timer started. Error details shown in the results message.
+.. Other incorrect start commands to try: `start`, `start x` (where x is larger than the list size or is index of task already marked completed) +
+Expected: Similar to previous.
+
+. Stop timer for a task that was previously added
+
+.. Prerequisites: Execute the `add` commands in the <<Adding a Task>>. Timer must be running for task.
+.. Test case: `stop 1` +
+Expected: Stops timing first task from the list. Details of the timed task is shown in the results message. +
+If task's timer to be stopped is due today or in next 6 days, displayed time spent is updated in productivity tab. +
+Task timed is removed from Running Timer(s) displayed in productivity tab.
+.. Test case: `stop 0` +
+Expected: No timer stopped. Error details shown in the results message.
+.. Other incorrect stop commands to try: `start`, `start x` (where x is larger than the list size or is index of task without running timer) +
+Expected: Similar to previous.
+
+
+=== Data Storage
 . Missing data files
 
 .. Open the `/data/` folder and delete all .json files in that folder.
