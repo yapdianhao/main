@@ -7,13 +7,13 @@ import static seedu.jelphabot.commons.util.AppUtil.checkArgument;
  */
 public class ReminderDay {
 
-    public static final String MESSAGE_CONSTRAINTS = "Reminder date should be within one week from now";
+    public static final String MESSAGE_CONSTRAINTS = "Reminder date should be within one week from now, and an integer";
 
     private final int reminderDay;
 
-    public ReminderDay(int reminderDay) {
+    public ReminderDay(String reminderDay) {
         checkArgument(isValidReminderDay(reminderDay), MESSAGE_CONSTRAINTS);
-        this.reminderDay = reminderDay;
+        this.reminderDay = Integer.parseInt(reminderDay);
     }
 
     public int getReminderDay() {
@@ -25,8 +25,13 @@ public class ReminderDay {
      * @param dayToTest
      * @return boolean
      */
-    public static boolean isValidReminderDay(int dayToTest) {
-        return 0 <= dayToTest && dayToTest <= 7;
+    public static boolean isValidReminderDay(String dayToTest) {
+        try {
+            int convertedDayToTest = Integer.parseInt(dayToTest);
+            return 0 <= convertedDayToTest && convertedDayToTest <= 7;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     /**

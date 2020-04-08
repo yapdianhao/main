@@ -61,21 +61,21 @@ class JsonAdaptedReminder {
                 throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, ReminderDay.class.getSimpleName()));
             }
-            if (!ReminderDay.isValidReminderDay(Integer.parseInt(reminderDay))) {
+            if (!ReminderDay.isValidReminderDay(reminderDay)) {
                 throw new IllegalValueException(ReminderDay.MESSAGE_CONSTRAINTS);
             }
             if (reminderHour == null) {
                 throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, ReminderHour.class.getSimpleName()));
             }
-            if (!ReminderHour.isValidReminderHour(Integer.parseInt(reminderHour))) {
+            if (!ReminderHour.isValidReminderHour(reminderHour)) {
                 throw new IllegalValueException(
                     String.format(ReminderHour.MESSAGE_CONSTRAINTS));
             }
             return new Reminder(
                 Index.fromZeroBased(Integer.parseInt(index)),
-                new ReminderDay(Integer.parseInt(reminderDay)),
-                new ReminderHour(Integer.parseInt(reminderHour))
+                new ReminderDay(reminderDay),
+                new ReminderHour(reminderHour)
             );
         } catch (IndexOutOfBoundsException e) {
             throw new IllegalValueException(NEGATIVE_INDEX_MESSAGE_FORMAT);

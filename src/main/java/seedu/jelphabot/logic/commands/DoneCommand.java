@@ -3,6 +3,7 @@ package seedu.jelphabot.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.jelphabot.model.Model.PREDICATE_SHOW_ALL_TASKS;
 
+import java.time.LocalDateTime;
 import java.util.Set;
 
 import seedu.jelphabot.commons.core.Messages;
@@ -57,9 +58,10 @@ public class DoneCommand extends Command {
 
         Task taskToMarkDone = lastShownList.get(index.getZeroBased());
         Task doneTask = createDoneTask(taskToMarkDone);
-        doneTask.setDoneTime();
 
-        if (taskToMarkDone.equals(doneTask)) {
+        boolean tasksSame = taskToMarkDone.equals(doneTask);
+
+        if (tasksSame) {
             throw new CommandException(MESSAGE_TASK_ALREADY_MARKED_COMPLETE);
         }
 
@@ -71,9 +73,10 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * Creates and returns a {@code Task} with the updated COMPLETE status,
-     * by copying all the details of the given {@code task} and creating a new
-     * {@code Task} object.
+     * Creates and returns a {@code Task} with the updated COMPLETE status, and updated DoneTime.
+     * DoneTime is set according to the time that the task was marked done.
+     * Creation of the {@code Task} is done by copying all the details of the given {@code Task}
+     * and creating a new {@code Task} object.
      * @param task Task object to get the relevant details from.
      * @return Task object with it's status set as COMPLETE.
      */
@@ -83,10 +86,34 @@ public class DoneCommand extends Command {
         Set<Tag> tags = task.getTags();
         DateTime dateTime = task.getDateTime();
         Status status = Status.COMPLETE;
+        String doneTimeString = LocalDateTime.now().format(DateTime.STANDARD_FORMATTER);
+        LocalDateTime doneTime = LocalDateTime.parse(doneTimeString, DateTime.STANDARD_FORMATTER);
         Priority priority = task.getPriority();
         TimeSpent timeSpent = task.getTimeSpent();
 
-        return new Task(description, status, dateTime, moduleCode, priority, tags, timeSpent);
+        return new Task(description, status, dateTime, doneTime, moduleCode, priority, tags, timeSpent);
+    }
+
+    /**
+     * Creates and returns a {@code Task} with the updated COMPLETE status, and updated DoneTime.
+     * DoneTime is set according to the String representing the time the task was completed.
+     * Creation of the {@code Task} is done by copying all the details of the given {@code Task}
+     * and creating a new {@code Task} object.
+     * @param task Task object to get the relevant details from.
+     * @param doneTimeString String representing the time that the task was marked done.
+     * @return Task object with it's status set as COMPLETE and it's doneTime set as the doneTimeString.
+     */
+    protected static Task createDoneTask(Task task, String doneTimeString) {
+        Description description = task.getDescription();
+        ModuleCode moduleCode = task.getModuleCode();
+        Set<Tag> tags = task.getTags();
+        DateTime dateTime = task.getDateTime();
+        Status status = Status.COMPLETE;
+        LocalDateTime doneTime = LocalDateTime.parse(doneTimeString);
+        Priority priority = task.getPriority();
+        TimeSpent timeSpent = task.getTimeSpent();
+
+        return new Task(description, status, dateTime, doneTime, moduleCode, priority, tags, timeSpent);
     }
 
     @Override

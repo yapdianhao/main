@@ -407,6 +407,12 @@ You can display all the tasks in your task list that have been completed.
 .Example of an expected result after running `show-completed`
 image::ug_figures/showCompletedCommand.png[width="600"]
 
+If you do not have any tasks that are complete in your tasklist, the displayed list will be empty and a message will be shown telling you that you currently do not have any completed tasks!
+
+[.text-center]
+.Example of an expected result after running `show-completed`, if the tasklist does not have any completed tasks
+image::ug_figures/showCompletedCommandNoCompleted.png[width="600"]
+
 // end::showcompleted[]
 
 // tag::showincomplete[]
@@ -417,6 +423,12 @@ You can display all the tasks in your task list that are currently incomplete.
 [.text-center]
 .Example of an expected result after running `show-incomplete`
 image::ug_figures/showIncompleteCommand.png[width="600"]
+
+If you do not have any tasks that are incomplete in your tasklist, the displayed list will be empty and a message will be shown telling you that you currently do not have any incomplete tasks!
+
+[.text-center]
+.Example of an expected result after running `show-incomplete`, if the tasklist does not have any incomplete tasks
+image::ug_figures/showCompletedCommandNoCompleted.png[width="600"]
 
 // end::showincomplete[]
 
@@ -520,11 +532,11 @@ image::CalendarToday.png[width="600"]
 
 Displays month of April in the year 2020 in the calendar panel on the right, with today's date highlighted and displays the corresponding tasks due today on the left.
 
+// tag::productivitytracker[]
 === Productivity Tracking (Jel)
 JelphaBot also comes with a productivity tracking that allows you track the progress of your tasks in that week.
 You would be able to see the progress bar as you complete more tasks!
 
-// tag::productivitytracker[]
 ==== Track productivity : `productivity`
 Apart from the function to switch tabs by pressing kbd:[Ctrl] + kbd:[tab] on your keyboard, you can enter the `productivity` command
 or its shortcuts `:P` or `:p` to manually switch to the productivity tab.
@@ -577,11 +589,14 @@ image::ug_figures/stopCommand.png[width="600"]
 * If task timed is due today or in next 6 days, time spent on timed task will be added to the respected time spent sections in the productivity tab.
 ****
 // end::productivitytracker[]
+
+// tag::feedback[]
 ==== Receiving encouragement and criticism
 
 JelphaBot automatically tracks the user's productivity in a day and outputs the appropriate response to the user's
 achievements and task completion rate. +
 There is no need to manually request for compliments or criticism.
+// end::feedback[]
 
 === Set Reminders and Notifications (Dian Hao)
 ==== Adding reminder : `reminder`
@@ -639,6 +654,7 @@ image::ug_figures/reminderpopup.png[width="600"]
 
 === Colour-code module codes `[coming in v2.0]`
 
+// tag::faq[]
 == FAQ
 
 *Q1*: Is JelphaBot free? +
@@ -661,7 +677,9 @@ We will consider this in v2.0.
 
 *Q6*: Do I need an Internet connection to use JelphaBot? +
 A: No, you don’t. JelphaBot works completely offline.
+// end::faq[]
 
+// tag::summary[]
 == Command Summary
 
 * *Help* : `help`
@@ -696,3 +714,4 @@ e.g. `calendar Jan-1-2020`
 * *Change Calendar View* : `calendar MONTHYEAR` +
 e.g. `calendar Apr-2020`
 * *Today's Calendar View* : `calendar today`
+// end::summary[]
