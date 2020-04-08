@@ -723,13 +723,12 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |`*` |student |track my habits| know if I have strayed from my goal.
 |=======================================================================
 
-//_{More to be added}_
-
 [appendix]
 
 == Use Cases
-
 (For all use cases below, the *System* is the `JelphaBot` and the *Actor* is the `user`, unless specified otherwise)
+
+// TODO: add use case diagram
 
 //[discrete]
 === Use case: UC1 - Add Task
@@ -1050,9 +1049,11 @@ Use case resumes from step 2.
 [appendix]
 == Non Functional Requirements
 
-.  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `11` or above installed.
-.  Should be able to hold up to 1000 tasks without a noticeable sluggishness in performance for typical usage.
-.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+. Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `11` or above installed.
+. Should work on both 32-bit and 64-bit machines.
+. Should be able to hold up to 1000 tasks without a noticeable sluggishness in performance for typical usage.
+. Should be able to handle any kind of input, including invalid ones.
+. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
 _{More to be added}_
 
@@ -1063,7 +1064,6 @@ _{More to be added}_
 
 [[mainstream-os]] Mainstream OS::
 Windows, Linux, Unix, OS-X
-
 
 [[graphical-user-interface]] GUI (Graphical User Interface)::
 A type of user interface that allows for interaction between the user and electronic devices through graphical icons
@@ -1126,12 +1126,12 @@ For this section, `markdown` will be used to denote commands that can be entered
     Expected: A new task is added with the description "test3", a module code of "CS2103T", and both the module code and descripton should be in italics.
 . Adding a task with incomplete parameters
 .. Test case: `add d/aa` +
-Expected: No task is added. Error details shown in the status message. Status bar remains the same. +
+Expected: No task is added. Error details shown in the results message. +
 .. Other incorrect add commands to try: other parameters are missing. +
 Expected: Similar to previous.
 . Adding a task with incorrect parameters
 .. Test case: `add d/aa dt/Joon-06-2020 23 59 p/-1 m/CS2103t` +
-Expected: No task is added. Error message with correct format of date command. Status bar remains the same. +
+Expected: No task is added. Error message with correct format of date command. +
 .. Other incorrect add commands to try: other parameters are wrongly formatted. +
 Eg. non-alphanumeric characters in description or tag, invalid priority, module codes not complying to NUS format (2-3 Alphabets, 4 numbers, one optional letter) +
 Expected: Similar to previous.
@@ -1164,7 +1164,7 @@ list date +
 add d/test dt/TOMORROW 23 59 m/3230``, where `TOMORROW` refers to the date of the next day. +
 Expected: A new task should appear under the category header "Due This Week".
 .. Test case: `list invalid` +
-Expected: List display does not change. Error details shown in the status message. Status bar remains the same.
+Expected: List display does not change. Error details shown in the results message. Status bar remains the same.
 
 
 === Deleting a Task
@@ -1251,6 +1251,7 @@ Expected: No timer stopped. Error details shown in the results message.
 .. Other incorrect stop commands to try: `start`, `start x` (where x is larger than the list size or is index of task without running timer) +
 Expected: Similar to previous.
 
+// TODO add more
 
 === Data Storage
 . Missing data files
@@ -1266,5 +1267,3 @@ Expected: Similar to previous.
 .. Launch JelphaBot by double-clicking the jar file. +
    Expected Outcome: JelphaBot starts up with sample data in the GUI.
     Sample data should be configured such that there are dates due within the current day and week.
-
-// TODO add more
