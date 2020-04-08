@@ -15,9 +15,9 @@ public class Index {
      * {@link Index#fromOneBased(int)}.
      */
     private Index(int zeroBasedIndex) {
-        if (zeroBasedIndex < 0) {
-            throw new IndexOutOfBoundsException();
-        }
+        //if (zeroBasedIndex < 0) {
+        //    throw new IndexOutOfBoundsException();
+        //}
 
         this.zeroBasedIndex = zeroBasedIndex;
     }
