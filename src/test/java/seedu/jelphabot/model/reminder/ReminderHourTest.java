@@ -11,10 +11,12 @@ public class ReminderHourTest {
     public void isValidReminderDay() {
 
         // invalid ReminderDay
-        assertFalse(ReminderHour.isValidReminderHour(-1)); // negative hours
-        assertFalse(ReminderHour.isValidReminderHour(30)); // 1 day 6 hours
+        assertFalse(ReminderHour.isValidReminderHour("-1")); // negative hours
+        assertFalse(ReminderHour.isValidReminderHour("30")); // 1 day 6 hours
+        assertFalse(ReminderHour.isValidReminderHour("not valid"));
 
         // valid ReminderDay
-        assertTrue(ReminderHour.isValidReminderHour(1)); // valid hours
+        assertTrue(ReminderHour.isValidReminderHour("1")); // valid hours
+        assertTrue(ReminderHour.isValidReminderHour("24"));
     }
 }
