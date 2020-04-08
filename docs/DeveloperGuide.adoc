@@ -417,6 +417,7 @@ Upon the completion of the execution of the command, the tasks due on 1st Januar
 ==== Design Considerations
 // TODO: amanda
 
+// tag::productivity[]
 === Productivity feature
 JelphaBot has a productivity panel of this feature which provides an overarching view of user's overall productivity.
 
@@ -471,6 +472,7 @@ an error in displaying.
 * *Alternative 1*: Allow users to edit task while timer is running.
 ** Pros: User is able to use all features without restriction.
 ** Cons: Difficult to implement as the Task model requires a new Task to replace the old Task when edit command is executed.
+// end::productivity[]
 
 === Reminder feature
 JelphaBot has a reminder feature that reminds users whenever they have tasks that are about to overdue.
@@ -721,13 +723,12 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |`*` |student |track my habits| know if I have strayed from my goal.
 |=======================================================================
 
-//_{More to be added}_
-
 [appendix]
 
 == Use Cases
-
 (For all use cases below, the *System* is the `JelphaBot` and the *Actor* is the `user`, unless specified otherwise)
+
+// TODO: add use case diagram
 
 //[discrete]
 === Use case: UC1 - Add Task
@@ -972,6 +973,7 @@ Use case resumes from step 2
 +
 Use case resumes from step 2.
 
+// tag::timerUseCase[]
 === Use Case: UC8 - Start Timer
 *MSS*
 
@@ -1042,27 +1044,34 @@ Use case ends.
 +
 Use case resumes from step 2.
 
+// end::timerUseCase[]
+
 [appendix]
 == Non Functional Requirements
 
-.  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `11` or above installed.
-.  Should be able to hold up to 1000 tasks without a noticeable sluggishness in performance for typical usage.
-.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+. Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `11` or above installed.
+. Should work on both 32-bit and 64-bit machines.
+. Should be able to hold up to 1000 tasks without a noticeable sluggishness in performance for typical usage.
+. Should be able to handle any kind of input, including invalid ones.
+. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
 _{More to be added}_
 
 [appendix]
+
+// tag::glossary[]
 == Glossary
 
 [[mainstream-os]] Mainstream OS::
 Windows, Linux, Unix, OS-X
-
 
 [[graphical-user-interface]] GUI (Graphical User Interface)::
 A type of user interface that allows for interaction between the user and electronic devices through graphical icons
 
 [[command-line-interface]] CLI (Command Line Interface)::
 A type of user interface that allows for interaction between the user and electronic devices in the form of lines of text.
+
+// end::glossary[]
 
 //[appendix]
 //== Product Survey
@@ -1104,11 +1113,11 @@ For this section, `markdown` will be used to denote commands that can be entered
 .. Re-launch the app by double-clicking the jar file. +
    Expected: The most recent window size and location is retained.
 
-=== Adding a task
+=== Adding a Task
 
 . Adding a new task to a cleared list
 .. Prerequisites: Clear the list with the `clear` command.
-.. For all test cases that successfully add a task, the respective totals for each category should increment as new tasks are added.
+.. For all test cases that successfully add a task, the respective total for each category should increment as new tasks are added.
 .. Test case: `add d/test dt/Apr-06-2020 23 59 m/CS2103t` +
     Expected: A new task is added with the description "test", and a module code of "CS2103T".
 .. Test case: `add d/test2 dt/Apr-06-2020 23 59 p/1 m/CS2103t` +
@@ -1117,22 +1126,24 @@ For this section, `markdown` will be used to denote commands that can be entered
     Expected: A new task is added with the description "test3", a module code of "CS2103T", and both the module code and descripton should be in italics.
 . Adding a task with incomplete parameters
 .. Test case: `add d/aa` +
-Expected: No task is added. Error details shown in the status message. Status bar remains the same. +
+Expected: No task is added. Error details shown in the results message. +
 .. Other incorrect add commands to try: other parameters are missing. +
 Expected: Similar to previous.
 . Adding a task with incorrect parameters
 .. Test case: `add d/aa dt/Joon-06-2020 23 59 p/-1 m/CS2103t` +
-Expected: No task is added. Error message with correct format of date command. Status bar remains the same. +
+Expected: No task is added. Error message with correct format of date command. +
 .. Other incorrect add commands to try: other parameters are wrongly formatted. +
 Eg. non-alphanumeric characters in description or tag, invalid priority, module codes not complying to NUS format (2-3 Alphabets, 4 numbers, one optional letter) +
 Expected: Similar to previous.
 
-=== Editing a task
+_{ more test cases }_
+
+=== Editing a Task
 
 . Editing a task that was previously added
 .. Prerequisites: Execute the `add` commands in the previous section.
 
-=== Completing a task
+=== Completing a Task
 
 . Setting an existing task to Complete.
 .. Prerequisites: Execute the `add` commands in the previous section.
@@ -1153,25 +1164,96 @@ list date +
 add d/test dt/TOMORROW 23 59 m/3230``, where `TOMORROW` refers to the date of the next day. +
 Expected: A new task should appear under the category header "Due This Week".
 .. Test case: `list invalid` +
-Expected: List display does not change. Error details shown in the status message. Status bar remains the same.
+Expected: List display does not change. Error details shown in the results message. Status bar remains the same.
 
 
-=== Deleting a task
+=== Deleting a Task
 
 . Deleting a task while all tasks are listed
 
 .. Prerequisites: List all tasks using the `list` command. Multiple tasks in the list.
 .. Test case: `delete 1` +
-   Expected: First task is deleted from the list. Details of the deleted task shown in the status message. Timestamp in the status bar is updated.
+   Expected: First task is deleted from the list. Details of the deleted task are shown in the results message.
 .. Test case: `delete 0` +
-   Expected: No task is deleted. Error details shown in the status message. Status bar remains the same.
+   Expected: No task is deleted. Error details are shown in the results message.
 .. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) +
    Expected: Similar to previous.
 
-// TODO add more
-_{ more test cases ... }_
+_{ more test cases }_
 
-=== Saving data
+=== Changing Tabs
+
+. Summary
+
+.. In Summary tab, switch to Summary with `:s`, `:S` or `summary`. +
+    Expected: Tab is not changed. Error message is shown in Results Display.
+
+.. In any other tab, switch to Summary with `:s`, `:S` or `summary`. +
+    Expected: Success message is shown in the Results Display.
+
+. Task List
+
+.. In Task List tab, switch to Task List with `:t`, `:T` or `list`. +
+    Expected: Tab is not changed. Error message is shown in Results Display.
+
+.. In any other tab, switch to Task List with `:t`, `:T` or `list`. +
+    Expected: Success message is shown in the Results Display.
+
+. Calendar
+
+.. In Calendar tab, switch to Calendar with `:c`, `:C` or `calendar`. +
+    Expected: Tab is not changed. Error message is shown in Results Display.
+
+.. In any other tab, switch to Calendar with `:c`, `:C` or `calendar`. +
+    Expected: Success message is shown in the Results Display.
+
+. Productivity
+
+.. In Productivity tab, switch to Productivity with `:p`, `:P` or `productivity`. +
+    Expected: Tab is not changed. Error message is shown in Results Display.
+
+.. In any other tab, switch to Productivity with `:p`, `:P` or `productivity`. +
+    Expected: Success message is shown in the Results Display.
+
+=== Productivity Feature
+
+. Marking a task that was previously added as complete
+
+.. Prerequisites: Execute the `add` commands in the <<Adding a Task>>.
+.. Test case: `done 1` +
+    Expected: First task from the list is marked completed. Details of the marked task is shown in the results message. +
+    If task completed is due today, progress bar in productivity tab is updated and displayed total number of completed tasks is updated.
+.. Test case: `done 0` +
+    Expected: No task is marked. Error details shown in the results message.
+.. Other incorrect done commands to try: `done`, `done x` (where x is larger than the list size) +
+    Expected: Similar to previous.
+
+. Start timer for a task that was previously added
+
+.. Prerequisites: Execute the `add` commands in the <<Adding a Task>>. Task must not be marked as completed.
+.. Test case: `start 1` +
+Expected: Starts timing first task from the list. Details of the timing task is shown in the results message. +
+Task being timed is displayed under Running Timer(s) in productivity tab.
+.. Test case: `start 0` +
+Expected: No timer started. Error details shown in the results message.
+.. Other incorrect start commands to try: `start`, `start x` (where x is larger than the list size or is index of task already marked completed) +
+Expected: Similar to previous.
+
+. Stop timer for a task that was previously added
+
+.. Prerequisites: Execute the `add` commands in the <<Adding a Task>>. Timer must be running for task.
+.. Test case: `stop 1` +
+Expected: Stops timing first task from the list. Details of the timed task is shown in the results message. +
+If task's timer to be stopped is due today or in next 6 days, displayed time spent is updated in productivity tab. +
+Task timed is removed from Running Timer(s) displayed in productivity tab.
+.. Test case: `stop 0` +
+Expected: No timer stopped. Error details shown in the results message.
+.. Other incorrect stop commands to try: `start`, `start x` (where x is larger than the list size or is index of task without running timer) +
+Expected: Similar to previous.
+
+// TODO add more
+
+=== Data Storage
 . Missing data files
 
 .. Open the `/data/` folder and delete all .json files in that folder.
