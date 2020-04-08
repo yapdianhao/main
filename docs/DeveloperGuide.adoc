@@ -416,8 +416,6 @@ the JelphaBot task list (e.g `DoneCommand`, `DeleteCommand`, `EditCommand`) woul
 
 **Function 1: Displays an overview of tasks in calendar for a selected month and year**
 
-This function mainly aids in navigating the calendar view. +
-
 There are 2 commands that users can issue to perform function 1:
 
 1. `calendar today`: Displays calendar for the current month with today's date highlighted, and its corresponding tasks due listed. +
@@ -464,7 +462,7 @@ The next input following the command word (`DATE`, `MONTHYEAR`, `today`) is then
 ** Cons: Certain areas of the code might be repetitive.
 ** Cons: Less intuitive for users to use.
 
-===== Aspect 3: Method of storing `ObservableList<Task>` of tasks for each day card (Implementation of Dot Indicator)
+===== Aspect 2: Method of storing `ObservableList<Task>` of tasks for each day card (Implementation of Dot Indicator)
 * *Current Solution:* Each `CalendarDayCard` stores a filtered list of tasks due on its specific date.
 This is done by obtaining all the tasks in the task list from Logic#getFilteredTaskList() and applying a filter function
 with the `TaskDueWithinDayPredicate`, specifically with the date of the day card. The list of tasks stored for each day card
@@ -1331,6 +1329,9 @@ Task timed is removed from Running Timer(s) displayed in productivity tab.
 Expected: No timer stopped. Error details shown in the results message.
 .. Other incorrect stop commands to try: `start`, `start x` (where x is larger than the list size or is index of task without running timer) +
 Expected: Similar to previous.
+
+=== Calendar Feature
+
 
 // TODO add more
 
