@@ -270,7 +270,7 @@ public class MainWindow extends UiPart<Stage> {
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
             CommandResult commandResult = logic.execute(commandText);
-            updateCalendarDayCards();
+            updateTasksInCalendarDayCards(); //for the dots showing overarching tasks
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
@@ -316,7 +316,7 @@ public class MainWindow extends UiPart<Stage> {
         calendarMainPanel.updateCalendarPanel(commandResult);
     }
 
-    private void updateCalendarDayCards() {
+    private void updateTasksInCalendarDayCards() {
         calendarMainPanel.getCalendarPanel().updateDayCards();
     }
 

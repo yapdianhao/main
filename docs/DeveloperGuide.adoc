@@ -242,8 +242,8 @@ The tabs of the application are defined using a [.java]#SwitchTab# enum and the 
 * [.java]#MainWindow# component so that the [.java]#SwitchTab# attribute in [.java]#MainWindow# reflects the new current tab, since this is used to check if a command can be executed,
 * [.java]#UI# component so that the panels display the information that is relevant to the tab.
 
-[IMPORTANT]
-`task list` is not a valid command to switch to the Task List tab. Use `list` instead.
+
+IMPORTANT: `task list` is not a valid command to switch to the Task List tab. Use `list` instead.
 
 For all these commands, updates are done by updating the [.java]#SwitchTab# attribute added in the [.java]#CommandResult# object. As an example, the figure below shows the sequence diagram for when a user executes the `:p` command:
 
@@ -388,34 +388,93 @@ JelphaBot has a calendar feature which provides an overarching view of their sch
 
 This feature offers two main functions:
 
-** Displays an overview tasks in calendar for a selected month and year
+** Displays an overview of tasks in calendar for a selected month and year
 ** Displays a list of tasks due for a specified date
 
 ====  Implementation
 
-**Function 1: Displays an overview tasks in calendar for a selected month and year**
+The implementation of the main calendar panel is facilitated by the `CalendarMainPanel` class, which serves as the main
+container for this feature. This main container consists of a `SplitPane` comprising of a `CalendarPanel` on the right,
+which displays the calendar view in a month, and a `CalendarTaskListPanel` on the left to display specific tasks.
+
+The diagram below describes the class structure of the calendar class structure.
+
+.Class Diagram for Calendar classes
+image::CalendarUiClassDiagram.png[]
+
+Upon initialisation of the `CalendarMainPanel`, the `CalendarPanel` would be set to display the current month and year calendar,
+with the dates filled up by `CalendarDayCards` by CalendarPanel#fillGridPane() with a `CalendarDate` starting from the first day of the current month.
+Today's date would also be highlighted, with `CalendarTaskListPanel` set to display the tasks due today by running
+Logic#getFilteredCalendarTaskList() and then Logic#updateFilteredCalendarTaskList() with a predicate to filter by today's date.
+
+The following diagram depicts how each individual day cell of the calendar will look like:
+
+image::CalendarDayCards.png[]
+
+After every execution of command, MainWindow#updateTasksInCalendarDayCards() will be run such that any commands that updates
+the JelphaBot task list (e.g `DoneCommand`, `DeleteCommand`, `EditCommand`) would be updated by the dot indicators in the calendar.
+
+**Function 1: Displays an overview of tasks in calendar for a selected month and year**
+
+This function mainly aids in navigating the calendar view. +
 
 There are 2 commands that users can issue to perform function 1:
 
-1. `calendar today`: Displays calendar for the current month with today's date highlighted, and its corresponding tasks listed. +
-2. `calendar MONTHYEAR`: Displays calendar for the month and year specified, with the first day of the month highlighted, and its corresponding tasks listed.
+1. `calendar today`: Displays calendar for the current month with today's date highlighted, and its corresponding tasks due listed. +
+2. `calendar MONTHYEAR`: Displays calendar for the month and year specified, with the first day of the month highlighted,
+and its corresponding tasks due listed (e.g. calendar Apr-2020).
 
-The following sequence diagram shows you how the `calendar MONTHYEAR` (e.g. `calendar Apr-2020`) command works.
-
-.Sequence diagram after running `calendar Apr-2020`
-image::CalendarViewSequenceDiagram.png[]
-
-Upon the completion of the execution of the command, the calendar  for April 2020 would be displayed, with the tasks due on 1st April 2020 listed.
+//The implementation of these 2 commands are largely similar. +
 
 **Function 2: Display a list of tasks due for a selected date in the month**
 
 In order to display the task list for specific input dates, the user enters the `calendar DATE` command +
-(e.g. calendar jan-1-2020)
+(e.g. calendar Jan-1-2020).
 
-Upon the completion of the execution of the command, the tasks due on 1st January 2020 would be displayed to the user on the task list panel to the left. +
+NOTE: Only a date belonging in the current displayed month on the `CalendarPanel` would be highlighted after
+processing the `calendar DATE` command. A date that falls in other month and years would just display its
+corresponding tasks due on the `CalendarTaskListPanel`.
+
+The following example sequence diagram shows you how the `calendar MONTHYEAR` (e.g. `calendar Apr-2020`) command works.
+
+.Sequence diagram after running `calendar Apr-2020`
+image::CalendarViewSequenceDiagram.png[]
+
+Upon execution of the `calendar MONTHYEAR` command, CalendarCommand#execute() will run `updateFilteredCalendarTaskList()` to
+filter the task list displaying the tasks due on the first day of the `MONTHYEAR` in the `CalendarTaskListPanel` and generate a CommandResult with the respective `MONTHYEAR`
+and return it to the `LogicManager`. The CommandResult is passed to the MainWindow in UI. Now, the updates can be done for the respective components:
+
+UI Component: Using the CommandResult, MainWindow calls MainWindow#updateCalendarMainPanel(), which is then passed to call CalendarMainPanel#updateCalendarPanel().
+This updates the `CalendarPanel` display with the respective `MONTHYEAR` view, and highlights the first day of the month.
+
+NOTE: The implementation of the other two calendar commands (`calendar DATE` and `calendar today`) are largely similar and run in the same process.
+The only exception is regarding the `calendar DATE` command which fulfills **Function 2** listed above, where the `GridPane` in CalendarPanel` is not
+altered by running CalendarPanel#fillGridPane() unlike the other two commands fulfilling **Function 1**. Only `CalendarTaskListPanel` is updated.
 
 ==== Design Considerations
-// TODO: amanda
+
+===== Aspect 1: How the user can navigate between specific dates and change the calendar month view
+* *Current Solution:* Use the same `calendar` command word for both viewing tasks in specific dates, and changing the calendar view.
+The next input following the command word (`DATE`, `MONTHYEAR`, `today`) is then parsed separately to give different command results.
+** Pros: Easier and more understandable for user interactions.
+** Pros: More open and accessible to future implementations regarding the calendar feature.
+** Cons: Implementation in the `CalendarCommand` class might seem a bit bulky.
+* **Alternative 1:** Use completely separate commands for viewing tasks in specific dates and changing the calendar view.
+** Pros: Less chance of a parse exception, with more precise error messages when invalid command formats are input by the user.
+** Cons: Certain areas of the code might be repetitive.
+** Cons: Less intuitive for users to use.
+
+===== Aspect 3: Method of storing `ObservableList<Task>` of tasks for each day card (Implementation of Dot Indicator)
+* *Current Solution:* Each `CalendarDayCard` stores a filtered list of tasks due on its specific date.
+This is done by obtaining all the tasks in the task list from Logic#getFilteredTaskList() and applying a filter function
+with the `TaskDueWithinDayPredicate`, specifically with the date of the day card. The list of tasks stored for each day card
+in the calendar panel would be re-filtered after the execution of each command.
+** Pros: Do not have to manually update the tasks stored in each `CalendarDayCard` (e.g add and remove manually in the separately stored copy)
+** Cons: Completely reliant on the main task list, possible errors might be carried over.
+* **Alternative 1:** Use a static HashMap of Dates as keys and a list of tasks due in that date as values.
+** Pros: Retrieving the tasks in a specific date and storing in the day card is fast - can be done in O(1) time.
+** Cons: Implementation would be much more complex.
+** Cons: Updating of this HashMap of the tasks as the main task list is being edited constantly can be very tedious.
 
 // tag::productivity[]
 === Productivity feature
@@ -1045,6 +1104,28 @@ Use case ends.
 Use case resumes from step 2.
 
 // end::timerUseCase[]
+
+=== Use case: UC10 - Navigate to a different date on calendar
+
+*MSS*
+
+1. User specifies date to jump to a specific month and year.
+2. JelphaBot displays updated calendar view with the corresponding tasks due on specified date.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. JelphaBot detects an error in the entered command.
++
+[none]
+** 1a1. JelphaBot detects error in specified date and displays the correct input format to be expected.
+** 1a2. User enters new command.
+** Steps 1a1-1a2 are repeated until the command entered is correct.
++
+Use case resumes from step 2.
+
 
 [appendix]
 == Non Functional Requirements

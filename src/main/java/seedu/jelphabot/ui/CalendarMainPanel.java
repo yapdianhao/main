@@ -58,7 +58,7 @@ public class CalendarMainPanel extends UiPart<Region> {
         logic.updateFilteredCalendarTaskList(new TaskDueWithinDayPredicate(DateUtil.getDateToday()));
         calendarTaskListPanelPlaceholder.getChildren().add(calendarTaskListPanel.getRoot());
 
-        calendarPanel = new CalendarPanel(CalendarDate.getCurrent(), mainWindowTabPane);
+        calendarPanel = new CalendarPanel(CalendarDate.getCurrentDate(), mainWindowTabPane);
         calendarPanelPlaceholder.getChildren().add(calendarPanel.getRoot());
     }
 
