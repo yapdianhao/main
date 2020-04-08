@@ -13,7 +13,7 @@ import seedu.jelphabot.commons.core.LogsCenter;
 import seedu.jelphabot.model.calendar.CalendarDate;
 
 /**
- * UI component for calendar view to be displayed.
+ * Panel containing the calendar view to be displayed.
  */
 public class CalendarPanel extends UiPart<Region> {
 
@@ -106,21 +106,6 @@ public class CalendarPanel extends UiPart<Region> {
 
     public int getCalendarMonth() {
         return calendarDate.getMonth();
-    }
-
-    /**
-     * Switches to display the calendar panel tab.
-     */
-    public void show() {
-        logger.fine("Showing calendar panel of application.");
-        mainWindowTabPane.getSelectionModel().select(2);
-    }
-
-    /**
-     * Returns true if the calendar panel is currently being shown.
-     */
-    public boolean isShowing() {
-        return mainWindowTabPane.isPressed();
     }
 
     public static CalendarDayCard getDayCard(int dayIndex) {

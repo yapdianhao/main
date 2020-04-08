@@ -42,4 +42,8 @@ public class ListCommandTest {
             expectedModel
         );
     }
+
+    @Test
+    void execute() {
+    }
 }

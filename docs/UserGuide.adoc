@@ -52,18 +52,19 @@ Enjoy!
 
 === Using this User Guide
 ==== Purpose of this Guide
+
 This User Guide is filled with information to help you set up and make the best out of you very own JelphaBot!
 You will be able to learn more about the commands that are available for you, together with examples of how they are used.
-These commands are also consolidated under <<Command Summary>> for your convenience.
+These commands are also consolidated under <<Command Summary, this section>> for your convenience.
 
 ==== Notation used in this Guide
-To aid in your understanding throughout this User Guide, you may find below the different symbols and
-formatting used throughout this guide.
+
+To aid in your understanding throughout this User Guide, you may find below the different symbols and formatting used throughout this guide.
 
 [width="100%",cols="40%,<60%,options="header",]
 |=======================================================================
 |*Symbol* | *What does it mean?*
-a| `code` | Command that can be typed into the command box
+a| `command` | Command that can be typed into the command box
 ifdef::env-github[]
 | :white_check_mark: | Expected result after executing the command
 | kbd:[Key] | A Key that you should press on your keyboard
@@ -72,27 +73,31 @@ ifdef::env-github[]
 | :heavy_exclamation_mark: | Important pointers to take note of
 endif::[]
 ifndef::env-github[]
-a| icon:check[role="green", size="2x"] | Expected result after executing the command
+a| icon:check[role="green",size="2x"] | Expected result after executing the command
 a| kbd:[Key] | A Key that you should press on your keyboard
 a| icon:lightbulb-o[role="icon-tip", size="2x"] | Tips and tricks that might be useful
 a| icon:info-circle[role="icon-note", size="2x"] | Additional information that is good to know
 a| icon:exclamation-circle[role="icon-important", size="2x"] | Important pointers to take note of
 endif::[]
+// also known as TIP, NOTE,
 // TODO: add link format
 |=======================================================================
 
 == Quick Start
+
 . Ensure you have Java `11` or above installed in your Computer.
 . Download the latest `jelphabot.jar` link:{repoURL}/releases[here].
 . Copy the file to the folder you want to use as the home folder for your JelphaBot.
 . Double-click the file to start the app.
-// TODO: if is new user why got tasks?
-The GUI should appear in a few seconds. You should see a list of tasks as shown in the following diagram.
+The GUI should appear in a few seconds.
+JelphaBot should initialize with a sample list of tasks as shown in the following diagram.
 +
 [.text-center]
-.Expected result after running `JelphaBot`
+.Expected result after running JelphaBot
 image::MainUi.png[width="600"]
 +
+[NOTE]
+The sample list of tasks helps test if you installed JelphaBot correctly! +
 If you do not see this, please try deleting JelphaBot and its accompanying files and folders and repeat steps 2 to 4.
 . Type a command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
@@ -103,15 +108,18 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * **`delete`**`1` : deletes the 1st task shown in the current list.
 * *`exit`* : exits the app.
 
-. Refer to <<Features>> for details of each command.
-A full list of commands is available in <<Command Summary>>
+. Refer to <<Features, this section>> for details of each command.
+A full list of commands is available <<Command Summary, here>>.
+
+[TIP]
+You can use the kbd:[UP] and kbd:[DOWN] keys to view your last entered commands!
 
 [[Features]]
-
 == Features
+
 In this section, you can find details about the commands that JelphaBot supports.
-These include the function of the command, its format, and example usages. The features will be depicted
-in the order of the tabs shown on the main User Interface as seen above for your ease of navigation!
+These include the function of the command, its format, and example usages.
+The features will be depicted in the order of the tabs shown on the main User Interface as seen above for your ease of navigation!
 
 === Common commands
 
@@ -129,12 +137,9 @@ image::ug_figures/help.png[width="600]
 
 You can exit the program anytime by entering the `exit` command directly from any panel. +
 Format: `exit`
-// no image needed
-// TODO: add exclamation mark
 
-****
-icon:exclamation-circle[role="icon-important", size="2x"] Exiting the application before stopping any running timer wil cause all recorded time since the timer was started to be lost.
-****
+[WARNING]
+Exiting the application before stopping any running timer wil cause all recorded time since the timer was started to be lost.
 
 === Summary (Eden)
 This tab will be the first panel you see after entering JelphaBot!
@@ -181,9 +186,6 @@ image::TaskListTab.png[width="600"]
 
 ====
 *Command Format for Task list commands*
-
-These command formats are applicable for the following commands: +
-`add`, `edit`, `find`.
 
 * Parts of the command in `UPPER_CASE` represent command parameters that have to be supplied by you. +
 e.g. in `add d/DESCRIPTION`, `DESCRIPTION` represents a field where you can provide the appropriate description, such as `add d/Assignment 1`.
@@ -254,20 +256,22 @@ Format: `list [SORTING_ORDER]`
 
 ===== Group Tasks by Date : `list date`
 
-You can groups tasks based on their due date. This is also the default interface for the task list tab. +
+You can groups tasks based on their due date.
+This is also the default interface for the task list tab. +
 Format: `list date`
 
 Group your tasks into the following categories:
 
-* Pinned (Coming in V1.4) +
-(Pinned tasks will always be displayed at the top. To read more about pinning tasks, go <<#pin, here>>)
-* Overdue  +
+* *Pinned* (Coming in V2.0) +
+(Pinned tasks will always be displayed at the top.
+To read more about pinning tasks, go <<#pin, here>>)
+* *Overdue*  +
 (Shows tasks which are incomplete and past their due date)
-* Due Today +
+* *Due Today* +
 (Shows tasks due by the end of the day)
-* Due This week +
+* *Due This Week* +
 (Shows tasks due by the end of the week, defined as before the next upcoming Monday)
-* Due Sometime +
+* *Due Sometime* +
 (Shows all other tasks that do not fit into prior categories)
 
 [.text-center]
@@ -395,6 +399,39 @@ image::ug_figures/clearCommand.png[width="600"]
 * All reminders will be cleared together with the tasks.
 ****
 
+// tag::showcompleted[]
+==== Show all completed Tasks : `show-completed` (Eden)
+You can display all the tasks in your task list that have been completed.
+
+[.text-center]
+.Example of an expected result after running `show-completed`
+image::ug_figures/showCompletedCommand.png[width="600"]
+
+If you do not have any tasks that are complete in your tasklist, the displayed list will be empty and a message will be shown telling you that you currently do not have any completed tasks!
+
+[.text-center]
+.Example of an expected result after running `show-completed`, if the tasklist does not have any completed tasks
+image::ug_figures/showCompletedCommandNoCompleted.png[width="600"]
+
+// end::showcompleted[]
+
+// tag::showincomplete[]
+==== Show all incomplete Tasks: `show-incomplete` (Eden)
+
+You can display all the tasks in your task list that are currently incomplete.
+
+[.text-center]
+.Example of an expected result after running `show-incomplete`
+image::ug_figures/showIncompleteCommand.png[width="600"]
+
+If you do not have any tasks that are incomplete in your tasklist, the displayed list will be empty and a message will be shown telling you that you currently do not have any incomplete tasks!
+
+[.text-center]
+.Example of an expected result after running `show-incomplete`, if the tasklist does not have any incomplete tasks
+image::ug_figures/showCompletedCommandNoCompleted.png[width="600"]
+
+// end::showincomplete[]
+
 // tag::pin[]
 [[pin]]
 ==== Pin Important Tasks  : `pin` (Coming in V1.4)
@@ -405,33 +442,12 @@ Trying to `pin` a task that is already pinned will unpin it.
 
 // end::pin[]
 
-// tag::showcompleted[]
-==== Show all completed Tasks : `show-completed` (Eden)
-You can display all the tasks in your task list that have been completed.
-
-[.text-center]
-.Example of an expected result after running `show-completed`
-image::ug_figures/showCompletedCommand.png[width="600"]
-
-// end::showcompleted[]
-
-// tag::showincomplete[]
-==== Show all incomplete Tasks: `show-incomplete` (Eden)
-You can display all the tasks in your task list that are currently incomplete.
-
-[.text-center]
-.Example of an expected result after running `show-incomplete`
-image::ug_figures/showIncompleteCommand.png[width="600"]
-
-// end::showincomplete[]
-
 ==== Sort Tasks : `sort`  [coming in v2.0]
 
 You can change how tasks are sorted with the `sort` command.
 Format: `sort SORTING_ORDER`
 
 Valid `SORTING_ORDER` values include `date`, `module`, and `priority`.
-
 
 === Calendar (Amanda)
 JelphaBot also comes with a built-in calendar view that allows you to view your overarching tasks due on a monthly basis.
@@ -632,16 +648,19 @@ image::ug_figures/reminderpopup.png[width="600"]
 *A*: Yes, JelphaBot is completely free to use!
 
 *Q2*: How do I transfer my data to another Computer? +
-*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous JelphaBot folder.
+*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous JelphaBot folder. +
 
 *Q3*: How do I save my data? +
-*A*: JelphaBot automatically saves your data whenever you make a change. There is no need to save manually.
+*A*: JelphaBot automatically saves your data whenever you make a change.
+There is no need to save manually.
 
 *Q4*: Can I add multiple tasks using a command line? +
-*A*: Sorry, we currently do not support this feature. We will consider this in v2.0.
+*A*: Sorry, we currently do not support this feature.
+We will consider this in v2.0.
 
 *Q5*: How do I add tasks with no deadline or description? +
-A : Sorry, we currently do not support task entries with no deadline or descriptions. We will consider this in v2.0.
+A : Sorry, we currently do not support task entries with no deadline or descriptions.
+We will consider this in v2.0.
 
 *Q6*: Do I need an Internet connection to use JelphaBot? +
 A: No, you don’t. JelphaBot works completely offline.

@@ -3,6 +3,7 @@
   "tasks" : [ {
     "status" : "INCOMPLETE",
     "dateTime" : "Feb-1-2020 11 00",
+    "doneTime" : "2000-01-01T00:00:00",
     "priority" : "HIGH",
     "tagged" : [ "school" ],
     "timeSpent" : {
@@ -13,6 +14,7 @@
   }, {
     "status" : "COMPLETE",
     "dateTime" : "Feb-1-2020 11 00",
+    "doneTime" : "2000-01-01T00:00:00",
     "priority" : "MEDIUM",
     "tagged" : [ "project", "school" ],
     "timeSpent" : {
@@ -23,6 +25,7 @@
   }, {
     "status" : "INCOMPLETE",
     "dateTime" : "Feb-1-2020 11 00",
+    "doneTime" : "2000-01-01T00:00:00",
     "priority" : "MEDIUM",
     "tagged" : [ ],
     "timeSpent" : {
@@ -33,6 +36,7 @@
   }, {
     "status" : "INCOMPLETE",
     "dateTime" : "Feb-1-2020 11 00",
+    "doneTime" : "2000-01-01T00:00:00",
     "priority" : "MEDIUM",
     "tagged" : [ ],
     "timeSpent" : {
@@ -43,6 +47,7 @@
   }, {
     "status" : "INCOMPLETE",
     "dateTime" : "Feb-1-2020 11 00",
+    "doneTime" : "2000-01-01T00:00:00",
     "priority" : "MEDIUM",
     "tagged" : [ ],
     "timeSpent" : {
@@ -53,6 +58,7 @@
   }, {
     "status" : "INCOMPLETE",
     "dateTime" : "Feb-1-2020 11 00",
+    "doneTime" : "2000-01-01T00:00:00",
     "priority" : "MEDIUM",
     "tagged" : [ "school" ],
     "timeSpent" : {
@@ -63,6 +69,7 @@
   }, {
     "status" : "INCOMPLETE",
     "dateTime" : "Feb-1-2020 11 00",
+    "doneTime" : "2000-01-01T00:00:00",
     "priority" : "MEDIUM",
     "tagged" : [ "project", "school" ],
     "timeSpent" : {
