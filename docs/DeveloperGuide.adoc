@@ -187,11 +187,10 @@ The `Model`,
 * exposes an unmodifiable `ObservableList<Task>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
-// TODO ignore this for now
-[NOTE]
-As a more OOP model, we can store a `Tag` list in `JelphaBot`, which `Task` can reference. This would allow `JelphaBot` to only require one `Tag` object per unique `Tag`, instead of each `Task` needing their own `Tag` object. An example of how such a model may look like is given below. +
- +
-image:BetterModelClassDiagram.png[]
+//[NOTE]
+//As a more OOP model, we can store a `Tag` list in `JelphaBot`, which `Task` can reference. This would allow `JelphaBot` to only require one `Tag` object per unique `Tag`, instead of each `Task` needing their own `Tag` object. An example of how such a model may look like is given below. +
+// +
+//image:BetterModelClassDiagram.png[]
 
 [[Design-Storage]]
 === Storage component
@@ -373,7 +372,7 @@ This second listener directly removes unused categories from `GroupedByModuleTas
 ** Pros: Easy to implement and understand.
 ** Pros: Enforce consistency with `GroupByDateTaskList` which might allow some methods to be abstracted to parent class.
 ** Cons: Not practical: as more Module Codes are added to the Task List, it might cause more and more hidden categories to be created which are expensive to filter through.
-* **Alternative 2:** Abstract mantainence of the set of unique module codes to a `UniqueModuleCodeSet` class instanced in `UniqueTaskList`.
+* *Alternative 2:* Abstract mantainence of the set of unique module codes to a `UniqueModuleCodeSet` class instanced in `UniqueTaskList`.
 ** Pros: Easy to understand.
 Logic is further abstracted to a higher level and the new class is instanced together with the list that affects it.
 ** Cons: Implementation is challenging and prone to bugs.
