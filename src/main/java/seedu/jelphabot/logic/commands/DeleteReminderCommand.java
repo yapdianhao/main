@@ -39,7 +39,7 @@ public class DeleteReminderCommand extends Command {
         requireNonNull(model);
         ViewTaskList lastShownList = model.getLastShownList();
         List<Reminder> reminderList = model.getFilteredReminderList();
-        if (targetIndex.getZeroBased() < 0 || targetIndex.getZeroBased() >= lastShownList.size() ) {
+        if (targetIndex.getZeroBased() < 0 || targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
         Reminder toDelete = null;

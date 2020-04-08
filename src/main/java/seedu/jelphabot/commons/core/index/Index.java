@@ -1,7 +1,5 @@
 package seedu.jelphabot.commons.core.index;
 
-import seedu.jelphabot.logic.commands.exceptions.CommandException;
-
 /**
  * Represents a zero-based or one-based index.
  *

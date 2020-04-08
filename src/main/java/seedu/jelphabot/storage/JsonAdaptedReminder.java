@@ -16,6 +16,7 @@ class JsonAdaptedReminder {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Reminder %s's field is missing!";
     public static final String NEGATIVE_INDEX_MESSAGE_FORMAT = "Index should not be negative!";
+    public static final String INVALID_INDEX_MESSAGE_FORMAT = "Index should be a positive number!";
 
     private final String index;
     private final String reminderDay;
@@ -57,6 +58,10 @@ class JsonAdaptedReminder {
                 throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, Index.class.getSimpleName()));
             }
+
+            if (Integer.parseInt(index) < 0) {
+                throw new IllegalValueException(NEGATIVE_INDEX_MESSAGE_FORMAT);
+            }
             if (reminderDay == null) {
                 throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, ReminderDay.class.getSimpleName()));
@@ -79,6 +84,8 @@ class JsonAdaptedReminder {
             );
         } catch (IndexOutOfBoundsException e) {
             throw new IllegalValueException(NEGATIVE_INDEX_MESSAGE_FORMAT);
+        } catch (NumberFormatException e) {
+            throw new IllegalValueException(INVALID_INDEX_MESSAGE_FORMAT);
         }
     }
 }
