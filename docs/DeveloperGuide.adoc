@@ -243,8 +243,7 @@ The tabs of the application are defined using a [.java]#SwitchTab# enum and the 
 * [.java]#UI# component so that the panels display the information that is relevant to the tab.
 
 
-[IMPORTANT]
-`task list` is not a valid command to switch to the Task List tab. Use `list` instead.
+IMPORTANT: `task list` is not a valid command to switch to the Task List tab. Use `list` instead.
 
 For all these commands, updates are done by updating the [.java]#SwitchTab# attribute added in the [.java]#CommandResult# object. As an example, the figure below shows the sequence diagram for when a user executes the `:p` command:
 
@@ -403,33 +402,51 @@ The diagram below describes the class structure of the calendar class structure.
 .Class Diagram for Calendar classes
 image::CalendarUiClassDiagram.png[]
 
+Upon initialisation of the `CalendarMainPanel`, the `CalendarPanel` would be set to display the current month and year calendar,
+with the dates filled up by `CalendarDayCards` by CalendarPanel#fillGridPane() with a `CalendarDate` starting from the first day of the current month.
+Today's date would also be highlighted, with `CalendarTaskListPanel` set to display the tasks due today by running
+Logic#getFilteredCalendarTaskList() and then Logic#updateFilteredCalendarTaskList() with a predicate to filter by today's date.
+
 **Function 1: Displays an overview of tasks in calendar for a selected month and year**
 
 This function mainly aids in navigating the calendar view. +
 
 There are 2 commands that users can issue to perform function 1:
 
-1. `calendar today`: Displays calendar for the current month with today's date highlighted, and its corresponding tasks listed. +
-2. `calendar MONTHYEAR`: Displays calendar for the month and year specified, with the first day of the month highlighted, and its corresponding tasks listed.
+1. `calendar today`: Displays calendar for the current month with today's date highlighted, and its corresponding tasks due listed. +
+2. `calendar MONTHYEAR`: Displays calendar for the month and year specified, with the first day of the month highlighted,
+and its corresponding tasks due listed (e.g. calendar Apr-2020).
 
-The following sequence diagram shows you how the `calendar MONTHYEAR` (e.g. `calendar Apr-2020`) command works.
-
-.Sequence diagram after running `calendar Apr-2020`
-image::CalendarViewSequenceDiagram.png[]
-
-Upon the completion of the execution of the command, the calendar  for April 2020 would be displayed, with the tasks due on 1st April 2020 listed.
-
-//todo add implementation shit of filling grids and screenshots
+//The implementation of these 2 commands are largely similar. +
 
 **Function 2: Display a list of tasks due for a selected date in the month**
 
 In order to display the task list for specific input dates, the user enters the `calendar DATE` command +
-(e.g. calendar jan-1-2020)
+(e.g. calendar Jan-1-2020).
 
-Upon the completion of the execution of the command, the tasks due on 1st January 2020 would be displayed to the user on the task list panel to the left. +
+NOTE: Only a date belonging in the current displayed month on the `CalendarPanel` would be highlighted after
+processing the `calendar DATE` command. A date that falls in other month and years would just display its
+corresponding tasks due on the `CalendarTaskListPanel`.
 
-//todo add screenshots of selected dates and the red and blue dots of tasks
+//Upon the completion of the execution of the command, the tasks due on 1st January 2020 would be displayed to the user on the task list panel to the left. +
 
+The following example sequence diagram shows you how the `calendar MONTHYEAR` (e.g. `calendar Apr-2020`) command works.
+
+.Sequence diagram after running `calendar Apr-2020`
+image::CalendarViewSequenceDiagram.png[]
+
+Upon execution of the `calendar MONTHYEAR` command, CalendarCommand#execute() will run `updateFilteredCalendarTaskList()` to
+filter the task list displaying the tasks due on the first day of the `MONTHYEAR` in the `CalendarTaskListPanel` and generate a CommandResult with the respective `MONTHYEAR`
+and return it to the `LogicManager`. The CommandResult is passed to the MainWindow in UI. Now, the updates can be done for the respective components:
+
+UI Component: Using the CommandResult, MainWindow calls MainWindow#updateCalendarMainPanel(), which is then passed to call CalendarMainPanel#updateCalendarPanel().
+This updates the `CalendarPanel` display with the respective `MONTHYEAR` view, and highlights the first day of the month.
+
+NOTE: The implementation of the other two calendar commands (`calendar DATE` and `calendar today`) are largely similar and run in the same process.
+The only exception is regarding the `calendar DATE` command which fulfills **Function 2** listed above, where the `GridPane` in CalendarPanel` is not
+altered by running CalendarPanel#fillGridPane() like the other two commands fulfilling **Function 1**.
+
+//todo add screenshots of selected dates and the red and blue dots of tasks and say MainWindow#updateTasksInCalendarDayCards() method after every execution of command
 
 
 
