@@ -1,5 +1,7 @@
 package seedu.jelphabot.commons.core.index;
 
+import seedu.jelphabot.logic.commands.exceptions.CommandException;
+
 /**
  * Represents a zero-based or one-based index.
  *
@@ -15,9 +17,9 @@ public class Index {
      * {@link Index#fromOneBased(int)}.
      */
     private Index(int zeroBasedIndex) {
-        if (zeroBasedIndex < 0) {
-            throw new IndexOutOfBoundsException();
-        }
+        //if (zeroBasedIndex < 0) {
+        //    throw new IndexOutOfBoundsException();
+        //}
 
         this.zeroBasedIndex = zeroBasedIndex;
     }

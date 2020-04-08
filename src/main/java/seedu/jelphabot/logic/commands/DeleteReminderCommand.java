@@ -4,10 +4,12 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
+import seedu.jelphabot.commons.core.Messages;
 import seedu.jelphabot.commons.core.index.Index;
 import seedu.jelphabot.logic.commands.exceptions.CommandException;
 import seedu.jelphabot.model.Model;
 import seedu.jelphabot.model.reminder.Reminder;
+import seedu.jelphabot.model.task.tasklist.ViewTaskList;
 
 /**
  * Deletes a reminder according to the task's index.
@@ -35,8 +37,12 @@ public class DeleteReminderCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        Reminder toDelete = null;
+        ViewTaskList lastShownList = model.getLastShownList();
         List<Reminder> reminderList = model.getFilteredReminderList();
+        if (targetIndex.getZeroBased() < 0 || targetIndex.getZeroBased() >= lastShownList.size() ) {
+            throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+        }
+        Reminder toDelete = null;
         for (Reminder reminder : reminderList) {
             if (reminder.getIndex().equals(targetIndex)) {
                 toDelete = reminder;
