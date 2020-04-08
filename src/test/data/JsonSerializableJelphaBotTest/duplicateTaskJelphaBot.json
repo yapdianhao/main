@@ -2,6 +2,7 @@
   "tasks": [ {
     "status" : "INCOMPLETE",
     "dateTime" : "Mar-26-2020 23 59",
+    "doneTime" : "2020-03-27T22:00:00",
     "priority" : "HIGH",
     "tagged" : [ "graded" ],
     "timeSpent" : {
@@ -12,6 +13,7 @@
   }, {
     "status" : "INCOMPLETE",
     "dateTime" : "Mar-26-2020 23 59",
+    "doneTime" : "2020-03-27T22:00:00",
     "priority" : "HIGH",
     "tagged" : [ "graded" ],
     "timeSpent" : {

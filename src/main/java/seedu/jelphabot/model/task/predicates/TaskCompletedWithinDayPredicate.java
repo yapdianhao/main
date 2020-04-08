@@ -17,7 +17,7 @@ public class TaskCompletedWithinDayPredicate implements Predicate<Task> {
 
     // default constructor sets the date to the instant the constructor is called
     public TaskCompletedWithinDayPredicate() {
-        date = LocalDate.now();
+        this.date = LocalDate.now();
     }
 
     public TaskCompletedWithinDayPredicate(Date date) {
@@ -38,7 +38,7 @@ public class TaskCompletedWithinDayPredicate implements Predicate<Task> {
         try {
             LocalDate taskDoneTime = task.getDoneTime().toLocalDate();
             return !taskDoneTime.isAfter(date.plusDays(1))
-                       && !taskDoneTime.isBefore(date);
+                       && !taskDoneTime.isBefore(date.minusDays(1));
         } catch (NullPointerException e) {
             return false;
         }

@@ -58,10 +58,6 @@ public class CalendarDate {
         return new CalendarDate(date.minusDays(getDay() - 1));
     }
 
-    public int getLengthCurrMonth() {
-        return date.lengthOfMonth();
-    }
-
     public int getLengthPrevMonth() {
         LocalDate prevMonth = date.minusMonths(1);
         return prevMonth.lengthOfMonth();
@@ -86,4 +82,10 @@ public class CalendarDate {
         return new CalendarDate(date.plusDays(1));
     }
 
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                   || (other instanceof CalendarDate // instanceof handles nulls
+                           && date.equals(((CalendarDate) other).date)); // state check
+    }
 }

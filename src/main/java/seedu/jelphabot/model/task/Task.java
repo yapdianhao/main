@@ -17,6 +17,7 @@ import seedu.jelphabot.model.tag.Tag;
  */
 public class Task {
 
+    private static final String DEFAULT_DONE_TIME = "Jan-1-2000 00 00";
     // Identity fields
     private final Description description;
     private final ModuleCode moduleCode;
@@ -37,17 +38,33 @@ public class Task {
      * Every field must be present and not null.
      */
     public Task(Description description, Status status, DateTime dateTime, ModuleCode moduleCode, Priority priority,
-                Set<Tag> tags, TimeSpent timeSpent) {
+        Set<Tag> tags, TimeSpent timeSpent) {
         requireAllNonNull(description, status, dateTime, moduleCode, tags, timeSpent);
         this.description = description;
         this.status = status;
         this.dateTime = dateTime;
+        this.doneTime = LocalDateTime.parse(DEFAULT_DONE_TIME, DateTime.STANDARD_FORMATTER);
         this.moduleCode = moduleCode;
         this.priority = priority;
         this.tags.addAll(tags);
         this.timeSpent = timeSpent;
         this.isTiming = false;
     }
+
+    public Task(Description description, Status status, DateTime dateTime, LocalDateTime doneTime,
+        ModuleCode moduleCode, Priority priority, Set<Tag> tags, TimeSpent timeSpent) {
+        requireAllNonNull(description, status, dateTime, doneTime, moduleCode, tags, timeSpent);
+        this.description = description;
+        this.status = status;
+        this.dateTime = dateTime;
+        this.doneTime = doneTime;
+        this.moduleCode = moduleCode;
+        this.priority = priority;
+        this.tags.addAll(tags);
+        this.timeSpent = timeSpent;
+        this.isTiming = false;
+    }
+
 
     public Description getDescription() {
         return description;
@@ -96,10 +113,6 @@ public class Task {
 
     public TimeSpent getTimeSpent() {
         return this.timeSpent;
-    }
-
-    public void setDoneTime() {
-        this.doneTime = LocalDateTime.now();
     }
 
     public void setDoneTime(DateTime datetime) {
@@ -154,9 +167,11 @@ public class Task {
         }
 
         Task otherTask = (Task) other;
+
         return otherTask.getDescription().equals(getDescription())
                    && otherTask.getStatus().equals(getStatus())
                    && otherTask.getDateTime().equals(getDateTime())
+                   && otherTask.getDoneTime().equals(getDoneTime())
                    && otherTask.getModuleCode().equals(getModuleCode())
                    && otherTask.getPriority().equals(getPriority())
                    && otherTask.getTags().equals(getTags());
@@ -165,7 +180,7 @@ public class Task {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(description, dateTime, moduleCode, tags);
+        return Objects.hash(description, dateTime, doneTime, moduleCode, tags);
     }
 
     @Override
