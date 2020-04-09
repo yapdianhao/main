@@ -165,6 +165,7 @@ public class ModelManager implements Model {
         readOnlyJelphaBot.setTask(target, editedTask);
     }
 
+    // TODO: please remove if not needed
     /*
     @Override
     public void setReminder(Reminder target, Reminder newReminder) {

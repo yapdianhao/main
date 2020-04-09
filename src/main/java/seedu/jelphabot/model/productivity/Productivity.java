@@ -8,16 +8,15 @@ import javafx.collections.ObservableList;
 import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.model.task.predicates.TaskDueWithinDayPredicate;
 
-// TODO: if time spent is 0, don't show in card.
 /**
  * Represents the overall productivity of the user.
  */
 public class Productivity {
 
+    private static TasksCompleted tasksCompleted;
+    private static RunningTimers runningTimers;
+    private static TimeSpentToday timeSpentToday;
     private final ObservableList<Task> taskList;
-    private TasksCompleted tasksCompleted;
-    private RunningTimers runningTimers;
-    private TimeSpentToday timeSpentToday;
 
     // booleans to decide which sub-productivity needs to be re-rendered.
     private boolean hasNewOrEditedTasks;
@@ -47,18 +46,6 @@ public class Productivity {
         return timeSpentToday;
     }
 
-    public boolean hasNewOrEditedTasks() {
-        return hasNewOrEditedTasks;
-    }
-
-    public boolean hasNewTimer() {
-        return hasNewTimer;
-    }
-
-    public boolean hasChangeInTimeSpent() {
-        return hasChangeInTimeSpent;
-    }
-
     /**
      * Creates the respective productivity objects.
      */
@@ -67,16 +54,16 @@ public class Productivity {
         ObservableList<Task> tasksDueThisWeek = taskList.filtered(getDueThisWeekPredicate());
 
         if (tasksCompleted == null || hasNewOrEditedTasks) {
-            this.tasksCompleted = new TasksCompleted(tasksDueToday, tasksDueThisWeek,
+            tasksCompleted = new TasksCompleted(tasksDueToday, tasksDueThisWeek,
                 taskList.filtered(getOverduePredicate()));
         }
 
         if (runningTimers == null || hasNewTimer) {
-            this.runningTimers = new RunningTimers(taskList);
+            runningTimers = new RunningTimers(taskList);
         }
 
         if (timeSpentToday == null || hasChangeInTimeSpent) {
-            this.timeSpentToday = new TimeSpentToday(tasksDueToday, tasksDueThisWeek);
+            timeSpentToday = new TimeSpentToday(tasksDueToday, tasksDueThisWeek);
         }
     }
 }

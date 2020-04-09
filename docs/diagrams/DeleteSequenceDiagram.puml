@@ -53,6 +53,9 @@ activate Model
 
 Model --> DeleteCommand
 deactivate Model
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+Model -[hidden]-> DeleteCommand
+destroy Model
 
 create CommandResult
 DeleteCommand -> CommandResult

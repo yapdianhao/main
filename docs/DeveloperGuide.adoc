@@ -169,7 +169,7 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 .Interactions Inside the Logic Component for the `delete 1` Command
 image::DeleteSequenceDiagram.png[]
 
-NOTE: The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+NOTE: The lifeline for `DeleteCommandParser` and `Model` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 [[Design-Model]]
 === Model component
@@ -254,8 +254,6 @@ Upon execution of the `:p` command, [.java]#ProductivityCommand#generateCommandR
 * [.java]#UI# component: [.java]#MainWindow# calls [.java]#MainWindow#executeCommand()#, to retrieve the tab to be changed to and updates the current tab stored in its [.java]#SwitchTab# attribute by calling [.java]#CommandResult#isShow{XXX}()# where XXX is the tab to switch to.
 The display panel is updated by calling [.java]#MainWindow#handle{XXX} where XXX is the tab to switch to.
 
-[NOTE]
-For commands that do not involve a change in mode, [.java]#CommandResult#newModeStatus()# will return [.java]#null# and no updates to the current mode or display will be done.
 // end::changetab[]
 // TODO: complete this section
 
@@ -366,20 +364,19 @@ Scalable when more groupings are added.
 The `ObservableSet<ModuleCode>` has a further `SetChangeListener<ModuleCode>` bound to it to remove categories that no longer contain any Tasks.
 This second listener directly removes unused categories from `GroupedByModuleTaskList`.
 ** Pros: Consecutive changes to the underlying Task List are automatically reflected with a change in `SubgroupTaskList` categories.
-** Pros: The delegation of responsibilities between each `Listener` allows Single Responsibility Principle to be mantained.
-** Cons: Dependency between the two `Listener` classes has to be mantained.
+** Pros: The delegation of responsibilities between each `Listener` allows Single Responsibility Principle to be maintained.
+** Cons: Dependency between the two `Listener` classes has to be maintained.
 * **Alternative 1:** Hide categories which are no longer used by adding a filter to the tasklist returned.
 ** Pros: Easy to implement and understand.
 ** Pros: Enforce consistency with `GroupByDateTaskList` which might allow some methods to be abstracted to parent class.
 ** Cons: Not practical: as more Module Codes are added to the Task List, it might cause more and more hidden categories to be created which are expensive to filter through.
-* *Alternative 2:* Abstract mantainence of the set of unique module codes to a `UniqueModuleCodeSet` class instanced in `UniqueTaskList`.
+* **Alternative 2:** Abstract maintenance of the set of unique module codes to a `UniqueModuleCodeSet` class instanced in `UniqueTaskList`.
 ** Pros: Easy to understand.
 Logic is further abstracted to a higher level and the new class is instanced together with the list that affects it.
 ** Cons: Implementation is challenging and prone to bugs.
-Due to the time of writing this Deveoper guide, the release is nearing V1.4 and time is spent fixing bugs for release instead.
+Due to the time of writing this Developer guide, the release is nearing V1.4 and time is spent fixing bugs for release instead.
 ** This could be a proposed update in the future.
 // TODO sample diagram?
-// end::taskgroups[]
 
 === Calendar feature
 
@@ -490,19 +487,24 @@ This feature offers two main functions:
 In order to start timing a task, the user enters `start INDEX` command
 (e.g. start 1)
 
-.Sequence Diagram after running `start 1`
-image::StartSequenceDiagram.png[]
+Upon successful execution of the command, the productivity tab displays the task being timed under the Running Timer(s) header.
 
-Upon successful execution of the command, the productivity tab displays the task being timed under the Running Timers header.
+The following diagram shows the sequence flow of `start` which modifies the current Productivity List:
+
+[[activity-settingProductivitylist]]
+.Activity Diagram showing the setting of Productivity in the Productivity List
+image::StartActivityDiagram.png[]
+
+Update productivity panel:
+[[activity-updatingProductivityPanel]]
+.Activity Diagram showing the updating of the productivity panel
+image::TimerPanelActivityDiagram.png[]
 
 **Function 2: Stops timer for a specified task** +
 In order to stop timing a task, the user enters `stop INDEX` command
 (e.g. stop 1)
 
-.Sequence Diagram after running `stop 1`
-image::StopSequenceDiagram.png[]
-
-Upon successful execution of the command, the productivity tab removes the task being timed under the Running Timers header.
+Upon successful execution of the command, the productivity tab removes the task being timed under the Running Timer(s) header.
 If the timed task is due today or in the next 6 days, the time spent on the timed task will be added to either the Due today: label
 or the Due in the next 6 days: label under the Time Spent on Tasks header.
 
@@ -510,12 +512,15 @@ or the Due in the next 6 days: label under the Time Spent on Tasks header.
 If the user attempts to start timer for a task marked as completed or stop a task that does not have a running timer,
 the command fails its execution so that it does not execute that start or stop operation to start or stop the timer for that task.
 
+.Sequence Diagram after running `stop 1`
+image::StopSequenceDiagram.png[]
+
 ==== Design Considerations
 
 ===== Aspect 1: Rendering sub-parts of productivity panel
 * *Current solution*: Render each sub-part (i.e. task completion rate, time spent and running timers) only when that part needs to
 be updated. All 3 parts are rendered on to the same card.
-** Rationale: No need to rerender all 3 parts when changes are made to only one part.
+** Rationale: No need to re-render all 3 parts when changes are made to only one part.
 ** Pros: Easy to implement and reduces waste of computational power.
 ** Cons: As all parts are displayed on the same card, if there happens to be problem in other parts of the card, all parts will be affected.
 * *Alternative 1*: Abstract each part to a separate card and render all cards onto the same panel.
@@ -566,8 +571,29 @@ to set reminders to tasks that are complete. However, if tasks that has reminder
 still warn the user.
 
 ==== Design Considerations
-// TODO: dianhao
 
+===== Aspect 1: Implementing `Reminder` object
+* *Current solution:* Implement `Reminder` as a standalone class
+** Rationale: A `Reminder` is an object, with the same hierarchy to the `Task` class, with similar attributes.
+** Pros: Fully capture the idea of an object-oriented design and robust in handling future changes.
+** Cons: An additional storage is required to store the `Reminder` objects, which causes overhead while reading from and writing to
+json files.
+* *Alternative 1:* Design `Reminder` as one of the attributes of a `Task`
+** Rationale: A `Reminder` can also be see as one of a `Task` 's properties, analogous with `Description` and
+other properties.
+** Pros: Easy to implement. Concurrent fetching and storing from the json files while reading and writing `Task` s.
+** Cons: A `Reminder` has to reminder users the moment when Jelphabot is booted. At that instance, `Storage` has not
+started to read `Task` s from the json files yet, therefore the `Reminder` could not be read beforehand.
+
+===== Aspect 2: Rendering `Reminder` on `ReminderListPanel`
+* *Current solution:* Shows the `Index` of the `Task` that is being reminded, the respective `ReminderDay` and `ReminderHour`.
+** Pros: Clean and simple to understand.
+** Cons: Users may need to refer to the `GroupedTaskListPanel` to check which `Task` the `Reminder` is associated to.
+* *Alternative 1:* Shows the `Reminder` similar to how the `Task` is displayed, and includes information such as `Task`
+associated.
+** Pros: Comprehensive, users need not to switch panels to find out which `Task` is being reminded.
+** Cons: Overcomplicated and may confuse users. Users may be confused by the `Index` s shown since `Reminder` and `Task`
+both has `Index` respectively.
 
 // tag::morningcallnightdebrief[]
 
@@ -617,7 +643,7 @@ Step 2. The user executes `delete 5` command to delete the 5th task in JelphaBot
 
 image::UndoRedoState1.png[]
 
-Step 3. The user executes `add n/David ...` to add a new task. The `add` command also calls `Model#commitJelphaBot()`, causing another modified JelphaBot state to be saved into the `jelphaBotStateList`.
+Step 3. The user executes `add d/Assignment ...` to add a new task. The `add` command also calls `Model#commitJelphaBot()`, causing another modified JelphaBot state to be saved into the `jelphaBotStateList`.
 
 image::UndoRedoState2.png[]
 
@@ -646,12 +672,12 @@ Step 5. The user then decides to execute the command `list`. Commands that do no
 
 image::UndoRedoState4.png[]
 
-Step 6. The user executes `clear`, which calls `Model#commitJelphaBot()`. Since the `currentStatePointer` is not pointing at the end of the `jelphaBotStateList`, all JelphaBot states after the `currentStatePointer` will be purged. We designed it this way because it no longer makes sense to redo the `add n/David ...` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitJelphaBot()`. Since the `currentStatePointer` is not pointing at the end of the `jelphaBotStateList`, all JelphaBot states after the `currentStatePointer` will be purged. We designed it this way because it no longer makes sense to redo the `add n/Assignment ...` command. This is the behavior that most modern desktop applications follow.
 
 image::UndoRedoState5.png[]
 
 The following activity diagram summarizes what happens when a user executes a new command:
-
+// TODO: update this diagram
 image::CommitActivityDiagram.png[]
 
 ==== Design Considerations
@@ -786,7 +812,8 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 == Use Cases
 (For all use cases below, the *System* is the `JelphaBot` and the *Actor* is the `user`, unless specified otherwise)
 
-// TODO: add use case diagram
+.Use case diagram for the below use cases
+image::UseCaseDiagram.png[]
 
 //[discrete]
 === Use case: UC1 - Add Task

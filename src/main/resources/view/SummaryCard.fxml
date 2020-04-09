@@ -23,7 +23,8 @@
                     <Region fx:constant="USE_PREF_SIZE" />
                 </minWidth>
             </Label>
-         </children></VBox>
+         </children>
+      </VBox>
       <VBox prefHeight="200.0" prefWidth="100.0">
          <children>
             <Label styleClass="cell_small_label" text="Here are your tasks that you have completed today!" />
@@ -32,6 +33,7 @@
                      <Region fx:constant="USE_PREF_SIZE" />
                  </minWidth>
              </Label>
-         </children></VBox>
+         </children>
+      </VBox>
    </children>
 </VBox>
