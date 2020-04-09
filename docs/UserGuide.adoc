@@ -228,7 +228,7 @@ image::ug_figures/addCommand.png[width="600"]
 * Values that p/PRIORITY can take are -1, 0 or 1.
 ****
 
-[IMPORTANT]
+[WARNING]
 Format of the month in DATETIME (MMM) input has to have the first letter in upper-case. +
 E.g `Mar` instead of `mar` when specifying the month of March.
 
@@ -488,7 +488,7 @@ image::CalendarView.png[width="600"]
 
 Displays month of May in the year 2020 in the calendar panel on the right.
 
-[IMPORTANT]
+[WARNING]
 Format of the month in MONTHYEAR (MMM) input has to have the first letter in upper-case. +
 E.g `Mar` instead of `mar` when specifying the month of March.
 
