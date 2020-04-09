@@ -40,38 +40,36 @@
                         <!-- Ensures that the label text is never truncated -->
                         <Region fx:constant="USE_PREF_SIZE" />
                     </minWidth>
-                <padding>
-                   <Insets top="3.0" />
-                </padding>
                 </Label>
             <padding>
                 <Insets bottom="4" left="15" right="4" top="3" />
             </padding>
         </VBox>
-        <VBox alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="68.0" prefWidth="195.0">
+        <VBox alignment="CENTER_LEFT" maxHeight="-Infinity" prefHeight="68.0" prefWidth="195.0">
             <padding>
                 <Insets bottom="4" left="15" right="4" top="3" />
             </padding>
             <children>
-                <Label prefHeight="18.0" prefWidth="90.0" styleClass="cell_medium_label" text="Time Spent">
+                <Label styleClass="cell_medium_label" text="Time Spent">
                     <minWidth>
                         <!-- Ensures that the label text is never truncated -->
                         <Region fx:constant="USE_PREF_SIZE" />
                     </minWidth>
                 </Label>
                 <Label fx:id="timeSpentToday" styleClass="cell_small_label" text="\$timeSpentToday">
-                    <padding>
-                       <Insets top="3.0" />
-                    </padding>
+                    <minWidth>
+                        <!-- Ensures that the label text is never truncated -->
+                        <Region fx:constant="USE_PREF_SIZE" />
+                    </minWidth>
                 </Label>
             </children>
         </VBox>
-        <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="195.0">
+        <VBox alignment="CENTER_LEFT" maxHeight="-Infinity" prefHeight="200.0" prefWidth="195.0">
             <padding>
                 <Insets bottom="4" left="15" right="4" top="3" />
             </padding>
             <children>
-                <Label prefHeight="18.0" prefWidth="120.0" styleClass="cell_medium_label" text="Running Timer(s)">
+                <Label styleClass="cell_medium_label" text="Running Timer(s)">
                     <minWidth>
                         <!-- Ensures that the label text is never truncated -->
                         <Region fx:constant="USE_PREF_SIZE" />
