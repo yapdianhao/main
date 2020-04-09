@@ -1336,7 +1336,28 @@ Expected: No timer stopped. Error details shown in the results message.
 .. Other incorrect stop commands to try: `start`, `start x` (where x is larger than the list size or is index of task without running timer) +
 Expected: Similar to previous.
 
-=== Calendar Feature
+=== View Tasks due on a specific Date
+
+. Input a date belonging to the calendar month to view tasks due
+.. Prerequisites: Navigate to the calendar with the `calendar` command (or other variants as listed above).
+.. Test case: `calendar Apr-20-2020` +
+Expected: Task(s) due on the input date will be displayed with results message displaying the number of tasks listed.
+If there are no tasks due on the input date, no tasks would be displayed. The input date would also be highlighted on the calendar.
+
+. Input a date not belonging to the calendar month to view tasks due
+.. Prerequisites: Navigate to the calendar with the `calendar` command (or other variants as listed above).
+.. Test case: `calendar Oct-20-2020` +
+Expected: Task(s) due on the input date will be displayed with results message displaying the number of tasks listed.
+If there are no tasks due on the input date, no tasks would be displayed.
+
+=== Navigating the Calendar
+
+. Navigate to different month and year on Calendar
+
+. Navigate to Today's Date on Calendar
+
+
+
 
 
 // TODO add more
