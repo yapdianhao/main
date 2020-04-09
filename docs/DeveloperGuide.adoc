@@ -245,18 +245,42 @@ The tabs of the application are defined using a [.java]#SwitchTab# enum and the 
 
 IMPORTANT: `task list` is not a valid command to switch to the Task List tab. Use `list` instead.
 
-For all these commands, updates are done by updating the [.java]#SwitchTab# attribute added in the [.java]#CommandResult# object. As an example, the figure below shows the sequence diagram for when a user executes the `:p` command:
+For all these commands, updates are done by updating the [.java]#SwitchTab# attribute added in the [.java]#CommandResult# object.
 
-.Component interactions for `:p` command
-// TODO: insert diagram
+To view an example, the figure <<Summary-SwitchTab-Sequence-Diagram, here>> shows the sequence diagram for when a user executes the `:s` or `summary` command.
 
-Upon execution of the `:p` command, [.java]#ProductivityCommand#generateCommandResult()# will generate a [.java]#CommandResult# whose [.java]#SwitchTab# attribute is set to [.java]#PRODUCTIVITY# and return it to the [.java]#LogicManager#. Now, the updates can be done for the respective components:
+Upon execution of the `:s` command, [.java]#SummaryCommand#generateCommandResult()# will generate a [.java]#CommandResult# whose [.java]#SwitchTab# attribute is set to [.java]#SUMMARY# and return it to the [.java]#LogicManager#. Now, the updates can be done for the respective components:
 
 * [.java]#UI# component: [.java]#MainWindow# calls [.java]#MainWindow#executeCommand()#, to retrieve the tab to be changed to and updates the current tab stored in its [.java]#SwitchTab# attribute by calling [.java]#CommandResult#isShow{XXX}()# where XXX is the tab to switch to.
 The display panel is updated by calling [.java]#MainWindow#handle{XXX} where XXX is the tab to switch to.
 
 // end::changetab[]
 // TODO: complete this section
+
+// tag::morningcallnightdebrief[]
+
+=== Summary feature
+
+JelphaBot has a Summary feature which provides an overview of the tasks due within the day as well as all tasks that have been complete within the day.
+
+This feature comes in the form of a welcome screen, which comprises of two sections for the tasks due within the day and the tasks completed within the day respectively.
+
+For each task shown only details such as the Module Code and the Description are shown.
+
+Once the user marks a task due within the day as complete, it will automatically appear under the tasks completed within the day.
+
+[NOTE]
+If the user marks a task as completed, and immediately deletes the task from the tasklist, it will not appear in the summary screen.
+
+==== Implementation
+
+To view the respective tasks, the user enters the `summary` command to switch to the summary tab panel.
+
+[[Summary-SwitchTab-Sequence-Diagram]]
+.Sequence diagram of execution of the `summary` command
+image::SummaryCommand.png[]
+// end::morningcallnightdebrief[]
+
 
 // tag::taskgroups[]
 === Task Grouping feature in Task List tab
@@ -573,33 +597,8 @@ still warn the user.
 ==== Design Considerations
 // TODO: dianhao
 
-
-// tag::morningcallnightdebrief[]
-
-=== Summary feature
-
-JelphaBot has a Summary feature which provides an overview of the tasks due within the day as well as all tasks that have been complete within the day.
-
-This feature comes in the form of a welcome screen, which comprises of two sections for the tasks due within the day and the tasks completed within the day respectively.
-
-For each task shown only details such as the Module Code and the Description are shown.
-
-Once the user marks a task due within the day as complete, it will automatically appear under the tasks completed within the day.
-
-[NOTE]
-If the user marks a task as completed, and immediately deletes the task from the tasklist, it will not appear in the summary screen.
-
-==== Implementation
-
-To view the respective tasks, the user enters the `summary` command.
-
-.Sequence diagram of execution of the `summary` command
-
-image::SummarySequenceDiagram.png[]
-// end::morningcallnightdebrief[]
-
 // tag::undoredo[]
-=== [Proposed] Undo/Redo feature
+=== Undo/Redo feature [Proposed to v2.0]
 ==== Proposed Implementation
 
 The undo/redo mechanism is facilitated by `VersionedJelphaBot`.
