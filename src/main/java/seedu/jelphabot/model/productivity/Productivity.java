@@ -20,6 +20,8 @@ public class Productivity {
     private TimeSpentToday timeSpentToday;
 
     // booleans to decide which sub-productivity needs to be re-rendered.
+    // TODO: remove. It's useless LOL wth u doing jel
+    //  instead, make methods for each.
     private boolean hasNewOrEditedTasks;
     private boolean hasNewTimer;
     private boolean hasChangeInTimeSpent;
@@ -45,18 +47,6 @@ public class Productivity {
 
     public TimeSpentToday getTimeSpentToday() {
         return timeSpentToday;
-    }
-
-    public boolean hasNewOrEditedTasks() {
-        return hasNewOrEditedTasks;
-    }
-
-    public boolean hasNewTimer() {
-        return hasNewTimer;
-    }
-
-    public boolean hasChangeInTimeSpent() {
-        return hasChangeInTimeSpent;
     }
 
     /**
