@@ -187,11 +187,10 @@ The `Model`,
 * exposes an unmodifiable `ObservableList<Task>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
-// TODO ignore this for now
-[NOTE]
-As a more OOP model, we can store a `Tag` list in `JelphaBot`, which `Task` can reference. This would allow `JelphaBot` to only require one `Tag` object per unique `Tag`, instead of each `Task` needing their own `Tag` object. An example of how such a model may look like is given below. +
- +
-image:ModelMoreOOP.png[]
+//[NOTE]
+//As a more OOP model, we can store a `Tag` list in `JelphaBot`, which `Task` can reference. This would allow `JelphaBot` to only require one `Tag` object per unique `Tag`, instead of each `Task` needing their own `Tag` object. An example of how such a model may look like is given below. +
+// +
+//image:BetterModelClassDiagram.png[]
 
 [[Design-Storage]]
 === Storage component
@@ -220,15 +219,16 @@ This section describes some noteworthy details on how certain features are imple
 === Tab System
 Users may find it complicated to handle the many features that JelphaBot offers. They might also be overwhelmed if all the information of their tasks were to be displayed together in one screen.
 
-As such, we have decided to implement a tab system for JelphaBot to organise the available commands into their respective features. JelphaBot provides 4 different tabs for the users,
+As such, we have decided to implement a tab system for JelphaBot to organise the available commands into their respective features. JelphaBot provides 5 different tabs for the users,
 each displaying a different set of panels that are relevant to the feature.
 
-* *Summary Tab* - <<Summary feature, overall view>> of the day's tasks in the task list.
-* *Task List Tab* - <<Task Grouping feature in Task List tab, view all tasks>> in the task list.
-* *Calendar Tab* - <<Calendar feature, visualisation>> of tasks in a specific day or month.
-* *Productivity Tab* - <<Productivity feature, overarching view>> of overall productivity such as task completion rate.
+* *Summary Tab* - <<Summary feature (Eden), overall view>> of the day's tasks in the task list.
+* *Task List Tab* - <<Task Grouping feature in Task List tab (Yao Jie), view all tasks>> in the task list.
+* *Calendar Tab* - <<Calendar feature (Amanda), visualisation>> of tasks in a specific day or month.
+* *Productivity Tab* - <<Productivity feature (Jel), overarching view>> of overall productivity such as task completion rate.
+* *Reminder Tab* - <<Reminder feature (Dian Hao), list>> of upcoming reminders.
 
-To use the different features, we have also implemented commands for users to switch between the 4 tabs.
+To use the different features, we have also implemented commands for users to switch between the 5 tabs.
 
 [[ChangeTab]]
 // tag::changetab[]
@@ -255,11 +255,10 @@ Upon execution of the `:s` command, [.java]#SummaryCommand#generateCommandResult
 The display panel is updated by calling [.java]#MainWindow#handle{XXX} where XXX is the tab to switch to.
 
 // end::changetab[]
-// TODO: complete this section
 
-// tag::morningcallnightdebrief[]
+// tag::summary[]
 
-=== Summary feature
+=== Summary feature (Eden)
 
 JelphaBot has a Summary feature which provides an overview of the tasks due within the day as well as all tasks that have been complete within the day.
 
@@ -270,7 +269,7 @@ For each task shown only details such as the Module Code and the Description are
 Once the user marks a task due within the day as complete, it will automatically appear under the tasks completed within the day.
 
 [NOTE]
-If the user marks a task as completed, and immediately deletes the task from the tasklist, it will not appear in the summary screen.
+If the user marks a task as completed, and immediately deletes the task from the task list, it will not appear in the summary screen.
 
 ==== Implementation
 
@@ -279,11 +278,11 @@ To view the respective tasks, the user enters the `summary` command to switch to
 [[Summary-SwitchTab-Sequence-Diagram]]
 .Sequence diagram of execution of the `summary` command
 image::SummaryCommand.png[]
-// end::morningcallnightdebrief[]
+// end::summary[]
 
 
 // tag::taskgroups[]
-=== Task Grouping feature in Task List tab
+=== Task Grouping feature in Task List tab (Yao Jie)
 ==== Implementation
 
 The task category mechanism is facilitated by the `ViewTaskList` interface, which serves as a wrapper for any list of tasks. +
@@ -333,13 +332,19 @@ The following diagram shows the process of retrieving a `Task` from `ViewTaskLis
 .Sequence Diagram for `ViewTaskList.get()`
 image::ViewTaskListGetSequenceDiagram.png[]
 
-As the index passed as an argument to `lastShownList.get()` is a cumulative index, the implementation of ` get()` in `ViewTaskList` has to iterate through each `SubgroupTaskList` stored within.
+As the index passed as an argument to `lastShownList.get()` is a cumulative index, the implementation of `get()` in `ViewTaskList` has to iterate through each `SubgroupTaskList` stored within.
 
-// TODO explain how panel is updated?
-//** Pros: Provides good protection over unexpected changes on the displayed Task List.
-//* *Alternative 1*: Let UI displays problems in an `ObservableList<Task>` and update the list directly.
-//** Pros: This implementation is more straightforward as the logic updates the displayed list directly and all changes are reflected immediately.
-//** Cons: `ObservableList` is able to be modified by the containing panel class.
+Tasks are organized via a two-dimensional list. In this case, a `Task` is rendered into a `TaskCard`, and `TaskCard` elements are rendered within `SubGroupTaskListCell` elements which are listed in `SubgroupTaskListPanel`. A populated `SubgroupTaskListPanel` element is rendered as a `GroupedTaskListCell` which is listed in the top-level `GroupedTaskListCell`. +
+`SubgroupTaskListCell` and `GroupedTaskListCell` implement the `ListViewCell<T>` interface of the `ListView<T>` class provided by JavaFX.
+
+[[class-tasklistpanel]]
+.Class Diagram for UI classes displaying `GroupedTaskList`
+image::TaskListPanelClassDiagram.png[]]
+
+The detailed interactions are described in the diagram shown above. As can be seen, the distribution of `ListViewCell` elements follows the way tasks are distributed within the model classes. Each `SubgroupTaskListPanel` is displaying a singular `SubgroupTaskList`.
+
+The indexes displayed in each `TaskCard` is dynamically computed from a `NumberBinding` which computes the index of that element in the list. The `NumberBinding` observes the place of the task within the current `SubgroupTaskList` as well as the number of elements in the preceeding sublists. The sum of both numbers gives the index for the current element.
+
 ==== Design Considerations
 
 ===== Aspect 1: `ListCommand` swaps to a different `ViewTaskList`
@@ -391,9 +396,8 @@ This second listener directly removes unused categories from `GroupedByModuleTas
 ** Pros: Consecutive changes to the underlying Task List are automatically reflected with a change in `SubgroupTaskList` categories.
 ** Pros: The delegation of responsibilities between each `Listener` allows Single Responsibility Principle to be maintained.
 ** Cons: Dependency between the two `Listener` classes has to be maintained.
-* **Alternative 1:** Hide categories which are no longer used by adding a filter to the tasklist returned.
+* **Alternative 1:** Hide categories which are no longer used by adding a filter to the Task List returned.
 ** Pros: Easy to implement and understand.
-** Pros: Enforce consistency with `GroupByDateTaskList` which might allow some methods to be abstracted to parent class.
 ** Cons: Not practical: as more Module Codes are added to the Task List, it might cause more and more hidden categories to be created which are expensive to filter through.
 * **Alternative 2:** Abstract maintenance of the set of unique module codes to a `UniqueModuleCodeSet` class instanced in `UniqueTaskList`.
 ** Pros: Easy to understand.
@@ -401,9 +405,8 @@ Logic is further abstracted to a higher level and the new class is instanced tog
 ** Cons: Implementation is challenging and prone to bugs.
 Due to the time of writing this Developer guide, the release is nearing V1.4 and time is spent fixing bugs for release instead.
 ** This could be a proposed update in the future.
-// TODO sample diagram?
 
-=== Calendar feature
+=== Calendar feature (Amanda)
 
 JelphaBot has a calendar feature which provides an overarching view of their schedules and to allow users to view their tasks due.
 
@@ -496,13 +499,14 @@ in the calendar panel would be re-filtered after the execution of each command.
 ** Cons: Updating of this HashMap of the tasks as the main task list is being edited constantly can be very tedious.
 
 // tag::productivity[]
-=== Productivity feature
+=== Productivity feature (Jel)
 JelphaBot has a productivity panel of this feature which provides an overarching view of user's overall productivity.
 
-This feature offers two main functions:
+This feature offers two main functions and one panel for visualisation:
 
 ** Start timer for a task.
 ** Stop running timer for a task.
+** Productivity panel under Productivity tab.
 
 ====  Implementation
 
@@ -549,18 +553,25 @@ be updated. All 3 parts are rendered on to the same card.
 * *Alternative 1*: Abstract each part to a separate card and render all cards onto the same panel.
 ** Pros: Allows other parts to be rendered even when there is error on one part. Additionally, it is easier to identify bugs when there is
 an error in displaying.
+** Cons: Difficult to implement as current view is generated from a ListView but with a single card. Thus, abstracting and refactoring will be costly and hard to debug.
+* *Alternative 2*: Employ multi-threading for rendering each sub-part.
+** Pros: No need to use 3 different booleans when updating view. Code base will be cleaner and more readable.
+** Cons: Unsure if cost of multi-threading less then of constructing 3 instances for rendering the productivity panel view.
 
-===== Aspect 2: Allowing tasks to be added, deleted and edited while timer is running
-* *Current solution*: Adding and deleting task is allowed. However, tasks cannot be edited.
+===== Aspect 2: Allowing tasks to be added, deleted or edited while timer is running
+* *Current solution*: Adding and deleting of tasks are allowed. However, tasks cannot be edited.
 ** Rationale: Adding and deleting tasks does not affect the task being timed.
-** Pros: Other functionality are still available for use. Thus, user's experience is not affected
-** Cons: User is unable to edit changes in the task being timed.
+** Pros: Other functionality are still available for use. Thus, user's experience is not affected.
+** Cons: User is unable to make changes to the task being timed.
 * *Alternative 1*: Allow users to edit task while timer is running.
 ** Pros: User is able to use all features without restriction.
 ** Cons: Difficult to implement as the Task model requires a new Task to replace the old Task when edit command is executed.
+
+===== Aspect 3: Productivity panel visualisation
+* *Current solution*:
 // end::productivity[]
 
-=== Reminder feature
+=== Reminder feature (Dian Hao)
 JelphaBot has a reminder feature that reminds users whenever they have tasks that are about to overdue.
 This feature offers two main functions:
 
@@ -671,10 +682,10 @@ To view the respective tasks, the user enters the `summary` command.
 .Sequence diagram of execution of the `summary` command
 
 image::SummarySequenceDiagram.png[]
-// end::morningcallnightdebrief[]
+// end::summary[]
 
 // tag::undoredo[]
-=== Undo/Redo feature [Proposed to v2.0]
+=== Undo/Redo feature [Proposed to implement in v2.0]
 ==== Proposed Implementation
 
 The undo/redo mechanism is facilitated by `VersionedJelphaBot`.
@@ -1376,7 +1387,7 @@ _{ more test cases }_
 .. In any other tab, switch to Productivity with `:p`, `:P` or `productivity`. +
     Expected: Success message is shown in the Results Display.
 
-=== Productivity Feature
+=== Progress Bar visualisation
 
 . Marking a task that was previously added as complete
 
@@ -1389,6 +1400,8 @@ _{ more test cases }_
 .. Other incorrect done commands to try: `done`, `done x` (where x is larger than the list size) +
     Expected: Similar to previous.
 
+=== View Tasks with Running Timers
+
 . Start timer for a task that was previously added
 
 .. Prerequisites: Execute the `add` commands in the <<Adding a Task>>. Task must not be marked as completed.
@@ -1400,16 +1413,18 @@ Expected: No timer started. Error details shown in the results message.
 .. Other incorrect start commands to try: `start`, `start x` (where x is larger than the list size or is index of task already marked completed) +
 Expected: Similar to previous.
 
+=== View Time Spent on Tasks
+
 . Stop timer for a task that was previously added
 
-.. Prerequisites: Execute the `add` commands in the <<Adding a Task>>. Timer must be running for task.
+.. Prerequisites: Execute the `start` commands in the <<View Tasks with Running Timers, previous section>>.
 .. Test case: `stop 1` +
 Expected: Stops timing first task from the list. Details of the timed task is shown in the results message. +
 If task's timer to be stopped is due today or in next 6 days, displayed time spent is updated in productivity tab. +
 Task timed is removed from Running Timer(s) displayed in productivity tab.
 .. Test case: `stop 0` +
 Expected: No timer stopped. Error details shown in the results message.
-.. Other incorrect stop commands to try: `start`, `start x` (where x is larger than the list size or is index of task without running timer) +
+.. Other incorrect stop commands to try: `stop`, `stop x` (where x is larger than the list size or is index of task without running timer) +
 Expected: Similar to previous.
 
 === View Tasks due on a specific Date

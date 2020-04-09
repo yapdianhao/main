@@ -6,7 +6,7 @@
 
 <VBox xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <VBox alignment="CENTER_LEFT" maxHeight="-Infinity" prefHeight="118.0" prefWidth="195.0">
+        <VBox maxHeight="-Infinity" prefHeight="118.0" prefWidth="195.0">
             <padding>
                 <Insets bottom="4" left="15" right="4" top="3" />
             </padding>
@@ -45,7 +45,7 @@
                 <Insets bottom="4" left="15" right="4" top="3" />
             </padding>
         </VBox>
-        <VBox alignment="CENTER_LEFT" maxHeight="-Infinity" prefHeight="68.0" prefWidth="195.0">
+        <VBox maxHeight="-Infinity" prefHeight="118.0" prefWidth="195.0">
             <padding>
                 <Insets bottom="4" left="15" right="4" top="3" />
             </padding>
@@ -64,7 +64,7 @@
                 </Label>
             </children>
         </VBox>
-        <VBox alignment="CENTER_LEFT" maxHeight="-Infinity" prefHeight="200.0" prefWidth="195.0">
+        <VBox maxHeight="-Infinity" prefHeight="200.0" prefWidth="195.0">
             <padding>
                 <Insets bottom="4" left="15" right="4" top="3" />
             </padding>
