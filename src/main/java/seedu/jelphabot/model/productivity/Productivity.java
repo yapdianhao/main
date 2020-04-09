@@ -13,10 +13,10 @@ import seedu.jelphabot.model.task.predicates.TaskDueWithinDayPredicate;
  */
 public class Productivity {
 
-    private final ObservableList<Task> taskList;
     private static TasksCompleted tasksCompleted;
     private static RunningTimers runningTimers;
     private static TimeSpentToday timeSpentToday;
+    private final ObservableList<Task> taskList;
 
     // booleans to decide which sub-productivity needs to be re-rendered.
     private boolean hasNewOrEditedTasks;
