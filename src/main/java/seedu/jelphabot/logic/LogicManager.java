@@ -21,6 +21,7 @@ import seedu.jelphabot.model.Model;
 import seedu.jelphabot.model.ReadOnlyJelphaBot;
 import seedu.jelphabot.model.productivity.ProductivityList;
 import seedu.jelphabot.model.reminder.Reminder;
+import seedu.jelphabot.model.reminder.ReminderShowsTask;
 import seedu.jelphabot.model.summary.SummaryList;
 import seedu.jelphabot.model.task.ReminderPredicate;
 import seedu.jelphabot.model.task.Task;
@@ -70,6 +71,11 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Reminder> getReminderList() {
         return model.getFilteredReminderList();
+    }
+
+    @Override
+    public ObservableList<ReminderShowsTask> getReminderShowsTaskList() {
+        return model.getReminderShowsTaskList();
     }
 
     @Override

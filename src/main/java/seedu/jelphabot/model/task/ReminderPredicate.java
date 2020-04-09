@@ -33,7 +33,6 @@ public class ReminderPredicate extends TaskIsIncompletePredicate {
         int reminderKey = taskList.indexOf(task);
         Reminder correspondingReminder = null;
         for (Reminder reminder : reminderList) {
-            //logger.info("reminder index: " + reminder.getIndex().getZeroBased());
             if (reminder.getIndex().getZeroBased() == reminderKey) {
                 correspondingReminder = reminder;
                 break;
