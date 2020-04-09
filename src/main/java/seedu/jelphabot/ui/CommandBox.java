@@ -42,6 +42,7 @@ public class CommandBox extends UiPart<Region> {
             System.out.println("Command: " + commandsHistory);
         }
 
+        // TODO: fix this. for some reason doesn't work well esp when adding tasks
         // Replicates behaviour of CLI when UP or DOWN key is pressed
         commandTextField.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.UP) {
