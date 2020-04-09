@@ -51,6 +51,10 @@ public class Task {
         this.isTiming = false;
     }
 
+    // @@author Eden
+    /**
+     * Special constructor with additional DoneTime field for use in JsonAdaptedTask.
+     */
     public Task(Description description, Status status, DateTime dateTime, LocalDateTime doneTime,
         ModuleCode moduleCode, Priority priority, Set<Tag> tags, TimeSpent timeSpent) {
         requireAllNonNull(description, status, dateTime, doneTime, moduleCode, tags, timeSpent);
