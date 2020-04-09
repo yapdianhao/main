@@ -1376,7 +1376,7 @@ _{ more test cases }_
 .. In any other tab, switch to Productivity with `:p`, `:P` or `productivity`. +
     Expected: Success message is shown in the Results Display.
 
-=== Productivity Feature
+=== Progress Bar visualisation
 
 . Marking a task that was previously added as complete
 
@@ -1389,6 +1389,8 @@ _{ more test cases }_
 .. Other incorrect done commands to try: `done`, `done x` (where x is larger than the list size) +
     Expected: Similar to previous.
 
+=== View Tasks with Running Timers
+
 . Start timer for a task that was previously added
 
 .. Prerequisites: Execute the `add` commands in the <<Adding a Task>>. Task must not be marked as completed.
@@ -1400,16 +1402,18 @@ Expected: No timer started. Error details shown in the results message.
 .. Other incorrect start commands to try: `start`, `start x` (where x is larger than the list size or is index of task already marked completed) +
 Expected: Similar to previous.
 
+=== View Time Spent on Tasks
+
 . Stop timer for a task that was previously added
 
-.. Prerequisites: Execute the `add` commands in the <<Adding a Task>>. Timer must be running for task.
+.. Prerequisites: Execute the `start` commands in the <<View Tasks with Running Timers, previous section>>.
 .. Test case: `stop 1` +
 Expected: Stops timing first task from the list. Details of the timed task is shown in the results message. +
 If task's timer to be stopped is due today or in next 6 days, displayed time spent is updated in productivity tab. +
 Task timed is removed from Running Timer(s) displayed in productivity tab.
 .. Test case: `stop 0` +
 Expected: No timer stopped. Error details shown in the results message.
-.. Other incorrect stop commands to try: `start`, `start x` (where x is larger than the list size or is index of task without running timer) +
+.. Other incorrect stop commands to try: `stop`, `stop x` (where x is larger than the list size or is index of task without running timer) +
 Expected: Similar to previous.
 
 === View Tasks due on a specific Date

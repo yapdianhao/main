@@ -549,10 +549,9 @@ Shortcut: `:P` or `:p`
 .Example of expected result after running `productivity`
 image::ug_figures/ProductivityTab.png[width="600"]
 
-****
-// TODO: add exclamation
-* The progress bar and the text following it only shows tasks that are due on the day JelphaBot is running.
-****
+[NOTE]
+The progress bar and the text following it only shows tasks that are due on the day JelphaBot is running.
+
 ==== Starting timer for a task : `start`
 
 You can start a timer running for a task. +

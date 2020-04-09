@@ -1,6 +1,7 @@
 package seedu.jelphabot.model.productivity;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.jelphabot.commons.util.DateUtil.getDueSomedayPredicate;
 import static seedu.jelphabot.commons.util.DateUtil.getDueThisWeekPredicate;
 import static seedu.jelphabot.commons.util.DateUtil.getOverduePredicate;
 
@@ -63,7 +64,7 @@ public class Productivity {
         }
 
         if (timeSpentToday == null || hasChangeInTimeSpent) {
-            timeSpentToday = new TimeSpentToday(tasksDueToday, tasksDueThisWeek);
+            timeSpentToday = new TimeSpentToday(tasksDueToday, tasksDueThisWeek, taskList.filtered(getDueSomedayPredicate()));
         }
     }
 }
