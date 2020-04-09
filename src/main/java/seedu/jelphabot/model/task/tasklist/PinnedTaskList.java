@@ -6,6 +6,8 @@ import seedu.jelphabot.model.task.Task;
 
 /**
  * Wrapper class for a ObservableList of pinned Tasks.
+ *
+ * @@author yaojiethng
  */
 public class PinnedTaskList extends SubgroupTaskList {
     public PinnedTaskList(ObservableList<Task> taskList, IntegerBinding startIndex) {

@@ -22,6 +22,8 @@ import seedu.jelphabot.model.task.exceptions.TaskNotFoundException;
  * Each 'GroupedTaskList' is a container for `ObservableList&lt;Task> objects,
  * each containing a unique filter over the full task list.
  * Classes which extend GroupedTaskList are expected to provide a getter method for each grouping defined.
+ *
+ * @@author yaojiethng
  */
 public abstract class GroupedTaskList implements ViewTaskList {
 
