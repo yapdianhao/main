@@ -332,13 +332,19 @@ The following diagram shows the process of retrieving a `Task` from `ViewTaskLis
 .Sequence Diagram for `ViewTaskList.get()`
 image::ViewTaskListGetSequenceDiagram.png[]
 
-As the index passed as an argument to `lastShownList.get()` is a cumulative index, the implementation of ` get()` in `ViewTaskList` has to iterate through each `SubgroupTaskList` stored within.
+As the index passed as an argument to `lastShownList.get()` is a cumulative index, the implementation of `get()` in `ViewTaskList` has to iterate through each `SubgroupTaskList` stored within.
 
-// TODO explain how panel is updated?
-//** Pros: Provides good protection over unexpected changes on the displayed Task List.
-//* *Alternative 1*: Let UI displays problems in an `ObservableList<Task>` and update the list directly.
-//** Pros: This implementation is more straightforward as the logic updates the displayed list directly and all changes are reflected immediately.
-//** Cons: `ObservableList` is able to be modified by the containing panel class.
+Tasks are organized via a two-dimensional list. In this case, a `Task` is rendered into a `TaskCard`, and `TaskCard` elements are rendered within `SubGroupTaskListCell` elements which are listed in `SubgroupTaskListPanel`. A populated `SubgroupTaskListPanel` element is rendered as a `GroupedTaskListCell` which is listed in the top-level `GroupedTaskListCell`. +
+`SubgroupTaskListCell` and `GroupedTaskListCell` implement the `ListViewCell<T>` interface of the `ListView<T>` class provided by JavaFX.
+
+[[class-tasklistpanel]]
+.Class Diagram for UI classes displaying `GroupedTaskList`
+image::TaskListPanelClassDiagram.png[]]
+
+The detailed interactions are described in the diagram shown above. As can be seen, the distribution of `ListViewCell` elements follows the way tasks are distributed within the model classes. Each `SubgroupTaskListPanel` is displaying a singular `SubgroupTaskList`.
+
+The indexes displayed in each `TaskCard` is dynamically computed from a `NumberBinding` which computes the index of that element in the list. The `NumberBinding` observes the place of the task within the current `SubgroupTaskList` as well as the number of elements in the preceeding sublists. The sum of both numbers gives the index for the current element.
+
 ==== Design Considerations
 
 ===== Aspect 1: `ListCommand` swaps to a different `ViewTaskList`
@@ -400,7 +406,6 @@ Logic is further abstracted to a higher level and the new class is instanced tog
 ** Cons: Implementation is challenging and prone to bugs.
 Due to the time of writing this Developer guide, the release is nearing V1.4 and time is spent fixing bugs for release instead.
 ** This could be a proposed update in the future.
-// TODO sample diagram?
 
 === Calendar feature (Amanda)
 
