@@ -85,7 +85,7 @@ public class GroupedByModuleTaskList extends GroupedTaskList {
 
     @Override
     public ObservableList<SubgroupTaskList> getSublists() {
-        return subLists.sorted(Comparator.comparing(SubgroupTaskList::getGroupName));
+        return subLists; //.sorted(Comparator.comparing(SubgroupTaskList::getGroupName));
     }
 
     /* === Methods used for testing. Application classes should not call these methods as Tasks are intended
