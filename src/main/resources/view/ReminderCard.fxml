@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+
+<HBox id="cardPane" fx:id="cardPane" alignment="CENTER_LEFT" fillHeight="false" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="107.0" prefWidth="355.0" spacing="16.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <Label fx:id="id" styleClass="cell_big_label">
+        <minWidth>
+            <!-- Ensures that the label text is never truncated -->
+            <Region fx:constant="USE_PREF_SIZE" />
+        </minWidth>
+    </Label>
+    <Label fx:id="taskAssociated" alignment="CENTER" maxWidth="-Infinity" prefHeight="17.0" prefWidth="194.0" styleClass="cell_big_label" text="reminding task: 2" />
+    <Label fx:id="reminderDay" alignment="CENTER" maxWidth="-Infinity" prefHeight="17.0" prefWidth="128.0" styleClass="cell_big_label" text="due in: 3 days" />
+    <Label fx:id="reminderHour" alignment="CENTER" maxWidth="-Infinity" prefWidth="100.0" styleClass="cell_big_label" text="3 hour(s)" />
+    <padding>
+        <Insets left="16.0" right="16.0" />
+    </padding>
+</HBox>
