@@ -115,7 +115,7 @@ Each of the four components
 For example, the `Logic` component (see the class diagram given below) defines it's API in the `Logic.java` interface and exposes its functionality using the `LogicManager.java` class.
 
 .Class Diagram of the Logic Component
-image::LogicClassDiagram.png[]
+image::LogicClassDiagram.png[][width="750"]
 
 [discrete]
 ==== How the architecture components interact with each other
@@ -133,7 +133,7 @@ The Ui Component handles interactions between the user and the application.
 This includes input fields where commands are entered as well as translations of data in the Model Component to a visual representation in the interface.
 
 .Class Diagram of the UI Component
-image::UiClassDiagram.png[]
+image::UiClassDiagram.png[][width="750"]
 
 *API* : link:{repoURL}/src/main/java/seedu/JelphaBot/ui/Ui.java[`Ui.java`]
 
@@ -153,7 +153,7 @@ The Logic component handles the business logic after a command is executed.
 
 [[fig-LogicClassDiagram]]
 .Structure of the Logic Component
-image::LogicClassDiagram.png[]
+image::LogicClassDiagram.png[][width="750"]
 
 *API* :
 link:{repoURL}/src/main/java/seedu/JelphaBot/logic/Logic.java[`Logic.java`]
@@ -176,7 +176,7 @@ NOTE: The lifeline for `DeleteCommandParser` and `Model` should end at the destr
 The Model component provides an internal data representation of all tasks stored in JelphaBot, as well as methods to modify that data.
 
 .Structure of the Model Component
-image::ModelClassDiagram.png[]
+image::ModelClassDiagram.png[][width="750"]
 
 *API* : link:{repoURL}/src/main/java/seedu/JelphaBot/model/Model.java[`Model.java`]
 
@@ -198,7 +198,7 @@ image:ModelMoreOOP.png[]
 The Storage component manages storing and retrieving of data onto local files in .json format.
 
 .Structure of the Storage Component
-image::Storage.png[]
+image::Storage.png[][width="750"]
 
 *API* : link:{repoURL}/src/main/java/seedu/JelphaBot/storage/Storage.java[`Storage.java`]
 
