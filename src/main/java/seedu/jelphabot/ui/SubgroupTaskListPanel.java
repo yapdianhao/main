@@ -2,7 +2,6 @@ package seedu.jelphabot.ui;
 
 import java.util.logging.Logger;
 
-import javafx.beans.binding.Bindings;
 import javafx.beans.binding.IntegerBinding;
 import javafx.beans.binding.NumberBinding;
 import javafx.fxml.FXML;
@@ -20,11 +19,12 @@ import seedu.jelphabot.model.task.tasklist.SubgroupTaskList;
  */
 public class SubgroupTaskListPanel extends UiPart<Region> {
 
-    private static final String FXML = "SubgroupTaskListPanel.fxml";
     private static final int PREF_CELL_HEIGHT = 100;
-    private static final NumberBinding START_INDEX = Bindings.createIntegerBinding(() -> 1);
-
+    private static final String FXML = "SubgroupTaskListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(TaskListPanel.class);
+
+    private final SubgroupTaskList subGroupTaskList;
+    private final NumberBinding startIndex;
 
     @FXML
     private TitledPane category;
@@ -32,15 +32,18 @@ public class SubgroupTaskListPanel extends UiPart<Region> {
     @FXML
     private ListView<Task> groupingList;
 
-    private SubgroupTaskList subGroupTaskList;
-
-    public SubgroupTaskListPanel(SubgroupTaskList subGroupTaskList) {
+    public SubgroupTaskListPanel(SubgroupTaskList subGroupTaskList, NumberBinding startIndex) {
         super(FXML);
         this.subGroupTaskList = subGroupTaskList;
+        this.startIndex = startIndex;
         setCategoryTitle(subGroupTaskList.getGroupName(), subGroupTaskList.sizeBinding());
-        groupingList.setCellFactory(viewCell -> new SubgroupTaskListViewCell());
+        groupingList.setCellFactory(viewCell -> new SubgroupTaskListViewCell(startIndex));
         groupingList.prefHeightProperty().bind(subGroupTaskList.sizeBinding().multiply(PREF_CELL_HEIGHT));
         groupingList.setItems(subGroupTaskList.getList());
+    }
+
+    public NumberBinding getLastElementIndex() {
+        return startIndex.add(subGroupTaskList.sizeBinding());
     }
 
     public void setCategoryTitle(String groupName, IntegerBinding totalSize) {
@@ -50,7 +53,13 @@ public class SubgroupTaskListPanel extends UiPart<Region> {
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Task} using a {@code GroupedTaskCard}.
      */
-    class SubgroupTaskListViewCell extends ListCell<Task> {
+    static class SubgroupTaskListViewCell extends ListCell<Task> {
+        private NumberBinding startIndex;
+
+        SubgroupTaskListViewCell(NumberBinding startIndex) {
+            this.startIndex = startIndex;
+        }
+
         @Override
         protected void updateItem(Task task, boolean empty) {
             super.updateItem(task, empty);
@@ -61,7 +70,7 @@ public class SubgroupTaskListPanel extends UiPart<Region> {
             } else {
                 setGraphic(new TaskCard(
                     task,
-                    START_INDEX.add(subGroupTaskList.startIndexBinding()).add(getIndex())
+                    startIndex.add(getIndex() + 1)
                 ).getRoot());
             }
         }
