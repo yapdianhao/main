@@ -64,7 +64,8 @@ public class Productivity {
         }
 
         if (timeSpentToday == null || hasChangeInTimeSpent) {
-            timeSpentToday = new TimeSpentToday(tasksDueToday, tasksDueThisWeek, taskList.filtered(getDueSomedayPredicate()));
+            timeSpentToday = new TimeSpentToday(tasksDueToday, tasksDueThisWeek,
+                taskList.filtered(getDueSomedayPredicate()));
         }
     }
 }
