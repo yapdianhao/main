@@ -1,6 +1,6 @@
 package seedu.jelphabot.model.reminder;
 
-import static java.util.Objects.requireNonNull;
+import static seedu.jelphabot.commons.util.CollectionUtil.requireAllNonNull;
 
 import seedu.jelphabot.commons.core.index.Index;
 
@@ -17,9 +17,7 @@ public class Reminder {
     private final Index index;
 
     public Reminder(Index index, ReminderDay daysToRemind, ReminderHour hoursToRemind) {
-        requireNonNull(index);
-        requireNonNull(daysToRemind);
-        requireNonNull(hoursToRemind);
+        requireAllNonNull(index, daysToRemind, hoursToRemind);
         this.index = index;
         this.daysToRemind = daysToRemind;
         this.hoursToRemind = hoursToRemind;
