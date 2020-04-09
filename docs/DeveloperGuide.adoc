@@ -618,30 +618,6 @@ associated.
 ** Cons: Overcomplicated and may confuse users. Users may be confused by the `Index` s shown since `Reminder` and `Task`
 both has `Index` respectively.
 
-// tag::morningcallnightdebrief[]
-
-=== Summary feature
-
-JelphaBot has a Summary feature which provides an overview of the tasks due within the day as well as all tasks that have been complete within the day.
-
-This feature comes in the form of a welcome screen, which comprises of two sections for the tasks due within the day and the tasks completed within the day respectively.
-
-For each task shown only details such as the Module Code and the Description are shown.
-
-Once the user marks a task due within the day as complete, it will automatically appear under the tasks completed within the day.
-
-[NOTE]
-If the user marks a task as completed, and immediately deletes the task from the tasklist, it will not appear in the summary screen.
-
-==== Implementation
-
-To view the respective tasks, the user enters the `summary` command.
-
-.Sequence diagram of execution of the `summary` command
-
-image::SummarySequenceDiagram.png[]
-// end::morningcallnightdebrief[]
-
 // tag::undoredo[]
 === Undo/Redo feature [Proposed to v2.0]
 ==== Proposed Implementation
@@ -1383,27 +1359,39 @@ Expected: Similar to previous.
 
 === View Tasks due on a specific Date
 
-. Input a date belonging to the calendar month to view tasks due
+. Input a date belonging to the current calendar month to view tasks due
 .. Prerequisites: Navigate to the calendar with the `calendar` command (or other variants as listed above).
 .. Test case: `calendar Apr-20-2020` +
 Expected: Task(s) due on the input date will be displayed with results message displaying the number of tasks listed.
 If there are no tasks due on the input date, no tasks would be displayed. The input date would also be highlighted on the calendar.
+.. Test case: `calendar Apri-20-2020` +
+Expected: Error message due to the invalid format for the input date would be displayed in the results message.
 
-. Input a date not belonging to the calendar month to view tasks due
+. Input a date not belonging to the current calendar month to view tasks due
 .. Prerequisites: Navigate to the calendar with the `calendar` command (or other variants as listed above).
 .. Test case: `calendar Oct-20-2020` +
 Expected: Task(s) due on the input date will be displayed with results message displaying the number of tasks listed.
 If there are no tasks due on the input date, no tasks would be displayed.
+.. Test case: `calendar Joon-20-2020` +
+Expected: Expected: Error message due to the invalid format for the input date would be displayed in the results message.
 
 === Navigating the Calendar
 
-. Navigate to different month and year on Calendar
-
 . Navigate to Today's Date on Calendar
+.. Prerequisites: Navigate to the calendar with the `calendar` command (or other variants as listed above).
+.. Test case: `calendar today` +
+Expected: Calendar will change to be the current month and year, with today's date also highlighted.
+Task(s) due today will be displayed with results message displaying the number of tasks listed.
+If there are no tasks due today, no tasks would be displayed.
 
-
-
-
+. Navigate to different month and year on Calendar
+.. Prerequisites: Navigate to the calendar with the `calendar` command (or other variants as listed above).
+.. Test case: `calendar May-2020` +
+Expected: Calendar will change to be for May 2020, with the first day of the May highlighted.
+Task(s) due on the first day of May will be displayed with results message displaying the number of tasks listed.
+If there are no tasks due, no tasks would be displayed.
+.. Test case: `calendar MAy-2020` +
+Expected: Error message due to the invalid format for the input month and year would be displayed in the results message.
 
 // TODO add more
 
