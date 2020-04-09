@@ -89,14 +89,6 @@ public class JsonJelphaBotStorage implements JelphaBotStorage {
         saveJelphaBot(jelphaBot, filePath);
     }
 
-    @Override
-    public void saveJelphaBot(ReadOnlyJelphaBot jelphaBot, boolean isReminder) throws IOException {
-        requireNonNull(jelphaBot);
-        requireNonNull(reminderPath);
-        FileUtil.createIfMissing(reminderPath);
-        JsonUtil.saveJsonFile(new JsonSerializableReminderJelphaBot(jelphaBot), reminderPath);
-    }
-
     /**
      * Similar to {@link #saveJelphaBot(ReadOnlyJelphaBot)}.
      *
@@ -108,6 +100,8 @@ public class JsonJelphaBotStorage implements JelphaBotStorage {
 
         FileUtil.createIfMissing(filePath);
         JsonUtil.saveJsonFile(new JsonSerializableJelphaBot(jelphaBot), filePath);
+        FileUtil.createIfMissing(reminderPath);
+        JsonUtil.saveJsonFile(new JsonSerializableReminderJelphaBot(jelphaBot), reminderPath);
     }
 
 }
