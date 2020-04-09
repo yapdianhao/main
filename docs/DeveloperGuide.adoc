@@ -499,10 +499,11 @@ in the calendar panel would be re-filtered after the execution of each command.
 === Productivity feature
 JelphaBot has a productivity panel of this feature which provides an overarching view of user's overall productivity.
 
-This feature offers two main functions:
+This feature offers two main functions and one panel for visualisation:
 
 ** Start timer for a task.
 ** Stop running timer for a task.
+** Productivity panel under Productivity tab.
 
 ====  Implementation
 
@@ -549,15 +550,22 @@ be updated. All 3 parts are rendered on to the same card.
 * *Alternative 1*: Abstract each part to a separate card and render all cards onto the same panel.
 ** Pros: Allows other parts to be rendered even when there is error on one part. Additionally, it is easier to identify bugs when there is
 an error in displaying.
+** Cons: Difficult to implement as current view is generated from a ListView but with a single card. Thus, abstracting and refactoring will be costly and hard to debug.
+* *Alternative 2*: Employ multi-threading for rendering each sub-part.
+** Pros: No need to use 3 different booleans when updating view. Code base will be cleaner and more readable.
+** Cons: Unsure if cost of multi-threading less then of constructing 3 instances for rendering the productivity panel view.
 
-===== Aspect 2: Allowing tasks to be added, deleted and edited while timer is running
-* *Current solution*: Adding and deleting task is allowed. However, tasks cannot be edited.
+===== Aspect 2: Allowing tasks to be added, deleted or edited while timer is running
+* *Current solution*: Adding and deleting of tasks are allowed. However, tasks cannot be edited.
 ** Rationale: Adding and deleting tasks does not affect the task being timed.
-** Pros: Other functionality are still available for use. Thus, user's experience is not affected
-** Cons: User is unable to edit changes in the task being timed.
+** Pros: Other functionality are still available for use. Thus, user's experience is not affected.
+** Cons: User is unable to make changes to the task being timed.
 * *Alternative 1*: Allow users to edit task while timer is running.
 ** Pros: User is able to use all features without restriction.
 ** Cons: Difficult to implement as the Task model requires a new Task to replace the old Task when edit command is executed.
+
+===== Aspect 3: Productivity panel visualisation
+* *Current solution*:
 // end::productivity[]
 
 === Reminder feature
