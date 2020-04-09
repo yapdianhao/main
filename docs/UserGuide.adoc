@@ -451,6 +451,7 @@ Valid `SORTING_ORDER` values include `date`, `module`, and `priority`.
 
 === Calendar (Amanda)
 JelphaBot also comes with a built-in calendar view that allows you to view your overarching tasks due on a monthly basis.
+Dates that have tasks due would have a dot indicator shown on the calendar.
 You would also be able to navigate to specific dates to view your tasks due for that day of the month!
 
 ==== View calender : `calendar`
@@ -465,9 +466,13 @@ Shorcut: `:C` or `:c`
 .Example of expected result after running `calendar`
 image::ug_figures/CalendarTab.png[width="600"]
 
+[NOTE]
+Highlighting of Dates: Today's date would be highlighted in dark blue, while other dates would be in light blue.
+
 ==== Change month and year view of Calendar : `calendar`
-Displays the tasks due on specified date, while highlighting that day on the calendar.
-The task list panel on the left will display the tasks due today. +
+You can navigate the calendar panel to another month and year by specifying it. The calendar panel would be updated accordingly
+while highlighting the first day of the month.
+The task list panel on the left will display the tasks due on the first day of the month. +
 Format: `calendar MONTHYEAR`
 
 ****
@@ -507,6 +512,10 @@ Examples:
 image::CalendarDate.png[width="600"]
 
 Highlights 1st of April in the calendar panel on the right and displays the corresponding tasks due on the left.
+
+[NOTE]
+Dot indicator showing tasks: Dates that have more than 3 tasks due would have a red dot indicator, while dates with
+at least 1 task but less than 4 tasks due would be represented with a green dot indicator.
 
 ==== Navigate directly to today's date on Calendar : `calendar`
 Immediately displays the calendar view for this month and highlights today's date.

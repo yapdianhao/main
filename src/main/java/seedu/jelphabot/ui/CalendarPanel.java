@@ -69,10 +69,10 @@ public class CalendarPanel extends UiPart<Region> {
                 CalendarDayCard calendarDayCard = new CalendarDayCard(currDate);
                 allDayCards.add(calendarDayCard);
                 if (currDate.isSameMonth(firstDay.getMonth())) {
-                    calendarDayCard.setSameMonth();
+                    calendarDayCard.setSameMonthDay();
                     dayCardsInMonth.add(calendarDayCard);
                 } else {
-                    calendarDayCard.setDiffMonth();
+                    calendarDayCard.setDiffMonthDay();
                 }
                 if (currDate.isToday()) {
                     // logger.info("today date");

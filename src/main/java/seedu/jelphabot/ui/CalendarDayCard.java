@@ -103,14 +103,14 @@ public class CalendarDayCard extends UiPart<Region> {
     /**
      * Sets the colour of labels for dates this month.
      */
-    public void setSameMonth() {
+    public void setSameMonthDay() {
         calendarDay.setTextFill(Paint.valueOf("000000"));
     }
 
     /**
      * Sets the colour of labels for trailing dates from the previous and next months.
      */
-    public void setDiffMonth() {
+    public void setDiffMonthDay() {
         calendarDay.setTextFill(Paint.valueOf("808080"));
         calendarDay.setOpacity(0.75);
     }

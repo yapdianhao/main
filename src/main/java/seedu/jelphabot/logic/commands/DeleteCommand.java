@@ -39,7 +39,7 @@ public class DeleteCommand extends Command {
 
         ViewTaskList lastShownList = model.getLastShownList();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+        if (targetIndex.getZeroBased() >= lastShownList.size() || targetIndex.getZeroBased() < 0) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 

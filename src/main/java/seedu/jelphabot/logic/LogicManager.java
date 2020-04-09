@@ -68,6 +68,11 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public ObservableList<Reminder> getReminderList() {
+        return model.getFilteredReminderList();
+    }
+
+    @Override
     public ReadOnlyJelphaBot getJelphaBot() {
         return model.getJelphaBot();
     }
