@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- TODO: fix UI, add scrollpane? -->
-
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox maxHeight="1.7976931348623157E308" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
+<VBox xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <VBox alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="85" prefHeight="118.0" prefWidth="195.0" VBox.vgrow="SOMETIMES">
+        <VBox alignment="CENTER_LEFT" maxHeight="-Infinity" prefHeight="118.0" prefWidth="195.0">
             <padding>
                 <Insets bottom="4" left="15" right="4" top="3" />
             </padding>
-            <Label graphicTextGap="0.0" prefHeight="24.0" prefWidth="155.0" styleClass="cell_big_label" text="Productivity Report" HBox.hgrow="NEVER">
-                <minWidth>
-                    <!-- Ensures that the label text is never truncated -->
-                    <Region fx:constant="USE_PREF_SIZE" />
-                </minWidth>
-            </Label>
+            <children>
+                <Label graphicTextGap="0.0" prefHeight="24.0" prefWidth="155.0" styleClass="cell_big_label" text="Productivity Report">
+                    <minWidth>
+                        <!-- Ensures that the label text is never truncated -->
+                        <Region fx:constant="USE_PREF_SIZE" />
+                    </minWidth>
+                </Label>
+            </children>
             <HBox prefHeight="26.0" prefWidth="176.0">
                 <children>
                     <ProgressBar fx:id="tasksCompletionProgress" maxWidth="-Infinity" prefWidth="200.0" progress="0.0" />
@@ -29,56 +29,60 @@
                     </Label>
                 </children>
             </HBox>
-            <Label fx:id="remark" styleClass="cell_small_label" text="\$remark">
-                <minWidth>
-                    <!-- Ensures that the label text is never truncated -->
-                    <Region fx:constant="USE_PREF_SIZE" />
-                </minWidth>
-            </Label>
-            <Label fx:id="overdueStatus" styleClass="cell_small_label" text="\$overdueStatus">
-                <minWidth>
-                    <!-- Ensures that the label text is never truncated -->
-                    <Region fx:constant="USE_PREF_SIZE" />
-                </minWidth>
-            <padding>
-               <Insets top="3.0" />
-            </padding>
-            </Label>
+                <Label fx:id="remark" styleClass="cell_small_label" text="\$remark">
+                    <minWidth>
+                        <!-- Ensures that the label text is never truncated -->
+                        <Region fx:constant="USE_PREF_SIZE" />
+                    </minWidth>
+                </Label>
+                <Label fx:id="overdueStatus" styleClass="cell_small_label" text="\$overdueStatus">
+                    <minWidth>
+                        <!-- Ensures that the label text is never truncated -->
+                        <Region fx:constant="USE_PREF_SIZE" />
+                    </minWidth>
+                <padding>
+                   <Insets top="3.0" />
+                </padding>
+                </Label>
             <padding>
                 <Insets bottom="4" left="15" right="4" top="3" />
             </padding>
         </VBox>
-        <VBox alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="68.0" prefHeight="78.0" prefWidth="195.0" VBox.vgrow="NEVER">
+        <VBox alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="68.0" prefWidth="195.0">
             <padding>
                 <Insets bottom="4" left="15" right="4" top="3" />
             </padding>
-            <Label prefHeight="18.0" prefWidth="90.0" styleClass="cell_medium_label" text="Time Spent">
-                <minWidth>
-                    <!-- Ensures that the label text is never truncated -->
-                    <Region fx:constant="USE_PREF_SIZE" />
-                </minWidth>
-            </Label>
-            <Label fx:id="timeSpentToday" styleClass="cell_small_label" text="\$timeSpentToday">
-            <padding>
-               <Insets top="3.0" />
-            </padding></Label>
-        </VBox>
-        <VBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" prefHeight="100.0" prefWidth="195.0" VBox.vgrow="SOMETIMES">
-            <padding>
-                <Insets bottom="4" left="15" right="4" top="3" />
-            </padding>
-         <HBox prefHeight="23.0" prefWidth="176.0">
             <children>
-                  <Label prefHeight="18.0" prefWidth="120.0" styleClass="cell_medium_label" text="Running Timer(s)">
-                      <minWidth>
-                          <!-- Ensures that the label text is never truncated -->
-                          <Region fx:constant="USE_PREF_SIZE" />
-                      </minWidth>
-                  </Label>
-
+                <Label prefHeight="18.0" prefWidth="90.0" styleClass="cell_medium_label" text="Time Spent">
+                    <minWidth>
+                        <!-- Ensures that the label text is never truncated -->
+                        <Region fx:constant="USE_PREF_SIZE" />
+                    </minWidth>
+                </Label>
+                <Label fx:id="timeSpentToday" styleClass="cell_small_label" text="\$timeSpentToday">
+                    <padding>
+                       <Insets top="3.0" />
+                    </padding>
+                </Label>
             </children>
-         </HBox>
-            <Label fx:id="runningTimers" styleClass="cell_small_label" text="\$runningTimers" />
+        </VBox>
+        <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="195.0">
+            <padding>
+                <Insets bottom="4" left="15" right="4" top="3" />
+            </padding>
+            <children>
+                <Label prefHeight="18.0" prefWidth="120.0" styleClass="cell_medium_label" text="Running Timer(s)">
+                    <minWidth>
+                        <!-- Ensures that the label text is never truncated -->
+                        <Region fx:constant="USE_PREF_SIZE" />
+                    </minWidth>
+                </Label>
+                <Label fx:id="runningTimers" styleClass="cell_small_label" text="\$runningTimers">
+                    <minWidth>
+                        <Region fx:constant="USE_PREF_SIZE" />
+                    </minWidth>
+                </Label>
+            </children>
         </VBox>
     </children>
 </VBox>
