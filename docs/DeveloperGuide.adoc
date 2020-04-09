@@ -219,15 +219,16 @@ This section describes some noteworthy details on how certain features are imple
 === Tab System
 Users may find it complicated to handle the many features that JelphaBot offers. They might also be overwhelmed if all the information of their tasks were to be displayed together in one screen.
 
-As such, we have decided to implement a tab system for JelphaBot to organise the available commands into their respective features. JelphaBot provides 4 different tabs for the users,
+As such, we have decided to implement a tab system for JelphaBot to organise the available commands into their respective features. JelphaBot provides 5 different tabs for the users,
 each displaying a different set of panels that are relevant to the feature.
 
-* *Summary Tab* - <<Summary feature, overall view>> of the day's tasks in the task list.
-* *Task List Tab* - <<Task Grouping feature in Task List tab, view all tasks>> in the task list.
-* *Calendar Tab* - <<Calendar feature, visualisation>> of tasks in a specific day or month.
-* *Productivity Tab* - <<Productivity feature, overarching view>> of overall productivity such as task completion rate.
+* *Summary Tab* - <<Summary feature (Eden), overall view>> of the day's tasks in the task list.
+* *Task List Tab* - <<Task Grouping feature in Task List tab (Yao Jie), view all tasks>> in the task list.
+* *Calendar Tab* - <<Calendar feature (Amanda), visualisation>> of tasks in a specific day or month.
+* *Productivity Tab* - <<Productivity feature (Jel), overarching view>> of overall productivity such as task completion rate.
+* *Reminder Tab* - <<Reminder feature (Dian Hao), list>> of upcoming reminders.
 
-To use the different features, we have also implemented commands for users to switch between the 4 tabs.
+To use the different features, we have also implemented commands for users to switch between the 5 tabs.
 
 [[ChangeTab]]
 // tag::changetab[]
@@ -254,9 +255,8 @@ Upon execution of the `:s` command, [.java]#SummaryCommand#generateCommandResult
 The display panel is updated by calling [.java]#MainWindow#handle{XXX} where XXX is the tab to switch to.
 
 // end::changetab[]
-// TODO: complete this section
 
-// tag::morningcallnightdebrief[]
+// tag::summary[]
 
 === Summary feature (Eden)
 
@@ -269,7 +269,7 @@ For each task shown only details such as the Module Code and the Description are
 Once the user marks a task due within the day as complete, it will automatically appear under the tasks completed within the day.
 
 [NOTE]
-If the user marks a task as completed, and immediately deletes the task from the tasklist, it will not appear in the summary screen.
+If the user marks a task as completed, and immediately deletes the task from the task list, it will not appear in the summary screen.
 
 ==== Implementation
 
@@ -278,7 +278,7 @@ To view the respective tasks, the user enters the `summary` command to switch to
 [[Summary-SwitchTab-Sequence-Diagram]]
 .Sequence diagram of execution of the `summary` command
 image::SummaryCommand.png[]
-// end::morningcallnightdebrief[]
+// end::summary[]
 
 
 // tag::taskgroups[]
@@ -682,7 +682,7 @@ To view the respective tasks, the user enters the `summary` command.
 .Sequence diagram of execution of the `summary` command
 
 image::SummarySequenceDiagram.png[]
-// end::morningcallnightdebrief[]
+// end::summary[]
 
 // tag::undoredo[]
 === Undo/Redo feature [Proposed to implement in v2.0]
