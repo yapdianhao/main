@@ -44,7 +44,8 @@ https://github.com/AY1920S2-CS2103T-F09-2/main/blob/master/src/test/java/seedu/j
 * Documentation:
 ** Made language improvements to the existing User Guide to make it more user-centric: PR #300, #283, #316
 ** Replaced existing Architecture Sequence diagram with one that corresponds to our final product: PR #198
-** Added Sequence diagram for timers: PR #
+** Added Use Case diagram and Activity diagrams for start command: PR https://github.com/AY1920S2-CS2103T-F09-2/main/pull/326[#326]
+** Added Sequence diagram for stop command: PR https://github.com/AY1920S2-CS2103T-F09-2/main/pull/328[#328]
 
 * Community:
 ** Reviewed Pull Requests: #19

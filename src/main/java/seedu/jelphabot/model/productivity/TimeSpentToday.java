@@ -15,11 +15,14 @@ public class TimeSpentToday {
 
     private ObservableList<Task> tasksDueToday;
     private ObservableList<Task> tasksDueThisWeek;
+    private ObservableList<Task> remainingTasks;
 
-    public TimeSpentToday(ObservableList<Task> tasksList, ObservableList<Task> tasksDueThisWeek) {
-        requireAllNonNull(tasksList, tasksDueThisWeek);
-        this.tasksDueToday = tasksList;
+    public TimeSpentToday(ObservableList<Task> tasksDueToday, ObservableList<Task> tasksDueThisWeek,
+        ObservableList<Task> remainingTasks) {
+        requireAllNonNull(tasksDueToday, tasksDueThisWeek, remainingTasks);
+        this.tasksDueToday = tasksDueToday;
         this.tasksDueThisWeek = tasksDueThisWeek;
+        this.remainingTasks = remainingTasks;
     }
 
     private TimeSpent getTimeSpent(ObservableList<Task> taskList) {
@@ -32,7 +35,7 @@ public class TimeSpentToday {
 
     @Override
     public String toString() {
-        return String.format("Tasks due today: %s.\nTasks due in next 6 days: %s.", getTimeSpent(tasksDueToday),
-            getTimeSpent(tasksDueThisWeek));
+        return String.format("Tasks due today: %s.\nTasks due in next 6 days: %s.\nTasks due after 6 days: %s.",
+            getTimeSpent(tasksDueToday), getTimeSpent(tasksDueThisWeek), getTimeSpent(remainingTasks));
     }
 }
