@@ -18,12 +18,11 @@ import seedu.jelphabot.model.task.tasklist.SubgroupTaskList;
 public class GroupedTaskListPanel extends UiPart<Region> {
 
     private static final String FXML = "GroupedTaskListPanel.fxml";
-
     private final Logger logger = LogsCenter.getLogger(TaskListPanel.class);
 
     private final ObservableList<SubgroupTaskList> subLists;
-
     private final GroupedTaskList groupedTaskList;
+
     @javafx.fxml.FXML
     private ListView<SubgroupTaskList> taskListGroups;
 
@@ -56,7 +55,7 @@ public class GroupedTaskListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new SubgroupTaskListPanel(task).getRoot());
+                setGraphic(new SubgroupTaskListPanel(task, task.startIndexBinding()).getRoot());
             }
         }
     }

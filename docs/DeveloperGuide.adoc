@@ -187,11 +187,10 @@ The `Model`,
 * exposes an unmodifiable `ObservableList<Task>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
-// TODO ignore this for now
-[NOTE]
-As a more OOP model, we can store a `Tag` list in `JelphaBot`, which `Task` can reference. This would allow `JelphaBot` to only require one `Tag` object per unique `Tag`, instead of each `Task` needing their own `Tag` object. An example of how such a model may look like is given below. +
- +
-image:ModelMoreOOP.png[]
+//[NOTE]
+//As a more OOP model, we can store a `Tag` list in `JelphaBot`, which `Task` can reference. This would allow `JelphaBot` to only require one `Tag` object per unique `Tag`, instead of each `Task` needing their own `Tag` object. An example of how such a model may look like is given below. +
+// +
+//image:BetterModelClassDiagram.png[]
 
 [[Design-Storage]]
 === Storage component
@@ -259,7 +258,7 @@ The display panel is updated by calling [.java]#MainWindow#handle{XXX} where XXX
 
 // tag::morningcallnightdebrief[]
 
-=== Summary feature
+=== Summary feature (Eden)
 
 JelphaBot has a Summary feature which provides an overview of the tasks due within the day as well as all tasks that have been complete within the day.
 
@@ -283,7 +282,7 @@ image::SummaryCommand.png[]
 
 
 // tag::taskgroups[]
-=== Task Grouping feature in Task List tab
+=== Task Grouping feature in Task List tab (Yao Jie)
 ==== Implementation
 
 The task category mechanism is facilitated by the `ViewTaskList` interface, which serves as a wrapper for any list of tasks. +
@@ -333,13 +332,19 @@ The following diagram shows the process of retrieving a `Task` from `ViewTaskLis
 .Sequence Diagram for `ViewTaskList.get()`
 image::ViewTaskListGetSequenceDiagram.png[]
 
-As the index passed as an argument to `lastShownList.get()` is a cumulative index, the implementation of ` get()` in `ViewTaskList` has to iterate through each `SubgroupTaskList` stored within.
+As the index passed as an argument to `lastShownList.get()` is a cumulative index, the implementation of `get()` in `ViewTaskList` has to iterate through each `SubgroupTaskList` stored within.
 
-// TODO explain how panel is updated?
-//** Pros: Provides good protection over unexpected changes on the displayed Task List.
-//* *Alternative 1*: Let UI displays problems in an `ObservableList<Task>` and update the list directly.
-//** Pros: This implementation is more straightforward as the logic updates the displayed list directly and all changes are reflected immediately.
-//** Cons: `ObservableList` is able to be modified by the containing panel class.
+Tasks are organized via a two-dimensional list. In this case, a `Task` is rendered into a `TaskCard`, and `TaskCard` elements are rendered within `SubGroupTaskListCell` elements which are listed in `SubgroupTaskListPanel`. A populated `SubgroupTaskListPanel` element is rendered as a `GroupedTaskListCell` which is listed in the top-level `GroupedTaskListCell`. +
+`SubgroupTaskListCell` and `GroupedTaskListCell` implement the `ListViewCell<T>` interface of the `ListView<T>` class provided by JavaFX.
+
+[[class-tasklistpanel]]
+.Class Diagram for UI classes displaying `GroupedTaskList`
+image::TaskListPanelClassDiagram.png[]]
+
+The detailed interactions are described in the diagram shown above. As can be seen, the distribution of `ListViewCell` elements follows the way tasks are distributed within the model classes. Each `SubgroupTaskListPanel` is displaying a singular `SubgroupTaskList`.
+
+The indexes displayed in each `TaskCard` is dynamically computed from a `NumberBinding` which computes the index of that element in the list. The `NumberBinding` observes the place of the task within the current `SubgroupTaskList` as well as the number of elements in the preceeding sublists. The sum of both numbers gives the index for the current element.
+
 ==== Design Considerations
 
 ===== Aspect 1: `ListCommand` swaps to a different `ViewTaskList`
@@ -391,9 +396,8 @@ This second listener directly removes unused categories from `GroupedByModuleTas
 ** Pros: Consecutive changes to the underlying Task List are automatically reflected with a change in `SubgroupTaskList` categories.
 ** Pros: The delegation of responsibilities between each `Listener` allows Single Responsibility Principle to be maintained.
 ** Cons: Dependency between the two `Listener` classes has to be maintained.
-* **Alternative 1:** Hide categories which are no longer used by adding a filter to the tasklist returned.
+* **Alternative 1:** Hide categories which are no longer used by adding a filter to the Task List returned.
 ** Pros: Easy to implement and understand.
-** Pros: Enforce consistency with `GroupByDateTaskList` which might allow some methods to be abstracted to parent class.
 ** Cons: Not practical: as more Module Codes are added to the Task List, it might cause more and more hidden categories to be created which are expensive to filter through.
 * **Alternative 2:** Abstract maintenance of the set of unique module codes to a `UniqueModuleCodeSet` class instanced in `UniqueTaskList`.
 ** Pros: Easy to understand.
@@ -401,9 +405,8 @@ Logic is further abstracted to a higher level and the new class is instanced tog
 ** Cons: Implementation is challenging and prone to bugs.
 Due to the time of writing this Developer guide, the release is nearing V1.4 and time is spent fixing bugs for release instead.
 ** This could be a proposed update in the future.
-// TODO sample diagram?
 
-=== Calendar feature
+=== Calendar feature (Amanda)
 
 JelphaBot has a calendar feature which provides an overarching view of their schedules and to allow users to view their tasks due.
 
@@ -496,7 +499,7 @@ in the calendar panel would be re-filtered after the execution of each command.
 ** Cons: Updating of this HashMap of the tasks as the main task list is being edited constantly can be very tedious.
 
 // tag::productivity[]
-=== Productivity feature
+=== Productivity feature (Jel)
 JelphaBot has a productivity panel of this feature which provides an overarching view of user's overall productivity.
 
 This feature offers two main functions and one panel for visualisation:
@@ -568,7 +571,7 @@ an error in displaying.
 * *Current solution*:
 // end::productivity[]
 
-=== Reminder feature
+=== Reminder feature (Dian Hao)
 JelphaBot has a reminder feature that reminds users whenever they have tasks that are about to overdue.
 This feature offers two main functions:
 
@@ -682,7 +685,7 @@ image::SummarySequenceDiagram.png[]
 // end::morningcallnightdebrief[]
 
 // tag::undoredo[]
-=== Undo/Redo feature [Proposed to v2.0]
+=== Undo/Redo feature [Proposed to implement in v2.0]
 ==== Proposed Implementation
 
 The undo/redo mechanism is facilitated by `VersionedJelphaBot`.
