@@ -568,11 +568,11 @@ This feature offers two main functions:
 ** Delete a reminder that is associated to a task.
 
 ==== Classes for Reminder feature in Model
-The Reminder feature was implemented by implementing a new set of classes to model. A new Reminder class is stored in
-Jelphabot's UniqueReminderList, which consists of a list of Reminders. Each Reminder consists of 3 objects:
-** Index: the Task's index of which the user wants to be reminded for.
-** ReminderDay: the number of days before the Task's deadline that the user wants to be reminded for.
-** ReminderHour: the number of hours before the Tasks's deadline that the user wants to be reminded for.
+The `Reminder` feature was implemented by implementing a new set of classes to model. A new `Reminder` class is stored in
+Jelphabot's `UniqueReminderList`, which consists of a list of `Reminder` s. Each `Reminder` consists of 3 objects: +
+** `Index`**: the `Task` 's index of which the user wants to be reminded for. +
+** `ReminderDay`**: the number of days before the `Task` 's deadline that the user wants to be reminded for. +
+** `ReminderHour`**: the number of hours before the `Tasks` 's deadline that the user wants to be reminded for.
 
 .Reminder Class Diagram in the Model component
 image::Reminderclass.png[]
@@ -580,28 +580,40 @@ image::Reminderclass.png[]
 ==== Implementation
 **Function 1: Creates a reminder for a specified task** +
 To add a reminder to a certain task, the user enters the `reminder INDEX days/DAYS hours/HOURS` command.
-(e.g, reminder 2 days/2 hours/1)
+(e.g, reminder 2 days/2 hours/1) +
+
+The sequence diagram for interactions between the `Logic`, `Model`, and `Storage` is shown below.
 
 .Sequence Diagram after running `reminder 2 days/2 hours/1`
 image::AddReminderSequenceDiagram.png[]
+
+The `Logic` `execute()` method creates a `ReminderCommand` from the input string by parsing the input according
+to the command word and several other attributes. Next, the input string is converted into `Index`,
+`ReminderDay`, `ReminderHour`, and a `Reminder` object with these properties are forwarded to `Model`. +
+
+The `Model` first check the validity of the attributes respectively. The valid `Reminder` is then added to
+the `UniqueReminderList` after checking that there are no other `Reminder` with the same `Index`. +
+
+After the above actions are correctly performed, the `Logic` fires the `Storage` to save the `Reminder`.
 
 Upon successful execution of the command, the user adds a reminder associated to the task at `INDEX`. Upon exiting JelphaBot,
 the reminder will be saved. By the next time the users starts JelphaBot, it will remind the user should the task's due date fall
 within the period set by the user from the current date.
 
-**Function 2: Deletes a reminder for a specified task** +
-To delete a reminder associated to a certain task, the user enters the `delrem INDEX` command.
-(e.g. delrem 2)
-
-.Sequence Diagram after running `delrem 2`
-image::DeleteReminderSequenceDiagram.png[]
-
-Upon successful execution of the command, the reminder of the task at `INDEX` is removed.
-
 [NOTE]
 If the user attempts to add a reminder to tasks that have reminders, the command will fail to execute. The user also need not
 to set reminders to tasks that are complete. However, if tasks that has reminders are not completed, JelphaBot will
 still warn the user.
+
+**Function 2: Deletes a reminder for a specified task** +
+To delete a reminder associated to a certain task, the user enters the `delrem INDEX` command.
+(e.g. delrem 2)
+
+The interaction between components is similar to adding a `Reminder`. A key difference that this command
+removes the `Reminder` that reminds the `Task` at `INDEX` from the `UniqueReminderList`. Moreover, `delrem` command
+requires that the `Reminder` with `INDEX` is in the list.
+
+Upon successful execution of the command, the reminder of the task at `INDEX` is removed.
 
 ==== Design Considerations
 
@@ -612,23 +624,32 @@ still warn the user.
 ** Cons: An additional storage is required to store the `Reminder` objects, which causes overhead while reading from and writing to
 json files.
 * *Alternative 1:* Design `Reminder` as one of the attributes of a `Task`
-** Rationale: A `Reminder` can also be see as one of a `Task` 's properties, analogous with `Description` and
+** Rationale: A `Reminder` can also be seen as one of `Task` 's properties, analogous with `Description` and
 other properties.
-** Pros: Easy to implement. Concurrent fetching and storing from the json files while reading and writing `Task` s.
-** Cons: A `Reminder` has to reminder users the moment when Jelphabot is booted. At that instance, `Storage` has not
-started to read `Task` s from the json files yet, therefore the `Reminder` could not be read beforehand.
+** Pros: Easy to implement. Concurrent fetching and storing from the json files while reading and writing `Task`.
+** Cons: A `Reminder` has to remind users the moment when Jelphabot is booted. At that instance, `Storage` has not
+started to read `Task` from the json files yet, therefore the `Reminder` could not be read beforehand.
 
 ===== Aspect 2: Rendering `Reminder` on `ReminderListPanel`
 * *Current solution:* Shows the `Index` of the `Task` that is being reminded, the respective `ReminderDay` and `ReminderHour`.
 ** Pros: Clean and simple to understand.
-** Cons: Users may need to refer to the `GroupedTaskListPanel` to check which `Task` the `Reminder` is associated to.
+** Cons: Users may need to refer to the `GroupedTaskListPanel` tab to check which `Task` the `Reminder` is associated to.
 * *Alternative 1:* Shows the `Reminder` similar to how the `Task` is displayed, and includes information such as `Task`
 associated.
 ** Pros: Comprehensive, users need not to switch panels to find out which `Task` is being reminded.
 ** Cons: Overcomplicated and may confuse users. Users may be confused by the `Index` s shown since `Reminder` and `Task`
 both has `Index` respectively.
 
-// tag::morningcallnightdebrief[]
+===== Aspect 3: Saving JelphaBot's `Reminder`
+* *Current solution:* Uses a `boolean` to indicate whether jelphaBot is saving `Task` or saving `Reminder`.
+** Rationale: jelphaBot's `Storage` takes identical parameters, which is the `Path` to the json file to write its contents.
+Since the `Path` are different but the parameters are identical, the function could not decide between to save as a
+`JsonSerializableJelphaBot` or a `JsonSerializableReminderJelphaBot`.
+** Pros: Simple to implement.
+** Cons: Does not strictly follow the Object-Oriented paradigm.
+* *Alternative 2:* Re-implement the `JelphaBot` component.
+** Pros: Adaptable to future changes and follows the OOP paradigm.
+
 
 === Summary feature
 
