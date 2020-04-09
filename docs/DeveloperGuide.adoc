@@ -115,7 +115,7 @@ Each of the four components
 For example, the `Logic` component (see the class diagram given below) defines it's API in the `Logic.java` interface and exposes its functionality using the `LogicManager.java` class.
 
 .Class Diagram of the Logic Component
-image::LogicClassDiagram.png[]
+image::LogicClassDiagram.png[][width="750"]
 
 [discrete]
 ==== How the architecture components interact with each other
@@ -133,7 +133,7 @@ The Ui Component handles interactions between the user and the application.
 This includes input fields where commands are entered as well as translations of data in the Model Component to a visual representation in the interface.
 
 .Class Diagram of the UI Component
-image::UiClassDiagram.png[]
+image::UiClassDiagram.png[][width="750"]
 
 *API* : link:{repoURL}/src/main/java/seedu/JelphaBot/ui/Ui.java[`Ui.java`]
 
@@ -153,7 +153,7 @@ The Logic component handles the business logic after a command is executed.
 
 [[fig-LogicClassDiagram]]
 .Structure of the Logic Component
-image::LogicClassDiagram.png[]
+image::LogicClassDiagram.png[][width="750"]
 
 *API* :
 link:{repoURL}/src/main/java/seedu/JelphaBot/logic/Logic.java[`Logic.java`]
@@ -176,7 +176,7 @@ NOTE: The lifeline for `DeleteCommandParser` and `Model` should end at the destr
 The Model component provides an internal data representation of all tasks stored in JelphaBot, as well as methods to modify that data.
 
 .Structure of the Model Component
-image::ModelClassDiagram.png[]
+image::ModelClassDiagram.png[][width="750"]
 
 *API* : link:{repoURL}/src/main/java/seedu/JelphaBot/model/Model.java[`Model.java`]
 
@@ -197,7 +197,7 @@ The `Model`,
 The Storage component manages storing and retrieving of data onto local files in .json format.
 
 .Structure of the Storage Component
-image::Storage.png[]
+image::Storage.png[][width="750"]
 
 *API* : link:{repoURL}/src/main/java/seedu/JelphaBot/storage/Storage.java[`Storage.java`]
 
@@ -244,18 +244,42 @@ The tabs of the application are defined using a [.java]#SwitchTab# enum and the 
 
 IMPORTANT: `task list` is not a valid command to switch to the Task List tab. Use `list` instead.
 
-For all these commands, updates are done by updating the [.java]#SwitchTab# attribute added in the [.java]#CommandResult# object. As an example, the figure below shows the sequence diagram for when a user executes the `:p` command:
+For all these commands, updates are done by updating the [.java]#SwitchTab# attribute added in the [.java]#CommandResult# object.
 
-.Component interactions for `:p` command
-// TODO: insert diagram
+To view an example, the figure <<Summary-SwitchTab-Sequence-Diagram, here>> shows the sequence diagram for when a user executes the `:s` or `summary` command.
 
-Upon execution of the `:p` command, [.java]#ProductivityCommand#generateCommandResult()# will generate a [.java]#CommandResult# whose [.java]#SwitchTab# attribute is set to [.java]#PRODUCTIVITY# and return it to the [.java]#LogicManager#. Now, the updates can be done for the respective components:
+Upon execution of the `:s` command, [.java]#SummaryCommand#generateCommandResult()# will generate a [.java]#CommandResult# whose [.java]#SwitchTab# attribute is set to [.java]#SUMMARY# and return it to the [.java]#LogicManager#. Now, the updates can be done for the respective components:
 
 * [.java]#UI# component: [.java]#MainWindow# calls [.java]#MainWindow#executeCommand()#, to retrieve the tab to be changed to and updates the current tab stored in its [.java]#SwitchTab# attribute by calling [.java]#CommandResult#isShow{XXX}()# where XXX is the tab to switch to.
 The display panel is updated by calling [.java]#MainWindow#handle{XXX} where XXX is the tab to switch to.
 
 // end::changetab[]
 // TODO: complete this section
+
+// tag::morningcallnightdebrief[]
+
+=== Summary feature
+
+JelphaBot has a Summary feature which provides an overview of the tasks due within the day as well as all tasks that have been complete within the day.
+
+This feature comes in the form of a welcome screen, which comprises of two sections for the tasks due within the day and the tasks completed within the day respectively.
+
+For each task shown only details such as the Module Code and the Description are shown.
+
+Once the user marks a task due within the day as complete, it will automatically appear under the tasks completed within the day.
+
+[NOTE]
+If the user marks a task as completed, and immediately deletes the task from the tasklist, it will not appear in the summary screen.
+
+==== Implementation
+
+To view the respective tasks, the user enters the `summary` command to switch to the summary tab panel.
+
+[[Summary-SwitchTab-Sequence-Diagram]]
+.Sequence diagram of execution of the `summary` command
+image::SummaryCommand.png[]
+// end::morningcallnightdebrief[]
+
 
 // tag::taskgroups[]
 === Task Grouping feature in Task List tab
@@ -412,8 +436,6 @@ the JelphaBot task list (e.g `DoneCommand`, `DeleteCommand`, `EditCommand`) woul
 
 **Function 1: Displays an overview of tasks in calendar for a selected month and year**
 
-This function mainly aids in navigating the calendar view. +
-
 There are 2 commands that users can issue to perform function 1:
 
 1. `calendar today`: Displays calendar for the current month with today's date highlighted, and its corresponding tasks due listed. +
@@ -460,7 +482,7 @@ The next input following the command word (`DATE`, `MONTHYEAR`, `today`) is then
 ** Cons: Certain areas of the code might be repetitive.
 ** Cons: Less intuitive for users to use.
 
-===== Aspect 3: Method of storing `ObservableList<Task>` of tasks for each day card (Implementation of Dot Indicator)
+===== Aspect 2: Method of storing `ObservableList<Task>` of tasks for each day card (Implementation of Dot Indicator)
 * *Current Solution:* Each `CalendarDayCard` stores a filtered list of tasks due on its specific date.
 This is done by obtaining all the tasks in the task list from Logic#getFilteredTaskList() and applying a filter function
 with the `TaskDueWithinDayPredicate`, specifically with the date of the day card. The list of tasks stored for each day card
@@ -544,6 +566,16 @@ This feature offers two main functions:
 ** Adds a reminder to a task.
 ** Delete a reminder that is associated to a task.
 
+==== Classes for Reminder feature in Model
+The Reminder feature was implemented by implementing a new set of classes to model. A new Reminder class is stored in
+Jelphabot's UniqueReminderList, which consists of a list of Reminders. Each Reminder consists of 3 objects:
+** Index: the Task's index of which the user wants to be reminded for.
+** ReminderDay: the number of days before the Task's deadline that the user wants to be reminded for.
+** ReminderHour: the number of hours before the Tasks's deadline that the user wants to be reminded for.
+
+.Reminder Class Diagram in the Model component
+image::Reminderclass.png[]
+
 ==== Implementation
 **Function 1: Creates a reminder for a specified task** +
 To add a reminder to a certain task, the user enters the `reminder INDEX days/DAYS hours/HOURS` command.
@@ -620,7 +652,7 @@ image::SummarySequenceDiagram.png[]
 // end::morningcallnightdebrief[]
 
 // tag::undoredo[]
-=== [Proposed] Undo/Redo feature
+=== Undo/Redo feature [Proposed to v2.0]
 ==== Proposed Implementation
 
 The undo/redo mechanism is facilitated by `VersionedJelphaBot`.
@@ -1357,6 +1389,30 @@ Task timed is removed from Running Timer(s) displayed in productivity tab.
 Expected: No timer stopped. Error details shown in the results message.
 .. Other incorrect stop commands to try: `start`, `start x` (where x is larger than the list size or is index of task without running timer) +
 Expected: Similar to previous.
+
+=== View Tasks due on a specific Date
+
+. Input a date belonging to the calendar month to view tasks due
+.. Prerequisites: Navigate to the calendar with the `calendar` command (or other variants as listed above).
+.. Test case: `calendar Apr-20-2020` +
+Expected: Task(s) due on the input date will be displayed with results message displaying the number of tasks listed.
+If there are no tasks due on the input date, no tasks would be displayed. The input date would also be highlighted on the calendar.
+
+. Input a date not belonging to the calendar month to view tasks due
+.. Prerequisites: Navigate to the calendar with the `calendar` command (or other variants as listed above).
+.. Test case: `calendar Oct-20-2020` +
+Expected: Task(s) due on the input date will be displayed with results message displaying the number of tasks listed.
+If there are no tasks due on the input date, no tasks would be displayed.
+
+=== Navigating the Calendar
+
+. Navigate to different month and year on Calendar
+
+. Navigate to Today's Date on Calendar
+
+
+
+
 
 // TODO add more
 
