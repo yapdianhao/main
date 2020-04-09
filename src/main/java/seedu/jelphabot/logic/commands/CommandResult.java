@@ -121,6 +121,15 @@ public class CommandResult {
         return this;
     }
 
+    /**
+     * The application should switch to the Calendar tab.
+     * @return Sets the "toSwitch" flag to Calendar.
+     */
+    public CommandResult isShowReminder() {
+        this.toSwitch = SwitchTab.REMINDER;
+        return this;
+    }
+
     public SwitchTab getTabSwitch() {
         return toSwitch;
     }
