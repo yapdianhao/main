@@ -793,7 +793,8 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 == Use Cases
 (For all use cases below, the *System* is the `JelphaBot` and the *Actor* is the `user`, unless specified otherwise)
 
-// TODO: add use case diagram
+.Use case diagram for the below use cases
+image::UseCaseDiagram.png[]
 
 //[discrete]
 === Use case: UC1 - Add Task
