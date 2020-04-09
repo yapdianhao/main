@@ -258,7 +258,7 @@ The display panel is updated by calling [.java]#MainWindow#handle{XXX} where XXX
 
 // tag::morningcallnightdebrief[]
 
-=== Summary feature
+=== Summary feature (Eden)
 
 JelphaBot has a Summary feature which provides an overview of the tasks due within the day as well as all tasks that have been complete within the day.
 
@@ -282,7 +282,7 @@ image::SummaryCommand.png[]
 
 
 // tag::taskgroups[]
-=== Task Grouping feature in Task List tab
+=== Task Grouping feature in Task List tab (Yao Jie)
 ==== Implementation
 
 The task category mechanism is facilitated by the `ViewTaskList` interface, which serves as a wrapper for any list of tasks. +
@@ -402,7 +402,7 @@ Due to the time of writing this Developer guide, the release is nearing V1.4 and
 ** This could be a proposed update in the future.
 // TODO sample diagram?
 
-=== Calendar feature
+=== Calendar feature (Amanda)
 
 JelphaBot has a calendar feature which provides an overarching view of their schedules and to allow users to view their tasks due.
 
@@ -495,7 +495,7 @@ in the calendar panel would be re-filtered after the execution of each command.
 ** Cons: Updating of this HashMap of the tasks as the main task list is being edited constantly can be very tedious.
 
 // tag::productivity[]
-=== Productivity feature
+=== Productivity feature (Jel)
 JelphaBot has a productivity panel of this feature which provides an overarching view of user's overall productivity.
 
 This feature offers two main functions:
@@ -559,7 +559,7 @@ an error in displaying.
 ** Cons: Difficult to implement as the Task model requires a new Task to replace the old Task when edit command is executed.
 // end::productivity[]
 
-=== Reminder feature
+=== Reminder feature (Dian Hao)
 JelphaBot has a reminder feature that reminds users whenever they have tasks that are about to overdue.
 This feature offers two main functions:
 
@@ -627,32 +627,8 @@ associated.
 ** Cons: Overcomplicated and may confuse users. Users may be confused by the `Index` s shown since `Reminder` and `Task`
 both has `Index` respectively.
 
-// tag::morningcallnightdebrief[]
-
-=== Summary feature
-
-JelphaBot has a Summary feature which provides an overview of the tasks due within the day as well as all tasks that have been complete within the day.
-
-This feature comes in the form of a welcome screen, which comprises of two sections for the tasks due within the day and the tasks completed within the day respectively.
-
-For each task shown only details such as the Module Code and the Description are shown.
-
-Once the user marks a task due within the day as complete, it will automatically appear under the tasks completed within the day.
-
-[NOTE]
-If the user marks a task as completed, and immediately deletes the task from the tasklist, it will not appear in the summary screen.
-
-==== Implementation
-
-To view the respective tasks, the user enters the `summary` command.
-
-.Sequence diagram of execution of the `summary` command
-
-image::SummarySequenceDiagram.png[]
-// end::morningcallnightdebrief[]
-
 // tag::undoredo[]
-=== Undo/Redo feature [Proposed to v2.0]
+=== Undo/Redo feature [Proposed to implement in v2.0]
 ==== Proposed Implementation
 
 The undo/redo mechanism is facilitated by `VersionedJelphaBot`.
