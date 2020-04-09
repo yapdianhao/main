@@ -256,31 +256,6 @@ The display panel is updated by calling [.java]#MainWindow#handle{XXX} where XXX
 
 // end::changetab[]
 
-// tag::summary[]
-
-=== Summary feature (Eden)
-
-JelphaBot has a Summary feature which provides an overview of the tasks due within the day as well as all tasks that have been complete within the day.
-
-This feature comes in the form of a welcome screen, which comprises of two sections for the tasks due within the day and the tasks completed within the day respectively.
-
-For each task shown only details such as the Module Code and the Description are shown.
-
-Once the user marks a task due within the day as complete, it will automatically appear under the tasks completed within the day.
-
-[NOTE]
-If the user marks a task as completed, and immediately deletes the task from the task list, it will not appear in the summary screen.
-
-==== Implementation
-
-To view the respective tasks, the user enters the `summary` command to switch to the summary tab panel.
-
-[[Summary-SwitchTab-Sequence-Diagram]]
-.Sequence diagram of execution of the `summary` command
-image::SummaryCommand.png[]
-// end::summary[]
-
-
 // tag::taskgroups[]
 === Task Grouping feature in Task List tab (Yao Jie)
 ==== Implementation
@@ -661,7 +636,7 @@ Since the `Path` are different but the parameters are identical, the function co
 * *Alternative 2:* Re-implement the `JelphaBot` component.
 ** Pros: Adaptable to future changes and follows the OOP paradigm.
 
-
+// tag::summary[]
 === Summary feature
 
 JelphaBot has a Summary feature which provides an overview of the tasks due within the day as well as all tasks that have been complete within the day.
@@ -682,7 +657,13 @@ To view the respective tasks, the user enters the `summary` command.
 .Sequence diagram of execution of the `summary` command
 
 image::SummarySequenceDiagram.png[]
+
+The following sequence diagram details the execution of the creation of the SummaryCommand.
+
+.Sequence diagram of the creation of SummaryCommand.
+image::SummaryCommandSequenceDiagram.png[]
 // end::summary[]
+
 
 // tag::undoredo[]
 === Undo/Redo feature [Proposed to implement in v2.0]
