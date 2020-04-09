@@ -2,7 +2,6 @@ package seedu.jelphabot.model.task.tasklist;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -85,7 +84,7 @@ public class GroupedByModuleTaskList extends GroupedTaskList {
 
     @Override
     public ObservableList<SubgroupTaskList> getSublists() {
-        return subLists.sorted(Comparator.comparing(SubgroupTaskList::getGroupName));
+        return subLists; //.sorted(Comparator.comparing(SubgroupTaskList::getGroupName));
     }
 
     /* === Methods used for testing. Application classes should not call these methods as Tasks are intended

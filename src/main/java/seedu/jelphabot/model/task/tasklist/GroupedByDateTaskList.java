@@ -27,12 +27,10 @@ public class GroupedByDateTaskList extends GroupedTaskList {
 
     public GroupedByDateTaskList(ObservableList<Task> tasks, PinnedTaskList pinnedTaskList) {
         super(tasks, pinnedTaskList);
+        addSublist("Overdue", isOverdue);
         addSublist("Due Today", isDueToday);
         addSublist("Due This Week", isDueThisWeek);
         addSublist("Due Someday", isDueSomeday);
-        addSublist("Overdue", isOverdue);
-        // subLists.removeIf(SubgroupTaskList::isEmpty);
-        // tasks.addListener(new TaskListChangeListener());
     }
 
     protected GroupedByDateTaskList(PinnedTaskList pinnedTaskList) {
@@ -68,7 +66,6 @@ public class GroupedByDateTaskList extends GroupedTaskList {
         addSublist("Due Today", isDueToday);
         addSublist("Due This Week", isDueThisWeek);
         addSublist("Due Someday", isDueSomeday);
-        // subLists.removeIf(SubgroupTaskList::isEmpty);
     }
     // === End of Methods used for testing ===
 

@@ -1,3 +1,4 @@
+// @@author Eden
 package seedu.jelphabot.model.summary;
 
 import static java.util.Objects.requireNonNull;
