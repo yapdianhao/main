@@ -389,20 +389,19 @@ Scalable when more groupings are added.
 The `ObservableSet<ModuleCode>` has a further `SetChangeListener<ModuleCode>` bound to it to remove categories that no longer contain any Tasks.
 This second listener directly removes unused categories from `GroupedByModuleTaskList`.
 ** Pros: Consecutive changes to the underlying Task List are automatically reflected with a change in `SubgroupTaskList` categories.
-** Pros: The delegation of responsibilities between each `Listener` allows Single Responsibility Principle to be mantained.
-** Cons: Dependency between the two `Listener` classes has to be mantained.
+** Pros: The delegation of responsibilities between each `Listener` allows Single Responsibility Principle to be maintained.
+** Cons: Dependency between the two `Listener` classes has to be maintained.
 * **Alternative 1:** Hide categories which are no longer used by adding a filter to the tasklist returned.
 ** Pros: Easy to implement and understand.
 ** Pros: Enforce consistency with `GroupByDateTaskList` which might allow some methods to be abstracted to parent class.
 ** Cons: Not practical: as more Module Codes are added to the Task List, it might cause more and more hidden categories to be created which are expensive to filter through.
-* **Alternative 2:** Abstract mantainence of the set of unique module codes to a `UniqueModuleCodeSet` class instanced in `UniqueTaskList`.
+* **Alternative 2:** Abstract maintenance of the set of unique module codes to a `UniqueModuleCodeSet` class instanced in `UniqueTaskList`.
 ** Pros: Easy to understand.
 Logic is further abstracted to a higher level and the new class is instanced together with the list that affects it.
 ** Cons: Implementation is challenging and prone to bugs.
-Due to the time of writing this Deveoper guide, the release is nearing V1.4 and time is spent fixing bugs for release instead.
+Due to the time of writing this Developer guide, the release is nearing V1.4 and time is spent fixing bugs for release instead.
 ** This could be a proposed update in the future.
 // TODO sample diagram?
-// end::taskgroups[]
 
 === Calendar feature
 
@@ -544,7 +543,7 @@ image::StopSequenceDiagram.png[]
 ===== Aspect 1: Rendering sub-parts of productivity panel
 * *Current solution*: Render each sub-part (i.e. task completion rate, time spent and running timers) only when that part needs to
 be updated. All 3 parts are rendered on to the same card.
-** Rationale: No need to rerender all 3 parts when changes are made to only one part.
+** Rationale: No need to re-render all 3 parts when changes are made to only one part.
 ** Pros: Easy to implement and reduces waste of computational power.
 ** Cons: As all parts are displayed on the same card, if there happens to be problem in other parts of the card, all parts will be affected.
 * *Alternative 1*: Abstract each part to a separate card and render all cards onto the same panel.
@@ -595,7 +594,53 @@ to set reminders to tasks that are complete. However, if tasks that has reminder
 still warn the user.
 
 ==== Design Considerations
-// TODO: dianhao
+
+===== Aspect 1: Implementing `Reminder` object
+* *Current solution:* Implement `Reminder` as a standalone class
+** Rationale: A `Reminder` is an object, with the same hierarchy to the `Task` class, with similar attributes.
+** Pros: Fully capture the idea of an object-oriented design and robust in handling future changes.
+** Cons: An additional storage is required to store the `Reminder` objects, which causes overhead while reading from and writing to
+json files.
+* *Alternative 1:* Design `Reminder` as one of the attributes of a `Task`
+** Rationale: A `Reminder` can also be see as one of a `Task` 's properties, analogous with `Description` and
+other properties.
+** Pros: Easy to implement. Concurrent fetching and storing from the json files while reading and writing `Task` s.
+** Cons: A `Reminder` has to reminder users the moment when Jelphabot is booted. At that instance, `Storage` has not
+started to read `Task` s from the json files yet, therefore the `Reminder` could not be read beforehand.
+
+===== Aspect 2: Rendering `Reminder` on `ReminderListPanel`
+* *Current solution:* Shows the `Index` of the `Task` that is being reminded, the respective `ReminderDay` and `ReminderHour`.
+** Pros: Clean and simple to understand.
+** Cons: Users may need to refer to the `GroupedTaskListPanel` to check which `Task` the `Reminder` is associated to.
+* *Alternative 1:* Shows the `Reminder` similar to how the `Task` is displayed, and includes information such as `Task`
+associated.
+** Pros: Comprehensive, users need not to switch panels to find out which `Task` is being reminded.
+** Cons: Overcomplicated and may confuse users. Users may be confused by the `Index` s shown since `Reminder` and `Task`
+both has `Index` respectively.
+
+// tag::morningcallnightdebrief[]
+
+=== Summary feature
+
+JelphaBot has a Summary feature which provides an overview of the tasks due within the day as well as all tasks that have been complete within the day.
+
+This feature comes in the form of a welcome screen, which comprises of two sections for the tasks due within the day and the tasks completed within the day respectively.
+
+For each task shown only details such as the Module Code and the Description are shown.
+
+Once the user marks a task due within the day as complete, it will automatically appear under the tasks completed within the day.
+
+[NOTE]
+If the user marks a task as completed, and immediately deletes the task from the tasklist, it will not appear in the summary screen.
+
+==== Implementation
+
+To view the respective tasks, the user enters the `summary` command.
+
+.Sequence diagram of execution of the `summary` command
+
+image::SummarySequenceDiagram.png[]
+// end::morningcallnightdebrief[]
 
 // tag::undoredo[]
 === Undo/Redo feature [Proposed to v2.0]
