@@ -122,7 +122,6 @@ public class JelphaBotParser {
         }
     }
 
-    // TODO: rename method
     private static Command getCommand(String arguments, Command command, String message) throws ParseException {
         if (arguments.length() > 0) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, message));
