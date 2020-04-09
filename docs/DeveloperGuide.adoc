@@ -567,6 +567,16 @@ This feature offers two main functions:
 ** Adds a reminder to a task.
 ** Delete a reminder that is associated to a task.
 
+==== Classes for Reminder feature in Model
+The Reminder feature was implemented by implementing a new set of classes to model. A new Reminder class is stored in
+Jelphabot's UniqueReminderList, which consists of a list of Reminders. Each Reminder consists of 3 objects:
+** Index: the Task's index of which the user wants to be reminded for.
+** ReminderDay: the number of days before the Task's deadline that the user wants to be reminded for.
+** ReminderHour: the number of hours before the Tasks's deadline that the user wants to be reminded for.
+
+.Reminder Class Diagram in the Model component
+image::Reminderclass.png[]
+
 ==== Implementation
 **Function 1: Creates a reminder for a specified task** +
 To add a reminder to a certain task, the user enters the `reminder INDEX days/DAYS hours/HOURS` command.
