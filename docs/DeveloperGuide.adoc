@@ -396,9 +396,8 @@ This second listener directly removes unused categories from `GroupedByModuleTas
 ** Pros: Consecutive changes to the underlying Task List are automatically reflected with a change in `SubgroupTaskList` categories.
 ** Pros: The delegation of responsibilities between each `Listener` allows Single Responsibility Principle to be maintained.
 ** Cons: Dependency between the two `Listener` classes has to be maintained.
-* **Alternative 1:** Hide categories which are no longer used by adding a filter to the tasklist returned.
+* **Alternative 1:** Hide categories which are no longer used by adding a filter to the Task List returned.
 ** Pros: Easy to implement and understand.
-** Pros: Enforce consistency with `GroupByDateTaskList` which might allow some methods to be abstracted to parent class.
 ** Cons: Not practical: as more Module Codes are added to the Task List, it might cause more and more hidden categories to be created which are expensive to filter through.
 * **Alternative 2:** Abstract maintenance of the set of unique module codes to a `UniqueModuleCodeSet` class instanced in `UniqueTaskList`.
 ** Pros: Easy to understand.
