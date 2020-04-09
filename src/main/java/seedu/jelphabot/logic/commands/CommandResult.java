@@ -157,7 +157,8 @@ public class CommandResult {
         SUMMARY,
         TASK_LIST_DATE,
         TASK_LIST_MODULE,
-        STAY_ON_CURRENT
+        STAY_ON_CURRENT,
+        REMINDER
     }
 
 }
