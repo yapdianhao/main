@@ -2,7 +2,6 @@ package seedu.jelphabot.model.task.tasklist;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
