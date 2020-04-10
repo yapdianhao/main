@@ -29,7 +29,7 @@ public interface Storage extends JelphaBotStorage, UserPrefsStorage {
     @Override
     void saveJelphaBot(ReadOnlyJelphaBot jelphaBot) throws IOException;
 
-    @Override
-    void saveJelphaBot(ReadOnlyJelphaBot jelphaBot, boolean isReminder) throws IOException;
+    //@Override
+    //void saveJelphaBot(ReadOnlyJelphaBot jelphaBot, boolean isReminder) throws IOException;
 
 }

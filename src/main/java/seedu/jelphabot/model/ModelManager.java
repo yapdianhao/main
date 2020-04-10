@@ -16,6 +16,7 @@ import seedu.jelphabot.commons.core.LogsCenter;
 import seedu.jelphabot.model.productivity.Productivity;
 import seedu.jelphabot.model.productivity.ProductivityList;
 import seedu.jelphabot.model.reminder.Reminder;
+import seedu.jelphabot.model.reminder.ReminderShowsTask;
 import seedu.jelphabot.model.summary.Summary;
 import seedu.jelphabot.model.summary.SummaryList;
 import seedu.jelphabot.model.task.Task;
@@ -165,14 +166,6 @@ public class ModelManager implements Model {
         readOnlyJelphaBot.setTask(target, editedTask);
     }
 
-    // TODO: please remove if not needed
-    /*
-    @Override
-    public void setReminder(Reminder target, Reminder newReminder) {
-        requireAllNonNull(target, newReminder);
-        readOnlyJelphaBot.setReminder(target, newReminder);
-    }*/
-
     // =========== Productivity List
 
     @Override
@@ -235,6 +228,11 @@ public class ModelManager implements Model {
 
     public ObservableList<Reminder> getFilteredReminderList() {
         return filteredReminders;
+    }
+
+    @Override
+    public ObservableList<ReminderShowsTask> getReminderShowsTaskList() {
+        return this.readOnlyJelphaBot.getReminderShowsTaskList(getLastShownList());
     }
 
     @Override

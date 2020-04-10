@@ -77,10 +77,10 @@ public class StorageManager implements Storage {
         saveJelphaBot(jelphaBot, jelphaBotStorage.getJelphaBotFilePath());
     }
 
-    @Override
-    public void saveJelphaBot(ReadOnlyJelphaBot jelphaBot, boolean isReminder) throws IOException {
-        jelphaBotStorage.saveJelphaBot(jelphaBot, true);
-    }
+    //@Override
+    //public void saveJelphaBot(ReadOnlyJelphaBot jelphaBot, boolean isReminder) throws IOException {
+    // jelphaBotStorage.saveJelphaBot(jelphaBot, true);
+    //}
 
     @Override
     public void saveJelphaBot(ReadOnlyJelphaBot jelphaBot, Path filePath) throws IOException {

@@ -9,6 +9,7 @@ import seedu.jelphabot.commons.core.GuiSettings;
 import seedu.jelphabot.model.productivity.Productivity;
 import seedu.jelphabot.model.productivity.ProductivityList;
 import seedu.jelphabot.model.reminder.Reminder;
+import seedu.jelphabot.model.reminder.ReminderShowsTask;
 import seedu.jelphabot.model.summary.Summary;
 import seedu.jelphabot.model.summary.SummaryList;
 import seedu.jelphabot.model.task.Task;
@@ -130,6 +131,8 @@ public interface Model {
     ViewTaskList getLastShownList();
 
     ObservableList<Reminder> getFilteredReminderList();
+
+    ObservableList<ReminderShowsTask> getReminderShowsTaskList();
 
     /**
      * Returns an unmodifiable view of the filtered task list in the Calendar

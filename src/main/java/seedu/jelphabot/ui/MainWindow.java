@@ -160,7 +160,7 @@ public class MainWindow extends UiPart<Stage> {
         productivityPanel = new ProductivityPanel(productivityList.asUnmodifiableObservableList(), mainWindowTabPane);
         productivityPanelPlaceholder.getChildren().add(productivityPanel.getRoot());
 
-        reminderListPanel = new ReminderListPanel(logic.getReminderList(), mainWindowTabPane);
+        reminderListPanel = new ReminderListPanel(logic.getReminderShowsTaskList(), mainWindowTabPane);
         reminderListPanelPlaceholder.getChildren().add(reminderListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();

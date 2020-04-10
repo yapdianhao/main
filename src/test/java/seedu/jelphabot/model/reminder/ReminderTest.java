@@ -1,3 +1,4 @@
+//@@ author yapdianhao
 package seedu.jelphabot.model.reminder;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -61,17 +62,17 @@ public class ReminderTest {
         // different reminder -> returns false
         assertNotEquals(ASSESSMENT_REMINDER, BOOK_REPORT_REMINDER);
 
-        // different reminder day -> returns false
+        // different reminder day -> returns true
         Reminder editedAssessmentReminder = new ReminderBuilder(ASSESSMENT_REMINDER)
                                                 .withReminderDay(VALID_BOOK_REPORT_REMINDER_DAY)
                                                 .build();
-        //assertNotEquals(ASSESSMENT_REMINDER, editedAssessmentReminder);
+        assertEquals(ASSESSMENT_REMINDER, editedAssessmentReminder);
 
-        // different reminder hour  -> returns false
+        // different reminder hour  -> returns true
         Reminder editedBookReminder = new ReminderBuilder(BOOK_REPORT_REMINDER)
                                           .withReminderHour(VALID_ASSESSMENT_REMINDER_HOUR)
                                           .build();
-        //assertNotEquals(BOOK_REPORT_REMINDER, editedBookReminder);
+        assertEquals(BOOK_REPORT_REMINDER, editedBookReminder);
 
         editedBookReminder = new ReminderBuilder(BOOK_REPORT_REMINDER)
                                  .withIndex(VALID_ASSIGNMENT_REMINDER_INDEX)
@@ -82,7 +83,7 @@ public class ReminderTest {
                                  .withReminderDay(VALID_ASSESSMENT_REMINDER_DAY)
                                  .withReminderHour(VALID_ASSESSMENT_REMINDER_HOUR)
                                  .build();
-        //assertNotEquals(BOOK_REPORT_REMINDER, editedBookReminder);
+        assertEquals(BOOK_REPORT_REMINDER, editedBookReminder);
 
     }
 }

@@ -7,9 +7,12 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.jelphabot.model.reminder.Reminder;
+import seedu.jelphabot.model.reminder.ReminderShowsTask;
 import seedu.jelphabot.model.reminder.UniqueReminderList;
+import seedu.jelphabot.model.reminder.UniqueReminderShowsTaskList;
 import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.model.task.UniqueTaskList;
+import seedu.jelphabot.model.task.tasklist.ViewTaskList;
 
 /**
  * Wraps all data at the address-book level
@@ -21,6 +24,7 @@ public class JelphaBot implements ReadOnlyJelphaBot {
     private final List<Reminder> reminderList;
     private final UniqueTaskList tasks;
     private final UniqueReminderList reminders;
+    private final UniqueReminderShowsTaskList reminderShowsTaskList = new UniqueReminderShowsTaskList();
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -123,12 +127,6 @@ public class JelphaBot implements ReadOnlyJelphaBot {
         tasks.setTask(target, editedTask);
     }
 
-    /*
-    public void setReminder(Reminder target, Reminder newReminder) {
-        requireNonNull(newReminder);
-        reminders.setReminder(target, newReminder);
-    }*/
-
     /**
      * Removes {@code key} from this {@code JelphaBot}.
      * {@code key} must exist in the address book.
@@ -164,6 +162,17 @@ public class JelphaBot implements ReadOnlyJelphaBot {
 
     public List<Reminder> getRemindersAsList() {
         return reminderList;
+    }
+
+
+    public ObservableList<ReminderShowsTask> getReminderShowsTaskList(ViewTaskList viewTaskList) {
+        for (Reminder reminder : getReminderList()) {
+            int idx = reminder.getIndex().getZeroBased();
+            Task currTask = viewTaskList.get(idx);
+            ReminderShowsTask reminderShowsTask = new ReminderShowsTask(reminder, currTask);
+            reminderShowsTaskList.add(reminderShowsTask);
+        }
+        return reminderShowsTaskList.asUnmodifiableObservableList();
     }
 
     @Override

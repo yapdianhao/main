@@ -1,3 +1,4 @@
+//@@ author yapdianhao
 package seedu.jelphabot.model.reminder;
 
 import static java.util.Objects.requireNonNull;
@@ -11,9 +12,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.jelphabot.model.reminder.exceptions.DuplicateReminderException;
 import seedu.jelphabot.model.reminder.exceptions.ReminderNotFoundException;
-import seedu.jelphabot.model.task.Task;
-import seedu.jelphabot.model.task.exceptions.DuplicateTaskException;
-import seedu.jelphabot.model.task.exceptions.TaskNotFoundException;
 
 /**
  * A list of reminders that enforces uniqueness between its elements and does not allow nulls.
@@ -24,8 +22,6 @@ import seedu.jelphabot.model.task.exceptions.TaskNotFoundException;
  * as to ensure that the task with exactly the same fields will be removed.
  * <p>
  * Supports a minimal set of list operations.
- *
- * @see Task#isSameTask(Task)
  */
 public class UniqueReminderList implements Iterable<Reminder> {
 
@@ -73,11 +69,11 @@ public class UniqueReminderList implements Iterable<Reminder> {
 
         int index = internalList.indexOf(target);
         if (index == -1) {
-            throw new TaskNotFoundException();
+            throw new ReminderNotFoundException();
         }
 
         if (!target.isSameReminder(target) && contains(newReminder)) {
-            throw new DuplicateTaskException();
+            throw new DuplicateReminderException();
         }
 
         internalList.set(index, newReminder);

@@ -11,6 +11,7 @@ import seedu.jelphabot.logic.parser.exceptions.ParseException;
 import seedu.jelphabot.model.ReadOnlyJelphaBot;
 import seedu.jelphabot.model.productivity.ProductivityList;
 import seedu.jelphabot.model.reminder.Reminder;
+import seedu.jelphabot.model.reminder.ReminderShowsTask;
 import seedu.jelphabot.model.summary.SummaryList;
 import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.model.task.tasklist.GroupedTaskList;
@@ -85,6 +86,8 @@ public interface Logic {
     ProductivityList getProductivityList();
 
     ObservableList<Reminder> getReminderList();
+
+    ObservableList<ReminderShowsTask> getReminderShowsTaskList();
 
     /**
      * Returns an unmodifiable view of the user's summary.
