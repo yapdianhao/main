@@ -1,4 +1,18 @@
 {
+  "ignoreGlobList": [
+    "about-us/**",
+    "**index.html"
+  ],
+  "formats": [
+    "html",
+    "css"
+  ],
+  "ignoreCommitList": [
+    "493206f16e1593adef8904bcb521aa4e4b2bf36e",
+    "aae9da92cff0db4e37ed8de0c30ffb2b2c8541e6",
+    "d0cbc3106d15f960417f9e80f9a1c7a9acd90441",
+    "4ff825e4a8004ec9bcf9727287ae687266e74b47",
+  ],
   "authors":
   [
     {

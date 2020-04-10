@@ -7,6 +7,8 @@ import seedu.jelphabot.model.Model;
 
 /**
  * Lists all tasks in the address book to the user.
+ *
+ * @@author yaojiethng
  */
 public class ListCommand extends Command {
 

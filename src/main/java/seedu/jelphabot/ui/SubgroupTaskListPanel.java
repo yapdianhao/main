@@ -16,6 +16,8 @@ import seedu.jelphabot.model.task.tasklist.SubgroupTaskList;
 /**
  * Panel containing one grouped list of tasks.
  * Tasks are further sorted into pinned, dueToday, dueThisWeek, dueSomeday
+ *
+ * @@author yaojiethng
  */
 public class SubgroupTaskListPanel extends UiPart<Region> {
 

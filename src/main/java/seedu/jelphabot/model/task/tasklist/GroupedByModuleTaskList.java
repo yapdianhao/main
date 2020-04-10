@@ -20,6 +20,8 @@ import seedu.jelphabot.model.task.Task;
  * GroupedByDateTaskList groups Tasks by their module codes.
  * Separation is done over @code{ObservableList} through use of filters.
  * <p>
+ *
+ * @@author yaojiethng
  */
 public class GroupedByModuleTaskList extends GroupedTaskList {
     private final ObservableSet<ModuleCode> moduleCodes = FXCollections.observableSet();
