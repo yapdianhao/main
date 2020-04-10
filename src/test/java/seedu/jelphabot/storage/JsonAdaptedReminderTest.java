@@ -1,4 +1,4 @@
-//@@ author yapdianhao
+//@@author yapdianhao
 package seedu.jelphabot.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

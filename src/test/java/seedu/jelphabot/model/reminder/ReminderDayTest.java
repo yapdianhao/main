@@ -1,4 +1,4 @@
-//@@ author yapdianhao
+//@@author yapdianhao
 package seedu.jelphabot.model.reminder;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;

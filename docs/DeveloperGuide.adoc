@@ -596,6 +596,7 @@ an error in displaying.
 // end::productivity[]
 
 
+// tag::reminder[]
 === Reminder feature (Dian Hao)
 JelphaBot has a reminder feature that reminds users whenever they have tasks that are about to overdue.
 This feature offers two main functions:
@@ -622,6 +623,15 @@ The sequence diagram for interactions between the `Logic`, `Model`, and `Storage
 
 .Sequence Diagram after running `reminder 2 days/2 hours/1`
 image::AddReminderSequenceDiagram.png[]
+
+.The reference frame of getting the `CommandResult` in the `Logic` component.
+image::getCommandResultReferenceDiagram.png[]
+
+.The reference frame of adding the `Reminder` in the `Model` component.
+image::addReminderReferenceDiagram.png[]
+
+.The reference frame of saving a `Reminder` by the `Storage` component.
+image::saveJelphaBot.png[]
 
 The `Logic` `execute()` method creates a `ReminderCommand` from the input string by parsing the input according
 to the command word and several other attributes. Next, the input string is converted into `Index`,
@@ -674,6 +684,7 @@ started to read `Task` from the json files yet, therefore the `Reminder` could n
 ** Pros: Simple, as it only shows the details of the `Reminder`.
 ** Cons: Users need to constantly refer to the `TaskListPanel` for details.
 both has `Index` respectively.
+// end::reminder[]
 
 // tag::undoredo[]
 === Undo/Redo feature [Proposed to implement in v2.0]
@@ -715,6 +726,7 @@ If the `currentStatePointer` is at index 0, pointing to the initial JelphaBot st
 
 The following sequence diagram shows how the undo operation works:
 
+.The sequence diagram of the undo feature.
 image::UndoSequenceDiagram.png[]
 
 NOTE: The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
@@ -733,7 +745,7 @@ Step 6. The user executes `clear`, which calls `Model#commitJelphaBot()`. Since 
 image::UndoRedoState5.png[]
 
 The following activity diagram summarizes what happens when a user executes a new command:
-// TODO: update this diagram
+
 image::CommitActivityDiagram.png[]
 
 ==== Design Considerations
@@ -1115,7 +1127,6 @@ Use case resumes from step 2
 Use case resumes from step 2.
 
 // tag::timerUseCase[]
-
 === Use Case: UC8 - Start Timer
 *MSS*
 
@@ -1434,10 +1445,34 @@ If there are no tasks due today, no tasks would be displayed.
 Expected: Calendar will change to be for May 2020, with the first day of the May highlighted.
 Task(s) due on the first day of May will be displayed with results message displaying the number of tasks listed.
 If there are no tasks due, no tasks would be displayed.
-.. Test case: `calendar MAy-2020` +
+.. Test case: `calendar May-2020` +
 Expected: Error message due to the invalid format for the input month and year would be displayed in the results message.
 
-// TODO add more
+=== Reminder Feature
+
+. Adding a reminder to remind a task
+.. Prerequisites: List all tasks using the `list` command to have a full view of the tasks. Select the `INDEX` of the task
+that needs to be reminded.
+.. Test case: `reminder 1 days/2 hours/2` +
+Expected: A reminder which is associated to the `Task` at index 2 will be added.
+.. Test case: `reminder -1 days/1 hours/0` +
+Expected: Error message due to negative index.
+.. Test case: `reminder 1 days/30 hours.0` +
+Expected: Error due to invalid day count, which has a limit of 7.
+.. Test case: `reminder 1 days/1 hours/30` +
+Expected: Error due to invalid hour count, which can be converted to days if it exceeds 24.
+.. Other invalid commands to try: `reminder `, `reminder 100000 days/1 hours/1`
+
+. Removing a reminder
+.. Prerequisites: List all tasks using the `list` command, and look for the task that is associated to the reminder that
+needs to be deleted.
+.. Test case: `delrem 1` +
+Expected: The reminder for task at index 1 will be removed, if it exists.
+.. Test case: `delrem -1` +
+Expected: Error message due to negative index.
+.. Test case: `delrem 100000` +
+Expected: Error message due to non-existing reminder.
+// TODO: add more
 
 === Data Storage
 . Missing data files
