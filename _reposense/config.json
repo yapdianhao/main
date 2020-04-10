@@ -12,6 +12,8 @@
     "aae9da92cff0db4e37ed8de0c30ffb2b2c8541e6",
     "d0cbc3106d15f960417f9e80f9a1c7a9acd90441",
     "4ff825e4a8004ec9bcf9727287ae687266e74b47",
+    "029c16c644df0a81e9c29f74dc856f9a5c206bf2",
+    "d0cbc3106d15f960417f9e80f9a1c7a9acd90441"
   ],
   "authors":
   [
@@ -28,8 +30,7 @@
     {
       "githubId": "Clouddoggo",
       "displayName": "LIM. . .JEL",
-      "authorNames": ["Clouddoggo", "Jel Lim"],
-      "ignoreCommitList": ["029c16c644df0a81e9c29f74dc856f9a5c206bf2", "d0cbc3106d15f960417f9e80f9a1c7a9acd90441"]
+      "authorNames": ["Clouddoggo", "Jel Lim"]
     },
     {
       "githubId": "eedenong",
