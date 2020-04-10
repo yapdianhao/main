@@ -10,6 +10,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import seedu.jelphabot.commons.core.LogsCenter;
+import seedu.jelphabot.commons.util.DateUtil;
 import seedu.jelphabot.model.calendar.CalendarDate;
 
 //@@author alam8064
@@ -44,6 +45,7 @@ public class CalendarPanel extends UiPart<Region> {
 
         CalendarDate firstDay = calendarDate.getFirstDay();
         fillGridPane(firstDay);
+        highlightToday();
     }
 
     /**
@@ -75,16 +77,10 @@ public class CalendarPanel extends UiPart<Region> {
                 } else {
                     calendarDayCard.setDiffMonthDay();
                 }
-                if (currDate.isToday()) {
-                    // logger.info("today date");
-                    calendarDayCard.highlightToday();
-                    highlightedDay = calendarDayCard;
-                }
                 calendarGrid.add(calendarDayCard.getRoot(), col, row);
                 currDate = currDate.dateNextDay();
             }
         }
-        logger.info("length of dayCardsInMonth " + dayCardsInMonth.size());
     }
 
     /**
@@ -109,19 +105,48 @@ public class CalendarPanel extends UiPart<Region> {
         return calendarDate.getMonth();
     }
 
-    public static CalendarDayCard getDayCard(int dayIndex) {
+    private static CalendarDayCard getDayCard(int dayIndex) {
         return CalendarPanel.dayCardsInMonth.get(dayIndex - 1);
     }
 
-    public CalendarDayCard getHighlightedDay() {
+    private CalendarDayCard getHighlightedDay() {
         return highlightedDay;
     }
 
-    public void setHighlightedDay(int dayIndex) {
+    private void setHighlightedDay(int dayIndex) {
         highlightedDay = dayCardsInMonth.get(dayIndex - 1);
     }
 
-    public boolean isTodayHighlighted() {
+    private boolean isTodayHighlighted() {
         return highlightedDay.getDate().isToday();
+    }
+
+    /**
+     * Highlights today's date on the calendar.
+     */
+    public void highlightToday() {
+        int dayIndexOfToday = DateUtil.getDateToday().getDayOfMonth();
+        getDayCard(dayIndexOfToday).highlightToday();
+        setHighlightedDay(dayIndexOfToday);
+    }
+
+    /**
+     * Removes the highlight for the current highlighted day on the calendar.
+     */
+    public void removeHighlightedDay() {
+        if (isTodayHighlighted()) {
+            getHighlightedDay().removeHighlightedToday();
+        } else {
+            getHighlightedDay().removeHighlightedDay();
+        }
+    }
+
+    /**
+     * Highlights the selected day card on the calendar when calendar command is run.
+     * @param index The index of the specified day card from the dayCardsInMonth array list.
+     */
+    public void highlightDay(int index) {
+        getDayCard(index).highlightDay();
+        setHighlightedDay(index);
     }
 }
