@@ -14,15 +14,26 @@ Interactions with the application and commands are entered through CLI. For a be
 
 == Summary of contributions
 
-* *Major enhancement*: added *the ability for users to have a summary view of their tasks due and completed within the day*
-** What it does: allows the user to view all the tasks that are due to be completed within the day, as well as the tasks that the user have completed within the day, under one page.
-** Justification: This feature improves the product significantly because a user .
-** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-** Credits: _{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}_
-
+* *Major enhancement*: added *the ability for users to have a summary view of their tasks due and completed within the day*.
+** What it does: allows the user to have a simplified view of all the tasks that are due to be completed within the day, as well as the tasks that the user have completed within the day, under one page. This page is shown upon the startup of the application, and can be accessed anytime
+while using the app by entering the `summary` command.
+** Justification: In the event the user wishes to have a quick look at what tasks he/she has remaining to complete within the day, or to see what tasks he/she has completed
+within the day, the user can easily do so and view this information all under the same page, with just a single command.
+This feature improves the product significantly with the convenience that it provides to the user in obtaining a quick but comprehensive overview of the above-mentioned tasks.
+** Highlights:
+*** This enhancement works with existing commands and commands to be added in future. It required an in-depth analysis of design alternatives so as to determine the optimal layout of the UI of the Summary panel to enhance the user experience as much as possible.
+*** The implementation too was challenging as it required the creation of special predicates to filter the tasks in the user's task list to be displayed, as well as deciding on what information from the tasks to display to the users.  Eventually, I decided to display only the Module Code and the Description of the task.
+*** Another challenge during the implementation was ensuring that the tasks that were completed within the day were still displayed when the user exits the application, and starts it again within the same day. This required extra data to be stored and hence required modification of classes in `Storage` to ensure that
+the data was stored correctly.
+** Relevant pull requests:
+https://github.com/AY1920S2-CS2103T-F09-2/main/pull/71[#71],
+https://github.com/AY1920S2-CS2103T-F09-2/main/pull/80[#80],
+https://github.com/AY1920S2-CS2103T-F09-2/main/pull/170[#170],
+https://github.com/AY1920S2-CS2103T-F09-2/main/pull/172[#172],
+https://github.com/AY1920S2-CS2103T-F09-2/main/pull/230[#230]
+https://github.com/AY1920S2-CS2103T-F09-2/main/pull/243[#243]
+** Credits: The structure and the classes in the summary package (under `Model`) were inspired by that of the productivity package, which is under `Model` as well.
 * *Minor enhancement*: added a `done` command that allows the user to mark a task with the given index as completed.
-
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
 
 * *Other contributions*:
 
