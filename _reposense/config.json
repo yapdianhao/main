@@ -1,12 +1,4 @@
 {
-  "ignoreGlobList": [
-    "about-us/**",
-    "**index.html"
-  ],
-  "formats": [
-    "html",
-    "css"
-  ],
   "ignoreCommitList": [
     "493206f16e1593adef8904bcb521aa4e4b2bf36e",
     "aae9da92cff0db4e37ed8de0c30ffb2b2c8541e6",
