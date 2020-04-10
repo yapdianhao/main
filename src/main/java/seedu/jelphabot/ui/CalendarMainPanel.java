@@ -50,17 +50,8 @@ public class CalendarMainPanel extends UiPart<Region> {
         initialiseCalendarMainPanel();
     }
 
-    /**
-     * Initialises and sets up the calendar main panel with the calendar task list, as well as the
-     * calendar panel.
-     */
-    private void initialiseCalendarMainPanel() {
-        calendarTaskListPanel = new CalendarTaskListPanel(logic.getFilteredCalendarTaskList());
-        logic.updateFilteredCalendarTaskList(new TaskDueWithinDayPredicate(DateUtil.getDateToday()));
-        calendarTaskListPanelPlaceholder.getChildren().add(calendarTaskListPanel.getRoot());
-
-        calendarPanel = new CalendarPanel(CalendarDate.getCurrentDate(), mainWindowTabPane);
-        calendarPanelPlaceholder.getChildren().add(calendarPanel.getRoot());
+    public CalendarPanel getCalendarPanel() {
+        return calendarPanel;
     }
 
     /**
@@ -78,8 +69,17 @@ public class CalendarMainPanel extends UiPart<Region> {
         return mainWindowTabPane.isPressed();
     }
 
-    public CalendarPanel getCalendarPanel() {
-        return calendarPanel;
+    /**
+     * Initialises and sets up the calendar main panel with the calendar task list, as well as the
+     * calendar panel.
+     */
+    private void initialiseCalendarMainPanel() {
+        calendarTaskListPanel = new CalendarTaskListPanel(logic.getFilteredCalendarTaskList());
+        logic.updateFilteredCalendarTaskList(new TaskDueWithinDayPredicate(DateUtil.getDateToday()));
+        calendarTaskListPanelPlaceholder.getChildren().add(calendarTaskListPanel.getRoot());
+
+        calendarPanel = new CalendarPanel(CalendarDate.getCurrentDate(), mainWindowTabPane);
+        calendarPanelPlaceholder.getChildren().add(calendarPanel.getRoot());
     }
 
     /**
@@ -89,34 +89,23 @@ public class CalendarMainPanel extends UiPart<Region> {
     public void updateCalendarPanel(CommandResult commandResult) {
         LocalDate date = commandResult.getDate();
         YearMonth yearMonth = commandResult.getYearMonth();
+        calendarPanel.removeHighlightedDay();
+
         if (date != null && yearMonth == null) { //change date
             if (date.getMonthValue() == calendarPanel.getCalendarMonth()) {
-                if (calendarPanel.isTodayHighlighted()) {
-                    calendarPanel.getHighlightedDay().removeHighlightedToday();
-                } else {
-                    calendarPanel.getHighlightedDay().removeHighlightedDay();
-                }
-
                 int dayIndex = date.getDayOfMonth();
                 if (date.equals(DateUtil.getDateToday())) {
-                    CalendarPanel.getDayCard(dayIndex).highlightToday();
+                    calendarPanel.highlightToday();
                 } else {
-                    CalendarPanel.getDayCard(dayIndex).highlightDay();
+                    calendarPanel.highlightDay(dayIndex);
                 }
-                calendarPanel.setHighlightedDay(dayIndex);
             }
         } else if (date == null && yearMonth != null) { //change month view
             LocalDate firstDayOfMonth = yearMonth.atDay(1);
             CalendarDate newDate = new CalendarDate(firstDayOfMonth);
             calendarPanel.changeMonthYearLabel(yearMonth);
             calendarPanel.fillGridPane(newDate);
-            if (calendarPanel.isTodayHighlighted()) {
-                calendarPanel.getHighlightedDay().removeHighlightedToday();
-            } else {
-                calendarPanel.getHighlightedDay().removeHighlightedDay();
-            }
-            CalendarPanel.getDayCard(1).highlightDay();
-            calendarPanel.setHighlightedDay(1);
+            calendarPanel.highlightDay(1);
         } else { //change today
             LocalDate today = DateUtil.getDateToday();
             LocalDate firstDay = today.withDayOfMonth(1);
@@ -124,9 +113,8 @@ public class CalendarMainPanel extends UiPart<Region> {
             YearMonth todayYearMonth = YearMonth.now();
             calendarPanel.changeMonthYearLabel(todayYearMonth);
             calendarPanel.fillGridPane(firstDayDate);
-            calendarPanel.getHighlightedDay().removeHighlightedDay();
-            CalendarPanel.getDayCard(today.getDayOfMonth()).highlightToday();
-            calendarPanel.setHighlightedDay(today.getDayOfMonth());
+            calendarPanel.highlightToday();
         }
     }
+
 }
