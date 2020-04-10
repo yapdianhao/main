@@ -105,8 +105,8 @@ public class JelphaBot implements ReadOnlyJelphaBot {
     }
 
     /**
-     * Adds a task to the address book.
-     * The task must not already exist in the address book.
+     * Adds a task to the task list.
+     * The task must not already exist in the task list.
      */
     public void addTask(Task p) {
         tasks.add(p);
@@ -118,8 +118,8 @@ public class JelphaBot implements ReadOnlyJelphaBot {
 
     /**
      * Replaces the given task {@code target} in the list with {@code editedTask}.
-     * {@code target} must exist in the address book.
-     * The task identity of {@code editedTask} must not be the same as another existing task in the address book.
+     * {@code target} must exist in the task list.
+     * The task identity of {@code editedTask} must not be the same as another existing task in the task list.
      */
     public void setTask(Task target, Task editedTask) {
         requireNonNull(editedTask);
@@ -129,7 +129,7 @@ public class JelphaBot implements ReadOnlyJelphaBot {
 
     /**
      * Removes {@code key} from this {@code JelphaBot}.
-     * {@code key} must exist in the address book.
+     * {@code key} must exist in the task list.
      */
     public void removeTask(Task key) {
         tasks.remove(key);

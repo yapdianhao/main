@@ -12,7 +12,7 @@ import java.util.Set;
 import seedu.jelphabot.model.tag.Tag;
 
 /**
- * Represents a Task in the address book.
+ * Represents a Task in the task list.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Task {
