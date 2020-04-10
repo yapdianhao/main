@@ -8,7 +8,7 @@ import seedu.jelphabot.model.productivity.Productivity;
 import seedu.jelphabot.model.summary.Summary;
 
 /**
- * Clears the address book.
+ * Clears the task list.
  */
 public class ClearCommand extends Command {
 

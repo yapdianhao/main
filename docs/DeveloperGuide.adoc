@@ -217,13 +217,14 @@ This includes classes which implement utility functions which can be used by all
 
 This section describes some noteworthy details on how certain features are implemented.
 
+// @@author Clouddoggo
 === Tab System
 Users may find it complicated to handle the many features that JelphaBot offers. They might also be overwhelmed if all the information of their tasks were to be displayed together in one screen.
 
 As such, we have decided to implement a tab system for JelphaBot to organise the available commands into their respective features. JelphaBot provides 5 different tabs for the users,
 each displaying a different set of panels that are relevant to the feature.
 
-* *Summary Tab* - <<Summary feature (Eden), overall view>> of the day's tasks in the task list.
+* *Summary Tab* - <<Summary feature, overall view>> of the day's tasks in the task list.
 * *Task List Tab* - <<Task Grouping feature in Task List tab (Yao Jie), view all tasks>> in the task list.
 * *Calendar Tab* - <<Calendar feature (Amanda), visualisation>> of tasks in a specific day or month.
 * *Productivity Tab* - <<Productivity feature (Jel), overarching view>> of overall productivity such as task completion rate.
@@ -256,8 +257,38 @@ Upon execution of the `:s` command, [.java]#SummaryCommand#generateCommandResult
 The display panel is updated by calling [.java]#MainWindow#handle{XXX} where XXX is the tab to switch to.
 
 // end::changetab[]
+// @@author
 
-// @@Author yaojiethng
+// tag::summary[]
+=== Summary feature (Eden)
+
+JelphaBot has a Summary feature which provides an overview of the tasks due within the day as well as all tasks that have been complete within the day.
+
+This feature comes in the form of a welcome screen, which comprises of two sections for the tasks due within the day and the tasks completed within the day respectively.
+
+For each task shown only details such as the Module Code and the Description are shown.
+
+Once the user marks a task due within the day as complete, it will automatically appear under the tasks completed within the day.
+
+[NOTE]
+If the user marks a task as completed, and immediately deletes the task from the tasklist, it will not appear in the summary screen.
+
+==== Implementation
+
+To view the respective tasks, the user enters the `summary` command.
+
+.Sequence diagram of execution of the `summary` command
+
+[[Summary-SwitchTab-Sequence-Diagram]]
+image::SummarySwitchTabSequenceDiagram.png[]
+
+The following sequence diagram details the execution of the creation of the SummaryCommand.
+
+.Sequence diagram of the creation of SummaryCommand.
+image::SummaryCommandSequenceDiagram.png[]
+// end::summary[]
+
+// @@author yaojiethng
 // tag::taskgroups[]
 === Task Grouping feature in Task List tab (Yao Jie)
 ==== Implementation
@@ -380,7 +411,7 @@ Logic is further abstracted to a higher level and the new class is instanced tog
 Due to the time of writing this Developer guide, the release is nearing V1.4 and time is spent fixing bugs for release instead.
 ** This could be a proposed update in the future.
 // end::taskgroups[]
-// @@Author
+// @@author
 
 // tag::calendar[]
 === Calendar feature (Amanda)
@@ -451,6 +482,11 @@ NOTE: The implementation of the other two calendar commands (`calendar DATE` and
 The only exception is regarding the `calendar DATE` command which fulfills **Function 2** listed above, where the `GridPane` in `CalendarPanel` is not
 altered by running CalendarPanel#fillGridPane() unlike the other two commands fulfilling **Function 1**. Only `CalendarTaskListPanel` is updated.
 
+The following diagram shows the sequence flow for variants of the `calendar XXX` command (XXX is an optional argument) which modifies the `CalendarMainPanel`:
+[[Calendar-ActivityDiagram]]
+.Activity Diagram showing the updating of `CalendarMainPanel`
+image::CalendarCommandActivityDiagram.png[]
+
 ==== Design Considerations
 
 ===== Aspect 1: How the user can navigate between specific dates and change the calendar month view
@@ -477,6 +513,7 @@ in the calendar panel would be re-filtered after the execution of each command.
 ** Cons: Updating of this HashMap of the tasks as the main task list is being edited constantly can be very tedious.
 // end::calendar[]
 
+// @@author Clouddoggo
 // tag::productivity[]
 === Productivity feature (Jel)
 JelphaBot has a productivity panel of this feature which provides an overarching view of user's overall productivity.
@@ -547,9 +584,21 @@ an error in displaying.
 ** Cons: Difficult to implement as the Task model requires a new Task to replace the old Task when edit command is executed.
 
 ===== Aspect 3: Productivity panel visualisation
-* *Current solution*:
+* *Current solution*: Separating sub-parts by paragraphs and including progress bar for tasks completed.
+** Rationale: Paragraphing increases readability and the progress bar provides visual aid.
+** Pros: Easy to see at a glance which parts are which.
+** Cons: Text under Running Timer(s) can appear wordy. As number of running timers increase, more text is added under Running Timer(s).
+* *Alternative 1*: Highlight displayed module code and deadline in alternating colours
+** Pros: Visually more appealing and looks less like a long list is tasks thus motivating the user to complete his/her tasks.
+** Cons: Does not resolve the issue of having too many words under the sections.
+* *Alternative 2*: Only show 3 tasks whose timers were started in order of priority and time when timers were started.
+** Pros: Allows user to focus on tasks at hand.
+** Cons: User might forget about other tasks whose timers were started and not complete them on time.
+// end::productivity[]
+// @@author
 
-
+// @@author yapdianhao
+// tag::reminder[]
 === Reminder feature (Dian Hao)
 JelphaBot has a reminder feature that reminds users whenever they have tasks that are about to overdue.
 This feature offers two main functions:
@@ -637,36 +686,8 @@ started to read `Task` from the json files yet, therefore the `Reminder` could n
 ** Pros: Simple, as it only shows the details of the `Reminder`.
 ** Cons: Users need to constantly refer to the `TaskListPanel` for details.
 both has `Index` respectively.
-
-// tag::summary[]
-=== Summary feature
-
-JelphaBot has a Summary feature which provides an overview of the tasks due within the day as well as all tasks that have been complete within the day.
-
-This feature comes in the form of a welcome screen, which comprises of two sections for the tasks due within the day and the tasks completed within the day respectively.
-
-For each task shown only details such as the Module Code and the Description are shown.
-
-Once the user marks a task due within the day as complete, it will automatically appear under the tasks completed within the day.
-
-[NOTE]
-If the user marks a task as completed, and immediately deletes the task from the tasklist, it will not appear in the summary screen.
-
-==== Implementation
-
-To view the respective tasks, the user enters the `summary` command.
-
-.Sequence diagram of execution of the `summary` command
-
-[[Summary-SwitchTab-Sequence-Diagram]]
-image::SummarySwitchTabSequenceDiagram.png[]
-
-The following sequence diagram details the execution of the creation of the SummaryCommand.
-
-.Sequence diagram of the creation of SummaryCommand.
-image::SummaryCommandSequenceDiagram.png[]
-// end::summary[]
-
+// end::reminder[]
+// @@author
 
 // tag::undoredo[]
 === Undo/Redo feature [Proposed to implement in v2.0]
@@ -1349,8 +1370,9 @@ Expected: List display does not change. Error details shown in the results messa
    Expected: No task is deleted. Error details are shown in the results message.
 .. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) +
    Expected: Similar to previous.
-// @@Author
+// @@author
 
+// @@author Clouddoggo
 === Progress Bar visualisation
 
 . Marking a task that was previously added as complete

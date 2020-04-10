@@ -94,7 +94,7 @@ public interface Logic {
      */
     SummaryList getSummaryList();
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' jelphabot file path.
      */
     Path getJelphaBotFilePath();
 
