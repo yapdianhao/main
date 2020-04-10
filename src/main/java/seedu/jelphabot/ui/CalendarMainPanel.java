@@ -110,7 +110,11 @@ public class CalendarMainPanel extends UiPart<Region> {
             CalendarDate newDate = new CalendarDate(firstDayOfMonth);
             calendarPanel.changeMonthYearLabel(yearMonth);
             calendarPanel.fillGridPane(newDate);
-            calendarPanel.getHighlightedDay().removeHighlightedDay();
+            if (calendarPanel.isTodayHighlighted()) {
+                calendarPanel.getHighlightedDay().removeHighlightedToday();
+            } else {
+                calendarPanel.getHighlightedDay().removeHighlightedDay();
+            }
             CalendarPanel.getDayCard(1).highlightDay();
             calendarPanel.setHighlightedDay(1);
         } else { //change today
