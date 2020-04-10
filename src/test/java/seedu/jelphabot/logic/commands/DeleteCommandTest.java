@@ -69,7 +69,7 @@ public class DeleteCommandTest {
         showTaskAtIndex(model, INDEX_FIRST_TASK);
 
         Index outOfBoundIndex = INDEX_THIRD_TASK;
-        // ensures that outOfBoundIndex is still in bounds of address book list
+        // ensures that outOfBoundIndex is still in bounds of task list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getJelphaBot().getTaskList().size());
 
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
@@ -100,7 +100,7 @@ public class DeleteCommandTest {
     }
 
     /**
-     * Updates {@code model}'s filtered list to show no one.
+     * Updates {@code model}'s filtered list to show no task.
      */
     private void showNoTask(Model model) {
         model.updateFilteredTaskList(p -> false);

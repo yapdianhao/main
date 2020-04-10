@@ -99,6 +99,7 @@ public class JelphaBotParserTest {
             -> parser.parseCommand(ListCommand.COMMAND_WORD + " 3"));
     }
 
+    // @@author Clouddoggo
     @Test
     public void parseCommand_done() throws Exception {
         DoneCommand command = (DoneCommand) parser.parseCommand(
@@ -136,6 +137,7 @@ public class JelphaBotParserTest {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
             ProductivityCommand.MESSAGE_USAGE), () -> parser.parseCommand(ProductivityCommand.COMMAND_WORD + " 3"));
     }
+    // @@author
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {

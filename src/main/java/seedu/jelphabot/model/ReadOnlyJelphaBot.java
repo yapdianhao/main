@@ -8,7 +8,7 @@ import seedu.jelphabot.model.reminder.Reminder;
 import seedu.jelphabot.model.task.Task;
 
 /**
- * Unmodifiable view of an address book
+ * Unmodifiable view of an task list
  */
 public interface ReadOnlyJelphaBot {
 

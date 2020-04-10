@@ -42,7 +42,7 @@ class JsonSerializableReminderJelphaBot {
     }
 
     /**
-     * Converts this address book into the model's {@code JelphaBot} object.
+     * Converts this task list into the model's {@code JelphaBot} object.
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */

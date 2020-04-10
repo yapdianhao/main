@@ -12,7 +12,7 @@ import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.model.task.tasklist.ViewTaskList;
 
 /**
- * Deletes a task identified using it's displayed index from the address book.
+ * Deletes a task identified using it's displayed index from the task list.
  */
 public class DeleteCommand extends Command {
 
