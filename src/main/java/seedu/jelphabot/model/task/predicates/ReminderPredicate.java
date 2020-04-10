@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 import seedu.jelphabot.commons.core.LogsCenter;
 import seedu.jelphabot.model.reminder.Reminder;
 import seedu.jelphabot.model.task.Task;
+import seedu.jelphabot.model.task.tasklist.ViewTaskList;
 
 /**
  * Tests that a {@code Task}'s {@code DateTime} is due within a week from now.
@@ -21,17 +22,25 @@ public class ReminderPredicate extends TaskIsIncompletePredicate {
     private final LocalDateTime currDateTime = LocalDateTime.now();
     private final Logger logger = LogsCenter.getLogger(ReminderPredicate.class);
 
-    private final List<Task> taskList;
+    private final ViewTaskList taskList;
     private final List<Reminder> reminderList;
 
-    public ReminderPredicate(List<Task> taskList, List<Reminder> reminderList) {
+    public ReminderPredicate(ViewTaskList taskList, List<Reminder> reminderList) {
         this.taskList = taskList;
         this.reminderList = reminderList;
     }
 
     @Override
     public boolean test(Task task) {
-        int reminderKey = taskList.indexOf(task);
+        int reminderKey = -1;
+        for (int i = 0; i < taskList.size(); i++) {
+            if (taskList.get(i).equals(task)) {
+                logger.info("reached reminderpredicate");
+                logger.info("" + taskList.get(i));
+                reminderKey = i;
+                break;
+            }
+        }
         Reminder correspondingReminder = null;
         for (Reminder reminder : reminderList) {
             if (reminder.getIndex().getZeroBased() == reminderKey) {
@@ -69,12 +78,12 @@ public class ReminderPredicate extends TaskIsIncompletePredicate {
             return true;
         }
         if (taskDateTime.minusDays(reminder.getDaysToRemind().getReminderDay())
-                .isAfter(currDateTime)) {
+                .isBefore(currDateTime)) {
+            logger.info("here");
             return true;
-        } else if (taskDateTime.minusDays(reminder.getDaysToRemind().getReminderDay()).isBefore(currDateTime)) {
-            return taskDateTime.minusHours(reminder.getHoursToRemind().getReminderHour()).isAfter(currDateTime);
+        } else {
+            return taskDateTime.minusHours(reminder.getHoursToRemind().getReminderHour()).isBefore(currDateTime);
         }
-        return false;
     }
 
     @Override

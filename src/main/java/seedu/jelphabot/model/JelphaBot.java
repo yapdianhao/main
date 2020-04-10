@@ -12,6 +12,7 @@ import seedu.jelphabot.model.reminder.UniqueReminderList;
 import seedu.jelphabot.model.reminder.UniqueReminderShowsTaskList;
 import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.model.task.UniqueTaskList;
+import seedu.jelphabot.model.task.tasklist.ViewTaskList;
 
 /**
  * Wraps all data at the address-book level
@@ -164,10 +165,10 @@ public class JelphaBot implements ReadOnlyJelphaBot {
     }
 
 
-    public ObservableList<ReminderShowsTask> getReminderShowsTaskList() {
+    public ObservableList<ReminderShowsTask> getReminderShowsTaskList(ViewTaskList viewTaskList) {
         for (Reminder reminder : getReminderList()) {
             int idx = reminder.getIndex().getZeroBased();
-            Task currTask = getTaskList().get(idx);
+            Task currTask = viewTaskList.get(idx);
             ReminderShowsTask reminderShowsTask = new ReminderShowsTask(reminder, currTask);
             reminderShowsTaskList.add(reminderShowsTask);
         }

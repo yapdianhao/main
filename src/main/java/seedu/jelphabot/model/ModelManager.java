@@ -230,8 +230,9 @@ public class ModelManager implements Model {
         return filteredReminders;
     }
 
+    @Override
     public ObservableList<ReminderShowsTask> getReminderShowsTaskList() {
-        return this.readOnlyJelphaBot.getReminderShowsTaskList();
+        return this.readOnlyJelphaBot.getReminderShowsTaskList(getLastShownList());
     }
 
     @Override
