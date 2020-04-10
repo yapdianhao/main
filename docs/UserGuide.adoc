@@ -267,20 +267,20 @@ Format: `list date`
 
 Group your tasks into the following categories:
 
-* *Pinned* (Coming in V2.0) +
+* *Pinned* [Coming in V2.0] +
 (Pinned tasks will always be displayed at the top.
 To read more about pinning tasks, go <<#pin, here>>)
 * *Overdue*  +
-(Shows tasks which are incomplete and past their due date)
+(Shows tasks which are past their due date)
 * *Due Today* +
-(Shows tasks due by the end of the day)
+(Shows tasks not overdue and due by the end of the current day)
 * *Due This Week* +
-(Shows tasks due by the end of the week, defined as before the next upcoming Monday)
+(Shows tasks due within the next seven days)
 * *Due Sometime* +
 (Shows all other tasks that do not fit into prior categories)
 
 [.text-center]
-.Example of an expected result after running `list module`
+.Example of an expected result after running `list date`
 image::ug_figures/listByDate.png[width="600"]
 
 ===== Group Tasks by Module : `list module`
