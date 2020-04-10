@@ -243,7 +243,7 @@ The tabs of the application are defined using a [.java]#SwitchTab# enum and the 
 * [.java]#UI# component so that the panels display the information that is relevant to the tab.
 
 
-IMPORTANT: `task list` is not a valid command to switch to the Task List tab. Use `list` instead.
+WARNING: `task list` is not a valid command to switch to the Task List tab. Use `list` instead.
 
 For all these commands, updates are done by updating the [.java]#SwitchTab# attribute added in the [.java]#CommandResult# object.
 
@@ -381,6 +381,7 @@ Logic is further abstracted to a higher level and the new class is instanced tog
 Due to the time of writing this Developer guide, the release is nearing V1.4 and time is spent fixing bugs for release instead.
 ** This could be a proposed update in the future.
 
+// tag::calendar[]
 === Calendar feature (Amanda)
 
 JelphaBot has a calendar feature which provides an overarching view of their schedules and to allow users to view their tasks due.
@@ -419,7 +420,7 @@ There are 2 commands that users can issue to perform function 1:
 
 1. `calendar today`: Displays calendar for the current month with today's date highlighted, and its corresponding tasks due listed. +
 2. `calendar MONTHYEAR`: Displays calendar for the month and year specified, with the first day of the month highlighted,
-and its corresponding tasks due listed (e.g. calendar Apr-2020).
+and its corresponding tasks due listed (e.g. calendar Apr-2020). Refer <<Calendar-MonthYear-SequenceDiagram, here>>, for the diagram describing this process.
 
 //The implementation of these 2 commands are largely similar. +
 
@@ -434,6 +435,7 @@ corresponding tasks due on the `CalendarTaskListPanel`.
 
 The following example sequence diagram shows you how the `calendar MONTHYEAR` (e.g. `calendar Apr-2020`) command works.
 
+[[Calendar-MonthYear-SequenceDiagram]]
 .Sequence diagram after running `calendar Apr-2020`
 image::CalendarViewSequenceDiagram.png[]
 
@@ -445,7 +447,7 @@ UI Component: Using the CommandResult, MainWindow calls MainWindow#updateCalenda
 This updates the `CalendarPanel` display with the respective `MONTHYEAR` view, and highlights the first day of the month.
 
 NOTE: The implementation of the other two calendar commands (`calendar DATE` and `calendar today`) are largely similar and run in the same process.
-The only exception is regarding the `calendar DATE` command which fulfills **Function 2** listed above, where the `GridPane` in CalendarPanel` is not
+The only exception is regarding the `calendar DATE` command which fulfills **Function 2** listed above, where the `GridPane` in `CalendarPanel` is not
 altered by running CalendarPanel#fillGridPane() unlike the other two commands fulfilling **Function 1**. Only `CalendarTaskListPanel` is updated.
 
 ==== Design Considerations
@@ -461,7 +463,7 @@ The next input following the command word (`DATE`, `MONTHYEAR`, `today`) is then
 ** Cons: Certain areas of the code might be repetitive.
 ** Cons: Less intuitive for users to use.
 
-===== Aspect 2: Method of storing `ObservableList<Task>` of tasks for each day card (Implementation of Dot Indicator)
+===== Aspect 2: Method of storing `ObservableList<Task>` of tasks for each day card (Implementation of the Dot Indicator)
 * *Current Solution:* Each `CalendarDayCard` stores a filtered list of tasks due on its specific date.
 This is done by obtaining all the tasks in the task list from Logic#getFilteredTaskList() and applying a filter function
 with the `TaskDueWithinDayPredicate`, specifically with the date of the day card. The list of tasks stored for each day card
@@ -472,6 +474,7 @@ in the calendar panel would be re-filtered after the execution of each command.
 ** Pros: Retrieving the tasks in a specific date and storing in the day card is fast - can be done in O(1) time.
 ** Cons: Implementation would be much more complex.
 ** Cons: Updating of this HashMap of the tasks as the main task list is being edited constantly can be very tedious.
+// end::calendar[]
 
 // tag::productivity[]
 === Productivity feature (Jel)
@@ -645,7 +648,8 @@ To view the respective tasks, the user enters the `summary` command.
 
 .Sequence diagram of execution of the `summary` command
 
-image::SummarySequenceDiagram.png[]
+[[Summary-SwitchTab-Sequence-Diagram]]
+image::SummarySwitchTabSequenceDiagram.png[]
 
 The following sequence diagram details the execution of the creation of the SummaryCommand.
 
@@ -1399,27 +1403,39 @@ Expected: Similar to previous.
 
 === View Tasks due on a specific Date
 
-. Input a date belonging to the calendar month to view tasks due
+. Input a date belonging to the current calendar month to view tasks due
 .. Prerequisites: Navigate to the calendar with the `calendar` command (or other variants as listed above).
 .. Test case: `calendar Apr-20-2020` +
 Expected: Task(s) due on the input date will be displayed with results message displaying the number of tasks listed.
 If there are no tasks due on the input date, no tasks would be displayed. The input date would also be highlighted on the calendar.
+.. Test case: `calendar Apri-20-2020` +
+Expected: Error message due to the invalid format for the input date would be displayed in the results message.
 
-. Input a date not belonging to the calendar month to view tasks due
+. Input a date not belonging to the current calendar month to view tasks due
 .. Prerequisites: Navigate to the calendar with the `calendar` command (or other variants as listed above).
 .. Test case: `calendar Oct-20-2020` +
 Expected: Task(s) due on the input date will be displayed with results message displaying the number of tasks listed.
 If there are no tasks due on the input date, no tasks would be displayed.
+.. Test case: `calendar Joon-20-2020` +
+Expected: Expected: Error message due to the invalid format for the input date would be displayed in the results message.
 
 === Navigating the Calendar
 
-. Navigate to different month and year on Calendar
-
 . Navigate to Today's Date on Calendar
+.. Prerequisites: Navigate to the calendar with the `calendar` command (or other variants as listed above).
+.. Test case: `calendar today` +
+Expected: Calendar will change to be the current month and year, with today's date also highlighted.
+Task(s) due today will be displayed with results message displaying the number of tasks listed.
+If there are no tasks due today, no tasks would be displayed.
 
-
-
-
+. Navigate to different month and year on Calendar
+.. Prerequisites: Navigate to the calendar with the `calendar` command (or other variants as listed above).
+.. Test case: `calendar May-2020` +
+Expected: Calendar will change to be for May 2020, with the first day of the May highlighted.
+Task(s) due on the first day of May will be displayed with results message displaying the number of tasks listed.
+If there are no tasks due, no tasks would be displayed.
+.. Test case: `calendar MAy-2020` +
+Expected: Error message due to the invalid format for the input month and year would be displayed in the results message.
 
 // TODO add more
 
