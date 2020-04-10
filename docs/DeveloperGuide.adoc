@@ -314,9 +314,8 @@ As the index passed as an argument to `lastShownList.get()` is a cumulative inde
 Tasks are organized via a two-dimensional list. In this case, a `Task` is rendered into a `TaskCard`, and `TaskCard` elements are rendered within `SubGroupTaskListCell` elements which are listed in `SubgroupTaskListPanel`. A populated `SubgroupTaskListPanel` element is rendered as a `GroupedTaskListCell` which is listed in the top-level `GroupedTaskListCell`. +
 `SubgroupTaskListCell` and `GroupedTaskListCell` implement the `ListViewCell<T>` interface of the `ListView<T>` class provided by JavaFX.
 
-[[class-tasklistpanel]]
 .Class Diagram for UI classes displaying `GroupedTaskList`
-image::TaskListPanelClassDiagram.png[]]
+image::TaskListPanelClassDiagram.png[]
 
 The detailed interactions are described in the diagram shown above. As can be seen, the distribution of `ListViewCell` elements follows the way tasks are distributed within the model classes. Each `SubgroupTaskListPanel` is displaying a singular `SubgroupTaskList`.
 
