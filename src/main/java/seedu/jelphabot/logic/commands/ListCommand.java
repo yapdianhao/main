@@ -48,7 +48,7 @@ public class ListCommand extends Command {
             return new CommandResult(String.format(MESSAGE_SUCCESS, grouping)).isShowModuleTaskList();
         case "date":
             return new CommandResult(String.format(MESSAGE_SUCCESS, grouping)).isShowDateTaskList();
-        case "none":
+        case "none": // Fallthrough
         default:
             return new CommandResult(MESSAGE_SWITCH_PANEL_ACKNOWLEDGEMENT).isShowDateTaskList();
         }
