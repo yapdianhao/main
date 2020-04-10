@@ -12,17 +12,17 @@
 JelphaBot is a desktop application to help NUS students manage tasks.
 JelphaBot allows students to track and manage tasks conveniently.
 Users enter commands in JelphaBot through a CLI. However, a GUI is implemented with JavaFX for a smoother user experience.
-It is written in Java, and has about 15 kLoC.
+It is written in Java, and has about 12 kLoC.
 
 == About this portfolio
 
-This portfolio lists my individual contributions to the AlgoBase project.
+This portfolio lists my individual contributions to the JelphaBot.
 It includes a summary of the feature enhancements implemented and contribution to the User Guide and Developer Guide.
 It also details other contributions I made throughout the duration of the project to team-based tasks.
 
 == Summary of contributions
 
-* *Major enhancement*: added *the ability for users to group their tasks by time or module code*, as well as *provided interfaces for other developers to implement new grouping categories*.
+* *Major enhancement*: added the ability for users to *group their tasks by time or module code*, as well as *provided interfaces for other developers to implement new grouping categories*.
 ** What it does: allows users to change the way their tasks are listed by switching between a list that shows:
 *** Tasks listed by how soon their due date is to the current date.
 *** Tasks listed by their Module Code.
@@ -41,6 +41,7 @@ https://github.com/AY1920S2-CS2103T-F09-2/main/pull/204[#204],
 https://github.com/AY1920S2-CS2103T-F09-2/main/pull/161[#161],
 https://github.com/AY1920S2-CS2103T-F09-2/main/pull/122[#122]
 
+<<<
 * *Minor enhancement*: Updated the Ui layout for each Task to allow tasks to be distinguished by priority.
 ** Pull requests:
 https://github.com/AY1920S2-CS2103T-F09-2/main/pull/196[#196],
@@ -66,6 +67,7 @@ https://github.com/AY1920S2-CS2103T-F09-2/main/pull/212[#212]
 ** Tools:
 *** Integrated Github plugins (gh-pages, Travis) to the team repository.
 
+<<<
 == Contributions to the User Guide
 
 |===
@@ -74,10 +76,10 @@ https://github.com/AY1920S2-CS2103T-F09-2/main/pull/212[#212]
 
 include::../UserGuide.adoc[tag=tasklist]
 
+<<<
 include::../UserGuide.adoc[tag=list]
 
-include::../UserGuide.adoc[tag=ug-pin-sort]
-
+<<<
 == Contributions to the Developer Guide
 
 |===
@@ -85,7 +87,4 @@ include::../UserGuide.adoc[tag=ug-pin-sort]
 |===
 
 include::../DeveloperGuide.adoc[tag=taskgroups]
-
-include::../DeveloperGuide.adoc[tag=taskgroups]
-
 
