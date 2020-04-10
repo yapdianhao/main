@@ -3,6 +3,7 @@
 :toc:
 :toc-title:
 :toc-placement: preamble
+:toclevels: 4
 :sectnums:
 :imagesDir: images
 :stylesDir: stylesheets
@@ -280,7 +281,7 @@ To view the respective tasks, the user enters the `summary` command to switch to
 image::SummaryCommand.png[]
 // end::morningcallnightdebrief[]
 
-
+// @@Author yaojiethng
 // tag::taskgroups[]
 === Task Grouping feature in Task List tab (Yao Jie)
 ==== Implementation
@@ -405,6 +406,8 @@ Logic is further abstracted to a higher level and the new class is instanced tog
 ** Cons: Implementation is challenging and prone to bugs.
 Due to the time of writing this Developer guide, the release is nearing V1.4 and time is spent fixing bugs for release instead.
 ** This could be a proposed update in the future.
+// end::taskgroups[]
+// @@Author
 
 === Calendar feature (Amanda)
 
@@ -1237,23 +1240,6 @@ A type of user interface that allows for interaction between the user and electr
 
 // end::glossary[]
 
-//[appendix]
-//== Product Survey
-//
-//*Product Name*
-//
-//Author: ...
-//
-//Pros:
-//
-//* ...
-//* ...
-//
-//Cons:
-//
-//* ...
-//* ...
-
 [appendix]
 == Instructions for Manual Testing
 
@@ -1277,15 +1263,46 @@ For this section, `markdown` will be used to denote commands that can be entered
 .. Re-launch the app by double-clicking the jar file. +
    Expected: The most recent window size and location is retained.
 
+=== Changing Tabs
+
+. Summary
+.. In Summary tab, switch to Summary with `:s`, `:S` or `summary`. +
+Expected: Tab is not changed.
+Error message is shown in Results Display.
+.. In any other tab, switch to Summary with `:s`, `:S` or `summary`. +
+Expected: Success message is shown in the Results Display.
+
+. Task List
+.. In Task List tab, switch to Task List with `:t`, `:T` or `list`. +
+Expected: Tab is not changed.
+Error message is shown in Results Display.
+.. In any other tab, switch to Task List with `:t`, `:T` or `list`. +
+Expected: Success message is shown in the Results Display.
+
+. Calendar
+.. In Calendar tab, switch to Calendar with `:c`, `:C` or `calendar`. +
+Expected: Tab is not changed.
+Error message is shown in Results Display.
+.. In any other tab, switch to Calendar with `:c`, `:C` or `calendar`. +
+Expected: Success message is shown in the Results Display.
+
+. Productivity
+.. In Productivity tab, switch to Productivity with `:p`, `:P` or `productivity`. +
+Expected: Tab is not changed.
+Error message is shown in Results Display.
+.. In any other tab, switch to Productivity with `:p`, `:P` or `productivity`. +
+Expected: Success message is shown in the Results Display.
+
+// @@Author yaojiethng
 === Adding a Task
 
 . Adding a new task to a cleared list
 .. Prerequisites: Clear the list with the `clear` command.
 .. For all test cases that successfully add a task, the respective total for each category should increment as new tasks are added.
 .. Test case: `add d/test dt/Apr-06-2020 23 59 m/CS2103t` +
-    Expected: A new task is added with the description "test", and a module code of "CS2103T".
+Expected: A new task is added with the description "test", and a module code of "CS2103T".
 .. Test case: `add d/test2 dt/Apr-06-2020 23 59 p/1 m/CS2103t` +
-    Expected: A new task is added with the description "test2", a module code of "CS2103T", and both the module code and descripton should be bolded.
+Expected: A new task is added with the description "test2", a module code of "CS2103T", and both the module code and descripton should be bolded.
 .. Test case: `add d/test3 dt/Apr-06-2020 23 59 p/-1 m/CS2103t` +
     Expected: A new task is added with the description "test3", a module code of "CS2103T", and both the module code and descripton should be in italics.
 . Adding a task with incomplete parameters
@@ -1299,19 +1316,21 @@ Expected: No task is added. Error message with correct format of date command. +
 .. Other incorrect add commands to try: other parameters are wrongly formatted. +
 Eg. non-alphanumeric characters in description or tag, invalid priority, module codes not complying to NUS format (2-3 Alphabets, 4 numbers, one optional letter) +
 Expected: Similar to previous.
-
-_{ more test cases }_
+// @@Author
 
 === Editing a Task
 
 . Editing a task that was previously added
 .. Prerequisites: Execute the `add` commands in the previous section.
+.. Edit each field as per examples given in `edit` command section.
 
 === Completing a Task
 
 . Setting an existing task to Complete.
 .. Prerequisites: Execute the `add` commands in the previous section.
+.. Complete tasks as per examples given in `edit` command section.
 
+// @@Author yaojiethng
 === Changing the list category
 
 . Displaying tasks by a different category
@@ -1330,7 +1349,6 @@ Expected: A new task should appear under the category header "Due This Week".
 .. Test case: `list invalid` +
 Expected: List display does not change. Error details shown in the results message. Status bar remains the same.
 
-
 === Deleting a Task
 
 . Deleting a task while all tasks are listed
@@ -1342,42 +1360,7 @@ Expected: List display does not change. Error details shown in the results messa
    Expected: No task is deleted. Error details are shown in the results message.
 .. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) +
    Expected: Similar to previous.
-
-_{ more test cases }_
-
-=== Changing Tabs
-
-. Summary
-
-.. In Summary tab, switch to Summary with `:s`, `:S` or `summary`. +
-    Expected: Tab is not changed. Error message is shown in Results Display.
-
-.. In any other tab, switch to Summary with `:s`, `:S` or `summary`. +
-    Expected: Success message is shown in the Results Display.
-
-. Task List
-
-.. In Task List tab, switch to Task List with `:t`, `:T` or `list`. +
-    Expected: Tab is not changed. Error message is shown in Results Display.
-
-.. In any other tab, switch to Task List with `:t`, `:T` or `list`. +
-    Expected: Success message is shown in the Results Display.
-
-. Calendar
-
-.. In Calendar tab, switch to Calendar with `:c`, `:C` or `calendar`. +
-    Expected: Tab is not changed. Error message is shown in Results Display.
-
-.. In any other tab, switch to Calendar with `:c`, `:C` or `calendar`. +
-    Expected: Success message is shown in the Results Display.
-
-. Productivity
-
-.. In Productivity tab, switch to Productivity with `:p`, `:P` or `productivity`. +
-    Expected: Tab is not changed. Error message is shown in Results Display.
-
-.. In any other tab, switch to Productivity with `:p`, `:P` or `productivity`. +
-    Expected: Success message is shown in the Results Display.
+// @@Author
 
 === Productivity Feature
 
@@ -1435,10 +1418,6 @@ If there are no tasks due on the input date, no tasks would be displayed.
 
 . Navigate to Today's Date on Calendar
 
-
-
-
-
 // TODO add more
 
 === Data Storage
@@ -1446,12 +1425,20 @@ If there are no tasks due on the input date, no tasks would be displayed.
 
 .. Open the `/data/` folder and delete all .json files in that folder.
 .. Launch JelphaBot by double-clicking the jar file. +
-   Expected Outcome: JelphaBot starts up with sample data in the GUI.
-    Sample data should be configured such that there are dates due within the current day and week.
+Expected Outcome: JelphaBot starts up with sample data in the GUI.
+Sample data should be configured such that there are dates due within the current day and week.
 
 . Corrupted data files
 
 .. Open the `/data/` folder and delete all .json files in that folder.
 .. Launch JelphaBot by double-clicking the jar file. +
-   Expected Outcome: JelphaBot starts up with sample data in the GUI.
-    Sample data should be configured such that there are dates due within the current day and week.
+Expected Outcome: JelphaBot starts up with sample data in the GUI.
+Sample data should be configured such that there are dates due within the current day and week.
+
+[appendix]
+== Effort
+
+* Difficulty Level
+* Challenges Faced
+* Effort required
+* Achievements
