@@ -634,8 +634,9 @@ started to read `Task` from the json files yet, therefore the `Reminder` could n
 ** Cons: Users need to constantly refer to the `TaskListPanel` for details.
 both has `Index` respectively.
 
+//@@author eedenong
 // tag::summary[]
-=== Summary feature
+=== Summary feature (Eden)
 
 JelphaBot has a Summary feature which provides an overview of the tasks due within the day as well as all tasks that have been complete within the day.
 

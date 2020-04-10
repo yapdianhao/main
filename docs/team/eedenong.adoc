@@ -26,32 +26,43 @@ This feature improves the product significantly with the convenience that it pro
 *** Another challenge during the implementation was ensuring that the tasks that were completed within the day were still displayed when the user exits the application, and starts it again within the same day. This required extra data to be stored and hence required modification of classes in `Storage` to ensure that
 the data was stored correctly.
 ** Relevant pull requests:
-https://github.com/AY1920S2-CS2103T-F09-2/main/pull/71[#71],
 https://github.com/AY1920S2-CS2103T-F09-2/main/pull/80[#80],
-https://github.com/AY1920S2-CS2103T-F09-2/main/pull/170[#170],
 https://github.com/AY1920S2-CS2103T-F09-2/main/pull/172[#172],
 https://github.com/AY1920S2-CS2103T-F09-2/main/pull/230[#230]
 https://github.com/AY1920S2-CS2103T-F09-2/main/pull/243[#243]
 ** Credits: The structure and the classes in the summary package (under `Model`) were inspired by that of the productivity package, which is under `Model` as well.
 * *Minor enhancement*: added a `done` command that allows the user to mark a task with the given index as completed.
+** Relevant pull requests:
+https://github.com/AY1920S2-CS2103T-F09-2/main/pull/71[#71]
 
-* *Other contributions*:
+* *Code contributed*:
+https://nus-cs2103-ay1920s2.github.io/tp-dashboard/#search=eedenong&sort=groupTitle&sortWithin=title&since=2020-02-14&timeframe=commit&mergegroup=false&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=eedenong&tabRepo=AY1920S2-CS2103T-F09-2%2Fmain%5Bmaster%5D[Functional Code]
+https://nus-cs2103-ay1920s2.github.io/tp-dashboard/#search=eedenong&sort=groupTitle&sortWithin=title&since=2020-02-14&timeframe=commit&mergegroup=false&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=eedenong&tabRepo=AY1920S2-CS2103T-F09-2%2Fmain%5Bmaster%5D[Test Code]
 
-** Project management:
-*** Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
-** Enhancements to existing features:
-*** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
-*** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
-** Documentation:
-*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
-** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
-*** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
-*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
-*** Some parts of the history feature I added was adopted by several other class mates (https://github.com[1], https://github.com[2])
-** Tools:
-*** Integrated a third party library (Natty) to the project (https://github.com[#42])
-*** Integrated a new Github plugin (CircleCI) to the team repo
+
+== Other contributions:
+
+---
+
+* Issues management:
+** Managed issues on GitHub:
+https://github.com/AY1920S2-CS2103T-F09-2/main/issues/92[#92],
+https://github.com/AY1920S2-CS2103T-F09-2/main/issues/97[#97],
+https://github.com/AY1920S2-CS2103T-F09-2/main/issues/101[#101],
+https://github.com/AY1920S2-CS2103T-F09-2/main/issues/113[#113]
+
+* Enhancements to existing features:
+** Updated and shifted task list filtering logic in relevant Model and Logic classes and APIs so as to not break abstraction between the classes and roles of the classes.
+https://github.com/AY1920S2-CS2103T-F09-2/main/pull/170[#170]
+* Documentation:
+** Replaced the Model class diagrams of the User Guide to make them the consistent with the structure of JelphaBot: https://github.com/AY1920S2-CS2103T-F09-2/main/pull/189[#189]
+** Added documentation for SummaryCommand, ShowCompletedCommand and ShowIncompleteCommand in User Guide: https://github.com/AY1920S2-CS2103T-F09-2/main/pull/189[#189]
+** Added documentation and sequence diagrams for SummaryCommand to Developer Guide: https://github.com/AY1920S2-CS2103T-F09-2/main/pull/294[#294], https://github.com/AY1920S2-CS2103T-F09-2/main/pull/336[#336]
+* Community:
+** PRs reviewed: https://github.com/AY1920S2-CS2103T-F09-2/main/pull/32[#32]
+** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
+** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
+** Some parts of the history feature I added was adopted by several other class mates (https://github.com[1], https://github.com[2])
 
 _{you can add/remove categories in the list above}_
 
@@ -62,15 +73,18 @@ _{you can add/remove categories in the list above}_
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-include::../UserGuide.adoc[tag=delete]
+include::../UserGuide.adoc[tag=summary]
 
+include::../UserGuide.adoc[tag=showcompleted]
+
+include::../UserGuide.adoc[tag=showincomplete]
 == Contributions to the Developer Guide
 
 |===
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-include::../DeveloperGuide.adoc[tag=undoredo]
+include::../DeveloperGuide.adoc[tag=summary]
 
 
 == PROJECT: PowerPointLabs

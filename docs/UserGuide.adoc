@@ -141,6 +141,8 @@ Format: `exit`
 [WARNING]
 Exiting the application before stopping any running timer wil cause all recorded time since the timer was started to be lost.
 
+//@@author eedenong
+// tag::summary[]
 === Summary (Eden)
 This tab will be the first panel you see after entering JelphaBot!
 
@@ -167,6 +169,8 @@ Once a task under the Due Today tab is marked as done, it will appear under the 
 [.text-center]
 .Expected view of the Summary tab after completing the task, ACC1101 Tutorial 4
 image::ug_figures/SummaryViewAfterTaskComplete.png[width="600"]
+
+// end::summary[]
 
 // @@author yaojiethng
 // tag::tasklist[]
@@ -405,6 +409,7 @@ image::ug_figures/clearCommand.png[width="600"]
 * All reminders will be cleared together with the tasks.
 ****
 
+//@@author eedenong
 // tag::showcompleted[]
 ==== Show all completed Tasks : `show-completed` (Eden)
 You can display all the tasks in your task list that have been completed.
@@ -421,6 +426,7 @@ image::ug_figures/showCompletedCommandNoCompleted.png[width="600"]
 
 // end::showcompleted[]
 
+//@@author eedenong
 // tag::showincomplete[]
 ==== Show all incomplete Tasks: `show-incomplete` (Eden)
 
@@ -693,7 +699,7 @@ We will consider this in v2.0.
 A: No, you don’t. JelphaBot works completely offline.
 // end::faq[]
 
-// tag::summary[]
+// tag::commandSummary[]
 == Command Summary
 
 * *Help* : `help`
