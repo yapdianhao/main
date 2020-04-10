@@ -16,7 +16,7 @@ It is written in Java, and has about 15 kLoC.
 
 == About this portfolio
 
-This portfolio lists my individual contributions to the AlgoBase project.
+This portfolio lists my individual contributions to the JelphaBot.
 It includes a summary of the feature enhancements implemented and contribution to the User Guide and Developer Guide.
 It also details other contributions I made throughout the duration of the project to team-based tasks.
 
