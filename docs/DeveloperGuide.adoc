@@ -262,7 +262,7 @@ The display panel is updated by calling [.java]#MainWindow#handle{XXX} where XXX
 
 JelphaBot has a Summary feature which provides an overview of the tasks due within the day as well as all tasks that have been complete within the day.
 
-This feature comes in the form of a welcome screen, which comprises of two sections for the tasks due within the day and the tasks completed within the day respectively.
+This feature comes in the form of a summary panel, which comprises of two sections for the tasks due within the day and the tasks completed within the day respectively.
 
 For each task shown only details such as the Module Code and the Description are shown.
 
@@ -273,6 +273,17 @@ If the user marks a task as completed, and immediately deletes the task from the
 
 ==== Implementation
 
+The implementation of this panel is facilitated by the `summary` package.
+
+Upon creation, the `Summary` object obtains the main task list from `Model`.
+The task list is then filtered with the help of `TaskDueWithinDayAndIncompletePredicate` and `TaskCompletedWithinDayPredicate` to obtain two lists with the desired tasks.
+
+
+These lists  are stored as fields in the `Summary` class and are used to display the relevant information in the summary panel.
+
+
+//Insert class diagram here
+
 To view the respective tasks, the user enters the `summary` command.
 
 .Sequence diagram of execution of the `summary` command
@@ -280,10 +291,19 @@ To view the respective tasks, the user enters the `summary` command.
 [[Summary-SwitchTab-Sequence-Diagram]]
 image::SummarySwitchTabSequenceDiagram.png[]
 
-The following sequence diagram details the execution of the creation of the SummaryCommand.
+The following sequence diagram details the execution of the creation of the `Summary` object when SummaryCommand is executed.
 
-.Sequence diagram of the creation of SummaryCommand.
+.Sequence diagram of the creation of the `Summary` object when SummaryCommand is executed.
 image::SummaryCommandSequenceDiagram.png[]
+
+==== Design considerations
+
+===== Aspect 1: The summary panel depends on the creation of new `Summary` objects to be updated
+
+* *Current solution*: Each time
+
+===== Aspect 2: Summary panel aesthetic improvements
+
 // end::summary[]
 
 // tag::taskgroups[]
@@ -685,39 +705,6 @@ started to read `Task` from the json files yet, therefore the `Reminder` could n
 ** Cons: Users need to constantly refer to the `TaskListPanel` for details.
 both has `Index` respectively.
 // end::reminder[]
-// tag::summary[]
-=== Summary feature (Eden)
-
-JelphaBot has a Summary feature which provides an overview of the tasks due within the day as well as all tasks that have been complete within the day.
-
-This feature comes in the form of a welcome screen, which comprises of two sections for the tasks due within the day and the tasks completed within the day respectively.
-
-For each task shown only details such as the Module Code and the Description are shown.
-
-Once the user marks a task due within the day as complete, it will automatically appear under the tasks completed within the day.
-
-[NOTE]
-If the user marks a task as completed, and immediately deletes the task from the tasklist, it will not appear in the summary screen.
-
-==== Implementation
-
-To view the respective tasks, the user enters the `summary` command.
-
-.Sequence diagram of execution of the `summary` command
-
-[[Summary-SwitchTab-Sequence-Diagram]]
-image::SummarySwitchTabSequenceDiagram.png[]
-
-The following sequence diagram details the execution of the creation of the SummaryCommand.
-
-.Sequence diagram of the creation of SummaryCommand.
-image::SummaryCommandSequenceDiagram.png[]
-
-
-==== Design Considerations
-
-===== Aspect 1:
-// end::summary[]
 
 // tag::undoredo[]
 === Undo/Redo feature [Proposed to implement in v2.0]
