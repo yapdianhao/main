@@ -729,6 +729,7 @@ If the `currentStatePointer` is at index 0, pointing to the initial JelphaBot st
 
 The following sequence diagram shows how the undo operation works:
 
+.The sequence diagram of the undo feature.
 image::UndoSequenceDiagram.png[]
 
 NOTE: The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
