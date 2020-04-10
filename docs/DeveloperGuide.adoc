@@ -339,7 +339,7 @@ Scalable when more groupings are added.
 
 ===== Aspect 2: `get()` Task from `ViewTaskList` and iterate between Tasks.
 
-Refer <<activity-swapping-groupedtasklist, here>> for the diagram describing this process.
+Refer <<sequence-viewtasklist-get, here>> for the diagram describing this process.
 
 * *Current solution*: Implement `get()` and `Iterator<Task>` in `ViewTaskList`.
 ** Pros: Easy to implement.
@@ -350,7 +350,6 @@ Scalable when more groupings are added.
 * **Alternative 1:** Keep instances of all `GroupedTaskList` objects and update them as underlying Task List changes.
 ** Pros: Consecutive `ListCommand` executions are less expensive.
 ** Cons: All other commands that update the underlying `UniqueTaskList` will result in multiple update calls to `ViewTaskList`.
-
 //===== Aspect 3: Hide empty Categories in `GroupByDateTaskList`
 //
 //* *Current Solution*: UI displays problems from a `FilteredList<SubgroupTaskList>` and use `filtered()` to hide empty categories without removing them.
@@ -366,7 +365,6 @@ Scalable when more groupings are added.
 //** Cons: Additional listeners have to be added (one for each category) to reinitialize empty categories.
 
 ===== Aspect 3: Remove empty Categories in `GroupByModuleTaskList`
-
 * *Current Solution*: UI displays problems from a `FilteredList<SubgroupTaskList>` and uses a `ListChangeListener<Task>` to maintain a set of unique module codes when the underlying task list is changed.
 The `ObservableSet<ModuleCode>` has a further `SetChangeListener<ModuleCode>` bound to it to remove categories that no longer contain any Tasks.
 This second listener directly removes unused categories from `GroupedByModuleTaskList`.
