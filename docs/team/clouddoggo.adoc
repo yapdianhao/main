@@ -1,14 +1,18 @@
 = Jel Lim – Project Portfolio
 :site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
 
 == About the project
 
 ---
 
-My team of 4 software engineering students and I were tasked with enhancing a basic command line interface desktop address book application for our Software Engineering project. We chose to morph it into a task management system called JelphaBot.
+My team of 4 software engineering students and I were tasked with enhancing a basic command line interface desktop address book application for our Software Engineering project.
+We chose to morph it into a task management system called JelphaBot.
 This enhanced application enables university students to file and recall task data, manage task scheduling and view productivity levels all in one place.
 
 === Summary of contributions
+
 This section shows a summary of my coding, documentation, and other helpful contributions to the team project.
 
 ==== Enhancement added:
