@@ -168,7 +168,7 @@ Once a task under the Due Today tab is marked as done, it will appear under the 
 .Expected view of the Summary tab after completing the task, ACC1101 Tutorial 4
 image::ug_figures/SummaryViewAfterTaskComplete.png[width="600"]
 
-// @@Author yaojiethng
+// @@author yaojiethng
 // tag::tasklist[]
 === Managing Tasks (Yao Jie)
 
@@ -209,7 +209,7 @@ Tasks are tagged according to their importance:
 The start of every task will be labelled with a module code so that you can visually categorize them. +
 Go <<#add, here>> to read more about adding tasks with priority and <<#edit, here>> for editing task priority.
 // end::tasklist[]
-// @@Author
+// @@author
 
 // tag::add[]
 [[add]]
@@ -247,7 +247,7 @@ Examples:
 * `add d/Project TP dt/Jan-01-2020 23 59 m/CS2103T p/1 t/pair work`
 // end::add[]
 
-// @@Author yaojiethng
+// @@author yaojiethng
 // tag::list[]
 ==== Listing all Tasks : `list`
 
@@ -292,7 +292,7 @@ Format: `list module`
 .Example of an expected result after running `list module`
 image::ug_figures/listByModule.png[width="600"]
 // end::list[]
-// @@Author
+// @@author
 
 ==== Locating Tasks by name: `find`
 
@@ -438,7 +438,7 @@ image::ug_figures/showCompletedCommandNoCompleted.png[width="600"]
 
 // end::showincomplete[]
 
-// @@Author yaojiethng
+// @@author yaojiethng
 // tag::ug-pin-sort[]
 [[pin]]
 ==== Pin Important Tasks  : `pin` [Coming in V2.0]
@@ -454,7 +454,7 @@ Format: `sort SORTING_ORDER`
 
 Valid `SORTING_ORDER` values include `date`, `module`, and `priority`.
 // end::ug-pin-sort[]
-// @@Author
+// @@author
 
 === Calendar (Amanda)
 
