@@ -51,7 +51,8 @@ public class Task {
         this.isTiming = false;
     }
 
-    // @@author Eden
+
+    //@@author eedenong
     /**
      * Special constructor with additional DoneTime field for use in JsonAdaptedTask.
      */

@@ -1,4 +1,4 @@
-// @@author Eden
+//@@author eedenong
 package seedu.jelphabot.ui;
 
 import java.util.logging.Logger;
