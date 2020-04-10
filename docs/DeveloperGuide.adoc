@@ -217,13 +217,14 @@ This includes classes which implement utility functions which can be used by all
 
 This section describes some noteworthy details on how certain features are implemented.
 
+// @@author Clouddoggo
 === Tab System
 Users may find it complicated to handle the many features that JelphaBot offers. They might also be overwhelmed if all the information of their tasks were to be displayed together in one screen.
 
 As such, we have decided to implement a tab system for JelphaBot to organise the available commands into their respective features. JelphaBot provides 5 different tabs for the users,
 each displaying a different set of panels that are relevant to the feature.
 
-* *Summary Tab* - <<Summary feature (Eden), overall view>> of the day's tasks in the task list.
+* *Summary Tab* - <<Summary feature, overall view>> of the day's tasks in the task list.
 * *Task List Tab* - <<Task Grouping feature in Task List tab (Yao Jie), view all tasks>> in the task list.
 * *Calendar Tab* - <<Calendar feature (Amanda), visualisation>> of tasks in a specific day or month.
 * *Productivity Tab* - <<Productivity feature (Jel), overarching view>> of overall productivity such as task completion rate.
@@ -256,6 +257,36 @@ Upon execution of the `:s` command, [.java]#SummaryCommand#generateCommandResult
 The display panel is updated by calling [.java]#MainWindow#handle{XXX} where XXX is the tab to switch to.
 
 // end::changetab[]
+// @@author
+
+// tag::summary[]
+=== Summary feature (Eden)
+
+JelphaBot has a Summary feature which provides an overview of the tasks due within the day as well as all tasks that have been complete within the day.
+
+This feature comes in the form of a welcome screen, which comprises of two sections for the tasks due within the day and the tasks completed within the day respectively.
+
+For each task shown only details such as the Module Code and the Description are shown.
+
+Once the user marks a task due within the day as complete, it will automatically appear under the tasks completed within the day.
+
+[NOTE]
+If the user marks a task as completed, and immediately deletes the task from the tasklist, it will not appear in the summary screen.
+
+==== Implementation
+
+To view the respective tasks, the user enters the `summary` command.
+
+.Sequence diagram of execution of the `summary` command
+
+[[Summary-SwitchTab-Sequence-Diagram]]
+image::SummarySwitchTabSequenceDiagram.png[]
+
+The following sequence diagram details the execution of the creation of the SummaryCommand.
+
+.Sequence diagram of the creation of SummaryCommand.
+image::SummaryCommandSequenceDiagram.png[]
+// end::summary[]
 
 // @@author yaojiethng
 // tag::taskgroups[]
@@ -482,6 +513,7 @@ in the calendar panel would be re-filtered after the execution of each command.
 ** Cons: Updating of this HashMap of the tasks as the main task list is being edited constantly can be very tedious.
 // end::calendar[]
 
+// @@author Clouddoggo
 // tag::productivity[]
 === Productivity feature (Jel)
 JelphaBot has a productivity panel of this feature which provides an overarching view of user's overall productivity.
@@ -516,8 +548,7 @@ In order to stop timing a task, the user enters `stop INDEX` command
 (e.g. stop 1)
 
 Upon successful execution of the command, the productivity tab removes the task being timed under the Running Timer(s) header.
-If the timed task is due today or in the next 6 days, the time spent on the timed task will be added to either the Due today: label
-or the Due in the next 6 days: label under the Time Spent on Tasks header.
+Under the Time Spent header, the total time spent will be increased depending on the date that the task is due.
 
 [NOTE]
 If the user attempts to start timer for a task marked as completed or stop a task that does not have a running timer,
@@ -552,8 +583,18 @@ an error in displaying.
 ** Cons: Difficult to implement as the Task model requires a new Task to replace the old Task when edit command is executed.
 
 ===== Aspect 3: Productivity panel visualisation
-* *Current solution*:
+* *Current solution*: Separating sub-parts by paragraphs and including progress bar for tasks completed.
+** Rationale: Paragraphing increases readability and the progress bar provides visual aid.
+** Pros: Easy to see at a glance which parts are which.
+** Cons: Text under Running Timer(s) can appear wordy. As number of running timers increase, more text is added under Running Timer(s).
+* *Alternative 1*: Highlight displayed module code and deadline in alternating colours
+** Pros: Visually more appealing and looks less like a long list is tasks thus motivating the user to complete his/her tasks.
+** Cons: Does not resolve the issue of having too many words under the sections.
+* *Alternative 2*: Only show 3 tasks whose timers were started in order of priority and time when timers were started.
+** Pros: Allows user to focus on tasks at hand.
+** Cons: User might forget about other tasks whose timers were started and not complete them on time.
 // end::productivity[]
+// @@author
 
 === Reminder feature (Dian Hao)
 JelphaBot has a reminder feature that reminds users whenever they have tasks that are about to overdue.
@@ -633,36 +674,6 @@ started to read `Task` from the json files yet, therefore the `Reminder` could n
 ** Pros: Simple, as it only shows the details of the `Reminder`.
 ** Cons: Users need to constantly refer to the `TaskListPanel` for details.
 both has `Index` respectively.
-
-// tag::summary[]
-=== Summary feature
-
-JelphaBot has a Summary feature which provides an overview of the tasks due within the day as well as all tasks that have been complete within the day.
-
-This feature comes in the form of a welcome screen, which comprises of two sections for the tasks due within the day and the tasks completed within the day respectively.
-
-For each task shown only details such as the Module Code and the Description are shown.
-
-Once the user marks a task due within the day as complete, it will automatically appear under the tasks completed within the day.
-
-[NOTE]
-If the user marks a task as completed, and immediately deletes the task from the tasklist, it will not appear in the summary screen.
-
-==== Implementation
-
-To view the respective tasks, the user enters the `summary` command.
-
-.Sequence diagram of execution of the `summary` command
-
-[[Summary-SwitchTab-Sequence-Diagram]]
-image::SummarySwitchTabSequenceDiagram.png[]
-
-The following sequence diagram details the execution of the creation of the SummaryCommand.
-
-.Sequence diagram of the creation of SummaryCommand.
-image::SummaryCommandSequenceDiagram.png[]
-// end::summary[]
-
 
 // tag::undoredo[]
 === Undo/Redo feature [Proposed to implement in v2.0]
@@ -1103,7 +1114,9 @@ Use case resumes from step 2
 +
 Use case resumes from step 2.
 
+// @@author Clouddoggo
 // tag::timerUseCase[]
+
 === Use Case: UC8 - Start Timer
 *MSS*
 
@@ -1175,6 +1188,7 @@ Use case ends.
 Use case resumes from step 2.
 
 // end::timerUseCase[]
+// @@author
 
 === Use case: UC10 - Navigate to a different date on calendar
 
@@ -1248,6 +1262,7 @@ For this section, `markdown` will be used to denote commands that can be entered
 .. Re-launch the app by double-clicking the jar file. +
    Expected: The most recent window size and location is retained.
 
+// @@author Clouddoggo
 === Changing Tabs
 
 . Summary
@@ -1277,6 +1292,8 @@ Expected: Tab is not changed.
 Error message is shown in Results Display.
 .. In any other tab, switch to Productivity with `:p`, `:P` or `productivity`. +
 Expected: Success message is shown in the Results Display.
+// @@author
+
 
 // @@author yaojiethng
 === Adding a Task
@@ -1347,6 +1364,7 @@ Expected: List display does not change. Error details shown in the results messa
    Expected: Similar to previous.
 // @@author
 
+// @@author Clouddoggo
 === Progress Bar visualisation
 
 . Marking a task that was previously added as complete
@@ -1380,12 +1398,13 @@ Expected: Similar to previous.
 .. Prerequisites: Execute the `start` commands in the <<View Tasks with Running Timers, previous section>>.
 .. Test case: `stop 1` +
 Expected: Stops timing first task from the list. Details of the timed task is shown in the results message. +
-If task's timer to be stopped is due today or in next 6 days, displayed time spent is updated in productivity tab. +
+Displayed time spent is updated in productivity tab. +
 Task timed is removed from Running Timer(s) displayed in productivity tab.
 .. Test case: `stop 0` +
 Expected: No timer stopped. Error details shown in the results message.
 .. Other incorrect stop commands to try: `stop`, `stop x` (where x is larger than the list size or is index of task without running timer) +
 Expected: Similar to previous.
+// @@author
 
 === View Tasks due on a specific Date
 

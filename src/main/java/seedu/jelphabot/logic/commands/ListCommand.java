@@ -6,7 +6,7 @@ import static seedu.jelphabot.model.Model.PREDICATE_SHOW_ALL_TASKS;
 import seedu.jelphabot.model.Model;
 
 /**
- * Lists all tasks in the address book to the user.
+ * Lists all tasks in the task list to the user.
  *
  * @@author yaojiethng
  */
@@ -50,7 +50,7 @@ public class ListCommand extends Command {
             return new CommandResult(String.format(MESSAGE_SUCCESS, grouping)).isShowModuleTaskList();
         case "date":
             return new CommandResult(String.format(MESSAGE_SUCCESS, grouping)).isShowDateTaskList();
-        case "none":
+        case "none": // Fallthrough
         default:
             return new CommandResult(MESSAGE_SWITCH_PANEL_ACKNOWLEDGEMENT).isShowDateTaskList();
         }
