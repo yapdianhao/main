@@ -548,7 +548,7 @@ an error in displaying.
 
 ===== Aspect 3: Productivity panel visualisation
 * *Current solution*:
-// end::productivity[]
+
 
 === Reminder feature (Dian Hao)
 JelphaBot has a reminder feature that reminds users whenever they have tasks that are about to overdue.
@@ -576,6 +576,15 @@ The sequence diagram for interactions between the `Logic`, `Model`, and `Storage
 
 .Sequence Diagram after running `reminder 2 days/2 hours/1`
 image::AddReminderSequenceDiagram.png[]
+
+.The reference frame of getting the `CommandResult` in the `Logic` component.
+image::getCommandResultReferenceDiagram.png[]
+
+.The reference frame of adding the `Reminder` in the `Model` component.
+image::addReminderReferenceDiagram.png[]
+
+.The reference frame of saving a `Reminder` by the `Storage` component.
+image::saveJelphaBot.png[]
 
 The `Logic` `execute()` method creates a `ReminderCommand` from the input string by parsing the input according
 to the command word and several other attributes. Next, the input string is converted into `Index`,

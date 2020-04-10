@@ -1,8 +1,6 @@
 //@@author yapdianhao
 package seedu.jelphabot.ui;
 
-//import java.util.List;
-
 import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
@@ -14,8 +12,6 @@ import seedu.jelphabot.commons.core.GuiSettings;
 import seedu.jelphabot.commons.core.LogsCenter;
 import seedu.jelphabot.logic.Logic;
 import seedu.jelphabot.model.task.Task;
-
-//import javafx.stage.Popup;
 
 /**
  * Reminders shown in app startup. Will show when tasks are about to expire,

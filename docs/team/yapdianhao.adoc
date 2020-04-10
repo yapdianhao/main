@@ -4,6 +4,14 @@
 :stylesDir: ../stylesheets
 
 == About the project
-
+JelphaBot is a desktop application to help NUS students manage tasks.
+JelphaBot allows students to track and manage tasks conveniently.
+Users enter commands in JelphaBot through a CLI. However, a GUI is implemented with JavaFX for a smoother user experience.
+It is written in Java, and has about 15 kLoC.
 
 === Summary of contributions
+* *Major enhancement*: added *the ability for users to add reminders to certain tasks*.
+** What it does: allows users to add or remove reminders to remind tasks that will due soon to increase users' efficiency, including:
+*** Tasks that are uncompleted
+*** Tasks that will due within a week
+** Justification: As our target users are students with a lot of commitments,
