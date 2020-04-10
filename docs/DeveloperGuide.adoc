@@ -217,14 +217,13 @@ This includes classes which implement utility functions which can be used by all
 
 This section describes some noteworthy details on how certain features are implemented.
 
-// @@author Clouddoggo
 === Tab System
 Users may find it complicated to handle the many features that JelphaBot offers. They might also be overwhelmed if all the information of their tasks were to be displayed together in one screen.
 
 As such, we have decided to implement a tab system for JelphaBot to organise the available commands into their respective features. JelphaBot provides 5 different tabs for the users,
 each displaying a different set of panels that are relevant to the feature.
 
-* *Summary Tab* - <<Summary feature, overall view>> of the day's tasks in the task list.
+* *Summary Tab* - <<Summary feature (Eden), overall view>> of the day's tasks in the task list.
 * *Task List Tab* - <<Task Grouping feature in Task List tab (Yao Jie), view all tasks>> in the task list.
 * *Calendar Tab* - <<Calendar feature (Amanda), visualisation>> of tasks in a specific day or month.
 * *Productivity Tab* - <<Productivity feature (Jel), overarching view>> of overall productivity such as task completion rate.
@@ -234,7 +233,7 @@ To use the different features, we have also implemented commands for users to sw
 
 [[ChangeTab]]
 // tag::changetab[]
-==== Current Implementation
+==== Implementation
 
 [[ChangingTabs]]
 ===== Switching between Tabs in Main Window
@@ -243,7 +242,6 @@ The tabs of the application are defined using a [.java]#SwitchTab# enum and the 
 
 * [.java]#MainWindow# component so that the [.java]#SwitchTab# attribute in [.java]#MainWindow# reflects the new current tab, since this is used to check if a command can be executed,
 * [.java]#UI# component so that the panels display the information that is relevant to the tab.
-
 
 WARNING: `task list` is not a valid command to switch to the Task List tab. Use `list` instead.
 
@@ -257,7 +255,7 @@ Upon execution of the `:s` command, [.java]#SummaryCommand#generateCommandResult
 The display panel is updated by calling [.java]#MainWindow#handle{XXX} where XXX is the tab to switch to.
 
 // end::changetab[]
-// @@author
+
 
 // tag::summary[]
 === Summary feature (Eden)
@@ -288,7 +286,6 @@ The following sequence diagram details the execution of the creation of the Summ
 image::SummaryCommandSequenceDiagram.png[]
 // end::summary[]
 
-// @@author yaojiethng
 // tag::taskgroups[]
 === Task Grouping feature in Task List tab (Yao Jie)
 ==== Implementation
@@ -411,7 +408,7 @@ Logic is further abstracted to a higher level and the new class is instanced tog
 Due to the time of writing this Developer guide, the release is nearing V1.4 and time is spent fixing bugs for release instead.
 ** This could be a proposed update in the future.
 // end::taskgroups[]
-// @@author
+
 
 // tag::calendar[]
 === Calendar feature (Amanda)
@@ -513,10 +510,13 @@ in the calendar panel would be re-filtered after the execution of each command.
 ** Cons: Updating of this HashMap of the tasks as the main task list is being edited constantly can be very tedious.
 // end::calendar[]
 
-// @@author Clouddoggo
 // tag::productivity[]
 === Productivity feature (Jel)
 JelphaBot has a productivity panel of this feature which provides an overarching view of user's overall productivity.
+
+The view of this panel is facilitated by the productivity package that extracts the relevant data and displays them in as cohesive view.
+The productivity package supports the creation of TimeSpentToday, RunningTimers as well as TasksCompleted instances.
+Each of these classes iterate through the tasks contained within the task list.
 
 This feature offers two main functions and one panel for visualisation:
 
@@ -594,7 +594,7 @@ an error in displaying.
 ** Pros: Allows user to focus on tasks at hand.
 ** Cons: User might forget about other tasks whose timers were started and not complete them on time.
 // end::productivity[]
-// @@author
+
 
 === Reminder feature (Dian Hao)
 JelphaBot has a reminder feature that reminds users whenever they have tasks that are about to overdue.
@@ -1114,7 +1114,6 @@ Use case resumes from step 2
 +
 Use case resumes from step 2.
 
-// @@author Clouddoggo
 // tag::timerUseCase[]
 
 === Use Case: UC8 - Start Timer
@@ -1188,7 +1187,7 @@ Use case ends.
 Use case resumes from step 2.
 
 // end::timerUseCase[]
-// @@author
+
 
 === Use case: UC10 - Navigate to a different date on calendar
 
@@ -1262,7 +1261,6 @@ For this section, `markdown` will be used to denote commands that can be entered
 .. Re-launch the app by double-clicking the jar file. +
    Expected: The most recent window size and location is retained.
 
-// @@author Clouddoggo
 === Changing Tabs
 
 . Summary
@@ -1292,10 +1290,9 @@ Expected: Tab is not changed.
 Error message is shown in Results Display.
 .. In any other tab, switch to Productivity with `:p`, `:P` or `productivity`. +
 Expected: Success message is shown in the Results Display.
-// @@author
 
 
-// @@author yaojiethng
+
 === Adding a Task
 
 . Adding a new task to a cleared list
@@ -1318,7 +1315,7 @@ Expected: No task is added. Error message with correct format of date command. +
 .. Other incorrect add commands to try: other parameters are wrongly formatted. +
 Eg. non-alphanumeric characters in description or tag, invalid priority, module codes not complying to NUS format (2-3 Alphabets, 4 numbers, one optional letter) +
 Expected: Similar to previous.
-// @@author
+
 
 === Editing a Task
 
@@ -1332,7 +1329,6 @@ Expected: Similar to previous.
 .. Prerequisites: Execute the `add` commands in the previous section.
 .. Complete tasks as per examples given in `edit` command section.
 
-// @@author yaojiethng
 === Changing the list category
 
 . Displaying tasks by a different category
@@ -1362,9 +1358,8 @@ Expected: List display does not change. Error details shown in the results messa
    Expected: No task is deleted. Error details are shown in the results message.
 .. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) +
    Expected: Similar to previous.
-// @@author
 
-// @@author Clouddoggo
+
 === Progress Bar visualisation
 
 . Marking a task that was previously added as complete
@@ -1404,7 +1399,7 @@ Task timed is removed from Running Timer(s) displayed in productivity tab.
 Expected: No timer stopped. Error details shown in the results message.
 .. Other incorrect stop commands to try: `stop`, `stop x` (where x is larger than the list size or is index of task without running timer) +
 Expected: Similar to previous.
-// @@author
+
 
 === View Tasks due on a specific Date
 
