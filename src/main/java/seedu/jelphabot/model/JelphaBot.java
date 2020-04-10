@@ -140,12 +140,18 @@ public class JelphaBot implements ReadOnlyJelphaBot {
     }
     //// util methods
 
+    /**
+     * adds the ReminderShowsTask Object to the panel.
+     */
     public void addReminderShowsTask(Reminder reminder, ViewTaskList lastShownList) {
         Task task = lastShownList.get(reminder.getIndex().getZeroBased());
         ReminderShowsTask reminderShowsTask = new ReminderShowsTask(reminder, task);
         reminderShowsTaskList.add(reminderShowsTask);
     }
 
+    /**
+     * deletes the ReminderShowsTask Object from the panel list.
+     */
     public void deleteReminderShowsTask(Reminder reminder, ViewTaskList lastShownList) {
         Task task = lastShownList.get(reminder.getIndex().getZeroBased());
         ReminderShowsTask reminderShowsTask = new ReminderShowsTask(reminder, task);

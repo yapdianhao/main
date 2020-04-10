@@ -65,6 +65,6 @@ public class ReminderShowsTask {
         return other == this // short circuit if same object
                    || (other instanceof ReminderShowsTask // instanceof handles nulls
                            && reminder.equals(((ReminderShowsTask) other).reminder)
-                           && task.equals(((ReminderShowsTask) other).task));// state check
+                           && task.equals(((ReminderShowsTask) other).task)); // state check
     }
 }
