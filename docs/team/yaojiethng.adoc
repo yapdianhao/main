@@ -12,7 +12,7 @@
 JelphaBot is a desktop application to help NUS students manage tasks.
 JelphaBot allows students to track and manage tasks conveniently.
 Users enter commands in JelphaBot through a CLI. However, a GUI is implemented with JavaFX for a smoother user experience.
-It is written in Java, and has about 15 kLoC.
+It is written in Java, and has about 12 kLoC.
 
 == About this portfolio
 
