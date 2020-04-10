@@ -617,24 +617,13 @@ other properties.
 started to read `Task` from the json files yet, therefore the `Reminder` could not be read beforehand.
 
 ===== Aspect 2: Rendering `Reminder` on `ReminderListPanel`
-* *Current solution:* Shows the `Index` of the `Task` that is being reminded, the respective `ReminderDay` and `ReminderHour`.
-** Pros: Clean and simple to understand.
-** Cons: Users may need to refer to the `GroupedTaskListPanel` tab to check which `Task` the `Reminder` is associated to.
-* *Alternative 1:* Shows the `Reminder` similar to how the `Task` is displayed, and includes information such as `Task`
-associated.
-** Pros: Comprehensive, users need not to switch panels to find out which `Task` is being reminded.
-** Cons: Overcomplicated and may confuse users. Users may be confused by the `Index` s shown since `Reminder` and `Task`
+* *Current solution:* Shows the `ModuleCode`, `Description`, and `DateTime` of the `Task` that is being reminded, the respective `ReminderDay` and `ReminderHour`.
+** Pros: convenient and simple to understand. Users only need to refer to the `TaskListPanel` to look at the details of the `Task`.
+** Cons: FXML styling will be squeezy.
+* *Alternative 1:* Shows the `Reminder` similar to how the `Task` is displayed.
+** Pros: Simple, as it only shows the details of the `Reminder`.
+** Cons: Users need to constantly refer to the `TaskListPanel` for details.
 both has `Index` respectively.
-
-===== Aspect 3: Saving JelphaBot's `Reminder`
-* *Current solution:* Uses a `boolean` to indicate whether jelphaBot is saving `Task` or saving `Reminder`.
-** Rationale: jelphaBot's `Storage` takes identical parameters, which is the `Path` to the json file to write its contents.
-Since the `Path` are different but the parameters are identical, the function could not decide between to save as a
-`JsonSerializableJelphaBot` or a `JsonSerializableReminderJelphaBot`.
-** Pros: Simple to implement.
-** Cons: Does not strictly follow the Object-Oriented paradigm.
-* *Alternative 2:* Re-implement the `JelphaBot` component.
-** Pros: Adaptable to future changes and follows the OOP paradigm.
 
 // tag::summary[]
 === Summary feature

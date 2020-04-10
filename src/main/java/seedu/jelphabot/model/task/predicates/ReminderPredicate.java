@@ -35,8 +35,6 @@ public class ReminderPredicate extends TaskIsIncompletePredicate {
         int reminderKey = -1;
         for (int i = 0; i < taskList.size(); i++) {
             if (taskList.get(i).equals(task)) {
-                logger.info("reached reminderpredicate");
-                logger.info("" + taskList.get(i));
                 reminderKey = i;
                 break;
             }
@@ -63,23 +61,11 @@ public class ReminderPredicate extends TaskIsIncompletePredicate {
      */
     public boolean shouldBeReminded(Task task, Reminder reminder) {
         LocalDateTime taskDateTime = task.getDateTime().getDateTime();
-        //logger.info("" + taskDateTime);
-        //logger.info("shouldBeReminded " + taskDateTime.minusDays(reminder.getDaysToRemind().getReminderDay())
-        //                                     .isAfter(currDateTime));
-        //logger.info("shouldBeReminded1 " + taskDateTime
-        //                                       .minusHours(reminder.getHoursToRemind()
-        //                                                       .getReminderHour())
-        //                                      .isAfter(currDateTime));
-        //logger.info("shouldBeReminded2 " + taskDateTime
-        //                                       .minusDays(reminder.getDaysToRemind()
-        //                                                      .getReminderDay())
-        //                                       .isBefore(currDateTime));
         if (taskDateTime.isBefore(currDateTime)) {
             return true;
         }
         if (taskDateTime.minusDays(reminder.getDaysToRemind().getReminderDay())
                 .isBefore(currDateTime)) {
-            logger.info("here");
             return true;
         } else {
             return taskDateTime.minusHours(reminder.getHoursToRemind().getReminderHour()).isBefore(currDateTime);
