@@ -1304,7 +1304,7 @@ Error message is shown in Results Display.
 .. In any other tab, switch to Productivity with `:p`, `:P` or `productivity`. +
 Expected: Success message is shown in the Results Display.
 
-// @@Author yaojiethng
+// @@author yaojiethng
 === Adding a Task
 
 . Adding a new task to a cleared list
@@ -1327,7 +1327,7 @@ Expected: No task is added. Error message with correct format of date command. +
 .. Other incorrect add commands to try: other parameters are wrongly formatted. +
 Eg. non-alphanumeric characters in description or tag, invalid priority, module codes not complying to NUS format (2-3 Alphabets, 4 numbers, one optional letter) +
 Expected: Similar to previous.
-// @@Author
+// @@author
 
 === Editing a Task
 
