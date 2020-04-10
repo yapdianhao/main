@@ -9,8 +9,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import seedu.jelphabot.commons.core.LogsCenter;
 import seedu.jelphabot.commons.util.DateUtil;
 import seedu.jelphabot.model.calendar.CalendarDate;
