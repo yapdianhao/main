@@ -60,14 +60,8 @@ https://github.com/AY1920S2-CS2103T-F09-2/main/pull/170[#170]
 ** Added documentation and sequence diagrams for SummaryCommand to Developer Guide: https://github.com/AY1920S2-CS2103T-F09-2/main/pull/294[#294], https://github.com/AY1920S2-CS2103T-F09-2/main/pull/336[#336]
 * Community:
 ** PRs reviewed: https://github.com/AY1920S2-CS2103T-F09-2/main/pull/32[#32]
-** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
-** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
-** Some parts of the history feature I added was adopted by several other class mates (https://github.com[1], https://github.com[2])
-
-_{you can add/remove categories in the list above}_
 
 == Contributions to the User Guide
-
 
 |===
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
