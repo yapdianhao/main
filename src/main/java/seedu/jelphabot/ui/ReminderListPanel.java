@@ -1,3 +1,4 @@
+//@@ author yapdianhao
 package seedu.jelphabot.ui;
 
 import java.util.logging.Logger;
@@ -9,7 +10,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.Region;
 import seedu.jelphabot.commons.core.LogsCenter;
-import seedu.jelphabot.model.reminder.Reminder;
+import seedu.jelphabot.model.reminder.ReminderShowsTask;
 
 /**
  * The Reminder List Panel. Provides the basic application layout of productivity of reminders.
@@ -24,13 +25,13 @@ public class ReminderListPanel extends UiPart<Region> {
     private TabPane mainWindowTabPane;
 
     @FXML
-    private ListView<Reminder> reminderListView;
+    private ListView<ReminderShowsTask> reminderListView;
 
-    public ReminderListPanel(ObservableList<Reminder> reminderList, TabPane tabPane) {
+    public ReminderListPanel(ObservableList<ReminderShowsTask> reminderShowsTaskList, TabPane tabPane) {
         super(FXML);
         logger.info("" + reminderListView + "here");
         this.mainWindowTabPane = tabPane;
-        reminderListView.setItems(reminderList);
+        reminderListView.setItems(reminderShowsTaskList);
         reminderListView.setCellFactory(listView -> new ReminderListPanel.ReminderListViewCell());
     }
 
@@ -52,16 +53,16 @@ public class ReminderListPanel extends UiPart<Region> {
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Reminder} using a {@code ReminderCard}.
      */
-    static class ReminderListViewCell extends ListCell<Reminder> {
+    static class ReminderListViewCell extends ListCell<ReminderShowsTask> {
         @Override
-        protected void updateItem(Reminder reminder, boolean empty) {
-            super.updateItem(reminder, empty);
+        protected void updateItem(ReminderShowsTask reminderShowsTask, boolean empty) {
+            super.updateItem(reminderShowsTask, empty);
 
-            if (empty || reminder == null) {
+            if (empty || reminderShowsTask == null) {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new ReminderCard(reminder).getRoot());
+                setGraphic(new ReminderCard(reminderShowsTask).getRoot());
             }
         }
     }

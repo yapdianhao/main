@@ -1,6 +1,8 @@
+//@@author yapdianhao
 package seedu.jelphabot.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.jelphabot.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_REMIND_DAY;
 import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_REMIND_HOUR;
 
@@ -33,12 +35,13 @@ public class ReminderCommand extends Command {
                                                    + "DAYS TO REMIND (between 0 and 7)]\n"
                                                    + "    " + "[" + PREFIX_REMIND_HOUR
                                                    + "HOURS TO REMIND (between 0 and 24)]\n";
+    public static final String MESSAGE_SWITCH_PANEL_ACKNOWLEDGEMENT = "Switched to reminder panel.";
+
     private final Reminder reminder;
     private final Index index;
 
     public ReminderCommand(Index index, Reminder reminder) {
-        requireNonNull(index);
-        requireNonNull(reminder);
+        requireAllNonNull(index, reminder);
         this.index = index;
         this.reminder = reminder;
     }

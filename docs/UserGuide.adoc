@@ -47,7 +47,6 @@ As seen from above, JelphaBot has four tabs; Summary, Task List, Calendar and Pr
 You can switch between tabs anytime by pressing kbd:[Ctrl] + kbd:[Tab] on your keyboard to move to the tab on the right.
 If you are already on the rightmost tab, it wraps around to the leftmost tab.
 
-// TODO: add a walkthrough for users? like a mini demo with steps.
 Interested? Jump to the <<Quick Start>> to get started.
 Enjoy!
 
@@ -79,6 +78,7 @@ a| kbd:[Key] | A Key that you should press on your keyboard
 a| icon:lightbulb-o[role="icon-tip", size="2x"] | Tips and tricks that might be useful
 a| icon:info-circle[role="icon-note", size="2x"] | Additional information that is good to know
 a| icon:exclamation-circle[role="icon-important", size="2x"] | Important pointers to take note of
+a| <<blue text underlined>> | Links
 endif::[]
 // also known as TIP, NOTE, WARNING
 |=======================================================================
@@ -233,7 +233,7 @@ image::ug_figures/addCommand.png[width="600"]
 * Values that p/PRIORITY can take are -1, 0 or 1.
 ****
 
-[IMPORTANT]
+[WARNING]
 Format of the month in DATETIME (MMM) input has to have the first letter in upper-case. +
 E.g `Mar` instead of `mar` when specifying the month of March.
 
@@ -497,7 +497,7 @@ image::CalendarView.png[width="600"]
 
 Displays month of May in the year 2020 in the calendar panel on the right.
 
-[IMPORTANT]
+[WARNING]
 Format of the month in MONTHYEAR (MMM) input has to have the first letter in upper-case. +
 E.g `Mar` instead of `mar` when specifying the month of March.
 
@@ -557,10 +557,9 @@ Shortcut: `:P` or `:p`
 .Example of expected result after running `productivity`
 image::ug_figures/ProductivityTab.png[width="600"]
 
-****
-// TODO: add exclamation
-* The progress bar and the text following it only shows tasks that are due on the day JelphaBot is running.
-****
+[NOTE]
+The progress bar and the text following it only shows tasks that are due on the day JelphaBot is running.
+
 ==== Starting timer for a task : `start`
 
 You can start a timer running for a task. +
@@ -607,6 +606,13 @@ There is no need to manually request for compliments or criticism.
 // end::feedback[]
 
 === Set Reminders and Notifications (Dian Hao)
+Apart from the function to switch tabs by pressing kbd:[Ctrl] + kbd:[tab] on your keyboard, you can enter the `reminder` command
+or its shortcuts `:r` or `:R` to manually switch to the productivity tab.
+The reminder panel will then show you your lists of upcoming reminders. +
+
+Format: `reminder` +
+Shortcut: `:r` or `:R`
+
 ==== Adding reminder : `reminder`
 You can add a reminder to your specified task to remind yourself of the task if the current time is within the time-frame specified
 by you. +
@@ -709,7 +715,8 @@ e.g. `delete 3`
 * *Exit* : `exit`
 * *Show Completed Tasks*: `show-completed`
 * *Show Incomplete Tasks*: `show-incomplete`
-* *Reminder* : `reminder INDEX days/DAYS hours/HOURS` +
+* *Reminder* : `reminder` or `:r` or `:R`
+* *Add Reminder* : `reminder INDEX days/DAYS hours/HOURS` +
 e.g. `reminder 2 days/1 hours/1`
 * *Delete Reminder* : `delrem INDEX` +
 e.g. `delrem 2`
