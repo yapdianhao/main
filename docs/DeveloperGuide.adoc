@@ -76,12 +76,14 @@ Each component is in charge of a single aspect of the software.
 [TIP]
 The data in JelphaBot is stored as .json files in the `data` subdirectory.
 
+//tag::designarchitecture[]
 [[Design-Architecture]]
 === Architecture
 The *_Architecture Diagram_* given below explains the high-level design of the App.
 
 .Architecture Diagram
 image::ArchitectureDiagram2.png[]
+//end::designarchitecture[]
 
 The *_Architecture Diagram_* given above explains the high-level design of the App. Given below is a quick overview of each component.
 
