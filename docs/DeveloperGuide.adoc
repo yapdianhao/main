@@ -257,7 +257,7 @@ The display panel is updated by calling [.java]#MainWindow#handle{XXX} where XXX
 
 // end::changetab[]
 
-// @@Author yaojiethng
+// @@author yaojiethng
 // tag::taskgroups[]
 === Task Grouping feature in Task List tab (Yao Jie)
 ==== Implementation
@@ -380,7 +380,7 @@ Logic is further abstracted to a higher level and the new class is instanced tog
 Due to the time of writing this Developer guide, the release is nearing V1.4 and time is spent fixing bugs for release instead.
 ** This could be a proposed update in the future.
 // end::taskgroups[]
-// @@Author
+// @@author
 
 // tag::calendar[]
 === Calendar feature (Amanda)
@@ -1278,7 +1278,7 @@ Error message is shown in Results Display.
 .. In any other tab, switch to Productivity with `:p`, `:P` or `productivity`. +
 Expected: Success message is shown in the Results Display.
 
-// @@Author yaojiethng
+// @@author yaojiethng
 === Adding a Task
 
 . Adding a new task to a cleared list
@@ -1301,7 +1301,7 @@ Expected: No task is added. Error message with correct format of date command. +
 .. Other incorrect add commands to try: other parameters are wrongly formatted. +
 Eg. non-alphanumeric characters in description or tag, invalid priority, module codes not complying to NUS format (2-3 Alphabets, 4 numbers, one optional letter) +
 Expected: Similar to previous.
-// @@Author
+// @@author
 
 === Editing a Task
 
@@ -1315,7 +1315,7 @@ Expected: Similar to previous.
 .. Prerequisites: Execute the `add` commands in the previous section.
 .. Complete tasks as per examples given in `edit` command section.
 
-// @@Author yaojiethng
+// @@author yaojiethng
 === Changing the list category
 
 . Displaying tasks by a different category
@@ -1345,7 +1345,7 @@ Expected: List display does not change. Error details shown in the results messa
    Expected: No task is deleted. Error details are shown in the results message.
 .. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) +
    Expected: Similar to previous.
-// @@Author
+// @@author
 
 === Progress Bar visualisation
 
