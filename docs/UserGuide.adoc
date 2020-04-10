@@ -609,6 +609,8 @@ There is no need to manually request for compliments or criticism.
 // end::feedback[]
 // @@author
 
+//@@author yapdianhao
+//tag::reminder[]
 === Set Reminders and Notifications (Dian Hao)
 //Apart from the function to switch tabs by pressing kbd:[Ctrl] + kbd:[tab] on your keyboard, you can enter the `reminder` command
 //or its shortcuts `:r` or `:R` to manually switch to the reminder tab.
@@ -669,6 +671,8 @@ a list of tasks that will expire soon, and tasks that have expired but have not 
 [.text-center]
 .Example of expected result after tasks are being reminded.
 image::ug_figures/reminderpopup.png[width="600"]
+//end::reminder[]
+//@@author
 
 === Colour-code module codes `[coming in v2.0]`
 
