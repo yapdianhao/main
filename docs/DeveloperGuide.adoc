@@ -451,6 +451,11 @@ NOTE: The implementation of the other two calendar commands (`calendar DATE` and
 The only exception is regarding the `calendar DATE` command which fulfills **Function 2** listed above, where the `GridPane` in `CalendarPanel` is not
 altered by running CalendarPanel#fillGridPane() unlike the other two commands fulfilling **Function 1**. Only `CalendarTaskListPanel` is updated.
 
+The following diagram shows the sequence flow for variants of the `calendar XXX` command (XXX is an optional argument) which modifies the `CalendarMainPanel`:
+[[Calendar-ActivityDiagram]]
+.Activity Diagram showing the updating of `CalendarMainPanel`
+image::CalendarCommandActivityDiagram.png[]
+
 ==== Design Considerations
 
 ===== Aspect 1: How the user can navigate between specific dates and change the calendar month view
