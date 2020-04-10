@@ -125,6 +125,7 @@ public class LogicManager implements Logic {
         return new FilteredList<>(filteredTasks, taskIncompletePredicate);
     }
 
+    //@@author eedenong
     public ObservableList<Task> getFilteredByIncompleteDueTodayTaskList() {
         ObservableList<Task> filteredTasks = model.getFilteredTaskList();
         TaskIsIncompletePredicate taskIncompletePredicate = new TaskIsIncompletePredicate();
