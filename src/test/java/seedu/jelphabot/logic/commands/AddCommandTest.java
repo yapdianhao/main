@@ -144,6 +144,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void updateReminderShowsTask() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public List<Task> getTaskListFromJelphaBot() {
             throw new AssertionError("This method should not be called.");
         }

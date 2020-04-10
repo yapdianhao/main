@@ -127,7 +127,7 @@ public class DoneCommandTest {
     }
 
     /**
-     * Updates {@code model}'s filtered list to show no one.
+     * Updates {@code model}'s filtered list to show no task.
      */
     private void showNoTask(Model model) {
         model.updateFilteredTaskList(p -> false);

@@ -1,4 +1,4 @@
-//@@ author yapdianhao
+//@@author yapdianhao
 package seedu.jelphabot.ui;
 
 import javafx.beans.binding.NumberBinding;

@@ -38,12 +38,12 @@ image::MainUi.png[width="600"]
 
 The function of each component is as follows:
 
-1. *Tabs Panel*: This is where you can navigate between the different features located in various tabs.
+1. *Tabs Pane*: This is where you can navigate between the different features located in various tabs.
 2. *Main Panel*: This is the main display screen which corresponds to the tab it is under.
 3. *Results Display*: This is where JelphaBot interacts with you by showing you the results of your commands!
 4. *Command Box*: This is where you key in your commands.
 
-As seen from above, JelphaBot has four tabs; Summary, Task List, Calendar and Productivity.
+As seen from above, JelphaBot has five tabs; Summary, Task List, Calendar Productivity and Reminder.
 You can switch between tabs anytime by pressing kbd:[Ctrl] + kbd:[Tab] on your keyboard to move to the tab on the right.
 If you are already on the rightmost tab, it wraps around to the leftmost tab.
 
@@ -271,20 +271,20 @@ Format: `list date`
 
 Group your tasks into the following categories:
 
-* *Pinned* (Coming in V2.0) +
+* *Pinned* [Coming in V2.0] +
 (Pinned tasks will always be displayed at the top.
 To read more about pinning tasks, go <<#pin, here>>)
 * *Overdue*  +
-(Shows tasks which are incomplete and past their due date)
+(Shows tasks which are past their due date)
 * *Due Today* +
-(Shows tasks due by the end of the day)
+(Shows tasks not overdue and due by the end of the current day)
 * *Due This Week* +
-(Shows tasks due by the end of the week, defined as before the next upcoming Monday)
+(Shows tasks due within the next seven days)
 * *Due Sometime* +
 (Shows all other tasks that do not fit into prior categories)
 
 [.text-center]
-.Example of an expected result after running `list module`
+.Example of an expected result after running `list date`
 image::ug_figures/listByDate.png[width="600"]
 
 ===== Group Tasks by Module : `list module`
@@ -462,6 +462,7 @@ Valid `SORTING_ORDER` values include `date`, `module`, and `priority`.
 // end::ug-pin-sort[]
 // @@author
 
+// tag::calendar[]
 === Calendar (Amanda)
 
 JelphaBot also comes with a built-in calendar view that allows you to view your overarching tasks due on a monthly basis.
@@ -545,7 +546,9 @@ Examples:
 image::CalendarToday.png[width="600"]
 
 Displays month of April in the year 2020 in the calendar panel on the right, with today's date highlighted and displays the corresponding tasks due today on the left.
+// end::calendar[]
 
+// @@author Clouddoggo
 // tag::productivitytracker[]
 === Productivity Tracking (Jel)
 JelphaBot also comes with a productivity tracking that allows you track the progress of your tasks in that week.
@@ -599,7 +602,7 @@ image::ug_figures/stopCommand.png[width="600"]
 * The index refers to the index number shown in the displayed task list.
 * The index *must be a positive integer* 1, 2, 3, ...
 * Timer entry under "Running Timer(s)" in the productivity tab will be removed if execution is successful.
-* If task timed is due today or in next 6 days, time spent on timed task will be added to the respected time spent sections in the productivity tab.
+* Time spent on timed task will be added to the respected time spent section in the productivity tab.
 ****
 // end::productivitytracker[]
 
@@ -610,14 +613,15 @@ JelphaBot automatically tracks the user's productivity in a day and outputs the 
 achievements and task completion rate. +
 There is no need to manually request for compliments or criticism.
 // end::feedback[]
+// @@author
 
 === Set Reminders and Notifications (Dian Hao)
-Apart from the function to switch tabs by pressing kbd:[Ctrl] + kbd:[tab] on your keyboard, you can enter the `reminder` command
-or its shortcuts `:r` or `:R` to manually switch to the productivity tab.
-The reminder panel will then show you your lists of upcoming reminders. +
-
-Format: `reminder` +
-Shortcut: `:r` or `:R`
+//Apart from the function to switch tabs by pressing kbd:[Ctrl] + kbd:[tab] on your keyboard, you can enter the `reminder` command
+//or its shortcuts `:r` or `:R` to manually switch to the reminder tab.
+//The reminder panel will then show you your lists of upcoming reminders. +
+//
+//Format: `reminder` +
+//Shortcut: `:r` or `:R`
 
 ==== Adding reminder : `reminder`
 You can add a reminder to your specified task to remind yourself of the task if the current time is within the time-frame specified
@@ -674,6 +678,7 @@ image::ug_figures/reminderpopup.png[width="600"]
 
 === Colour-code module codes `[coming in v2.0]`
 
+// @@author Clouddoggo
 // tag::faq[]
 == FAQ
 
@@ -698,6 +703,7 @@ We will consider this in v2.0.
 *Q6*: Do I need an Internet connection to use JelphaBot? +
 A: No, you don’t. JelphaBot works completely offline.
 // end::faq[]
+// @@author
 
 // tag::commandSummary[]
 == Command Summary
@@ -721,7 +727,7 @@ e.g. `delete 3`
 * *Exit* : `exit`
 * *Show Completed Tasks*: `show-completed`
 * *Show Incomplete Tasks*: `show-incomplete`
-* *Reminder* : `reminder` or `:r` or `:R`
+//* *Reminder* : `reminder` or `:r` or `:R`
 * *Add Reminder* : `reminder INDEX days/DAYS hours/HOURS` +
 e.g. `reminder 2 days/1 hours/1`
 * *Delete Reminder* : `delrem INDEX` +

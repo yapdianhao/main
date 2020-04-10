@@ -1,4 +1,4 @@
-//@@ author yapdianhao
+//@@author yapdianhao
 package seedu.jelphabot.model.reminder;
 
 import seedu.jelphabot.model.task.DateTime;
@@ -16,6 +16,8 @@ public class ReminderShowsTask {
     private DateTime dateTime;
     private ReminderDay reminderDay;
     private ReminderHour reminderHour;
+    private Task task;
+    private Reminder reminder;
 
     public ReminderShowsTask(Reminder reminder, Task task) {
         this.description = task.getDescription();
@@ -23,6 +25,8 @@ public class ReminderShowsTask {
         this.dateTime = task.getDateTime();
         this.reminderDay = reminder.getDaysToRemind();
         this.reminderHour = reminder.getHoursToRemind();
+        this.task = task;
+        this.reminder = reminder;
     }
 
     public Description getDescription() {
@@ -45,6 +49,13 @@ public class ReminderShowsTask {
         return this.reminderHour;
     }
 
+    public Reminder getReminder() {
+        return this.reminder;
+    }
+
+    public Task getTask() {
+        return this.task;
+    }
     /**
      * Check if another object is equal to this ReminderShowsTask object.
      * @param other
@@ -53,10 +64,7 @@ public class ReminderShowsTask {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                    || (other instanceof ReminderShowsTask // instanceof handles nulls
-                           && description.equals(((ReminderShowsTask) other).description)
-                           && moduleCode.equals(((ReminderShowsTask) other).description)
-                           && dateTime.equals(((ReminderShowsTask) other).dateTime)
-                           && reminderDay.equals(((ReminderShowsTask) other).reminderDay)
-                           && reminderHour.equals(((ReminderShowsTask) other).reminderHour)); // state check
+                           && reminder.equals(((ReminderShowsTask) other).reminder)
+                           && task.equals(((ReminderShowsTask) other).task)); // state check
     }
 }
