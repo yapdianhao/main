@@ -5,6 +5,8 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * Class to generate updated dates for SampleDataUtil.
+ *
+ * @@author yaojiethng
  */
 public class SampleDateUtil {
     private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MMM-d-yyyy HH mm");

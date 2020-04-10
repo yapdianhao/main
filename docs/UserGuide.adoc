@@ -2,6 +2,7 @@
 :site-section: UserGuide
 :toc:
 :toc-title:
+:toclevels: 4
 :toc-placement: preamble
 :sectnums:
 :imagesDir: images
@@ -37,7 +38,7 @@ image::MainUi.png[width="600"]
 
 The function of each component is as follows:
 
-1. *Tabs Panel*: This is where you can navigate between the different features located in various tabs.
+1. *Tabs Pane*: This is where you can navigate between the different features located in various tabs.
 2. *Main Panel*: This is the main display screen which corresponds to the tab it is under.
 3. *Results Display*: This is where JelphaBot interacts with you by showing you the results of your commands!
 4. *Command Box*: This is where you key in your commands.
@@ -79,7 +80,7 @@ a| icon:info-circle[role="icon-note", size="2x"] | Additional information that i
 a| icon:exclamation-circle[role="icon-important", size="2x"] | Important pointers to take note of
 a| <<blue text underlined>> | Links
 endif::[]
-// also known as TIP, NOTE,
+// also known as TIP, NOTE, WARNING
 |=======================================================================
 
 == Quick Start
@@ -167,13 +168,14 @@ Once a task under the Due Today tab is marked as done, it will appear under the 
 .Expected view of the Summary tab after completing the task, ACC1101 Tutorial 4
 image::ug_figures/SummaryViewAfterTaskComplete.png[width="600"]
 
+// @@Author yaojiethng
+// tag::tasklist[]
 === Managing Tasks (Yao Jie)
 
 JelphaBot allows you to track and manage your tasks comprehensively as well!
 You can view and sort all your tasks from the Task List page.
 
-Apart from the function to switch tabs by pressing kbd:[Ctrl] + kbd:[tab] on your keyboard, you can enter the `list` command
-or its shortcuts `:T` or `:t` to manually switch to the task list tab.
+Apart from the function to switch tabs by pressing kbd:[Ctrl] + kbd:[tab] on your keyboard, you can enter the `list` command or its shortcuts `:T` or `:t` to manually switch to the task list tab.
 The task list panel will then display all your tasks sorted into various sections. +
 
 Format: `list` +
@@ -196,8 +198,9 @@ e.g. `[t/TAG]...` can be used as `t/project`, `t/project t/graded` etc.
 
 ==== Reading the Task List
 
-The task list is formatted so that you can distinguish urgent tasks at first glance. The start of every task is labelled
-with a module code so that you can visually categorize them. Tasks are tagged according to their importance:
+The task list is formatted so that you can distinguish urgent tasks at first glance.
+The start of every task is labelled with a module code so that you can visually categorize them.
+Tasks are tagged according to their importance:
 
 * Default priority
 * *High Priority* tasks will be *bolded* to denote important tasks.
@@ -205,6 +208,8 @@ with a module code so that you can visually categorize them. Tasks are tagged ac
 
 The start of every task will be labelled with a module code so that you can visually categorize them. +
 Go <<#add, here>> to read more about adding tasks with priority and <<#edit, here>> for editing task priority.
+// end::tasklist[]
+// @@Author
 
 // tag::add[]
 [[add]]
@@ -242,6 +247,7 @@ Examples:
 * `add d/Project TP dt/Jan-01-2020 23 59 m/CS2103T p/1 t/pair work`
 // end::add[]
 
+// @@Author yaojiethng
 // tag::list[]
 ==== Listing all Tasks : `list`
 
@@ -286,6 +292,7 @@ Format: `list module`
 .Example of an expected result after running `list module`
 image::ug_figures/listByModule.png[width="600"]
 // end::list[]
+// @@Author
 
 ==== Locating Tasks by name: `find`
 
@@ -357,8 +364,8 @@ image::ug_figures/doneCommand.png[width="600"]
 * The index *must be a positive integer* 1, 2, 3, ...
 ****
 
-// tag::delete[]
 ==== Deleting a Task : `delete`
+// tag::delete[]
 
 Delete a task from your task list. +
 Format: `delete INDEX`
@@ -431,31 +438,33 @@ image::ug_figures/showCompletedCommandNoCompleted.png[width="600"]
 
 // end::showincomplete[]
 
-// tag::pin[]
+// @@Author yaojiethng
+// tag::ug-pin-sort[]
 [[pin]]
-==== Pin Important Tasks  : `pin` (Coming in V1.4)
+==== Pin Important Tasks  : `pin` [Coming in V2.0]
 
 You can pin important tasks to the top of the task list with the `pin` command. +
 Pinned tasks will always be displayed in the Pinned Tasks group in the task list. +
 Trying to `pin` a task that is already pinned will unpin it.
 
-// end::pin[]
-
-==== Sort Tasks : `sort`  [coming in v2.0]
+==== Sort Tasks : `sort`  [Coming in v2.0]
 
 You can change how tasks are sorted with the `sort` command.
 Format: `sort SORTING_ORDER`
 
 Valid `SORTING_ORDER` values include `date`, `module`, and `priority`.
+// end::ug-pin-sort[]
+// @@Author
 
 === Calendar (Amanda)
+
 JelphaBot also comes with a built-in calendar view that allows you to view your overarching tasks due on a monthly basis.
 Dates that have tasks due would have a dot indicator shown on the calendar.
 You would also be able to navigate to specific dates to view your tasks due for that day of the month!
 
 ==== View calender : `calendar`
-Apart from the function to switch tabs by pressing kbd:[Ctrl] + kbd:[tab] on your keyboard, you can enter the `calendar` command
-or its shortcuts `:C` or `:c` to manually switch to the calendar tab.
+
+Apart from the function to switch tabs by pressing kbd:[Ctrl] + kbd:[tab] on your keyboard, you can enter the `calendar` command or its shortcuts `:C` or `:c` to manually switch to the calendar tab.
 The calendar panel will then show you your schedule for the current month with today's date highlighted. +
 
 Format: `calendar` +
@@ -531,6 +540,7 @@ image::CalendarToday.png[width="600"]
 
 Displays month of April in the year 2020 in the calendar panel on the right, with today's date highlighted and displays the corresponding tasks due today on the left.
 
+// @@author Clouddoggo
 // tag::productivitytracker[]
 === Productivity Tracking (Jel)
 JelphaBot also comes with a productivity tracking that allows you track the progress of your tasks in that week.
@@ -595,6 +605,7 @@ JelphaBot automatically tracks the user's productivity in a day and outputs the 
 achievements and task completion rate. +
 There is no need to manually request for compliments or criticism.
 // end::feedback[]
+// @@author
 
 === Set Reminders and Notifications (Dian Hao)
 //Apart from the function to switch tabs by pressing kbd:[Ctrl] + kbd:[tab] on your keyboard, you can enter the `reminder` command
@@ -659,6 +670,7 @@ image::ug_figures/reminderpopup.png[width="600"]
 
 === Colour-code module codes `[coming in v2.0]`
 
+// @@author Clouddoggo
 // tag::faq[]
 == FAQ
 
@@ -683,6 +695,7 @@ We will consider this in v2.0.
 *Q6*: Do I need an Internet connection to use JelphaBot? +
 A: No, you don’t. JelphaBot works completely offline.
 // end::faq[]
+// @@author
 
 // tag::summary[]
 == Command Summary
