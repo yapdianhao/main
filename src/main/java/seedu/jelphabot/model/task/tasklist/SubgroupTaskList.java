@@ -7,6 +7,8 @@ import seedu.jelphabot.model.task.Task;
 
 /**
  * Wrapper class for a ObservableList Tasks.
+ *
+ * @@author yaojiethng
  */
 public class SubgroupTaskList {
     private final String groupName;

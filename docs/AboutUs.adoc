@@ -11,8 +11,9 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 == Project Team
 
 === Yao Jie Thng
-image::yaojiethng.png[width="150", align="left"]
-{empty}[http://github.com/yaojiethng[github]] [<<johndoe#, portfolio>>]
+
+image::yaojiethng.png[width="150",align="left"]
+{empty}[http://github.com/yaojiethng[github]] [<<yaojiethng#, portfolio>>]
 
 Role: Team lead +
 Responsibilities: Integration
@@ -20,7 +21,8 @@ Responsibilities: Integration
 '''
 
 === Jel Lim
-image::clouddoggo.png[width="150", align="left"]
+
+image::clouddoggo.png[width="150",align="left"]
 {empty}[https://github.com/Clouddoggo[github]] [<<johndoe#, portfolio>>]
 
 Role: Team Member +
