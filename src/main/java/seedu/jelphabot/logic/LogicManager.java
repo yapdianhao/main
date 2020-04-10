@@ -95,7 +95,6 @@ public class LogicManager implements Logic {
         return model.getFilteredCalendarTaskList();
     }
 
-    //@@author eedenong
     @Override
     public ObservableList<Task> getFilteredByCompleteTaskList() {
         ObservableList<Task> filteredTasks = model.getFilteredTaskList();
@@ -103,7 +102,6 @@ public class LogicManager implements Logic {
         return new FilteredList<>(filteredTasks, predicate);
     }
 
-    //@@author eedenong
     @Override
     public ObservableList<Task> getFilteredByCompletedTodayTaskList() {
         ObservableList<Task> filteredTasks = model.getFilteredTaskList();
@@ -120,7 +118,6 @@ public class LogicManager implements Logic {
         return model.getFilteredTaskList().filtered(reminderPredicate);
     }
 
-    //@@author eedenong
     @Override
     public ObservableList<Task> getFilteredByIncompleteTaskList() {
         ObservableList<Task> filteredTasks = model.getFilteredTaskList();

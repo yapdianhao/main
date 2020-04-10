@@ -278,12 +278,11 @@ The implementation of this panel is facilitated by the `summary` package.
 Upon creation, the `Summary` object obtains the main task list from `Model`.
 The task list is then filtered with the help of `TaskDueWithinDayAndIncompletePredicate` and `TaskCompletedWithinDayPredicate` to obtain two lists with the desired tasks.
 
-
 These lists  are stored as fields in the `Summary` class and are used to display the relevant information in the summary panel.
 
-
-//Insert class diagram here
-
+.Class diagram of structure and relations of `Summary`, `SummaryPanel` and their components.
+[[SummaryPanelClassDiagram]]
+image::SummaryPanelClassDiagram.png[]
 To view the respective tasks, the user enters the `summary` command.
 
 .Sequence diagram of execution of the `summary` command
