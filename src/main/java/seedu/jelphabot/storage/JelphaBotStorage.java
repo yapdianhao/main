@@ -51,7 +51,7 @@ public interface JelphaBotStorage {
      * @param jelphaBot cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveJelphaBot(ReadOnlyJelphaBot jelphaBot, boolean isReminder) throws IOException;
+    //void saveJelphaBot(ReadOnlyJelphaBot jelphaBot, boolean isReminder) throws IOException;
 
     /**
      * @see #saveJelphaBot(ReadOnlyJelphaBot)
