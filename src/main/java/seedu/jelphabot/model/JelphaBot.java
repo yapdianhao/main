@@ -140,6 +140,18 @@ public class JelphaBot implements ReadOnlyJelphaBot {
     }
     //// util methods
 
+    public void addReminderShowsTask(Reminder reminder, ViewTaskList lastShownList) {
+        Task task = lastShownList.get(reminder.getIndex().getZeroBased());
+        ReminderShowsTask reminderShowsTask = new ReminderShowsTask(reminder, task);
+        reminderShowsTaskList.add(reminderShowsTask);
+    }
+
+    public void deleteReminderShowsTask(Reminder reminder, ViewTaskList lastShownList) {
+        Task task = lastShownList.get(reminder.getIndex().getZeroBased());
+        ReminderShowsTask reminderShowsTask = new ReminderShowsTask(reminder, task);
+        reminderShowsTaskList.remove(reminderShowsTask);
+    }
+
     @Override
     public String toString() {
         return tasks.asUnmodifiableObservableList().size() + " tasks";
@@ -166,13 +178,19 @@ public class JelphaBot implements ReadOnlyJelphaBot {
 
 
     public ObservableList<ReminderShowsTask> getReminderShowsTaskList(ViewTaskList viewTaskList) {
+        return reminderShowsTaskList.asUnmodifiableObservableList();
+    }
+
+    /**
+     * Updates the reminder list panel after adding / delete a reminder.
+     */
+    public void updateReminderShowsTask(ViewTaskList viewTaskList) {
         for (Reminder reminder : getReminderList()) {
             int idx = reminder.getIndex().getZeroBased();
             Task currTask = viewTaskList.get(idx);
             ReminderShowsTask reminderShowsTask = new ReminderShowsTask(reminder, currTask);
             reminderShowsTaskList.add(reminderShowsTask);
         }
-        return reminderShowsTaskList.asUnmodifiableObservableList();
     }
 
     @Override
