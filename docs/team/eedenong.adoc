@@ -58,6 +58,7 @@ https://github.com/AY1920S2-CS2103T-F09-2/main/pull/170[#170]
 ** Replaced the Model class diagrams of the User Guide to make them the consistent with the structure of JelphaBot: https://github.com/AY1920S2-CS2103T-F09-2/main/pull/189[#189]
 ** Added documentation for SummaryCommand, ShowCompletedCommand and ShowIncompleteCommand in User Guide: https://github.com/AY1920S2-CS2103T-F09-2/main/pull/189[#189]
 ** Added documentation and sequence diagrams for SummaryCommand to Developer Guide: https://github.com/AY1920S2-CS2103T-F09-2/main/pull/294[#294], https://github.com/AY1920S2-CS2103T-F09-2/main/pull/336[#336]
+** Added Use Cases UC4 to UC6: https://github.com/AY1920S2-CS2103T-F09-2/main/pull/58[#58]
 * Community:
 ** PRs reviewed: https://github.com/AY1920S2-CS2103T-F09-2/main/pull/32[#32]
 

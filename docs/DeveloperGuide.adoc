@@ -300,10 +300,28 @@ image::SummaryCommandSequenceDiagram.png[]
 
 ===== Aspect 1: The summary panel depends on the creation of new `Summary` objects to be updated
 
-* *Current solution*: Each time
+* *Current solution*: Each time `DoneCommand` is executed, a new Summary object is to be created, and along with it the task lists
+contained inside the `Summary` object is updated and displayed on the summary panel as an updated list.
+** Pros: Easy to implement. Scalable when there are more things are to be displayed on the summary panel.
+** Cons: Consecutive `done` commands are expensive, as the lists in the `Summary` object are reinitialised upon every `done` command.
+
+* *Alternative 1*: Have a single `Summary` object with underlying task list listeners to update the relevant task lists
+** Pros: Only one `Summary` object will have to be created for the duration the application is open. The task lists in the `Summary` object
+do not have to be reinitialised upon every `done` command.
+** Cons: May not be scalable if there are many things to be added to the summary panel in the future, as this will require more listeners,
+and the presence of many listeners may affect the performance of the application.
 
 ===== Aspect 2: Summary panel aesthetic improvements
 
+* *Current solution*: The Welcome header, tasks due today and tasks completed subsections have the same font and styling. The distinction between them
+is by the bigger font for the Welcome header, and the space separation between the subsections. Everything shown on the panel is shown as plain text, with no
+additional styling.
+** Pros: This gives the summary panel a minimal look that is simple and easy to look at, while still providing the user with the relevant information that is needed.
+** Cons: Due to the implementation of the subsections as separate boxes of equal sizes that are scaled to fit the panel, there is a lot of unused space in between each subsection, if there
+are not enough tasks to fill in the space. This can be seen as a waste of space.
+* *Alternative 1*: Add font styling and section highlighting to different sections of the summary panel
+** Pros: Makes the summary panel more visually appealing, and makes each subsection more distinct from each other.
+** Cons: Does not solve the problem of unused space when there are not enough tasks to fill the space in each subsection.
 // end::summary[]
 
 // tag::taskgroups[]
