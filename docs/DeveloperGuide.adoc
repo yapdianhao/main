@@ -662,6 +662,11 @@ The following sequence diagram details the execution of the creation of the Summ
 
 .Sequence diagram of the creation of SummaryCommand.
 image::SummaryCommandSequenceDiagram.png[]
+
+
+==== Design Considerations
+
+===== Aspect 1:
 // end::summary[]
 
 
