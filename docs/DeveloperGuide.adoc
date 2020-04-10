@@ -382,7 +382,6 @@ Due to the time of writing this Developer guide, the release is nearing V1.4 and
 // end::taskgroups[]
 // @@author
 
-//@@author alam8064
 // tag::calendar[]
 === Calendar feature (Amanda)
 
@@ -482,7 +481,6 @@ in the calendar panel would be re-filtered after the execution of each command.
 ** Cons: Implementation would be much more complex.
 ** Cons: Updating of this HashMap of the tasks as the main task list is being edited constantly can be very tedious.
 // end::calendar[]
-//@@author alam8064
 
 // tag::productivity[]
 === Productivity feature (Jel)
@@ -1389,7 +1387,6 @@ Expected: No timer stopped. Error details shown in the results message.
 .. Other incorrect stop commands to try: `stop`, `stop x` (where x is larger than the list size or is index of task without running timer) +
 Expected: Similar to previous.
 
-//@@author alam8064
 === View Tasks due on a specific Date
 
 . Input a date belonging to the current calendar month to view tasks due
@@ -1425,7 +1422,6 @@ Task(s) due on the first day of May will be displayed with results message displ
 If there are no tasks due, no tasks would be displayed.
 .. Test case: `calendar MAy-2020` +
 Expected: Error message due to the invalid format for the input month and year would be displayed in the results message.
-//@@author
 
 // TODO add more
 
