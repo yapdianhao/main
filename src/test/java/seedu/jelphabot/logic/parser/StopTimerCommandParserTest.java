@@ -1,13 +1,13 @@
 package seedu.jelphabot.logic.parser;
 
-import org.junit.jupiter.api.Test;
-
-import seedu.jelphabot.logic.commands.StopTimerCommand;
-
 import static seedu.jelphabot.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.jelphabot.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.jelphabot.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.jelphabot.testutil.TypicalIndexes.INDEX_FIRST_TASK;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.jelphabot.logic.commands.StopTimerCommand;
 
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations

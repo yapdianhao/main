@@ -3,6 +3,7 @@ package seedu.jelphabot.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.jelphabot.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.jelphabot.commons.core.Messages.MESSAGE_INVALID_YEARMONTH_FORMAT;
 import static seedu.jelphabot.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.jelphabot.testutil.Assert.assertThrows;
 import static seedu.jelphabot.testutil.TypicalIndexes.INDEX_FIRST_TASK;
@@ -123,10 +124,9 @@ public class JelphaBotParserTest {
         assertTrue(parser.parseCommand(CalendarCommand.COMMAND_SHORTCUT_UPPER) instanceof CalendarCommand);
         assertTrue(parser.parseCommand(CalendarCommand.COMMAND_WORD + " May-2020") instanceof CalendarCommand);
         assertTrue(parser.parseCommand(CalendarCommand.COMMAND_WORD + " Apr-1-2020") instanceof CalendarCommand);
-        // TODO: fix this test
-        // assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-        //     CalendarCommand.MESSAGE_USAGE), ()
-        //         -> parser.parseCommand(CalendarCommand.COMMAND_WORD + " apr"));
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_YEARMONTH_FORMAT,
+            CalendarCommand.MESSAGE_USAGE), ()
+                -> parser.parseCommand(CalendarCommand.COMMAND_WORD + " apr"));
     }
 
     @Test
