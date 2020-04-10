@@ -76,6 +76,7 @@ public class LogicManager implements Logic {
 
     @Override
     public ObservableList<ReminderShowsTask> getReminderShowsTaskList() {
+        model.updateReminderShowsTask();
         return model.getReminderShowsTaskList();
     }
 

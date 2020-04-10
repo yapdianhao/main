@@ -175,4 +175,6 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredCalendarTaskList(Predicate<Task> predicate);
+
+    void updateReminderShowsTask();
 }
