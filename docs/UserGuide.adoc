@@ -735,4 +735,4 @@ e.g. `calendar Jan-1-2020`
 * *Change Calendar View* : `calendar MONTHYEAR` +
 e.g. `calendar Apr-2020`
 * *Today's Calendar View* : `calendar today`
-// end::summary[]
+// end::commandSummary[]
