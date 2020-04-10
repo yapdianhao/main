@@ -19,7 +19,7 @@ import seedu.jelphabot.model.UserPrefs;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and
- * RedoCommand) and unit tests for {@code DeleteCommand}.
+ * RedoCommand) and unit tests for {@code StopTimerCommand}.
  */
 class StopTimerCommandTest {
 

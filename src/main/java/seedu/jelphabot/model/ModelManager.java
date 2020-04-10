@@ -114,8 +114,7 @@ public class ModelManager implements Model {
         userPrefs.setJelphaBotReminderFilePath(reminderFilePath);
     }
 
-    // =========== JelphaBot
-    // ================================================================================
+    // =========== JelphaBot ==================================================
 
     @Override
     public ReadOnlyJelphaBot getJelphaBot() {
@@ -146,7 +145,9 @@ public class ModelManager implements Model {
 
     @Override
     public void deleteReminder(Reminder reminder) {
+        readOnlyJelphaBot.deleteReminderShowsTask(reminder, getLastShownList());
         readOnlyJelphaBot.removeReminder(reminder);
+        //updateReminderShowsTask();
     }
 
     @Override
@@ -157,7 +158,13 @@ public class ModelManager implements Model {
 
     @Override
     public void addReminder(Reminder reminder) {
+        readOnlyJelphaBot.addReminderShowsTask(reminder, getLastShownList());
         readOnlyJelphaBot.addReminder(reminder);
+        //updateReminderShowsTask();
+    }
+
+    public void updateReminderShowsTask() {
+        readOnlyJelphaBot.updateReminderShowsTask(getLastShownList());
     }
 
     @Override

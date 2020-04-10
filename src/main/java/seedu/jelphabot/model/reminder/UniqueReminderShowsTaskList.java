@@ -47,6 +47,17 @@ public class UniqueReminderShowsTaskList implements Iterable<ReminderShowsTask> 
         internalList.add(toAdd);
     }
 
+    /**
+     * Removes the equivalent reminder from the list.
+     * The reminder must exist in the list.
+     */
+    public void remove(ReminderShowsTask toRemove) {
+        requireNonNull(toRemove);
+        if (!internalList.remove(toRemove)) {
+            //throw new ReminderNotFoundException();
+        }
+    }
+
     public ObservableList<ReminderShowsTask> asUnmodifiableObservableList() {
         return internalUnmodifiableList;
     }
