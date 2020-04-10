@@ -14,7 +14,8 @@
     {
       "githubId": "Clouddoggo",
       "displayName": "LIM. . .JEL",
-      "authorNames": ["Clouddoggo", "Jel Lim"]
+      "authorNames": ["Clouddoggo", "Jel Lim"],
+      "ignoreCommitList": ["029c16c644df0a81e9c29f74dc856f9a5c206bf2", "d0cbc3106d15f960417f9e80f9a1c7a9acd90441"]
     },
     {
       "githubId": "eedenong",

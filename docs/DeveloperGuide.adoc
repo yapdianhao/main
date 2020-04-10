@@ -256,6 +256,35 @@ The display panel is updated by calling [.java]#MainWindow#handle{XXX} where XXX
 
 // end::changetab[]
 
+// tag::summary[]
+=== Summary feature (Eden)
+
+JelphaBot has a Summary feature which provides an overview of the tasks due within the day as well as all tasks that have been complete within the day.
+
+This feature comes in the form of a welcome screen, which comprises of two sections for the tasks due within the day and the tasks completed within the day respectively.
+
+For each task shown only details such as the Module Code and the Description are shown.
+
+Once the user marks a task due within the day as complete, it will automatically appear under the tasks completed within the day.
+
+[NOTE]
+If the user marks a task as completed, and immediately deletes the task from the tasklist, it will not appear in the summary screen.
+
+==== Implementation
+
+To view the respective tasks, the user enters the `summary` command.
+
+.Sequence diagram of execution of the `summary` command
+
+[[Summary-SwitchTab-Sequence-Diagram]]
+image::SummarySwitchTabSequenceDiagram.png[]
+
+The following sequence diagram details the execution of the creation of the SummaryCommand.
+
+.Sequence diagram of the creation of SummaryCommand.
+image::SummaryCommandSequenceDiagram.png[]
+// end::summary[]
+
 // tag::taskgroups[]
 === Task Grouping feature in Task List tab (Yao Jie)
 ==== Implementation
@@ -545,7 +574,17 @@ an error in displaying.
 ** Cons: Difficult to implement as the Task model requires a new Task to replace the old Task when edit command is executed.
 
 ===== Aspect 3: Productivity panel visualisation
-* *Current solution*:
+* *Current solution*: Separating sub-parts by paragraphs and including progress bar for tasks completed.
+** Rationale: Paragraphing increases readability and the progress bar provides visual aid.
+** Pros: Easy to see at a glance which parts are which.
+** Cons: Text under Running Timer(s) can appear wordy. As number of running timers increase, more text is added under Running Timer(s).
+* *Alternative 1*: Highlight displayed module code and deadline in alternating colours
+** Pros: Visually more appealing and looks less like a long list is tasks thus motivating the user to complete his/her tasks.
+** Cons: Does not resolve the issue of having too many words under the sections.
+* *Alternative 2*: Only show 3 tasks whose timers were started in order of priority and time when timers were started.
+** Pros: Allows user to focus on tasks at hand.
+** Cons: User might forget about other tasks whose timers were started and not complete them on time.
+
 // end::productivity[]
 
 === Reminder feature (Dian Hao)
@@ -626,36 +665,6 @@ started to read `Task` from the json files yet, therefore the `Reminder` could n
 ** Pros: Simple, as it only shows the details of the `Reminder`.
 ** Cons: Users need to constantly refer to the `TaskListPanel` for details.
 both has `Index` respectively.
-
-// tag::summary[]
-=== Summary feature
-
-JelphaBot has a Summary feature which provides an overview of the tasks due within the day as well as all tasks that have been complete within the day.
-
-This feature comes in the form of a welcome screen, which comprises of two sections for the tasks due within the day and the tasks completed within the day respectively.
-
-For each task shown only details such as the Module Code and the Description are shown.
-
-Once the user marks a task due within the day as complete, it will automatically appear under the tasks completed within the day.
-
-[NOTE]
-If the user marks a task as completed, and immediately deletes the task from the tasklist, it will not appear in the summary screen.
-
-==== Implementation
-
-To view the respective tasks, the user enters the `summary` command.
-
-.Sequence diagram of execution of the `summary` command
-
-[[Summary-SwitchTab-Sequence-Diagram]]
-image::SummarySwitchTabSequenceDiagram.png[]
-
-The following sequence diagram details the execution of the creation of the SummaryCommand.
-
-.Sequence diagram of the creation of SummaryCommand.
-image::SummaryCommandSequenceDiagram.png[]
-// end::summary[]
-
 
 // tag::undoredo[]
 === Undo/Redo feature [Proposed to implement in v2.0]
@@ -1097,6 +1106,7 @@ Use case resumes from step 2
 Use case resumes from step 2.
 
 // tag::timerUseCase[]
+
 === Use Case: UC8 - Start Timer
 *MSS*
 
