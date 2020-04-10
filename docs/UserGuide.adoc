@@ -456,6 +456,8 @@ Valid `SORTING_ORDER` values include `date`, `module`, and `priority`.
 // end::ug-pin-sort[]
 // @@author
 
+// @@author alam8064
+// tag::calendar[]
 === Calendar (Amanda)
 
 JelphaBot also comes with a built-in calendar view that allows you to view your overarching tasks due on a monthly basis.
@@ -539,6 +541,8 @@ Examples:
 image::CalendarToday.png[width="600"]
 
 Displays month of April in the year 2020 in the calendar panel on the right, with today's date highlighted and displays the corresponding tasks due today on the left.
+// end::calendar[]
+// @@author
 
 // tag::productivitytracker[]
 === Productivity Tracking (Jel)
