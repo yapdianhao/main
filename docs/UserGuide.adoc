@@ -364,8 +364,8 @@ image::ug_figures/doneCommand.png[width="600"]
 * The index *must be a positive integer* 1, 2, 3, ...
 ****
 
-// tag::delete[]
 ==== Deleting a Task : `delete`
+// tag::delete[]
 
 Delete a task from your task list. +
 Format: `delete INDEX`

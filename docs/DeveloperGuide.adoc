@@ -326,7 +326,7 @@ The indexes displayed in each `TaskCard` is dynamically computed from a `NumberB
 
 ===== Aspect 1: `ListCommand` swaps to a different `ViewTaskList`
 
-Refer <<activity-swapping-groupedtasklist, here>> for the diagram describing this process.
+Refer to <<activity-swapping-groupedtasklist>> for the diagram describing this process.
 
 * *Current solution*: Initializes each grouped list as each `ListCommand` is called and stores the latest list as `Model.lastShownList`.
 ** Pros: Easy to implement.
@@ -339,7 +339,7 @@ Scalable when more groupings are added.
 
 ===== Aspect 2: `get()` Task from `ViewTaskList` and iterate between Tasks.
 
-Refer <<sequence-viewtasklist-get, here>> for the diagram describing this process.
+Refer to <<sequence-viewtasklist-get>> for the diagram describing this process.
 
 * *Current solution*: Implement `get()` and `Iterator<Task>` in `ViewTaskList`.
 ** Pros: Easy to implement.
