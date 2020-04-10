@@ -1340,7 +1340,7 @@ Expected: Similar to previous.
 .. Prerequisites: Execute the `add` commands in the previous section.
 .. Complete tasks as per examples given in `edit` command section.
 
-// @@Author yaojiethng
+// @@author yaojiethng
 === Changing the list category
 
 . Displaying tasks by a different category
@@ -1449,7 +1449,32 @@ If there are no tasks due, no tasks would be displayed.
 .. Test case: `calendar MAy-2020` +
 Expected: Error message due to the invalid format for the input month and year would be displayed in the results message.
 
-// TODO add more
+//@@author yapdianhao
+=== Reminder Feature
+
+. Adding a reminder to remind a task
+.. Prerequisites: List all tasks using the `list` command to have a full view of the tasks. Select the `INDEX` of the task
+that needs to be reminded.
+.. Test case: `reminder 1 days/2 hours/2` +
+Expected: A reminder which is associated to the `Task` at index 2 will be added.
+.. Test case: `reminder -1 days/1 hours/0` +
+Expected: Error message due to negative index.
+.. Test case: `reminder 1 days/30 hours.0` +
+Expected: Error due to invalid day count, which has a limit of 7.
+.. Test case: `reminder 1 days/1 hours/30` +
+Expected: Error due to invalid hour count, which can be converted to days if it exceeds 24.
+.. Other invalid commands to try: `reminder `, `reminder 100000 days/1 hours/1`
+
+. Removing a reminder
+.. Prerequisites: List all tasks using the `list` command, and look for the task that is associated to the reminder that
+needs to be deleted.
+.. Test case: `delrem 1` +
+Expected: The reminder for task at index 1 will be removed, if it exists.
+.. Test case: `delrem -1` +
+Expected: Error message due to negative index.
+.. Test case: `delrem 100000` +
+Expected: Error message due to non-existing reminder.
+//@@author
 
 === Data Storage
 . Missing data files
