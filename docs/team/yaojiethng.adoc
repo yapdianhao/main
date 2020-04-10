@@ -22,7 +22,7 @@ It also details other contributions I made throughout the duration of the projec
 
 == Summary of contributions
 
-* *Major enhancement*: added *the ability for users to group their tasks by time or module code*, as well as *provided interfaces for other developers to implement new grouping categories*.
+* *Major enhancement*: added the ability for users to *group their tasks by time or module code*, as well as *provided interfaces for other developers to implement new grouping categories*.
 ** What it does: allows users to change the way their tasks are listed by switching between a list that shows:
 *** Tasks listed by how soon their due date is to the current date.
 *** Tasks listed by their Module Code.
@@ -41,6 +41,7 @@ https://github.com/AY1920S2-CS2103T-F09-2/main/pull/204[#204],
 https://github.com/AY1920S2-CS2103T-F09-2/main/pull/161[#161],
 https://github.com/AY1920S2-CS2103T-F09-2/main/pull/122[#122]
 
+<<<
 * *Minor enhancement*: Updated the Ui layout for each Task to allow tasks to be distinguished by priority.
 ** Pull requests:
 https://github.com/AY1920S2-CS2103T-F09-2/main/pull/196[#196],
@@ -66,6 +67,7 @@ https://github.com/AY1920S2-CS2103T-F09-2/main/pull/212[#212]
 ** Tools:
 *** Integrated Github plugins (gh-pages, Travis) to the team repository.
 
+<<<
 == Contributions to the User Guide
 
 |===
@@ -74,10 +76,10 @@ https://github.com/AY1920S2-CS2103T-F09-2/main/pull/212[#212]
 
 include::../UserGuide.adoc[tag=tasklist]
 
+<<<
 include::../UserGuide.adoc[tag=list]
 
-include::../UserGuide.adoc[tag=ug-pin-sort]
-
+<<<
 == Contributions to the Developer Guide
 
 |===
@@ -85,7 +87,4 @@ include::../UserGuide.adoc[tag=ug-pin-sort]
 |===
 
 include::../DeveloperGuide.adoc[tag=taskgroups]
-
-include::../DeveloperGuide.adoc[tag=taskgroups]
-
 
