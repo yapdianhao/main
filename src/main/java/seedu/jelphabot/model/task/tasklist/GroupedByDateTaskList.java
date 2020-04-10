@@ -17,6 +17,8 @@ import seedu.jelphabot.model.task.Task;
  * GroupedByDateTaskList groups Tasks by how close the due date is to the current date.
  * Separation is done over @code{ObservableList} through use of filters.
  * <p>
+ *
+ * @@author yaojiethng
  */
 public class GroupedByDateTaskList extends GroupedTaskList {
 

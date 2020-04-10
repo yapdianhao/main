@@ -14,6 +14,8 @@ import seedu.jelphabot.model.task.tasklist.SubgroupTaskList;
 /**
  * Panel containing the list of tasks.
  * Tasks are further sorted into subgroups
+ *
+ * @@author yaojiethng
  */
 public class GroupedTaskListPanel extends UiPart<Region> {
 
