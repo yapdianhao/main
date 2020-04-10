@@ -584,7 +584,7 @@ image::ug_figures/stopCommand.png[width="600"]
 * The index refers to the index number shown in the displayed task list.
 * The index *must be a positive integer* 1, 2, 3, ...
 * Timer entry under "Running Timer(s)" in the productivity tab will be removed if execution is successful.
-* If task timed is due today or in next 6 days, time spent on timed task will be added to the respected time spent sections in the productivity tab.
+* Time spent on timed task will be added to the respected time spent section in the productivity tab.
 ****
 // end::productivitytracker[]
 

@@ -1,54 +1,61 @@
 = Jel Lim – Project Portfolio
-:site-section: AboutUs
 
 == About the project
 
 ---
 
-My team of 4 software engineering students and I were tasked with enhancing a basic command line interface desktop address book application for our Software Engineering project. We chose to morph it into a task management system called JelphaBot.
+My team of 5 software engineering students morphed a basic command line interface desktop address book application into a task management system called JelphaBot.
 This enhanced application enables university students to file and recall task data, manage task scheduling and view productivity levels all in one place.
 
 === Summary of contributions
-This section shows a summary of my coding, documentation, and other helpful contributions to the team project.
 
-==== Enhancement added:
-I added the start and stop a timer feature for tasks as well as a viewing panel for the user’s overall productivity for the day.
-I also incorporated the command line history.
+==== Major enhancement:
+Added the start and stop a timer feature for tasks as well as a viewing panel for the user’s overall productivity for the day.
 
-* What it does: The `start <index>` command allows the user to start a timer for the task specified by the index provided.
-The user may stop this timer with the `stop <index>` command. If the task timed is due today or in the next seven days, the productivity panel would show the total time spent on that task.
-The panel also shows the completion rate of tasks due today.
-To retrieve the command history, the UP-arrow key retrieves the command entered right before the one entered. The DOWN-arrow key does the opposite, meaning that it retrieves the command entered after the one entered if any.
-* Justification: In the event the user wants to gauge the amount of time they have spent on their tasks and how many tasks they have completed or an overview of their productivity in that day, it is easy to view all this information in one tab.
-To reduce the hassle of having to key in similar commands repeatedly, users can easily retrieve past commands and enter it.
-* Highlights: This enhancement works with existing as well as future commands. An in-depth analysis of design alternatives was necessary to decide the layout of the productivity panel and how effective it was in improving overall user experience of the application.
-The implementation was also challenging because it was difficult to decide how much data to present to users. Out of all the data stored, I had to decide which calculations are the most beneficial for the user and would boost their productivity and efficiency in their tasks.
+* What it does: `start <index>` command allows the user to start a timer for the task specified by the index provided.
+The user may stop this timer with `stop <index>` command. The productivity panel will show the total time spent on as well as the number of tasks completed that are due today.
+* Justification: If the user wants to gauge the amount of time spent on their tasks and how many tasks they have completed or an overview of their productivity in that day, it is easy to view all this information in one tab.
+* Highlights: This enhancement works with existing as well as future commands. An in-depth analysis of design alternatives was necessary to decide the layout of the productivity panel and how effective it was in improving overall user experience.
+The implementation was also challenging as it was difficult to decide how much data to present to users.
 * Credits: Stop and Start command classes were adapted from existing commands such as Edit command. Command line history was adapted from existing implementations.
-Code contributed: https://github.com/AY1920S2-CS2103T-F09-2/main/blob/master/src/main/resources/view/ProductivityCard.fxml[[Productivity UI]] https://github.com/AY1920S2-CS2103T-F09-2/main/tree/master/src/main/java/seedu/jelphabot/model/productivity[[Productivity model]]
-https://github.com/AY1920S2-CS2103T-F09-2/main/blob/master/src/main/java/seedu/jelphabot/logic/commands/StartTimerCommand.java[[Start Timer]] https://github.com/AY1920S2-CS2103T-F09-2/main/blob/master/src/main/java/seedu/jelphabot/logic/commands/StopTimerCommand.java[[Stop Timer]]
-https://github.com/AY1920S2-CS2103T-F09-2/main/blob/master/src/test/java/seedu/jelphabot/model/productivity/ProductivityListTest.java[[Productivity Test Code]] https://github.com/AY1920S2-CS2103T-F09-2/main/blob/master/src/test/java/seedu/jelphabot/storage/JsonAdaptedTaskTest.java[[Json Test]]
+
+==== Minor enhancement:
+Added a command history that allows the user to navigate to previous commands using up/down keys.
+
+==== Contributions to DG:
+Section 3.1, Delete Sequence diagram +
+Whole section of 3.3, 4.1, 4.4, 4.7 +
+
+Appendix C, Use Case diagram +
+Whole section of appendix C8, C9, D, E, F7, F8, F9, F10
+
+==== Code contributed:
+https://nus-cs2103-ay1920s2.github.io/tp-dashboard/#search=clouddoggo&sort=groupTitle&sortWithin=title&since=2020-02-14&timeframe=commit&mergegroup=false&groupSelect=groupByRepos&breakdown=false[[RepoSense]]
+https://github.com/AY1920S2-CS2103T-F09-2/main/tree/master/src/main/java/seedu/jelphabot/model/productivity[[Productivity Model]]
+https://github.com/AY1920S2-CS2103T-F09-2/main/tree/master/src/main/java/seedu/jelphabot/logic/commands[[Command Code]]
+https://github.com/AY1920S2-CS2103T-F09-2/main/tree/master/src/main/java/seedu/jelphabot/ui[[UI Code]]
+https://github.com/AY1920S2-CS2103T-F09-2/main/tree/master/src/test/java/seedu/jelphabot/model/productivity[[Test Code]]
+https://github.com/AY1920S2-CS2103T-F09-2/main/blob/master/src/test/java/seedu/jelphabot/logic/parser/JelphaBotParserTest.java[[Parser Test Code]]
+https://github.com/AY1920S2-CS2103T-F09-2/main/blob/master/src/test/java/seedu/jelphabot/storage/JsonAdaptedTaskTest.java[[Json Test]]
 
 == Other contributions:
 
 ---
 
 * Issues management:
-** There was a total of 94 issues, from versions 1.0 to 1.4. I managed 42 of them on GitHub (examples: #163 #144 #263).
+** Out of a total of 95 issues from versions 1.0 to 1.4. I managed 42 of them on GitHub (examples: https://github.com/AY1920S2-CS2103T-F09-2/main/issues/163[#163] https://github.com/AY1920S2-CS2103T-F09-2/main/issues/263[#263]).
 
 * User stories management:
-** There was a total of 29 user stories, for versions 1.0 to 1.4. I managed 10 of them.
-
-* Enhancements made to existing features:
-** Wrote additional tests for existing features such as to increase coverage from …. (link to PR)
+** There was a total of 30 user stories, for versions 1.0 to 1.4. I managed 10 of them.
 
 * Documentation:
-** Made language improvements to the existing User Guide to make it more user-centric: PR #300, #283, #316
-** Replaced existing Architecture Sequence diagram with one that corresponds to our final product: PR #198
+** Made language improvements to the existing User Guide to make it more user-centric: PR https://github.com/AY1920S2-CS2103T-F09-2/main/pull/300[#300], https://github.com/AY1920S2-CS2103T-F09-2/main/pull/283[#283], https://github.com/AY1920S2-CS2103T-F09-2/main/pull/316[#316]
+** Replaced existing Architecture Sequence diagram with one that corresponds to our final product: PR https://github.com/AY1920S2-CS2103T-F09-2/main/pull/198[#198]
 ** Added Use Case diagram and Activity diagrams for start command: PR https://github.com/AY1920S2-CS2103T-F09-2/main/pull/326[#326]
 ** Added Sequence diagram for stop command: PR https://github.com/AY1920S2-CS2103T-F09-2/main/pull/328[#328]
 
 * Community:
-** Reviewed Pull Requests: #19
+** Reviewed Pull Requests: https://github.com/AY1920S2-CS2103T-F09-2/main/pull/19[#19]
 ** Reported bugs and offered suggestions for other teams in the class (examples: https://github.com/nus-cs2103-AY1920S2/addressbook-level3/pull/25/files#r398983142[1],
 https://github.com/nus-cs2103-AY1920S2/addressbook-level3/pull/25/files#r398989484[2], https://github.com/nus-cs2103-AY1920S2/addressbook-level3/pull/25/files#r398987630[3])
 
@@ -57,7 +64,7 @@ https://github.com/nus-cs2103-AY1920S2/addressbook-level3/pull/25/files#r3989894
 
 <<<
 
-== Contributions to User Guide
+== Contributions to User Guide (Extracts)
 
 ---
 
@@ -65,15 +72,15 @@ https://github.com/nus-cs2103-AY1920S2/addressbook-level3/pull/25/files#r3989894
 |_Below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-include::UserGuide.adoc[tag=productivitytracker]
+include::..\UserGuide.adoc[tag=productivitytracker]
 
-include::UserGuide.adoc[tag=feedback]
+include::..\UserGuide.adoc[tag=feedback]
 
-include::UserGuide.adoc[tag=faq]
+include::..\UserGuide.adoc[tag=faq]
 
 <<<
 
-== Contributions to Developer Guide
+== Contributions to Developer Guide (Extracts)
 
 ---
 
@@ -81,8 +88,6 @@ include::UserGuide.adoc[tag=faq]
 |_Below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-include::DeveloperGuide.adoc[tag=productivity]
+include::..\DeveloperGuide.adoc[tag=productivity]
 
-include::DeveloperGuide.adoc[tag=timerUseCase]
-
-include::DeveloperGuide.adoc[tag=glossary]
+include::..\DeveloperGuide.adoc[tag=timerUseCase]

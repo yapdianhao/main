@@ -222,7 +222,7 @@ Users may find it complicated to handle the many features that JelphaBot offers.
 As such, we have decided to implement a tab system for JelphaBot to organise the available commands into their respective features. JelphaBot provides 5 different tabs for the users,
 each displaying a different set of panels that are relevant to the feature.
 
-* *Summary Tab* - <<Summary feature (Eden), overall view>> of the day's tasks in the task list.
+* *Summary Tab* - <<Summary feature, overall view>> of the day's tasks in the task list.
 * *Task List Tab* - <<Task Grouping feature in Task List tab (Yao Jie), view all tasks>> in the task list.
 * *Calendar Tab* - <<Calendar feature (Amanda), visualisation>> of tasks in a specific day or month.
 * *Productivity Tab* - <<Productivity feature (Jel), overarching view>> of overall productivity such as task completion rate.
@@ -510,8 +510,7 @@ In order to stop timing a task, the user enters `stop INDEX` command
 (e.g. stop 1)
 
 Upon successful execution of the command, the productivity tab removes the task being timed under the Running Timer(s) header.
-If the timed task is due today or in the next 6 days, the time spent on the timed task will be added to either the Due today: label
-or the Due in the next 6 days: label under the Time Spent on Tasks header.
+Under the Time Spent header, the total time spent will be increased depending on the date that the task is due.
 
 [NOTE]
 If the user attempts to start timer for a task marked as completed or stop a task that does not have a running timer,
@@ -1405,7 +1404,7 @@ Expected: Similar to previous.
 .. Prerequisites: Execute the `start` commands in the <<View Tasks with Running Timers, previous section>>.
 .. Test case: `stop 1` +
 Expected: Stops timing first task from the list. Details of the timed task is shown in the results message. +
-If task's timer to be stopped is due today or in next 6 days, displayed time spent is updated in productivity tab. +
+Displayed time spent is updated in productivity tab. +
 Task timed is removed from Running Timer(s) displayed in productivity tab.
 .. Test case: `stop 0` +
 Expected: No timer stopped. Error details shown in the results message.
