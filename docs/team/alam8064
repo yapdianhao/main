@@ -71,10 +71,6 @@ https://github.com/AY1920S2-CS2103T-F09-2/main/pull/196[#78]
 ** Project management:
 *** Managed releases `v1.2.1` - `v1.3` (2 releases) on GitHub
 
-//** Enhancements to existing features:
-//*** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
-//*** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
-
 ** Documentation:
 *** Added diagrams and documentation for the Calendar feature in the Developer Guide.
 *** Updated diagram for the Ui section from AB3 and and the proposed undo feature from AB3 in the Developer Guide.
@@ -83,10 +79,6 @@ https://github.com/AY1920S2-CS2103T-F09-2/main/pull/196[#78]
 ** Community:
 *** Reported bugs and suggestions for other teams:
 https://github.com/alam8064/ped/issues[Reported 11 bugs during PE Dry Run]
-
-//** Tools:
-//*** Integrated a third party library (Natty) to the project (https://github.com[#42])
-//*** Integrated a new Github plugin (CircleCI) to the team repo
 
 == Contributions to the User Guide
 
@@ -105,5 +97,4 @@ The full Developer Guide can be found https://ay1920s2-cs2103t-f09-2.github.io/m
 |===
 
 include::../DeveloperGuide.adoc[tag=calendar]
-
 
