@@ -1,4 +1,4 @@
-//@@ author yapdianhao
+//@@author yapdianhao
 package seedu.jelphabot.model.task.predicates;
 
 import java.time.LocalDate;

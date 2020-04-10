@@ -548,7 +548,8 @@ In order to stop timing a task, the user enters `stop INDEX` command
 (e.g. stop 1)
 
 Upon successful execution of the command, the productivity tab removes the task being timed under the Running Timer(s) header.
-Under the Time Spent header, the total time spent will be increased depending on the date that the task is due.
+If the timed task is due today or in the next 6 days, the time spent on the timed task will be added to either the Due today: label
+or the Due in the next 6 days: label under the Time Spent on Tasks header.
 
 [NOTE]
 If the user attempts to start timer for a task marked as completed or stop a task that does not have a running timer,
@@ -596,6 +597,8 @@ an error in displaying.
 // end::productivity[]
 // @@author
 
+// @@author yapdianhao
+// tag::reminder[]
 === Reminder feature (Dian Hao)
 JelphaBot has a reminder feature that reminds users whenever they have tasks that are about to overdue.
 This feature offers two main functions:
@@ -622,6 +625,15 @@ The sequence diagram for interactions between the `Logic`, `Model`, and `Storage
 
 .Sequence Diagram after running `reminder 2 days/2 hours/1`
 image::AddReminderSequenceDiagram.png[]
+
+.The reference frame of getting the `CommandResult` in the `Logic` component.
+image::getCommandResultReferenceDiagram.png[]
+
+.The reference frame of adding the `Reminder` in the `Model` component.
+image::addReminderReferenceDiagram.png[]
+
+.The reference frame of saving a `Reminder` by the `Storage` component.
+image::saveJelphaBot.png[]
 
 The `Logic` `execute()` method creates a `ReminderCommand` from the input string by parsing the input according
 to the command word and several other attributes. Next, the input string is converted into `Index`,
@@ -674,6 +686,8 @@ started to read `Task` from the json files yet, therefore the `Reminder` could n
 ** Pros: Simple, as it only shows the details of the `Reminder`.
 ** Cons: Users need to constantly refer to the `TaskListPanel` for details.
 both has `Index` respectively.
+// end::reminder[]
+// @@author
 
 // tag::undoredo[]
 === Undo/Redo feature [Proposed to implement in v2.0]
@@ -715,6 +729,7 @@ If the `currentStatePointer` is at index 0, pointing to the initial JelphaBot st
 
 The following sequence diagram shows how the undo operation works:
 
+.The sequence diagram of the undo feature.
 image::UndoSequenceDiagram.png[]
 
 NOTE: The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
@@ -1114,9 +1129,7 @@ Use case resumes from step 2
 +
 Use case resumes from step 2.
 
-// @@author Clouddoggo
 // tag::timerUseCase[]
-
 === Use Case: UC8 - Start Timer
 *MSS*
 
@@ -1188,7 +1201,6 @@ Use case ends.
 Use case resumes from step 2.
 
 // end::timerUseCase[]
-// @@author
 
 === Use case: UC10 - Navigate to a different date on calendar
 
@@ -1262,7 +1274,6 @@ For this section, `markdown` will be used to denote commands that can be entered
 .. Re-launch the app by double-clicking the jar file. +
    Expected: The most recent window size and location is retained.
 
-// @@author Clouddoggo
 === Changing Tabs
 
 . Summary
@@ -1292,10 +1303,8 @@ Expected: Tab is not changed.
 Error message is shown in Results Display.
 .. In any other tab, switch to Productivity with `:p`, `:P` or `productivity`. +
 Expected: Success message is shown in the Results Display.
-// @@author
 
-
-// @@author yaojiethng
+// @@Author yaojiethng
 === Adding a Task
 
 . Adding a new task to a cleared list
@@ -1318,7 +1327,7 @@ Expected: No task is added. Error message with correct format of date command. +
 .. Other incorrect add commands to try: other parameters are wrongly formatted. +
 Eg. non-alphanumeric characters in description or tag, invalid priority, module codes not complying to NUS format (2-3 Alphabets, 4 numbers, one optional letter) +
 Expected: Similar to previous.
-// @@author
+// @@Author
 
 === Editing a Task
 
@@ -1398,13 +1407,12 @@ Expected: Similar to previous.
 .. Prerequisites: Execute the `start` commands in the <<View Tasks with Running Timers, previous section>>.
 .. Test case: `stop 1` +
 Expected: Stops timing first task from the list. Details of the timed task is shown in the results message. +
-Displayed time spent is updated in productivity tab. +
+If task's timer to be stopped is due today or in next 6 days, displayed time spent is updated in productivity tab. +
 Task timed is removed from Running Timer(s) displayed in productivity tab.
 .. Test case: `stop 0` +
 Expected: No timer stopped. Error details shown in the results message.
 .. Other incorrect stop commands to try: `stop`, `stop x` (where x is larger than the list size or is index of task without running timer) +
 Expected: Similar to previous.
-// @@author
 
 === View Tasks due on a specific Date
 
@@ -1442,7 +1450,32 @@ If there are no tasks due, no tasks would be displayed.
 .. Test case: `calendar MAy-2020` +
 Expected: Error message due to the invalid format for the input month and year would be displayed in the results message.
 
-// TODO add more
+//@@author yapdianhao
+=== Reminder Feature
+
+. Adding a reminder to remind a task
+.. Prerequisites: List all tasks using the `list` command to have a full view of the tasks. Select the `INDEX` of the task
+that needs to be reminded.
+.. Test case: `reminder 1 days/2 hours/2` +
+Expected: A reminder which is associated to the `Task` at index 2 will be added.
+.. Test case: `reminder -1 days/1 hours/0` +
+Expected: Error message due to negative index.
+.. Test case: `reminder 1 days/30 hours.0` +
+Expected: Error due to invalid day count, which has a limit of 7.
+.. Test case: `reminder 1 days/1 hours/30` +
+Expected: Error due to invalid hour count, which can be converted to days if it exceeds 24.
+.. Other invalid commands to try: `reminder `, `reminder 100000 days/1 hours/1`
+
+. Removing a reminder
+.. Prerequisites: List all tasks using the `list` command, and look for the task that is associated to the reminder that
+needs to be deleted.
+.. Test case: `delrem 1` +
+Expected: The reminder for task at index 1 will be removed, if it exists.
+.. Test case: `delrem -1` +
+Expected: Error message due to negative index.
+.. Test case: `delrem 100000` +
+Expected: Error message due to non-existing reminder.
+//@@author
 
 === Data Storage
 . Missing data files
