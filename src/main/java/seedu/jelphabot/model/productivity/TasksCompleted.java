@@ -84,7 +84,7 @@ public class TasksCompleted {
         return response.toString();
     }
 
-    public String getRemark() {
+    private String getRemark() {
         int n = overdueTasks.filtered(new TaskIsIncompletePredicate()).size();
 
         if (n > 3) {
