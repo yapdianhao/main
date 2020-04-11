@@ -186,7 +186,7 @@ public class GroupedTaskListTest {
 
         @Override
         public ObservableList<SubgroupTaskList> getSublists() {
-            throw new AssertionError("This method should not be called.");
+            return subLists;
         }
 
         @Override
