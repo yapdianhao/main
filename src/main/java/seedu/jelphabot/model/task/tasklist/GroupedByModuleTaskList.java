@@ -28,7 +28,7 @@ public class GroupedByModuleTaskList extends GroupedTaskList {
 
     public GroupedByModuleTaskList(ObservableList<Task> tasks, PinnedTaskList pinnedTaskList) {
         super(tasks, pinnedTaskList);
-        this.moduleCodes.addAll(getUniqueModuleSet(tasks));
+        this.moduleCodes.addAll(makeUniqueModuleSet(tasks));
         for (ModuleCode code : moduleCodes) {
             addSublist(code);
         }
@@ -42,7 +42,13 @@ public class GroupedByModuleTaskList extends GroupedTaskList {
         this.tasks.addListener(new TaskListChangeListener());
     }
 
-    private static Set<ModuleCode> getUniqueModuleSet(List<Task> taskList) {
+    /**
+     * Creates a set of unique module codes based on the given tasklist.
+     *
+     * @param taskList a list of unique Task objects
+     * @return a set of unique ModuleCode objects
+     */
+    private static Set<ModuleCode> makeUniqueModuleSet(List<Task> taskList) {
         Set<ModuleCode> moduleSet = new HashSet<>();
         for (Task task : taskList) {
             moduleSet.add(task.getModuleCode());
@@ -96,7 +102,7 @@ public class GroupedByModuleTaskList extends GroupedTaskList {
         this.tasks.setAll(taskList);
 
         moduleCodes.clear();
-        moduleCodes.addAll(getUniqueModuleSet(tasks));
+        moduleCodes.addAll(makeUniqueModuleSet(tasks));
         for (ModuleCode code : moduleCodes) {
             addSublist(code);
         }
