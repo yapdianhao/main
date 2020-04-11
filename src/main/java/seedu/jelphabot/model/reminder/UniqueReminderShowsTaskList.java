@@ -9,7 +9,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.jelphabot.model.reminder.exceptions.DuplicateReminderException;
+import seedu.jelphabot.model.reminder.exceptions.DuplicateReminderShowsTaskException;
 
 /**
  * A list of reminders that enforces uniqueness between its elements and does not allow nulls.
@@ -42,9 +42,20 @@ public class UniqueReminderShowsTaskList implements Iterable<ReminderShowsTask> 
     public void add(ReminderShowsTask toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
-            throw new DuplicateReminderException();
+            throw new DuplicateReminderShowsTaskException();
         }
         internalList.add(toAdd);
+    }
+
+    /**
+     * Removes the equivalent reminder from the list.
+     * The reminder must exist in the list.
+     */
+    public void remove(ReminderShowsTask toRemove) {
+        requireNonNull(toRemove);
+        if (!internalList.remove(toRemove)) {
+            //throw new ReminderNotFoundException();
+        }
     }
 
     public ObservableList<ReminderShowsTask> asUnmodifiableObservableList() {

@@ -1,4 +1,4 @@
-// @@author Yao Jie
+//@@author yaojiethng
 package seedu.jelphabot.model.task;
 
 import static java.util.Objects.requireNonNull;
