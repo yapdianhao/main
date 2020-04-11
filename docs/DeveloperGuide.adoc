@@ -287,7 +287,6 @@ These lists are stored as fields in the `Summary` class and are used to display 
 
 The following class diagram shows the structure of the classes in the `summary` package, in relation with their `Ui` counterparts.
 
-.Class diagram of structure and relations of `Summary`, `SummaryPanel` and their components.
 [[SummaryPanelClassDiagram]]
 .Class diagram of structure and relations of `Summary`, `SummaryPanel` and their components.
 image::SummaryPanelClassDiagram.png[]

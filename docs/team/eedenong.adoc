@@ -10,6 +10,7 @@
 
 JelphaBot is a desktop application that serves as a simple yet comprehensive task manager for NUS students.
 Interactions with the application and commands are entered through CLI. For a better user experience, JavaFX was used to create and enhance the GUI.
+It is writtren in Java, and has about 12 kLoC.
 
 == Summary of contributions
 
