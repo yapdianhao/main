@@ -683,11 +683,13 @@ This feature offers two main functions:
 ** Delete a reminder that is associated to a task.
 
 ==== Classes for Reminder feature in Model
-The `Reminder` feature was implemented by a new set of classes to model. A new `Reminder` class is stored in
+The `Reminder` feature was implemented by a new set of classes to `Model`. A new `Reminder` class is stored in
 Jelphabot's `UniqueReminderList`, which consists of a list of `Reminder` s. Each `Reminder` consists of 3 objects: +
 ** `Index`**: the `Task` 's index of which the user wants to be reminded for. +
 ** `ReminderDay`**: the number of days before the `Task` 's deadline that the user wants to be reminded for. +
-** `ReminderHour`**: the number of hours before the `Tasks` 's deadline that the user wants to be reminded for.
+** `ReminderHour`**: the number of hours before the `Tasks` 's deadline that the user wants to be reminded for. +
+
+The following class diagram summarizes shows the relationship between the classes.
 
 .Reminder Class Diagram in the Model component
 image::Reminderclass.png[]
@@ -696,6 +698,19 @@ image::Reminderclass.png[]
 **Function 1: Creates a reminder for a specified task** +
 To add a reminder to a certain task, the user enters the `reminder INDEX days/DAYS hours/HOURS` command.
 (e.g, reminder 2 days/2 hours/1) +
+
+The `Logic` `execute()` method creates a `ReminderCommand` from the input string by parsing the input according
+to the command word and several other attributes. Next, the input string is converted into `Index`,
+`ReminderDay`, `ReminderHour`, and a `Reminder` object with these properties are forwarded to `Model`. +
+
+The `Model` first check the validity of the attributes respectively. The valid `Reminder` is then added to
+the `UniqueReminderList` after checking that there are no other `Reminder` with the same `Index`. +
+
+After the above actions are correctly performed, the `Logic` fires the `Storage` to save the `Reminder`.
+
+Upon successful execution of the command, the user adds a reminder associated to the task at `INDEX`. Upon exiting JelphaBot,
+the reminder will be saved. By the next time the users starts JelphaBot, it will remind the user should the task's due date fall
+within the period set by the user from the current date. +
 
 The sequence diagram for interactions between the `Logic`, `Model`, and `Storage` is shown below.
 
@@ -710,19 +725,6 @@ image::addReminderReferenceDiagram.png[]
 
 .The reference frame of saving a `Reminder` by the `Storage` component.
 image::saveJelphaBot.png[]
-
-The `Logic` `execute()` method creates a `ReminderCommand` from the input string by parsing the input according
-to the command word and several other attributes. Next, the input string is converted into `Index`,
-`ReminderDay`, `ReminderHour`, and a `Reminder` object with these properties are forwarded to `Model`. +
-
-The `Model` first check the validity of the attributes respectively. The valid `Reminder` is then added to
-the `UniqueReminderList` after checking that there are no other `Reminder` with the same `Index`. +
-
-After the above actions are correctly performed, the `Logic` fires the `Storage` to save the `Reminder`.
-
-Upon successful execution of the command, the user adds a reminder associated to the task at `INDEX`. Upon exiting JelphaBot,
-the reminder will be saved. By the next time the users starts JelphaBot, it will remind the user should the task's due date fall
-within the period set by the user from the current date.
 
 [NOTE]
 If the user attempts to add a reminder to tasks that have reminders, the command will fail to execute. The user also need not
@@ -754,14 +756,20 @@ other properties.
 ** Cons: A `Reminder` has to remind users the moment when Jelphabot is booted. At that instance, `Storage` has not
 started to read `Task` from the json files yet, therefore the `Reminder` could not be read beforehand.
 
+We decided to choose the current solution due to the dynamic nature of tasks and users' needs. For upcoming changes in the
+future, it is easier to implement by adding similar classes or attributes to the existing design.
+
 ===== Aspect 2: Rendering `Reminder` on `ReminderListPanel`
 * *Current solution:* Shows the `ModuleCode`, `Description`, and `DateTime` of the `Task` that is being reminded, the respective `ReminderDay` and `ReminderHour`.
 ** Pros: convenient and simple to understand. Users only need to refer to the `TaskListPanel` to look at the details of the `Task`.
 ** Cons: FXML styling will be squeezy.
 * *Alternative 1:* Shows the `Reminder` similar to how the `Task` is displayed.
 ** Pros: Simple, as it only shows the details of the `Reminder`.
-** Cons: Users need to constantly refer to the `TaskListPanel` for details.
-both has `Index` respectively.
+** Cons: Users need to constantly refer to the `TaskListPanel` for details. Both has `Index` respectively, which may cause confusion.
+
+We decided to choose the current solution after considering users' needs and convenience of fully using the `Reminder` s.
+Users do not need to switch back and forth between tabs to refer between `Task` s and `Reminder` s, which saves time that can
+be better spent by completing the `Task` s.
 // end::reminder[]
 
 // tag::undoredo[]
