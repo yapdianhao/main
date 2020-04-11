@@ -173,7 +173,6 @@ image::ug_figures/SummaryViewAfterTaskComplete.png[width="600"]
 
 // end::summary[]
 
-// @@author yaojiethng
 // tag::tasklist[]
 === Managing Tasks (Yao Jie)
 
@@ -214,7 +213,6 @@ Tasks are tagged according to their importance:
 The start of every task will be labelled with a module code so that you can visually categorize them. +
 Go <<#add, here>> to read more about adding tasks with priority and <<#edit, here>> for editing task priority.
 // end::tasklist[]
-// @@author
 
 // tag::add[]
 [[add]]
@@ -249,10 +247,9 @@ If the priority field is not specified, the default priority used is Normal Prio
 Examples:
 
 * `add d/Assignment 1 dt/Jan-01-2020 23 59 m/CS3230 p/1`
-* `add d/Project TP dt/Jan-01-2020 23 59 m/CS2103T p/1 t/pair work`
+* `add d/Project TP dt/Jan-01-2020 23 59 m/CS2103T p/1 t/pair t/work`
 // end::add[]
 
-// @@author yaojiethng
 // tag::list[]
 ==== Listing all Tasks : `list`
 
@@ -297,7 +294,7 @@ Format: `list module`
 .Example of an expected result after running `list module`
 image::ug_figures/listByModule.png[width="600"]
 // end::list[]
-// @@author
+
 
 ==== Locating Tasks by name: `find`
 
@@ -445,7 +442,6 @@ image::ug_figures/showCompletedCommandNoCompleted.png[width="600"]
 
 // end::showincomplete[]
 
-// @@author yaojiethng
 // tag::ug-pin-sort[]
 [[pin]]
 ==== Pin Important Tasks  : `pin` [Coming in V2.0]
@@ -461,7 +457,7 @@ Format: `sort SORTING_ORDER`
 
 Valid `SORTING_ORDER` values include `date`, `module`, and `priority`.
 // end::ug-pin-sort[]
-// @@author
+
 
 // tag::calendar[]
 === Calendar (Amanda)
@@ -549,7 +545,6 @@ image::CalendarToday.png[width="600"]
 Displays month of April in the year 2020 in the calendar panel on the right, with today's date highlighted and displays the corresponding tasks due today on the left.
 // end::calendar[]
 
-// @@author Clouddoggo
 // tag::productivitytracker[]
 === Productivity Tracking (Jel)
 JelphaBot also comes with a productivity tracking that allows you track the progress of your tasks in that week.
@@ -614,7 +609,7 @@ JelphaBot automatically tracks the user's productivity in a day and outputs the 
 achievements and task completion rate. +
 There is no need to manually request for compliments or criticism.
 // end::feedback[]
-// @@author
+
 
 //@@author yapdianhao
 //tag::reminder[]
@@ -697,11 +692,11 @@ JelphaBot's reminder will always popup.
 ****
 
 //end::reminder[]
-//@@author
 
 === Colour-code module codes `[coming in v2.0]`
+Users can customise the font colours of different modules to better distinguish between different tasks.
+The module codes displayed in the Main Window will be similar to the tags displayed to make it easier for users to view them.
 
-// @@author Clouddoggo
 // tag::faq[]
 == FAQ
 
@@ -726,7 +721,7 @@ We will consider this in v2.0.
 *Q6*: Do I need an Internet connection to use JelphaBot? +
 A: No, you don’t. JelphaBot works completely offline.
 // end::faq[]
-// @@author
+
 
 // tag::commandSummary[]
 == Command Summary

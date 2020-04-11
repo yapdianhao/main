@@ -1,3 +1,5 @@
+//@@author Clouddoggo
+
 package seedu.jelphabot.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -22,6 +24,7 @@ import seedu.jelphabot.model.UserPrefs;
  * RedoCommand) and unit tests for {@code StopTimerCommand}.
  */
 class StopTimerCommandTest {
+    // unable to automate test for success as we require a model that has a running timer.
 
     private Model model = new ModelManager(getTypicalJelphaBot(), new UserPrefs());
 
