@@ -47,6 +47,7 @@ and explains the design considerations of these implementations.
 * <<Dev Ops, Dev Ops>> - A guide for developers to build, test and release JelphaBot.
 
 === Notation used in this Guide
+.Common symbols used throughout this guide.
 [width="70%",cols="^15%,85%"]
 |===
 a| `code` | A Java method or class

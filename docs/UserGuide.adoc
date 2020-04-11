@@ -61,6 +61,7 @@ These commands are also consolidated under <<Command Summary, this section>> for
 
 To aid in your understanding throughout this User Guide, you may find below the different symbols and formatting used throughout this guide.
 
+.Common symbols used throughout this guide.
 [width="100%",cols="40%,<60%,options="header",]
 |=======================================================================
 |*Symbol* | *What does it mean?*
@@ -75,10 +76,10 @@ endif::[]
 ifndef::env-github[]
 a| icon:check[role="green",size="2x"] | Expected result after executing the command
 a| kbd:[Key] | A Key that you should press on your keyboard
-a| icon:lightbulb-o[role="icon-tip", size="2x"] | Tips and tricks that might be useful
-a| icon:info-circle[role="icon-note", size="2x"] | Additional information that is good to know
-a| icon:exclamation-circle[role="icon-important", size="2x"] | Important pointers to take note of
-a| <<blue text underlined>> | Links
+a| icon:lightbulb-o[role="icon-tip",size="2x"] | Tips and tricks that might be useful
+a| icon:info-circle[role="icon-note",size="2x"] | Additional information that is good to know
+a| icon:exclamation-circle[role="icon-important",size="2x"] | Important pointers to take note of
+a| <<Blue-text-underlined, blue text, underlined>> | [[Blue-text-underlined]] Links
 endif::[]
 // also known as TIP, NOTE, WARNING
 |=======================================================================
@@ -277,7 +278,7 @@ To read more about pinning tasks, go <<#pin, here>>)
 * *Due This Week* +
 (Shows tasks due within the next seven days)
 * *Due Sometime* +
-(Shows all other yttasks that do not fit into prior categories)
+(Shows all other tasks that do not fit into prior categories)
 
 [.text-center]
 .Example of an expected result after running `list date`
