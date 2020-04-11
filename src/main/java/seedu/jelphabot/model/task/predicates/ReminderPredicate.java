@@ -15,7 +15,7 @@ import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.model.task.tasklist.ViewTaskList;
 
 /**
- * Tests that a {@code Task}'s {@code DateTime} is due within a week from now.
+ * Tests that a {@code Task}'s {@code DateTime} is due within a week from now and has not been done.
  */
 public class ReminderPredicate extends TaskIsIncompletePredicate {
 
@@ -52,7 +52,7 @@ public class ReminderPredicate extends TaskIsIncompletePredicate {
         if (correspondingReminder == null) {
             return false;
         } else {
-            return shouldBeReminded(task, correspondingReminder);
+            return shouldBeReminded(task, correspondingReminder) && super.test(task);
         }
     }
 

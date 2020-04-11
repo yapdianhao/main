@@ -43,8 +43,20 @@ public class SampleDataUtil {
                 new ModuleCode("ST2334"), Priority.MEDIUM, getTagSet("exam"),
                 new TimeSpent(Duration.ofMinutes(4))
             ),
-            new Task(new Description("Consultation with David Li"), Status.INCOMPLETE, new DateTime(NEXT_WEEK),
+            new Task(new Description("Consultation"), Status.INCOMPLETE, new DateTime(NEXT_WEEK),
                 new ModuleCode("PF1103"), Priority.MEDIUM, getTagSet("consult", "prepare"),
+                new TimeSpent(Duration.ofMinutes(1))
+            ),
+            new Task(new Description("Revision"), Status.INCOMPLETE, new DateTime(NEXT_WEEK),
+                new ModuleCode("ST2334"), Priority.MEDIUM, getTagSet("midterm", "prepare"),
+                new TimeSpent(Duration.ofMinutes(1))
+            ),
+            new Task(new Description("Team Project"), Status.INCOMPLETE, new DateTime(NEXT_WEEK),
+                new ModuleCode("CS2103T"), Priority.HIGH, getTagSet("final-submission", "team"),
+                new TimeSpent(Duration.ofMinutes(1))
+            ),
+            new Task(new Description("Individual Assignment 2"), Status.INCOMPLETE, new DateTime(NEXT_WEEK),
+                new ModuleCode("CS3230"), Priority.HIGH, getTagSet("graded"),
                 new TimeSpent(Duration.ofMinutes(1))
             ),
             new Task(new Description("Tutorial 4"), Status.INCOMPLETE, new DateTime(TODAY_MORNING),

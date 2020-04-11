@@ -1,3 +1,4 @@
+//@@author yapdianhao
 package seedu.jelphabot.model.reminder;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -84,6 +85,13 @@ public class UniqueReminderListTest {
 
     @Test
     public void setReminders_listWithDuplicateReminders_throwsDuplicateReminderException() {
+        List<Reminder> listWithDuplicateReminders = Arrays.asList(ASSESSMENT_REMINDER, ASSESSMENT_REMINDER);
+        assertThrows(DuplicateReminderException.class, ()->uniqueReminderList
+                                                               .setReminders(listWithDuplicateReminders));
+    }
+
+    @Test
+    public void setReminders_listWithDuplicateReminderShowsTasks_throwsDuplicateReminderException() {
         List<Reminder> listWithDuplicateReminders = Arrays.asList(ASSESSMENT_REMINDER, ASSESSMENT_REMINDER);
         assertThrows(DuplicateReminderException.class, ()->uniqueReminderList
                                                                .setReminders(listWithDuplicateReminders));

@@ -18,6 +18,7 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.jelphabot.model.reminder.Reminder;
+import seedu.jelphabot.model.reminder.ReminderShowsTask;
 import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.model.task.exceptions.DuplicateTaskException;
 import seedu.jelphabot.testutil.TaskBuilder;
@@ -87,8 +88,10 @@ public class JelphaBotTest {
      * A stub ReadOnlyJelphaBot whose tasks list can violate interface constraints.
      */
     private static class JelphaBotStub implements ReadOnlyJelphaBot {
+
         private final ObservableList<Task> tasks = FXCollections.observableArrayList();
         private final ObservableList<Reminder> reminders = FXCollections.observableArrayList();
+        private final ObservableList<ReminderShowsTask> reminderShowsTasks = FXCollections.observableArrayList();
 
         JelphaBotStub(Collection<Task> tasks) {
             this.tasks.setAll(tasks);
@@ -105,6 +108,11 @@ public class JelphaBotTest {
         }
 
         @Override
+        public ObservableList<ReminderShowsTask> getReminderShowsTaskList() {
+            return reminderShowsTasks;
+        }
+
+        @Override
         public void setTasks(List<Task> tasks) {
             this.tasks.setAll(tasks);
         }
@@ -113,7 +121,6 @@ public class JelphaBotTest {
         public void setReminders(List<Reminder> reminders) {
             this.reminders.setAll(reminders);
         }
-
 
     }
 

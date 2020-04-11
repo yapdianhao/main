@@ -640,9 +640,10 @@ image::ug_figures/addReminder.png[width="600"]
 * `HOURS` refers to the number of hours before the due date of the task when you want to be reminded of it.
 * You can only specify `DAYS` to be in the range 0 - 7 inclusive.
 * You can only specify `HOURS` to be in the range 0 - 24 inclusive.
-* Every Task can only have one reminder.
-* Tasks that are completed cannot have a reminder.
-* Tasks that are reminded but are not completed after the deadline will still be reminded for.
+* Every `Task` can only have one `Reminder` .
+* A `Task` that is completed cannot have a `Reminder` .
+* A `Task` that is reminded but are not completed after the deadline will still be reminded for.
+* A `Task` will not be reminded if the task is completed but it has a `Reminder` .
 ****
 
 ==== Removing reminder : `delrem`
@@ -664,15 +665,32 @@ image::ug_figures/delReminder.png[width="600"]
 * Whenever a task is deleted, the corresponding reminder will also be removed.
 ****
 
+==== Navigate directly to view all reminders : `remindertab`
+
+Whenever you add a `Reminder` , you can navigate to the `Reminder` tab to see a list of `Reminder` s that you have.
+You can either click the tab, or enter the command `remindertab` to switch to the `Reminder`'s panel.
+Every `Reminder` will show the `Task` `s module code, description, due date, the days that will be reminded before the
+deadline, and the hours that will be reminded before the deadline.
+
+[.text-center]
+.Example of expected result after running `remindertab`
+image::ug_figures/remindertab.png[width="600"]
 
 ==== Reminder popup notification
 
-Whenever you boot JelphaBot the next session after you added your reminders, if there is any task that have to be reminded, JelphaBot will show
+Whenever you boot JelphaBots the next session after you added your reminders, if there is any task that have to be reminded, JelphaBot will show
 a list of tasks that will expire soon, and tasks that have expired but have not been completed.
 
 [.text-center]
 .Example of expected result after tasks are being reminded.
 image::ug_figures/reminderpopup.png[width="600"]
+
+****
+* Whenever JelphaBot is booted, should you have any tasks that is not completed but is reminded,
+JelphaBot's reminder will always popup.
+* This will persist until you either complete the `Task`, or delete the `Reminder`.
+****
+
 //end::reminder[]
 
 === Colour-code module codes `[coming in v2.0]`
@@ -732,6 +750,7 @@ e.g. `delete 3`
 e.g. `reminder 2 days/1 hours/1`
 * *Delete Reminder* : `delrem INDEX` +
 e.g. `delrem 2`
+* *View Reminders*: `remindertab` +
 * *Productivity* : `productivity` or `:p` or `:P`
 * *Timer* : `start INDEX` or `stop INDEX` +
 e.g. `start 1` or `stop 1`
