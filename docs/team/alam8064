@@ -41,28 +41,28 @@ visualise which days are busier with more tasks on hand.
 ** Highlights:
 *** The overarching view of the tasks displayed on the calendar (shown by the dot indicators) is done by filtering the
 existing main task list.
-*** The implementation was challenging as it required constant updates to be accounted for after other commands which
+*** The implementation was challenging as it required constant updates to be accounted for after other commands
 edits the main task list is input.
 *** Moreover, to avoid user mistakes and increase the feature's usability, the included commands implementation in
 carrying out various functions as listed above uses the same command keyword : `calendar`. This involved the heavy use
 and interaction between the `Ui`, `Logic`, and `Model` components.
 
 ** Relevant pull requests:
-https://github.com/AY1920S2-CS2103T-F09-2/main/pull/196[#314],
-https://github.com/AY1920S2-CS2103T-F09-2/main/pull/196[#299],
-https://github.com/AY1920S2-CS2103T-F09-2/main/pull/196[#297],
-https://github.com/AY1920S2-CS2103T-F09-2/main/pull/196[#177],
-https://github.com/AY1920S2-CS2103T-F09-2/main/pull/196[#174],
-https://github.com/AY1920S2-CS2103T-F09-2/main/pull/196[#165],
-https://github.com/AY1920S2-CS2103T-F09-2/main/pull/196[#138],
-https://github.com/AY1920S2-CS2103T-F09-2/main/pull/196[#84]
+https://github.com/AY1920S2-CS2103T-F09-2/main/pull/314[#314],
+https://github.com/AY1920S2-CS2103T-F09-2/main/pull/299[#299],
+https://github.com/AY1920S2-CS2103T-F09-2/main/pull/297[#297],
+https://github.com/AY1920S2-CS2103T-F09-2/main/pull/177[#177],
+https://github.com/AY1920S2-CS2103T-F09-2/main/pull/174[#174],
+https://github.com/AY1920S2-CS2103T-F09-2/main/pull/165[#165],
+https://github.com/AY1920S2-CS2103T-F09-2/main/pull/138[#138],
+https://github.com/AY1920S2-CS2103T-F09-2/main/pull/84[#84]
 
 //** Credits: _{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}_
 
 * *Minor enhancement*: Added in the panel of tabs in the main Ui layout during initial stages.
 This was done for the subsequence integration of our individual features.
 ** Pull requests:
-https://github.com/AY1920S2-CS2103T-F09-2/main/pull/196[#78]
+https://github.com/AY1920S2-CS2103T-F09-2/main/pull/78[#78]
 
 * *Code contributed*: [https://nus-cs2103-ay1920s2.github.io/tp-dashboard/#search=alam8064[View on RepoSense]]
 
@@ -70,10 +70,12 @@ https://github.com/AY1920S2-CS2103T-F09-2/main/pull/196[#78]
 
 ** Project management:
 *** Managed releases `v1.2.1` - `v1.3` (2 releases) on GitHub
+*** Updated `SampleDataUtil` to propagate an empty instance of the app with time-sensitive test data to streamline manual testing.
+(Pull requests: https://github.com/AY1920S2-CS2103T-F09-2/main/pull/357[#357])
 
 ** Documentation:
 *** Added diagrams and documentation for the Calendar feature in the Developer Guide.
-*** Updated diagram for the Ui section from AB3 and and the proposed undo feature from AB3 in the Developer Guide.
+*** Updated diagram for the Ui section, the delete command diagram and the proposed undo feature from AB3 in the Developer Guide.
 *** Added documentation for Calendar feature in the User Guide.
 
 ** Community:

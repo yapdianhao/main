@@ -173,8 +173,6 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 .Interactions Inside the Logic Component for the `delete 1` Command
 image::DeleteSequenceDiagram.png[]
 
-NOTE: The lifeline for `DeleteCommandParser` and `Model` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
 [[Design-Model]]
 === Model component
 The Model component provides an internal data representation of all tasks stored in JelphaBot, as well as methods to modify that data.
@@ -526,7 +524,20 @@ There are 2 commands that users can issue to perform function 1:
 2. `calendar MONTHYEAR`: Displays calendar for the month and year specified, with the first day of the month highlighted,
 and its corresponding tasks due listed (e.g. calendar Apr-2020). Refer <<Calendar-MonthYear-SequenceDiagram, here>>, for the diagram describing this process.
 
-//The implementation of these 2 commands are largely similar. +
+Upon execution of the `calendar MONTHYEAR` or the `calendar today` command, CalendarCommand#execute() will run `updateFilteredCalendarTaskList()` to
+filter the task list to display the tasks on the `CalendarTaskListPanel` according to the first day of the `MONTHYEAR` or the tasks due `today` respectively.
+The filtering of the tasks according to date is done using the `TaskDueWithinDayPredicate`. A distinct `CommandResult` would then be generated according to
+the input command and is returned to the `LogicManager`. Finally, the  `CommandResult` is passed to the `MainWindow` in UI. Now, the updates can be done for the respective components:
+
+UI Component: Using the CommandResult, MainWindow calls MainWindow#updateCalendarMainPanel(), which is then passed to call CalendarMainPanel#updateCalendarPanel().
+For the `calendar MONTHYEAR` command, this updates the `CalendarPanel` display with the respective `MONTHYEAR` view, and highlights the first day of the month.
+For the `calendar today` command, this updates the `CalendarPanel` display to the current month and year, with today's date highlighted.
+
+The following example sequence diagram shows you how the `calendar MONTHYEAR` (e.g. `calendar Apr-2020`) command works.
+
+[[Calendar-MonthYear-SequenceDiagram]]
+.Sequence diagram after running `calendar Apr-2020`
+image::CalendarViewSequenceDiagram.png[]
 
 **Function 2: Display a list of tasks due for a selected date in the month**
 
@@ -537,24 +548,11 @@ NOTE: Only a date belonging in the current displayed month on the `CalendarPanel
 processing the `calendar DATE` command. A date that falls in other month and years would just display its
 corresponding tasks due on the `CalendarTaskListPanel`.
 
-The following example sequence diagram shows you how the `calendar MONTHYEAR` (e.g. `calendar Apr-2020`) command works.
-
-[[Calendar-MonthYear-SequenceDiagram]]
-.Sequence diagram after running `calendar Apr-2020`
-image::CalendarViewSequenceDiagram.png[]
-
-Upon execution of the `calendar MONTHYEAR` command, CalendarCommand#execute() will run `updateFilteredCalendarTaskList()` to
-filter the task list displaying the tasks due on the first day of the `MONTHYEAR` in the `CalendarTaskListPanel` and generate a CommandResult with the respective `MONTHYEAR`
-and return it to the `LogicManager`. The CommandResult is passed to the MainWindow in UI. Now, the updates can be done for the respective components:
-
-UI Component: Using the CommandResult, MainWindow calls MainWindow#updateCalendarMainPanel(), which is then passed to call CalendarMainPanel#updateCalendarPanel().
-This updates the `CalendarPanel` display with the respective `MONTHYEAR` view, and highlights the first day of the month.
-
-NOTE: The implementation of the other two calendar commands (`calendar DATE` and `calendar today`) are largely similar and run in the same process.
+The implementation of the previous two calendar commands (`calendar DATE` and `calendar today`) are largely similar and run in the same process.
 The only exception is regarding the `calendar DATE` command which fulfills **Function 2** listed above, where the `GridPane` in `CalendarPanel` is not
 altered by running CalendarPanel#fillGridPane() unlike the other two commands fulfilling **Function 1**. Only `CalendarTaskListPanel` is updated.
 
-The following diagram shows the sequence flow for variants of the `calendar XXX` command (XXX is an optional argument) which modifies the `CalendarMainPanel`:
+The following diagram shows the sequence flow for variants of these three calendar commands which modifies the `CalendarMainPanel`:
 [[Calendar-ActivityDiagram]]
 .Activity Diagram showing the updating of `CalendarMainPanel`
 image::CalendarCommandActivityDiagram.png[]
@@ -572,6 +570,11 @@ The next input following the command word (`DATE`, `MONTHYEAR`, `today`) is then
 ** Cons: Certain areas of the code might be repetitive.
 ** Cons: Less intuitive for users to use.
 
+*Reason for chosen implementation:* +
+The current solution is more user-friendly as it reduces the number of varying commands that users have to remember in order to
+access the respective information. Additionally, upcoming changes and future implementations can be easily integrated into the
+existing code base as well.
+
 ===== Aspect 2: Method of storing `ObservableList<Task>` of tasks for each day card (Implementation of the Dot Indicator)
 * *Current Solution:* Each `CalendarDayCard` stores a filtered list of tasks due on its specific date.
 This is done by obtaining all the tasks in the task list from Logic#getFilteredTaskList() and applying a filter function
@@ -583,6 +586,11 @@ in the calendar panel would be re-filtered after the execution of each command.
 ** Pros: Retrieving the tasks in a specific date and storing in the day card is fast - can be done in O(1) time.
 ** Cons: Implementation would be much more complex.
 ** Cons: Updating of this HashMap of the tasks as the main task list is being edited constantly can be very tedious.
+
+*Reason for chosen implementation:* +
+The current solution is easier to implement since we are filtering the tasks we want to see directly from the main task list.
+This reduces the amount of methods to implement over various class and components as constant updates of the tasks
+in each day card of the calendar is done. The ease of implementation is crucial given the tight deadlines we have to meet for the project.
 // end::calendar[]
 
 // tag::productivity[]
