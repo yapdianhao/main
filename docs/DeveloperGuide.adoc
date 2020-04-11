@@ -616,28 +616,28 @@ Displaying the productivity panel is done through the `Productivity` class. +
 A `Productivity` object is a container for the objects responsible for the sub-parts of the panel, namely `TimeSpentToday`, `RunningTimers` and `TasksCompleted`.
 Each of these have their respective String representations which will be used in rendering the panel.
 
-`TimeSpentToday` implements the following operation:
+`TimeSpentToday` implements the following operations:
 
 * An iterator method `getTimeSpent()` which iterates through a list of `ObservableList<Task>`.
-** This iterator will extract the description and deadline of tasks with timers that have been started.
-* A toString method which returns the sum of duration spent on tasks under 3 different categories: "due today", "due in next 6 days" and "due after 6 days".
+** This iterator will extract the duration field of each task.
+* A `toString()` method which returns the sum of duration (i.e. time spent) of tasks under 3 different categories: "due today", "due in next 6 days" and "due after 6 days".
 [NOTE]
-Each time `TimeSpentToday` is instantiated, `getTimeSpent()` is called thrice, once each for the 3 categories.
+Each time `TimeSpentToday` is instantiated, `getTimeSpent()` is called thrice; once each for the 3 categories.
 
 `RunningTimers` implements the following operations:
 
 * An iterator method `getTasksWithTimers()` which iterates through a list of `ObservableList<Task>`.
 ** This iterator will extract the description and deadline of tasks with timers that have been started.
-* A toString method which returns the tasks with running timers.
+* A `toString()` method which returns the tasks with running timers.
 
 `TasksCompleted` implements the following operations:
 
 * An iterator method `getCompletionStatus()` which iterates through a list of `ObservableList<Task>`.
 ** This iterator will extract the number of tasks completed under the "due today" category.
 * An iterator method `getOverdueStatus()` which iterates through a list of `ObservableList<Task>`.
-** This iterator will extract the number of incomplete and overdue tasks.
+** This iterator will extract the number of tasks that are incomplete and past their due date.
 * A getter method which returns the percentage of tasks completed that are under the "due today" category.
-* A toStringArray method which returns the task completion status, JelphaBot's response to the user's productivity,as well as number of overdue tasks.
+* A `toStringArray()` method which returns the task completion status, JelphaBot's response to the user's productivity, as well as number of overdue tasks.
 
 Information from all three objects are subsequently rendered onto the panel through the respective FXML files.
 
@@ -670,11 +670,12 @@ image::TimerPanelSequenceDiagram.png[]
 In order to stop timing a task, the user enters `stop INDEX` command
 (e.g. `stop 1`)
 
-Upon successful execution of the command, the productivity tab removes the task being timed under the Running Timer(s) header. Removing a task from the Running Timer(s) header is similar adding it, as illustrated by the Sequence Diagram <<sequence-updatingProductivityPanel, above>>.
+Upon successful execution of the command, the productivity tab removes the task being timed under the Running Timer(s) header.
+Removing a task from the Running Timer(s) header is similar to adding it, as illustrated by the Sequence Diagram <<sequence-updatingProductivityPanel, above>>.
 Under the Time Spent header, the total time spent will be increased depending on the date that the task is due.
 
-[NOTE]
-If the user attempts to start timer for a task marked as completed or `stop` a task that does not have a running timer,
+[WARNING]
+Attempting to start timer for a task marked as completed or `stop` a task that does not have a running timer,
 the command fails its execution so that it does not execute that `start` or `stop` operation to `start` or `stop` the timer for that task.
 
 .Sequence Diagram after running `stop 1`
