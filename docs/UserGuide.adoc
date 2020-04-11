@@ -277,7 +277,7 @@ To read more about pinning tasks, go <<#pin, here>>)
 * *Due This Week* +
 (Shows tasks due within the next seven days)
 * *Due Sometime* +
-(Shows all other tasks that do not fit into prior categories)
+(Shows all other yttasks that do not fit into prior categories)
 
 [.text-center]
 .Example of an expected result after running `list date`
