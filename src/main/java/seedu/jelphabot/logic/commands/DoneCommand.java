@@ -60,9 +60,9 @@ public class DoneCommand extends Command {
         Task taskToMarkDone = lastShownList.get(index.getZeroBased());
         Task doneTask = createDoneTask(taskToMarkDone);
 
-        boolean tasksSame = taskToMarkDone.equals(doneTask);
+        boolean isSameTask = taskToMarkDone.equals(doneTask);
 
-        if (tasksSame) {
+        if (isSameTask) {
             throw new CommandException(MESSAGE_TASK_ALREADY_MARKED_COMPLETE);
         }
 

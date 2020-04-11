@@ -562,7 +562,6 @@ image::StopSequenceDiagram.png[]
 ===== Aspect 1: Rendering sub-parts of productivity panel
 * *Current solution*: Render each sub-part (i.e. task completion rate, time spent and running timers) only when that part needs to
 be updated. All 3 parts are rendered on to the same card.
-** Rationale: No need to re-render all 3 parts when changes are made to only one part.
 ** Pros: Easy to implement and reduces waste of computational power.
 ** Cons: As all parts are displayed on the same card, if there happens to be problem in other parts of the card, all parts will be affected.
 * *Alternative 1*: Abstract each part to a separate card and render all cards onto the same panel.
@@ -572,19 +571,19 @@ an error in displaying.
 * *Alternative 2*: Employ multi-threading for rendering each sub-part.
 ** Pros: No need to use 3 different booleans when updating view. Code base will be cleaner and more readable.
 ** Cons: Unsure if cost of multi-threading less then of constructing 3 instances for rendering the productivity panel view.
+** Rationale for current implementation: No need to re-render all 3 parts when changes are made to only one part.
 
 ===== Aspect 2: Allowing tasks to be added, deleted or edited while timer is running
 * *Current solution*: Adding and deleting of tasks are allowed. However, tasks cannot be edited.
-** Rationale: Adding and deleting tasks does not affect the task being timed.
 ** Pros: Other functionality are still available for use. Thus, user's experience is not affected.
 ** Cons: User is unable to make changes to the task being timed.
 * *Alternative 1*: Allow users to edit task while timer is running.
 ** Pros: User is able to use all features without restriction.
 ** Cons: Difficult to implement as the Task model requires a new Task to replace the old Task when edit command is executed.
+** Rationale for current implementation: Adding and deleting tasks does not affect the task being timed.
 
 ===== Aspect 3: Productivity panel visualisation
 * *Current solution*: Separating sub-parts by paragraphs and including progress bar for tasks completed.
-** Rationale: Paragraphing increases readability and the progress bar provides visual aid.
 ** Pros: Easy to see at a glance which parts are which.
 ** Cons: Text under Running Timer(s) can appear wordy. As number of running timers increase, more text is added under Running Timer(s).
 * *Alternative 1*: Highlight displayed module code and deadline in alternating colours
@@ -593,6 +592,7 @@ an error in displaying.
 * *Alternative 2*: Only show 3 tasks whose timers were started in order of priority and time when timers were started.
 ** Pros: Allows user to focus on tasks at hand.
 ** Cons: User might forget about other tasks whose timers were started and not complete them on time.
+** Rationale for current implementation: Paragraphing increases readability and the progress bar provides visual aid.
 // end::productivity[]
 
 
@@ -728,8 +728,6 @@ The following sequence diagram shows how the undo operation works:
 
 .The sequence diagram of the undo feature.
 image::UndoSequenceDiagram.png[]
-
-NOTE: The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 The `redo` command does the opposite -- it calls `Model#redoJelphaBot()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores JelphaBot to that state.
 

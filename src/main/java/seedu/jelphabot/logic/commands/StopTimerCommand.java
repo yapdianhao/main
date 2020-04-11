@@ -39,8 +39,8 @@ public class StopTimerCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-        Task dummy = lastShownList.get(targetIndex.getZeroBased());
         Task taskToStop = lastShownList.get(targetIndex.getZeroBased());
+        Task dummy = taskToStop;
 
         if (!taskToStop.isBeingTimed()) {
             throw new CommandException(MESSAGE_NO_TIMER_TO_STOP);

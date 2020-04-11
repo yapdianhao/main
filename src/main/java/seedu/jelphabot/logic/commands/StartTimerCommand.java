@@ -8,9 +8,18 @@ import seedu.jelphabot.commons.core.index.Index;
 import seedu.jelphabot.logic.commands.exceptions.CommandException;
 import seedu.jelphabot.model.Model;
 import seedu.jelphabot.model.productivity.Productivity;
+import seedu.jelphabot.model.tag.Tag;
+import seedu.jelphabot.model.task.DateTime;
+import seedu.jelphabot.model.task.Description;
+import seedu.jelphabot.model.task.ModuleCode;
+import seedu.jelphabot.model.task.Priority;
 import seedu.jelphabot.model.task.Status;
 import seedu.jelphabot.model.task.Task;
+import seedu.jelphabot.model.task.TimeSpent;
 import seedu.jelphabot.model.task.tasklist.ViewTaskList;
+
+import java.time.LocalDateTime;
+import java.util.Set;
 
 /**
  * Starts a timer for a task.
@@ -42,7 +51,6 @@ public class StartTimerCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-        Task dummy = lastShownList.get(targetIndex.getZeroBased());
         Task taskToTime = lastShownList.get(targetIndex.getZeroBased());
 
         if (taskToTime.getStatus() == Status.COMPLETE) {
@@ -52,7 +60,6 @@ public class StartTimerCommand extends Command {
         }
 
         taskToTime.startTimer();
-        model.setTask(dummy, taskToTime);
         model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
         model.setProductivity(new Productivity(model.getFilteredTaskList(), false, true, false));
         return new CommandResult(String.format(MESSAGE_SUCCESS, targetIndex.getOneBased(),

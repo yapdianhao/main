@@ -21,15 +21,12 @@ import seedu.jelphabot.model.task.Priority;
 import seedu.jelphabot.model.task.Status;
 import seedu.jelphabot.model.task.TimeSpent;
 
-// TODO: add test for invalid priority
 // no test for status and TimeSpent needed because they are not user-dependent
 public class JsonAdaptedTaskTest {
     private static final String INVALID_DESCRIPTION = "∫3L L1M";
-    // private static final String INVALID_PRIORITY = "INVALID";
     private static final String INVALID_MODULE_CODE = "2103T";
     private static final String INVALID_TAG = "#rabbit!!";
     private static final String INVALID_DATETIME = "03-19/1999 00:00";
-    private static final String INVALID_DONETIME = "01/22-1999 00:00";
 
     private static final String VALID_DESCRIPTION = BOOK_REPORT.getDescription().toString();
     private static final String VALID_MODULE_CODE = BOOK_REPORT.getModuleCode().toString();
@@ -123,16 +120,6 @@ public class JsonAdaptedTaskTest {
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, DateTime.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, task::toModelType);
     }
-
-    // @Test
-    // public void toModelType_invalidPriority_throwsIllegalValueException() {
-    //     JsonAdaptedTask task =
-    //         new JsonAdaptedTask(VALID_DESCRIPTION, VALID_STATUS, VALID_DATETIME, VALID_MODULE_CODE, INVALID_PRIORITY,
-    //             VALID_TAGS, VALID_TIME_SPENT
-    //         );
-    //     String expectedMessage = Priority.MESSAGE_CONSTRAINTS;
-    //     assertThrows(IllegalValueException.class, expectedMessage, task::toModelType);
-    // }
 
     @Test
     public void toModelType_invalidTags_throwsIllegalValueException() {
