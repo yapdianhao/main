@@ -4,10 +4,12 @@
 :stylesDir: ../stylesheets
 
 == Overview
-JelphaBot is a desktop Task Manager. The user interacts with it using a CLI, but it has a GUI created with JavaFX. It is written in Java, and has about 15 kLoC.
+JelphaBot is a desktop Task Manager that aids NUS students in tracking tasks efficiently. The user interacts with it using a CLI, but it has a GUI created with JavaFX.
+It is written in Java, and has about 12 kLoC.
 
 === Summary of contributions
-* Code contributed: https://nus-cs2103-ay1920s2.github.io/tp-dashboard/#search=clouddoggo&sort=groupTitle&sortWithin=title&since=2020-02-14&timeframe=commit&mergegroup=false&groupSelect=groupByRepos&breakdown=false[[View on RepoSense]]
+* Code contributed: [https://nus-cs2103-ay1920s2.github.io/tp-dashboard/#search=clouddoggo&sort=groupTitle&sortWithin=title&since=2020-02-14&timeframe=commit&mergegroup=false&groupSelect=groupByRepos&breakdown=false[View on RepoSense]]
+
 //https://github.com/AY1920S2-CS2103T-F09-2/main/tree/master/src/main/java/seedu/jelphabot/model/productivity[[Productivity Model]]
 //https://github.com/AY1920S2-CS2103T-F09-2/main/tree/master/src/main/java/seedu/jelphabot/logic/commands[[Command Code]]
 //https://github.com/AY1920S2-CS2103T-F09-2/main/tree/master/src/main/java/seedu/jelphabot/ui[[UI Code]]
