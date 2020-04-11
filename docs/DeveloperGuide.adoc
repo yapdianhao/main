@@ -490,7 +490,20 @@ There are 2 commands that users can issue to perform function 1:
 2. `calendar MONTHYEAR`: Displays calendar for the month and year specified, with the first day of the month highlighted,
 and its corresponding tasks due listed (e.g. calendar Apr-2020). Refer <<Calendar-MonthYear-SequenceDiagram, here>>, for the diagram describing this process.
 
-//The implementation of these 2 commands are largely similar. +
+Upon execution of the `calendar MONTHYEAR` or the `calendar today` command, CalendarCommand#execute() will run `updateFilteredCalendarTaskList()` to
+filter the task list to display the tasks on the `CalendarTaskListPanel` according to the first day of the `MONTHYEAR` or the tasks due `today` respectively.
+The filtering of the tasks according to date is done using the `TaskDueWithinDayPredicate`. A distinct `CommandResult` would then be generated according to
+the input command and is returned to the `LogicManager`. Finally, the  `CommandResult` is passed to the `MainWindow` in UI. Now, the updates can be done for the respective components:
+
+UI Component: Using the CommandResult, MainWindow calls MainWindow#updateCalendarMainPanel(), which is then passed to call CalendarMainPanel#updateCalendarPanel().
+For the `calendar MONTHYEAR` command, this updates the `CalendarPanel` display with the respective `MONTHYEAR` view, and highlights the first day of the month.
+For the `calendar today` command, this updates the `CalendarPanel` display to the current month and year, with today's date highlighted.
+
+The following example sequence diagram shows you how the `calendar MONTHYEAR` (e.g. `calendar Apr-2020`) command works.
+
+[[Calendar-MonthYear-SequenceDiagram]]
+.Sequence diagram after running `calendar Apr-2020`
+image::CalendarViewSequenceDiagram.png[]
 
 **Function 2: Display a list of tasks due for a selected date in the month**
 
@@ -501,24 +514,11 @@ NOTE: Only a date belonging in the current displayed month on the `CalendarPanel
 processing the `calendar DATE` command. A date that falls in other month and years would just display its
 corresponding tasks due on the `CalendarTaskListPanel`.
 
-The following example sequence diagram shows you how the `calendar MONTHYEAR` (e.g. `calendar Apr-2020`) command works.
-
-[[Calendar-MonthYear-SequenceDiagram]]
-.Sequence diagram after running `calendar Apr-2020`
-image::CalendarViewSequenceDiagram.png[]
-
-Upon execution of the `calendar MONTHYEAR` command, CalendarCommand#execute() will run `updateFilteredCalendarTaskList()` to
-filter the task list displaying the tasks due on the first day of the `MONTHYEAR` in the `CalendarTaskListPanel` and generate a CommandResult with the respective `MONTHYEAR`
-and return it to the `LogicManager`. The CommandResult is passed to the MainWindow in UI. Now, the updates can be done for the respective components:
-
-UI Component: Using the CommandResult, MainWindow calls MainWindow#updateCalendarMainPanel(), which is then passed to call CalendarMainPanel#updateCalendarPanel().
-This updates the `CalendarPanel` display with the respective `MONTHYEAR` view, and highlights the first day of the month.
-
-NOTE: The implementation of the other two calendar commands (`calendar DATE` and `calendar today`) are largely similar and run in the same process.
+The implementation of the previous two calendar commands (`calendar DATE` and `calendar today`) are largely similar and run in the same process.
 The only exception is regarding the `calendar DATE` command which fulfills **Function 2** listed above, where the `GridPane` in `CalendarPanel` is not
 altered by running CalendarPanel#fillGridPane() unlike the other two commands fulfilling **Function 1**. Only `CalendarTaskListPanel` is updated.
 
-The following diagram shows the sequence flow for variants of the `calendar XXX` command (XXX is an optional argument) which modifies the `CalendarMainPanel`:
+The following diagram shows the sequence flow for variants of these three calendar commands which modifies the `CalendarMainPanel`:
 [[Calendar-ActivityDiagram]]
 .Activity Diagram showing the updating of `CalendarMainPanel`
 image::CalendarCommandActivityDiagram.png[]
