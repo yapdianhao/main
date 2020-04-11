@@ -282,10 +282,14 @@ The task list is then filtered with the help of `TaskDueWithinDayAndIncompletePr
 
 These lists  are stored as fields in the `Summary` class and are used to display the relevant information in the summary panel.
 
+The following class diagram shows the structure of the classes in the `summary` package, in relation with their `Ui` counterparts.
+
 .Class diagram of structure and relations of `Summary`, `SummaryPanel` and their components.
 [[SummaryPanelClassDiagram]]
 image::SummaryPanelClassDiagram.png[]
 To view the respective tasks, the user enters the `summary` command.
+
+The following sequence diagram details the execution of the `summary` command, when the user enters the command.
 
 .Sequence diagram of execution of the `summary` command
 
