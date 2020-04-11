@@ -276,7 +276,7 @@ For each task shown only details such as the Module Code and the Description are
 Once the user marks a task due within the day as complete, it will automatically appear under the tasks completed within the day.
 
 [NOTE]
-If the user marks a task as completed, and immediately deletes the task from the tasklist, it will not appear in the summary screen.
+If the user marks a task as completed, and immediately deletes the task from the task list, it will not appear in the summary screen.
 
 ==== Implementation
 
@@ -285,7 +285,7 @@ The implementation of this panel is facilitated by the `summary` package.
 Upon creation, the `Summary` object obtains the main task list from `Model`.
 The task list is then filtered with the help of `TaskDueWithinDayAndIncompletePredicate` and `TaskCompletedWithinDayPredicate` to obtain two lists with the desired tasks.
 
-These lists  are stored as fields in the `Summary` class and are used to display the relevant information in the summary panel.
+These lists are stored as fields in the `Summary` class and are used to display the relevant information in the summary panel.
 
 .Class diagram of structure and relations of `Summary`, `SummaryPanel` and their components.
 [[SummaryPanelClassDiagram]]
@@ -559,7 +559,7 @@ in the calendar panel would be re-filtered after the execution of each command.
 JelphaBot has a productivity panel of this feature which provides an overarching view of user's overall productivity.
 
 The view of this panel is facilitated by the productivity package that extracts the relevant data and displays them in as cohesive view.
-The productivity package supports the creation of TimeSpentToday, RunningTimers as well as TasksCompleted instances.
+The productivity package supports the creation of `TimeSpentToday`, `RunningTimers` as well as `TasksCompleted` instances.
 Each of these classes iterate through the tasks contained within the task list.
 
 .Class diagram showing the structure and relations of `Productivity`, `ProductivityPanel` and their components.
@@ -573,33 +573,70 @@ This feature offers two main functions and one panel for visualisation:
 
 ====  Implementation
 
+Displaying the productivity panel is done through the `Productivity` class. +
+A `Productivity` object is a container for the objects responsible for the sub-parts of the panel, namely `TimeSpentToday`, `RunningTimers` and `TasksCompleted`.
+Each of these have their respective String representations which will be used in rendering the panel.
+
+`TimeSpentToday` implements the following operation:
+
+* An iterator method `getTimeSpent()` which iterates through a list of `ObservableList<Task>`.
+** This iterator will extract the description and deadline of tasks with timers that have been started.
+* A toString method which returns the sum of duration spent on tasks under 3 different categories: "due today", "due in next 6 days" and "due after 6 days".
+[NOTE]
+Each time `TimeSpentToday` is instantiated, `getTimeSpent()` is called thrice, once each for the 3 categories.
+
+`RunningTimers` implements the following operations:
+
+* An iterator method `getTasksWithTimers()` which iterates through a list of `ObservableList<Task>`.
+** This iterator will extract the description and deadline of tasks with timers that have been started.
+* A toString method which returns the tasks with running timers.
+
+`TasksCompleted` implements the following operations:
+
+* An iterator method `getCompletionStatus()` which iterates through a list of `ObservableList<Task>`.
+** This iterator will extract the number of tasks completed under the "due today" category.
+* An iterator method `getOverdueStatus()` which iterates through a list of `ObservableList<Task>`.
+** This iterator will extract the number of incomplete and overdue tasks.
+* A getter method which returns the percentage of tasks completed that are under the "due today" category.
+* A toStringArray method which returns the task completion status, JelphaBot's response to the user's productivity,as well as number of overdue tasks.
+
+Information from all three objects are subsequently rendered onto the panel through the respective FXML files.
+
+Assuming that the task list is not empty, the following describes the flow of `start 1` and `stop 1` which modifies the currently shown productivity panel:
+
 **Function 1: Starts timer for a specified task** +
 In order to start timing a task, the user enters `start INDEX` command
 (e.g. `start 1`)
 
 Upon successful execution of the command, the productivity tab displays the task being timed under the Running Timer(s) header.
-
-The following diagram shows the sequence flow of `start` which modifies the current Productivity List:
+The following diagram shows the flow of `start 1` which modifies the current view of the productivity panel:
 
 [[activity-settingProductivitylist]]
-.Activity Diagram showing the setting of Productivity in the Productivity List
+.Activity Diagram showing the setting of `Productivity` in the `ProductivityList`
 image::StartActivityDiagram.png[]
 
-Update productivity panel:
-[[activity-updatingProductivityPanel]]
-.Activity Diagram showing the updating of the productivity panel
-image::TimerPanelActivityDiagram.png[]
+To update the productivity panel to reflect the changes, a new `Productivity` object will first be created, replacing the existing `Productivity` object in the `ProductivityList`.
+Each time a new `Productivity` object is created, its corresponding booleans will dictate whether the sub-parts (i.e. `TimeSpentToday`, `RunningTimers` and `TasksCompleted`) are to be replaced with new objects.
+As the command executed is the `start` command, a new `RunningTimers` object is created. As detailed above, the iterator method in `RunningTimers` will be called and a new String representation to be displayed onto the productivity panel will be created.
+This String is subsequently rendered onto the panel under the Running Timer(s) header.
+
+The following diagram shows the sequence flow which updates the Running Timer(s) section in the productivity panel:
+
+[[sequence-updatingProductivityPanel]]
+.Sequence Diagram showing the updating of Running Timer(s) in the productivity panel
+image::TimerPanelSequenceDiagram.png[]
+// TODO: change to sequence diagram
 
 **Function 2: Stops timer for a specified task** +
 In order to stop timing a task, the user enters `stop INDEX` command
 (e.g. `stop 1`)
 
-Upon successful execution of the command, the productivity tab removes the task being timed under the Running Timer(s) header.
+Upon successful execution of the command, the productivity tab removes the task being timed under the Running Timer(s) header. Removing a task from the Running Timer(s) header is similar adding it, as illustrated by the Sequence Diagram <<sequence-updatingProductivityPanel, above>>.
 Under the Time Spent header, the total time spent will be increased depending on the date that the task is due.
 
 [NOTE]
-If the user attempts to start timer for a task marked as completed or stop a task that does not have a running timer,
-the command fails its execution so that it does not execute that start or stop operation to start or stop the timer for that task.
+If the user attempts to start timer for a task marked as completed or `stop` a task that does not have a running timer,
+the command fails its execution so that it does not execute that `start` or `stop` operation to `start` or `stop` the timer for that task.
 
 .Sequence Diagram after running `stop 1`
 image::StopSequenceDiagram.png[]
