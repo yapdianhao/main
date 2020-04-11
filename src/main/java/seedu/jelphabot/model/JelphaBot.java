@@ -64,6 +64,10 @@ public class JelphaBot implements ReadOnlyJelphaBot {
         this.reminders.setReminders(reminders);
     }
 
+    public void setReminderShowsTasks(List<ReminderShowsTask> reminderShowsTasks) {
+        this.reminderShowsTaskList.setReminderShowsTasks(reminderShowsTasks);
+    }
+
     /**
      * Resets the existing data of this {@code JelphaBot} with {@code newData}.
      */
@@ -77,6 +81,7 @@ public class JelphaBot implements ReadOnlyJelphaBot {
         }
         setReminders(newData.getReminderList());
         setTasks(newData.getTaskList());
+        setReminderShowsTasks(newData.getReminderShowsTaskList());
     }
 
     //// task-level operations
@@ -174,17 +179,17 @@ public class JelphaBot implements ReadOnlyJelphaBot {
         return reminders.asUnmodifiableObservableList();
     }
 
+    @Override
+    public ObservableList<ReminderShowsTask> getReminderShowsTaskList() {
+        return reminderShowsTaskList.asUnmodifiableObservableList();
+    }
+
     public List<Task> getTasksAsList() {
         return taskList;
     }
 
     public List<Reminder> getRemindersAsList() {
         return reminderList;
-    }
-
-
-    public ObservableList<ReminderShowsTask> getReminderShowsTaskList(ViewTaskList viewTaskList) {
-        return reminderShowsTaskList.asUnmodifiableObservableList();
     }
 
     /**

@@ -2,6 +2,7 @@
 package seedu.jelphabot.model.reminder;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.jelphabot.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.HashSet;
 import java.util.Iterator;
@@ -74,10 +75,24 @@ public class UniqueReminderShowsTaskList implements Iterable<ReminderShowsTask> 
                            && internalList.equals(((UniqueReminderShowsTaskList) other).internalList));
     }
 
+    public void setReminderShowsTasks(UniqueReminderShowsTaskList replacement) {
+        requireNonNull(replacement);
+        internalList.setAll(replacement.internalList);
+    }
+
+    public void setReminderShowsTasks(List<ReminderShowsTask> reminderShowsTasks) {
+        requireAllNonNull(reminderShowsTasks);
+        if (!reminderShowsTaskAreUnique(reminderShowsTasks)) {
+            throw new DuplicateReminderShowsTaskException();
+        }
+
+        internalList.setAll(reminderShowsTasks);
+    }
+
     /**
      * Returns true if {@code reminderShowsTaskList} contains only unique reminderShowsTasks.
      */
-    public boolean remindersAreUnique(List<ReminderShowsTask> reminderShowsTaskList) {
+    public boolean reminderShowsTaskAreUnique(List<ReminderShowsTask> reminderShowsTaskList) {
         HashSet<ReminderShowsTask> seen = new HashSet<>();
         for (ReminderShowsTask reminder : reminderShowsTaskList) {
             if (seen.contains(reminder)) {
