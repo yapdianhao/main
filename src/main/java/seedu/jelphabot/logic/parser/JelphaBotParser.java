@@ -20,6 +20,7 @@ import seedu.jelphabot.logic.commands.HelpCommand;
 import seedu.jelphabot.logic.commands.ListCommand;
 import seedu.jelphabot.logic.commands.ProductivityCommand;
 import seedu.jelphabot.logic.commands.ReminderCommand;
+import seedu.jelphabot.logic.commands.ReminderTabCommand;
 import seedu.jelphabot.logic.commands.ShowCompletedCommand;
 import seedu.jelphabot.logic.commands.ShowIncompleteCommand;
 import seedu.jelphabot.logic.commands.StartTimerCommand;
@@ -86,6 +87,9 @@ public class JelphaBotParser {
         case ReminderCommand.COMMAND_WORD_UPPER: // fallthrough
         case ReminderCommand.COMMAND_WORD_LOWER:
             return new ReminderCommandParser().parse(arguments);
+
+        case ReminderTabCommand.COMMAND_WORD:
+            return getCommand(arguments, new ReminderTabCommand(), ReminderTabCommand.MESSAGE_USAGE);
 
         case ShowCompletedCommand.COMMAND_WORD:
             return getCommand(arguments, new ShowCompletedCommand(), ShowCompletedCommand.MESSAGE_USAGE);

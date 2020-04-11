@@ -49,8 +49,7 @@ https://github.com/AY1920S2-CS2103T-F09-2/main/pull/76[#76]
 *** Updated the `Storage` component's sequence diagram for Developer Guide.
 *** Added screenshots and descriptions as visual aids for User Guide.
 ** Community:
-*** Contributed to forum discussions:
-**** Requesting usage for third-party libraries (controlsfx) https://github.com/nus-cs2103-AY1920S2/forum/issues/81[#81]
+*** Contributed to forum discussions: requesting usage for third-party libraries (controlsfx) https://github.com/nus-cs2103-AY1920S2/forum/issues/81[#81]
 *** Reviewed pull requests: https://github.com/AY1920S2-CS2103T-F09-2/main/pull/13[#13], https://github.com/AY1920S2-CS2103T-F09-2/main/pull/17[#17]
 *** Reported bugs and suggestions for another team in PE dry run: https://github.com/yapdianhao/ped/issues[Reported 15 bugs]
 
