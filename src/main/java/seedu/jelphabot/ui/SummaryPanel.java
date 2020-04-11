@@ -1,4 +1,4 @@
-// @@author Eden
+//@@author eedenong
 package seedu.jelphabot.ui;
 
 import java.util.logging.Logger;
@@ -54,7 +54,7 @@ public class SummaryPanel extends UiPart<Region> {
 }
 
 /**
- * Custom {@code ListCell} that displays the graphics of a {@code Task} using a {@code TaskCard}.
+ * Custom {@code ListCell} that displays the graphics of a {@code Summary} using a {@code SummaryCard}.
  */
 class SummaryTaskListViewCell extends ListCell<Summary> {
     @Override

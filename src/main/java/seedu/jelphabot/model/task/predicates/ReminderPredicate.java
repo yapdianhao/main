@@ -1,6 +1,8 @@
 //@@author yapdianhao
 package seedu.jelphabot.model.task.predicates;
 
+import static seedu.jelphabot.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -26,6 +28,7 @@ public class ReminderPredicate extends TaskIsIncompletePredicate {
     private final List<Reminder> reminderList;
 
     public ReminderPredicate(ViewTaskList taskList, List<Reminder> reminderList) {
+        requireAllNonNull(taskList, reminderList);
         this.taskList = taskList;
         this.reminderList = reminderList;
     }
@@ -75,6 +78,8 @@ public class ReminderPredicate extends TaskIsIncompletePredicate {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                   || (other instanceof TaskIsIncompletePredicate); // instanceof handles null
+                   || (other instanceof ReminderPredicate)
+                          && this.taskList.equals(((ReminderPredicate) other).taskList)
+                          && this.reminderList.equals(((ReminderPredicate) other).reminderList);
     }
 }

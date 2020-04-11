@@ -1,4 +1,4 @@
-// @@author Eden
+//@@author eedenong
 package seedu.jelphabot.logic.commands;
 
 import seedu.jelphabot.model.Model;
