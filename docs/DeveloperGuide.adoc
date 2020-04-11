@@ -285,14 +285,13 @@ The task list is then filtered with the help of `TaskDueWithinDayAndIncompletePr
 
 These lists are stored as fields in the `Summary` class and are used to display the relevant information in the summary panel.
 
-.Class diagram of structure and relations of `Summary`, `SummaryPanel` and their components.
 [[SummaryPanelClassDiagram]]
+.Class diagram of structure and relations of `Summary`, `SummaryPanel` and their components.
 image::SummaryPanelClassDiagram.png[]
 To view the respective tasks, the user enters the `summary` command.
 
-.Sequence diagram of execution of the `summary` command
-
 [[Summary-SwitchTab-Sequence-Diagram]]
+.Sequence diagram of execution of the `summary` command
 image::SummarySwitchTabSequenceDiagram.png[]
 
 The following sequence diagram details the execution of the creation of the `Summary` object when SummaryCommand is executed.
@@ -511,6 +510,7 @@ Logic#getFilteredCalendarTaskList() and then Logic#updateFilteredCalendarTaskLis
 
 The following diagram depicts how each individual day cell of the calendar will look like:
 
+.Expected display of dates on calendar
 image::CalendarDayCards.png[]
 
 After every execution of command, MainWindow#updateTasksInCalendarDayCards() will be run such that any commands that updates
@@ -835,14 +835,17 @@ Given below is an example usage scenario and how the undo/redo mechanism behaves
 
 Step 1. The user launches the application for the first time. The `VersionedJelphaBot` will be initialized with the initial JelphaBot state, and the `currentStatePointer` pointing to that single JelphaBot state.
 
+.Initial state of JelphaBot
 image::UndoRedoState0.png[]
 
 Step 2. The user executes `delete 5` command to delete the 5th task in JelphaBot. The `delete` command calls `Model#commitJelphaBot()`, causing the modified state of JelphaBot after the `delete 5` command executes to be saved in the `jelphaBotStateList`, and the `currentStatePointer` is shifted to the newly inserted JelphaBot state.
 
+.State of JelphaBot after "delete 5"
 image::UndoRedoState1.png[]
 
 Step 3. The user executes `add d/Assignment ...` to add a new task. The `add` command also calls `Model#commitJelphaBot()`, causing another modified JelphaBot state to be saved into the `jelphaBotStateList`.
 
+.State of JelphaBot after "add d/Assignment"
 image::UndoRedoState2.png[]
 
 [NOTE]
@@ -850,6 +853,7 @@ If a command fails its execution, it will not call `Model#commitJelphaBot()`, so
 
 Step 4. The user now decides that adding the task was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoJelphaBot()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous JelphaBot state, and restores JelphaBot to that state.
 
+.State of JelphaBot after "undo"
 image::UndoRedoState3.png[]
 
 [NOTE]
@@ -867,14 +871,17 @@ If the `currentStatePointer` is at index `jelphaBotStateList.size() - 1`, pointi
 
 Step 5. The user then decides to execute the command `list`. Commands that do not modify JelphaBot, such as `list`, will usually not call `Model#commitJelphaBot()`, `Model#undoJelphaBot()` or `Model#redoJelphaBot()`. Thus, the `jelphaBotStateList` remains unchanged.
 
+.State of JelphaBot after "list"
 image::UndoRedoState4.png[]
 
 Step 6. The user executes `clear`, which calls `Model#commitJelphaBot()`. Since the `currentStatePointer` is not pointing at the end of the `jelphaBotStateList`, all JelphaBot states after the `currentStatePointer` will be purged. We designed it this way because it no longer makes sense to redo the `add n/Assignment ...` command. This is the behavior that most modern desktop applications follow.
 
+.State of JelphaBot after "clear"
 image::UndoRedoState5.png[]
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
+.Activity diagram showing details of command execution
 image::CommitActivityDiagram.png[]
 
 ==== Design Considerations
