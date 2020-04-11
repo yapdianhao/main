@@ -47,6 +47,7 @@ and explains the design considerations of these implementations.
 * <<Dev Ops, Dev Ops>> - A guide for developers to build, test and release JelphaBot.
 
 === Notation used in this Guide
+.Common symbols used throughout this guide.
 [width="70%",cols="^15%,85%"]
 |===
 a| `code` | A Java method or class
@@ -240,22 +241,26 @@ To use the different features, we have also implemented commands for users to sw
 [[ChangingTabs]]
 ===== Switching between Tabs in Main Window
 
-The tabs of the application are defined using a [.java]#SwitchTab# enum and the current tab of the application is stored as a private attribute [.java]#mode# in [.java]#LogicManager#. Users can switch between tabs in JelphaBot using the lower case names of each tab as commands (e.g. `calendar`). When the tab of the application is changed, we need to update the:
+The tabs of the application are defined using a `SwitchTab` enum and the current tab of the application is stored as a private attribute `mode` in `LogicManager`.
+Users can switch between tabs in JelphaBot using the lower case names of each tab as commands (e.g. `calendar`). +
+When the tab of the application is changed, we need to update the:
 
-* [.java]#MainWindow# component so that the [.java]#SwitchTab# attribute in [.java]#MainWindow# reflects the new current tab, since this is used to check if a command can be executed,
-* [.java]#UI# component so that the panels display the information that is relevant to the tab.
+* `MainWindow` component so that the `SwitchTab` attribute in `MainWindow` reflects the new current tab, since this is used to check if a command can be executed,
+* `UI` component so that the panels display the information that is relevant to the tab.
 
-WARNING: `task list` is not a valid command to switch to the Task List tab. Use `list` instead.
+WARNING: `task list` is not a valid command to switch to the Task List tab.
+Use `list` instead.
+Similarly, `:l` is rhe corresponding shortcut.
 
-For all these commands, updates are done by updating the [.java]#SwitchTab# attribute added in the [.java]#CommandResult# object.
+For all these commands, updates are done by updating the `SwitchTab` attribute added in the `CommandResult` object.
 
 To view an example, the figure <<Summary-SwitchTab-Sequence-Diagram, here>> shows the sequence diagram for when a user executes the `:s` or `summary` command.
 
-Upon execution of the `:s` command, [.java]#SummaryCommand#generateCommandResult()# will generate a [.java]#CommandResult# whose [.java]#SwitchTab# attribute is set to [.java]#SUMMARY# and return it to the [.java]#LogicManager#. Now, the updates can be done for the respective components:
+Upon execution of the `:s` command, `SummaryCommand#generateCommandResult()` will generate a `CommandResult``#`` whose `SwitchTab``#`` attribute is set to `SUMMARY``#`` and return it to the `LogicManager``#``.
+Now, the updates can be done for the respective components:
 
-* [.java]#UI# component: [.java]#MainWindow# calls [.java]#MainWindow#executeCommand()#, to retrieve the tab to be changed to and updates the current tab stored in its [.java]#SwitchTab# attribute by calling [.java]#CommandResult#isShow{XXX}()# where XXX is the tab to switch to.
-The display panel is updated by calling [.java]#MainWindow#handle{XXX} where XXX is the tab to switch to.
-
+* `UI` component: `MainWindow` calls `MainWindow#executeCommand()`, to retrieve the tab to be changed to and updates the current tab stored in its `SwitchTab` attribute by calling `CommandResult#isShowXXX()` where `XXX` is the tab to switch to.
+The display panel is updated by calling `MainWindow#handleXXX` where `XXX` is the tab to switch to.
 // end::changetab[]
 
 
