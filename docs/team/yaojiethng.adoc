@@ -75,9 +75,10 @@ https://github.com/AY1920S2-CS2103T-F09-2/main/pull/47[#47])
 *** Added documentation for Task List panel and List Command in User Guide.
 
 ** Tools:
-*** Integrated Github plugins (gh-pages, Travis) to the team repository.
+*** Integrated Github plugins (gh-pages, Travis, Netlify) to the team repository.
 
 <<<
+
 == Contributions to the User Guide
 
 |===
