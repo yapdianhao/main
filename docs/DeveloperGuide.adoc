@@ -252,7 +252,11 @@ Similarly, `:l` is rhe corresponding shortcut.
 
 For all these commands, updates are done by updating the `SwitchTab` attribute added in the `CommandResult` object.
 
-To view an example, the figure <<Summary-SwitchTab-Sequence-Diagram, here>> shows the sequence diagram for when a user executes the `:s` or `summary` command.
+To view an example, the figure here shows the sequence diagram for when a user executes the `:s` or `summary` command.
+
+[[Summary-SwitchTab-Sequence-Diagram]]
+.Sequence diagram of execution of the `summary` command
+image::SummarySwitchTabSequenceDiagram.png[]
 
 Upon execution of the `:s` command, `SummaryCommand#generateCommandResult()` will generate a `CommandResult``#`` whose `SwitchTab``#`` attribute is set to `SUMMARY``#`` and return it to the `LogicManager``#``.
 Now, the updates can be done for the respective components:
@@ -285,18 +289,18 @@ The task list is then filtered with the help of `TaskDueWithinDayAndIncompletePr
 
 These lists are stored as fields in the `Summary` class and are used to display the relevant information in the summary panel.
 
+The following class diagram shows the structure of the classes in the `summary` package, in relation with their `Ui` counterparts.
+
 [[SummaryPanelClassDiagram]]
 .Class diagram of structure and relations of `Summary`, `SummaryPanel` and their components.
 image::SummaryPanelClassDiagram.png[]
-To view the respective tasks, the user enters the `summary` command.
 
-[[Summary-SwitchTab-Sequence-Diagram]]
-.Sequence diagram of execution of the `summary` command
-image::SummarySwitchTabSequenceDiagram.png[]
+To view the respective tasks, the user enters the `summary` command. Upon entry of the `summary` command, a `SummaryCommand` object will be created and `SummaryCommand#execute()`
+will be called.
 
-The following sequence diagram details the execution of the creation of the `Summary` object when SummaryCommand is executed.
+The following sequence diagram details the execution when `SummaryCommand#execute()` is called.
 
-.Sequence diagram of the creation of the `Summary` object when SummaryCommand is executed.
+.Sequence diagram of the creation of the `Summary` object when `SummaryCommand#execute()` is executed.
 image::SummaryCommandSequenceDiagram.png[]
 
 ==== Design considerations
