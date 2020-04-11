@@ -2,12 +2,12 @@
 package seedu.jelphabot.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.jelphabot.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
 import static seedu.jelphabot.model.Model.PREDICATE_SHOW_ALL_TASKS;
 
 import java.time.LocalDateTime;
 import java.util.Set;
 
-import seedu.jelphabot.commons.core.Messages;
 import seedu.jelphabot.commons.core.index.Index;
 import seedu.jelphabot.logic.commands.exceptions.CommandException;
 import seedu.jelphabot.model.Model;
@@ -37,6 +37,7 @@ public class DoneCommand extends Command {
     public static final String MESSAGE_MARK_TASK_COMPLETE_SUCCESS = "Marked task as completed: %1$s";
     public static final String MESSAGE_TASK_ALREADY_MARKED_COMPLETE = "The specified task has already "
                                                                           + "been marked as complete!";
+    public static final String MESSAGE_STOP_TASK_FIRST = "Please stop timer for this task before marking it as done!";
 
     private final Index index;
 
@@ -54,15 +55,20 @@ public class DoneCommand extends Command {
         ViewTaskList lastShownList = model.getLastShownList();
 
         if (index.getZeroBased() >= lastShownList.size() || index.getZeroBased() < 0) {
-            throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+            throw new CommandException(MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
         Task taskToMarkDone = lastShownList.get(index.getZeroBased());
+
+        if (taskToMarkDone.isBeingTimed()) {
+            throw new CommandException(MESSAGE_STOP_TASK_FIRST);
+        }
+
         Task doneTask = createDoneTask(taskToMarkDone);
 
-        boolean tasksSame = taskToMarkDone.equals(doneTask);
+        boolean isSameTask = taskToMarkDone.equals(doneTask);
 
-        if (tasksSame) {
+        if (isSameTask) {
             throw new CommandException(MESSAGE_TASK_ALREADY_MARKED_COMPLETE);
         }
 

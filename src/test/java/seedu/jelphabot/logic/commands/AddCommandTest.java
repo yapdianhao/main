@@ -39,7 +39,8 @@ public class AddCommandTest {
         assertThrows(NullPointerException.class, () -> new AddCommand(null));
     }
 
-    // TODO: fix this fking test
+    // TODO: fix this fking test, eden, go check if u need to override your setsummary method in the
+    //  modelstubacceptingtaskadded class
     // @Test
     // public void execute_taskAcceptedByModel_addSuccessful() throws Exception {
     //     ModelStubAcceptingTaskAdded modelStub = new ModelStubAcceptingTaskAdded();
@@ -252,7 +253,6 @@ public class AddCommandTest {
         public void setSummary(Summary summary) {
             throw new AssertionError("This method should not be called");
         }
-
     }
 
     /**

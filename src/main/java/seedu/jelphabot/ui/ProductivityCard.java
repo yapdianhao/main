@@ -1,3 +1,5 @@
+//@@author Clouddoggo
+
 package seedu.jelphabot.ui;
 
 import javafx.fxml.FXML;
@@ -14,7 +16,7 @@ public class ProductivityCard extends UiPart<Region> {
 
     private static final String FXML = "ProductivityCard.fxml";
 
-    public final Productivity productivity;
+    private final Productivity productivity;
 
     @FXML
     private HBox cardPane;

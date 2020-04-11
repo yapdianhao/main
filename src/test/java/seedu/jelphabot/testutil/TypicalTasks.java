@@ -62,7 +62,6 @@ public class TypicalTasks {
                                               .withPriority(VALID_PRIORITY_ASSIGNMENT)
                                               .withTags(VALID_TAG_GRADED).build();
 
-
     public static final Task TUTORIAL = new TaskBuilder()
                                             .withDescription(VALID_DESCRIPTION_TUTORIAL)
                                             .withDateTime(VALID_DATETIME_TUTORIAL)

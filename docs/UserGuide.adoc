@@ -61,6 +61,7 @@ These commands are also consolidated under <<Command Summary, this section>> for
 
 To aid in your understanding throughout this User Guide, you may find below the different symbols and formatting used throughout this guide.
 
+.Common symbols used throughout this guide.
 [width="100%",cols="40%,<60%,options="header",]
 |=======================================================================
 |*Symbol* | *What does it mean?*
@@ -75,10 +76,10 @@ endif::[]
 ifndef::env-github[]
 a| icon:check[role="green",size="2x"] | Expected result after executing the command
 a| kbd:[Key] | A Key that you should press on your keyboard
-a| icon:lightbulb-o[role="icon-tip", size="2x"] | Tips and tricks that might be useful
-a| icon:info-circle[role="icon-note", size="2x"] | Additional information that is good to know
-a| icon:exclamation-circle[role="icon-important", size="2x"] | Important pointers to take note of
-a| <<blue text underlined>> | Links
+a| icon:lightbulb-o[role="icon-tip",size="2x"] | Tips and tricks that might be useful
+a| icon:info-circle[role="icon-note",size="2x"] | Additional information that is good to know
+a| icon:exclamation-circle[role="icon-important",size="2x"] | Important pointers to take note of
+a| <<Blue-text-underlined, blue text, underlined>> | [[Blue-text-underlined]] Links
 endif::[]
 // also known as TIP, NOTE, WARNING
 |=======================================================================
@@ -172,7 +173,6 @@ image::ug_figures/SummaryViewAfterTaskComplete.png[width="600"]
 
 // end::summary[]
 
-// @@author yaojiethng
 // tag::tasklist[]
 === Managing Tasks (Yao Jie)
 
@@ -213,7 +213,6 @@ Tasks are tagged according to their importance:
 The start of every task will be labelled with a module code so that you can visually categorize them. +
 Go <<#add, here>> to read more about adding tasks with priority and <<#edit, here>> for editing task priority.
 // end::tasklist[]
-// @@author
 
 // tag::add[]
 [[add]]
@@ -248,10 +247,9 @@ If the priority field is not specified, the default priority used is Normal Prio
 Examples:
 
 * `add d/Assignment 1 dt/Jan-01-2020 23 59 m/CS3230 p/1`
-* `add d/Project TP dt/Jan-01-2020 23 59 m/CS2103T p/1 t/pair work`
+* `add d/Project TP dt/Jan-01-2020 23 59 m/CS2103T p/1 t/pair t/work`
 // end::add[]
 
-// @@author yaojiethng
 // tag::list[]
 ==== Listing all Tasks : `list`
 
@@ -296,7 +294,7 @@ Format: `list module`
 .Example of an expected result after running `list module`
 image::ug_figures/listByModule.png[width="600"]
 // end::list[]
-// @@author
+
 
 ==== Locating Tasks by name: `find`
 
@@ -366,6 +364,7 @@ image::ug_figures/doneCommand.png[width="600"]
 * Marks the task at the specified `INDEX` as done.
 * The index refers to the index number shown in the displayed task list.
 * The index *must be a positive integer* 1, 2, 3, ...
+* The task must not have a running timer.
 ****
 
 ==== Deleting a Task : `delete`
@@ -444,7 +443,6 @@ image::ug_figures/showCompletedCommandNoCompleted.png[width="600"]
 
 // end::showincomplete[]
 
-// @@author yaojiethng
 // tag::ug-pin-sort[]
 [[pin]]
 ==== Pin Important Tasks  : `pin` [Coming in V2.0]
@@ -460,7 +458,7 @@ Format: `sort SORTING_ORDER`
 
 Valid `SORTING_ORDER` values include `date`, `module`, and `priority`.
 // end::ug-pin-sort[]
-// @@author
+
 
 // tag::calendar[]
 === Calendar (Amanda)
@@ -548,7 +546,6 @@ image::CalendarToday.png[width="600"]
 Displays month of April in the year 2020 in the calendar panel on the right, with today's date highlighted and displays the corresponding tasks due today on the left.
 // end::calendar[]
 
-// @@author Clouddoggo
 // tag::productivitytracker[]
 === Productivity Tracking (Jel)
 JelphaBot also comes with a productivity tracking that allows you track the progress of your tasks in that week.
@@ -583,7 +580,7 @@ image::ug_figures/startCommand.png[width="600"]
 * Starts the timer for the task at the specified `INDEX` if timer was not already running.
 * The index refers to the index number shown in the displayed task list.
 * The index *must be a positive integer* 1, 2, 3, ...
-* The task to be timed cannot be a completed task.
+* A completed task cannot be timed.
 * New timer entry under "Running Timer(s)" in the productivity tab will be added if execution is successful.
 ****
 
@@ -613,7 +610,7 @@ JelphaBot automatically tracks the user's productivity in a day and outputs the 
 achievements and task completion rate. +
 There is no need to manually request for compliments or criticism.
 // end::feedback[]
-// @@author
+
 
 //@@author yapdianhao
 //tag::reminder[]
@@ -644,9 +641,10 @@ image::ug_figures/addReminder.png[width="600"]
 * `HOURS` refers to the number of hours before the due date of the task when you want to be reminded of it.
 * You can only specify `DAYS` to be in the range 0 - 7 inclusive.
 * You can only specify `HOURS` to be in the range 0 - 24 inclusive.
-* Every Task can only have one reminder.
-* Tasks that are completed cannot have a reminder.
-* Tasks that are reminded but are not completed after the deadline will still be reminded for.
+* Every `Task` can only have one `Reminder` .
+* A `Task` that is completed cannot have a `Reminder` .
+* A `Task` that is reminded but are not completed after the deadline will still be reminded for.
+* A `Task` will not be reminded if the task is completed but it has a `Reminder` .
 ****
 
 ==== Removing reminder : `delrem`
@@ -668,21 +666,38 @@ image::ug_figures/delReminder.png[width="600"]
 * Whenever a task is deleted, the corresponding reminder will also be removed.
 ****
 
+==== Navigate directly to view all reminders : `remindertab`
+
+Whenever you add a `Reminder` , you can navigate to the `Reminder` tab to see a list of `Reminder` s that you have.
+You can either click the tab, or enter the command `remindertab` to switch to the `Reminder`'s panel.
+Every `Reminder` will show the `Task` `s module code, description, due date, the days that will be reminded before the
+deadline, and the hours that will be reminded before the deadline.
+
+[.text-center]
+.Example of expected result after running `remindertab`
+image::ug_figures/remindertab.png[width="600"]
 
 ==== Reminder popup notification
 
-Whenever you boot JelphaBot the next session after you added your reminders, if there is any task that have to be reminded, JelphaBot will show
+Whenever you boot JelphaBots the next session after you added your reminders, if there is any task that have to be reminded, JelphaBot will show
 a list of tasks that will expire soon, and tasks that have expired but have not been completed.
 
 [.text-center]
 .Example of expected result after tasks are being reminded.
 image::ug_figures/reminderpopup.png[width="600"]
+
+****
+* Whenever JelphaBot is booted, should you have any tasks that is not completed but is reminded,
+JelphaBot's reminder will always popup.
+* This will persist until you either complete the `Task`, or delete the `Reminder`.
+****
+
 //end::reminder[]
-//@@author
 
 === Colour-code module codes `[coming in v2.0]`
+Users can customise the font colours of different modules to better distinguish between different tasks.
+The module codes displayed in the Main Window will be similar to the tags displayed to make it easier for users to view them.
 
-// @@author Clouddoggo
 // tag::faq[]
 == FAQ
 
@@ -707,7 +722,7 @@ We will consider this in v2.0.
 *Q6*: Do I need an Internet connection to use JelphaBot? +
 A: No, you don’t. JelphaBot works completely offline.
 // end::faq[]
-// @@author
+
 
 // tag::commandSummary[]
 == Command Summary
@@ -736,6 +751,7 @@ e.g. `delete 3`
 e.g. `reminder 2 days/1 hours/1`
 * *Delete Reminder* : `delrem INDEX` +
 e.g. `delrem 2`
+* *View Reminders*: `remindertab` +
 * *Productivity* : `productivity` or `:p` or `:P`
 * *Timer* : `start INDEX` or `stop INDEX` +
 e.g. `start 1` or `stop 1`

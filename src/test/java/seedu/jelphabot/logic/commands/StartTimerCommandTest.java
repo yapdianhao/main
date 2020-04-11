@@ -1,3 +1,5 @@
+//@@author Clouddoggo
+
 package seedu.jelphabot.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -25,23 +27,6 @@ class StartTimerCommandTest {
 
     private Model model = new ModelManager(getTypicalJelphaBot(), new UserPrefs());
 
-    // TODO: fix test
-    // @Test
-    // public void execute_validIndexUnfilteredList_success() {
-    //     Task taskToStart = model.getLastShownList().get(INDEX_FIRST_TASK.getZeroBased());
-    //     StartTimerCommand StartTimerCommand = new StartTimerCommand(INDEX_FIRST_TASK);
-    //     Task startedTask = model.getLastShownList().get(INDEX_FIRST_TASK.getZeroBased());
-    //     startedTask.startTimer();
-    //
-    //     String expectedMessage = String.format(StartTimerCommand.MESSAGE_SUCCESS, INDEX_FIRST_TASK.getZeroBased(),
-    //         taskToStart.getModuleCode().toString(), taskToStart.getDescription().toString());
-    //
-    //     ModelManager expectedModel = new ModelManager(model.getJelphaBot(), new UserPrefs());
-    //     expectedModel.setTask(taskToStart, startedTask);
-    //
-    //     assertCommandSuccess(StartTimerCommand, model, expectedMessage, expectedModel);
-    // }
-
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getLastShownList().size() + 1);
@@ -49,26 +34,6 @@ class StartTimerCommandTest {
 
         assertCommandFailure(startTimerCommand, model, Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
-
-    // TODO: fix test
-    // @Test
-    // public void execute_validIndexFilteredList_success() {
-    //     showTaskAtIndex(model, INDEX_FIRST_TASK);
-    //
-    //     Task taskToStart = model.getLastShownList().get(INDEX_FIRST_TASK.getZeroBased());
-    //     StartTimerCommand StartTimerCommand = new StartTimerCommand(INDEX_FIRST_TASK);
-    //     Task startedTask = model.getLastShownList().get(INDEX_FIRST_TASK.getZeroBased());
-    //     startedTask.startTimer();
-    //
-    //     String expectedMessage = String.format(StartTimerCommand.MESSAGE_SUCCESS, INDEX_FIRST_TASK.getZeroBased(),
-    //         taskToStart.getModuleCode().toString(), taskToStart.getDescription().toString());
-    //
-    //     Model expectedModel = new ModelManager(model.getJelphaBot(), new UserPrefs());
-    //     expectedModel.setTask(taskToStart, startedTask);
-    //     showNoTask(expectedModel);
-    //
-    //     assertCommandSuccess(StartTimerCommand, model, expectedMessage, expectedModel);
-    // }
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {

@@ -91,9 +91,7 @@ public abstract class GroupedTaskList implements ViewTaskList {
         return tasks.iterator();
     }
 
-    public ObservableList<SubgroupTaskList> getSublists() {
-        return subLists;
-    }
+    public abstract ObservableList<SubgroupTaskList> getSublists();
 
     /**
      * Gets an IntegerBinding for the next Sublist in this GroupedTaskList.
