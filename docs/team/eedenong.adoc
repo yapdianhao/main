@@ -5,7 +5,6 @@
 
 == PROJECT: JelphaBot
 
-'''
 
 == Overview
 
@@ -61,6 +60,7 @@ https://github.com/AY1920S2-CS2103T-F09-2/main/pull/170[#170]
 ** Added Use Cases UC4 to UC6: https://github.com/AY1920S2-CS2103T-F09-2/main/pull/58[#58]
 * Community:
 ** PRs reviewed: https://github.com/AY1920S2-CS2103T-F09-2/main/pull/32[#32]
+** Reviewed other team's application to find and report https://github.com/eedenong/ped/issues[bugs].
 
 == Contributions to the User Guide
 
