@@ -659,19 +659,18 @@ Each time a new `Productivity` object is created, its corresponding booleans wil
 As the command executed is the `start` command, a new `RunningTimers` object is created. As detailed above, the iterator method in `RunningTimers` will be called and a new String representation to be displayed onto the productivity panel will be created.
 This String is subsequently rendered onto the panel under the Running Timer(s) header.
 
-The following diagram shows the sequence flow which updates the Running Timer(s) section in the productivity panel:
+The following diagram shows the flow which updates the Running Timer(s) section in the productivity panel:
 
-[[sequence-updatingProductivityPanel]]
-.Sequence Diagram showing the updating of Running Timer(s) in the productivity panel
-image::TimerPanelSequenceDiagram.png[]
-// TODO: change to sequence diagram
+[[activity-updatingProductivityPanel]]
+.Activity Diagram showing the updating of Running Timer(s) in the productivity panel
+image::TimerPanelActivityDiagram.png[]
 
 **Function 2: Stops timer for a specified task** +
 In order to stop timing a task, the user enters `stop INDEX` command
 (e.g. `stop 1`)
 
 Upon successful execution of the command, the productivity tab removes the task being timed under the Running Timer(s) header.
-Removing a task from the Running Timer(s) header is similar to adding it, as illustrated by the Sequence Diagram <<sequence-updatingProductivityPanel, above>>.
+Removing a task from the Running Timer(s) header is similar to adding it, as illustrated by the Activity Diagram <<activity-updatingProductivityPanel, above>>.
 Under the Time Spent header, the total time spent will be increased depending on the date that the task is due.
 
 [WARNING]
