@@ -41,7 +41,7 @@ visualise which days are busier with more tasks on hand.
 ** Highlights:
 *** The overarching view of the tasks displayed on the calendar (shown by the dot indicators) is done by filtering the
 existing main task list.
-*** The implementation was challenging as it required constant updates to be accounted for after other commands which
+*** The implementation was challenging as it required constant updates to be accounted for after other commands
 edits the main task list is input.
 *** Moreover, to avoid user mistakes and increase the feature's usability, the included commands implementation in
 carrying out various functions as listed above uses the same command keyword : `calendar`. This involved the heavy use
