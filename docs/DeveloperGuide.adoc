@@ -139,12 +139,12 @@ This includes input fields where commands are entered as well as translations of
 .Class Diagram of the UI Component
 image::UiClassDiagram.png[][width="750"]
 
-*API* : link:{repoURL}/src/main/java/seedu/JelphaBot/ui/Ui.java[`Ui.java`]
+*API* : link:{repoURL}/blob/master/src/main/java/seedu/jelphabot/ui/Ui.java[`Ui.java`]
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `CalendarDayCard`, `ResultDisplay`, `TaskListPanel`, `StatusBarFooter` etc.
 All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
-The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the link:{repoURL}/src/main/java/seedu/JelphaBot/ui/MainWindow.java[`MainWindow`] is specified in link:{repoURL}/src/main/resources/view/MainWindow.fxml[`MainWindow.fxml`]
+The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the link:{repoURL}/blob/master/src/main/java/seedu/jelphabot/ui/MainWindow.java[`MainWindow`] is specified in link:{repoURL}/blob/master/src/main/resources/view/MainWindow.fxml[`MainWindow.fxml`]
 
 The `UI` component,
 
@@ -160,7 +160,7 @@ The Logic component handles the business logic after a command is executed.
 image::LogicClassDiagram.png[][width="750"]
 
 *API* :
-link:{repoURL}/src/main/java/seedu/JelphaBot/logic/Logic.java[`Logic.java`]
+link:{repoURL}/blob/master/src/main/java/seedu/jelphabot/logic/Logic.java[`Logic.java`]
 
 .  `Logic` uses the `JelphaBotParser` class to parse the user command.
 .  This results in a `Command` object which is executed by the `LogicManager`.
@@ -180,7 +180,7 @@ The Model component provides an internal data representation of all tasks stored
 .Structure of the Model Component
 image::ModelClassDiagram.png[][width="750"]
 
-*API* : link:{repoURL}/src/main/java/seedu/JelphaBot/model/Model.java[`Model.java`]
+*API* : link:{repoURL}/blob/master/src/main/java/seedu/jelphabot/model/Model.java[`Model.java`]
 
 The `Model`,
 
@@ -201,7 +201,7 @@ The Storage component manages storing and retrieving of data onto local files in
 .Structure of the Storage Component
 image::Storage.png[][width="750"]
 
-*API* : link:{repoURL}/src/main/java/seedu/JelphaBot/storage/Storage.java[`Storage.java`]
+*API* : link:{repoURL}/blob/master/src/main/java/seedu/jelphabot/storage/Storage.java[`Storage.java`]
 
 The `Storage` component,
 
