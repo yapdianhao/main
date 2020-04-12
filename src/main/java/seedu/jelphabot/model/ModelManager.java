@@ -13,6 +13,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.jelphabot.commons.core.GuiSettings;
 import seedu.jelphabot.commons.core.LogsCenter;
+import seedu.jelphabot.commons.core.index.Index;
 import seedu.jelphabot.model.productivity.Productivity;
 import seedu.jelphabot.model.productivity.ProductivityList;
 import seedu.jelphabot.model.reminder.Reminder;
@@ -161,6 +162,10 @@ public class ModelManager implements Model {
         readOnlyJelphaBot.addReminderShowsTask(reminder, getLastShownList());
         readOnlyJelphaBot.addReminder(reminder);
         //updateReminderShowsTask();
+    }
+
+    public void updateDeletedReminders(Index deletedIndex) {
+        readOnlyJelphaBot.updateDeletedReminder(deletedIndex);
     }
 
     public void updateReminderShowsTask() {
