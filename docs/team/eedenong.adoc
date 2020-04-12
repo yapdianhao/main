@@ -5,12 +5,12 @@
 
 == PROJECT: JelphaBot
 
-'''
 
 == Overview
 
 JelphaBot is a desktop application that serves as a simple yet comprehensive task manager for NUS students.
 Interactions with the application and commands are entered through CLI. For a better user experience, JavaFX was used to create and enhance the GUI.
+It is writtren in Java, and has about 13 kLoC.
 
 == Summary of contributions
 
@@ -61,6 +61,7 @@ https://github.com/AY1920S2-CS2103T-F09-2/main/pull/170[#170]
 ** Added Use Cases UC4 to UC6: https://github.com/AY1920S2-CS2103T-F09-2/main/pull/58[#58]
 * Community:
 ** PRs reviewed: https://github.com/AY1920S2-CS2103T-F09-2/main/pull/32[#32]
+** Reviewed other team's application to find and report https://github.com/eedenong/ped/issues[bugs].
 
 == Contributions to the User Guide
 

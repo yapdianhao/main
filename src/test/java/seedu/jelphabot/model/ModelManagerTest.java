@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.jelphabot.model.Model.PREDICATE_SHOW_ALL_TASKS;
 import static seedu.jelphabot.testutil.Assert.assertThrows;
+import static seedu.jelphabot.testutil.TypicalReminders.ASSESSMENT_REMINDER;
 import static seedu.jelphabot.testutil.TypicalTasks.ASSESSMENT;
 import static seedu.jelphabot.testutil.TypicalTasks.BOOK_REPORT;
 
@@ -79,8 +80,18 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void hasReminder_nullReminder_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasReminder(null));
+    }
+
+    @Test
     public void hasTask_taskNotInJelphaBot_returnsFalse() {
         assertFalse(modelManager.hasTask(ASSESSMENT));
+    }
+
+    @Test
+    public void hasReminder_reminderNotInJelphaBot_returnsFalse() {
+        assertFalse(modelManager.hasReminder(ASSESSMENT_REMINDER));
     }
 
     @Test
@@ -90,8 +101,25 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void hasReminder_reminderInJelphaBot_returnsTrue() {
+        modelManager.addTask(ASSESSMENT);
+        modelManager.addReminder(ASSESSMENT_REMINDER);
+        assertTrue(modelManager.hasReminder(ASSESSMENT_REMINDER));
+    }
+
+    @Test
     public void getFilteredTaskList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredTaskList().remove(0));
+    }
+
+    @Test
+    public void getFiltererdReminderTaskList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredReminderList().remove(0));
+    }
+
+    @Test
+    public void getFilteredReminderShowsTaskList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getReminderShowsTaskList().remove(0));
     }
 
     @Test

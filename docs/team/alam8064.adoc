@@ -15,7 +15,7 @@ NUS students as our target group. It is specially designed by my talented crew o
 JelphaBot was developed for our software engineering module, CS2103T, where we were tasked to morph an address book
 application that manages contact details into something else. As part of the project constraints, user interactions are
 primarily Command-Line Interface (CLI), assisted with a GUI created using JavaFX.
-It is written in Java, and has about 12 kLoC.
+It is written in Java, and has about 13 kLoC.
 
 == Summary of contributions
 

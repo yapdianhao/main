@@ -7,7 +7,7 @@
 JelphaBot is a desktop application to help NUS students manage tasks.
 JelphaBot allows students to track and manage tasks conveniently.
 Users enter commands in JelphaBot through a CLI. However, a GUI is implemented with JavaFX for a smoother user experience.
-It is written in Java, and has about 12 kLoC.
+It is written in Java, and has about 13 kLoC.
 
 == Summary of contributions
 * *Major enhancement*: added *the ability for users to add reminders to certain tasks*.
@@ -20,14 +20,15 @@ we have decided to include a reminding feature in JelphaBot to address this need
 to link tasks and reminders, and combined them to maximize users' efficiency in fulfilling their commitments. This adds
 significant feature to JelphaBot, as a task manager and a task reminder.
 ** Highlights:
-*** This feature is implemented in a way that it undergoes the whole application's main components' development, in front-end
-and back-end. It involves the `Ui`, `Logic`, `Model`, and `Storage`.
 *** This feature introduces a new class, `Reminder`, which plays the similar significance to `Task`.
 The `Reminder` class is leveraged on the Object-Oriented paradigm that a `Task` needs to be reminded by a `Reminder`,
-therefore they are closely relatable to each other. To successfully design such a class that connects a wide
-range of components, a complete understanding and thorough analysis is required.
-*** Moreover, this feature incorporates a Ui pane that shows all the `Reminder` that are in the queue for users' convenience.
-Users are able to view the reminders similar to that of the tasks, and take action accordingly.
+therefore they are closely relatable to each other. To successfully design such a class that transcends a wide
+range of components, a complete understanding and thorough analysis of the whole application is required.
+*** Challenging as it requires real time synchronization and integration between GUI and internal logic components.
+For instance, a user, when deletes a `Task`, should observe the deletion of its corresponding `Reminder` from the UI as well.
+*** This feature is implemented in a way that it undergoes the whole application's main components' development, in front-end
+and back-end. It involves the `Ui`, `Logic`, `Model`, and `Storage`, with over 3k lines of functional and test code.
+
 ** Relevant pull requests:
 https://github.com/AY1920S2-CS2103T-F09-2/main/pull/88[#88],
 https://github.com/AY1920S2-CS2103T-F09-2/main/pull/149[#149],
@@ -36,6 +37,8 @@ https://github.com/AY1920S2-CS2103T-F09-2/main/pull/179[#179],
 https://github.com/AY1920S2-CS2103T-F09-2/main/pull/207[#207],
 https://github.com/AY1920S2-CS2103T-F09-2/main/pull/309[#309],
 https://github.com/AY1920S2-CS2103T-F09-2/main/pull/346[#346]
+
+* *Code contributed*: https://nus-cs2103-ay1920s2.github.io/tp-dashboard/#search=yapdianhao&sort=groupTitle&sortWithin=title&since=2020-02-14&timeframe=commit&mergegroup=false&groupSelect=groupByRepos&breakdown=false[Code contributed]
 
 * *Minor enhancement*: Increased code coverage through writing new tests and improved existing tests.
 https://github.com/AY1920S2-CS2103T-F09-2/main/pull/33[#33],

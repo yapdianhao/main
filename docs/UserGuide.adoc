@@ -34,7 +34,7 @@ Upon running JelphaBot, you will see various components on it's main display scr
 
 [.text-center]
 .Brief overview of the app
-image::MainUi.png[width="600"]
+image::Ui.png[width="600"]
 
 The function of each component is as follows:
 
@@ -95,7 +95,7 @@ JelphaBot should initialize with a sample list of tasks as shown in the followin
 +
 [.text-center]
 .Expected result after running JelphaBot
-image::MainUi.png[width="600"]
+image::Ui.png[width="600"]
 +
 [NOTE]
 The sample list of tasks helps test if you installed JelphaBot correctly! +
@@ -142,7 +142,6 @@ Format: `exit`
 [WARNING]
 Exiting the application before stopping any running timer wil cause all recorded time since the timer was started to be lost.
 
-//@@author eedenong
 // tag::summary[]
 === Summary (Eden)
 This tab will be the first panel you see after entering JelphaBot!
@@ -263,7 +262,7 @@ Format: `list [SORTING_ORDER]`
 
 ===== Group Tasks by Date : `list date`
 
-You can groups tasks based on their due date.
+You can group tasks based on their due date.
 This is also the default interface for the task list tab. +
 Format: `list date`
 
@@ -353,7 +352,7 @@ Edits the date and time of the 2nd task to be `Jan-2-2020 23 59` and clears all 
 
 ==== Completing a Task : `done`
 
-Marks a task in your task list as done and then removes the task from the task list display. +
+You can mark a task in your task list as done and the task's status will be updated in the display. +
 Format: `done INDEX`
 
 [.text-center]
@@ -364,12 +363,13 @@ image::ug_figures/doneCommand.png[width="600"]
 * Marks the task at the specified `INDEX` as done.
 * The index refers to the index number shown in the displayed task list.
 * The index *must be a positive integer* 1, 2, 3, ...
+* The task must not have a running timer.
 ****
 
 ==== Deleting a Task : `delete`
 // tag::delete[]
 
-Delete a task from your task list. +
+You can delete a task from your task list. +
 Format: `delete INDEX`
 
 [.text-center]
@@ -407,7 +407,6 @@ image::ug_figures/clearCommand.png[width="600"]
 * All reminders will be cleared together with the tasks.
 ****
 
-//@@author eedenong
 // tag::showcompleted[]
 ==== Show all completed Tasks : `show-completed` (Eden)
 You can display all the tasks in your task list that have been completed.
@@ -424,7 +423,6 @@ image::ug_figures/showCompletedCommandNoCompleted.png[width="600"]
 
 // end::showcompleted[]
 
-//@@author eedenong
 // tag::showincomplete[]
 ==== Show all incomplete Tasks: `show-incomplete` (Eden)
 
@@ -450,7 +448,7 @@ You can pin important tasks to the top of the task list with the `pin` command. 
 Pinned tasks will always be displayed in the Pinned Tasks group in the task list. +
 Trying to `pin` a task that is already pinned will unpin it.
 
-==== Sort Tasks : `sort`  [Coming in v2.0]
+==== Sort Tasks : `sort`  [Coming in V2.0]
 
 You can change how tasks are sorted with the `sort` command.
 Format: `sort SORTING_ORDER`
@@ -497,7 +495,7 @@ Examples:
 
 [.text-center]
 .Example of expected result after running `calendar May-2020`
-image::CalendarView.png[width="600"]
+image::ug_figures/CalendarView.png[width="600"]
 
 Displays month of May in the year 2020 in the calendar panel on the right.
 
@@ -521,7 +519,7 @@ Examples:
 
 [.text-center]
 .Example of expected result after running `calendar Apr-1-2020`
-image::CalendarDate.png[width="600"]
+image::ug_figures/CalendarDate.png[width="600"]
 
 Highlights 1st of April in the calendar panel on the right and displays the corresponding tasks due on the left.
 
@@ -540,7 +538,7 @@ Examples:
 
 [.text-center]
 .Example of expected result after running `calendar today`
-image::CalendarToday.png[width="600"]
+image::ug_figures/CalendarToday.png[width="600"]
 
 Displays month of April in the year 2020 in the calendar panel on the right, with today's date highlighted and displays the corresponding tasks due today on the left.
 // end::calendar[]
@@ -567,7 +565,7 @@ The progress bar and the text following it only shows tasks that are due on the 
 
 ==== Starting timer for a task : `start`
 
-You can start a timer running for a task. +
+You can start a timer for your task. +
 Format: `start INDEX`
 
 [.text-center]
@@ -579,13 +577,13 @@ image::ug_figures/startCommand.png[width="600"]
 * Starts the timer for the task at the specified `INDEX` if timer was not already running.
 * The index refers to the index number shown in the displayed task list.
 * The index *must be a positive integer* 1, 2, 3, ...
-* The task to be timed cannot be a completed task.
+* A completed task cannot be timed.
 * New timer entry under "Running Timer(s)" in the productivity tab will be added if execution is successful.
 ****
 
 ==== Stopping timer for a task : `stop`
 
-You can stop a running timer for a task. +
+You can stop a running timer for your task. +
 Format: `stop INDEX`
 
 [.text-center]
@@ -611,7 +609,6 @@ There is no need to manually request for compliments or criticism.
 // end::feedback[]
 
 
-//@@author yapdianhao
 //tag::reminder[]
 === Set Reminders and Notifications (Dian Hao)
 //Apart from the function to switch tabs by pressing kbd:[Ctrl] + kbd:[tab] on your keyboard, you can enter the `reminder` command
@@ -647,9 +644,8 @@ image::ug_figures/addReminder.png[width="600"]
 ****
 
 ==== Removing reminder : `delrem`
-
-Should you choose to stop a task to be reminded or after it is completed, you can enter the
-`delrem` command to remove the reminder of that particular task. +
+If you would like for a task's reminder to be deleted, you can enter the
+`delrem` command to remove the reminder of that task. +
 
 Format: `delrem INDEX`
 
@@ -667,7 +663,7 @@ image::ug_figures/delReminder.png[width="600"]
 
 ==== Navigate directly to view all reminders : `remindertab`
 
-Whenever you add a `Reminder` , you can navigate to the `Reminder` tab to see a list of `Reminder` s that you have.
+Whenever you add a `Reminder`, you can navigate to the `Reminder` tab to see a list of `Reminder` s that you have.
 You can either click the tab, or enter the command `remindertab` to switch to the `Reminder`'s panel.
 Every `Reminder` will show the `Task` `s module code, description, due date, the days that will be reminded before the
 deadline, and the hours that will be reminded before the deadline.
@@ -678,22 +674,22 @@ image::ug_figures/remindertab.png[width="600"]
 
 ==== Reminder popup notification
 
-Whenever you boot JelphaBots the next session after you added your reminders, if there is any task that have to be reminded, JelphaBot will show
-a list of tasks that will expire soon, and tasks that have expired but have not been completed.
+Everytime you run JelphaBot after adding your reminders, JelphaBot will show a list of tasks that will be overdue soon,
+and tasks that are past their deadline but have not been completed.
 
 [.text-center]
 .Example of expected result after tasks are being reminded.
 image::ug_figures/reminderpopup.png[width="600"]
 
 ****
-* Whenever JelphaBot is booted, should you have any tasks that is not completed but is reminded,
-JelphaBot's reminder will always popup.
+* Whenever JelphaBot is booted, if you have any tasks that is not completed but has a reminder,
+JelphaBot's reminder window will popup.
 * This will persist until you either complete the `Task`, or delete the `Reminder`.
 ****
 
 //end::reminder[]
 
-=== Colour-code module codes `[coming in v2.0]`
+=== Colour-code module codes [Coming in V2.0]
 Users can customise the font colours of different modules to better distinguish between different tasks.
 The module codes displayed in the Main Window will be similar to the tags displayed to make it easier for users to view them.
 
@@ -745,7 +741,6 @@ e.g. `delete 3`
 * *Exit* : `exit`
 * *Show Completed Tasks*: `show-completed`
 * *Show Incomplete Tasks*: `show-incomplete`
-//* *Reminder* : `reminder` or `:r` or `:R`
 * *Add Reminder* : `reminder INDEX days/DAYS hours/HOURS` +
 e.g. `reminder 2 days/1 hours/1`
 * *Delete Reminder* : `delrem INDEX` +
