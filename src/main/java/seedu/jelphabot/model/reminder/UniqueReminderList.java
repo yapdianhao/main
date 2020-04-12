@@ -7,9 +7,11 @@ import static seedu.jelphabot.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.jelphabot.commons.core.LogsCenter;
 import seedu.jelphabot.model.reminder.exceptions.DuplicateReminderException;
 import seedu.jelphabot.model.reminder.exceptions.ReminderNotFoundException;
 
@@ -24,6 +26,8 @@ import seedu.jelphabot.model.reminder.exceptions.ReminderNotFoundException;
  * Supports a minimal set of list operations.
  */
 public class UniqueReminderList implements Iterable<Reminder> {
+
+    private static final Logger logger = LogsCenter.getLogger(UniqueReminderList.class);
 
     private final ObservableList<Reminder> internalList = FXCollections.observableArrayList();
     private final ObservableList<Reminder> internalUnmodifiableList =
@@ -91,6 +95,19 @@ public class UniqueReminderList implements Iterable<Reminder> {
         }
 
         internalList.setAll(reminders);
+    }
+
+    /**
+     * Sets the new index after a reminder before has been deleted.
+     */
+    public void updateReminderIndexes(int index) {
+        for (Reminder reminder : internalList) {
+            if (reminder.getIndex().getOneBased() > index) {
+                int currentIndex = reminder.getIndex().getOneBased();
+                currentIndex -= index;
+                reminder.setIndex(currentIndex);
+            }
+        }
     }
 
     @Override
