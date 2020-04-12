@@ -60,7 +60,7 @@ ifndef::env-github[]
 a| [.java]#name# | Reference to the codebase (such as component, class and method names)
 a| icon:lightbulb-o[role="icon-tip",size="2x"] | Tips and tricks that might be useful
 a| icon:info-circle[role="icon-note",size="2x"] | Additional information that is good to know
-a| icon:exclamation-circle[role="icon-important",size="2x"] | Important pointers to take note
+a| icon:exclamation-triangle[role="icon-warning",size="2x"] | Important pointers to take note
 endif::[]
 |===
 
