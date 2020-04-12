@@ -139,12 +139,12 @@ This includes input fields where commands are entered as well as translations of
 .Class Diagram of the UI Component
 image::UiClassDiagram.png[][width="750"]
 
-*API* : link:{repoURL}/src/main/java/seedu/JelphaBot/ui/Ui.java[`Ui.java`]
+*API* : link:{repoURL}/blob/master/src/main/java/seedu/jelphabot/ui/Ui.java[`Ui.java`]
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `CalendarDayCard`, `ResultDisplay`, `TaskListPanel`, `StatusBarFooter` etc.
 All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
-The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the link:{repoURL}/src/main/java/seedu/JelphaBot/ui/MainWindow.java[`MainWindow`] is specified in link:{repoURL}/src/main/resources/view/MainWindow.fxml[`MainWindow.fxml`]
+The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the link:{repoURL}/blob/master/src/main/java/seedu/jelphabot/ui/MainWindow.java[`MainWindow`] is specified in link:{repoURL}/blob/master/src/main/resources/view/MainWindow.fxml[`MainWindow.fxml`]
 
 The `UI` component,
 
@@ -160,7 +160,7 @@ The Logic component handles the business logic after a command is executed.
 image::LogicClassDiagram.png[][width="750"]
 
 *API* :
-link:{repoURL}/src/main/java/seedu/JelphaBot/logic/Logic.java[`Logic.java`]
+link:{repoURL}/blob/master/src/main/java/seedu/jelphabot/logic/Logic.java[`Logic.java`]
 
 .  `Logic` uses the `JelphaBotParser` class to parse the user command.
 .  This results in a `Command` object which is executed by the `LogicManager`.
@@ -180,7 +180,7 @@ The Model component provides an internal data representation of all tasks stored
 .Structure of the Model Component
 image::ModelClassDiagram.png[][width="750"]
 
-*API* : link:{repoURL}/src/main/java/seedu/JelphaBot/model/Model.java[`Model.java`]
+*API* : link:{repoURL}/blob/master/src/main/java/seedu/jelphabot/model/Model.java[`Model.java`]
 
 The `Model`,
 
@@ -201,7 +201,7 @@ The Storage component manages storing and retrieving of data onto local files in
 .Structure of the Storage Component
 image::Storage.png[][width="750"]
 
-*API* : link:{repoURL}/src/main/java/seedu/JelphaBot/storage/Storage.java[`Storage.java`]
+*API* : link:{repoURL}/blob/master/src/main/java/seedu/jelphabot/storage/Storage.java[`Storage.java`]
 
 The `Storage` component,
 
@@ -248,17 +248,17 @@ When the tab of the application is changed, we need to update the:
 
 WARNING: `task list` is not a valid command to switch to the Task List tab.
 Use `list` instead.
-Similarly, `:l` is rhe corresponding shortcut.
+Similarly, `:l` is the corresponding shortcut.
 
 For all these commands, updates are done by updating the `SwitchTab` attribute added in the `CommandResult` object.
 
-To view an example, the figure here shows the sequence diagram for when a user executes the `:s` or `summary` command.
+As an example, the figure below shows the sequence diagram of when a user executes the `:s` or `summary` command.
 
 [[Summary-SwitchTab-Sequence-Diagram]]
 .Sequence diagram of execution of the `summary` command
 image::SummarySwitchTabSequenceDiagram.png[]
 
-Upon execution of the `:s` command, `SummaryCommand#generateCommandResult()` will generate a `CommandResult``#`` whose `SwitchTab``#`` attribute is set to `SUMMARY``#`` and return it to the `LogicManager``#``.
+Upon execution of the `:s` command, `SummaryCommand#generateCommandResult()` will generate a `CommandResult` whose `SwitchTab` attribute is set to `SUMMARY` and return it to the `LogicManager`.
 Now, the updates can be done for the respective components:
 
 * `UI` component: `MainWindow` calls `MainWindow#executeCommand()`, to retrieve the tab to be changed to and updates the current tab stored in its `SwitchTab` attribute by calling `CommandResult#isShowXXX()` where `XXX` is the tab to switch to.
@@ -600,7 +600,7 @@ This reduces the amount of methods to implement over various class and component
 in each day card of the calendar is done. The ease of implementation is crucial given the tight deadlines we have to meet for the project.
 // end::calendar[]
 
-// tag::productivity[]
+// tag::productivityImplementation[]
 === Productivity feature (Jel)
 JelphaBot has a productivity panel of this feature which provides an overarching view of user's overall productivity.
 
@@ -648,7 +648,9 @@ Each time `TimeSpentToday` is instantiated, `getTimeSpent()` is called thrice; o
 * A `toStringArray()` method which returns the task completion status, JelphaBot's response to the user's productivity, as well as number of overdue tasks.
 
 Information from all three objects are subsequently rendered onto the panel through `ProductivityCard` and `ProductivityPanel`.
+// end::productivityImplementation[]
 
+// tag::productivityFunctions[]
 Assuming that the task list is not empty, the following describe the flow of `start 1` and `stop 1` which modify the currently shown productivity panel:
 
 **Function 1: Starts timer for a specified task** +
@@ -686,7 +688,9 @@ the command fails its execution so that it does not execute that `start` or `sto
 
 .Sequence Diagram after running `stop 1`
 image::StopSequenceDiagram.png[]
+// end::productivityFunctions[]
 
+// tag::productivityDesign[]
 ==== Design Considerations
 
 ===== Aspect 1: Rendering sub-parts of productivity panel
@@ -732,7 +736,7 @@ Editing and marking a task require the creation of a new task which overwrites t
 
 *Reason for chosen implementation:* +
 We feel that paragraphing increases readability and the progress bar provides visual aid. Addtionally, including more images or pie charts may confuse or distract users from their tasks which defeats the purpose of JelphaBot.
-// end::productivity[]
+// end::productivityDesign[]
 
 
 // tag::reminder[]
@@ -906,7 +910,7 @@ image::CommitActivityDiagram.png[]
 
 ===== Aspect: How undo & redo executes
 
-* **Alternative 1 (current choice):** Saves the entire JelphaBot.
+* **Alternative 1:** Saves the entire JelphaBot.
 ** Pros: Easy to implement.
 ** Cons: May have performance issues in terms of memory usage.
 * **Alternative 2:** Individual command knows how to undo/redo by itself.
