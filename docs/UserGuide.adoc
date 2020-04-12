@@ -34,7 +34,7 @@ Upon running JelphaBot, you will see various components on it's main display scr
 
 [.text-center]
 .Brief overview of the app
-image::MainUi.png[width="600"]
+image::Ui.png[width="600"]
 
 The function of each component is as follows:
 
@@ -95,7 +95,7 @@ JelphaBot should initialize with a sample list of tasks as shown in the followin
 +
 [.text-center]
 .Expected result after running JelphaBot
-image::MainUi.png[width="600"]
+image::Ui.png[width="600"]
 +
 [NOTE]
 The sample list of tasks helps test if you installed JelphaBot correctly! +
@@ -142,7 +142,6 @@ Format: `exit`
 [WARNING]
 Exiting the application before stopping any running timer wil cause all recorded time since the timer was started to be lost.
 
-//@@author eedenong
 // tag::summary[]
 === Summary (Eden)
 This tab will be the first panel you see after entering JelphaBot!
@@ -408,7 +407,6 @@ image::ug_figures/clearCommand.png[width="600"]
 * All reminders will be cleared together with the tasks.
 ****
 
-//@@author eedenong
 // tag::showcompleted[]
 ==== Show all completed Tasks : `show-completed` (Eden)
 You can display all the tasks in your task list that have been completed.
@@ -425,7 +423,6 @@ image::ug_figures/showCompletedCommandNoCompleted.png[width="600"]
 
 // end::showcompleted[]
 
-//@@author eedenong
 // tag::showincomplete[]
 ==== Show all incomplete Tasks: `show-incomplete` (Eden)
 
@@ -498,7 +495,7 @@ Examples:
 
 [.text-center]
 .Example of expected result after running `calendar May-2020`
-image::CalendarView.png[width="600"]
+image::ug_figures/CalendarView.png[width="600"]
 
 Displays month of May in the year 2020 in the calendar panel on the right.
 
@@ -522,7 +519,7 @@ Examples:
 
 [.text-center]
 .Example of expected result after running `calendar Apr-1-2020`
-image::CalendarDate.png[width="600"]
+image::ug_figures/CalendarDate.png[width="600"]
 
 Highlights 1st of April in the calendar panel on the right and displays the corresponding tasks due on the left.
 
@@ -541,7 +538,7 @@ Examples:
 
 [.text-center]
 .Example of expected result after running `calendar today`
-image::CalendarToday.png[width="600"]
+image::ug_figures/CalendarToday.png[width="600"]
 
 Displays month of April in the year 2020 in the calendar panel on the right, with today's date highlighted and displays the corresponding tasks due today on the left.
 // end::calendar[]
@@ -612,7 +609,6 @@ There is no need to manually request for compliments or criticism.
 // end::feedback[]
 
 
-//@@author yapdianhao
 //tag::reminder[]
 === Set Reminders and Notifications (Dian Hao)
 //Apart from the function to switch tabs by pressing kbd:[Ctrl] + kbd:[tab] on your keyboard, you can enter the `reminder` command
