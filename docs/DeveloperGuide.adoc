@@ -8,6 +8,7 @@
 :imagesDir: images
 :stylesDir: stylesheets
 :xrefstyle: full
+:icons: font
 ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
@@ -54,19 +55,21 @@ This Developer Guide consists of the following sections:
 .Common symbols used throughout this guide.
 [width="70%",cols="^15%,85%"]
 |===
-a| `code` | A Java method or class
+| `code` | A Java method or class
 ifdef::env-github[]
 | :bulb: | Tips and tricks that might be useful
 | :information_source: | Additional information that is good to know
 | :heavy_exclamation_mark: | Important pointers to take note
 endif::[]
 ifndef::env-github[]
-a| [.java]#name# | Reference to the codebase (such as component, class and method names)
-a| icon:lightbulb-o[role="icon-tip",size="2x"] | Tips and tricks that might be useful
-a| icon:info-circle[role="icon-note",size="2x"] | Additional information that is good to know
-a| icon:exclamation-circle[role="icon-important",size="2x"] | Important pointers to take note
+a|TIP: {blank}| Tips and tricks that might be useful
+a|NOTE: {blank}| Additional information that is good to know
+a|IMPORTANT: {blank}| Important pointers to take note
 endif::[]
+// also known as TIP, NOTE, IMPORTANT
 |===
+
+<<<
 
 == Setting Up
 
@@ -90,12 +93,11 @@ The *_Architecture Diagram_* given below explains the high-level design of the A
 .Architecture Diagram for JelphaBot
 image::ArchitectureDiagram2.png[]
 
-Given below is a quick overview of each component.
-
 [TIP]
 The `.drawio` files used to create diagrams in this document can be found in the link:{repoURL}/tree/master/docs/diagrams/[diagrams] folder.
 To update a diagram, import the `.drawio` file to the https://draw.io[webapp].
 
+<<<
 Given below is a quick overview of each component.
 
 `Main` has two classes called link:{repoURL}/blob/master/src/main/java/seedu/jelphabot/Main.java[`Main`] and link:{repoURL}/blob/master//src/main/java/seedu/jelphabot/MainApp.java[`MainApp`].
@@ -123,6 +125,8 @@ Each of the four components
 
 For example, the `Logic` component defines it's API in the `Logic.java` interface and exposes its functionality using the `LogicManager.java` class.
 
+<<<
+
 [discrete]
 ==== How the architecture components interact with each other
 
@@ -131,7 +135,9 @@ The _Sequence Diagram_ below shows how the components interact with each other f
 .Component interactions for `delete 1` command
 image::interaction.png[]
 
-The sections below give more details of each component.
+The subsequent sections detail how each component is implemented and its interactions with other components.
+
+<<<
 
 [[Design-Ui]]
 === UI component
@@ -157,6 +163,8 @@ The `UI` component,
 * Executes user commands using the `Logic` component.
 * Listens for changes to `Model` data so that the UI can be updated with the modified data.
 
+<<<
+
 [[Design-Logic]]
 === Logic component
 
@@ -176,10 +184,13 @@ link:{repoURL}/blob/master/src/main/java/seedu/jelphabot/logic/Logic.java[`Logic
 . The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 . In addition, the `CommandResult` object can also instruct the `Ui` to perform certain actions, such as displaying help to the user.
 
+<<<
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")` API call.
 
 .Interactions Inside the Logic Component for the `delete 1` Command
 image::DeleteSequenceDiagram.png[]
+
+<<<
 
 [[Design-Model]]
 === Model component
@@ -203,6 +214,8 @@ The `Model`,
 //As a more OOP model, we can store a `Tag` list in `JelphaBot`, which `Task` can reference. This would allow `JelphaBot` to only require one `Tag` object per unique `Tag`, instead of each `Task` needing their own `Tag` object. An example of how such a model may look like is given below. +
 // +
 //image:BetterModelClassDiagram.png[]
+
+<<<
 
 [[Design-Storage]]
 === Storage component
@@ -245,9 +258,8 @@ JelphaBot contains 5 different tabs, each displaying a specific set of informati
 // tag::changetab[]
 [[ChangeTab]]
 ==== Switching between Tabs in Main Window
-To use the different features, we have also implemented commands for users to switch between the 5 tabs.
 
-The following is a list of valid comands:
+To use the different features, we have also implemented commands for users to switch between the 5 tabs.
 
 .List of applicable Switch Tab commands.
 [width="70%",cols="45%,60%"]
@@ -260,14 +272,20 @@ The following is a list of valid comands:
 |`productivity`, `:p`|Productivity
 |`remindertab`, `:r`|Reminder
 |===
-IMPORTANT: `list` is used instead of `task list` to keep the relevant command short. However, `:t` is a valid shortcut, as we are keeping to a convention of the first letter of the tab label.
 
-Each respective shortcut also has the respective letter bolded in the Tab Panel of the User Interface. Shortcuts are case insensitive.
+NOTE: `list` is used instead of `task list` to keep the relevant command short. +
+Conventionally, the shortcut is devrived from first letter of each tab label.
+
+Each respective shortcut also has the respective letter bolded in the Tab Panel of the User Interface.
+Shortcuts are case insensitive.
 
 .View of currently implented tabs in JelphaBot
 image::TabPresentationFormat.png[]
 
-Tab changing in the application is defined using a `SwitchTab` enumeration. Tab changes are called at the end of a command by reading the private attribute `toSwitch` in `CommandResult`. To initiate a tab switch, the `Command` which returns the `CommandResult` with the corresponding value of `toSwitch`, set with the method `isShow{tabLabel}`, where `{tabLabel}` refers to the name of the tab defined in `SwitchTab`.
+<<<
+Tab changing in the application is defined using a `SwitchTab` enumeration.
+Tab changes are called at the end of a command by reading the private attribute `toSwitch` in `CommandResult`.
+To initiate a tab switch, the `Command` which returns the `CommandResult` with the corresponding value of `toSwitch`, set with the method `isShow{tabLabel}`, where `{tabLabel}` refers to the name of the tab defined in `SwitchTab`.
 
 When the tab of the application is changed, we need to update the:
 
@@ -287,7 +305,7 @@ Now, the updates can be done for the respective components:
 The display panel is updated by calling `MainWindow#handle{tabLabel}` where `{tabLabel}` is the tab to switch to.
 // end::changetab[]
 
-
+<<<
 // tag::summary[]
 === Summary feature (Eden)
 
@@ -302,6 +320,8 @@ Once the user marks a task due within the day as complete, it will automatically
 [NOTE]
 If the user marks a task as completed, and immediately deletes the task from the task list, it will not appear in the summary screen.
 
+<<<
+
 ==== Implementation
 
 The implementation of this panel is facilitated by the `summary` package.
@@ -315,8 +335,9 @@ The following class diagram shows the structure of the classes in the `summary` 
 
 [[SummaryPanelClassDiagram]]
 .Class diagram of structure and relations of `Summary`, `SummaryPanel` and their components.
-image::SummaryPanelClassDiagram.png[]
+image::SummaryPanelClassDiagram.png[width=500]
 
+<<<
 To view the respective tasks, the user enters the `summary` command.
 Upon entry of the `summary` command, a `SummaryCommand` object will be created and `SummaryCommand#execute()`
 will be called.
@@ -325,6 +346,8 @@ The following sequence diagram details the execution when `SummaryCommand#execut
 
 .Sequence diagram of the creation of the `Summary` object when `SummaryCommand#execute()` is executed.
 image::SummaryCommandSequenceDiagram.png[]
+
+<<<
 
 ==== Design considerations
 
@@ -360,6 +383,7 @@ This makes it very user-friendly, and it also easily scalable in the future as e
 
 // end::summary[]
 
+<<<
 // tag::taskgroups[]
 === Task Grouping feature in Task List tab (Yao Jie)
 
@@ -393,6 +417,7 @@ The following diagram shows the sequence flow of a `ListCommand` which modifies 
 .Activity Diagram showing the tab switch for ListCommand
 image::ListCommandActivityDiagram.png[]
 
+<<<
 Given below is an example usage scenario and how the task category mechanism behaves at each step.
 
 *Step 1.* The user launches the application for the first time.
@@ -414,6 +439,7 @@ image::ViewTaskListGetSequenceDiagram.png[]
 
 As the index passed as an argument to `lastShownList.get()` is a cumulative index, the implementation of `get()` in `ViewTaskList` has to iterate through each `SubgroupTaskList` stored within.
 
+<<<
 Tasks are organized via a two-dimensional list.
 In this case, a `Task` is rendered into a `TaskCard`, and `TaskCard` elements are rendered within `SubGroupTaskListCell` elements which are listed in `SubgroupTaskListPanel`.
 A populated `SubgroupTaskListPanel` element is rendered as a `GroupedTaskListCell` which is listed in the top-level `GroupedTaskListCell`. +
@@ -430,6 +456,7 @@ The indexes displayed in each `TaskCard` is dynamically computed from a `NumberB
 The `NumberBinding` observes the place of the task within the current `SubgroupTaskList` as well as the number of elements in the preceding sublists.
 The sum of both numbers gives the index for the current element, which is set using `setId()`. `TaskCard` elements are updated with `populateTaskElements()`.
 
+<<<
 Each `TaskCard` will also have a different visual presentation depending on the value of the `Priority` of the task.
 The method which adjusts the visual presentation of a `Task` is `applyPriorityMarkdown()`.
 
@@ -437,6 +464,8 @@ The following images show how `Task` entities of different priorities are displa
 
 .Markdown for Tasks of different priority. (Top to bottom: Normal, High, Low.)
 image::PriorityMarkupForTaskCards.png[]
+
+<<<
 
 ==== Design Considerations
 
@@ -471,6 +500,8 @@ Scalable when more groupings are added.
 * **Alternative 1:** Keep instances of all `GroupedTaskList` objects and update them as underlying Task List changes.
 ** Pros: Consecutive `ListCommand` executions are less expensive.
 ** Cons: All other commands that update the underlying `UniqueTaskList` will result in multiple update calls to `ViewTaskList`.
+
+<<<
 
 *Reason for chosen implementation:* +
 The current solution was chosen with integration with other tabs in mind.
@@ -518,11 +549,12 @@ However, the current solution mimics the best solution as closely as possible by
 This means that a returned `UnmodifiableObservableSet` from `UniqueModuleCodeSet` can be substituted easily whenever such a refactoring is done.
 // end::taskgroups[]
 
-
+<<<
 // tag::calendar[]
 === Calendar feature (Amanda)
 
-JelphaBot has a calendar feature which provides an overarching view of users' schedules and to allow them to keep track of their due tasks. It is meant to provide a more fine-grained visualization than what is shown in the task list.
+JelphaBot has a calendar feature which provides an overarching view of users' schedules and to allow them to keep track of their due tasks.
+It is meant to provide a more fine-grained visualization than what is shown in the task list.
 
 This feature offers two main functions:
 
@@ -538,6 +570,8 @@ The diagram below describes the class structure of the calendar class structure.
 
 .Class Diagram for Calendar classes
 image::CalendarUiClassDiagram.png[]
+
+<<<
 
 Upon initialisation of the `CalendarMainPanel`, the `CalendarPanel` would be set to display the current month and year calendar, with the dates filled up by `CalendarDayCard` by CalendarPanel#fillGridPane() with a `CalendarDate` starting from the first day of the current month.
 Today's date would also be highlighted, with `CalendarTaskListPanel` set to display the tasks due today by running Logic#getFilteredCalendarTaskList() and then Logic#updateFilteredCalendarTaskList() with a predicate to filter by today's date.
@@ -562,10 +596,11 @@ The filtering of the tasks according to date is done using the `TaskDueWithinDay
 A distinct `CommandResult` would then be generated according to the input command and is returned to the `LogicManager`.
 Finally, the  `CommandResult` is passed to the `MainWindow` in UI. Now, the updates can be done for the respective components:
 
-UI Component: Using the CommandResult, MainWindow calls MainWindow#updateCalendarMainPanel(), which is then passed to call CalendarMainPanel#updateCalendarPanel().
+`UI` Component: Using the CommandResult, `MainWindow` calls `MainWindow#updateCalendarMainPanel()`, which is then passed to call `CalendarMainPanel#updateCalendarPanel()`.
 For the `calendar MONTHYEAR` command, this updates the `CalendarPanel` display with the respective `MONTHYEAR` view, and highlights the first day of the month.
 For the `calendar today` command, this updates the `CalendarPanel` display to the current month and year, with today's date highlighted.
 
+<<<
 The following example sequence diagram shows you how the `calendar MONTHYEAR` (e.g. `calendar Apr-2020`) command works.
 
 [[Calendar-MonthYear-SequenceDiagram]]
@@ -584,10 +619,14 @@ The implementation of the previous two calendar commands (`calendar DATE` and `c
 The only exception is regarding the `calendar DATE` command which fulfills **Function 2** listed above, where the `GridPane` in `CalendarPanel` is not altered by running CalendarPanel#fillGridPane() unlike the other two commands fulfilling **Function 1**.
 Only `CalendarTaskListPanel` is updated.
 
+<<<
+
 The following diagram shows the sequence flow for variants of these three calendar commands which modifies the `CalendarMainPanel`:
 [[Calendar-ActivityDiagram]]
 .Activity Diagram showing the updating of `CalendarMainPanel`
 image::CalendarCommandActivityDiagram.png[]
+
+<<<
 
 ==== Design Considerations
 
@@ -607,6 +646,8 @@ The next input following the command word (`DATE`, `MONTHYEAR`, `today`) is then
 The current solution is more user-friendly as it reduces the number of varying commands that users have to remember in order to access the respective information.
 Additionally, upcoming changes and future implementations can be easily integrated into the existing code base as well.
 
+<<<
+
 ===== Aspect 2: Method of storing `ObservableList<Task>` of tasks for each day card (Implementation of the Dot Indicator)
 
 * *Current Solution:* Each `CalendarDayCard` stores a filtered list of tasks due on its specific date.
@@ -625,6 +666,8 @@ This reduces the amount of methods to implement over various class and component
 The ease of implementation is crucial given the tight deadlines we have to meet for the project.
 // end::calendar[]
 
+<<<
+
 // tag::productivityImplementation[]
 === Productivity feature (Jel)
 
@@ -636,13 +679,15 @@ Each of these classes iterate through the tasks contained within the task list. 
 Below is a class diagram of the related productivity classes:
 
 .Class diagram showing the structure and relations of `Productivity`, `ProductivityPanel` and their components.
-image::ProductivityClassDiagram.png[]
+image::ProductivityClassDiagram.png[width=540]
 
 This feature offers two main functions and one panel for visualisation:
 
 ** Start timer for a task.
 ** Stop running timer for a task.
 ** Productivity panel under Productivity tab.
+
+<<<
 
 ====  Implementation
 
@@ -680,6 +725,8 @@ Information from all three objects are subsequently rendered onto the panel thro
 // tag::productivityFunctions[]
 Assuming that the task list is not empty, the following describe the flow of `start 1` and `stop 1` which modify the currently shown productivity panel:
 
+<<<
+
 **Function 1: Starts timer for a specified task** +
 In order to start timing a task, the user enters `start INDEX` command (e.g. `start 1`).
 
@@ -696,11 +743,15 @@ As the command executed is `start`, a new `RunningTimers` object is created.
 As detailed above, the iterator method in `RunningTimers` will be called and a new `String` representation to be displayed onto the productivity panel will be created.
 This `String` is subsequently rendered onto the panel under the Running Timer(s) header.
 
+<<<
+
 The following diagram shows the flow which updates the Running Timer(s) section in the productivity panel:
 
 [[activity-updatingProductivityPanel]]
 .Activity Diagram showing the updating of Running Timer(s) in the productivity panel
 image::TimerPanelActivityDiagram.png[]
+
+<<<
 
 **Function 2: Stops timer for a specified task** +
 In order to stop timing a task, the user enters `stop INDEX` command (e.g. `stop 1`)
@@ -716,6 +767,7 @@ Attempting to start a timer for a task which is marked as completed or stop a ta
 image::StopSequenceDiagram.png[]
 // end::productivityFunctions[]
 
+<<<
 // tag::productivityDesign[]
 ==== Design Considerations
 
@@ -754,6 +806,8 @@ More storage space is also needed to store the additional start time field for e
 ** Cons: User may have forgotten about running timer and wish to collect such information.
 However, there is currently no function that supports undoing commands or unmarking a completed task.
 
+<<<
+
 *Reason for chosen implementation:* +
 Editing and marking a task require the creation of a new task which overwrites the existing task.
 Use of space is also minimised and less computational power is used as no new Task objects have to be created.
@@ -773,10 +827,11 @@ As number of running timers increase, more text is added under Running Timer(s).
 
 *Reason for chosen implementation:* +
 We feel that paragraphing increases readability and the progress bar provides visual aid.
-Addtionally, including more images or pie charts may confuse or distract users from their tasks which defeats the purpose of JelphaBot. Restricting the number of running timers listed will also adversely affect user experience as it does not provide any tangible benefits.
+Addtionally, including more images or pie charts may confuse or distract users from their tasks which defeats the purpose of JelphaBot.
+Restricting the number of running timers listed will also adversely affect user experience as it does not provide any tangible benefits.
 // end::productivityDesign[]
 
-
+<<<
 // tag::reminder[]
 === Reminder feature (Dian Hao)
 
@@ -799,6 +854,8 @@ The following class diagram summarizes shows the relationship between the classe
 
 .Reminder Class Diagram in the Model component
 image::Reminderclass.png[]
+
+<<<
 
 ==== Implementation
 
@@ -848,6 +905,8 @@ Moreover, `delrem` command requires that the `Reminder` with `INDEX` is in the l
 
 Upon successful execution of the command, the reminder of the task at `INDEX` is removed.
 
+<<<
+
 ==== Design Considerations
 
 ===== Aspect 1: Implementing `Reminder` object
@@ -883,6 +942,7 @@ We decided to choose the current solution after considering users' needs and con
 Users do not need to switch back and forth between tabs to refer between `Task` s and `Reminder` s, which saves time that can be better spent by completing the `Task` s.
 // end::reminder[]
 
+<<<
 // tag::undoredo[]
 === Undo/Redo feature [Proposed to implement in v2.0]
 
@@ -964,6 +1024,8 @@ The following activity diagram summarizes what happens when a user executes a ne
 .Activity diagram showing details of command execution
 image::CommitActivityDiagram.png[]
 
+<<<
+
 ==== Design Considerations
 
 ===== Aspect: How undo & redo executes
@@ -977,6 +1039,7 @@ image::CommitActivityDiagram.png[]
 
 // end::undoredo[]
 
+<<<
 === Logging
 
 We are using `java.util.logging` package for logging.
@@ -998,18 +1061,25 @@ The `LogsCenter` class is used to manage the logging levels and logging destinat
 
 Certain properties of the application can be controlled (e.g user prefs file location, logging level) through the configuration file (default: `config.json`).
 
+<<<
+
 == Documentation
 
 Refer to the guide <<Documentation#, here>>.
+
+<<<
 
 == Testing
 
 Refer to the guide <<Testing#, here>>.
 
+<<<
+
 == Dev Ops
 
 Refer to the guide <<DevOps#, here>>.
 
+<<<
 [appendix]
 == Product Scope
 
@@ -1024,6 +1094,7 @@ Refer to the guide <<DevOps#, here>>.
 *Value proposition*: Using this application will increase the user's efficiency in managing tasks than when using a typical mouse/GUI driven application.
 The visual representation of tasks in the UI will also allow the user to look through entire lists of tasks more quickly than in the terminal.
 
+<<<
 [appendix]
 == User Stories
 
@@ -1091,6 +1162,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |`*` |student |track my habits| know if I have strayed from my goal.
 |=======================================================================
 
+<<<
 [appendix]
 == Use Cases
 
@@ -1099,6 +1171,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 .Use case diagram for the below use cases
 image::UseCaseDiagram.png[]
 
+<<<
 //[discrete]
 === Use case: UC1 - Add Task
 
@@ -1153,6 +1226,8 @@ User specifies a category grouping for the list.
 +
 Use case resumes from step 2.
 
+<<<
+
 === Use case: UC3 - Mark Task as Done
 
 *MSS*
@@ -1192,6 +1267,8 @@ JelphaBot detects that the specified task has a running time.
 ** 1c1. JelphaBot displays that the task cannot be marked as done due to a running timer.
 +
 Use case resumes from step 2.
+
+<<<
 
 === Use case: UC4 - Edit Task Details
 
@@ -1246,6 +1323,8 @@ Use case resumes from step 2.
 //+
 //** Use case ends.
 
+<<<
+
 === Use case: UC5 - Delete Task
 
 *MSS*
@@ -1284,6 +1363,8 @@ Use case resumes from step 2
 //2.  JelphaBot removes all listed tasks and returns an empty list.
 //+
 //Use case ends.
+
+<<<
 
 === Use case: UC6 - Add Reminder
 
@@ -1332,6 +1413,8 @@ JelphaBot detects an error in the entered command.
 +
 Use case resumes from step 2.
 
+<<<
+
 === Use case: UC7 - Delete Reminder
 
 *MSS*
@@ -1377,6 +1460,7 @@ JelphaBot detects an error in the entered command.
 +
 Use case resumes from step 2.
 
+<<<
 // tag::timerUseCase[]
 === Use Case: UC8 - Start Timer
 
@@ -1418,6 +1502,8 @@ JelphaBot detects that the specified task does not exist.
 ** Steps 1c1-1c2 are repeated until the command entered is correct.
 +
 Use case resumes from step 2.
+
+<<<
 
 === Use Case: UC9 - Stop Timer
 
@@ -1462,7 +1548,6 @@ Use case resumes from step 2.
 
 // end::timerUseCase[]
 
-
 === Use case: UC10 - Navigate to a different date on calendar
 
 *MSS*
@@ -1485,8 +1570,9 @@ JelphaBot detects an error in the entered command.
 +
 Use case resumes from step 2.
 
-[appendix]
+<<<
 
+[appendix]
 == Non Functional Requirements
 
 . Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `11` or above installed.
@@ -1498,7 +1584,6 @@ Use case resumes from step 2.
 _{More to be added}_
 
 [appendix]
-
 // tag::glossary[]
 == Glossary
 
@@ -1515,6 +1600,8 @@ CLI (Command Line Interface)::
 A type of user interface that allows for interaction between the user and electronic devices in the form of lines of text.
 
 // end::glossary[]
+
+<<<
 
 [appendix]
 == Instructions for Manual Testing
@@ -1745,8 +1832,10 @@ Sample data should be configured such that there are dates due within the curren
 Expected Outcome: JelphaBot starts up with sample data in the GUI.
 Sample data should be configured such that there are dates due within the current day and week.
 
+<<<
 [appendix]
 == Effort
+
 The following section describes the effort we have put into this project.
 
 === Use of VCS and CI tools
@@ -1759,12 +1848,12 @@ However, as each of our team members got more used to the tools we were using, w
 
 === Mantaining good software design while implementing Object-Oriented paradigms
 
-The AB3 codebase came with preexisting architectural components, many of which we further extended on when implementing our features.
-Each of our features required a *complete understanding and thorough analysis of the functionalities of each component*.
-In integrating each feature across the codebase, as all team members would use the preexisting classes and methods in different ways.
+Each of our features required us to have a *complete understanding and thorough analysis of the preexisting architectural components* which came with the AB3 codebase.
+In implementing our features  across the codebase, all team members would use the preexisting classes and methods in different ways.
 *Hence, care had to be taken to make any modifications that would not invalidate the work of another teammate*.
 Simultaneously, we had to ensure good software design, such as ensuring that DRY and SRP are not violated and mantaining a high level of abstraction while reducing unneeded functions.
-All this required conscious effort, such as *organising regular team meetings to update our teammates on our latest implementations*, as well as deconflicting sessions where we tried to *allow each other to access our code in a protected way through interfaces and class inheritance*. We are proud that we managed to *implement each tab in a clean, concise manner that ensures these principles are followed as far as possible*.
+All this required conscious effort, such as *organising regular team meetings to update our teammates on our latest implementations*, as well as *reducing unprotected access to code variables through interfaces and class inheritance*.
+We are proud that we managed to *implement each tab in a clean, concise manner that ensures these principles are followed as far as possible*.
 
 === real time synchronization and integration between GUI and internal logic components
 
