@@ -423,6 +423,7 @@ Scalable when more groupings are added.
 ** Pros: Consecutive `ListCommand` executions are less expensive.
 ** Cons: All other commands that update the underlying list now have additional checks as each grouped list is updated.
 
+*Reason for chosen implementation:* +
 The current solution was chosen in order to accomodate more `Category` implementations in the future.
 With only two classes inheriting `GroupedTaskList`, it is entirely feasible to implement both.
 However, since only one `GroupedTaskList` will be used at any time, and to take account possible performance savings, only one `GroupedTaskList` implementation will exist at any one time.
@@ -441,6 +442,7 @@ Scalable when more groupings are added.
 ** Pros: Consecutive `ListCommand` executions are less expensive.
 ** Cons: All other commands that update the underlying `UniqueTaskList` will result in multiple update calls to `ViewTaskList`.
 
+*Reason for chosen implementation:* +
 The current solution was chosen with integration with other tabs in mind.
 This implementation can easily be expanded to other tabs in a future version if other tabs also inherit from `ViewTaskList`.
 This allows `add`, `edit`, `delete` and `done` commands to be executable from any tab, while still only requiring one `ViewTaskList` to be instantiated, which saves performance.
@@ -478,6 +480,7 @@ Logic is further abstracted to a higher level and the new class is instanced tog
 Due to the time of writing this Developer guide, the release is nearing V1.4 and time is spent fixing bugs for release instead.
 ** This could be a proposed update in the future.
 
+*Reason for chosen implementation:* +
 The best solution would be to create a `UniqueModuleCodeSet` instanced in `UniqueTaskList`, which would have the best scalability and abstraction.
 In addition, since such a set would be updated regularly, less mantainence is needed inside classes that require a list of unique `ModuleCode` entities.
 However, due to time constraints, such an implementation was not chosen.
@@ -814,6 +817,7 @@ other properties.
 ** Cons: A `Reminder` has to remind users the moment when Jelphabot is booted. At that instance, `Storage` has not
 started to read `Task` from the json files yet, therefore the `Reminder` could not be read beforehand.
 
+*Reason for chosen implementation:* +
 We decided to choose the current solution due to the dynamic nature of tasks and users' needs. For upcoming changes in the
 future, it is easier to implement by adding similar classes or attributes to the existing design.
 
@@ -825,6 +829,7 @@ future, it is easier to implement by adding similar classes or attributes to the
 ** Pros: Simple, as it only shows the details of the `Reminder`.
 ** Cons: Users need to constantly refer to the `TaskListPanel` for details. Both has `Index` respectively, which may cause confusion.
 
+*Reason for chosen implementation:* +
 We decided to choose the current solution after considering users' needs and convenience of fully using the `Reminder` s.
 Users do not need to switch back and forth between tabs to refer between `Task` s and `Reminder` s, which saves time that can
 be better spent by completing the `Task` s.
