@@ -419,6 +419,7 @@ Scalable when more groupings are added.
 ** Pros: Consecutive `ListCommand` executions are less expensive.
 ** Cons: All other commands that update the underlying list now have additional checks as each grouped list is updated.
 
+*Reason for chosen implementation:* +
 The current solution was chosen in order to accomodate more `Category` implementations in the future.
 With only two classes inheriting `GroupedTaskList`, it is entirely feasible to implement both.
 However, since only one `GroupedTaskList` will be used at any time, and to take account possible performance savings, only one `GroupedTaskList` implementation will exist at any one time.
@@ -437,6 +438,7 @@ Scalable when more groupings are added.
 ** Pros: Consecutive `ListCommand` executions are less expensive.
 ** Cons: All other commands that update the underlying `UniqueTaskList` will result in multiple update calls to `ViewTaskList`.
 
+*Reason for chosen implementation:* +
 The current solution was chosen with integration with other tabs in mind.
 This implementation can easily be expanded to other tabs in a future version if other tabs also inherit from `ViewTaskList`.
 This allows `add`, `edit`, `delete` and `done` commands to be executable from any tab, while still only requiring one `ViewTaskList` to be instantiated, which saves performance.
@@ -474,6 +476,7 @@ Logic is further abstracted to a higher level and the new class is instanced tog
 Due to the time of writing this Developer guide, the release is nearing V1.4 and time is spent fixing bugs for release instead.
 ** This could be a proposed update in the future.
 
+*Reason for chosen implementation:* +
 The best solution would be to create a `UniqueModuleCodeSet` instanced in `UniqueTaskList`, which would have the best scalability and abstraction.
 In addition, since such a set would be updated regularly, less mantainence is needed inside classes that require a list of unique `ModuleCode` entities.
 However, due to time constraints, such an implementation was not chosen.
@@ -694,7 +697,9 @@ an error in displaying.
 * *Alternative 2*: Employ multi-threading for rendering each sub-part.
 ** Pros: No need to use 3 different booleans when updating view. Code base will be cleaner and more readable.
 ** Cons: Unsure if cost of multi-threading less then of constructing 3 instances for rendering the productivity panel view.
-** Rationale for current implementation: No need to re-render all 3 parts when changes are made to only one part.
+
+*Reason for chosen implementation:* +
+No need to re-render all 3 parts when changes are made to only one part.
 
 ===== Aspect 2: Allowing tasks to be added, deleted or edited while timer is running
 * *Current solution*: Adding and deleting of tasks are allowed. However, tasks cannot be edited.
@@ -703,7 +708,9 @@ an error in displaying.
 * *Alternative 1*: Allow users to edit task while timer is running.
 ** Pros: User is able to use all features without restriction.
 ** Cons: Difficult to implement as the Task model requires a new Task to replace the old Task when edit command is executed.
-** Rationale for current implementation: Adding and deleting tasks does not affect the task being timed.
+
+*Reason for chosen implementation:* +
+Adding and deleting tasks does not affect the task being timed.
 
 ===== Aspect 3: Productivity panel visualisation
 * *Current solution*: Separating sub-parts by paragraphs and including progress bar for tasks completed.
@@ -715,7 +722,9 @@ an error in displaying.
 * *Alternative 2*: Only show 3 tasks whose timers were started in order of priority and time when timers were started.
 ** Pros: Allows user to focus on tasks at hand.
 ** Cons: User might forget about other tasks whose timers were started and not complete them on time.
-** Rationale for current implementation: Paragraphing increases readability and the progress bar provides visual aid.
+
+*Reason for chosen implementation:* +
+Paragraphing increases readability and the progress bar provides visual aid.
 // end::productivity[]
 
 
@@ -728,7 +737,7 @@ This feature offers two main functions:
 ** Delete a reminder that is associated to a task.
 
 ==== Classes for Reminder feature in Model
-The `Reminder` feature was implemented by a new set of classes to `Model`. A new `Reminder` class is stored in
+The `Reminder` feature was implemented by introducing a new set of classes to `Model`. A new `Reminder` class is stored in
 Jelphabot's `UniqueReminderList`, which consists of a list of `Reminder` s. Each `Reminder` consists of 3 objects: +
 ** `Index`**: the `Task` 's index of which the user wants to be reminded for. +
 ** `ReminderDay`**: the number of days before the `Task` 's deadline that the user wants to be reminded for. +
@@ -737,6 +746,7 @@ Jelphabot's `UniqueReminderList`, which consists of a list of `Reminder` s. Each
 The following class diagram summarizes shows the relationship between the classes.
 
 .Reminder Class Diagram in the Model component
+[text-center]
 image::Reminderclass.png[]
 
 ==== Implementation
@@ -759,7 +769,7 @@ within the period set by the user from the current date. +
 
 The sequence diagram for interactions between the `Logic`, `Model`, and `Storage` is shown below.
 
-.Sequence Diagram after running `reminder 2 days/2 hours/1`
+.Sequence Diagram after running `reminder 2 days/2 hours/1`.
 image::AddReminderSequenceDiagram.png[]
 
 .The reference frame of getting the `CommandResult` in the `Logic` component.
@@ -801,6 +811,7 @@ other properties.
 ** Cons: A `Reminder` has to remind users the moment when Jelphabot is booted. At that instance, `Storage` has not
 started to read `Task` from the json files yet, therefore the `Reminder` could not be read beforehand.
 
+*Reason for chosen implementation:* +
 We decided to choose the current solution due to the dynamic nature of tasks and users' needs. For upcoming changes in the
 future, it is easier to implement by adding similar classes or attributes to the existing design.
 
@@ -812,6 +823,7 @@ future, it is easier to implement by adding similar classes or attributes to the
 ** Pros: Simple, as it only shows the details of the `Reminder`.
 ** Cons: Users need to constantly refer to the `TaskListPanel` for details. Both has `Index` respectively, which may cause confusion.
 
+*Reason for chosen implementation:* +
 We decided to choose the current solution after considering users' needs and convenience of fully using the `Reminder` s.
 Users do not need to switch back and forth between tabs to refer between `Task` s and `Reminder` s, which saves time that can
 be better spent by completing the `Task` s.
