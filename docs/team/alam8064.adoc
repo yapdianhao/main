@@ -22,11 +22,7 @@ It is written in Java, and has about 12 kLoC.
 This section contains a summary of my coding, documentation, and other helpful contributions to my team project.
 
 * *Major enhancement*: Implemented the Calendar feature
-
-.UI of Calendar Tab Feature
-image::ug_figures/CalendarTab.png[width="600"]
-
-** What it does: Literally a calendar integrated to display a monthly calendar of overarching tasks due,
+** What it does: A calendar integrated to display a monthly calendar of overarching tasks due,
 together with a task list panel on the left for detailed tasks to be shown.
 *** Allow users to navigate to other months of their choice.
 *** Allow users to view specific tasks due to be listed on selected dates.
