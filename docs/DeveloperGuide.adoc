@@ -1,7 +1,7 @@
 = JelphaBot - Developer Guide
 :site-section: DeveloperGuide
 :toc:
-:toc-title:
+:toc-title: Table of Contents
 :toc-placement: preamble
 :toclevels: 4
 :sectnums:
@@ -16,7 +16,7 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/AY1920S2-CS2103T-F09-2/main
 
-By: `Team 2103T-F09-02`      Since: `Jan 2020`      Licence: `MIT`
+By: `AY1920S2-CS2103T-F09-2`      Since: `Jan 2020`      Licence: `MIT`
 
 <<<
 
