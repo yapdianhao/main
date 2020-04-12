@@ -101,11 +101,8 @@ public class UniqueReminderList implements Iterable<Reminder> {
      * Sets the new index after a reminder before has been deleted.
      */
     public void updateReminderIndexes(int index) {
-        logger.info("updating " + index);
         for (Reminder reminder : internalList) {
-            logger.info("" + reminder.getIndex().getOneBased());
             if (reminder.getIndex().getOneBased() > index) {
-                logger.info("" + index + reminder.getIndex().getOneBased());
                 int currentIndex = reminder.getIndex().getOneBased();
                 currentIndex -= index;
                 reminder.setIndex(currentIndex);

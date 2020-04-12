@@ -42,11 +42,8 @@ public class Reminder {
     }
 
     public void setIndex(int index) {
-        logger.info("input: " + index);
         Index updatedIndex = Index.fromOneBased(index);
-        logger.info("updated index: " + this.getIndex().getZeroBased() + "counted: " + updatedIndex.getZeroBased());
         this.index = updatedIndex;
-        logger.info("updated index: " + this.getIndex().getZeroBased());
     }
 
     @Override
