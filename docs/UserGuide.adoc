@@ -12,6 +12,7 @@
 ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
 endif::[]
 :repoURL: https://github.com/AY1920S2-CS2103T-F09-2/main
 
@@ -78,10 +79,10 @@ a| icon:check[role="green",size="2x"] | Expected result after executing the comm
 a| kbd:[Key] | A Key that you should press on your keyboard
 a| icon:lightbulb-o[role="icon-tip",size="2x"] | Tips and tricks that might be useful
 a| icon:info-circle[role="icon-note",size="2x"] | Additional information that is good to know
-a| icon:exclamation-triangle[role="icon-warning",size="2x"] | Important pointers to take note of
+a| icon:exclamation-circle[role="icon-important",size="2x"] | Important pointers to take note of
 a| <<Blue-text-underlined, blue text, underlined>> | [[Blue-text-underlined]] Links
 endif::[]
-// also known as TIP, NOTE, WARNING
+// also known as TIP, NOTE, IMPORTANT
 |=======================================================================
 
 == Quick Start
@@ -139,7 +140,7 @@ image::ug_figures/help.png[width="600]
 You can exit the program anytime by entering the `exit` command directly from any panel. +
 Format: `exit`
 
-[WARNING]
+[IMPORTANT]
 Exiting the application before stopping any running timer wil cause all recorded time since the timer was started to be lost.
 
 // tag::summary[]
@@ -235,7 +236,7 @@ image::ug_figures/addCommand.png[width="600"]
 * Values that p/PRIORITY can take are -1, 0 or 1.
 ****
 
-[WARNING]
+[IMPORTANT]
 Format of the month in DATETIME (MMM) input has to have the first letter in upper-case. +
 E.g `Mar` instead of `mar` when specifying the month of March.
 
@@ -499,7 +500,7 @@ image::ug_figures/CalendarView.png[width="600"]
 
 Displays month of May in the year 2020 in the calendar panel on the right.
 
-[WARNING]
+[IMPORTANT]
 Format of the month in MONTHYEAR (MMM) input has to have the first letter in upper-case. +
 E.g `Mar` instead of `mar` when specifying the month of March.
 
