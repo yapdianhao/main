@@ -6,7 +6,7 @@ https://ci.appveyor.com/project/Clouddoggo/main/branch/master[image:https://ci.a
 https://coveralls.io/github/AY1920S2-CS2103T-F09-2/main?branch=master[image:https://coveralls.io/repos/github/AY1920S2-CS2103T-F09-2/main/badge.svg?branch=master[Coverage Status]]
 
 
-ifdef::env-github[]
+ifndef::env-github[]
 image::docs/images/MainUi.png[width="600"]
 endif::[]
 
