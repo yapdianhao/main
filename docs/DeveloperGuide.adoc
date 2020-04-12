@@ -1809,7 +1809,7 @@ Expected: Error due to invalid hour count, which can be converted to days if it 
 .. Prerequisites: List all tasks using the *_list_* command, and look for the task that is associated to the reminder that needs to be deleted.
 .. Test case: _delrem 1_ +
 Expected: The reminder for task at index 1 will be removed, if it exists.
-.. Other incorrect *_delrm_* commands to try: *_delrm_* , *_delrm x_* (where x is larger than the list size)
+.. Other incorrect commands to try: *_delrm_* , *_delrm x_* (where x is larger than the list size)
 
 === Data Storage
 
