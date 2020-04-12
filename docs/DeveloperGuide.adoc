@@ -248,11 +248,11 @@ When the tab of the application is changed, we need to update the:
 
 WARNING: `task list` is not a valid command to switch to the Task List tab.
 Use `list` instead.
-Similarly, `:l` is rhe corresponding shortcut.
+Similarly, `:l` is the corresponding shortcut.
 
 For all these commands, updates are done by updating the `SwitchTab` attribute added in the `CommandResult` object.
 
-To view an example, the figure here shows the sequence diagram for when a user executes the `:s` or `summary` command.
+As an example, the figure below shows the sequence diagram of when a user executes the `:s` or `summary` command.
 
 [[Summary-SwitchTab-Sequence-Diagram]]
 .Sequence diagram of execution of the `summary` command
