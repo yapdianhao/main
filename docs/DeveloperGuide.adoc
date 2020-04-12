@@ -52,6 +52,8 @@ This Developer Guide consists of the following sections:
 * <<Testing, Testing>> - A guide for developers to set up and run test code.
 * <<Dev Ops, Dev Ops>> - A guide for developers to build, test and release JelphaBot.
 
+<<<
+
 === Notation used in this Guide
 
 .Common symbols used throughout this guide.
@@ -78,6 +80,8 @@ endif::[]
 == Setting Up
 
 Refer to the guide <<SettingUp#, here>>.
+
+<<<
 
 == Design
 
@@ -324,8 +328,6 @@ Once the user marks a task due within the day as complete, it will automatically
 [NOTE]
 If the user marks a task as completed, and immediately deletes the task from the task list, it will not appear in the summary screen.
 
-<<<
-
 ==== Implementation
 
 The implementation of this panel is facilitated by the `summary` package.
@@ -335,11 +337,13 @@ The task list is then filtered with the help of `TaskDueWithinDayAndIncompletePr
 
 These lists are stored as fields in the `Summary` class and are used to display the relevant information in the summary panel.
 
+<<<
+
 The following class diagram shows the structure of the classes in the `summary` package, in relation with their `Ui` counterparts.
 
 [[SummaryPanelClassDiagram]]
 .Class diagram of structure and relations of `Summary`, `SummaryPanel` and their components.
-image::SummaryPanelClassDiagram.png[width=500]
+image::SummaryPanelClassDiagram.png[]
 
 <<<
 To view the respective tasks, the user enters the _summary_ command.
@@ -368,6 +372,8 @@ The task lists in the `Summary` object do not have to be reinitialised upon ever
 ** Cons: May not be scalable if there are many things to be added to the summary panel in the future, as this will require more listeners, and the presence of many listeners may affect the performance of the application.
 
 * *Reason for chosen implementation:* The current implementation is more straightforward and simpler to implement, as the `SummaryList` and `SummaryPanel` which are used to display the contents of the summary panel simply need to extract and display the contents of the `Summary` object that was given, instead of requiring underlying listeners to keep track of whatever is happening within the application.
+
+<<<
 
 ===== Aspect 2: Summary panel aesthetic improvements
 
