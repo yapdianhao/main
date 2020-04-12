@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!-- @@author eedenong -->
+
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
@@ -16,25 +17,25 @@
             <Label fx:id="breakline" text="\$breakline" />
          </children>
       </VBox>
-      <VBox prefHeight="200.0" prefWidth="363.0">
+      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="363.0">
          <children>
-            <Label styleClass="cell_small_label" text="Here are your tasks that are due today!" />
-            <Label fx:id="tasksDueToday" text="\$tasksDueToday">
+            <Label styleClass="cell_medium_label" text="Here are your tasks that are due today!" />
+            <Label fx:id="tasksDueToday" maxHeight="Infinity" maxWidth="Infinity" minHeight="-Infinity" text="\$tasksDueToday" VBox.vgrow="ALWAYS">
                 <minWidth>
                     <Region fx:constant="USE_PREF_SIZE" />
                 </minWidth>
             </Label>
          </children>
       </VBox>
-      <VBox prefHeight="200.0" prefWidth="100.0">
+      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="363.0">
          <children>
-            <Label styleClass="cell_small_label" text="Here are your tasks that you have completed today!" />
-             <Label fx:id="tasksCompletedToday" text="\$tasksCompletedToday">
+            <Label styleClass="cell_medium_label" text="Here are your tasks that you have completed today!"
+                   VBox.vgrow="ALWAYS" />
+             <Label fx:id="tasksCompletedToday" maxHeight="Infinity" maxWidth="Infinity" text="\$tasksCompletedToday" VBox.vgrow="ALWAYS">
                  <minWidth>
                      <Region fx:constant="USE_PREF_SIZE" />
                  </minWidth>
              </Label>
-         </children>
-      </VBox>
+         </children></VBox>
    </children>
 </VBox>

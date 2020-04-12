@@ -1,10 +1,13 @@
 //@@author eedenong
 package seedu.jelphabot.logic.commands;
 
+import static seedu.jelphabot.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.showTasksWithSpecifiedStatus;
+import static seedu.jelphabot.logic.commands.ShowIncompleteCommand.MESSAGE_SUCCESS;
 import static seedu.jelphabot.testutil.TypicalTasks.getTypicalJelphaBot;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import seedu.jelphabot.model.Model;
 import seedu.jelphabot.model.ModelManager;
@@ -26,11 +29,11 @@ public class ShowIncompleteCommandTest {
         showTasksWithSpecifiedStatus(expectedModel, Status.INCOMPLETE);
     }
 
-    // @Test
-    // public void execute_listIsFilteredByPredicate_showsIncompleteTasks() {
-    //     showTasksWithSpecifiedStatus(model, Status.INCOMPLETE);
-    //     assertCommandSuccess(new ShowIncompleteCommand(), model,
-    //     ShowIncompleteCommand.MESSAGE_SUCCESS, expectedModel);
-    // }
+    @Test
+    public void execute_listIsFilteredByPredicate_showsIncompleteTasks() {
+        showTasksWithSpecifiedStatus(model, Status.INCOMPLETE);
+        CommandResult expectedCommandResult = new CommandResult(MESSAGE_SUCCESS).isShowDateTaskList();
+        assertCommandSuccess(new ShowIncompleteCommand(), model, expectedCommandResult, expectedModel);
+    }
 
 }
