@@ -2,6 +2,9 @@ package seedu.jelphabot.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.logging.Logger;
+
+import seedu.jelphabot.commons.core.LogsCenter;
 import seedu.jelphabot.commons.core.Messages;
 import seedu.jelphabot.commons.core.index.Index;
 import seedu.jelphabot.logic.commands.exceptions.CommandException;
@@ -27,6 +30,10 @@ public class DeleteCommand extends Command {
     public static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted Task: %1$s";
     public static final String MESSAGE_DELETE_RUNNING_TASK = "Deleted Task with running timer: %1$s ";
 
+    public static final String REMINDER_ASSOCIATED_WITH_TASK = DeleteReminderCommand.MESSAGE_DELETE_REMINDER_SUCCESS;
+
+    private static final Logger logger = LogsCenter.getLogger(DeleteCommand.class);
+
     private final Index targetIndex;
 
     public DeleteCommand(Index targetIndex) {
@@ -44,8 +51,13 @@ public class DeleteCommand extends Command {
         }
 
         Task taskToDelete = lastShownList.get(targetIndex.getZeroBased());
-        CommandResult fromDeleteReminderCommand = new DeleteReminderCommand(targetIndex).execute(model);
+        try {
+            CommandResult fromDeleteReminderCommand = new DeleteReminderCommand(targetIndex).execute(model);
+        } catch (CommandException ce) {
+            logger.info(REMINDER_ASSOCIATED_WITH_TASK);
+        }
         model.deleteTask(taskToDelete);
+        model.updateDeletedReminders(targetIndex);
         model.setProductivity(new Productivity(model.getFilteredTaskList(), true, true, true));
         model.setSummary(new Summary(model.getFilteredTaskList()));
 

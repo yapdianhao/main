@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.jelphabot.commons.core.index.Index;
 import seedu.jelphabot.model.reminder.Reminder;
 import seedu.jelphabot.model.reminder.ReminderShowsTask;
 import seedu.jelphabot.model.reminder.UniqueReminderList;
@@ -66,6 +67,14 @@ public class JelphaBot implements ReadOnlyJelphaBot {
 
     public void setReminderShowsTasks(List<ReminderShowsTask> reminderShowsTasks) {
         this.reminderShowsTaskList.setReminderShowsTasks(reminderShowsTasks);
+    }
+
+    /**
+     * deletes a reminder will cause all reminders' indexes after to shift forward.
+     */
+    public void updateDeletedReminder(Index deletedIndex) {
+        int index = deletedIndex.getOneBased();
+        reminders.updateReminderIndexes(index);
     }
 
     /**

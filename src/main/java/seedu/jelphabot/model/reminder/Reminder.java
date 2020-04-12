@@ -3,6 +3,9 @@ package seedu.jelphabot.model.reminder;
 
 import static seedu.jelphabot.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.logging.Logger;
+
+import seedu.jelphabot.commons.core.LogsCenter;
 import seedu.jelphabot.commons.core.index.Index;
 
 /**
@@ -11,11 +14,13 @@ import seedu.jelphabot.commons.core.index.Index;
  */
 public class Reminder {
 
+    private static final Logger logger = LogsCenter.getLogger(Reminder.class);
+
     private final ReminderDay daysToRemind;
 
     private final ReminderHour hoursToRemind;
 
-    private final Index index;
+    private Index index;
 
     public Reminder(Index index, ReminderDay daysToRemind, ReminderHour hoursToRemind) {
         requireAllNonNull(index, daysToRemind, hoursToRemind);
@@ -34,6 +39,11 @@ public class Reminder {
 
     public ReminderHour getHoursToRemind() {
         return this.hoursToRemind;
+    }
+
+    public void setIndex(int index) {
+        Index updatedIndex = Index.fromOneBased(index);
+        this.index = updatedIndex;
     }
 
     @Override

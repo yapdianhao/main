@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.jelphabot.commons.core.GuiSettings;
+import seedu.jelphabot.commons.core.index.Index;
 import seedu.jelphabot.logic.commands.exceptions.CommandException;
 import seedu.jelphabot.model.JelphaBot;
 import seedu.jelphabot.model.Model;
@@ -88,6 +89,7 @@ public class AddCommandTest {
      * A default model stub that have all of the methods failing.
      */
     private static class ModelStub implements Model {
+
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
@@ -110,6 +112,11 @@ public class AddCommandTest {
 
         @Override
         public void setGuiSettings(GuiSettings guiSettings) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateDeletedReminders(Index index) {
             throw new AssertionError("This method should not be called.");
         }
 
