@@ -11,7 +11,7 @@
 ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
-:warning-caption: :warning:
+:important-caption: :heavy_exclamation_mark:
 endif::[]
 :repoURL: https://github.com/AY1920S2-CS2103T-F09-2/main
 
@@ -246,7 +246,7 @@ When the tab of the application is changed, we need to update the:
 * `MainWindow` component so that the `SwitchTab` attribute in `MainWindow` reflects the new current tab, since this is used to check if a command can be executed,
 * `UI` component so that the panels display the information that is relevant to the tab.
 
-WARNING: `task list` is not a valid command to switch to the Task List tab.
+IMPORTANT: `task list` is not a valid command to switch to the Task List tab.
 Use `list` instead.
 Similarly, `:l` is the corresponding shortcut.
 
@@ -682,7 +682,7 @@ Upon successful execution of the command, the productivity tab removes the task 
 Removing a task from the Running Timer(s) header is similar to adding it, as illustrated by the Activity Diagram <<activity-updatingProductivityPanel, above>>.
 Under the Time Spent header, the total time spent will be increased depending on the date that the task is due.
 
-[WARNING]
+[IMPORTANT]
 Attempting to start timer for a task marked as completed or `stop` a task that does not have a running timer,
 the command fails its execution so that it does not execute that `start` or `stop` operation to `start` or `stop` the timer for that task.
 
