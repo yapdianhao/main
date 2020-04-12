@@ -448,7 +448,7 @@ You can pin important tasks to the top of the task list with the `pin` command. 
 Pinned tasks will always be displayed in the Pinned Tasks group in the task list. +
 Trying to `pin` a task that is already pinned will unpin it.
 
-==== Sort Tasks : `sort`  [Coming in v2.0]
+==== Sort Tasks : `sort`  [Coming in V2.0]
 
 You can change how tasks are sorted with the `sort` command.
 Format: `sort SORTING_ORDER`
@@ -689,7 +689,7 @@ JelphaBot's reminder window will popup.
 
 //end::reminder[]
 
-=== Colour-code module codes `[coming in v2.0]`
+=== Colour-code module codes [Coming in V2.0]
 Users can customise the font colours of different modules to better distinguish between different tasks.
 The module codes displayed in the Main Window will be similar to the tags displayed to make it easier for users to view them.
 
