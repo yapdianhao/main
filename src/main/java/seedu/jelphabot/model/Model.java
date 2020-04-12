@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.jelphabot.commons.core.GuiSettings;
+import seedu.jelphabot.commons.core.index.Index;
 import seedu.jelphabot.model.productivity.Productivity;
 import seedu.jelphabot.model.productivity.ProductivityList;
 import seedu.jelphabot.model.reminder.Reminder;
@@ -118,6 +119,8 @@ public interface Model {
      * Replaces the existing summary with {@code summary}.
      */
     void setSummary(Summary summary);
+
+    void updateDeletedReminders(Index deletedIndex);
 
     /**
      * Returns an unmodifiable view of the filtered task list
