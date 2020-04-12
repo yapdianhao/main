@@ -9,6 +9,8 @@ import seedu.jelphabot.model.Model;
 public class ReminderTabCommand extends Command {
 
     public static final String COMMAND_WORD = "remindertab";
+    public static final String COMMAND_WORD_UPPER = ":R";
+    public static final String COMMAND_WORD_LOWER = ":r";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows reminder panel.\n"
                                                    + "Example: " + COMMAND_WORD;
