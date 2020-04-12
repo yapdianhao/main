@@ -548,7 +548,7 @@ Displays month of April in the year 2020 in the calendar panel on the right, wit
 // tag::productivitytracker[]
 === Productivity Tracking (Jel)
 JelphaBot also comes with a productivity tracking that allows you track the progress of your tasks in that week.
-You would be able to see the progress bar as you complete more tasks!
+You would be able to see the progress bar fill up as you complete more tasks!
 
 ==== Track productivity : `productivity`
 Apart from the function to switch tabs by pressing kbd:[Ctrl] + kbd:[tab] on your keyboard, you can enter the `productivity` command
@@ -612,13 +612,22 @@ There is no need to manually request for compliments or criticism.
 
 
 //tag::reminder[]
-=== Set Reminders and Notifications (Dian Hao)
-//Apart from the function to switch tabs by pressing kbd:[Ctrl] + kbd:[tab] on your keyboard, you can enter the `reminder` command
-//or its shortcuts `:r` or `:R` to manually switch to the reminder tab.
-//The reminder panel will then show you your lists of upcoming reminders. +
-//
-//Format: `reminder` +
-//Shortcut: `:r` or `:R`
+=== Set Reminders (Dian Hao)
+JelphaBot allows you to set reminders for tasks and manage your tasks comprehensively!
+You can view all your existing reminders from the reminders tab.
+
+==== View reminders : `remindertab`
+Apart from the function to switch tabs by pressing kbd:[Ctrl] + kbd:[tab] on your keyboard, you can enter the `remindertab` command
+or its shortcuts `:R` or `:r` to manually switch to the reminder tab.
+Every `Reminder` will show the `Task` `s module code, description, due date, the days that will be reminded before the
+deadline, and the hours that will be reminded before the deadline. +
+
+Format: `remindertab` +
+Shortcut: `:R` or `:r`
+
+[.text-center]
+.Example of expected result after running `remindertab`
+image::ug_figures/remindertab.png[width="600"]
 
 ==== Adding reminder : `reminder`
 You can add a reminder to your specified task to remind yourself of the task if the current time is within the time-frame specified
@@ -651,7 +660,6 @@ If you would like for a task's reminder to be deleted, you can enter the
 
 Format: `delrem INDEX`
 
-
 [.text-center]
 .Example of expected result after running `delrem 1`
 image::ug_figures/delReminder.png[width="600"]
@@ -663,20 +671,9 @@ image::ug_figures/delReminder.png[width="600"]
 * Whenever a task is deleted, the corresponding reminder will also be removed.
 ****
 
-==== Navigate directly to view all reminders : `remindertab`
-
-Whenever you add a `Reminder`, you can navigate to the `Reminder` tab to see a list of `Reminder` s that you have.
-You can either click the tab, or enter the command `remindertab` to switch to the `Reminder`'s panel.
-Every `Reminder` will show the `Task` `s module code, description, due date, the days that will be reminded before the
-deadline, and the hours that will be reminded before the deadline.
-
-[.text-center]
-.Example of expected result after running `remindertab`
-image::ug_figures/remindertab.png[width="600"]
-
 ==== Reminder popup notification
 
-Everytime you run JelphaBot after adding your reminders, JelphaBot will show a list of tasks that will be overdue soon,
+Every time you run JelphaBot after adding your reminders, JelphaBot will show a list of tasks that will be overdue soon,
 and tasks that are past their deadline but have not been completed.
 
 [.text-center]
@@ -747,7 +744,7 @@ e.g. `delete 3`
 e.g. `reminder 2 days/1 hours/1`
 * *Delete Reminder* : `delrem INDEX` +
 e.g. `delrem 2`
-* *View Reminders*: `remindertab` +
+* *View Reminders*: `remindertab` or `:r` or `:R` +
 * *Productivity* : `productivity` or `:p` or `:P`
 * *Timer* : `start INDEX` or `stop INDEX` +
 e.g. `start 1` or `stop 1`

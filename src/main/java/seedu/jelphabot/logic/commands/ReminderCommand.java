@@ -26,8 +26,6 @@ public class ReminderCommand extends Command {
                                                                           + "been marked as complete!";
     public static final String MESSAGE_SUCCESS = "Added reminder for task %d!";
     public static final String COMMAND_WORD = "reminder";
-    public static final String COMMAND_WORD_UPPER = ":R";
-    public static final String COMMAND_WORD_LOWER = ":r";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks a reminder on the given task "
                                                    + " on the specified date. "
                                                    + "Parameters:\n" + "INDEX (must be a positive integer) "

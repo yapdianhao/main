@@ -1,7 +1,7 @@
 = JelphaBot - Developer Guide
 :site-section: DeveloperGuide
 :toc:
-:toc-title:
+:toc-title: Table of Contents
 :toc-placement: preamble
 :toclevels: 4
 :sectnums:
@@ -15,7 +15,7 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/AY1920S2-CS2103T-F09-2/main
 
-By: `Team 2103T-F09-02`      Since: `Jan 2020`      Licence: `MIT`
+By: `AY1920S2-CS2103T-F09-2`      Since: `Jan 2020`      Licence: `MIT`
 
 == Preface
 === Introduction
@@ -116,7 +116,7 @@ Each of the four components
 * Defines its _API_ in an `interface` with the same name as the Component.
 * Exposes its functionality using a `{Component Name}Manager` class.
 
-For example, the `Logic` component (see the class diagram given below) defines it's API in the `Logic.java` interface and exposes its functionality using the `LogicManager.java` class.
+For example, the `Logic` component (see the class diagram given below) defines its API in the `Logic.java` interface and exposes its functionality using the `LogicManager.java` class.
 
 .Class Diagram of the Logic Component
 image::LogicClassDiagram.png[][width="750"]
