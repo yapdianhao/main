@@ -5,12 +5,15 @@ https://travis-ci.org/AY1920S2-CS2103T-F09-2/main[image:https://travis-ci.org/se
 https://ci.appveyor.com/project/Clouddoggo/main/branch/master[image:https://ci.appveyor.com/api/projects/status/3vmwqwd4y4fc4ini/branch/master?svg=true[Build status]]
 https://coveralls.io/github/AY1920S2-CS2103T-F09-2/main?branch=master[image:https://coveralls.io/repos/github/AY1920S2-CS2103T-F09-2/main/badge.svg?branch=master[Coverage Status]]
 
-
 ifdef::env-github[]
 image::docs/images/Ui.png[width="600"]
 endif::[]
 ifndef::env-github[]
 image::docs/images/Ui.png[width="600"]
+endif::[]
+
+ifndef::env-github[]
+image::images/Ui.png[width="600"]
 endif::[]
 
 * JelphaBot is your very own personal Task Manager to help University Students keep track of their modules and various assignments and commitments.

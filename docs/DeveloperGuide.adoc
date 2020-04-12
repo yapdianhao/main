@@ -11,7 +11,7 @@
 ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
-:warning-caption: :warning:
+:important-caption: :heavy_exclamation_mark:
 endif::[]
 :repoURL: https://github.com/AY1920S2-CS2103T-F09-2/main
 
@@ -246,7 +246,7 @@ When the tab of the application is changed, we need to update the:
 * `MainWindow` component so that the `SwitchTab` attribute in `MainWindow` reflects the new current tab, since this is used to check if a command can be executed,
 * `UI` component so that the panels display the information that is relevant to the tab.
 
-WARNING: `task list` is not a valid command to switch to the Task List tab.
+IMPORTANT: `task list` is not a valid command to switch to the Task List tab.
 Use `list` instead.
 Similarly, `:l` is the corresponding shortcut.
 
@@ -318,17 +318,28 @@ do not have to be reinitialised upon every `done` command.
 ** Cons: May not be scalable if there are many things to be added to the summary panel in the future, as this will require more listeners,
 and the presence of many listeners may affect the performance of the application.
 
+* *Reason for chosen implementation:*
+The current implementation is more straightforward and simpler to implement, as the `SummaryList` and `SummaryPanel` which are used to display the contents of the summary
+panel simply need to extract and display the contents of the `Summary` object that was given, instead of requiring underlying listeners to keep track of whatever is happening within
+the application.
+
 ===== Aspect 2: Summary panel aesthetic improvements
 
 * *Current solution*: The Welcome header, tasks due today and tasks completed subsections have the same font and styling. The distinction between them
-is by the bigger font for the Welcome header, and the space separation between the subsections. Everything shown on the panel is shown as plain text, with no
-additional styling.
+is by the bigger font for the Welcome header, and the space separation between the subsections. This is done by having each section in their own separate `Vbox`.
+Everything shown on the panel is shown as plain text, with no additional styling.
 ** Pros: This gives the summary panel a minimal look that is simple and easy to look at, while still providing the user with the relevant information that is needed.
 ** Cons: Due to the implementation of the subsections as separate boxes of equal sizes that are scaled to fit the panel, there is a lot of unused space in between each subsection, if there
 are not enough tasks to fill in the space. This can be seen as a waste of space.
 * *Alternative 1*: Add font styling and section highlighting to different sections of the summary panel
 ** Pros: Makes the summary panel more visually appealing, and makes each subsection more distinct from each other.
 ** Cons: Does not solve the problem of unused space when there are not enough tasks to fill the space in each subsection.
+
+* *Reason for chosen implementation:*
+The current implementation is easier to implement and keeps the summary panel simple and easy to look at as it avoids the cluttering of the summary panel with too many different design elements.
+This makes it very user-friendly, and it also easily scalable in the future as each section is already partitioned accordingly, so future changes to the summary panel simply have to change the elements
+within each section.
+
 // end::summary[]
 
 // tag::taskgroups[]
@@ -682,7 +693,7 @@ Upon successful execution of the command, the productivity tab removes the task 
 Removing a task from the Running Timer(s) header is similar to adding it, as illustrated by the Activity Diagram <<activity-updatingProductivityPanel, above>>.
 Under the Time Spent header, the total time spent will be increased depending on the date that the task is due.
 
-[WARNING]
+[IMPORTANT]
 Attempting to start timer for a task marked as completed or `stop` a task that does not have a running timer,
 the command fails its execution so that it does not execute that `start` or `stop` operation to `start` or `stop` the timer for that task.
 
