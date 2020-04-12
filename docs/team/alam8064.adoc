@@ -53,8 +53,6 @@ https://github.com/AY1920S2-CS2103T-F09-2/main/pull/165[#165],
 https://github.com/AY1920S2-CS2103T-F09-2/main/pull/138[#138],
 https://github.com/AY1920S2-CS2103T-F09-2/main/pull/84[#84]
 
-//** Credits: _{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}_
-
 * *Minor enhancement*: Added in the panel of tabs in the main Ui layout during initial stages.
 This was done for the subsequence integration of our individual features.
 ** Pull requests:
