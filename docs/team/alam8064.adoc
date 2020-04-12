@@ -15,18 +15,14 @@ NUS students as our target group. It is specially designed by my talented crew o
 JelphaBot was developed for our software engineering module, CS2103T, where we were tasked to morph an address book
 application that manages contact details into something else. As part of the project constraints, user interactions are
 primarily Command-Line Interface (CLI), assisted with a GUI created using JavaFX.
-It is written in Java, and has about 12 kLoC.
+It is written in Java, and has about 13 kLoC.
 
 == Summary of contributions
 
 This section contains a summary of my coding, documentation, and other helpful contributions to my team project.
 
 * *Major enhancement*: Implemented the Calendar feature
-
-.UI of Calendar Tab Feature
-image::ug_figures/CalendarTab.png[width="600"]
-
-** What it does: Literally a calendar integrated to display a monthly calendar of overarching tasks due,
+** What it does: A calendar integrated to display a monthly calendar of overarching tasks due,
 together with a task list panel on the left for detailed tasks to be shown.
 *** Allow users to navigate to other months of their choice.
 *** Allow users to view specific tasks due to be listed on selected dates.
@@ -56,8 +52,6 @@ https://github.com/AY1920S2-CS2103T-F09-2/main/pull/174[#174],
 https://github.com/AY1920S2-CS2103T-F09-2/main/pull/165[#165],
 https://github.com/AY1920S2-CS2103T-F09-2/main/pull/138[#138],
 https://github.com/AY1920S2-CS2103T-F09-2/main/pull/84[#84]
-
-//** Credits: _{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}_
 
 * *Minor enhancement*: Added in the panel of tabs in the main Ui layout during initial stages.
 This was done for the subsequence integration of our individual features.
