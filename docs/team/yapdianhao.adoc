@@ -27,7 +27,7 @@ range of components, a complete understanding and thorough analysis of the whole
 *** Challenging as it requires real time synchronization and integration between GUI and internal logic components.
 For instance, a user, when deletes a `Task`, should observe the deletion of its corresponding `Reminder` from the UI as well.
 *** This feature is implemented in a way that it undergoes the whole application's main components' development, in front-end
-and back-end. It involves the `Ui`, `Logic`, `Model`, and `Storage`, with over ?k (Reposense) lines of functional and test code.
+and back-end. It involves the `Ui`, `Logic`, `Model`, and `Storage`, with over 3k lines of functional and test code.
 
 ** Relevant pull requests:
 https://github.com/AY1920S2-CS2103T-F09-2/main/pull/88[#88],
@@ -37,6 +37,8 @@ https://github.com/AY1920S2-CS2103T-F09-2/main/pull/179[#179],
 https://github.com/AY1920S2-CS2103T-F09-2/main/pull/207[#207],
 https://github.com/AY1920S2-CS2103T-F09-2/main/pull/309[#309],
 https://github.com/AY1920S2-CS2103T-F09-2/main/pull/346[#346]
+
+* *Code contributed*: https://nus-cs2103-ay1920s2.github.io/tp-dashboard/#search=yapdianhao&sort=groupTitle&sortWithin=title&since=2020-02-14&timeframe=commit&mergegroup=false&groupSelect=groupByRepos&breakdown=false[Code contributed]
 
 * *Minor enhancement*: Increased code coverage through writing new tests and improved existing tests.
 https://github.com/AY1920S2-CS2103T-F09-2/main/pull/33[#33],
