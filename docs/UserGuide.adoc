@@ -35,7 +35,7 @@ Upon running JelphaBot, you will see various components on it's main display scr
 
 [.text-center]
 .Brief overview of the app
-image::Ui.png[width="600"]
+image::ug_figures/Ui.png[width="600"]
 
 The function of each component is as follows:
 
@@ -75,7 +75,6 @@ ifdef::env-github[]
 | :heavy_exclamation_mark: | Important pointers to take note of
 endif::[]
 ifndef::env-github[]
-a| icon:check[role="green",size="2x"] | Expected result after executing the command
 a| kbd:[Key] | A Key that you should press on your keyboard
 a| icon:lightbulb-o[role="icon-tip",size="2x"] | Tips and tricks that might be useful
 a| icon:info-circle[role="icon-note",size="2x"] | Additional information that is good to know
@@ -96,7 +95,7 @@ JelphaBot should initialize with a sample list of tasks as shown in the followin
 +
 [.text-center]
 .Expected result after running JelphaBot
-image::Ui.png[width="600"]
+image::ug_figures/Ui.png[width="600"]
 +
 [NOTE]
 The sample list of tasks helps test if you installed JelphaBot correctly! +
@@ -161,7 +160,7 @@ Shortcut: `:S` or `:s`
 
 [.text-center]
 .Example of expected result after running `summary`
-image::ug_figures/summaryTab.png[width="600"]
+image::ug_figures/Ui.png[width="600"]
 
 Displays the two dropdown tabs that show the tasks that are Due Today, and Completed Today.
 
@@ -187,7 +186,7 @@ Shortcut: `:T` or `:t`
 
 [.text-center]
 .Example of expected result after running `list`
-image::TaskListTab.png[width="600"]
+image::ug_figures/TaskListTab.png[width="600"]
 
 ====
 *Command Format for Task list commands*
@@ -437,7 +436,7 @@ If you do not have any tasks that are incomplete in your tasklist, the displayed
 
 [.text-center]
 .Example of an expected result after running `show-incomplete`, if the tasklist does not have any incomplete tasks
-image::ug_figures/showCompletedCommandNoCompleted.png[width="600"]
+image::ug_figures/showIncompleteCommandNoIncomplete.png[width="600"]
 
 // end::showincomplete[]
 
@@ -504,6 +503,11 @@ Displays month of May in the year 2020 in the calendar panel on the right.
 Format of the month in MONTHYEAR (MMM) input has to have the first letter in upper-case. +
 E.g `Mar` instead of `mar` when specifying the month of March.
 
+[NOTE]
+Dot indicator showing tasks: Dates that have more than 3 tasks due would have a red dot indicator, while dates with
+at least 1 task but less than 4 tasks due would be represented with a green dot indicator.
+
+
 ==== Show tasks due on specific date : `calendar`
 Displays the tasks due on specified date, while highlighting that day on the calendar +
 Format: `calendar DATE`
@@ -524,9 +528,6 @@ image::ug_figures/CalendarDate.png[width="600"]
 
 Highlights 1st of April in the calendar panel on the right and displays the corresponding tasks due on the left.
 
-[NOTE]
-Dot indicator showing tasks: Dates that have more than 3 tasks due would have a red dot indicator, while dates with
-at least 1 task but less than 4 tasks due would be represented with a green dot indicator.
 
 ==== Navigate directly to today's date on Calendar : `calendar`
 Immediately displays the calendar view for this month and highlights today's date.
