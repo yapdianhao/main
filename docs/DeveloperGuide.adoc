@@ -2,7 +2,7 @@
 :site-section: DeveloperGuide
 :toc:
 :toc-title: Table of Contents
-:toc-placement: preamble
+:toc-placement: macro
 :toclevels: 4
 :sectnums:
 :imagesDir: images
@@ -18,6 +18,8 @@ endif::[]
 
 By: `AY1920S2-CS2103T-F09-2`      Since: `Jan 2020`      Licence: `MIT`
 
+<<<
+toc::[]
 <<<
 
 == Preface
