@@ -262,7 +262,7 @@ Format: `list [SORTING_ORDER]`
 
 ===== Group Tasks by Date : `list date`
 
-You can groups tasks based on their due date.
+You can group tasks based on their due date.
 This is also the default interface for the task list tab. +
 Format: `list date`
 
@@ -352,7 +352,7 @@ Edits the date and time of the 2nd task to be `Jan-2-2020 23 59` and clears all 
 
 ==== Completing a Task : `done`
 
-Marks a task in your task list as done and then removes the task from the task list display. +
+You can mark a task in your task list as done and the task's status will be updated in the display. +
 Format: `done INDEX`
 
 [.text-center]
@@ -369,7 +369,7 @@ image::ug_figures/doneCommand.png[width="600"]
 ==== Deleting a Task : `delete`
 // tag::delete[]
 
-Delete a task from your task list. +
+You can delete a task from your task list. +
 Format: `delete INDEX`
 
 [.text-center]
@@ -565,7 +565,7 @@ The progress bar and the text following it only shows tasks that are due on the 
 
 ==== Starting timer for a task : `start`
 
-You can start a timer running for a task. +
+You can start a timer for your task. +
 Format: `start INDEX`
 
 [.text-center]
@@ -583,7 +583,7 @@ image::ug_figures/startCommand.png[width="600"]
 
 ==== Stopping timer for a task : `stop`
 
-You can stop a running timer for a task. +
+You can stop a running timer for your task. +
 Format: `stop INDEX`
 
 [.text-center]
@@ -644,9 +644,8 @@ image::ug_figures/addReminder.png[width="600"]
 ****
 
 ==== Removing reminder : `delrem`
-
-Should you choose to stop a task to be reminded or after it is completed, you can enter the
-`delrem` command to remove the reminder of that particular task. +
+If you would like for a task's reminder to be deleted, you can enter the
+`delrem` command to remove the reminder of that task. +
 
 Format: `delrem INDEX`
 
@@ -664,7 +663,7 @@ image::ug_figures/delReminder.png[width="600"]
 
 ==== Navigate directly to view all reminders : `remindertab`
 
-Whenever you add a `Reminder` , you can navigate to the `Reminder` tab to see a list of `Reminder` s that you have.
+Whenever you add a `Reminder`, you can navigate to the `Reminder` tab to see a list of `Reminder` s that you have.
 You can either click the tab, or enter the command `remindertab` to switch to the `Reminder`'s panel.
 Every `Reminder` will show the `Task` `s module code, description, due date, the days that will be reminded before the
 deadline, and the hours that will be reminded before the deadline.
@@ -675,16 +674,16 @@ image::ug_figures/remindertab.png[width="600"]
 
 ==== Reminder popup notification
 
-Whenever you boot JelphaBots the next session after you added your reminders, if there is any task that have to be reminded, JelphaBot will show
-a list of tasks that will expire soon, and tasks that have expired but have not been completed.
+Everytime you run JelphaBot after adding your reminders, JelphaBot will show a list of tasks that will be overdue soon,
+and tasks that are past their deadline but have not been completed.
 
 [.text-center]
 .Example of expected result after tasks are being reminded.
 image::ug_figures/reminderpopup.png[width="600"]
 
 ****
-* Whenever JelphaBot is booted, should you have any tasks that is not completed but is reminded,
-JelphaBot's reminder will always popup.
+* Whenever JelphaBot is booted, if you have any tasks that is not completed but has a reminder,
+JelphaBot's reminder window will popup.
 * This will persist until you either complete the `Task`, or delete the `Reminder`.
 ****
 
@@ -742,7 +741,6 @@ e.g. `delete 3`
 * *Exit* : `exit`
 * *Show Completed Tasks*: `show-completed`
 * *Show Incomplete Tasks*: `show-incomplete`
-//* *Reminder* : `reminder` or `:r` or `:R`
 * *Add Reminder* : `reminder INDEX days/DAYS hours/HOURS` +
 e.g. `reminder 2 days/1 hours/1`
 * *Delete Reminder* : `delrem INDEX` +
