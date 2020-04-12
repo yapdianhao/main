@@ -23,7 +23,7 @@ Responsibilities: Integration
 === Jel Lim
 
 image::clouddoggo.png[width="150",align="left"]
-{empty}[https://github.com/Clouddoggo[github]] [<<johndoe#, portfolio>>]
+{empty}[https://github.com/Clouddoggo[github]] [<<clouddoggo#, portfolio>>]
 
 Role: Team Member +
 Responsibilities: Scheduling and Tracking
@@ -31,8 +31,9 @@ Responsibilities: Scheduling and Tracking
 '''
 
 === Amanda Lam
-image::alam8064.png[width="150", align="left"]
-{empty}[http://github.com/alam8064[github]] [<<johndoe#, portfolio>>]
+
+image::alam8064.png[width="150",align="left"]
+{empty}[http://github.com/alam8064[github]] [<<alam8064#, portfolio>>]
 
 Role: Team Member +
 Responsibilities: Documentation
@@ -40,8 +41,9 @@ Responsibilities: Documentation
 '''
 
 === Eden Ong
-image::eedenong.png[width="150", align="left"]
-{empty}[http://github.com/eedenong[github]] [<<johndoe#, portfolio>>]
+
+image::eedenong.png[width="150",align="left"]
+{empty}[http://github.com/eedenong[github]] [<<eedenong#, portfolio>>]
 
 Role: Team Member +
 Responsibilities: Testing
@@ -49,8 +51,9 @@ Responsibilities: Testing
 '''
 
 === Yap Dian Hao
-image::yapdianhao.png[width="150", align="left"]
-{empty}[http://github.com/yapdianhao[github]] [<<johndoe#, portfolio>>]
+
+image::yapdianhao.png[width="150",align="left"]
+{empty}[http://github.com/yapdianhao[github]] [<<yapdianhao#, portfolio>>]
 
 Role: Team Member +
 Responsibilities: UI
