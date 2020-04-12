@@ -1646,8 +1646,19 @@ Sample data should be configured such that there are dates due within the curren
 
 [appendix]
 == Effort
+We highly recommend adding an appendix named Effort that evaluators can use to estimate the total project effort.
 
-* Difficulty Level
-* Challenges Faced
-* Effort required
-* Achievements
+    Keep it brief (~1 page)
+    Explain the difficulty level, challenges faced, effort required, and achievements of the project.
+    Use AB3 as a reference point e.g., you can explain that while AB3 deals with only one entity type, your project was harder because it deals with multiple entity types.
+
+=== Use of VCS and CI tools
+For all of our members, this was the first time we had to manage a repositiory with over 10,000 lines of code. Additionally, this was the *first time many of our team members were introduced* to version control tools like Git and Github, as well as CI tools like Travis and AppVeyor. The lack of familliarity with the tools used meant that *a lot of effort was spent at the start of the project setting things up and ensuring that the changes to the codebase were as intended*. The project was the *most difficult to manage thus far* out of all our previous module projects or submissions due to the large number of tools and standards required. However, as each of our team members got more used to the tools we were using, we were able to *implement* checks such as *required checks and branch protection which greatly improved the quality of code committed*.
+
+=== Mantaining good software design while implementing Object-Oriented paradigms
+The AB3 codebase came with preexisting architectural components, many of which we further extended on when implementing our features. Each of our features required a complete understanding and thorough analysis of the functionalties of each component. In integrating each feature across the codebase, as all team members would use the preexisting classes and methods in different ways. Care had to be taken to make any modifications in a way that would not invalidate the work of another teammate. At the same time, we had to ensure that good software design, such as the Single Responsibility Principle and mantaining a high level of abstraction while reducing repeated code and unneeded functions. All this required conscious effort, such as organising regular team meetings to update our teammates on our latest implementations, as well as deconflicting sessions where we tried to allow each other to access our code in a protected way through the use of interfaces and class inheritance. We are proud that we managed to ___ (idk help pls)
+
+=== real time synchronization and integration between GUI and internal logic components
+AB3 uses an observer design pattern where a `UniqueTaskList` allows changes to it to be observed by a `Listener` observing that list. This implementation was challenging as it required constant updates to be accounted for whenever another command edited the main task list. In addition, since multiple tabs all took information from the same underlying task list, it had to be sensitive to command inputs from other tabs. For instance, a user, when deletes a Task, should observe the deletion of its corresponding Reminder from the UI as well, even if that deletion happened on another tab. This required us to write tests for `Model` and `Logic` classes as well as minimise dependencies between the Ui and other components. It required a lot more effort as we had more tabs, and thus more object properties to keep track of, than the initial AB3 project. In the end, our group managed to ____.
+
+=== UI design is a bitch
