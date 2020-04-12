@@ -602,8 +602,9 @@ in each day card of the calendar is done. The ease of implementation is crucial 
 JelphaBot has a productivity panel of this feature which provides an overarching view of user's overall productivity.
 
 The view of this panel is facilitated by the productivity package that extracts the relevant data and displays them in as cohesive view.
-The productivity package supports the creation of `TimeSpentToday`, `RunningTimers` as well as `TasksCompleted` instances.
-Each of these classes iterate through the tasks contained within the task list.
+The productivity package supports the creation of `TimeSpentToday`, `RunningTimers` and `TasksCompleted` instances.
+Each of these classes iterate through the tasks contained within the task list. +
+Below is a class diagram of the related productivity classes:
 
 .Class diagram showing the structure and relations of `Productivity`, `ProductivityPanel` and their components.
 image::ProductivityClassDiagram.png[]
@@ -616,7 +617,7 @@ This feature offers two main functions and one panel for visualisation:
 
 ====  Implementation
 
-Displaying the productivity panel is done through the `Productivity` class. +
+Text rendered onto the productivity panel is gotten from the `Productivity` class. +
 A `Productivity` object is a container for the objects responsible for the sub-parts of the panel, namely `TimeSpentToday`, `RunningTimers` and `TasksCompleted`.
 Each of these have their respective String representations which will be used in rendering the panel.
 
@@ -643,13 +644,12 @@ Each time `TimeSpentToday` is instantiated, `getTimeSpent()` is called thrice; o
 * A getter method which returns the percentage of tasks completed that are under the "due today" category.
 * A `toStringArray()` method which returns the task completion status, JelphaBot's response to the user's productivity, as well as number of overdue tasks.
 
-Information from all three objects are subsequently rendered onto the panel through the respective FXML files.
+Information from all three objects are subsequently rendered onto the panel through `ProductivityCard` and `ProductivityPanel`.
 
-Assuming that the task list is not empty, the following describes the flow of `start 1` and `stop 1` which modifies the currently shown productivity panel:
+Assuming that the task list is not empty, the following describe the flow of `start 1` and `stop 1` which modify the currently shown productivity panel:
 
 **Function 1: Starts timer for a specified task** +
-In order to start timing a task, the user enters `start INDEX` command
-(e.g. `start 1`)
+In order to start timing a task, the user enters `start INDEX` command (e.g. `start 1`).
 
 Upon successful execution of the command, the productivity tab displays the task being timed under the Running Timer(s) header.
 The following diagram shows the flow of `start 1` which modifies the current view of the productivity panel:
@@ -660,7 +660,7 @@ image::StartActivityDiagram.png[]
 
 To update the productivity panel to reflect the changes, a new `Productivity` object will first be created, replacing the existing `Productivity` object in the `ProductivityList`.
 Each time a new `Productivity` object is created, its corresponding booleans will dictate whether the sub-parts (i.e. `TimeSpentToday`, `RunningTimers` and `TasksCompleted`) are to be replaced with new objects.
-As the command executed is the `start` command, a new `RunningTimers` object is created. As detailed above, the iterator method in `RunningTimers` will be called and a new String representation to be displayed onto the productivity panel will be created.
+As the command executed is `start`, a new `RunningTimers` object is created. As detailed above, the iterator method in `RunningTimers` will be called and a new String representation to be displayed onto the productivity panel will be created.
 This String is subsequently rendered onto the panel under the Running Timer(s) header.
 
 The following diagram shows the flow which updates the Running Timer(s) section in the productivity panel:
@@ -698,16 +698,23 @@ an error in displaying.
 * *Alternative 2*: Employ multi-threading for rendering each sub-part.
 ** Pros: No need to use 3 different booleans when updating view. Code base will be cleaner and more readable.
 ** Cons: Unsure if cost of multi-threading less then of constructing 3 instances for rendering the productivity panel view.
-** Rationale for current implementation: No need to re-render all 3 parts when changes are made to only one part.
 
-===== Aspect 2: Allowing tasks to be added, deleted or edited while timer is running
-* *Current solution*: Adding and deleting of tasks are allowed. However, tasks cannot be edited.
-** Pros: Other functionality are still available for use. Thus, user's experience is not affected.
-** Cons: User is unable to make changes to the task being timed.
+*Reason for chosen implementation:* +
+Minimal computational power is wasted as only the parts that requires re-rendering are recomputed. Moreover, it is easy to implement and easily extendable to display
+
+===== Aspect 2: Restriction of functionality while timer is running
+* *Current solution*: Tasks with running timers cannot be edited or marked as done.
+** Pros: Other functionality are still available for use. Thus, overall user experience is not affected.
+** Cons: User is unable to make changes to the task being timed nor mark it as complete.
 * *Alternative 1*: Allow users to edit task while timer is running.
 ** Pros: User is able to use all features without restriction.
-** Cons: Difficult to implement as the Task model requires a new Task to replace the old Task when edit command is executed.
-** Rationale for current implementation: Adding and deleting tasks does not affect the task being timed.
+** Cons: Difficult to implement as the Task model requires a new Task to replace the old Task when edit command is executed. More storage space is also needed to store the additional start time field for each task.
+* *Alternative 2*: Allow users to mark tasks as done while timer is running.
+** Pros: Similar to the above, user is able to use all features without restriction.
+** Cons: User may have forgotten about running timer and wish to collect such information. However, there is currently no function that supports undoing commands or unmarking a completed task.
+
+*Reason for chosen implementation:* +
+Editing and marking a task require the creation of a new task which overwrites the existing task. Use of space is also minimised and less computational power is used as no new Task objects have to be created.
 
 ===== Aspect 3: Productivity panel visualisation
 * *Current solution*: Separating sub-parts by paragraphs and including progress bar for tasks completed.
@@ -719,7 +726,9 @@ an error in displaying.
 * *Alternative 2*: Only show 3 tasks whose timers were started in order of priority and time when timers were started.
 ** Pros: Allows user to focus on tasks at hand.
 ** Cons: User might forget about other tasks whose timers were started and not complete them on time.
-** Rationale for current implementation: Paragraphing increases readability and the progress bar provides visual aid.
+
+*Reason for chosen implementation:* +
+We feel that paragraphing increases readability and the progress bar provides visual aid. Addtionally, including more images or pie charts may confuse or distract users from their tasks which defeats the purpose of JelphaBot.
 // end::productivity[]
 
 
