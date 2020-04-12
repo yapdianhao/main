@@ -55,9 +55,11 @@ This Developer Guide consists of the following sections:
 === Notation used in this Guide
 
 .Common symbols used throughout this guide.
-[width="70%",cols="^15%,85%"]
+[width="90%",cols="^15%,85%"]
 |===
-| `code` | A Java method or class
+| `markdown` | A Java method or class
+| _italics_ | A command which can be called in JelphaBot. +
+Sections presented in ALL CAPS represent command parameters.
 ifdef::env-github[]
 | :bulb: | Tips and tricks that might be useful
 | :information_source: | Additional information that is good to know
@@ -122,7 +124,7 @@ The rest of the App consists of four components.
 
 Each of the four components
 
-* Defines its _API_ in an `interface` with the same name as the Component.
+* Defines its API in an `interface` with the same name as the Component.
 * Exposes its functionality using a `{Component Name}Manager` class.
 
 For example, the `Logic` component defines it's API in the `Logic.java` interface and exposes its functionality using the `LogicManager.java` class.
@@ -268,14 +270,14 @@ To use the different features, we have also implemented commands for users to sw
 |===
 |Command |Tab switched to
 
-|`summary`, `:s`| Summary
-|`list`, `:t`| Task List
-|`calendar`, `:c`| Calendar
-|`productivity`, `:p`|Productivity
-|`remindertab`, `:r`|Reminder
+|_summary_, _:s_| Summary
+|_list_, _:t_| Task List
+|_calendar_, _:c_| Calendar
+|_productivity_, _:p_|Productivity
+|_remindertab_, _:r_|Reminder
 |===
 
-NOTE: `list` is used instead of `task list` to keep the relevant command short. +
+NOTE: _list_ is used instead of _task list_ to keep the relevant command short. +
 Conventionally, the shortcut is devrived from first letter of each tab label.
 
 Each respective shortcut also has the respective letter bolded in the Tab Panel of the User Interface.
@@ -294,10 +296,10 @@ When the tab of the application is changed, we need to update the:
 * `MainWindow` component so that the `SwitchTab` attribute in `MainWindow` reflects the new current tab, since this is used to check if a command can be executed,
 * `UI` component so that the panels display the information that is relevant to the tab.
 
-As an example, the figure below shows the sequence diagram of when a user executes the `:s` or `summary` command.
+As an example, the figure below shows the sequence diagram of when a user executes the _:s_ or _summary_ command.
 
 [[Summary-SwitchTab-Sequence-Diagram]]
-.Sequence diagram of execution of the `summary` command
+.Sequence diagram of execution of the _summary_ command
 image::SummarySwitchTabSequenceDiagram.png[]
 
 Upon execution of the `:s` command, `SummaryCommand#generateCommandResult()` will generate a `CommandResult` whose `SwitchTab` attribute is set to `SUMMARY` and return it to the `LogicManager`.
@@ -340,8 +342,8 @@ The following class diagram shows the structure of the classes in the `summary` 
 image::SummaryPanelClassDiagram.png[width=500]
 
 <<<
-To view the respective tasks, the user enters the `summary` command.
-Upon entry of the `summary` command, a `SummaryCommand` object will be created and `SummaryCommand#execute()`
+To view the respective tasks, the user enters the _summary_ command.
+Upon entry of the _summary_ command, a `SummaryCommand` object will be created and `SummaryCommand#execute()`
 will be called.
 
 The following sequence diagram details the execution when `SummaryCommand#execute()` is called.
@@ -358,11 +360,11 @@ image::SummaryCommandSequenceDiagram.png[]
 * *Current solution*: Each time `DoneCommand` is executed, a new Summary object is to be created, and along with it the task lists contained inside the `Summary` object is updated and displayed on the summary panel as an updated list.
 ** Pros: Easy to implement.
 Scalable when there are more things to be displayed on the summary panel.
-** Cons: Consecutive `done` commands are expensive, as the lists in the `Summary` object are reinitialised upon every `done` command.
+** Cons: Consecutive _done_ commands are expensive, as the lists in the `Summary` object are reinitialised upon every _done_ command.
 
 * *Alternative 1*: Have a single `Summary` object with underlying task list listeners to update the relevant task lists
 ** Pros: Only one `Summary` object will have to be created for the duration the application is open.
-The task lists in the `Summary` object do not have to be reinitialised upon every `done` command.
+The task lists in the `Summary` object do not have to be reinitialised upon every _done_ command.
 ** Cons: May not be scalable if there are many things to be added to the summary panel in the future, as this will require more listeners, and the presence of many listeners may affect the performance of the application.
 
 * *Reason for chosen implementation:* The current implementation is more straightforward and simpler to implement, as the `SummaryList` and `SummaryPanel` which are used to display the contents of the summary panel simply need to extract and display the contents of the `Summary` object that was given, instead of requiring underlying listeners to keep track of whatever is happening within the application.
@@ -426,7 +428,7 @@ Given below is an example usage scenario and how the task category mechanism beh
 The `MainWindow` will be initialized with `GroupedTaskListPanel` as a container for GroupedTaskList model objects.
 The panel is populated with sublists defined in `GroupedByDateTaskList`.
 
-*Step 2.* The user executes `list model` to switch to category tasks by module code instead. `GroupedTaskListPanel` is repopulated with sublists defined in `GroupedByModuleTaskList`.
+*Step 2.* The user executes _list model_ to switch to category tasks by module code instead. `GroupedTaskListPanel` is repopulated with sublists defined in `GroupedByModuleTaskList`.
 
 [NOTE]
 If the user tries to switch to a `Cateory` which is already set, the command does not reinitialize the `GroupedTaskList` to prevent redundant filtering operations.
@@ -508,7 +510,7 @@ Scalable when more groupings are added.
 *Reason for chosen implementation:* +
 The current solution was chosen with integration with other tabs in mind.
 This implementation can easily be expanded to other tabs in a future version if other tabs also inherit from `ViewTaskList`.
-This allows `add`, `edit`, `delete` and `done` commands to be executable from any tab, while still only requiring one `ViewTaskList` to be instantiated, which saves performance.
+This allows _add_, _edit_, _delete and _done_ commands to be executable from any tab, while still only requiring one `ViewTaskList` to be instantiated, which saves performance.
 
 //===== Aspect 3: Hide empty Categories in `GroupByDateTaskList`
 //
@@ -589,21 +591,21 @@ After every execution of command, MainWindow#updateTasksInCalendarDayCards() wil
 
 There are 2 commands that users can issue to perform function 1:
 
-1. `calendar today`: Displays calendar for the current month with today's date highlighted, and its corresponding tasks due listed. +
-2. `calendar MONTHYEAR`: Displays calendar for the month and year specified, with the first day of the month highlighted, and its corresponding tasks due listed (e.g. calendar Apr-2020).
+1. _calendar today_: Displays calendar for the current month with today's date highlighted, and its corresponding tasks due listed. +
+2. _calendar MONTHYEAR_: Displays calendar for the month and year specified, with the first day of the month highlighted, and its corresponding tasks due listed (e.g. calendar Apr-2020).
 Refer <<Calendar-MonthYear-SequenceDiagram, here>>, for the diagram describing this process.
 
-Upon execution of the `calendar MONTHYEAR` or the `calendar today` command, CalendarCommand#execute() will run `updateFilteredCalendarTaskList()` to filter the task list to display the tasks on the `CalendarTaskListPanel` according to the first day of the `MONTHYEAR` or the tasks due `today` respectively.
+Upon execution of the _calendar MONTHYEAR_ or the _calendar today_ command, CalendarCommand#execute() will run `updateFilteredCalendarTaskList()` to filter the task list to display the tasks on the `CalendarTaskListPanel` according to the first day of the _MONTHYEAR_ or the tasks due _today_ respectively.
 The filtering of the tasks according to date is done using the `TaskDueWithinDayPredicate`.
 A distinct `CommandResult` would then be generated according to the input command and is returned to the `LogicManager`.
 Finally, the  `CommandResult` is passed to the `MainWindow` in UI. Now, the updates can be done for the respective components:
 
 `UI` Component: Using the CommandResult, `MainWindow` calls `MainWindow#updateCalendarMainPanel()`, which is then passed to call `CalendarMainPanel#updateCalendarPanel()`.
-For the `calendar MONTHYEAR` command, this updates the `CalendarPanel` display with the respective `MONTHYEAR` view, and highlights the first day of the month.
-For the `calendar today` command, this updates the `CalendarPanel` display to the current month and year, with today's date highlighted.
+For the _calendar MONTHYEAR_ command, this updates the `CalendarPanel` display with the respective _MONTHYEAR_ view, and highlights the first day of the month.
+For the _calendar today_ command, this updates the `CalendarPanel` display to the current month and year, with today's date highlighted.
 
 <<<
-The following example sequence diagram shows you how the `calendar MONTHYEAR` (e.g. `calendar Apr-2020`) command works.
+The following example sequence diagram shows you how the _calendar MONTHYEAR_ (e.g. _calendar Apr-2020_) command works.
 
 [[Calendar-MonthYear-SequenceDiagram]]
 .Sequence diagram after running `calendar Apr-2020`
@@ -611,14 +613,14 @@ image::CalendarViewSequenceDiagram.png[]
 
 **Function 2: Display a list of tasks due for a selected date in the month**
 
-In order to display the task list for specific input dates, the user enters the `calendar DATE` command +
+In order to display the task list for specific input dates, the user enters the _calendar DATE_ command +
 (e.g. calendar Jan-1-2020).
 
 NOTE: Only a date belonging in the current displayed month on the `CalendarPanel` would be highlighted after processing the `calendar DATE` command.
 A date that falls in other month and years would just display its corresponding tasks due on the `CalendarTaskListPanel`.
 
-The implementation of the previous two calendar commands (`calendar DATE` and `calendar today`) are largely similar and run in the same process.
-The only exception is regarding the `calendar DATE` command which fulfills **Function 2** listed above, where the `GridPane` in `CalendarPanel` is not altered by running CalendarPanel#fillGridPane() unlike the other two commands fulfilling **Function 1**.
+The implementation of the previous two calendar commands (_calendar DATE_ and _calendar today_) are largely similar and run in the same process.
+The only exception is regarding the _calendar DATE_ command which fulfills **Function 2** listed above, where the `GridPane` in `CalendarPanel` is not altered by running CalendarPanel#fillGridPane() unlike the other two commands fulfilling **Function 1**.
 Only `CalendarTaskListPanel` is updated.
 
 <<<
@@ -635,7 +637,7 @@ image::CalendarCommandActivityDiagram.png[]
 ===== Aspect 1: How the user can navigate between specific dates and change the calendar month view
 
 * *Current Solution:* Use the same `calendar` command word for both viewing tasks in specific dates, and changing the calendar view.
-The next input following the command word (`DATE`, `MONTHYEAR`, `today`) is then parsed separately to give different command results.
+The next input following the command word (_DATE_, _MONTHYEAR_, _today_) is then parsed separately to give different command results.
 ** Pros: Easier and more understandable for user interactions.
 ** Pros: More open and accessible to future implementations regarding the calendar feature.
 ** Cons: Implementation in the `CalendarCommand` class might seem a bit bulky.
@@ -725,15 +727,15 @@ Information from all three objects are subsequently rendered onto the panel thro
 // end::productivityImplementation[]
 
 // tag::productivityFunctions[]
-Assuming that the task list is not empty, the following describe the flow of `start 1` and `stop 1` which modify the currently shown productivity panel:
+Assuming that the task list is not empty, the following describe the flow of _start 1_ and _stop 1_ which modify the currently shown productivity panel:
 
 <<<
 
 **Function 1: Starts timer for a specified task** +
-In order to start timing a task, the user enters `start INDEX` command (e.g. `start 1`).
+In order to start timing a task, the user enters _start INDEX_ command (e.g. _start 1_).
 
 Upon successful execution of the command, the productivity tab displays the task being timed under the Running Timer(s) header.
-The following diagram shows the flow of `start 1` which modifies the current view of the productivity panel:
+The following diagram shows the flow of _start 1_ which modifies the current view of the productivity panel:
 
 [[activity-settingProductivitylist]]
 .Activity Diagram showing the setting of `Productivity` in the `ProductivityList`
@@ -741,7 +743,7 @@ image::StartActivityDiagram.png[]
 
 To update the productivity panel to reflect the changes, a new `Productivity` object will first be created, replacing the existing `Productivity` object in the `ProductivityList`.
 Each time a new `Productivity` object is created, its corresponding booleans will dictate whether the sub-parts (i.e. `TimeSpentToday`, `RunningTimers` and `TasksCompleted`) are to be replaced with new objects.
-As the command executed is `start`, a new `RunningTimers` object is created.
+As the command executed is _start_, a new `RunningTimers` object is created.
 As detailed above, the iterator method in `RunningTimers` will be called and a new `String` representation to be displayed onto the productivity panel will be created.
 This `String` is subsequently rendered onto the panel under the Running Timer(s) header.
 
@@ -756,7 +758,7 @@ image::TimerPanelActivityDiagram.png[]
 <<<
 
 **Function 2: Stops timer for a specified task** +
-In order to stop timing a task, the user enters `stop INDEX` command (e.g. `stop 1`)
+In order to stop timing a task, the user enters _stop INDEX_ command (e.g. _stop 1_)
 
 Upon successful execution of the command, the productivity tab removes the task being timed under the Running Timer(s) header.
 Removing a task from the Running Timer(s) header is similar to adding it, as illustrated by the Activity Diagram <<activity-updatingProductivityPanel, above>>.
@@ -765,7 +767,7 @@ Under the Time Spent header, the total time spent will be increased in the respe
 [IMPORTANT]
 Attempting to start a timer for a task which is marked as completed or stop a task with no active timer results in the command execution failing and an exception thrown.
 
-.Sequence Diagram after running `stop 1`
+.Sequence Diagram after running _stop 1_
 image::StopSequenceDiagram.png[]
 // end::productivityFunctions[]
 
@@ -862,7 +864,7 @@ image::Reminderclass.png[]
 ==== Implementation
 
 **Function 1: Creates a reminder for a specified task** +
-To add a reminder to a certain task, the user enters the `reminder INDEX days/DAYS hours/HOURS` command.
+To add a reminder to a certain task, the user enters the _reminder INDEX days/DAYS hours/HOURS_ command.
 (e.g, reminder 2 days/2 hours/1) +
 
 The `Logic` `execute()` method creates a `ReminderCommand` from the input string by parsing the input according to the command word and several other attributes.
@@ -880,7 +882,7 @@ By the next time the users starts JelphaBot, it will remind the user should the 
 
 The sequence diagram for interactions between the `Logic`, `Model`, and `Storage` is shown below.
 
-.Sequence Diagram after running `reminder 2 days/2 hours/1`
+.Sequence Diagram after running _reminder 2 days/2 hours/1_
 image::AddReminderSequenceDiagram.png[]
 
 .The reference frame of getting the `CommandResult` in the `Logic` component.
@@ -969,13 +971,13 @@ The `VersionedJelphaBot` will be initialized with the initial JelphaBot state, a
 image::UndoRedoState0.png[]
 
 Step 2. The user executes `delete 5` command to delete the 5th task in JelphaBot.
-The `delete` command calls `Model#commitJelphaBot()`, causing the modified state of JelphaBot after the `delete 5` command executes to be saved in the `jelphaBotStateList`, and the `currentStatePointer` is shifted to the newly inserted JelphaBot state.
+The _delete command calls `Model#commitJelphaBot()`, causing the modified state of JelphaBot after the `delete 5` command executes to be saved in the `jelphaBotStateList`, and the `currentStatePointer` is shifted to the newly inserted JelphaBot state.
 
 .State of JelphaBot after "delete 5"
 image::UndoRedoState1.png[]
 
 Step 3. The user executes `add d/Assignment ...` to add a new task.
-The `add` command also calls `Model#commitJelphaBot()`, causing another modified JelphaBot state to be saved into the `jelphaBotStateList`.
+The _add_ command also calls `Model#commitJelphaBot()`, causing another modified JelphaBot state to be saved into the `jelphaBotStateList`.
 
 .State of JelphaBot after "add d/Assignment"
 image::UndoRedoState2.png[]
@@ -1006,8 +1008,8 @@ If the `currentStatePointer` is at index `jelphaBotStateList.size() - 1`, pointi
 The `redo` command uses `Model#canRedoJelphaBot()` to check if this is the case.
 If so, it will return an error to the user rather than attempting to perform the redo.
 
-Step 5. The user then decides to execute the command `list`.
-Commands that do not modify JelphaBot, such as `list`, will usually not call `Model#commitJelphaBot()`, `Model#undoJelphaBot()` or `Model#redoJelphaBot()`.
+Step 5. The user then decides to execute the command _list_.
+Commands that do not modify JelphaBot, such as _list_, will usually not call `Model#commitJelphaBot()`, `Model#undoJelphaBot()` or `Model#redoJelphaBot()`.
 Thus, the `jelphaBotStateList` remains unchanged.
 
 .State of JelphaBot after "list"
@@ -1036,7 +1038,7 @@ image::CommitActivityDiagram.png[]
 ** Pros: Easy to implement.
 ** Cons: May have performance issues in terms of memory usage.
 * **Alternative 2:** Individual command knows how to undo/redo by itself.
-** Pros: Will use less memory (e.g. for `delete`, just save the task being deleted).
+** Pros: Will use less memory (e.g. for _delete, just save the task being deleted).
 ** Cons: We must ensure that the implementation of each individual command are correct.
 
 // end::undoredo[]
@@ -1538,6 +1540,7 @@ JelphaBot detects that the specified task does not exist.
 Use case resumes from step 2.
 
 // end::timerUseCase[]
+<<<
 
 === Use case: UC10 - Navigate to a different date on calendar
 
@@ -1620,44 +1623,45 @@ For this section, `markdown` will be used to denote commands that can be entered
 === Changing Tabs
 
 . Summary
-.. Switch to Summary with `:s`, `:S` or `summary`. +
+.. Switch to Summary with _:s_, _:S_ or _summary_. +
+.. Switch to Summary with _:s_, _:S_ or _summary_. +
 Expected: Success message is shown in the Results Display.
 
 . Task List
-.. Switch to Task List with `:t`, `:T` or `list`. +
+.. Switch to Task List with _:t_, _:T_ or _list_. +
 Expected: Success message is shown in the Results Display.
 
 . Calendar
-.. Switch to Calendar with `:c`, `:C` or `calendar`. +
+.. Switch to Calendar with _:c_, _:C_ or _calendar_. +
 Expected: Success message is shown in the Results Display.
 
 . Productivity
-.. Switch to Productivity with `:p`, `:P` or `productivity`. +
+.. Switch to Productivity with _:p_, _:P_ or _productivity_. +
 Expected: Success message is shown in the Results Display.
 
 . Reminder
-.. Switch to Reminder with `:r`, `:R` or `remindertab`. +
+.. Switch to Reminder with _:r_, _:R_ or _remindertab_. +
 Expected: Success message is shown in the Results Display.
 
 === Adding a Task
 
 . Adding a new task to a cleared list
-.. Prerequisites: Clear the list with the `clear` command.
+.. Prerequisites: Clear the list with the _clear_ command.
 .. For all test cases that successfully add a task, the respective total for each category should increment as new tasks are added.
-.. Test case: `add d/test dt/Apr-06-2020 23 59 m/CS2103t` +
+.. Test case: _add d/test dt/Apr-06-2020 23 59 m/CS2103t_ +
 Expected: A new task is added with the description "test", and a module code of "CS2103T".
-.. Test case: `add d/test2 dt/Apr-06-2020 23 59 p/1 m/CS2103t` +
+.. Test case: _add d/test2 dt/Apr-06-2020 23 59 p/1 m/CS2103t_ +
 Expected: A new task is added with the description "test2", a module code of "CS2103T", and both the module code and descripton should be bolded.
-.. Test case: `add d/test3 dt/Apr-06-2020 23 59 p/-1 m/CS2103t` +
+.. Test case: _add d/test3 dt/Apr-06-2020 23 59 p/-1 m/CS2103t_ +
 Expected: A new task is added with the description "test3", a module code of "CS2103T", and both the module code and descripton should be in italics.
 . Adding a task with incomplete parameters
-.. Test case: `add d/aa` +
+.. Test case: _add d/aa_ +
 Expected: No task is added.
 Error details shown in the results message. +
 .. Other incorrect add commands to try: other parameters are missing. +
 Expected: Similar to previous.
 . Adding a task with incorrect parameters
-.. Test case: `add d/aa dt/Joon-06-2020 23 59 p/-1 m/CS2103t` +
+.. Test case: _add d/aa dt/Joon-06-2020 23 59 p/-1 m/CS2103t_ +
 Expected: No task is added.
 Error message with correct format of date command. +
 .. Other incorrect add commands to try: other parameters are wrongly formatted. +
@@ -1667,31 +1671,24 @@ Expected: Similar to previous.
 === Editing a Task
 
 . Editing a task that was previously added
-.. Prerequisites: Execute the `add` commands in the previous section.
-.. Edit each field as per examples given in `edit` command section.
+.. Prerequisites: Execute the _add_ commands in the previous section.
+.. Edit each field as per examples given in _edit_ command section.
 
 === Completing a Task
 
 . Setting an existing task to Complete.
-.. Prerequisites: Execute the `add` commands in the previous section.
-.. Complete tasks as per examples given in `done` command section.
+.. Prerequisites: Execute the _add_ commands in the previous section.
+.. Complete tasks as per examples given in _done_ command section.
 
 === Changing the list category
 
 . Displaying tasks by a different category
-.. Prerequisites: Execute the `add` commands above.
-.. Test case: +
-``
-list module +
-add d/test dt/Apr-06-2020 23 59 m/3230
-`` +
+.. Prerequisites: Execute the _add_ commands above.
+.. Test case: _list module_, followed by _add d/test dt/Apr-06-2020 23 59 m/3230_ +
 Expected: A new module category should appear with a category title of "CS3230".
-.. Test case: +
-``
-list date +
-add d/test dt/TOMORROW 23 59 m/3230``, where `TOMORROW` refers to the date of the next day. +
+.. Test case: _list date_, followed by _add d/test dt/TOMORROW 23 59 m/3230_, where _TOMORROW_ refers to the date of the next day. +
 Expected: A new task should appear under the category header "Due This Week".
-.. Test case: `list invalid` +
+.. Test case: _list invalid_ +
 Expected: List display does not change.
 Error details shown in the results message.
 Status bar remains the same.
@@ -1700,21 +1697,21 @@ Status bar remains the same.
 
 . Deleting a task while all tasks are listed
 
-.. Prerequisites: List all tasks using the `list` command. Multiple tasks in the list.
-.. Test case: `delete 1` +
+.. Prerequisites: List all tasks using the _list_ command. Multiple tasks in the list.
+.. Test case: _delete 1_ +
 Expected: First task is deleted from the list.
 Details of the deleted task are shown in the results message.
-.. Test case: `delete 0` +
+.. Test case: _delete 0_ +
 Expected: No task is deleted.
 Error details are shown in the results message.
-.. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) +
+.. Other incorrect delete commands to try: _delete_, _delete x_ (where x is larger than the list size) +
 Expected: Similar to previous.
 
 === Progress Bar visualisation
 
 . Marking a task that was previously added as complete
 
-.. Prerequisites: Execute the `add` commands in the <<Adding a Task>>.
+.. Prerequisites: Execute the _add_ commands in the <<Adding a Task>>.
 .. Complete tasks as per examples given in done command section. +
 Expected: Upon successful completion of a task, if that task is due by the end of the day, progress bar in productivity tab is updated and displayed total number of completed tasks is updated.
 
@@ -1722,90 +1719,90 @@ Expected: Upon successful completion of a task, if that task is due by the end o
 
 . Start timer for a task that was previously added
 
-.. Prerequisites: Execute the `add` commands in the <<Adding a Task>>. Task must not be marked as completed.
-.. Test case: `start 1` +
+.. Prerequisites: Execute the _add_ commands in the <<Adding a Task>>. Task must not be marked as completed.
+.. Test case: _start 1_ +
 Expected: Starts timing first task from the list.
 Details of the timing task is shown in the results message. +
 Task being timed is displayed under Running Timer(s) in productivity tab.
-.. Test case: `start 0` +
+.. Test case: _start 0_ +
 Expected: No timer started.
 Error details shown in the results message.
-.. Other incorrect start commands to try: `start`, `start x` (where x is larger than the list size or is index of task already marked completed) +
+.. Other incorrect start commands to try: _start_, _start x_ (where x is larger than the list size or is index of task already marked completed) +
 Expected: Similar to previous.
 
 === View Time Spent on Tasks
 
 . Stop timer for a task that was previously added
 
-.. Prerequisites: Execute the `start` commands in the <<View Tasks with Running Timers, previous section>>.
-.. Test case: `stop 1` +
+.. Prerequisites: Execute the _start_ commands in the <<View Tasks with Running Timers, previous section>>.
+.. Test case: _stop 1_ +
 Expected: Stops timing first task from the list.
 Details of the timed task is shown in the results message. +
 Displayed time spent is updated in productivity tab. +
 Task timed is removed from Running Timer(s) displayed in productivity tab.
-.. Test case: `stop 0` +
+.. Test case: _stop 0_ +
 Expected: No timer stopped.
 Error details shown in the results message.
-.. Other incorrect stop commands to try: `stop`, `stop x` (where x is larger than the list size or is index of task without running timer) +
+.. Other incorrect stop commands to try: _stop_, _stop x_ (where x is larger than the list size or is index of task without running timer) +
 Expected: Similar to previous.
 
 === View Tasks due on a specific Date
 
 . Input a date belonging to the current calendar month to view tasks due
-.. Prerequisites: Navigate to the calendar with the `calendar` command (or other variants as listed above).
-.. Test case: `calendar Apr-20-2020` +
+.. Prerequisites: Navigate to the calendar with the _calendar_ command (or other variants as listed above).
+.. Test case: _calendar Apr-20-2020_ +
 Expected: Task(s) due on the input date will be displayed with results message displaying the number of tasks listed.
 If there are no tasks due on the input date, no tasks would be displayed.
 The input date would also be highlighted on the calendar.
-.. Test case: `calendar Apri-20-2020` +
+.. Test case: _calendar Apri-20-2020_ +
 Expected: Error message due to the invalid format for the input date would be displayed in the results message.
 
 . Input a date not belonging to the current calendar month to view tasks due
-.. Prerequisites: Navigate to the calendar with the `calendar` command (or other variants as listed above).
-.. Test case: `calendar Oct-20-2020` +
+.. Prerequisites: Navigate to the calendar with the _calendar_ command (or other variants as listed above).
+.. Test case: _calendar Oct-20-2020_ +
 Expected: Task(s) due on the input date will be displayed with results message displaying the number of tasks listed.
 If there are no tasks due on the input date, no tasks would be displayed.
-.. Test case: `calendar Joon-20-2020` +
+.. Test case: _calendar Joon-20-2020_ +
 Expected: Expected: Error message due to the invalid format for the input date would be displayed in the results message.
 
 === Navigating the Calendar
 
 . Navigate to Today's Date on Calendar
-.. Prerequisites: Navigate to the calendar with the `calendar` command (or other variants as listed above).
-.. Test case: `calendar today` +
+.. Prerequisites: Navigate to the calendar with the _calendar_ command (or other variants as listed above).
+.. Test case: _calendar today_ +
 Expected: Calendar will change to be the current month and year, with today's date also highlighted.
 Task(s) due today will be displayed with results message displaying the number of tasks listed.
 If there are no tasks due today, no tasks would be displayed.
 
 . Navigate to different month and year on Calendar
-.. Prerequisites: Navigate to the calendar with the `calendar` command (or other variants as listed above).
-.. Test case: `calendar May-2020` +
+.. Prerequisites: Navigate to the calendar with the _calendar_ command (or other variants as listed above).
+.. Test case: _calendar May-2020_ +
 Expected: Calendar will change to be for May 2020, with the first day of the May highlighted.
 Task(s) due on the first day of May will be displayed with results message displaying the number of tasks listed.
 If there are no tasks due, no tasks would be displayed.
-.. Test case: `calendar may-2020` +
+.. Test case: _calendar may-2020_ +
 Expected: Error message due to the invalid format for the input month and year would be displayed in the results message.
 
 === Reminder Feature
 
 . Adding a reminder to remind a task
-.. Prerequisites: List all tasks using the `list` command to have a full view of the tasks.
+.. Prerequisites: List all tasks using the _list_ command to have a full view of the tasks.
 Select the `INDEX` of the task that needs to be reminded.
-.. Test case: `reminder 2 days/2 hours/2` +
-Expected: A reminder which is associated to the `Task` at index 2 will be added.
-.. Test case: `reminder -1 days/1 hours/0` +
+.. Test case: _reminder 2 days/2 hours/2_ +
+Expected: A reminder which is associated to the _Task_ at index 2 will be added.
+.. Test case: _reminder -1 days/1 hours/0_ +
 Expected: Error message due to negative index.
-.. Test case: `reminder 1 days/30 hours/0` +
+.. Test case: _reminder 1 days/30 hours/0_ +
 Expected: Error due to invalid day count, which has a limit of 7.
-.. Test case: `reminder 1 days/1 hours/30` +
+.. Test case: _reminder 1 days/1 hours/30_ +
 Expected: Error due to invalid hour count, which can be converted to days if it exceeds 24.
-.. Other invalid commands to try: `reminder `, `reminder 100000 days/1 hours/1`
+.. Other invalid commands to try: _reminder _, _reminder 100000 days/1 hours/1_
 
 . Removing a reminder
-.. Prerequisites: List all tasks using the `list` command, and look for the task that is associated to the reminder that needs to be deleted.
-.. Test case: `delrem 1` +
+.. Prerequisites: List all tasks using the _list_ command, and look for the task that is associated to the reminder that needs to be deleted.
+.. Test case: _delrem 1_ +
 Expected: The reminder for task at index 1 will be removed, if it exists.
-.. Other incorrect `delrm` commands to try: `delrm` , `delrm x` (where x is larger than the list size)
+.. Other incorrect _delrm_ commands to try: _delrm_ , _delrm x_ (where x is larger than the list size)
 
 === Data Storage
 
@@ -1837,16 +1834,16 @@ The lack of familliarity with the tools used meant that *a lot of effort was spe
 The project was the *most difficult to manage thus far* out of all our previous module projects or submissions due to the large number of tools and standards required.
 However, as each of our team members got more used to the tools we were using, we were able to *implement required checks and branch protection which greatly improved the quality of code committed*.
 
-=== Mantaining good software design while implementing Object-Oriented paradigms
+=== Maintaining good software design while implementing Object-Oriented paradigms
 
 Each of our features required us to have a *complete understanding and thorough analysis of the preexisting architectural components* which came with the AB3 codebase.
-In implementing our features  across the codebase, all team members would use the preexisting classes and methods in different ways.
+In implementing our features across the codebase, all team members would use the preexisting classes and methods in different ways.
 *Hence, care had to be taken to make any modifications that would not invalidate the work of another teammate*.
-Simultaneously, we had to ensure good software design, such as ensuring that DRY and SRP are not violated and mantaining a high level of abstraction while reducing unneeded functions.
+Simultaneously, we had to ensure good software design, such as ensuring that DRY and SRP are not violated and maintaining a high level of abstraction while reducing unneeded functions.
 All this required conscious effort, such as *organising regular team meetings to update our teammates on our latest implementations*, as well as *reducing unprotected access to code variables through interfaces and class inheritance*.
 We are proud that we managed to *implement each tab in a clean, concise manner that ensures these principles are followed as far as possible*.
 
-=== real time synchronization and integration between GUI and internal logic components
+=== Real-time synchronization and integration between GUI and internal logic components
 
 AB3 uses an observer design pattern where a `UniqueTaskList` allows changes to it to be observed by a `Listener` observing that list.
 This implementation was *challenging as it required constant updates to be accounted for in real-time* whenever another command edited the main task list.
