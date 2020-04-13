@@ -22,7 +22,6 @@ public class ReminderPredicate extends TaskIsIncompletePredicate {
     private final LocalDate currDate = LocalDate.now();
     private final LocalTime currTime = LocalTime.now();
     private final LocalDateTime currDateTime = LocalDateTime.now();
-    private final Logger logger = LogsCenter.getLogger(ReminderPredicate.class);
 
     private final ViewTaskList taskList;
     private final List<Reminder> reminderList;
