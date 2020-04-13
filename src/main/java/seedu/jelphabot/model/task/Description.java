@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.jelphabot.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Task's description in the address book.
+ * Represents a Task's description in the task list.
  * Guarantees: immutable; is valid as declared in {@link #isValidDescription(String)}
  */
 public class Description {

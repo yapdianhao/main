@@ -30,7 +30,7 @@ public class TasksCompleted {
         this.percentage = 1;
     }
 
-    public String getCompletionStatus() {
+    private String getCompletionStatus() {
         double size = tasksDueThisWeek.size() + tasksDueToday.size();
         double completed = 0;
 
@@ -59,7 +59,7 @@ public class TasksCompleted {
             } else {
                 message = "Wow! It must feel great to have accomplished so little today!";
             }
-            return String.format("%.0f out of %.0f tasks done.\n%s", completed,
+            return String.format("%.0f out of %.0f done.\n%s", completed,
                 size, message);
         } else {
             return String.format("No tasks due today!\n%s", message);
@@ -84,7 +84,7 @@ public class TasksCompleted {
         return response.toString();
     }
 
-    public String getRemark() {
+    private String getRemark() {
         int n = overdueTasks.filtered(new TaskIsIncompletePredicate()).size();
 
         if (n > 3) {

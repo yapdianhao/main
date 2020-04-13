@@ -20,6 +20,7 @@ import seedu.jelphabot.logic.commands.HelpCommand;
 import seedu.jelphabot.logic.commands.ListCommand;
 import seedu.jelphabot.logic.commands.ProductivityCommand;
 import seedu.jelphabot.logic.commands.ReminderCommand;
+import seedu.jelphabot.logic.commands.ReminderTabCommand;
 import seedu.jelphabot.logic.commands.ShowCompletedCommand;
 import seedu.jelphabot.logic.commands.ShowIncompleteCommand;
 import seedu.jelphabot.logic.commands.StartTimerCommand;
@@ -82,10 +83,13 @@ public class JelphaBotParser {
         case HelpCommand.COMMAND_WORD:
             return getCommand(arguments, new HelpCommand(), HelpCommand.MESSAGE_USAGE);
 
-        case ReminderCommand.COMMAND_WORD: // fallthrough
-        case ReminderCommand.COMMAND_WORD_UPPER: // fallthrough
-        case ReminderCommand.COMMAND_WORD_LOWER:
+        case ReminderCommand.COMMAND_WORD:
             return new ReminderCommandParser().parse(arguments);
+
+        case ReminderTabCommand.COMMAND_WORD: // fallthrough
+        case ReminderTabCommand.COMMAND_WORD_UPPER: // fallthrough
+        case ReminderTabCommand.COMMAND_WORD_LOWER:
+            return getCommand(arguments, new ReminderTabCommand(), ReminderTabCommand.MESSAGE_USAGE);
 
         case ShowCompletedCommand.COMMAND_WORD:
             return getCommand(arguments, new ShowCompletedCommand(), ShowCompletedCommand.MESSAGE_USAGE);
@@ -122,7 +126,6 @@ public class JelphaBotParser {
         }
     }
 
-    // TODO: rename method
     private static Command getCommand(String arguments, Command command, String message) throws ParseException {
         if (arguments.length() > 0) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, message));

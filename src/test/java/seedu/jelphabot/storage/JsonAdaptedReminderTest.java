@@ -1,6 +1,8 @@
+//@@author yapdianhao
 package seedu.jelphabot.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.jelphabot.storage.JsonAdaptedReminder.INVALID_INDEX_MESSAGE_FORMAT;
 import static seedu.jelphabot.storage.JsonAdaptedReminder.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.jelphabot.storage.JsonAdaptedReminder.NEGATIVE_INDEX_MESSAGE_FORMAT;
 import static seedu.jelphabot.testutil.Assert.assertThrows;
@@ -15,7 +17,8 @@ import seedu.jelphabot.model.reminder.ReminderHour;
 
 public class JsonAdaptedReminderTest {
 
-    private static final String INVALID_INDEX = "-1";
+    private static final String NEGATIVE_INDEX = "-1";
+    private static final String INVALID_INDEX = "!";
     private static final String INVALID_REMINDER_DAY = "30";
     private static final String INVALID_REMINDER_HOUR = "30";
     private static final String VALID_INDEX = "1";
@@ -36,10 +39,18 @@ public class JsonAdaptedReminderTest {
     }
 
     @Test
+    public void toModelType_negativeIndex_throwsIllegalValueException() {
+        JsonAdaptedReminder negativeIndexReminder =
+            new JsonAdaptedReminder(NEGATIVE_INDEX, VALID_REMINDER_DAY, VALID_REMINDER_HOUR);
+        String expectedMessage = NEGATIVE_INDEX_MESSAGE_FORMAT;
+        assertThrows(IllegalValueException.class, expectedMessage, negativeIndexReminder::toModelType);
+    }
+
+    @Test
     public void toModelType_invalidIndex_throwsIllegalValueException() {
         JsonAdaptedReminder invalidIndexReminder =
             new JsonAdaptedReminder(INVALID_INDEX, VALID_REMINDER_DAY, VALID_REMINDER_HOUR);
-        String expectedMessage = NEGATIVE_INDEX_MESSAGE_FORMAT;
+        String expectedMessage = INVALID_INDEX_MESSAGE_FORMAT;
         assertThrows(IllegalValueException.class, expectedMessage, invalidIndexReminder::toModelType);
     }
 

@@ -1,3 +1,4 @@
+//@@author yapdianhao
 package seedu.jelphabot.model.util;
 
 import seedu.jelphabot.commons.core.index.Index;
@@ -14,9 +15,9 @@ public class SampleReminderUtil {
 
     public static Reminder[] getSampleReminders() {
         return new Reminder[] {
-            new Reminder(Index.fromOneBased(1), new ReminderDay(1), new ReminderHour(1)),
-            new Reminder(Index.fromOneBased(2), new ReminderDay(1), new ReminderHour(4)),
-            new Reminder(Index.fromOneBased(3), new ReminderDay(2), new ReminderHour(2))
+            new Reminder(Index.fromOneBased(1), new ReminderDay("1"), new ReminderHour("1")),
+            new Reminder(Index.fromOneBased(2), new ReminderDay("1"), new ReminderHour("4")),
+            new Reminder(Index.fromOneBased(3), new ReminderDay("2"), new ReminderHour("2"))
         };
     }
 

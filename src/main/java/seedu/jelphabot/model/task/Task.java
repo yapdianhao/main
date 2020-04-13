@@ -12,7 +12,7 @@ import java.util.Set;
 import seedu.jelphabot.model.tag.Tag;
 
 /**
- * Represents a Task in the address book.
+ * Represents a Task in the task list.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Task {
@@ -51,6 +51,11 @@ public class Task {
         this.isTiming = false;
     }
 
+
+    //@@author eedenong
+    /**
+     * Special constructor with additional DoneTime field for use in JsonAdaptedTask.
+     */
     public Task(Description description, Status status, DateTime dateTime, LocalDateTime doneTime,
         ModuleCode moduleCode, Priority priority, Set<Tag> tags, TimeSpent timeSpent) {
         requireAllNonNull(description, status, dateTime, doneTime, moduleCode, tags, timeSpent);

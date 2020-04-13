@@ -1,3 +1,4 @@
+//@@author yapdianhao
 package seedu.jelphabot.model.reminder;
 
 import static java.util.Objects.requireNonNull;
@@ -8,18 +9,28 @@ import static seedu.jelphabot.commons.util.AppUtil.checkArgument;
  */
 public class ReminderHour {
 
-    public static final String MESSAGE_CONSTRAINTS = "Reminder hour should be within 24 hours from now";
+    public static final String MESSAGE_CONSTRAINTS = "Reminder hour should be within 24 hours from now, and an integer";
 
     private final int reminderHour;
 
-    public ReminderHour(int reminderHour) {
+    public ReminderHour(String reminderHour) {
         requireNonNull(reminderHour);
         checkArgument(isValidReminderHour(reminderHour), MESSAGE_CONSTRAINTS);
-        this.reminderHour = reminderHour;
+        this.reminderHour = Integer.parseInt(reminderHour);
     }
 
-    public static boolean isValidReminderHour(int hourToTest) {
-        return 0 <= hourToTest && hourToTest <= 24;
+    /**
+     * Returns a boolean to determine whether the days to remind is within 24 hours.
+     * @param dayToTest
+     * @return boolean
+     */
+    public static boolean isValidReminderHour(String hourToTest) {
+        try {
+            int convertedHourToTest = Integer.parseInt(hourToTest);
+            return 0 <= convertedHourToTest && convertedHourToTest <= 24;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     public int getReminderHour() {

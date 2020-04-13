@@ -1,8 +1,8 @@
 package seedu.jelphabot.ui;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -22,7 +22,7 @@ public class CommandBox extends UiPart<Region> {
     public static final String ERROR_STYLE_CLASS = "error";
     private static final String FXML = "CommandBox.fxml";
 
-    private static List<String> commandsHistory = new ArrayList<>();
+    private static List<String> commandsHistory = new CopyOnWriteArrayList<>();
 
     private final CommandExecutor commandExecutor;
 
@@ -57,6 +57,7 @@ public class CommandBox extends UiPart<Region> {
             commandsHistory.add(commandTextField.getText());
             commandExecutor.execute(commandTextField.getText());
             commandTextField.setText("");
+            command = null;
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
         }

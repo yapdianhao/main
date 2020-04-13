@@ -1,3 +1,5 @@
+//@@author Clouddoggo
+
 package seedu.jelphabot.logic.commands;
 
 import static java.util.Objects.requireNonNull;
@@ -42,7 +44,6 @@ public class StartTimerCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-        Task dummy = lastShownList.get(targetIndex.getZeroBased());
         Task taskToTime = lastShownList.get(targetIndex.getZeroBased());
 
         if (taskToTime.getStatus() == Status.COMPLETE) {
@@ -52,7 +53,6 @@ public class StartTimerCommand extends Command {
         }
 
         taskToTime.startTimer();
-        model.setTask(dummy, taskToTime);
         model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
         model.setProductivity(new Productivity(model.getFilteredTaskList(), false, true, false));
         return new CommandResult(String.format(MESSAGE_SUCCESS, targetIndex.getOneBased(),

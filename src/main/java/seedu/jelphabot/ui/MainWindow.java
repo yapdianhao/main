@@ -45,6 +45,7 @@ public class MainWindow extends UiPart<Stage> {
     private GroupedTaskListPanel taskListPanel;
     private CalendarMainPanel calendarMainPanel;
     private ProductivityPanel productivityPanel;
+    private ReminderListPanel reminderListPanel;
     private ResultDisplay resultDisplay;
     private SummaryPanel summaryPanel;
     private HelpWindow helpWindow;
@@ -77,6 +78,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane summaryPanelPlaceholder;
+
+    @FXML
+    private StackPane reminderListPanelPlaceholder;
 
     public MainWindow(Stage primaryStage, Logic logic) {
         super(FXML, primaryStage);
@@ -156,6 +160,9 @@ public class MainWindow extends UiPart<Stage> {
         productivityPanel = new ProductivityPanel(productivityList.asUnmodifiableObservableList(), mainWindowTabPane);
         productivityPanelPlaceholder.getChildren().add(productivityPanel.getRoot());
 
+        reminderListPanel = new ReminderListPanel(logic.getReminderShowsTaskList(), mainWindowTabPane);
+        reminderListPanelPlaceholder.getChildren().add(reminderListPanel.getRoot());
+
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
@@ -218,6 +225,13 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    @FXML
+    private void handleReminder() {
+        if (!reminderListPanel.isShowing()) {
+            reminderListPanel.show();
+        }
+    }
+
     /**
      * Switches view to calendar panel.
      */
@@ -270,7 +284,7 @@ public class MainWindow extends UiPart<Stage> {
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
             CommandResult commandResult = logic.execute(commandText);
-            updateCalendarDayCards();
+            updateTasksInCalendarDayCards(); //for the dots showing overarching tasks
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
@@ -288,6 +302,9 @@ public class MainWindow extends UiPart<Stage> {
                 break;
             case PRODUCTIVITY:
                 handleProductivity();
+                break;
+            case REMINDER:
+                handleReminder();
                 break;
             case SUMMARY:
                 handleSummary();
@@ -316,7 +333,7 @@ public class MainWindow extends UiPart<Stage> {
         calendarMainPanel.updateCalendarPanel(commandResult);
     }
 
-    private void updateCalendarDayCards() {
+    private void updateTasksInCalendarDayCards() {
         calendarMainPanel.getCalendarPanel().updateDayCards();
     }
 

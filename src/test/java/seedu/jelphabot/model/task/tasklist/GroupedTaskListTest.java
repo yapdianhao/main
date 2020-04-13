@@ -16,11 +16,13 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.model.task.exceptions.DuplicateTaskException;
 import seedu.jelphabot.model.task.exceptions.TaskNotFoundException;
 import seedu.jelphabot.testutil.TaskBuilder;
 
+// @@author yaojiethng
 public class GroupedTaskListTest {
 
     private final GroupedTaskListStub groupedTaskList = new GroupedTaskListStub();
@@ -180,6 +182,11 @@ public class GroupedTaskListTest {
         @Override
         public Category getCategory() {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<SubgroupTaskList> getSublists() {
+            return subLists;
         }
 
         @Override

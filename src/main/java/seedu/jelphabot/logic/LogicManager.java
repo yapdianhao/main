@@ -21,14 +21,16 @@ import seedu.jelphabot.model.Model;
 import seedu.jelphabot.model.ReadOnlyJelphaBot;
 import seedu.jelphabot.model.productivity.ProductivityList;
 import seedu.jelphabot.model.reminder.Reminder;
+import seedu.jelphabot.model.reminder.ReminderShowsTask;
 import seedu.jelphabot.model.summary.SummaryList;
-import seedu.jelphabot.model.task.ReminderPredicate;
 import seedu.jelphabot.model.task.Task;
+import seedu.jelphabot.model.task.predicates.ReminderPredicate;
 import seedu.jelphabot.model.task.predicates.TaskCompletedWithinDayPredicate;
 import seedu.jelphabot.model.task.predicates.TaskIsCompletedPredicate;
 import seedu.jelphabot.model.task.predicates.TaskIsIncompletePredicate;
 import seedu.jelphabot.model.task.tasklist.GroupedTaskList;
 import seedu.jelphabot.model.task.tasklist.PinnedTaskList;
+import seedu.jelphabot.model.task.tasklist.ViewTaskList;
 import seedu.jelphabot.storage.Storage;
 
 /**
@@ -59,12 +61,23 @@ public class LogicManager implements Logic {
 
         try {
             storage.saveJelphaBot(model.getJelphaBot());
-            storage.saveJelphaBot(model.getJelphaBot(), true);
+            //storage.saveJelphaBot(model.getJelphaBot(), true);
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
 
         return commandResult;
+    }
+
+    @Override
+    public ObservableList<Reminder> getReminderList() {
+        return model.getFilteredReminderList();
+    }
+
+    @Override
+    public ObservableList<ReminderShowsTask> getReminderShowsTaskList() {
+        model.updateReminderShowsTask();
+        return model.getReminderShowsTaskList();
     }
 
     @Override
@@ -98,7 +111,7 @@ public class LogicManager implements Logic {
 
     public ObservableList<Task> getFilteredByReminder() {
         //logger.info("reached filtered by reminder");
-        List<Task> taskList = model.getTaskListFromJelphaBot();
+        ViewTaskList taskList = model.getLastShownList();
         List<Reminder> reminderList = model.getReminderListFromJelphaBot();
         ReminderPredicate reminderPredicate = new ReminderPredicate(taskList, reminderList);
         //logger.info("" + filteredList.size());
@@ -112,6 +125,7 @@ public class LogicManager implements Logic {
         return new FilteredList<>(filteredTasks, taskIncompletePredicate);
     }
 
+    //@@author eedenong
     public ObservableList<Task> getFilteredByIncompleteDueTodayTaskList() {
         ObservableList<Task> filteredTasks = model.getFilteredTaskList();
         TaskIsIncompletePredicate taskIncompletePredicate = new TaskIsIncompletePredicate();

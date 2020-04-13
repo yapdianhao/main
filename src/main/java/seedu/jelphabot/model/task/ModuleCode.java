@@ -1,10 +1,11 @@
+//@@author yaojiethng
 package seedu.jelphabot.model.task;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.jelphabot.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Task's module code in the address book.
+ * Represents a Task's module code in the task list.
  * Guarantees: immutable; is valid as declared in {@link #isValidModuleCode(String)}
  */
 public class ModuleCode implements Comparable<ModuleCode> {

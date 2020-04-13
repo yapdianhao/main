@@ -1,3 +1,4 @@
+//@@author yapdianhao
 package seedu.jelphabot.testutil;
 
 import seedu.jelphabot.commons.core.index.Index;
@@ -11,8 +12,8 @@ import seedu.jelphabot.model.reminder.ReminderHour;
 public class ReminderBuilder {
 
     public static final int DEFAULT_INDEX = 1;
-    public static final int DEFAULT_REMINDERDAY = 1;
-    public static final int DEFAULT_REMINDERHOUR = 1;
+    public static final String DEFAULT_REMINDERDAY = "1";
+    public static final String DEFAULT_REMINDERHOUR = "1";
 
     private Index index;
     private ReminderDay reminderDay;
@@ -46,7 +47,7 @@ public class ReminderBuilder {
      * Sets the {@code ReminderDay} of the {@code Reminder} that we are building.
      */
     public ReminderBuilder withReminderDay(String reminderDay) {
-        this.reminderDay = new ReminderDay(Integer.parseInt(reminderDay));
+        this.reminderDay = new ReminderDay(reminderDay);
         return this;
     }
 
@@ -54,7 +55,7 @@ public class ReminderBuilder {
      * Sets the {@code ReminderHour} of the {@code Reminder} that we are building.
      */
     public ReminderBuilder withReminderHour(String reminderHour) {
-        this.reminderHour = new ReminderHour(Integer.parseInt(reminderHour));
+        this.reminderHour = new ReminderHour(reminderHour);
         return this;
     }
 

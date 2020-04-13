@@ -3,8 +3,10 @@ package seedu.jelphabot.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_BOOK_REPORT_REMINDER_DAY;
 import static seedu.jelphabot.logic.commands.CommandTestUtil.VALID_TAG_GRADED;
 import static seedu.jelphabot.testutil.Assert.assertThrows;
+import static seedu.jelphabot.testutil.TypicalReminders.ASSESSMENT_REMINDER;
 import static seedu.jelphabot.testutil.TypicalTasks.ASSESSMENT;
 import static seedu.jelphabot.testutil.TypicalTasks.getTypicalJelphaBot;
 
@@ -18,8 +20,10 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.jelphabot.model.reminder.Reminder;
+import seedu.jelphabot.model.reminder.ReminderShowsTask;
 import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.model.task.exceptions.DuplicateTaskException;
+import seedu.jelphabot.testutil.ReminderBuilder;
 import seedu.jelphabot.testutil.TaskBuilder;
 
 public class JelphaBotTest {
@@ -64,11 +68,26 @@ public class JelphaBotTest {
         assertFalse(jelphaBot.hasTask(ASSESSMENT));
     }
 
+    //@@author yapdianhao
     @Test
-    public void hasTask_tasknJelphaBot_returnsTrue() {
+    public void hasReminder_reminderNotInJelphaBot_returnsFalse() {
+        assertFalse(jelphaBot.hasReminder(ASSESSMENT_REMINDER));
+    }
+    //@@author
+
+    @Test
+    public void hasTask_taskInJelphaBot_returnsTrue() {
         jelphaBot.addTask(ASSESSMENT);
         assertTrue(jelphaBot.hasTask(ASSESSMENT));
     }
+
+    //@@author yapdianhao
+    @Test
+    public void hasReminder_reminderInJelphaBot_returnsTrue() {
+        jelphaBot.addReminder(ASSESSMENT_REMINDER);
+        assertTrue(jelphaBot.hasReminder(ASSESSMENT_REMINDER));
+    }
+    //@@author
 
     @Test
     public void hasTask_taskWithSameIdentityFieldsInJelphaBot_returnsTrue() {
@@ -78,17 +97,43 @@ public class JelphaBotTest {
         assertTrue(jelphaBot.hasTask(editedAlice));
     }
 
+    //@@author yapdianhao
+    @Test
+    public void hasReminder_reminderWithSameIdentityFieldsInJelphaBot_returnsTrue() {
+        jelphaBot.addReminder(ASSESSMENT_REMINDER);
+        Reminder editedReminder = new ReminderBuilder(ASSESSMENT_REMINDER)
+                                      .withReminderDay(VALID_BOOK_REPORT_REMINDER_DAY).build();
+        assertTrue(jelphaBot.hasReminder(editedReminder));
+    }
+    //@@author
+
     @Test
     public void getTaskList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> jelphaBot.getTaskList().remove(0));
     }
 
+    //@@author yapdianhao
+    @Test
+    public void getReminderList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> jelphaBot.getReminderList().remove(0));
+    }
+
+    //@@author yapdianhao
+    @Test
+    public void getReminderShowsTaskList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> jelphaBot
+                                                                    .getReminderShowsTaskList().remove(0));
+    }
+    //@@author
+
     /**
      * A stub ReadOnlyJelphaBot whose tasks list can violate interface constraints.
      */
     private static class JelphaBotStub implements ReadOnlyJelphaBot {
+
         private final ObservableList<Task> tasks = FXCollections.observableArrayList();
         private final ObservableList<Reminder> reminders = FXCollections.observableArrayList();
+        private final ObservableList<ReminderShowsTask> reminderShowsTasks = FXCollections.observableArrayList();
 
         JelphaBotStub(Collection<Task> tasks) {
             this.tasks.setAll(tasks);
@@ -105,6 +150,11 @@ public class JelphaBotTest {
         }
 
         @Override
+        public ObservableList<ReminderShowsTask> getReminderShowsTaskList() {
+            return reminderShowsTasks;
+        }
+
+        @Override
         public void setTasks(List<Task> tasks) {
             this.tasks.setAll(tasks);
         }
@@ -113,7 +163,6 @@ public class JelphaBotTest {
         public void setReminders(List<Reminder> reminders) {
             this.reminders.setAll(reminders);
         }
-
 
     }
 

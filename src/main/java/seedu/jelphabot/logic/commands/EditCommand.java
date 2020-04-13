@@ -31,7 +31,7 @@ import seedu.jelphabot.model.task.TimeSpent;
 import seedu.jelphabot.model.task.tasklist.ViewTaskList;
 
 /**
- * Edits the details of an existing task in the address book.
+ * Edits the details of an existing task in the task list.
  */
 public class EditCommand extends Command {
 
@@ -96,7 +96,7 @@ public class EditCommand extends Command {
         requireNonNull(model);
         ViewTaskList lastShownList = model.getLastShownList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
+        if (index.getZeroBased() >= lastShownList.size() || index.getZeroBased() < 0) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 

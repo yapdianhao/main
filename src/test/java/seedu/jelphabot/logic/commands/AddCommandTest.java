@@ -7,6 +7,7 @@ import static seedu.jelphabot.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -15,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.jelphabot.commons.core.GuiSettings;
+import seedu.jelphabot.commons.core.index.Index;
 import seedu.jelphabot.logic.commands.exceptions.CommandException;
 import seedu.jelphabot.model.JelphaBot;
 import seedu.jelphabot.model.Model;
@@ -23,6 +25,7 @@ import seedu.jelphabot.model.ReadOnlyUserPrefs;
 import seedu.jelphabot.model.productivity.Productivity;
 import seedu.jelphabot.model.productivity.ProductivityList;
 import seedu.jelphabot.model.reminder.Reminder;
+import seedu.jelphabot.model.reminder.ReminderShowsTask;
 import seedu.jelphabot.model.summary.Summary;
 import seedu.jelphabot.model.summary.SummaryList;
 import seedu.jelphabot.model.task.Task;
@@ -38,17 +41,16 @@ public class AddCommandTest {
         assertThrows(NullPointerException.class, () -> new AddCommand(null));
     }
 
-    // TODO: fix this fking test
-    // @Test
-    // public void execute_taskAcceptedByModel_addSuccessful() throws Exception {
-    //     ModelStubAcceptingTaskAdded modelStub = new ModelStubAcceptingTaskAdded();
-    //     Task validTask = new TaskBuilder().build();
-    //
-    //     CommandResult commandResult = new AddCommand(validTask).execute(modelStub);
-    //
-    //     assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validTask), commandResult.getFeedbackToUser());
-    //     assertEquals(Arrays.asList(validTask), modelStub.tasksAdded);
-    // }
+    @Test
+    public void execute_taskAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingTaskAdded modelStub = new ModelStubAcceptingTaskAdded();
+        Task validTask = new TaskBuilder().build();
+
+        CommandResult commandResult = new AddCommand(validTask).execute(modelStub);
+
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validTask), commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(validTask), modelStub.tasksAdded);
+    }
 
     @Test
     public void execute_duplicateTask_throwsCommandException() {
@@ -87,6 +89,7 @@ public class AddCommandTest {
      * A default model stub that have all of the methods failing.
      */
     private static class ModelStub implements Model {
+
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
@@ -109,6 +112,11 @@ public class AddCommandTest {
 
         @Override
         public void setGuiSettings(GuiSettings guiSettings) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateDeletedReminders(Index index) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -139,6 +147,11 @@ public class AddCommandTest {
 
         @Override
         public ReadOnlyJelphaBot getJelphaBot() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateReminderShowsTask() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -192,8 +205,14 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+
         @Override
         public ObservableList<Task> getFilteredTaskList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<ReminderShowsTask> getReminderShowsTaskList() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -241,7 +260,6 @@ public class AddCommandTest {
         public void setSummary(Summary summary) {
             throw new AssertionError("This method should not be called");
         }
-
     }
 
     /**
@@ -268,6 +286,7 @@ public class AddCommandTest {
     private class ModelStubAcceptingTaskAdded extends ModelStub {
         final ArrayList<Task> tasksAdded = new ArrayList<>();
         final ArrayList<Productivity> productivityAdded = new ArrayList<>();
+        final ArrayList<Summary> summaryAdded = new ArrayList<>();
 
         @Override
         public boolean hasTask(Task task) {
@@ -285,6 +304,12 @@ public class AddCommandTest {
         public void setProductivity(Productivity productivity) {
             requireNonNull(productivity);
             productivityAdded.add(productivity);
+        }
+
+        @Override
+        public void setSummary(Summary summary) {
+            requireNonNull(summary);
+            summaryAdded.add(summary);
         }
 
         @Override

@@ -2,7 +2,6 @@ package seedu.jelphabot.model.task.tasklist;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -21,13 +20,15 @@ import seedu.jelphabot.model.task.Task;
  * GroupedByDateTaskList groups Tasks by their module codes.
  * Separation is done over @code{ObservableList} through use of filters.
  * <p>
+ *
+ * @@author yaojiethng
  */
 public class GroupedByModuleTaskList extends GroupedTaskList {
     private final ObservableSet<ModuleCode> moduleCodes = FXCollections.observableSet();
 
     public GroupedByModuleTaskList(ObservableList<Task> tasks, PinnedTaskList pinnedTaskList) {
         super(tasks, pinnedTaskList);
-        this.moduleCodes.addAll(getUniqueModuleSet(tasks));
+        this.moduleCodes.addAll(makeUniqueModuleSet(tasks));
         for (ModuleCode code : moduleCodes) {
             addSublist(code);
         }
@@ -41,7 +42,13 @@ public class GroupedByModuleTaskList extends GroupedTaskList {
         this.tasks.addListener(new TaskListChangeListener());
     }
 
-    private static Set<ModuleCode> getUniqueModuleSet(List<Task> taskList) {
+    /**
+     * Creates a set of unique module codes based on the given tasklist.
+     *
+     * @param taskList a list of unique Task objects
+     * @return a set of unique ModuleCode objects
+     */
+    private static Set<ModuleCode> makeUniqueModuleSet(List<Task> taskList) {
         Set<ModuleCode> moduleSet = new HashSet<>();
         for (Task task : taskList) {
             moduleSet.add(task.getModuleCode());
@@ -85,7 +92,7 @@ public class GroupedByModuleTaskList extends GroupedTaskList {
 
     @Override
     public ObservableList<SubgroupTaskList> getSublists() {
-        return subLists.sorted(Comparator.comparing(SubgroupTaskList::getGroupName));
+        return subLists; //.sorted(Comparator.comparing(SubgroupTaskList::getGroupName));
     }
 
     /* === Methods used for testing. Application classes should not call these methods as Tasks are intended
@@ -95,7 +102,7 @@ public class GroupedByModuleTaskList extends GroupedTaskList {
         this.tasks.setAll(taskList);
 
         moduleCodes.clear();
-        moduleCodes.addAll(getUniqueModuleSet(tasks));
+        moduleCodes.addAll(makeUniqueModuleSet(tasks));
         for (ModuleCode code : moduleCodes) {
             addSublist(code);
         }

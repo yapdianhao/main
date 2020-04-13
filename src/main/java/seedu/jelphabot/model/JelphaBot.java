@@ -6,10 +6,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.jelphabot.commons.core.index.Index;
 import seedu.jelphabot.model.reminder.Reminder;
+import seedu.jelphabot.model.reminder.ReminderShowsTask;
 import seedu.jelphabot.model.reminder.UniqueReminderList;
+import seedu.jelphabot.model.reminder.UniqueReminderShowsTaskList;
 import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.model.task.UniqueTaskList;
+import seedu.jelphabot.model.task.tasklist.ViewTaskList;
 
 /**
  * Wraps all data at the address-book level
@@ -21,6 +25,7 @@ public class JelphaBot implements ReadOnlyJelphaBot {
     private final List<Reminder> reminderList;
     private final UniqueTaskList tasks;
     private final UniqueReminderList reminders;
+    private final UniqueReminderShowsTaskList reminderShowsTaskList = new UniqueReminderShowsTaskList();
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -60,6 +65,18 @@ public class JelphaBot implements ReadOnlyJelphaBot {
         this.reminders.setReminders(reminders);
     }
 
+    public void setReminderShowsTasks(List<ReminderShowsTask> reminderShowsTasks) {
+        this.reminderShowsTaskList.setReminderShowsTasks(reminderShowsTasks);
+    }
+
+    /**
+     * deletes a reminder will cause all reminders' indexes after to shift forward.
+     */
+    public void updateDeletedReminder(Index deletedIndex) {
+        int index = deletedIndex.getOneBased();
+        reminders.updateReminderIndexes(index);
+    }
+
     /**
      * Resets the existing data of this {@code JelphaBot} with {@code newData}.
      */
@@ -73,6 +90,7 @@ public class JelphaBot implements ReadOnlyJelphaBot {
         }
         setReminders(newData.getReminderList());
         setTasks(newData.getTaskList());
+        setReminderShowsTasks(newData.getReminderShowsTaskList());
     }
 
     //// task-level operations
@@ -101,8 +119,8 @@ public class JelphaBot implements ReadOnlyJelphaBot {
     }
 
     /**
-     * Adds a task to the address book.
-     * The task must not already exist in the address book.
+     * Adds a task to the task list.
+     * The task must not already exist in the task list.
      */
     public void addTask(Task p) {
         tasks.add(p);
@@ -114,8 +132,8 @@ public class JelphaBot implements ReadOnlyJelphaBot {
 
     /**
      * Replaces the given task {@code target} in the list with {@code editedTask}.
-     * {@code target} must exist in the address book.
-     * The task identity of {@code editedTask} must not be the same as another existing task in the address book.
+     * {@code target} must exist in the task list.
+     * The task identity of {@code editedTask} must not be the same as another existing task in the task list.
      */
     public void setTask(Task target, Task editedTask) {
         requireNonNull(editedTask);
@@ -123,15 +141,9 @@ public class JelphaBot implements ReadOnlyJelphaBot {
         tasks.setTask(target, editedTask);
     }
 
-    /*
-    public void setReminder(Reminder target, Reminder newReminder) {
-        requireNonNull(newReminder);
-        reminders.setReminder(target, newReminder);
-    }*/
-
     /**
      * Removes {@code key} from this {@code JelphaBot}.
-     * {@code key} must exist in the address book.
+     * {@code key} must exist in the task list.
      */
     public void removeTask(Task key) {
         tasks.remove(key);
@@ -141,6 +153,24 @@ public class JelphaBot implements ReadOnlyJelphaBot {
         reminders.remove(key);
     }
     //// util methods
+
+    /**
+     * adds the ReminderShowsTask Object to the panel.
+     */
+    public void addReminderShowsTask(Reminder reminder, ViewTaskList lastShownList) {
+        Task task = lastShownList.get(reminder.getIndex().getZeroBased());
+        ReminderShowsTask reminderShowsTask = new ReminderShowsTask(reminder, task);
+        reminderShowsTaskList.add(reminderShowsTask);
+    }
+
+    /**
+     * deletes the ReminderShowsTask Object from the panel list.
+     */
+    public void deleteReminderShowsTask(Reminder reminder, ViewTaskList lastShownList) {
+        Task task = lastShownList.get(reminder.getIndex().getZeroBased());
+        ReminderShowsTask reminderShowsTask = new ReminderShowsTask(reminder, task);
+        reminderShowsTaskList.remove(reminderShowsTask);
+    }
 
     @Override
     public String toString() {
@@ -158,12 +188,29 @@ public class JelphaBot implements ReadOnlyJelphaBot {
         return reminders.asUnmodifiableObservableList();
     }
 
+    @Override
+    public ObservableList<ReminderShowsTask> getReminderShowsTaskList() {
+        return reminderShowsTaskList.asUnmodifiableObservableList();
+    }
+
     public List<Task> getTasksAsList() {
         return taskList;
     }
 
     public List<Reminder> getRemindersAsList() {
         return reminderList;
+    }
+
+    /**
+     * Updates the reminder list panel after adding / delete a reminder.
+     */
+    public void updateReminderShowsTask(ViewTaskList viewTaskList) {
+        for (Reminder reminder : getReminderList()) {
+            int idx = reminder.getIndex().getZeroBased();
+            Task currTask = viewTaskList.get(idx);
+            ReminderShowsTask reminderShowsTask = new ReminderShowsTask(reminder, currTask);
+            reminderShowsTaskList.add(reminderShowsTask);
+        }
     }
 
     @Override

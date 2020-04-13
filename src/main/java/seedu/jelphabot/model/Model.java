@@ -6,9 +6,11 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.jelphabot.commons.core.GuiSettings;
+import seedu.jelphabot.commons.core.index.Index;
 import seedu.jelphabot.model.productivity.Productivity;
 import seedu.jelphabot.model.productivity.ProductivityList;
 import seedu.jelphabot.model.reminder.Reminder;
+import seedu.jelphabot.model.reminder.ReminderShowsTask;
 import seedu.jelphabot.model.summary.Summary;
 import seedu.jelphabot.model.summary.SummaryList;
 import seedu.jelphabot.model.task.Task;
@@ -52,12 +54,12 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' task list file path.
      */
     Path getJelphaBotFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' task list file path.
      */
     void setJelphaBotFilePath(Path jelphaBotFilePath);
 
@@ -74,7 +76,7 @@ public interface Model {
     void setJelphaBot(ReadOnlyJelphaBot jelphaBot);
 
     /**
-     * Returns true if a task with the same identity as {@code task} exists in the address book.
+     * Returns true if a task with the same identity as {@code task} exists in the task list.
      */
     boolean hasTask(Task task);
 
@@ -82,7 +84,7 @@ public interface Model {
 
     /**
      * Deletes the given task.
-     * The task must exist in the address book.
+     * The task must exist in the task list.
      */
     void deleteTask(Task target);
 
@@ -95,7 +97,7 @@ public interface Model {
 
     /**
      * Adds the given task.
-     * {@code task} must not already exist in the address book.
+     * {@code task} must not already exist in the task list.
      */
     void addTask(Task task);
 
@@ -103,8 +105,8 @@ public interface Model {
 
     /**
      * Replaces the given task {@code target} with {@code editedTask}.
-     * {@code target} must exist in the address book.
-     * The task identity of {@code editedTask} must not be the same as another existing task in the address book.
+     * {@code target} must exist in the task list.
+     * The task identity of {@code editedTask} must not be the same as another existing task in the task list.
      */
     void setTask(Task target, Task editedTask);
 
@@ -118,6 +120,8 @@ public interface Model {
      */
     void setSummary(Summary summary);
 
+    void updateDeletedReminders(Index deletedIndex);
+
     /**
      * Returns an unmodifiable view of the filtered task list
      */
@@ -130,6 +134,8 @@ public interface Model {
     ViewTaskList getLastShownList();
 
     ObservableList<Reminder> getFilteredReminderList();
+
+    ObservableList<ReminderShowsTask> getReminderShowsTaskList();
 
     /**
      * Returns an unmodifiable view of the filtered task list in the Calendar
@@ -172,4 +178,6 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredCalendarTaskList(Predicate<Task> predicate);
+
+    void updateReminderShowsTask();
 }

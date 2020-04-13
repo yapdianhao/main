@@ -13,9 +13,11 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.jelphabot.commons.core.GuiSettings;
 import seedu.jelphabot.commons.core.LogsCenter;
+import seedu.jelphabot.commons.core.index.Index;
 import seedu.jelphabot.model.productivity.Productivity;
 import seedu.jelphabot.model.productivity.ProductivityList;
 import seedu.jelphabot.model.reminder.Reminder;
+import seedu.jelphabot.model.reminder.ReminderShowsTask;
 import seedu.jelphabot.model.summary.Summary;
 import seedu.jelphabot.model.summary.SummaryList;
 import seedu.jelphabot.model.task.Task;
@@ -24,7 +26,7 @@ import seedu.jelphabot.model.task.tasklist.PinnedTaskList;
 import seedu.jelphabot.model.task.tasklist.ViewTaskList;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the task list data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
@@ -46,7 +48,7 @@ public class ModelManager implements Model {
         super();
         requireAllNonNull(readOnlyJelphaBot, userPrefs);
 
-        logger.fine("Initializing with address book: " + readOnlyJelphaBot + " and user prefs " + userPrefs);
+        logger.fine("Initializing with task list: " + readOnlyJelphaBot + " and user prefs " + userPrefs);
 
         this.readOnlyJelphaBot = new JelphaBot(readOnlyJelphaBot);
         this.userPrefs = new UserPrefs(userPrefs);
@@ -113,8 +115,7 @@ public class ModelManager implements Model {
         userPrefs.setJelphaBotReminderFilePath(reminderFilePath);
     }
 
-    // =========== JelphaBot
-    // ================================================================================
+    // =========== JelphaBot ==================================================
 
     @Override
     public ReadOnlyJelphaBot getJelphaBot() {
@@ -145,7 +146,9 @@ public class ModelManager implements Model {
 
     @Override
     public void deleteReminder(Reminder reminder) {
+        readOnlyJelphaBot.deleteReminderShowsTask(reminder, getLastShownList());
         readOnlyJelphaBot.removeReminder(reminder);
+        //updateReminderShowsTask();
     }
 
     @Override
@@ -156,7 +159,17 @@ public class ModelManager implements Model {
 
     @Override
     public void addReminder(Reminder reminder) {
+        readOnlyJelphaBot.addReminderShowsTask(reminder, getLastShownList());
         readOnlyJelphaBot.addReminder(reminder);
+        //updateReminderShowsTask();
+    }
+
+    public void updateDeletedReminders(Index deletedIndex) {
+        readOnlyJelphaBot.updateDeletedReminder(deletedIndex);
+    }
+
+    public void updateReminderShowsTask() {
+        readOnlyJelphaBot.updateReminderShowsTask(getLastShownList());
     }
 
     @Override
@@ -164,13 +177,6 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedTask);
         readOnlyJelphaBot.setTask(target, editedTask);
     }
-
-    /*
-    @Override
-    public void setReminder(Reminder target, Reminder newReminder) {
-        requireAllNonNull(target, newReminder);
-        readOnlyJelphaBot.setReminder(target, newReminder);
-    }*/
 
     // =========== Productivity List
 
@@ -234,6 +240,11 @@ public class ModelManager implements Model {
 
     public ObservableList<Reminder> getFilteredReminderList() {
         return filteredReminders;
+    }
+
+    @Override
+    public ObservableList<ReminderShowsTask> getReminderShowsTaskList() {
+        return this.readOnlyJelphaBot.getReminderShowsTaskList();
     }
 
     @Override

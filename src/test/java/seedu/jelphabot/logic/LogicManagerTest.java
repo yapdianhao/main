@@ -94,16 +94,31 @@ public class LogicManagerTest {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredTaskList().remove(0));
     }
 
+    //@@author yapdianhao
+    @Test
+    public void getFilteredReminderList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getReminderList().remove(0));
+    }
+
+    //@@author yapdianhao
+    @Test
+    public void getFilteredByReminder_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredByReminder().remove(0));
+    }
+
+    //@@author eedenong
     @Test
     public void getFilteredByCompleteTaskList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredByCompleteTaskList().remove(0));
     }
 
+    //@@author eedenong
     @Test
     public void getFilteredByIncompleteTaskList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredByIncompleteTaskList().remove(0));
     }
 
+    //@@author eedenong
     @Test
     public void getFilteredByIncompleteDueTodayTaskList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic

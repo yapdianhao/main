@@ -1,6 +1,8 @@
+//@@author yapdianhao
 package seedu.jelphabot.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.jelphabot.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_REMIND_DAY;
 import static seedu.jelphabot.logic.parser.CliSyntax.PREFIX_REMIND_HOUR;
 
@@ -24,8 +26,6 @@ public class ReminderCommand extends Command {
                                                                           + "been marked as complete!";
     public static final String MESSAGE_SUCCESS = "Added reminder for task %d!";
     public static final String COMMAND_WORD = "reminder";
-    public static final String COMMAND_WORD_UPPER = ":R";
-    public static final String COMMAND_WORD_LOWER = ":r";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks a reminder on the given task "
                                                    + " on the specified date. "
                                                    + "Parameters:\n" + "INDEX (must be a positive integer) "
@@ -33,12 +33,13 @@ public class ReminderCommand extends Command {
                                                    + "DAYS TO REMIND (between 0 and 7)]\n"
                                                    + "    " + "[" + PREFIX_REMIND_HOUR
                                                    + "HOURS TO REMIND (between 0 and 24)]\n";
+    public static final String MESSAGE_SWITCH_PANEL_ACKNOWLEDGEMENT = "Switched to reminder panel.";
+
     private final Reminder reminder;
     private final Index index;
 
     public ReminderCommand(Index index, Reminder reminder) {
-        requireNonNull(index);
-        requireNonNull(reminder);
+        requireAllNonNull(index, reminder);
         this.index = index;
         this.reminder = reminder;
     }

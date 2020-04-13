@@ -5,10 +5,11 @@ import java.util.List;
 import javafx.collections.ObservableList;
 
 import seedu.jelphabot.model.reminder.Reminder;
+import seedu.jelphabot.model.reminder.ReminderShowsTask;
 import seedu.jelphabot.model.task.Task;
 
 /**
- * Unmodifiable view of an address book
+ * Unmodifiable view of an task list
  */
 public interface ReadOnlyJelphaBot {
 
@@ -19,6 +20,8 @@ public interface ReadOnlyJelphaBot {
     ObservableList<Task> getTaskList();
 
     ObservableList<Reminder> getReminderList();
+
+    ObservableList<ReminderShowsTask> getReminderShowsTaskList();
 
     void setTasks(List<Task> tasks);
 

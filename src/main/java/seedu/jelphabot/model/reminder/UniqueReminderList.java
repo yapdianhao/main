@@ -1,3 +1,4 @@
+//@@author yapdianhao
 package seedu.jelphabot.model.reminder;
 
 import static java.util.Objects.requireNonNull;
@@ -6,14 +7,13 @@ import static seedu.jelphabot.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.jelphabot.commons.core.LogsCenter;
 import seedu.jelphabot.model.reminder.exceptions.DuplicateReminderException;
 import seedu.jelphabot.model.reminder.exceptions.ReminderNotFoundException;
-import seedu.jelphabot.model.task.Task;
-import seedu.jelphabot.model.task.exceptions.DuplicateTaskException;
-import seedu.jelphabot.model.task.exceptions.TaskNotFoundException;
 
 /**
  * A list of reminders that enforces uniqueness between its elements and does not allow nulls.
@@ -24,10 +24,10 @@ import seedu.jelphabot.model.task.exceptions.TaskNotFoundException;
  * as to ensure that the task with exactly the same fields will be removed.
  * <p>
  * Supports a minimal set of list operations.
- *
- * @see Task#isSameTask(Task)
  */
 public class UniqueReminderList implements Iterable<Reminder> {
+
+    private static final Logger logger = LogsCenter.getLogger(UniqueReminderList.class);
 
     private final ObservableList<Reminder> internalList = FXCollections.observableArrayList();
     private final ObservableList<Reminder> internalUnmodifiableList =
@@ -73,11 +73,11 @@ public class UniqueReminderList implements Iterable<Reminder> {
 
         int index = internalList.indexOf(target);
         if (index == -1) {
-            throw new TaskNotFoundException();
+            throw new ReminderNotFoundException();
         }
 
         if (!target.isSameReminder(target) && contains(newReminder)) {
-            throw new DuplicateTaskException();
+            throw new DuplicateReminderException();
         }
 
         internalList.set(index, newReminder);
@@ -95,6 +95,19 @@ public class UniqueReminderList implements Iterable<Reminder> {
         }
 
         internalList.setAll(reminders);
+    }
+
+    /**
+     * Sets the new index after a reminder before has been deleted.
+     */
+    public void updateReminderIndexes(int index) {
+        for (Reminder reminder : internalList) {
+            if (reminder.getIndex().getOneBased() > index) {
+                int currentIndex = reminder.getIndex().getOneBased();
+                currentIndex -= index;
+                reminder.setIndex(currentIndex);
+            }
+        }
     }
 
     @Override

@@ -1,3 +1,4 @@
+//@@author yaojiethng
 package seedu.jelphabot.model.task.predicates;
 
 import java.time.LocalDate;
@@ -8,6 +9,8 @@ import seedu.jelphabot.model.task.Task;
 
 /**
  * Tests that a {@code Task}'s {@code DateTime} falls within the given Date.
+ *
+ * @@author yaojiethng
  */
 public class TaskDueWithinDayPredicate implements Predicate<Task> {
     private final LocalDate date;

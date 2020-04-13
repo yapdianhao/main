@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import seedu.jelphabot.commons.util.DateUtil;
 
+//@@author alam8064
 /**
  * Class representing a date without time, mainly for the calendar UI.
  */
@@ -18,7 +19,7 @@ public class CalendarDate {
         this.date = date;
     }
 
-    public static CalendarDate getCurrent() {
+    public static CalendarDate getCurrentDate() {
         return new CalendarDate(DateUtil.getDateToday());
     }
 

@@ -7,6 +7,11 @@ import static seedu.jelphabot.model.util.SampleDateUtil.NEXT_MONTH;
 import static seedu.jelphabot.model.util.SampleDateUtil.NEXT_WEEK;
 import static seedu.jelphabot.model.util.SampleDateUtil.TODAY_MORNING;
 import static seedu.jelphabot.model.util.SampleDateUtil.TONIGHT;
+import static seedu.jelphabot.model.util.SampleIndexUtil.ELEVENTH_INDEX;
+import static seedu.jelphabot.model.util.SampleIndexUtil.FIFTH_INDEX;
+import static seedu.jelphabot.model.util.SampleIndexUtil.FIRST_INDEX;
+import static seedu.jelphabot.model.util.SampleIndexUtil.SECOND_INDEX;
+import static seedu.jelphabot.model.util.SampleIndexUtil.THIRD_INDEX;
 
 import java.time.Duration;
 import java.util.Arrays;
@@ -15,6 +20,9 @@ import java.util.stream.Collectors;
 
 import seedu.jelphabot.model.JelphaBot;
 import seedu.jelphabot.model.ReadOnlyJelphaBot;
+import seedu.jelphabot.model.reminder.Reminder;
+import seedu.jelphabot.model.reminder.ReminderDay;
+import seedu.jelphabot.model.reminder.ReminderHour;
 import seedu.jelphabot.model.tag.Tag;
 import seedu.jelphabot.model.task.DateTime;
 import seedu.jelphabot.model.task.Description;
@@ -43,8 +51,20 @@ public class SampleDataUtil {
                 new ModuleCode("ST2334"), Priority.MEDIUM, getTagSet("exam"),
                 new TimeSpent(Duration.ofMinutes(4))
             ),
-            new Task(new Description("Consultation with David Li"), Status.INCOMPLETE, new DateTime(NEXT_WEEK),
+            new Task(new Description("Consultation"), Status.INCOMPLETE, new DateTime(NEXT_WEEK),
                 new ModuleCode("PF1103"), Priority.MEDIUM, getTagSet("consult", "prepare"),
+                new TimeSpent(Duration.ofMinutes(1))
+            ),
+            new Task(new Description("Revision"), Status.INCOMPLETE, new DateTime(NEXT_WEEK),
+                new ModuleCode("ST2334"), Priority.MEDIUM, getTagSet("midterm", "prepare"),
+                new TimeSpent(Duration.ofMinutes(1))
+            ),
+            new Task(new Description("Team Project"), Status.INCOMPLETE, new DateTime(NEXT_WEEK),
+                new ModuleCode("CS2103T"), Priority.HIGH, getTagSet("final-submission", "team"),
+                new TimeSpent(Duration.ofMinutes(1))
+            ),
+            new Task(new Description("Individual Assignment 2"), Status.INCOMPLETE, new DateTime(NEXT_WEEK),
+                new ModuleCode("CS3230"), Priority.HIGH, getTagSet("graded"),
                 new TimeSpent(Duration.ofMinutes(1))
             ),
             new Task(new Description("Tutorial 4"), Status.INCOMPLETE, new DateTime(TODAY_MORNING),
@@ -70,12 +90,25 @@ public class SampleDataUtil {
         };
     }
 
+    public static Reminder[] getSampleReminders() {
+        return new Reminder[]{
+            new Reminder(FIRST_INDEX, new ReminderDay("2"), new ReminderHour("0")),
+            new Reminder(SECOND_INDEX, new ReminderDay("1"), new ReminderHour("5")),
+            new Reminder(THIRD_INDEX, new ReminderDay("4"), new ReminderHour("1")),
+            new Reminder (FIFTH_INDEX, new ReminderDay("7"), new ReminderHour("0")),
+            new Reminder(ELEVENTH_INDEX, new ReminderDay("1"), new ReminderHour("0"))
+        };
+    }
+
     public static ReadOnlyJelphaBot getSampleJelphaBot() {
-        JelphaBot sampleAb = new JelphaBot();
+        JelphaBot sampleJelphaBot = new JelphaBot();
         for (Task sampleTask : getSampleTasks()) {
-            sampleAb.addTask(sampleTask);
+            sampleJelphaBot.addTask(sampleTask);
         }
-        return sampleAb;
+        for (Reminder sampleReminder : getSampleReminders()) {
+            sampleJelphaBot.addReminder(sampleReminder);
+        }
+        return sampleJelphaBot;
     }
 
     /**

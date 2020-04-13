@@ -1,3 +1,4 @@
+//@@author yapdianhao
 package seedu.jelphabot.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -16,6 +17,7 @@ class JsonAdaptedReminder {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Reminder %s's field is missing!";
     public static final String NEGATIVE_INDEX_MESSAGE_FORMAT = "Index should not be negative!";
+    public static final String INVALID_INDEX_MESSAGE_FORMAT = "Index should be a positive number!";
 
     private final String index;
     private final String reminderDay;
@@ -57,28 +59,34 @@ class JsonAdaptedReminder {
                 throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, Index.class.getSimpleName()));
             }
+
+            if (Integer.parseInt(index) < 0) {
+                throw new IllegalValueException(NEGATIVE_INDEX_MESSAGE_FORMAT);
+            }
             if (reminderDay == null) {
                 throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, ReminderDay.class.getSimpleName()));
             }
-            if (!ReminderDay.isValidReminderDay(Integer.parseInt(reminderDay))) {
+            if (!ReminderDay.isValidReminderDay(reminderDay)) {
                 throw new IllegalValueException(ReminderDay.MESSAGE_CONSTRAINTS);
             }
             if (reminderHour == null) {
                 throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, ReminderHour.class.getSimpleName()));
             }
-            if (!ReminderHour.isValidReminderHour(Integer.parseInt(reminderHour))) {
+            if (!ReminderHour.isValidReminderHour(reminderHour)) {
                 throw new IllegalValueException(
                     String.format(ReminderHour.MESSAGE_CONSTRAINTS));
             }
             return new Reminder(
                 Index.fromZeroBased(Integer.parseInt(index)),
-                new ReminderDay(Integer.parseInt(reminderDay)),
-                new ReminderHour(Integer.parseInt(reminderHour))
+                new ReminderDay(reminderDay),
+                new ReminderHour(reminderHour)
             );
         } catch (IndexOutOfBoundsException e) {
             throw new IllegalValueException(NEGATIVE_INDEX_MESSAGE_FORMAT);
+        } catch (NumberFormatException e) {
+            throw new IllegalValueException(INVALID_INDEX_MESSAGE_FORMAT);
         }
     }
 }
