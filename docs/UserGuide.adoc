@@ -122,10 +122,11 @@ If you do not see this, please try deleting JelphaBot and its accompanying files
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 . Some example commands you can try:
 
-* **`add`**`d/Assignment 1 dt/10-Mar-2020 23 59 m/CS2103T` : adds a task with description `Assignment 1` to the task list.
-* *`list`* : lists all tasks.
-* **`delete`**`1` : deletes the 1st task shown in the current list.
-* *`exit`* : exits the app.
+* `add d/Assignment 1 dt/10-Mar-2020 23 59 m/CS2103T` : +
+adds a task with description "Assignment 1" to the task list.
+* `list` : lists all tasks.
+* `delete 1` : deletes the 1st task shown in the current list.
+* `exit` : exits the app.
 +
 [TIP]
 You can use the kbd:[UP] and kbd:[DOWN] keys to view your last entered commands, +
