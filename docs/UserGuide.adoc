@@ -294,6 +294,8 @@ A task can have any number of tags (including 0)! +
 If the priority field is not specified, priority is set to Default priority.
 // end::add[]
 
+<<<
+
 // tag::list[]
 ==== Listing all Tasks : `list`
 
@@ -306,8 +308,6 @@ Format: `list [SORTING_ORDER]`
 * Valid `SORTING_ORDER` values are `date` (groups tasks by date) and `module` (Groups tasks by module code)
 ****
 
-<<<
-
 ===== Group Tasks by Date : `list date`
 
 You can group tasks based on their due date.
@@ -317,6 +317,8 @@ Format: `list date`
 [.text-center]
 .Example of an expected result after running `list date`
 image::ug_figures/listByDate.png[width="600"]
+
+<<<
 
 `list date` allows you to group your tasks into the following categories:
 
