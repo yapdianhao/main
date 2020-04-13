@@ -1,3 +1,5 @@
+// @@author Clouddoggo
+
 package seedu.jelphabot.model.productivity;
 
 import static seedu.jelphabot.commons.util.CollectionUtil.requireAllNonNull;

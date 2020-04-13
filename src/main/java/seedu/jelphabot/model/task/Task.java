@@ -51,7 +51,6 @@ public class Task {
         this.isTiming = false;
     }
 
-
     //@@author eedenong
     /**
      * Special constructor with additional DoneTime field for use in JsonAdaptedTask.
@@ -70,6 +69,7 @@ public class Task {
         this.isTiming = false;
     }
 
+    // @@author
 
     public Description getDescription() {
         return description;
@@ -122,10 +122,6 @@ public class Task {
 
     public void setDoneTime(DateTime datetime) {
         this.doneTime = datetime.getDateTime();
-    }
-
-    public LocalDateTime getStartTime() {
-        return this.startTime;
     }
 
     public LocalDateTime getDoneTime() {
