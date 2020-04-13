@@ -1,3 +1,5 @@
+// @@author Clouddoggo
+
 package seedu.jelphabot.model.productivity;
 
 import static java.util.Objects.requireNonNull;

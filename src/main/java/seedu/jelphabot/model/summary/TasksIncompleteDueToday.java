@@ -16,7 +16,6 @@ public class TasksIncompleteDueToday {
         this.tasksDueToday = tasksDueToday;
     }
 
-    //TODO: implement method to get string of the tasks due today
     public String getTasksDueTodayString() {
         // For each of the tasks, arrange them in the format example:
         // [ ] (CS3230) Assignment 1
