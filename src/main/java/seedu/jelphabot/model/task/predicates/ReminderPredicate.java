@@ -7,9 +7,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
-import java.util.logging.Logger;
 
-import seedu.jelphabot.commons.core.LogsCenter;
 import seedu.jelphabot.model.reminder.Reminder;
 import seedu.jelphabot.model.task.Task;
 import seedu.jelphabot.model.task.tasklist.ViewTaskList;
