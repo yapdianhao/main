@@ -7,16 +7,16 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
+<VBox xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
    <children>
        <HBox prefHeight="131.0" prefWidth="406.0">
            <children>
-               <ImageView fx:id="image" fitHeight="88.0" fitWidth="113.0" pickOnBounds="true" preserveRatio="true">
+               <ImageView fx:id="image" fitHeight="109.0" fitWidth="128.0" pickOnBounds="true" preserveRatio="true">
                    <image>
                        <Image url="@../images/logo.png" />
                    </image>
                </ImageView>
-               <Label prefHeight="40.0" prefWidth="307.0" text="Welcome to JelphaBot!">
+               <Label prefHeight="96.0" prefWidth="307.0" text="      Welcome to JelphaBot!">
                    <minWidth>
                        <Region fx:constant="USE_PREF_SIZE" />
                    </minWidth>
@@ -26,7 +26,7 @@
                </Label>
            </children>
        </HBox>
-      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="363.0">
+      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="150.0">
          <children>
             <Label styleClass="cell_medium_label" text="Here are your tasks that are due today!" />
             <Label fx:id="tasksDueToday" minHeight="-Infinity" text="\$tasksDueToday" VBox.vgrow="ALWAYS">
@@ -36,7 +36,7 @@
             </Label>
          </children>
       </VBox>
-      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="363.0">
+      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="150.0">
          <children>
             <Label styleClass="cell_medium_label" text="Here are your tasks that you have completed today!" VBox.vgrow="ALWAYS" />
              <Label fx:id="tasksCompletedToday" minHeight="-Infinity" text="\$tasksCompletedToday" VBox.vgrow="ALWAYS">
