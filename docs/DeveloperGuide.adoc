@@ -863,6 +863,8 @@ Each `Reminder` consists of 3 objects: +
 
 The following class diagram summarizes shows the relationship between the classes.
 
+
+[[class-Reminder]]
 .Reminder Class Diagram in the Model component
 image::Reminderclass.png[]
 
@@ -889,15 +891,19 @@ By the next time the users starts JelphaBot, it will remind the user should the 
 
 The sequence diagram for interactions between the `Logic`, `Model`, and `Storage` is shown below.
 
+[[sequence-addReminder]]
 .Sequence Diagram after running _reminder 2 days/2 hours/1_
 image::AddReminderSequenceDiagram.png[]
 
+[[reference-getCommandResult]]
 .The reference frame of getting the `CommandResult` in the `Logic` component.
 image::getCommandResultReferenceDiagram.png[]
 
+[[reference-addReminder]]
 .The reference frame of adding the `Reminder` in the `Model` component.
 image::addReminderReferenceDiagram.png[]
 
+[[reference-saveJelphaBot]]
 .The reference frame of saving a `Reminder` by the `Storage` component.
 image::saveJelphaBot.png[]
 
