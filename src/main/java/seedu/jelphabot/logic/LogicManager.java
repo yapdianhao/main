@@ -110,11 +110,9 @@ public class LogicManager implements Logic {
     }
 
     public ObservableList<Task> getFilteredByReminder() {
-        //logger.info("reached filtered by reminder");
         ViewTaskList taskList = model.getLastShownList();
         List<Reminder> reminderList = model.getReminderListFromJelphaBot();
         ReminderPredicate reminderPredicate = new ReminderPredicate(taskList, reminderList);
-        //logger.info("" + filteredList.size());
         return model.getFilteredTaskList().filtered(reminderPredicate);
     }
 
@@ -132,6 +130,8 @@ public class LogicManager implements Logic {
         FilteredList<Task> filteredIncompleteList = new FilteredList<>(filteredTasks, taskIncompletePredicate);
         return new FilteredList<>(filteredIncompleteList, getDueTodayPredicate());
     }
+
+    // @@author
 
     @Override
     public GroupedTaskList getGroupedTaskList(GroupedTaskList.Category category) {

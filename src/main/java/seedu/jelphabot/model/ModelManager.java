@@ -229,7 +229,6 @@ public class ModelManager implements Model {
 
     @Override
     public PinnedTaskList getPinnedTaskList() {
-        // TODO implement pinned tasks
         return new PinnedTaskList(filteredTasks.filtered(task -> false), Bindings.createIntegerBinding(() -> 0));
     }
 
