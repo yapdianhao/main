@@ -29,7 +29,6 @@ public class ReminderListPanel extends UiPart<Region> {
 
     public ReminderListPanel(ObservableList<ReminderShowsTask> reminderShowsTaskList, TabPane tabPane) {
         super(FXML);
-        logger.info("" + reminderListView + "here");
         this.mainWindowTabPane = tabPane;
         reminderListView.setItems(reminderShowsTaskList);
         reminderListView.setCellFactory(listView -> new ReminderListPanel.ReminderListViewCell());
@@ -46,7 +45,6 @@ public class ReminderListPanel extends UiPart<Region> {
      * Shows the reminderList panel.
      */
     public void show() {
-        //logger.fine("Showing productivity panel of application.");
         mainWindowTabPane.getSelectionModel().select(4);
     }
 

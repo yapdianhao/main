@@ -568,7 +568,8 @@ Examples:
 .Example of expected result after running `calendar May-2020`
 image::ug_figures/CalendarView.png[width="600"]
 
-Displays month of May in the year 2020 in the calendar panel on the right.
+Displays month of May in the year 2020 in the calendar panel on the right. Task list panel on the left
+is empty as there are no tasks due on 1-May-2020.
 
 [IMPORTANT]
 Format of the month in MONTHYEAR (MMM) input has to have the first letter in upper-case. +
@@ -717,6 +718,11 @@ Format: `reminder INDEX days/DAYS hours/HOURS`
 .Example of expected result after running `reminder 1 days/1 hours/1`
 image::ug_figures/addReminder.png[width="600"]
 
+[.text-center]
+.Example of new reminder appended to reminder list panel after running `reminder 1 days/1 hours/1`
+image::ug_figures/addReminderTab.png[width="600"]
+
+
 ****
 * Adds a reminder to the task which is at the specified `INDEX`.
 * The index refers to the index number shown in the displayed task list.
@@ -741,6 +747,11 @@ Format: `delrem INDEX`
 [.text-center]
 .Example of expected result after running `delrem 1`
 image::ug_figures/delReminder.png[width="600"]
+
+[.text-center]
+.Example of reminder removed from reminder list panel after running `delrem 1`
+image::ug_figures/delReminderTab.png[width="600"]
+
 
 ****
 * Removes a reminder associated to the task at the specified `INDEX`.

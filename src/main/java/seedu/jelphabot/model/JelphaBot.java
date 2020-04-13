@@ -175,7 +175,6 @@ public class JelphaBot implements ReadOnlyJelphaBot {
     @Override
     public String toString() {
         return tasks.asUnmodifiableObservableList().size() + " tasks";
-        // TODO: refine later
     }
 
     @Override

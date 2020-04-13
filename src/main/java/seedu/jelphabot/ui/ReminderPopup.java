@@ -55,12 +55,9 @@ public class ReminderPopup extends UiPart<Stage> {
      */
     void fillWindow() {
         // get the list of Incomplete tasks
-        //ObservableList<Task> taskList = logic.getFilteredByReminder();
         for (Task task : logic.getFilteredByReminder()) {
-            //logger.info("added reminder");
             taskList.add(task);
         }
-        //logger.info("taskList size " + taskList.size());
         taskListPanel = new TaskListPanel(taskList);
         taskListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
 
@@ -80,7 +77,6 @@ public class ReminderPopup extends UiPart<Stage> {
      */
     void show() {
         logger.info("Showing reminderStage");
-        //logger.info("reminded size: " + taskList.size());
         if (taskList.size() == 0) {
             return;
         } else {
