@@ -622,7 +622,7 @@ Displays month of April in the year 2020 in the calendar panel on the right, wit
 // tag::productivitytracker[]
 === Productivity Tracking (Jel)
 
-JelphaBot automatically tracks your productivity within the day, and provides a bar which allows you to track the progress of your tasks in the current week.
+JelphaBot automatically tracks your productivity within the day, and displays a progress bar which allows you to track the completion progress of the tasks which are due in the coming week.
 You would be able to see the progress bar fill up as you complete more tasks.
 
 JelphaBot also dynamically provides feedback responses to the user's achievements and task completion rate.
@@ -752,16 +752,15 @@ image::ug_figures/delReminder.png[width="600"]
 <<<
 ==== Reminder popup notification
 
-Every time you run JelphaBot after adding your reminders, JelphaBot will show a list of tasks that will be overdue soon,
-and tasks that are past their deadline but have not been completed.
+Whenever you start up JelphaBot after adding your reminders, JelphaBot's reminder window will popup.
+The popup will show a list of tasks that will be overdue soon, and tasks that are past their deadline but have not been completed.
 
 [.text-center]
 .Example of expected result after tasks are being reminded.
 image::ug_figures/reminderpopup.png[width="600"]
 
 ****
-* Whenever JelphaBot is booted, if you have any tasks that is not completed but has a reminder, JelphaBot's reminder window will popup.
-* This will persist until you either complete the `Task`, or delete the `Reminder`.
+* Reminders will persist until you either complete the `Task`, or delete the `Reminder`.
 ****
 //end::reminder[]
 
