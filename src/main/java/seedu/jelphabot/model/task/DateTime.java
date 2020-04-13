@@ -1,4 +1,4 @@
-// @@author Jel
+// @@author Clouddoggo
 package seedu.jelphabot.model.task;
 
 import static java.util.Objects.requireNonNull;
